@@ -1,0 +1,205 @@
+/***********************************
+            BASIC RESET
+***********************************/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html {
+    /* 
+    Converting default browser font-size of 16px to 10px in percentage
+    10px / 16px * 100 = 62.5%, thus 1rem = 62.5% = 10px
+    */
+    font-size: 62.5% !important;
+    @include respond-up(lg) {
+        font-size: 75% !important; // 1rem = 12px, 12/16*100 = 75%
+    }
+    @include respond-down(md) {
+        font-size: 56.25% !important; // 1rem = 9px, 8/16*100 = 56.25%
+    }
+    @include respond-down(sm) {
+        font-size: 50% !important; // 1rem = 8px, 8/16 * 100 = 50%;
+    }
+    overflow-y: initial !important;
+}
+body {
+    text-rendering: optimizeLegibility;
+    box-sizing: border-box;
+    font-family: "Open+Sans", sans-serif !important;
+    font-weight: 400;
+    line-height: 1.7;
+    color: $text;
+    font-size: 1.2rem !important;
+    background: $body-bg !important;
+}
+a,
+a:active {
+    color: $text;
+    text-decoration: none;
+}
+::selection {
+    background-color: $main !important;
+    color: #fff !important;
+}
+.tabs.is-toggle li.is-active a {
+    background-color: $main !important;
+    border-color: $main !important;
+}
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: $text !important;
+}
+.label {
+    font-size: 1rem !important;
+    letter-spacing: 0.08rem;
+    //color: $main-1 !important;
+}
+button.is-primary {
+    // background-color: $main !important;
+}
+.button.is-primary.is-light {
+    color: $main !important;
+}
+.b__collapse__section {
+    margin-bottom: 1.5rem;
+}
+.upload-draggable > .section {
+    padding: 1rem !important;
+}
+.textarea:not([rows]) {
+    max-height: 40em !important;
+    min-height: 6.5em !important;
+}
+.b-tabs .tab-content {
+    padding: 1rem 0 !important;
+}
+
+.center__buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4rem;
+}
+.modal {
+    z-index: 1000 !important;
+}
+.modal-card-title {
+    //color: $main-1 !important;
+    font-size: 1.2rem !important;
+}
+.modal-card-head,
+.modal-card-foot {
+    background-color: $white !important;
+    padding: 0.5rem !important;
+}
+.modal-card-foot {
+    // margin-top: 2rem !important;
+}
+.leave__type__form,
+.leave__type__form___advance {
+    .field-label {
+        flex: 2 !important;
+    }
+}
+// .leave__type__form___advance {
+//     .field-label {
+//         flex: 2 !important;
+//     }
+// }
+.dropdown-item,
+.dropdown .dropdown-menu .has-link a {
+    font-size: 1.2rem !important;
+}
+.help {
+    display: block;
+    font-size: 1rem !important;
+    margin-top: 0.25rem;
+}
+.b-checkbox.checkbox:hover input[type="checkbox"]:not(:disabled) + .check {
+    border-color: rgba(13, 103, 206, 0.651) !important;
+}
+.b-checkbox.checkbox input[type="checkbox"]:checked + .check {
+    background-color: rgba(13, 103, 206, 0.651) !important;
+    border-color: rgba(13, 103, 206, 0.466) !important;
+}
+
+.b-checkbox.checkbox input[type="checkbox"]:focus:checked + .check {
+    -webkit-box-shadow: 0 0 0.5em rgba(13, 103, 206, 0.651) !important;
+    box-shadow: 0 0 0.5em rgba(13, 103, 206, 0.651) !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+.pdf-app #thumbnailView {
+    position: absolute;
+    width: 100% !important;
+    top: 0;
+    bottom: 0;
+    padding: 10px 30px 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.has-text-primary {
+    color: rgba(13, 103, 206, 0.651) !important;
+}
+.datepicker .datepicker-table .datepicker-body .datepicker-cell.is-selected {
+    background-color: rgba(13, 103, 206, 0.651) !important;
+    color: #fff;
+}
+.datepicker .datepicker-table .datepicker-body .datepicker-cell.is-today {
+    border: solid 1px rgba(13, 103, 206, 0.651) !important;
+}
+.select select:focus,
+.taginput .taginput-container.is-focusable:focus,
+.textarea:focus,
+.input:focus,
+.select select.is-focused,
+.taginput .is-focused.taginput-container.is-focusable,
+.is-focused.textarea,
+.is-focused.input,
+.select select:active,
+.taginput .taginput-container.is-focusable:active,
+.textarea:active,
+.input:active,
+.select select.is-active,
+.taginput .is-active.taginput-container.is-focusable,
+.is-active.textarea,
+.is-active.input {
+    border-color: rgba(13, 103, 206, 0.651) !important;
+    -webkit-box-shadow: 0 0 0 0.125em rgb(13 103 206 / 25%) !important;
+    box-shadow: 0 0 0 0.125em rgb(13 103 206 / 25%) !important;
+}
+
+.pagination.is-simple {
+    margin-top: 1rem !important;
+    & > .pagination-link {
+        padding: 0.4rem !important;
+    }
+    & > .info {
+        padding: 0 0.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    & > .pagination-previous,
+    & > .pagination-next {
+        &:active,
+        &:focus {
+            border-color: $primary !important;
+        }
+    }
+}
+.notification {
+    background-color: #ffffff !important;
+    border-radius: 4px;
+    position: relative;
+    padding: 0 !important;
+}

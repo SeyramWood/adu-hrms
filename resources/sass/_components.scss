@@ -1,0 +1,97 @@
+.dropper {
+    max-width: 50%;
+    // max-height: 90%;
+    border: 1px solid rgb(204, 204, 204) !important;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        0 0px 0 1px rgb(10 10 10 / 2%);
+}
+
+.profile-detail-bar {
+    width: 100%;
+    height: 13rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: repeating-linear-gradient(
+            rgba(0, 0, 0, 0.644),
+            rgba(0, 0, 0, 0.623)
+        ),
+        url("/storage/bgs/profile_bg.jpg");
+    & > .p-text {
+        width: 100%;
+        height: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+        font-size: 4rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+}
+
+.checkbox__lists {
+    width: 100%;
+    &__list {
+        width: inherit;
+        & > label {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            padding: 0.725rem 1.5rem;
+
+            cursor: pointer;
+            pointer-events: fill;
+            transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+            & > input[type="checkbox"] {
+                width: 16px;
+                height: 16px;
+                margin-right: 1.5rem;
+            }
+            &:hover {
+                background-color: #f5f5f5;
+            }
+        }
+    }
+}
+.table__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    &__title {
+        color: $main-1;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+    &__lists {
+        display: flex;
+        &__item:not(:last-child) {
+            padding-right: 0.6rem;
+        }
+        // align-items: center;
+    }
+}
+.kpi__table {
+    width: 80%;
+    margin: 2rem auto;
+}
+.kpi_goals__wrapper {
+    & .goal__btns {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.step__buttons {
+    width: 80%;
+    margin: 2rem auto;
+}
