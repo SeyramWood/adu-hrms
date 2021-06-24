@@ -45,9 +45,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 
 
@@ -89,8 +86,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {},
   created: function created() {
-    var _this = this;
-
     this.dispatchUserAccount({
       payload: 1
     });
@@ -121,11 +116,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
     this.dispatchWorkShift({
       payload: this.workShifts
-    });
-    this.$axios.get("/api/bio").then(function (res) {
-      _this.test = res.data.data; // window.location.reload();
-      // console.log(res.data);
-    });
+    }); // this.$axios.get("/api/bio").then((res) => {
+    //   this.test = res.data.data;
+    //   // window.location.reload();
+    //   // console.log(res.data);
+    // });
   },
   data: function data() {
     return {
@@ -1588,6 +1583,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Paginate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Paginate */ "./resources/js/components/Paginate.vue");
+/* harmony import */ var _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @riophae/vue-treeselect */ "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.cjs.js");
+/* harmony import */ var _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @riophae/vue-treeselect/dist/vue-treeselect.css */ "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css");
+/* harmony import */ var _riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_3__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2090,15 +2089,296 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ManageUserComponent",
   components: {
-    Paginate: _Paginate__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Paginate: _Paginate__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Treeselect: _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   props: {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getUsers", "getRolePermissions"])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getUsers", "getRolePermissions"])), {}, {
+    getDropperId: function getDropperId() {
+      return this.dropperId.toString();
+    },
+    getStaff: function getStaff() {
+      return this.getUsers.data.map(function (s) {
+        return {
+          id: s.id,
+          label: "".concat(s.personal_details.title || "", " ").concat(s.personal_details.firstName, " ").concat(s.personal_details.middleName || "", " ").concat(s.personal_details.lastName)
+        };
+      });
+    }
+  }),
   beforeMount: function beforeMount() {
     this.authUser = this.$page.props.authUser;
   },
@@ -2134,6 +2414,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       sortIcon: "arrow-up",
       sortIconSize: "is-small",
       selectedUsers: [],
+      checkedRoles: [],
       toggleUserForm: false,
       toggleQueryForm: false,
       showAssignRoleForm: false,
@@ -2141,6 +2422,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isSubmitting: false,
       noUserFound: false,
       isLoading: false,
+      isSubmittingRole: false,
+      dropperId: "",
+      newStaff: {
+        value: [],
+        errors: []
+      },
       user: {
         firstName: "",
         middleName: "",
@@ -2174,10 +2461,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         status: []
       },
       roleData: ["ESS"],
-      statusData: ""
+      statusData: "",
+      permissions: ["Create", "Edit", "Delete"]
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchUserAccount", "dispatchStaffCount"])), {}, {
+    openRoleDropper: function openRoleDropper() {
+      var dropper = this.$refs.roleDropper; // this.positionDropperId = data.id;
+
+      if (dropper) {
+        dropper.open();
+      }
+    },
+    closeRoleDropper: function closeRoleDropper() {
+      var dropper = this.$refs.roleDropper;
+
+      if (dropper) {
+        dropper.close();
+      }
+    },
+    openAddStaffDropper: function openAddStaffDropper(index) {
+      var dropper = this.$refs.addStaffDropper;
+      this.dropperId = index;
+      console.log(dropper);
+
+      if (dropper) {
+        dropper.open();
+      }
+    },
+    closeAddStaffDropper: function closeAddStaffDropper() {
+      var dropper = this.$refs.addStaffDropper;
+
+      if (dropper) {
+        dropper.close();
+      }
+    },
     closeUserForm: function closeUserForm() {
       this.toggleUserForm = !this.toggleUserForm;
       this.setUserErrors();
@@ -5522,6 +5840,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".button.is-rounded[data-v-276c2ef2] {\n  border-radius: 290486px;\n  padding-bottom: calc(0.2em - 1px);\n  padding-left: 1em;\n  padding-right: 1em;\n  padding-top: calc(0.2em - 1px);\n}\n.role-user[data-v-276c2ef2] {\n  width: 100%;\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  margin: 0 1rem 1rem 0;\n}\n.role-user > span[data-v-276c2ef2] {\n  margin-left: 1rem;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/OrganizationComponent.vue?vue&type=style&index=0&id=b08483a2&lang=scss&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/OrganizationComponent.vue?vue&type=style&index=0&id=b08483a2&lang=scss&scoped=true& ***!
@@ -5538,6 +5875,36 @@ exports.push([module.i, ".brand-logo-overlay[data-v-b08483a2] {\n  position: rel
 
 // exports
 
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -5597,33 +5964,7 @@ var render = function() {
           _c(
             "tab",
             { attrs: { label: "User Management" } },
-            [
-              _vm._v("\n      " + _vm._s(_vm.test) + "\n      "),
-              _c(
-                "b-button",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.changeLang("fr")
-                    }
-                  }
-                },
-                [_vm._v("French")]
-              ),
-              _c(
-                "b-button",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.changeLang("ar")
-                    }
-                  }
-                },
-                [_vm._v("Arabic")]
-              ),
-              _vm._v(" "),
-              _c("ManageUserComponent")
-            ],
+            [_c("ManageUserComponent")],
             1
           ),
           _vm._v(" "),
@@ -7639,853 +7980,450 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "section",
-      { staticClass: "b__collapse__section" },
-      [
-        _c(
-          "b-collapse",
-          {
-            staticClass: "card",
-            attrs: { animation: "slide", "aria-id": "querystaff" },
-            scopedSlots: _vm._u([
-              {
-                key: "trigger",
-                fn: function(props) {
-                  return _c(
-                    "div",
-                    {
-                      staticClass: "card-header",
-                      attrs: { role: "button", "aria-controls": "querystaff" }
-                    },
-                    [
-                      _c(
-                        "p",
-                        { staticClass: "card-header-title" },
-                        [
-                          _c("b-icon", {
-                            attrs: {
-                              type: "is-info",
-                              pack: "fas",
-                              icon: "plus"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "has-text-info" }, [
-                            _vm._v(" Add New User")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "card-header-icon" },
-                        [
-                          _c("b-icon", {
-                            attrs: {
-                              type: "is-info",
-                              pack: "fas",
-                              icon: props.open ? "angle-up" : "angle-down"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                }
-              }
-            ]),
-            model: {
-              value: _vm.toggleUserForm,
-              callback: function($$v) {
-                _vm.toggleUserForm = $$v
-              },
-              expression: "toggleUserForm"
-            }
-          },
-          [
-            _vm._v(" "),
-            _c("div", { staticClass: "card-content" }, [
-              _c("div", { staticClass: "content" }, [
+  return _c(
+    "div",
+    [
+      _c(
+        "b-tabs",
+        {
+          attrs: { type: "is-toggle", size: "", animated: false, expanded: "" }
+        },
+        [
+          _c("b-tab-item", { attrs: { label: "Staff Account" } }, [
+            _c(
+              "section",
+              { staticClass: "b__collapse__section" },
+              [
                 _c(
-                  "form",
+                  "b-collapse",
                   {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.addUser()
-                      }
-                    }
-                  },
-                  [
-                    _c("h5", { staticClass: "text-main" }, [
-                      _vm._v("Full Name")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column is-3" },
-                        [
-                          _c(
-                            "b-field",
+                    staticClass: "card",
+                    attrs: { animation: "slide", "aria-id": "querystaff" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "trigger",
+                        fn: function(props) {
+                          return _c(
+                            "div",
                             {
+                              staticClass: "card-header",
                               attrs: {
-                                label: "Last Name",
-                                expanded: "",
-                                type: {
-                                  "is-danger": _vm.userError.lastName.length > 0
-                                },
-                                message: _vm.userError.lastName
-                              }
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Enter last name"
-                                },
-                                model: {
-                                  value: _vm.user.lastName,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.user, "lastName", $$v)
-                                  },
-                                  expression: "user.lastName"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column is-3" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "First Name",
-                                expanded: "",
-                                type: {
-                                  "is-danger":
-                                    _vm.userError.firstName.length > 0
-                                },
-                                message: _vm.userError.firstName
-                              }
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Enter first name"
-                                },
-                                model: {
-                                  value: _vm.user.firstName,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.user, "firstName", $$v)
-                                  },
-                                  expression: "user.firstName"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column is-3" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Middle Name",
-                                expanded: "",
-                                type: {
-                                  "is-danger":
-                                    _vm.userError.middleName.length > 0
-                                },
-                                message: _vm.userError.middleName
-                              }
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Enter middle name"
-                                },
-                                model: {
-                                  value: _vm.user.middleName,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.user, "middleName", $$v)
-                                  },
-                                  expression: "user.middleName"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "text-main" }, [
-                      _vm._v("Login Credentials")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column is-3" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Username",
-                                expanded: "",
-                                type: {
-                                  "is-danger": _vm.userError.username.length > 0
-                                },
-                                message: _vm.userError.username
-                              }
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Enter email"
-                                },
-                                model: {
-                                  value: _vm.user.username,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.user, "username", $$v)
-                                  },
-                                  expression: "user.username"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "text-main" }, [
-                      _vm._v("Access Level")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column is-12" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "User Role",
-                                expanded: "",
-                                type: {
-                                  "is-danger": _vm.userError.role.length > 0
-                                },
-                                message: _vm.userError.role
+                                role: "button",
+                                "aria-controls": "querystaff"
                               }
                             },
                             [
                               _c(
-                                "div",
-                                { staticClass: "block" },
-                                _vm._l(_vm.getRolePermissions, function(r, i) {
-                                  return _c(
-                                    "b-checkbox",
-                                    {
-                                      key: i,
-                                      attrs: {
-                                        "native-value": r.role,
-                                        disabled: r.role === "ESS"
-                                      },
-                                      model: {
-                                        value: _vm.user.role,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.user, "role", $$v)
-                                        },
-                                        expression: "user.role"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                      " +
-                                          _vm._s(r.role) +
-                                          "\n                    "
-                                      )
-                                    ]
-                                  )
-                                }),
-                                1
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column is-12" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Status",
-                                expanded: "",
-                                type: {
-                                  "is-danger": _vm.userError.status.length > 0
-                                },
-                                message: _vm.userError.status
-                              }
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "block" },
+                                "p",
+                                { staticClass: "card-header-title" },
                                 [
-                                  _c(
-                                    "b-radio",
-                                    {
-                                      attrs: {
-                                        type: "is-info",
-                                        name: "status",
-                                        "native-value": "1"
-                                      },
-                                      model: {
-                                        value: _vm.user.status,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.user, "status", $$v)
-                                        },
-                                        expression: "user.status"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                      Enable\n                    "
-                                      )
-                                    ]
-                                  ),
+                                  _c("b-icon", {
+                                    attrs: {
+                                      type: "is-info",
+                                      pack: "fas",
+                                      icon: "plus"
+                                    }
+                                  }),
                                   _vm._v(" "),
-                                  _c(
-                                    "b-radio",
-                                    {
-                                      attrs: {
-                                        type: "is-info",
-                                        name: "status",
-                                        "native-value": "0"
-                                      },
-                                      model: {
-                                        value: _vm.user.status,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.user, "status", $$v)
-                                        },
-                                        expression: "user.status"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                      Disable\n                    "
-                                      )
-                                    ]
-                                  )
+                                  _c("span", { staticClass: "has-text-info" }, [
+                                    _vm._v(" Add New User")
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                { staticClass: "card-header-icon" },
+                                [
+                                  _c("b-icon", {
+                                    attrs: {
+                                      type: "is-info",
+                                      pack: "fas",
+                                      icon: props.open
+                                        ? "angle-up"
+                                        : "angle-down"
+                                    }
+                                  })
                                 ],
                                 1
                               )
                             ]
                           )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _c(
-                      "b-field",
-                      { staticClass: "buttons" },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "button is-success is-light",
-                            attrs: {
-                              type: "submit",
-                              disabled: _vm.isSubmitting
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                " +
-                                _vm._s(
-                                  _vm.isSubmitting ? "Submitting..." : "Add"
-                                ) +
-                                "\n              "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-button",
-                          {
-                            staticClass: "is-danger is-light",
-                            on: {
-                              click: function($event) {
-                                return _vm.closeUserForm()
-                              }
-                            }
-                          },
-                          [_vm._v("Cancel")]
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ])
-          ]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("section", { staticClass: "b__collapse__section" }, [
-      _c("div", { staticClass: "card" }, [
-        _c(
-          "header",
-          { staticClass: "card-header", attrs: { role: "button" } },
-          [
-            _c("article", { staticClass: "table__header" }, [
-              _c("h5", { staticClass: "table__header__title" }, [
-                _vm._v("User List")
-              ]),
-              _vm._v(" "),
-              _c("section", { staticClass: "table__header__lists" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "table__header__lists__item",
-                    on: {
-                      click: function($event) {
-                        return _vm.openQueryForm()
+                        }
                       }
+                    ]),
+                    model: {
+                      value: _vm.toggleUserForm,
+                      callback: function($$v) {
+                        _vm.toggleUserForm = $$v
+                      },
+                      expression: "toggleUserForm"
                     }
                   },
                   [
-                    _c(
-                      "b-tooltip",
-                      { attrs: { label: "Query Users.", type: "is-dark" } },
-                      [
-                        _c("b-icon", {
-                          staticClass: "icon--wrapper",
-                          attrs: { icon: "search" }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c(
-            "div",
-            { staticClass: "content" },
-            [
-              _vm.toggleQueryForm
-                ? _c(
-                    "section",
-                    { staticClass: "b__collapse__section" },
-                    [
-                      _c(
-                        "b-collapse",
-                        {
-                          staticClass: "card",
-                          attrs: {
-                            open: _vm.toggleQueryForm,
-                            animation: "slide",
-                            "aria-id": "querystaff"
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-content" }, [
+                      _c("div", { staticClass: "content" }, [
+                        _c(
+                          "form",
+                          {
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.addUser()
+                              }
+                            }
                           },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "trigger",
-                                fn: function(props) {
-                                  return _c(
-                                    "div",
+                          [
+                            _c("h5", { staticClass: "text-main" }, [
+                              _vm._v("Full Name")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "columns" }, [
+                              _c(
+                                "div",
+                                { staticClass: "column is-3" },
+                                [
+                                  _c(
+                                    "b-field",
                                     {
-                                      staticClass: "card-header",
                                       attrs: {
-                                        role: "button",
-                                        "aria-controls": "querystaff"
+                                        label: "Last Name",
+                                        expanded: "",
+                                        type: {
+                                          "is-danger":
+                                            _vm.userError.lastName.length > 0
+                                        },
+                                        message: _vm.userError.lastName
                                       }
                                     },
                                     [
-                                      _c(
-                                        "p",
-                                        { staticClass: "card-header-title" },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "has-text-info" },
-                                            [_vm._v("Query Users")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "a",
-                                        { staticClass: "card-header-icon" },
-                                        [
-                                          _c("b-icon", {
-                                            attrs: {
-                                              type: "is-info",
-                                              pack: "fas",
-                                              icon: props.open
-                                                ? "angle-up"
-                                                : "angle-down"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ]
+                                      _c("b-input", {
+                                        attrs: {
+                                          expanded: "",
+                                          placeholder: "Enter last name"
+                                        },
+                                        model: {
+                                          value: _vm.user.lastName,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.user, "lastName", $$v)
+                                          },
+                                          expression: "user.lastName"
+                                        }
+                                      })
+                                    ],
+                                    1
                                   )
-                                }
-                              }
-                            ],
-                            null,
-                            false,
-                            2710651610
-                          )
-                        },
-                        [
-                          _vm._v(" "),
-                          _c("div", { staticClass: "card-content" }, [
-                            _c("div", { staticClass: "content" }, [
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
                               _c(
-                                "form",
-                                { attrs: { action: "" } },
+                                "div",
+                                { staticClass: "column is-3" },
                                 [
-                                  _c("div", { staticClass: "columns" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "column is-3" },
-                                      [
-                                        _c(
-                                          "b-field",
-                                          {
-                                            attrs: {
-                                              label: "Username",
-                                              expanded: ""
-                                            }
-                                          },
-                                          [
-                                            _c("b-input", {
-                                              attrs: { expanded: "" }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "column is-3" },
-                                      [
-                                        _c(
-                                          "b-field",
-                                          {
-                                            attrs: {
-                                              label: "Staff Name",
-                                              expanded: ""
-                                            }
-                                          },
-                                          [
-                                            _c("b-input", {
-                                              attrs: { expanded: "" }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "column is-3" },
-                                      [
-                                        _c(
-                                          "b-field",
-                                          {
-                                            attrs: {
-                                              label: "User Role",
-                                              expanded: ""
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "b-select",
-                                              { attrs: { expanded: "" } },
-                                              [
-                                                _c("option", [
-                                                  _vm._v("Full-Time")
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("option", [
-                                                  _vm._v("Part-Time")
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("option", [_vm._v("Other")])
-                                              ]
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "column is-3" },
-                                      [
-                                        _c(
-                                          "b-field",
-                                          {
-                                            attrs: {
-                                              label: "Status",
-                                              expanded: ""
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "b-select",
-                                              { attrs: { expanded: "" } },
-                                              [
-                                                _c("option", [
-                                                  _vm._v("Current Staff Only")
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("option", [
-                                                  _vm._v(
-                                                    "Current and Past Staff Only"
-                                                  )
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("option", [
-                                                  _vm._v("Past Staff Only")
-                                                ])
-                                              ]
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("hr"),
-                                  _vm._v(" "),
                                   _c(
                                     "b-field",
-                                    { staticClass: "buttons" },
+                                    {
+                                      attrs: {
+                                        label: "First Name",
+                                        expanded: "",
+                                        type: {
+                                          "is-danger":
+                                            _vm.userError.firstName.length > 0
+                                        },
+                                        message: _vm.userError.firstName
+                                      }
+                                    },
                                     [
-                                      _c(
-                                        "b-button",
-                                        { staticClass: "is-success is-light" },
-                                        [_vm._v("Search")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-button",
-                                        { staticClass: "is-danger is-light" },
-                                        [_vm._v("Cancel")]
-                                      )
+                                      _c("b-input", {
+                                        attrs: {
+                                          expanded: "",
+                                          placeholder: "Enter first name"
+                                        },
+                                        model: {
+                                          value: _vm.user.firstName,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.user, "firstName", $$v)
+                                          },
+                                          expression: "user.firstName"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column is-3" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      attrs: {
+                                        label: "Middle Name",
+                                        expanded: "",
+                                        type: {
+                                          "is-danger":
+                                            _vm.userError.middleName.length > 0
+                                        },
+                                        message: _vm.userError.middleName
+                                      }
+                                    },
+                                    [
+                                      _c("b-input", {
+                                        attrs: {
+                                          expanded: "",
+                                          placeholder: "Enter middle name"
+                                        },
+                                        model: {
+                                          value: _vm.user.middleName,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.user,
+                                              "middleName",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "user.middleName"
+                                        }
+                                      })
                                     ],
                                     1
                                   )
                                 ],
                                 1
                               )
-                            ])
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "section",
-                { staticClass: "py-4 multiples-actions" },
-                [
-                  _c(
-                    "b-dropdown",
-                    {
-                      attrs: {
-                        "aria-role": "list",
-                        disabled: _vm.selectedUsers.length > 0 ? false : true
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "trigger",
-                          fn: function(ref) {
-                            var active = ref.active
-                            return [
-                              _c("b-button", {
-                                attrs: {
-                                  type: "is-info is-light",
-                                  label: "Actions",
-                                  pack: "fas",
-                                  "icon-right": active
-                                    ? "angle-up"
-                                    : "angle-down"
-                                }
-                              })
-                            ]
-                          }
-                        }
-                      ])
-                    },
-                    [
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-item",
-                        {
-                          attrs: { "aria-role": "listitem" },
-                          on: {
-                            click: function($event) {
-                              return _vm.openAssignRoleForm()
-                            }
-                          }
-                        },
-                        [_vm._v("Assign user role")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-item",
-                        {
-                          attrs: { "aria-role": "listitem" },
-                          on: {
-                            click: function($event) {
-                              return _vm.openAssignStatusForm()
-                            }
-                          }
-                        },
-                        [_vm._v("Assign account status")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-item",
-                        {
-                          attrs: { "aria-role": "listitem" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteUsers()
-                            }
-                          }
-                        },
-                        [_vm._v("Delete users")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("transition", { attrs: { name: "fade" } }, [
-                    _vm.showAssignRoleForm && _vm.selectedUsers.length > 0
-                      ? _c(
-                          "form",
-                          { attrs: { action: "" } },
-                          [
-                            _c(
-                              "b-field",
-                              { attrs: { label: "Choose Role", expanded: "" } },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "block" },
-                                  _vm._l(_vm.getRolePermissions, function(
-                                    r,
-                                    i
-                                  ) {
-                                    return _c(
-                                      "b-checkbox",
-                                      {
-                                        key: i,
+                            ]),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "text-main" }, [
+                              _vm._v("Login Credentials")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "columns" }, [
+                              _c(
+                                "div",
+                                { staticClass: "column is-3" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      attrs: {
+                                        label: "Username",
+                                        expanded: "",
+                                        type: {
+                                          "is-danger":
+                                            _vm.userError.username.length > 0
+                                        },
+                                        message: _vm.userError.username
+                                      }
+                                    },
+                                    [
+                                      _c("b-input", {
                                         attrs: {
-                                          "native-value": r.role,
-                                          disabled: r.role === "ESS"
+                                          expanded: "",
+                                          placeholder: "Enter email"
                                         },
                                         model: {
-                                          value: _vm.roleData,
+                                          value: _vm.user.username,
                                           callback: function($$v) {
-                                            _vm.roleData = $$v
+                                            _vm.$set(_vm.user, "username", $$v)
                                           },
-                                          expression: "roleData"
+                                          expression: "user.username"
                                         }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                      " +
-                                            _vm._s(r.role) +
-                                            "\n                    "
-                                        )
-                                      ]
-                                    )
-                                  }),
-                                  1
-                                )
-                              ]
-                            ),
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "text-main" }, [
+                              _vm._v("Access Level")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "columns" }, [
+                              _c(
+                                "div",
+                                { staticClass: "column is-12" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      attrs: {
+                                        label: "User Role",
+                                        expanded: "",
+                                        type: {
+                                          "is-danger":
+                                            _vm.userError.role.length > 0
+                                        },
+                                        message: _vm.userError.role
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "block" },
+                                        _vm._l(_vm.getRolePermissions, function(
+                                          r,
+                                          i
+                                        ) {
+                                          return _c(
+                                            "b-checkbox",
+                                            {
+                                              key: i,
+                                              attrs: {
+                                                "native-value": r.role,
+                                                disabled: r.role === "ESS"
+                                              },
+                                              model: {
+                                                value: _vm.user.role,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.user,
+                                                    "role",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "user.role"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          " +
+                                                  _vm._s(r.role) +
+                                                  "\n                        "
+                                              )
+                                            ]
+                                          )
+                                        }),
+                                        1
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "columns" }, [
+                              _c(
+                                "div",
+                                { staticClass: "column is-12" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      attrs: {
+                                        label: "Status",
+                                        expanded: "",
+                                        type: {
+                                          "is-danger":
+                                            _vm.userError.status.length > 0
+                                        },
+                                        message: _vm.userError.status
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "block" },
+                                        [
+                                          _c(
+                                            "b-radio",
+                                            {
+                                              attrs: {
+                                                type: "is-info",
+                                                name: "status",
+                                                "native-value": "1"
+                                              },
+                                              model: {
+                                                value: _vm.user.status,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.user,
+                                                    "status",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "user.status"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          Enable\n                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-radio",
+                                            {
+                                              attrs: {
+                                                type: "is-info",
+                                                name: "status",
+                                                "native-value": "0"
+                                              },
+                                              model: {
+                                                value: _vm.user.status,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.user,
+                                                    "status",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "user.status"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          Disable\n                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("hr"),
                             _vm._v(" "),
                             _c(
                               "b-field",
                               { staticClass: "buttons" },
                               [
                                 _c(
-                                  "b-button",
+                                  "button",
                                   {
-                                    staticClass: "is-success is-light",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.assignUserRole()
-                                      }
+                                    staticClass: "button is-success is-light",
+                                    attrs: {
+                                      type: "submit",
+                                      disabled: _vm.isSubmitting
                                     }
                                   },
-                                  [_vm._v("Save")]
+                                  [
+                                    _vm._v(
+                                      "\n                    " +
+                                        _vm._s(
+                                          _vm.isSubmitting
+                                            ? "Submitting..."
+                                            : "Add"
+                                        ) +
+                                        "\n                  "
+                                    )
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -8494,7 +8432,7 @@ var render = function() {
                                     staticClass: "is-danger is-light",
                                     on: {
                                       click: function($event) {
-                                        return _vm.cancelAssignForm()
+                                        return _vm.closeUserForm()
                                       }
                                     }
                                   },
@@ -8506,423 +8444,1497 @@ var render = function() {
                           ],
                           1
                         )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.showAssignStatusForm && _vm.selectedUsers.length > 0
-                      ? _c(
-                          "form",
-                          { attrs: { action: "" } },
+                      ])
+                    ])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("section", { staticClass: "b__collapse__section" }, [
+              _c("div", { staticClass: "card" }, [
+                _c(
+                  "header",
+                  { staticClass: "card-header", attrs: { role: "button" } },
+                  [
+                    _c("article", { staticClass: "table__header" }, [
+                      _c("h5", { staticClass: "table__header__title" }, [
+                        _vm._v("User List")
+                      ]),
+                      _vm._v(" "),
+                      _c("section", { staticClass: "table__header__lists" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "table__header__lists__item",
+                            on: {
+                              click: function($event) {
+                                return _vm.openQueryForm()
+                              }
+                            }
+                          },
                           [
                             _c(
-                              "b-field",
+                              "b-tooltip",
                               {
-                                attrs: { label: "Choose Status", expanded: "" }
+                                attrs: {
+                                  label: "Query Users.",
+                                  type: "is-dark"
+                                }
                               },
                               [
-                                _c(
-                                  "div",
-                                  { staticClass: "block" },
+                                _c("b-icon", {
+                                  staticClass: "icon--wrapper",
+                                  attrs: { icon: "search" }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c(
+                    "div",
+                    { staticClass: "content" },
+                    [
+                      _vm.toggleQueryForm
+                        ? _c(
+                            "section",
+                            { staticClass: "b__collapse__section" },
+                            [
+                              _c(
+                                "b-collapse",
+                                {
+                                  staticClass: "card",
+                                  attrs: {
+                                    open: _vm.toggleQueryForm,
+                                    animation: "slide",
+                                    "aria-id": "querystaff"
+                                  },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "trigger",
+                                        fn: function(props) {
+                                          return _c(
+                                            "div",
+                                            {
+                                              staticClass: "card-header",
+                                              attrs: {
+                                                role: "button",
+                                                "aria-controls": "querystaff"
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticClass:
+                                                    "card-header-title"
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-info"
+                                                    },
+                                                    [_vm._v("Query Users")]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "a",
+                                                {
+                                                  staticClass:
+                                                    "card-header-icon"
+                                                },
+                                                [
+                                                  _c("b-icon", {
+                                                    attrs: {
+                                                      type: "is-info",
+                                                      pack: "fas",
+                                                      icon: props.open
+                                                        ? "angle-up"
+                                                        : "angle-down"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    false,
+                                    2710651610
+                                  )
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "card-content" }, [
+                                    _c("div", { staticClass: "content" }, [
+                                      _c(
+                                        "form",
+                                        { attrs: { action: "" } },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "columns" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "column is-3" },
+                                                [
+                                                  _c(
+                                                    "b-field",
+                                                    {
+                                                      attrs: {
+                                                        label: "Username",
+                                                        expanded: ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("b-input", {
+                                                        attrs: { expanded: "" }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "column is-3" },
+                                                [
+                                                  _c(
+                                                    "b-field",
+                                                    {
+                                                      attrs: {
+                                                        label: "Staff Name",
+                                                        expanded: ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("b-input", {
+                                                        attrs: { expanded: "" }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "column is-3" },
+                                                [
+                                                  _c(
+                                                    "b-field",
+                                                    {
+                                                      attrs: {
+                                                        label: "User Role",
+                                                        expanded: ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "b-select",
+                                                        {
+                                                          attrs: {
+                                                            expanded: ""
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("option", [
+                                                            _vm._v("Full-Time")
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("option", [
+                                                            _vm._v("Part-Time")
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("option", [
+                                                            _vm._v("Other")
+                                                          ])
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "column is-3" },
+                                                [
+                                                  _c(
+                                                    "b-field",
+                                                    {
+                                                      attrs: {
+                                                        label: "Status",
+                                                        expanded: ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "b-select",
+                                                        {
+                                                          attrs: {
+                                                            expanded: ""
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("option", [
+                                                            _vm._v(
+                                                              "Current Staff Only"
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("option", [
+                                                            _vm._v(
+                                                              "Current and Past Staff Only"
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("option", [
+                                                            _vm._v(
+                                                              "Past Staff Only"
+                                                            )
+                                                          ])
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("hr"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-field",
+                                            { staticClass: "buttons" },
+                                            [
+                                              _c(
+                                                "b-button",
+                                                {
+                                                  staticClass:
+                                                    "is-success is-light"
+                                                },
+                                                [_vm._v("Search")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "b-button",
+                                                {
+                                                  staticClass:
+                                                    "is-danger is-light"
+                                                },
+                                                [_vm._v("Cancel")]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "section",
+                        { staticClass: "py-4 multiples-actions" },
+                        [
+                          _c(
+                            "b-dropdown",
+                            {
+                              attrs: {
+                                "aria-role": "list",
+                                disabled:
+                                  _vm.selectedUsers.length > 0 ? false : true
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "trigger",
+                                  fn: function(ref) {
+                                    var active = ref.active
+                                    return [
+                                      _c("b-button", {
+                                        attrs: {
+                                          type: "is-info is-light",
+                                          label: "Actions",
+                                          pack: "fas",
+                                          "icon-right": active
+                                            ? "angle-up"
+                                            : "angle-down"
+                                        }
+                                      })
+                                    ]
+                                  }
+                                }
+                              ])
+                            },
+                            [
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown-item",
+                                {
+                                  attrs: { "aria-role": "listitem" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openAssignRoleForm()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Assign user role")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown-item",
+                                {
+                                  attrs: { "aria-role": "listitem" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openAssignStatusForm()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Assign account status")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown-item",
+                                {
+                                  attrs: { "aria-role": "listitem" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteUsers()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Delete users")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("transition", { attrs: { name: "fade" } }, [
+                            _vm.showAssignRoleForm &&
+                            _vm.selectedUsers.length > 0
+                              ? _c(
+                                  "form",
+                                  { attrs: { action: "" } },
                                   [
                                     _c(
-                                      "b-radio",
+                                      "b-field",
                                       {
                                         attrs: {
-                                          type: "is-info",
-                                          name: "status",
-                                          "native-value": "1"
-                                        },
-                                        model: {
-                                          value: _vm.statusData,
-                                          callback: function($$v) {
-                                            _vm.statusData = $$v
-                                          },
-                                          expression: "statusData"
+                                          label: "Choose Role",
+                                          expanded: ""
                                         }
                                       },
                                       [
-                                        _vm._v(
-                                          "\n                      Enable\n                    "
+                                        _c(
+                                          "div",
+                                          { staticClass: "block" },
+                                          _vm._l(
+                                            _vm.getRolePermissions,
+                                            function(r, i) {
+                                              return _c(
+                                                "b-checkbox",
+                                                {
+                                                  key: i,
+                                                  attrs: {
+                                                    "native-value": r.role,
+                                                    disabled: r.role === "ESS"
+                                                  },
+                                                  model: {
+                                                    value: _vm.roleData,
+                                                    callback: function($$v) {
+                                                      _vm.roleData = $$v
+                                                    },
+                                                    expression: "roleData"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(r.role) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          ),
+                                          1
                                         )
                                       ]
                                     ),
                                     _vm._v(" "),
                                     _c(
-                                      "b-radio",
-                                      {
-                                        attrs: {
-                                          type: "is-info",
-                                          name: "status",
-                                          "native-value": "0"
-                                        },
-                                        model: {
-                                          value: _vm.statusData,
-                                          callback: function($$v) {
-                                            _vm.statusData = $$v
-                                          },
-                                          expression: "statusData"
-                                        }
-                                      },
+                                      "b-field",
+                                      { staticClass: "buttons" },
                                       [
-                                        _vm._v(
-                                          "\n                      Disable\n                    "
+                                        _c(
+                                          "b-button",
+                                          {
+                                            staticClass: "is-success is-light",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.assignUserRole()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Save")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-button",
+                                          {
+                                            staticClass: "is-danger is-light",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.cancelAssignForm()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Cancel")]
                                         )
-                                      ]
+                                      ],
+                                      1
                                     )
                                   ],
                                   1
                                 )
-                              ]
-                            ),
+                              : _vm._e(),
                             _vm._v(" "),
-                            _c(
-                              "b-field",
-                              { staticClass: "buttons" },
-                              [
-                                _c(
-                                  "b-button",
-                                  {
-                                    staticClass: "is-success is-light",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.assignUserStatus()
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Save")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-button",
-                                  {
-                                    staticClass: "is-danger is-light",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.cancelAssignForm()
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Cancel")]
+                            _vm.showAssignStatusForm &&
+                            _vm.selectedUsers.length > 0
+                              ? _c(
+                                  "form",
+                                  { attrs: { action: "" } },
+                                  [
+                                    _c(
+                                      "b-field",
+                                      {
+                                        attrs: {
+                                          label: "Choose Status",
+                                          expanded: ""
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "block" },
+                                          [
+                                            _c(
+                                              "b-radio",
+                                              {
+                                                attrs: {
+                                                  type: "is-info",
+                                                  name: "status",
+                                                  "native-value": "1"
+                                                },
+                                                model: {
+                                                  value: _vm.statusData,
+                                                  callback: function($$v) {
+                                                    _vm.statusData = $$v
+                                                  },
+                                                  expression: "statusData"
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Enable\n                        "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "b-radio",
+                                              {
+                                                attrs: {
+                                                  type: "is-info",
+                                                  name: "status",
+                                                  "native-value": "0"
+                                                },
+                                                model: {
+                                                  value: _vm.statusData,
+                                                  callback: function($$v) {
+                                                    _vm.statusData = $$v
+                                                  },
+                                                  expression: "statusData"
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Disable\n                        "
+                                                )
+                                              ]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-field",
+                                      { staticClass: "buttons" },
+                                      [
+                                        _c(
+                                          "b-button",
+                                          {
+                                            staticClass: "is-success is-light",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.assignUserStatus()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Save")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-button",
+                                          {
+                                            staticClass: "is-danger is-light",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.cancelAssignForm()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Cancel")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
                                 )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e()
+                              : _vm._e()
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table",
+                        {
+                          attrs: {
+                            data: _vm.getUsers.data,
+                            "default-sort-direction": _vm.defaultSortDirection,
+                            "sort-icon": _vm.sortIcon,
+                            "sort-icon-size": _vm.sortIconSize,
+                            "checked-rows": _vm.selectedUsers,
+                            loading: _vm.isLoading,
+                            checkable: "",
+                            striped: "",
+                            hoverable: "",
+                            "default-sort": "id",
+                            "aria-next-label": "Next page",
+                            "aria-previous-label": "Previous page",
+                            "aria-page-label": "Page",
+                            "aria-current-label": "Current page"
+                          },
+                          on: {
+                            "update:checkedRows": function($event) {
+                              _vm.selectedUsers = $event
+                            },
+                            "update:checked-rows": function($event) {
+                              _vm.selectedUsers = $event
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "footer",
+                                fn: function() {
+                                  return [
+                                    _c("paginate", {
+                                      attrs: {
+                                        state: _vm.getUsers,
+                                        dispatch: _vm.dispatchUserAccount
+                                      }
+                                    })
+                                  ]
+                                },
+                                proxy: true
+                              },
+                              _vm.noUserFound
+                                ? {
+                                    key: "empty",
+                                    fn: function() {
+                                      return [
+                                        _c(
+                                          "article",
+                                          {
+                                            staticClass: "table__data__notfound"
+                                          },
+                                          [
+                                            _c("b-icon", {
+                                              attrs: {
+                                                icon: "database",
+                                                pack: "fas"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "strong",
+                                              { staticClass: "pt-3" },
+                                              [_vm._v("Ooops! No user found.")]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                : null
+                            ],
+                            null,
+                            true
+                          )
+                        },
+                        [
+                          _c("b-table-column", {
+                            staticClass: "is-info",
+                            attrs: {
+                              field: "id",
+                              label: "ID",
+                              width: "40",
+                              sortable: "",
+                              numeric: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [_vm._v(_vm._s(props.row.id))]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "username",
+                              label: "Username",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [_vm._v(_vm._s(props.row.email))]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "staff_name",
+                              label: "Name",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _vm._v(
+                                      _vm._s(
+                                        (props.row.personal_details.title ||
+                                          "") +
+                                          " " +
+                                          props.row.personal_details.firstName +
+                                          " " +
+                                          (props.row.personal_details
+                                            .middleName || "") +
+                                          " " +
+                                          props.row.personal_details.lastName
+                                      )
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "user_role",
+                              label: "User Role",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return _vm._l(
+                                    JSON.parse(props.row.role),
+                                    function(r) {
+                                      return _c(
+                                        "b-tag",
+                                        {
+                                          key: r,
+                                          staticClass: "mr-1",
+                                          attrs: { type: "is-dark" }
+                                        },
+                                        [_vm._v(_vm._s(r))]
+                                      )
+                                    }
+                                  )
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "status",
+                              label: "Status",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "b-tag",
+                                      {
+                                        attrs: {
+                                          type:
+                                            (props.row.status === 1
+                                              ? "is-success"
+                                              : "is-danger") + " is-light"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            props.row.status === 1
+                                              ? "Enabled"
+                                              : "Disabled"
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "actions", label: "Actions" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "div",
+                                      { staticClass: "b-tooltips" },
+                                      [
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: "View Profile",
+                                              size: "is-small",
+                                              type: "is-dark"
+                                            }
+                                          },
+                                          [
+                                            _vm.$page.props.authUser.id !==
+                                            props.row.id
+                                              ? _c(
+                                                  "inertia-link",
+                                                  {
+                                                    attrs: {
+                                                      href:
+                                                        "/dashboard/ess/" +
+                                                        props.row.id +
+                                                        "/" +
+                                                        props.row.slug,
+                                                      "preserve-scroll": ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("b-button", {
+                                                      staticClass: "is-light",
+                                                      attrs: {
+                                                        size: "is-small",
+                                                        pack: "fas",
+                                                        "icon-right": "eye"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                              : _c(
+                                                  "inertia-link",
+                                                  {
+                                                    attrs: {
+                                                      href: "/dashboard/ess",
+                                                      "preserve-scroll": ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("b-button", {
+                                                      staticClass: "is-light",
+                                                      attrs: {
+                                                        size: "is-small",
+                                                        pack: "fas",
+                                                        "icon-right": "eye"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: "Delete",
+                                              size: "is-small",
+                                              type: "is-dark"
+                                            }
+                                          },
+                                          [
+                                            _c("b-button", {
+                                              staticClass: "is-danger is-light",
+                                              attrs: {
+                                                size: "is-small",
+                                                pack: "fas",
+                                                "icon-right": "trash"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteUser(
+                                                    props.row.id
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _c("b-tab-item", { attrs: { label: "Roles & Permissions" } }, [
+            _c("section", { staticClass: "b__collapse__section" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("header", { staticClass: "card-header" }, [
+                  _c("article", { staticClass: "table__header" }, [
+                    _c("h5", { staticClass: "table__header__title" }, [
+                      _vm._v("Roles")
+                    ]),
+                    _vm._v(" "),
+                    _c("section", { staticClass: "table__header__lists" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "table__header__lists__item",
+                          attrs: { id: "add-new-role" }
+                        },
+                        [
+                          _c(
+                            "b-tooltip",
+                            {
+                              attrs: { label: "Add new role", type: "is-dark" }
+                            },
+                            [
+                              _c("b-icon", {
+                                staticClass: "icon--wrapper",
+                                attrs: { icon: "plus" }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ])
                   ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c(
+                    "div",
+                    { staticClass: "content" },
+                    [
+                      _c(
+                        "b-table",
+                        {
+                          attrs: {
+                            data: ["hphophpo"],
+                            paginated: true,
+                            "per-page": 100,
+                            "current-page": 1,
+                            "pagination-simple": true,
+                            "pagination-position": "bottom",
+                            "default-sort-direction": "desc",
+                            "sort-icon": "arrow-up",
+                            "sort-icon-size": "is-small",
+                            "checked-rows": _vm.checkedRoles,
+                            checkable: "",
+                            hoverable: "",
+                            "default-sort": "id",
+                            "aria-next-label": "Next page",
+                            "aria-previous-label": "Previous page",
+                            "aria-page-label": "Page",
+                            "aria-current-label": "Current page"
+                          },
+                          on: {
+                            "update:checkedRows": function($event) {
+                              _vm.checkedRoles = $event
+                            },
+                            "update:checked-rows": function($event) {
+                              _vm.checkedRoles = $event
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                field: "role",
+                                label: "Role",
+                                sortable: ""
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                  dsjkgfjkaasg\n                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                field: "staff",
+                                label: "Staff",
+                                sortable: ""
+                              }
+                            },
+                            [
+                              _vm._l(["dsdsgds"], function(member, index) {
+                                return _c(
+                                  "div",
+                                  { key: index, staticClass: "role-user" },
+                                  [
+                                    _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          rounded: "",
+                                          size: "",
+                                          type: "is-danger is-light"
+                                        }
+                                      },
+                                      [
+                                        _c("b-icon", {
+                                          attrs: {
+                                            icon: "minus",
+                                            size: "is-small"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("span", [_vm._v(_vm._s(member))])
+                                  ],
+                                  1
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: {
+                                    rounded: "",
+                                    "icon-left": "plus",
+                                    size: "",
+                                    type: "is-info is-light",
+                                    id: "add-staff-" + 546546
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openAddStaffDropper(546546)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Add\n                  ")]
+                              )
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                field: "permissions",
+                                label: "Permissions",
+                                sortable: ""
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "block",
+                                  staticStyle: { display: "block" }
+                                },
+                                _vm._l(_vm.permissions, function(p, i) {
+                                  return _c(
+                                    "b-checkbox",
+                                    {
+                                      key: i,
+                                      attrs: {
+                                        "native-value": p.id,
+                                        size: "",
+                                        type: "is-success"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                      " +
+                                          _vm._s(p) +
+                                          "\n                    "
+                                      )
+                                    ]
+                                  )
+                                }),
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                [
+                                  _c(
+                                    "b-button",
+                                    {
+                                      attrs: {
+                                        "icon-left": "file",
+                                        rounded: "",
+                                        size: "",
+                                        type: "is-info is-light"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.savePermissions()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("span", { ref: "abs" }, [
+                                        _vm._v("Save")
+                                      ])
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                field: "report-to",
+                                label: "Report to",
+                                sortable: ""
+                              }
+                            },
+                            [
+                              _vm._l(["dsdsgds"], function(member, index) {
+                                return _c(
+                                  "div",
+                                  { key: index, staticClass: "role-user" },
+                                  [
+                                    _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          rounded: "",
+                                          size: "",
+                                          type: "is-danger is-light"
+                                        }
+                                      },
+                                      [
+                                        _c("b-icon", {
+                                          attrs: {
+                                            icon: "minus",
+                                            size: "is-small"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("span", [_vm._v(_vm._s(member))])
+                                  ],
+                                  1
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: {
+                                    rounded: "",
+                                    "icon-left": "plus",
+                                    size: "",
+                                    type: "is-info is-light",
+                                    id: "add-staff-" + 546546
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openAddStaffDropper(546546)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Add\n                  ")]
+                              )
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "actions", label: "Actions" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "div",
+                                      { staticClass: "b-tooltips" },
+                                      [
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: "Assign",
+                                              size: "is-small",
+                                              type: "is-dark"
+                                            }
+                                          },
+                                          [
+                                            _c("b-button", {
+                                              staticClass: "is-light",
+                                              attrs: {
+                                                size: "is-small",
+                                                pack: "fas",
+                                                "icon-right": "user-cog"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.getStaffToAssign(
+                                                    props.row.id
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: "View Profile",
+                                              size: "is-small",
+                                              type: "is-dark"
+                                            }
+                                          },
+                                          [
+                                            _vm.$page.props.authUser.id !==
+                                            props.row.id
+                                              ? _c(
+                                                  "inertia-link",
+                                                  {
+                                                    attrs: {
+                                                      href:
+                                                        "/dashboard/ess/" +
+                                                        props.row.id +
+                                                        "/" +
+                                                        props.row.slug,
+                                                      "preserve-scroll": ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("b-button", {
+                                                      staticClass: "is-light",
+                                                      attrs: {
+                                                        size: "is-small",
+                                                        pack: "fas",
+                                                        "icon-right": "eye"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                              : _c(
+                                                  "inertia-link",
+                                                  {
+                                                    attrs: {
+                                                      href: "/dashboard/ess",
+                                                      "preserve-scroll": ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("b-button", {
+                                                      staticClass: "is-light",
+                                                      attrs: {
+                                                        size: "is-small",
+                                                        pack: "fas",
+                                                        "icon-right": "eye"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "dropper",
+        {
+          ref: "roleDropper",
+          staticClass: "dropper",
+          attrs: { join: "#add-new-role", "z-index": 9999 },
+          on: {
+            "esc-keydown": _vm.closeRoleDropper,
+            "other-area-clicked": _vm.closeRoleDropper
+          }
+        },
+        [
+          _c("h5", { staticClass: "text-main py-4" }, [_vm._v("Add New Role")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            { staticStyle: { width: "25rem" } },
+            [
+              _c(
+                "b-field",
+                [
+                  _c("b-input", {
+                    staticClass: "is-info",
+                    attrs: {
+                      placeholder: "Enter new role",
+                      type: "text",
+                      expanded: ""
+                    }
+                  })
                 ],
                 1
               ),
               _vm._v(" "),
-              _c(
-                "b-table",
-                {
-                  attrs: {
-                    data: _vm.getUsers.data,
-                    "default-sort-direction": _vm.defaultSortDirection,
-                    "sort-icon": _vm.sortIcon,
-                    "sort-icon-size": _vm.sortIconSize,
-                    "checked-rows": _vm.selectedUsers,
-                    loading: _vm.isLoading,
-                    checkable: "",
-                    striped: "",
-                    hoverable: "",
-                    "default-sort": "id",
-                    "aria-next-label": "Next page",
-                    "aria-previous-label": "Previous page",
-                    "aria-page-label": "Page",
-                    "aria-current-label": "Current page"
+              _c("b-field", { staticClass: "buttons pt-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-success is-light",
+                    attrs: { type: "submit", disabled: _vm.isSubmittingRole }
                   },
-                  on: {
-                    "update:checkedRows": function($event) {
-                      _vm.selectedUsers = $event
-                    },
-                    "update:checked-rows": function($event) {
-                      _vm.selectedUsers = $event
+                  [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(_vm.isSubmittingRole ? "Saving..." : "Save") +
+                        "\n        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-danger is-light",
+                    attrs: { type: "button", disabled: _vm.isSubmittingRole },
+                    on: {
+                      click: function($event) {
+                        return _vm.closeRoleDropper()
+                      }
                     }
                   },
-                  scopedSlots: _vm._u(
-                    [
-                      {
-                        key: "footer",
-                        fn: function() {
-                          return [
-                            _c("paginate", {
-                              attrs: {
-                                state: _vm.getUsers,
-                                dispatch: _vm.dispatchUserAccount
-                              }
-                            })
-                          ]
-                        },
-                        proxy: true
-                      },
-                      _vm.noUserFound
-                        ? {
-                            key: "empty",
-                            fn: function() {
-                              return [
-                                _c(
-                                  "article",
-                                  { staticClass: "table__data__notfound" },
-                                  [
-                                    _c("b-icon", {
-                                      attrs: { icon: "database", pack: "fas" }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("strong", { staticClass: "pt-3" }, [
-                                      _vm._v("Ooops! No user found.")
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ]
-                            },
-                            proxy: true
-                          }
-                        : null
-                    ],
-                    null,
-                    true
-                  )
-                },
-                [
-                  _c("b-table-column", {
-                    staticClass: "is-info",
-                    attrs: {
-                      field: "id",
-                      label: "ID",
-                      width: "40",
-                      sortable: "",
-                      numeric: ""
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return [_vm._v(_vm._s(props.row.id))]
-                        }
-                      }
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("b-table-column", {
-                    attrs: {
-                      field: "username",
-                      label: "Username",
-                      sortable: ""
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return [_vm._v(_vm._s(props.row.email))]
-                        }
-                      }
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("b-table-column", {
-                    attrs: { field: "staff_name", label: "Name", sortable: "" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return [
-                            _vm._v(
-                              _vm._s(
-                                (props.row.personal_details.title || "") +
-                                  " " +
-                                  props.row.personal_details.firstName +
-                                  " " +
-                                  (props.row.personal_details.middleName ||
-                                    "") +
-                                  " " +
-                                  props.row.personal_details.lastName
-                              )
-                            )
-                          ]
-                        }
-                      }
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("b-table-column", {
-                    attrs: {
-                      field: "user_role",
-                      label: "User Role",
-                      sortable: ""
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return _vm._l(JSON.parse(props.row.role), function(
-                            r
-                          ) {
-                            return _c(
-                              "b-tag",
-                              {
-                                key: r,
-                                staticClass: "mr-1",
-                                attrs: { type: "is-dark" }
-                              },
-                              [_vm._v(_vm._s(r))]
-                            )
-                          })
-                        }
-                      }
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("b-table-column", {
-                    attrs: { field: "status", label: "Status", sortable: "" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return [
-                            _c(
-                              "b-tag",
-                              {
-                                attrs: {
-                                  type:
-                                    (props.row.status === 1
-                                      ? "is-success"
-                                      : "is-danger") + " is-light"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    props.row.status === 1
-                                      ? "Enabled"
-                                      : "Disabled"
-                                  )
-                                )
-                              ]
-                            )
-                          ]
-                        }
-                      }
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("b-table-column", {
-                    attrs: { field: "actions", label: "Actions" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return [
-                            _c(
-                              "div",
-                              { staticClass: "b-tooltips" },
-                              [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    attrs: {
-                                      label: "View Profile",
-                                      size: "is-small",
-                                      type: "is-dark"
-                                    }
-                                  },
-                                  [
-                                    _vm.$page.props.authUser.id !== props.row.id
-                                      ? _c(
-                                          "inertia-link",
-                                          {
-                                            attrs: {
-                                              href:
-                                                "/dashboard/ess/" +
-                                                props.row.id +
-                                                "/" +
-                                                props.row.slug,
-                                              "preserve-scroll": ""
-                                            }
-                                          },
-                                          [
-                                            _c("b-button", {
-                                              staticClass: "is-light",
-                                              attrs: {
-                                                size: "is-small",
-                                                pack: "fas",
-                                                "icon-right": "eye"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      : _c(
-                                          "inertia-link",
-                                          {
-                                            attrs: {
-                                              href: "/dashboard/ess",
-                                              "preserve-scroll": ""
-                                            }
-                                          },
-                                          [
-                                            _c("b-button", {
-                                              staticClass: "is-light",
-                                              attrs: {
-                                                size: "is-small",
-                                                pack: "fas",
-                                                "icon-right": "eye"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    attrs: {
-                                      label: "Delete",
-                                      size: "is-small",
-                                      type: "is-dark"
-                                    }
-                                  },
-                                  [
-                                    _c("b-button", {
-                                      staticClass: "is-danger is-light",
-                                      attrs: {
-                                        size: "is-small",
-                                        pack: "fas",
-                                        "icon-right": "trash"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deleteUser(props.row.id)
-                                        }
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ]
-                        }
-                      }
-                    ])
-                  })
-                ],
-                1
-              )
+                  [_vm._v("\n          Cancel\n        ")]
+                )
+              ])
             ],
             1
           )
-        ])
-      ])
-    ])
-  ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "dropper",
+        {
+          ref: "addStaffDropper",
+          staticClass: "dropper",
+          attrs: { join: "#add-staff-" + _vm.getDropperId, "z-index": 9999 },
+          on: {
+            "esc-keydown": _vm.closeAddStaffDropper,
+            "other-area-clicked": _vm.closeAddStaffDropper
+          }
+        },
+        [
+          _c("h5", { staticClass: "text-main py-4" }, [
+            _vm._v("Add New Staff")
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            { staticStyle: { width: "25rem" } },
+            [
+              _c(
+                "b-field",
+                {
+                  staticClass: "expand-input",
+                  attrs: {
+                    type: {
+                      "is-danger": _vm.newStaff.errors.length > 0
+                    },
+                    message: _vm.newStaff.errors
+                  }
+                },
+                [
+                  _c("treeselect", {
+                    attrs: {
+                      multiple: true,
+                      options: _vm.getStaff,
+                      placeholder: "Select staff..."
+                    },
+                    model: {
+                      value: _vm.newStaff.value,
+                      callback: function($$v) {
+                        _vm.$set(_vm.newStaff, "value", $$v)
+                      },
+                      expression: "newStaff.value"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("b-field", { staticClass: "buttons pt-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-success is-light",
+                    attrs: { type: "submit", disabled: _vm.isSubmittingRole }
+                  },
+                  [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(_vm.isSubmittingRole ? "Saving..." : "Save") +
+                        "\n        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-danger is-light",
+                    attrs: { type: "button", disabled: _vm.isSubmittingRole },
+                    on: {
+                      click: function($event) {
+                        return _vm.closeRoleDropper()
+                      }
+                    }
+                  },
+                  [_vm._v("\n          Cancel\n        ")]
+                )
+              ])
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14161,7 +15173,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ManageUserComponent_vue_vue_type_template_id_276c2ef2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageUserComponent.vue?vue&type=template&id=276c2ef2&scoped=true& */ "./resources/js/components/admin/ManageUserComponent.vue?vue&type=template&id=276c2ef2&scoped=true&");
 /* harmony import */ var _ManageUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageUserComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/ManageUserComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _ManageUserComponent_vue_vue_type_style_index_0_id_276c2ef2_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true& */ "./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -14169,7 +15183,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ManageUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ManageUserComponent_vue_vue_type_template_id_276c2ef2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ManageUserComponent_vue_vue_type_template_id_276c2ef2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -14198,6 +15212,22 @@ component.options.__file = "resources/js/components/admin/ManageUserComponent.vu
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ManageUserComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/ManageUserComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true&":
+/*!*************************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageUserComponent_vue_vue_type_style_index_0_id_276c2ef2_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageUserComponent_vue_vue_type_style_index_0_id_276c2ef2_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageUserComponent_vue_vue_type_style_index_0_id_276c2ef2_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageUserComponent_vue_vue_type_style_index_0_id_276c2ef2_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageUserComponent_vue_vue_type_style_index_0_id_276c2ef2_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 

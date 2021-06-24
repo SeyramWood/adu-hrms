@@ -3,9 +3,6 @@ use Inertia\Inertia;
   <section class="main__content">
     <tabs stickyTab="main__content__sticky">
       <tab label="User Management">
-        {{ test }}
-        <b-button @click="changeLang('fr')">French</b-button
-        ><b-button @click="changeLang('ar')">Arabic</b-button>
         <ManageUserComponent />
       </tab>
       <tab label="Job">
@@ -77,11 +74,11 @@ export default {
     this.dispatchStaffCount({ payload: this.staffCount });
     this.dispatchWorkShift({ payload: this.workShifts });
 
-    this.$axios.get("/api/bio").then((res) => {
-      this.test = res.data.data;
-      // window.location.reload();
-      // console.log(res.data);
-    });
+    // this.$axios.get("/api/bio").then((res) => {
+    //   this.test = res.data.data;
+    //   // window.location.reload();
+    //   // console.log(res.data);
+    // });
   },
   data() {
     return {

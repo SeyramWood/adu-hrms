@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"5905cceb29fd679d5e5b","1":"de3ab2613adc3a398c0f","2":"f518316c7973219c06ed","3":"8e0e00e9d85d6d4236d0","4":"d00695bb6a4033ce28b9","5":"aa8b9d6eee9db0bee85c","6":"f3cd99afffb04bd60977","7":"146e3cf518f5433cdd95","8":"4dcb1f1e01a4d1cd6e7a","9":"6ad0e8d171cad30dc4ff","10":"b34f66232ded8d2e654c","11":"bdaa8d39908d08aba6e5","12":"35659626b044af5fe18b","13":"14d8d05916708ef8e8bc","14":"f79e5044f723d4f26837","15":"3799cc3eaa010fb236cd","16":"317eb36b5996d8db370e"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"5905cceb29fd679d5e5b","1":"de3ab2613adc3a398c0f","2":"f518316c7973219c06ed","3":"347669814305d83f1bc0","4":"66c7c26cc1f83cffb746","5":"a6213792231ce4107cfd","6":"f3cd99afffb04bd60977","7":"146e3cf518f5433cdd95","8":"4dcb1f1e01a4d1cd6e7a","9":"6ad0e8d171cad30dc4ff","10":"b34f66232ded8d2e654c","11":"bdaa8d39908d08aba6e5","12":"35659626b044af5fe18b","13":"14d8d05916708ef8e8bc","14":"f79e5044f723d4f26837","15":"3799cc3eaa010fb236cd","16":"317eb36b5996d8db370e"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -84209,6 +84209,7 @@ module.exports = function(module) {
 var map = {
 	"./Administration": [
 		"./resources/js/Pages/Administration.vue",
+		2,
 		3,
 		0,
 		1,
@@ -84216,6 +84217,7 @@ var map = {
 	],
 	"./Administration.vue": [
 		"./resources/js/Pages/Administration.vue",
+		2,
 		3,
 		0,
 		1,

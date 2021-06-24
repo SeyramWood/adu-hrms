@@ -119,15 +119,19 @@ button.is-primary {
     font-size: 1rem !important;
     margin-top: 0.25rem;
 }
-.b-checkbox.checkbox:hover input[type="checkbox"]:not(:disabled) + .check {
+.b-checkbox.checkbox:hover
+    input[type="checkbox"]:not(:disabled)
+    + .check:not(.is-success) {
     border-color: rgba(13, 103, 206, 0.651) !important;
 }
-.b-checkbox.checkbox input[type="checkbox"]:checked + .check {
+.b-checkbox.checkbox input[type="checkbox"]:checked + .check:not(.is-success) {
     background-color: rgba(13, 103, 206, 0.651) !important;
     border-color: rgba(13, 103, 206, 0.466) !important;
 }
 
-.b-checkbox.checkbox input[type="checkbox"]:focus:checked + .check {
+.b-checkbox.checkbox
+    input[type="checkbox"]:focus:checked
+    + .check:not(.is-success) {
     -webkit-box-shadow: 0 0 0.5em rgba(13, 103, 206, 0.651) !important;
     box-shadow: 0 0 0.5em rgba(13, 103, 206, 0.651) !important;
 }
