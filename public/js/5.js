@@ -2730,7 +2730,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         middleName: "",
         lastName: "",
         username: "",
-        role: "ESS",
+        role: ["ESS"],
         status: "1"
       };
     }

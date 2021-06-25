@@ -1137,7 +1137,7 @@ export default {
         middleName: "",
         lastName: "",
         username: "",
-        role: "ESS",
+        role: ["ESS"],
         status: "1",
       };
     },

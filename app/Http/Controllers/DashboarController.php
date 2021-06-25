@@ -28,8 +28,6 @@ class DashboarController extends Controller
         if (!Gate::allows('ess', Auth::user())) {
             abort(401);
         }
-        // return response(['Accept-Language' => 'fr'])->json([]);
-        // Session()->put('locale', 'fr');
         return inertia('Dashboard', [
             'jobTitles' => $this->getJobTitle(),
         ]);

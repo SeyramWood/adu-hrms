@@ -1,10 +1,11 @@
 <?php
 
-use App\Jobs\AccountCreated;
-use App\Models\Profile;
 use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Profile;
+use App\Jobs\AccountCreated;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Notifications\NewAccountCreated;
 
 
@@ -20,16 +21,16 @@ use App\Notifications\NewAccountCreated;
 */
 
 Route::get('/config', function () {
-  // Artisan::call('config:clear');
-  // Artisan::call('cache:clear');
-  // Artisan::call('config:cache');
-  // Artisan::call('storage:link');
-  // return 'Done';
+  Artisan::call('config:clear');
+  Artisan::call('cache:clear');
+  Artisan::call('config:cache');
+  Artisan::call('storage:link');
+  return 'Done';
 });
 
 Route::get('/notification', function () {
   // AccountCreated::dispatch();
-  $user = User::find(12);
+  $user = User::find(4);
   $password = 'sdfdsfdsf';
   $user->notify(new NewAccountCreated($user, $password, ['first_name' => 'Woodson', 'last_name' => 'Prikah']));
   return (new NewAccountCreated($user, $password, ['first_name' => 'Woodson', 'last_name' => 'Prikah']))

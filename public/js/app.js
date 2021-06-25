@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"5905cceb29fd679d5e5b","1":"de3ab2613adc3a398c0f","2":"f518316c7973219c06ed","3":"347669814305d83f1bc0","4":"66c7c26cc1f83cffb746","5":"a6213792231ce4107cfd","6":"f3cd99afffb04bd60977","7":"146e3cf518f5433cdd95","8":"4dcb1f1e01a4d1cd6e7a","9":"6ad0e8d171cad30dc4ff","10":"b34f66232ded8d2e654c","11":"bdaa8d39908d08aba6e5","12":"35659626b044af5fe18b","13":"14d8d05916708ef8e8bc","14":"f79e5044f723d4f26837","15":"3799cc3eaa010fb236cd","16":"317eb36b5996d8db370e"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"5905cceb29fd679d5e5b","1":"de3ab2613adc3a398c0f","3":"66331f484ebfdeafe0fd","4":"66c7c26cc1f83cffb746","5":"718991f7660668e01511","6":"f3cd99afffb04bd60977","7":"146e3cf518f5433cdd95","8":"4dcb1f1e01a4d1cd6e7a","9":"6ad0e8d171cad30dc4ff","10":"b34f66232ded8d2e654c","11":"bdaa8d39908d08aba6e5","12":"35659626b044af5fe18b","13":"14d8d05916708ef8e8bc","14":"f79e5044f723d4f26837","15":"3799cc3eaa010fb236cd","16":"317eb36b5996d8db370e","17":"646cbeecc0b30892f6af"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -84209,16 +84209,16 @@ module.exports = function(module) {
 var map = {
 	"./Administration": [
 		"./resources/js/Pages/Administration.vue",
-		2,
 		3,
+		17,
 		0,
 		1,
 		5
 	],
 	"./Administration.vue": [
 		"./resources/js/Pages/Administration.vue",
-		2,
 		3,
+		17,
 		0,
 		1,
 		5
@@ -84235,21 +84235,21 @@ var map = {
 	],
 	"./ESS": [
 		"./resources/js/Pages/ESS.vue",
-		3,
+		17,
 		0,
 		1,
 		4
 	],
 	"./ESS.vue": [
 		"./resources/js/Pages/ESS.vue",
-		3,
+		17,
 		0,
 		1,
 		4
 	],
 	"./KPI": [
 		"./resources/js/Pages/KPI.vue",
-		2,
+		3,
 		9,
 		0,
 		1,
@@ -84257,7 +84257,7 @@ var map = {
 	],
 	"./KPI.vue": [
 		"./resources/js/Pages/KPI.vue",
-		2,
+		3,
 		9,
 		0,
 		1,
@@ -84285,14 +84285,14 @@ var map = {
 	],
 	"./PIM": [
 		"./resources/js/Pages/PIM.vue",
-		2,
+		3,
 		0,
 		1,
 		7
 	],
 	"./PIM.vue": [
 		"./resources/js/Pages/PIM.vue",
-		2,
+		3,
 		0,
 		1,
 		7
@@ -84801,27 +84801,27 @@ var actions = {
 
             case 6:
               commit("addNewUser", payload);
-              return _context.abrupt("break", 30);
+              return _context.abrupt("break", 29);
 
             case 8:
               state.rolePermissions = payload;
-              return _context.abrupt("break", 30);
+              return _context.abrupt("break", 29);
 
             case 10:
               commit("assignUserRole", payload);
-              return _context.abrupt("break", 30);
+              return _context.abrupt("break", 29);
 
             case 12:
               commit("assignUserStatus", payload);
-              return _context.abrupt("break", 30);
+              return _context.abrupt("break", 29);
 
             case 14:
               commit("deleteUser", payload);
-              return _context.abrupt("break", 30);
+              return _context.abrupt("break", 29);
 
             case 16:
               commit("deleteUsers", payload);
-              return _context.abrupt("break", 30);
+              return _context.abrupt("break", 29);
 
             case 18:
               _context.prev = 18;
@@ -84830,34 +84830,33 @@ var actions = {
 
             case 21:
               result = _context.sent;
-              console.log(result);
               commit("addUsers", result.data);
-              _context.next = 29;
+              _context.next = 28;
               break;
 
-            case 26:
-              _context.prev = 26;
+            case 25:
+              _context.prev = 25;
               _context.t1 = _context["catch"](18);
               console.log(_context.t1);
 
-            case 29:
-              return _context.abrupt("break", 30);
+            case 28:
+              return _context.abrupt("break", 29);
 
-            case 30:
-              _context.next = 35;
+            case 29:
+              _context.next = 34;
               break;
 
-            case 32:
-              _context.prev = 32;
+            case 31:
+              _context.prev = 31;
               _context.t2 = _context["catch"](2);
               console.log(_context.t2);
 
-            case 35:
+            case 34:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 32], [18, 26]]);
+      }, _callee, null, [[2, 31], [18, 25]]);
     }))();
   },
   dispatchJobCategory: function dispatchJobCategory(_ref3, _ref4) {

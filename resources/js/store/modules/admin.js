@@ -56,7 +56,6 @@ const actions = {
                         const result = await axios.get(
                             `/dashboard/get-users?page=${payload}`
                         );
-                        console.log(result);
                         commit("addUsers", result.data);
                     } catch (error) {
                         console.log(error);

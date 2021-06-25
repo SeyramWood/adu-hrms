@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'), //change to postmark
+    'default' => env('MAIL_MAILER', 'postmark'), //change to postmark
 
     /*
     |--------------------------------------------------------------------------

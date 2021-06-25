@@ -12,9 +12,7 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        Commands\SendMailAccountCreated::class
-    ];
+    protected $commands = [];
 
     /**
      * Define the application's command schedule.
@@ -24,9 +22,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        // $schedule->command('queue:listen')->everyMinute();
-        $schedule->command('queue:work')->everyMinute()->withoutOverlapping();
+        $schedule->command('queue:restart')
+            ->everyFiveMinutes();
+        $schedule->command('queue:work --stop-when-empty')
+            ->everyMinute()
+            ->withoutOverlapping();
+        $schedule->command('queue:flush')->everyThreeMinutes()->withoutOverlapping();
     }
 
     /**
