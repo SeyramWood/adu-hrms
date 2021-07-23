@@ -140,8 +140,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="dashboard__cards">
           <div class="dashboard__cards__card c--6">
             <div class="card">
               <div class="card-content">
