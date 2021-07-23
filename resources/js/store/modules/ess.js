@@ -12,7 +12,9 @@ const state = {
     education: [],
     skills: [],
     languages: [],
-    qualificationAttachments: []
+    qualificationAttachments: [],
+    myLeaders: {},
+    countries: []
 };
 
 const getters = {
@@ -27,7 +29,9 @@ const getters = {
     getEducation: state => state.education,
     getSkills: state => state.skills,
     getLanguages: state => state.languages,
-    getQualificationAttachments: state => state.qualificationAttachments
+    getQualificationAttachments: state => state.qualificationAttachments,
+    getMyLeaders: state => state.myLeaders,
+    getCountries: state => state.countries
 };
 
 const actions = {
@@ -96,6 +100,9 @@ const actions = {
                 case "DELETE_USERS":
                     commit("deleteUsers", payload);
                     break;
+                case "ADD_MY_LEADERS":
+                    state.myLeaders = payload;
+                    break;
                 default:
                     commit("addProfile", payload);
                     break;
@@ -112,6 +119,17 @@ const actions = {
                     break;
                 default:
                     state.authUser = payload;
+                    break;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async dispatchCountry({ commit, state }, { type = "", payload }) {
+        try {
+            switch (type) {
+                default:
+                    state.countries = payload;
                     break;
             }
         } catch (err) {

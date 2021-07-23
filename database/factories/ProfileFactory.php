@@ -22,6 +22,7 @@ class ProfileFactory extends Factory
      */
     public function definition()
     {
+
         $qualifications = [
             'workExperience' => [],
             'education' => [],

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolePermissionsTable extends Migration
+class CreateUserKeyGoalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateRolePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_permissions', function (Blueprint $table) {
+        Schema::create('user_key_goals', function (Blueprint $table) {
             $table->id();
-            $table->json('role_permission')->nullable();
+            $table->foreignId('appraisal_id')->constrained('appraisals')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id', false)->nullable();
+            $table->longText('goal')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateRolePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_permissions');
+        Schema::dropIfExists('user_key_goals');
     }
 }

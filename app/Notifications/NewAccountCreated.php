@@ -8,14 +8,9 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewAccountCreated extends Notification implements ShouldQueue
+class NewAccountCreated extends Notification
 {
-    use Queueable;
     protected $user, $password, $request;
-    // public $afterCommit = true;
-    public $tries = 3;
-
-
     /**
      * Create a new notification instance.
      *

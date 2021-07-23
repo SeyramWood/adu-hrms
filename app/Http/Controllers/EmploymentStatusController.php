@@ -25,11 +25,7 @@ class EmploymentStatusController extends Controller
     }
     public function deleteEmpStatuses($employmentSatuses)
     {
-        $ids = json_decode($employmentSatuses);
-        for ($i = 0; $i < count($ids); $i++) {
-            $category = EmploymentStatus::find($ids[$i]);
-            $category->delete();
-        }
+        EmploymentStatus::whereIn('id', json_decode($employmentSatuses))->delete();
         return response()->json(['deleted' => true]);
     }
 }

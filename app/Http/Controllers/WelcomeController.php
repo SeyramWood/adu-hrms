@@ -17,7 +17,6 @@ class WelcomeController extends Controller
         // ]);
         // Alternatively, you can use the inertia() helper
         return inertia('Welcome', [
-            'event' => 'Seyram',
             'create_url' => URL::route('welcome'),
         ]);
     }

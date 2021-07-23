@@ -16,10 +16,10 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->bigInteger('branch_id')->nullable();
-            $table->bigInteger('department_id')->nullable();
-            $table->string('managers')->nullable();
-            $table->string('supervisors')->nullable();
+            $table->unsignedBigInteger('branch_id', false)->nullable();
+            $table->unsignedBigInteger('department_id', false)->nullable();
+            $table->unsignedBigInteger('unit_id', false)->nullable();
+            $table->unsignedBigInteger('position_id', false)->nullable();
             $table->string('employee_status')->default('current');
             $table->json('personal_details')->nullable();
             $table->json('contact_details')->nullable();

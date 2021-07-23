@@ -38,6 +38,7 @@ const actions = {
                         const result = await axios.get(
                             `/dashboard/get-appraisals?page=${payload}`
                         );
+
                         commit("addAppraisals", result.data);
                     } catch (error) {
                         console.log(error);
@@ -53,10 +54,14 @@ const actions = {
 const mutations = {
     addAppraisals: (state, data) => {
         if (!data) return state;
-        if (data.data.length > 0) {
+        let result = data.data;
+        if (typeof result === "object") {
+            result = Object.values(result);
+        }
+        if (result.length > 0) {
             state.appraisals = {
                 ...data,
-                data: data.data.map(a => {
+                data: result.map(a => {
                     a.period = JSON.parse(a.period);
                     a.sap_timestamp = JSON.parse(a.sap_timestamp);
                     a.np_timestamp = JSON.parse(a.np_timestamp);

@@ -34,6 +34,7 @@ class AppraisalRequest extends FormRequest
             'description' => 'nullable|string',
             'applicableFor.branch' => 'required|array',
             'applicableFor.department' => 'required|array',
+            'applicableFor.unit' => 'required|array',
             'applicableFor.role' => 'required|array',
         ];
     }
@@ -48,12 +49,17 @@ class AppraisalRequest extends FormRequest
         return [
             'period.from' => 'from',
             'period.to' => 'to',
+            'sap.open' => 'open',
+            'sap.close' => 'close',
+            'np.open' => 'open',
+            'np.close' => 'close',
             'kg.open' => 'open',
             'kg.close' => 'close',
             'ar.open' => 'open',
             'ar.close' => 'close',
             'applicableFor.branch' => 'branch',
             'applicableFor.department' => 'department',
+            'applicableFor.unit' => 'unit',
             'applicableFor.role' => 'role',
         ];
     }

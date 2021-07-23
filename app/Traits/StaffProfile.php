@@ -53,8 +53,13 @@ trait StaffProfile
       ->join('profiles', 'profiles.user_id', '=', 'users.id')
       ->select(
         'users.*',
+        'profiles.branch_id',
+        'profiles.department_id',
+        'profiles.unit_id',
         'profiles.personal_details->title as title',
         'profiles.personal_details->lastName as lastName',
+        'profiles.personal_details->firstName as firstName',
+        'profiles.personal_details->middleName as middleName',
         'profiles.personal_details->avatar as avatar',
         'profiles.job->title as jobTitle'
 
@@ -105,7 +110,6 @@ trait StaffProfile
       'otherId' => 'nullable|string',
       'birthDate' => 'required|string',
       'maritalStatus' => 'required|string',
-      'nationality' => 'required|string',
       'gender' => 'required|string',
     ]);
     DB::table('profiles')->where('user_id', $id)->update([
@@ -117,7 +121,6 @@ trait StaffProfile
       'personal_details->otherId' => $request->otherId,
       'personal_details->birthDate' => $request->birthDate,
       'personal_details->maritalStatus' => $request->maritalStatus,
-      'personal_details->nationality' => $request->nationality,
       'personal_details->gender' => $request->gender,
       'slug' => Str::slug($request->firstName . ' ' . $request->middleName . ' ' . $request->lastName, '-'),
     ]);
@@ -556,7 +559,7 @@ trait StaffProfile
       "category" => "required|numeric",
       "title" => "required|numeric",
       "employmentStatus" => "required|numeric",
-      "department" => "required|numeric",
+      "department" => "required",
       "branch" => "required|numeric",
       "startDate" => [
         'required',
@@ -584,18 +587,23 @@ trait StaffProfile
         $file = $request->contractDetails;
       }
     }
-
+    $dpt = $request->department === 'none' ? null : ($request->unit ? null : $request->department);
+    $unt = $request->unit === 'none' ? null : $request->unit;
     $profile->job = json_encode([
       'category' => $request->category,
       'title' => $request->title,
       'employmentStatus' => $request->employmentStatus,
-      'department' => $request->department,
+      'department' => $dpt,
+      'unit' => $unt,
+      'position' => $request->position,
       'branch' => $request->branch,
       'startDate' => $request->startDate,
       'endDate' => $request->endDate,
       'contractDetails' => $file,
     ]);
-    $profile->department_id = $request->department;
+    $profile->department_id = $dpt;
+    $profile->unit_id = $unt;
+    $profile->position_id = $request->position;
     $profile->branch_id = $request->branch;
     $profile->save();
     return response()->json(['updated' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->job)]);
@@ -635,9 +643,10 @@ trait StaffProfile
         'job->department' => $request->department,
       ]);
     }
-    if ($type === 'position') {
+    if ($type === 'unit') {
       DB::table('profiles')->where('user_id', $profile->user_id)->update([
-        'job->position' => $request->position
+        'unit_id' => $request->unit,
+        'job->unit' => $request->unit,
       ]);
     }
     return response()->json(['assigned' => true, 'staff' => $this->getStaffList($profile->user_id)]);

@@ -2,11 +2,7 @@
   <main class="v-cloak">
     <div class="brand__logo">
       <div class="brand__logo__main">
-        <img
-          :src="`/storage/logo/${getOrganizationProfile.logo}`"
-          alt="Brand Logo"
-          srcset=""
-        />
+        <img :src="`/storage/logo/${getLogo}`" alt="Brand Logo" srcset="" />
       </div>
     </div>
     <header class="header">
@@ -21,7 +17,7 @@
               href="/dashboard"
               preserve-scroll
               :headers="{ 'Custom-Header': 'poopjpo' }"
-              >Dashboard</inertia-link
+              >{{ $t("app.dashboard") }}</inertia-link
             >
           </li>
           <li
@@ -33,86 +29,59 @@
                 : ''
             }`"
           >
-            <inertia-link href="/dashboard/ess" preserve-scroll
-              >ESS</inertia-link
-            >
+            <inertia-link href="/dashboard/ess" preserve-scroll>{{
+              $t("app.employee")
+            }}</inertia-link>
           </li>
-          <template v-if="isUserRole('Admin')">
-            <li
-              :class="`header__nav__list__item ${
-                activePage === '/dashboard/admin' ? 'active-left' : ''
-              }`"
-            >
-              <inertia-link href="/dashboard/admin" preserve-scroll
-                >Admin</inertia-link
-              >
-            </li>
-          </template>
-          <!-- <template v-if="isUserRole('Manager')">
-            <li
-              :class="`header__nav__list__item ${
-                activePage === '/dashboard/manager' ? 'active-left' : ''
-              }`"
-            >
-              <inertia-link href="/dashboard/manager" preserve-scroll
-                >Manager</inertia-link
-              >
-            </li>
-          </template>
-          <template v-if="isUserRole('Supervisor')">
-            <li
-              :class="`header__nav__list__item ${
-                activePage === '/dashboard/manager' ? 'active-left' : ''
-              }`"
-            >
-              <inertia-link href="/dashboard/manager" preserve-scroll
-                >Supervisor</inertia-link
-              >
-            </li>
-          </template> -->
-          <template
-            v-if="
-              isUserRole('Admin') ||
-              isUserRole('Manager') ||
-              isUserRole('Supervisor')
-            "
+          <li
+            :class="`header__nav__list__item ${
+              activePage === '/dashboard/admin' ? 'active-left' : ''
+            }`"
+            v-if="isPermission('view_admin')"
           >
-            <li
-              :class="`header__nav__list__item ${
-                activePage === '/dashboard/pim' ? 'active-left' : ''
-              }`"
-            >
-              <inertia-link href="/dashboard/pim" preserve-scroll
-                >PIM</inertia-link
-              >
-            </li>
-            <li
-              :class="`header__nav__list__item ${
-                activePage === '/dashboard/leave' ? 'active-left' : ''
-              }`"
-            >
-              <inertia-link href="/dashboard/leave" preserve-scroll
-                >Leave</inertia-link
-              >
-            </li>
-            <li
-              :class="`header__nav__list__item ${
-                activePage === '/dashboard/kpi' ? 'active-left' : ''
-              }`"
-            >
-              <inertia-link href="/dashboard/kpi" preserve-scroll
-                >KPI</inertia-link
-              >
-            </li>
-          </template>
+            <inertia-link href="/dashboard/admin" preserve-scroll>{{
+              $t("app.admin")
+            }}</inertia-link>
+          </li>
+
+          <li
+            :class="`header__nav__list__item ${
+              activePage === '/dashboard/pim' ? 'active-left' : ''
+            }`"
+            v-if="isPermission('view_pim')"
+          >
+            <inertia-link href="/dashboard/pim" preserve-scroll>{{
+              $t("app.pim")
+            }}</inertia-link>
+          </li>
+          <li
+            :class="`header__nav__list__item ${
+              activePage === '/dashboard/leave' ? 'active-left' : ''
+            }`"
+            v-if="isPermission('view_leave')"
+          >
+            <inertia-link href="/dashboard/leave" preserve-scroll>{{
+              $t("app.leave")
+            }}</inertia-link>
+          </li>
+          <li
+            :class="`header__nav__list__item ${
+              activePage === '/dashboard/kpi' ? 'active-left' : ''
+            }`"
+          >
+            <inertia-link href="/dashboard/kpi" preserve-scroll>{{
+              $t("app.kpi")
+            }}</inertia-link>
+          </li>
+
           <li
             :class="`header__nav__list__item ${
               activePage === '/dashboard/staff-directory' ? 'active-left' : ''
             }`"
           >
-            <inertia-link href="/dashboard/staff-directory" preserve-scroll
-              >Staff Directory</inertia-link
-            >
+            <inertia-link href="/dashboard/staff-directory" preserve-scroll>{{
+              $t("app.staff_directory")
+            }}</inertia-link>
           </li>
         </ul>
         <ul class="header__nav__list header__nav__list--right">
@@ -145,22 +114,10 @@
                 <b-icon pack="fas" icon="cogs" size="is-small"></b-icon>
               </p>
               <b-dropdown-item aria-role="listitem">
-                <a href="#" class="default"
-                  ><b-icon pack="fas" icon="user" size="is-small"></b-icon>
-                  &nbsp; Profile</a
-                >
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <a href="#"
-                  ><b-icon pack="fas" icon="lock" size="is-small"></b-icon>
-                  &nbsp; Change Password</a
-                >
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <a href="#"
-                  ><b-icon pack="fas" icon="cog" size="is-small"></b-icon>
-                  &nbsp; Settings</a
-                >
+                <inertia-link :href="`/dashboard/ess`" preserve-scroll>
+                  <b-icon pack="fas" icon="user" size="is-small"></b-icon>
+                  &nbsp; {{ $t("app.profile") }}
+                </inertia-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
                 <inertia-link
@@ -173,13 +130,7 @@
                     icon="sign-out-alt"
                     size="is-small"
                   ></b-icon>
-                  &nbsp; Logout</inertia-link
-                >
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <a href="#"
-                  ><b-icon pack="fas" icon="cog" size="is-small"></b-icon>
-                  &nbsp; French</a
+                  &nbsp; {{ $t("app.logout") }}</inertia-link
                 >
               </b-dropdown-item>
             </b-dropdown>
@@ -205,7 +156,7 @@
           </h4>
         </div>
         <div class="header__details__brand__name">
-          <h4>{{ getOrganizationProfile.name }}</h4>
+          <h4>{{ getOrgName }}</h4>
         </div>
       </div>
     </header>
@@ -225,6 +176,7 @@ export default {
     // all titles will be injected into this template
     titleTemplate: "%s | Human Resource Management System",
   },
+  props: { userPermissions: { require: true, type: Array } },
   computed: {
     ...mapGetters([
       "getBranches",
@@ -237,7 +189,9 @@ export default {
     authUserName() {
       return `${this.isNull(this.getAuthUser.title)} ${
         this.getAuthUser.lastName
-      }`;
+      } ${this.getAuthUser.firstName} ${this.isNull(
+        this.getAuthUser.middleName
+      )}`;
     },
     authJobTitle() {
       if (this.getAuthUser.jobTitle && this.getJobTitles) {
@@ -248,13 +202,27 @@ export default {
       }
       return "";
     },
+    getLogo() {
+      if (this.getOrganizationProfile) {
+        return this.getOrganizationProfile.logo;
+      }
+    },
+    getOrgName() {
+      if (this.getOrganizationProfile) {
+        return this.getOrganizationProfile.name;
+      }
+    },
   },
-  props: {},
   beforeMount() {
     this.activePage = this.$page.url;
     Inertia.on("navigate", (event) => {
       this.activePage = event.detail.page.url;
     });
+    if (localStorage.getItem("locale")) {
+      this.$lang.setLocale(localStorage.getItem("locale"));
+    } else {
+      this.$lang.setLocale("en");
+    }
   },
   created() {
     this.dispatchAuthUser({ payload: this.$page.props.authUser });
@@ -294,9 +262,6 @@ export default {
         return "";
       }
       return el;
-    },
-    changeLang() {
-      location.reload();
     },
   },
 };

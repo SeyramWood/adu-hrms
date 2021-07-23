@@ -1,5 +1,6 @@
 const mix = require("laravel-mix");
 const path = require("path");
+const WebpackShellPlugin = require("webpack-shell-plugin");
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -20,5 +21,13 @@ mix.js("resources/js/app.js", "public/js")
         },
         output: {
             chunkFilename: "js/[name].js?id=[chunkhash]"
-        }
+        },
+        plugins: [
+            new WebpackShellPlugin({
+                onBuildStart: [
+                    "php artisan lang:js resources/js/lang.js --no-lib --quiet"
+                ],
+                onBuildEnd: []
+            })
+        ]
     });

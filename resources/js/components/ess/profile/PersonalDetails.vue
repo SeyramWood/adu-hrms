@@ -10,15 +10,20 @@
             <div class="personal__details">
               <div class="personal__details__photo">
                 <div class="p-text">
-                  <p>Employee Personal Profile</p>
+                  <p>
+                    {{ $t("app.personal_detail_cta") }}
+                  </p>
                 </div>
                 <div class="personal__details__photo__display">
                   <div
                     class="profile__photo__overlay"
-                    v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+                    v-if="userOrPermission('update', getProfile.user_id)"
                   >
                     <b-field>
-                      <b-tooltip label="Upload profile photo" type="is-dark">
+                      <b-tooltip
+                        :label="$t('app.upload_profile_photo')"
+                        type="is-dark"
+                      >
                         <b-upload
                           v-model="personalDetails.avatar"
                           class="file-label"
@@ -42,7 +47,7 @@
                     ></b-loading>
                     <img
                       :src="`/storage/avatar/${getProfile.personal_details.avatar}`"
-                      alt="Profile Photo"
+                      :alt="$t('app.profile_photo')"
                       srcset
                     />
                   </div>
@@ -50,12 +55,22 @@
               </div>
               <hr />
               <div class="personal__details__detail">
+                <template v-if="userOrPermission('update', getProfile.user_id)">
+                  <b-field v-if="isEditPersonalDetails" class="mb-4">
+                    <b-button
+                      class="is-info is-light"
+                      icon-left="pen"
+                      @click="isEditPersonalDetails = !isEditPersonalDetails"
+                      >{{ $t("app.edit") }}</b-button
+                    >
+                  </b-field>
+                </template>
                 <fieldset :disabled="isEditPersonalDetails" class="mb-4">
                   <form @submit.prevent="updatePersonalDetails()">
                     <div class="columns">
                       <div class="column is-3">
                         <b-field
-                          label="Title"
+                          :label="$t('app.title')"
                           :type="{
                             'is-danger': personalDetailsErrors.title.length > 0,
                           }"
@@ -66,15 +81,32 @@
                             expanded
                             v-model="personalDetails.title"
                           >
-                            <option value="Mr.">Mr.</option>
-                            <option value="Mrs.">Mrs.</option>
-                            <option value="Dr.">Dr.</option>
+                            <option value="Mr.">{{ $tc("app.mr", 1) }}</option>
+                            <option value="Miss">
+                              {{ $t("app.miss") }}
+                            </option>
+                            <option value="Mrs.">
+                              {{ $t("app.mrs") }}
+                            </option>
+                            <option value="Hon.">
+                              {{ $t("app.hon") }}
+                            </option>
+                            <option value="Rev.">
+                              {{ $t("app.rev") }}
+                            </option>
+                            <option value="Dr.">{{ $t("app.dr") }}</option>
+                            <option value="Prof.">
+                              {{ $t("app.prof") }}
+                            </option>
+                            <option value="Other">
+                              {{ $tc("app.other", 1) }}
+                            </option>
                           </b-select>
                         </b-field>
                       </div>
                       <div class="column is-3">
                         <b-field
-                          label="First Name"
+                          :label="$t('app.firstName')"
                           expanded
                           :type="{
                             'is-danger':
@@ -90,7 +122,7 @@
                       </div>
                       <div class="column is-3">
                         <b-field
-                          label="Middle Name"
+                          :label="$t('app.middleName')"
                           expanded
                           :type="{
                             'is-danger':
@@ -106,7 +138,7 @@
                       </div>
                       <div class="column is-3">
                         <b-field
-                          label="Last Name"
+                          :label="$t('app.lastName')"
                           expanded
                           :type="{
                             'is-danger':
@@ -125,7 +157,7 @@
                     <div class="columns">
                       <div class="column is-3">
                         <b-field
-                          label="Birth Date"
+                          :label="$t('app.birthDate')"
                           :type="{
                             'is-danger':
                               personalDetailsErrors.birthDate.length > 0,
@@ -134,7 +166,7 @@
                         >
                           <b-datepicker
                             v-model="personalDetails.birthDate"
-                            placeholder="Click to select..."
+                            :placeholder="$t('placeholder_birthdate')"
                             pack="fas"
                             icon="calendar"
                             trap-focus
@@ -143,7 +175,7 @@
                       </div>
                       <div class="column is-3">
                         <b-field
-                          label="Marital Status"
+                          :label="$t('app.maritalStatus')"
                           :type="{
                             'is-danger':
                               personalDetailsErrors.maritalStatus.length > 0,
@@ -155,35 +187,27 @@
                             expanded
                             v-model="personalDetails.maritalStatus"
                           >
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Other">Other</option>
+                            <option :value="$tc('app.single', 1)">
+                              {{ $tc("app.single", 1) }}
+                            </option>
+                            <option :value="$tc('app.married', 1)">
+                              {{ $tc("app.married", 1) }}
+                            </option>
+                            <option :value="$tc('app.divorced', 1)">
+                              {{ $tc("app.divorced", 1) }}
+                            </option>
+                            <option :value="$tc('app.widowed', 1)">
+                              {{ $tc("app.widowed", 1) }}
+                            </option>
+                            <option :value="$tc('app.other', 1)">
+                              {{ $tc("app.other", 1) }}
+                            </option>
                           </b-select>
                         </b-field>
                       </div>
                       <div class="column is-3">
                         <b-field
-                          label="Nationality"
-                          :type="{
-                            'is-danger':
-                              personalDetailsErrors.nationality.length > 0,
-                          }"
-                          :message="personalDetailsErrors.nationality"
-                        >
-                          <b-select
-                            size=""
-                            expanded
-                            v-model="personalDetails.nationality"
-                          >
-                            <option value="Ghana">Ghana</option>
-                            <option value="Nigeria">Nigeria</option>
-                            <option value="USA">USA</option>
-                          </b-select>
-                        </b-field>
-                      </div>
-                      <div class="column is-3">
-                        <b-field
-                          label="Gender"
+                          :label="`${$tc('app.gender', 1)}`"
                           :type="{
                             'is-danger':
                               personalDetailsErrors.gender.length > 0,
@@ -197,7 +221,7 @@
                               type="is-info"
                               native-value="Male"
                               size=""
-                              >Male</b-radio
+                              >{{ $tc("app.male", 1) }}</b-radio
                             >
                             <b-radio
                               v-model="personalDetails.gender"
@@ -205,7 +229,7 @@
                               type="is-info"
                               native-value="Female"
                               size=""
-                              >Female</b-radio
+                              >{{ $tc("app.female", 1) }}</b-radio
                             >
                           </div>
                         </b-field>
@@ -213,9 +237,9 @@
                     </div>
 
                     <div class="columns">
-                      <div class="column is-6">
+                      <div class="column is-3">
                         <b-field
-                          label="Staff Id"
+                          :label="$tc('app.staffId')"
                           expanded
                           :type="{
                             'is-danger':
@@ -229,9 +253,9 @@
                           ></b-input>
                         </b-field>
                       </div>
-                      <div class="column is-6">
+                      <div class="column is-3">
                         <b-field
-                          label="Other Id"
+                          :label="$tc('app.otherId')"
                           expanded
                           :type="{
                             'is-danger':
@@ -254,27 +278,27 @@
                           :disabled="isSubmittingPersonalDetails"
                         >
                           {{
-                            isSubmittingPersonalDetails ? "Saving..." : "Save"
+                            isSubmittingPersonalDetails
+                              ? `${$t("app.saving")}...`
+                              : $t("app.save")
                           }}
                         </button>
                         <b-button
                           class="is-danger is-light"
                           @click="cancelPersonalDetailsForm()"
-                          >Cancel</b-button
+                          >{{ $t("app.cancel") }}</b-button
                         >
                       </div>
                     </b-field>
                   </form>
                 </fieldset>
-                <template
-                  v-if="roleOrUserPermission('Admin', getProfile.user_id)"
-                >
+                <template v-if="userOrPermission('update', getProfile.user_id)">
                   <b-field v-if="isEditPersonalDetails">
                     <b-button
                       class="is-info is-light"
                       icon-left="pen"
                       @click="isEditPersonalDetails = !isEditPersonalDetails"
-                      >Edit</b-button
+                      >{{ $t("app.edit") }}</b-button
                     >
                   </b-field>
                 </template>
@@ -287,13 +311,13 @@
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">Attachments</p>
+          <p class="card-header-title">{{ $tc("app.attachment", 2) }}</p>
         </header>
         <div class="card-content">
           <div class="content">
             <section
               class="b__collapse__section"
-              v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+              v-if="userOrPermission('update', getProfile.user_id)"
             >
               <b-collapse
                 :open="false"
@@ -308,7 +332,9 @@
                   role="button"
                   aria-controls="Add Attachment"
                 >
-                  <p class="card-header-title has-text-info">Add Attachment</p>
+                  <p class="card-header-title has-text-info">
+                    {{ $t("app.addAttament") }}
+                  </p>
                   <a class="card-header-icon">
                     <b-icon
                       type="is-info"
@@ -338,7 +364,9 @@
                                         size="is-small"
                                       ></b-icon>
                                     </p>
-                                    <p>Drop or click to upload attachment</p>
+                                    <p>
+                                      {{ $t("app.placeholder_attachment") }}
+                                    </p>
                                   </div>
                                 </section>
                               </b-upload>
@@ -379,7 +407,9 @@
                             >
                               <b-input
                                 type="textarea"
-                                placeholder="Type your comment here..."
+                                :placeholder="`${$tc(
+                                  'app.placeholder_comment'
+                                )}...`"
                                 v-model="personalDetails.attachment.comment"
                               ></b-input>
                             </b-field>
@@ -395,15 +425,15 @@
                             >
                               {{
                                 isSubmittingPersonalDetailsAttachment
-                                  ? "Submitting..."
-                                  : "Submit"
+                                  ? `${$t("app.submitting")}...`
+                                  : $t("app.submit")
                               }}
                             </button>
 
                             <b-button
                               class="is-danger is-light"
                               @click="cancelPersonalDetailsAttachmentForm()"
-                              >Cancel</b-button
+                              >{{ $t("app.cancel") }}</b-button
                             >
                           </div>
                         </b-field>
@@ -417,7 +447,7 @@
                           isEditPersonalDetailsAttachment =
                             !isEditPersonalDetailsAttachment
                         "
-                        >Add</b-button
+                        >{{ $t("app.add") }}</b-button
                       >
                     </b-field>
                   </div>
@@ -432,7 +462,12 @@
               :pagination-simple="true"
               pagination-position="bottom"
             >
-              <b-table-column field="file" label="File" sortable v-slot="props">
+              <b-table-column
+                field="file"
+                :label="`${$tc('app.file', 1)}`"
+                sortable
+                v-slot="props"
+              >
                 <a
                   @click="
                     viewAttachment(`/attachments/personal/${props.row.file}`)
@@ -442,25 +477,33 @@
               </b-table-column>
               <b-table-column
                 field="comment"
-                label="Comment"
+                :label="$tc('app.comment', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.comment }}</b-table-column
               >
-              <b-table-column field="actions" label="Actions" v-slot="props">
+              <b-table-column
+                field="actions"
+                :label="$tc('app.action', 2)"
+                v-slot="props"
+              >
                 <div class="b-tooltips">
-                  <b-tooltip label="Replace attachment" type="is-dark">
+                  <b-tooltip
+                    :label="$t('app.replaceAttachment')"
+                    type="is-dark"
+                  >
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="upload"
+                      :id="`comment-id${getAttachmentDropperId}`"
                       @click="openAttachmentDropper(props.row, 'attachment')"
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Edit comment" type="is-dark">
+                  <b-tooltip :label="$t('app.editComment')" type="is-dark">
                     <b-button
-                      :id="`comment-id${props.row.id}`"
+                      :id="`comment-id${getAttachmentDropperId}`"
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
@@ -468,7 +511,7 @@
                       @click="openAttachmentDropper(props.row, 'comment')"
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Delete" type="is-dark">
+                  <b-tooltip :label="$t('app.delete')" type="is-dark">
                     <b-button
                       class="is-danger is-light"
                       size="is-small"
@@ -496,8 +539,12 @@
       <form
         @submit.prevent="replacePersonalDetailsAttachment(attachmentUpdateType)"
         v-if="attachmentUpdateType === 'comment'"
+        class="p-4"
+        style="width: 30rem"
       >
-        <h3 class="label">Edit Comment</h3>
+        <h3 class="label text-main">
+          {{ `${$t("app.edit")} ${$tc("app.comment", 1)}` }}
+        </h3>
         <b-field
           :type="{
             'is-danger': personalDetailsAttachmentError.comment.length > 0,
@@ -506,8 +553,9 @@
         >
           <b-input
             type="textarea"
-            placeholder="Type your comment here..."
+            :placeholder="`${$t('app.placeholder_comment')}...`"
             v-model="personalDetails.attachment.comment"
+            expanded
           ></b-input>
         </b-field>
         <b-field class="buttons">
@@ -516,7 +564,9 @@
             type="submit"
             :disabled="isUpdatingFileComment"
           >
-            {{ isUpdatingFileComment ? "Saving..." : "Save" }}
+            {{
+              isUpdatingFileComment ? `${$t("app.saving")}...` : $t("app.save")
+            }}
           </button>
           <button
             class="button is-danger is-light"
@@ -524,16 +574,20 @@
             :disabled="isUpdatingFileComment"
             @click="closeAttachmentDropper()"
           >
-            Cancel
+            {{ $t("app.cancel") }}
           </button>
         </b-field>
       </form>
       <form
         @submit.prevent="replacePersonalDetailsAttachment(attachmentUpdateType)"
         v-if="attachmentUpdateType === 'attachment'"
+        class="p-4"
+        style="width: 30rem"
       >
-        <h3 class="label has-text-info">Replace Attachment</h3>
-        <hr />
+        <h3 class="label text-main">
+          {{ `${$tc("app.replace", 1)} ${$tc("app.attachment", 1)}` }}
+        </h3>
+
         <b-field>
           <b-upload
             v-model="personalDetails.attachment.file"
@@ -545,7 +599,7 @@
                 <p>
                   <b-icon icon="upload" size="is-small"></b-icon>
                 </p>
-                <p>Click to replace attachment</p>
+                <p>{{ $t("app.placeholder_attachment1") }}</p>
               </div>
             </section>
           </b-upload>
@@ -573,7 +627,9 @@
             type="submit"
             :disabled="isUpdatingFileComment"
           >
-            {{ isUpdatingFileComment ? "Saving..." : "Save" }}
+            {{
+              isUpdatingFileComment ? `${$t("app.saving")}...` : $t("app.save")
+            }}
           </button>
           <button
             class="button is-danger is-light"
@@ -581,7 +637,7 @@
             :disabled="isUpdatingFileComment"
             @click="closeAttachmentDropper()"
           >
-            Cancel
+            {{ $t("app.cancel") }}
           </button>
         </b-field>
       </form>
@@ -596,7 +652,7 @@ export default {
   name: "PersonalDetails",
   components: { ViewPdf },
   computed: {
-    ...mapGetters(["getProfile"]),
+    ...mapGetters(["getProfile", "getCountries"]),
     getPersonalAttachments() {
       if (typeof this.getProfile.personal_details.attachments === "string")
         return JSON.parse(this.getProfile.personal_details.attachments);
@@ -639,7 +695,6 @@ export default {
         otherId: "",
         birthDate: new Date(),
         maritalStatus: "",
-        nationality: "",
         gender: "",
         attachment: {
           file: null,
@@ -660,7 +715,6 @@ export default {
         otherId: [],
         birthDate: [],
         maritalStatus: [],
-        nationality: [],
         gender: [],
       },
     };
@@ -696,7 +750,6 @@ export default {
         otherId: details.otherId || "",
         birthDate: details.birthDate ? new Date(details.birthDate) : new Date(),
         maritalStatus: details.maritalStatus || "",
-        nationality: details.nationality || "",
         gender: details.gender || "",
       };
     },
@@ -778,6 +831,10 @@ export default {
         )
         .then((res) => {
           if (res.status === 200) {
+            this.personalDetails.attachment = {
+              file: null,
+              comment: "",
+            };
             this.dispatchProfile({
               type: "UPDATE_PERSONAL_DETAILS_ATTACHMENT",
               payload: res.data.attachments,
@@ -881,7 +938,6 @@ export default {
       this.personalDetailsErrors.otherId = error.otherId || [];
       this.personalDetailsErrors.birthDate = error.birthDate || [];
       this.personalDetailsErrors.maritalStatus = error.maritalStatus || [];
-      this.personalDetailsErrors.nationality = error.nationality || [];
       this.personalDetailsErrors.gender = error.gender || [];
     },
     cancelPersonalDetailsForm() {
@@ -897,7 +953,7 @@ export default {
     },
     cancelPersonalDetailsAttachmentForm() {
       this.personalDetails.attachment = {
-        file: [],
+        file: null,
         comment: "",
       };
       this.personalDetailsAttachmentError = {

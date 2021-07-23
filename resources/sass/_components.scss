@@ -79,10 +79,15 @@
         // align-items: center;
     }
 }
-.kpi__table {
-    width: 80%;
+.kpi__table__wrapper {
+    width: 95%;
     margin: 2rem auto;
 }
+.kpi__table {
+    width: 100%;
+    height: inherit;
+}
+
 .kpi_goals__wrapper {
     & .goal__btns {
         width: 100%;
@@ -92,6 +97,15 @@
     }
 }
 .step__buttons {
-    width: 80%;
-    margin: 2rem auto;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    & > button:first-child {
+        margin-right: 1rem;
+    }
+}
+.step__buttons.position {
+    // padding-left: 23rem;
+    // margin-top: 2rem;
 }

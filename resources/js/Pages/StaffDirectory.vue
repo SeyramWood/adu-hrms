@@ -27,19 +27,18 @@
         </div>
         <div class="info">
           <article class="info__details info--header">
-            <!-- <i><b-icon icon="user" pack="fas"></b-icon></i> -->
             <strong>{{ getFullName(staff.personal_details) }}</strong>
           </article>
           <article class="info__details">
-            <!-- <i><b-icon icon="user" pack="fas"></b-icon></i> -->
             <span>{{ staff.department }}</span>
           </article>
           <article class="info__details">
             <a :href="`mailto:${staff.email}`">{{ staff.email }}</a>
           </article>
           <article class="info__details mb-4">
-            <!-- <i><b-icon icon="user" pack="fas"></b-icon></i> -->
-            <a :href="`tel:+${'233265518694'}`">0265518694</a>
+            <a :href="`tel:+${isNull(staff.mobile)}`">{{
+              isNull(staff.mobile)
+            }}</a>
           </article>
           <inertia-link
             :href="`${
@@ -48,7 +47,10 @@
                 : `/dashboard/ess/${staff.id}/${staff.slug}`
             }`"
             preserve-scroll
-            v-if="$page.props.userRoles.includes('Admin')"
+            v-if="
+              $page.props.userPermissions.includes('view_admin') ||
+              $page.props.userPermissions.includes('view_pim')
+            "
           >
             <b-button type="is-info is-light" size="">View profile</b-button>
           </inertia-link>
@@ -57,7 +59,8 @@
             preserve-scroll
             v-if="
               $page.props.authUser.id === staff.id &&
-              !$page.props.userRoles.includes('Admin')
+              (!$page.props.userPermissions.includes('view_admin') ||
+                !$page.props.userPermissions.includes('view_pim'))
             "
           >
             <b-button type="is-info is-light" size="">View profile</b-button>
@@ -92,7 +95,7 @@ export default {
     this.dispatchStaff({ payload: this.staffList });
   },
   mounted() {
-    console.log(this.getStaffList);
+    // console.log(this.getStaffList);
   },
   methods: {
     ...mapActions(["dispatchStaff"]),

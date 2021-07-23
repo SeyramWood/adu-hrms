@@ -202,11 +202,19 @@
                   <h5 class="label text-main">
                     Noteworthy accomplishments and areas of improvement
                   </h5>
-                  <editor :init="initEditor" />
+                  <editor
+                    api-key="25qhafbs9v6uleue5kg84jeofqdrwawb30mv1o6mgvx4cdbb"
+                    id="improvement"
+                    :init="initEditor"
+                  ></editor>
                 </section>
                 <section class="content">
                   <h5 class="label text-main">Overall assessment</h5>
-                  <editor :init="initEditor" />
+                  <editor
+                    api-key="25qhafbs9v6uleue5kg84jeofqdrwawb30mv1o6mgvx4cdbb"
+                    id="assessment"
+                    :init="initEditor"
+                  ></editor>
                 </section>
               </div>
             </div>
@@ -230,6 +238,7 @@ import Editor from "@tinymce/tinymce-vue";
 export default {
   name: "RateAppraiseeModal",
   components: {
+    // "vue-mce": component,
     Editor,
   },
   props: {},

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AppraisalRequest;
+use App\Models\Appraisal;
 use App\Traits\ManageKPI;
 use Illuminate\Http\Request;
+use App\Http\Requests\AppraisalRequest;
 
 class KPIController extends Controller
 {
@@ -22,5 +23,11 @@ class KPIController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAppraisalGoal($appraisal)
+    {
+        // dd($appraisal->keyGoals());
+        return $this->getKeyGoals($appraisal);
     }
 }

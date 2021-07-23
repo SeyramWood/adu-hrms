@@ -200,6 +200,7 @@
                       size="is-small"
                       pack="fas"
                       icon-right="eye"
+                      :disabled="!isPermission('read')"
                     ></b-button>
                   </b-tooltip>
                   <b-tooltip label="Delete" size="is-small" type="is-dark">
@@ -209,6 +210,7 @@
                       pack="fas"
                       icon-right="trash"
                       @click="deleteUser(props.row.id)"
+                      :disabled="!isPermission('delete')"
                     ></b-button>
                   </b-tooltip>
                 </div>
@@ -256,7 +258,6 @@ export default {
         payload: { id: this.appraisal.id, page: 1 },
       });
     });
-    console.log(this.getAppraisees.data);
   },
   data() {
     return {
@@ -267,6 +268,8 @@ export default {
       isSubmitting: false,
       isLoading: false,
       noAppraisalFound: false,
+      showAssignRoleForm: false,
+      showAssignStatusForm: false,
     };
   },
   methods: {
@@ -282,7 +285,7 @@ export default {
       return "";
     },
     isNull(el) {
-      if (el === "null" || null) {
+      if (el === "null" || el === null) {
         return "";
       }
       return el;

@@ -196,11 +196,13 @@
               </b-table-column>
               <b-table-column
                 field="department"
-                label="Department"
+                label="Department/Unit"
                 sortable
                 v-slot="props"
               >
-                <span>{{ props.row.department || "N/A" }}</span>
+                <span>{{
+                  props.row.department || props.row.unit || "N/A"
+                }}</span>
               </b-table-column>
               <b-table-column
                 field="supervisor"
@@ -214,11 +216,12 @@
                 <div class="b-tooltips">
                   <b-tooltip label="Assign" size="is-small" type="is-dark">
                     <b-button
-                      class="is-light"
+                      class="is-light is-info"
                       size="is-small"
                       pack="fas"
                       icon-right="user-cog"
-                      @click="openAssignShiftModal(props.row.id)"
+                      @click="openAssignModal(props.row)"
+                      :disabled="!isPermission('update')"
                     ></b-button>
                   </b-tooltip>
 
@@ -231,6 +234,7 @@
                       :href="`/dashboard/ess/${props.row.id}/${props.row.slug}`"
                       preserve-scroll
                       v-if="$page.props.authUser.id !== props.row.id"
+                      :disabled="!isPermission('rea')"
                     >
                       <b-button
                         class="is-light"
@@ -243,6 +247,9 @@
                       :href="`/dashboard/ess`"
                       preserve-scroll
                       v-else
+                      as="button"
+                      class="inertia__link__btn"
+                      :disabled="!isPermission('read')"
                     >
                       <b-button
                         class="is-light"
@@ -341,14 +348,14 @@ export default {
       }
       return "";
     },
-    openAssignShiftModal(staffToAssignId) {
+    openAssignModal(staffToAssign) {
       this.$buefy.modal.open({
         parent: this,
         component: AssignmentModal,
         hasModalCard: true,
         trapFocus: true,
         canCancel: ["escape"],
-        props: { staffToAssignId },
+        props: { staffToAssign },
       });
     },
   },

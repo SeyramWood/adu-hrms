@@ -3,21 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Traits\Job;
-use App\Models\User;
 use App\Traits\Admin;
+use App\Traits\ManageRole;
 use App\Traits\Shift;
 use App\Traits\Staff;
 use App\Traits\Organization;
 use App\Traits\StaffProfile;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App as app;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Stichoza\GoogleTranslate\GoogleTranslate;
+
 
 class DashboarController extends Controller
 {
-    use Admin, Job, Staff, Organization, StaffProfile, Shift;
+    use Admin, Job, Staff, Organization, StaffProfile, Shift, ManageRole;
 
     public function __construct()
     {
@@ -25,124 +23,104 @@ class DashboarController extends Controller
     }
     public function index()
     {
-        if (!Gate::allows('ess', Auth::user())) {
+        if (!Auth::user()) {
             abort(401);
         }
         return inertia('Dashboard', [
-            'jobTitles' => $this->getJobTitle(),
+            'branches' => fn () => $this->getBranches(),
+            'staffCount' => fn () => $this->getStaffCount(),
+            'departments' => fn () => $this->getDepartments(),
+            'units' => fn () => $this->getUnits(),
         ]);
     }
-    public function admin(Request $request)
+    public function admin()
     {
-        if (!Gate::allows('admin', Auth::user())) {
+        if (!Gate::allows('view_admin', Auth::user())) {
             abort(401);
         }
         return inertia('Administration', [
-            'jobCategories' => $this->getJobCategory(),
-            'jobTitles' => $this->getJobTitle(),
-            'workShifts' => $this->getShifts(),
-            'employmentStatuses' => $this->getEmploymentStatus(),
-            'branches' => $this->getBranches(),
-            'departments' => $this->getDepartments(),
-            'positions' => $this->getPositions(),
-            'staffCount' => $this->getStaffCount(),
-            'rolePermissions' => $this->getRolePermissions()
-        ]);
-    }
-    public function manager()
-    {
-        if (!Gate::allows('manager', Auth::user())) {
-            abort(401);
-        }
-        return inertia('Manager', [
-            'jobCategories' => $this->getJobCategory(),
-            'jobTitles' => $this->getJobTitle(),
-            'workShifts' => $this->getShifts(),
-            'employmentStatuses' => $this->getEmploymentStatus(),
-            'branches' => $this->getBranches(),
-            'departments' => $this->getDepartments(),
-            'positions' => $this->getPositions(),
-            'staffCount' => $this->getStaffCount(),
-            'rolePermissions' => $this->getRolePermissions()
-        ]);
-    }
-    public function supervisor()
-    {
-        if (!Gate::allows('supervisor', Auth::user())) {
-            abort(401);
-        }
-        return inertia('Supervisor', [
-            'jobCategories' => $this->getJobCategory(),
-            'jobTitles' => $this->getJobTitle(),
-            'workShifts' => $this->getShifts(),
-            'employmentStatuses' => $this->getEmploymentStatus(),
-            'branches' => $this->getBranches(),
-            'departments' => $this->getDepartments(),
-            'positions' => $this->getPositions(),
-            'staffCount' => $this->getStaffCount(),
-            'rolePermissions' => $this->getRolePermissions()
+            'jobCategories' => fn () => $this->getJobCategory(),
+            'jobTitles' => fn () => $this->getJobTitle(),
+            'workShifts' => fn () => $this->getShifts(),
+            'employmentStatuses' => fn () => $this->getEmploymentStatus(),
+            'branches' => fn () => $this->getBranches(),
+            'departments' => fn () => $this->getDepartments(),
+            'units' => fn () => $this->getUnits(),
+            'positions' => fn () => $this->getPositions(),
+            'staffCount' => fn () => $this->getStaffCount(),
+            'roles' => fn () => $this->getRoles(),
+            'permissions' => fn () => $this->getpermissions()
         ]);
     }
     public function ess($user = null, $slug = null)
     {
-        if (!Gate::allows('ess', Auth::user()))
+        if (!Auth::user())
             abort(401);
         if ($user || $slug) {
-            if (!Gate::any(['admin', 'manager', 'supervisor'], Auth::user()))
+            if (!Gate::any(['view_admin', 'view_pim',], Auth::user()))
                 abort(401);
             if (!$this->getProfile($user, $slug))
                 abort(404);
         }
         return inertia('ESS', [
             'profile' => $user ? $this->getProfile($user, $slug) : $this->getProfile(),
-            'jobCategories' => $this->getJobCategory(),
-            'jobTitles' => $this->getJobTitle(),
-            'employmentStatuses' => $this->getEmploymentStatus(),
-            'branches' => $this->getBranches(),
-            'departments' => $this->getDepartments(),
+            'jobCategories' => fn () => $this->getJobCategory(),
+            'jobTitles' => fn () => $this->getJobTitle(),
+            'employmentStatuses' => fn () => $this->getEmploymentStatus(),
+            'branches' => fn () => $this->getBranches(),
+            'departments' => fn () => $this->getDepartments(),
+            'units' => fn () => $this->getUnits(),
+            'positions' => fn () => $this->getPositions(),
+            'supervisors' => fn () => $this->getSupervisors(),
+            'hods' => fn () => $this->getHODs(),
+            'managers' => fn () => $this->getManagers(),
+            'reportTo' => fn () => $this->getReportTo(),
+            'reportToMe' => fn () => $this->getReportToMe(),
+            'directorates' => fn () => $this->getDirectorates(),
         ]);
     }
     public function pim()
     {
-        if (!Gate::any(['admin', 'manager', 'supervisor'], Auth::user())) {
+        if (!Gate::allows('view_pim', Auth::user())) {
             abort(403);
         }
         return inertia('PIM', [
-            'staffList' => $this->getStaffList(),
-            'jobTitles' => $this->getJobTitle(),
-            'employmentStatuses' => $this->getEmploymentStatus(),
-            'positions' => $this->getPositions(),
-            'jobCategories' => $this->getJobCategory(),
-            'branches' => $this->getBranches(),
-            'departments' => $this->getDepartments(),
-            'rolePermissions' => $this->getRolePermissions(),
-            'workShifts' => $this->getShifts(),
+            'staffList' => fn () => $this->getStaffList(),
+            'jobTitles' => fn () => $this->getJobTitle(),
+            'employmentStatuses' => fn () => $this->getEmploymentStatus(),
+            'positions' => fn () => $this->getPositions(),
+            'jobCategories' => fn () => $this->getJobCategory(),
+            'branches' => fn () => $this->getBranches(),
+            'departments' => fn () => $this->getDepartments(),
+            'units' => fn () => $this->getUnits(),
+            'workShifts' => fn () => $this->getShifts(),
         ]);
     }
     public function leave()
     {
-        if (!Gate::any(['admin', 'manager', 'supervisor'], Auth::user())) {
+        if (!Gate::allows('view_leave', Auth::user())) {
             abort(403);
         }
         return inertia('Leave');
     }
     public function kpi()
     {
-        if (!Gate::any(['admin', 'manager', 'supervisor'], Auth::user())) {
-            abort(403);
-        }
+        // if (!Auth::user()) {
+        //     abort(401);
+        // }
         return inertia('KPI', [
             'branches' => $this->getBranches(),
             'departments' => $this->getDepartments(),
-            'rolePermissions' => $this->getRolePermissions(),
+            'units' => $this->getUnits(),
             'jobTitles' => $this->getJobTitle(),
+            'roles' => $this->getRoles(),
         ]);
     }
     public function staffDirectory()
     {
-        if (!Gate::allows('ess', Auth::user())) {
-            abort(403);
-        }
+        // if (!Auth::user()) {
+        //     abort(401);
+        // }
         return inertia('StaffDirectory', [
             "staffList" => $this->getStaffList(),
         ]);

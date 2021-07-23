@@ -2,28 +2,33 @@ import axios from "axios";
 
 const state = {
     users: { data: [] },
+    roles: [],
+    permissions: {},
+    userPermissions: [],
     jobCategories: [],
     jobTitles: [],
     employmentStatus: [],
     branches: [],
     departments: [],
+    units: [],
     positions: [],
     organizationProfile: {},
-    rolePermissions: [],
     staffCount: {},
-
     workShifts: []
 };
 
 const getters = {
     getUsers: state => state.users,
+    getRoles: state => state.roles,
+    getPermissions: state => state.permissions,
+    getUserPermission: state => state.userPermissions,
     getJobCategories: state => state.jobCategories,
     getJobTitles: state => state.jobTitles,
     getEmploymentStatus: state => state.employmentStatus,
     getBranches: state => state.branches,
     getDepartments: state => state.departments,
+    getUnits: state => state.units,
     getPositions: state => state.positions,
-    getRolePermissions: state => state.rolePermissions,
     getOrganizationProfile: state => state.organizationProfile,
     getStaffCount: state => state.staffCount,
     getWorkShifts: state => state.workShifts
@@ -37,7 +42,7 @@ const actions = {
                     commit("addNewUser", payload);
                     break;
                 case "ADD_ROLE_PERMISSION":
-                    state.rolePermissions = payload;
+                    state.userPermissions = payload;
                     break;
                 case "ASSIGN_ROLE":
                     commit("assignUserRole", payload);
@@ -64,6 +69,48 @@ const actions = {
             }
         } catch (err) {
             console.log(err);
+        }
+    },
+    async dispatchRole({ commit }, { type = "", payload }) {
+        switch (type) {
+            case "ADD_NEW_ROLE":
+                commit("addNewRole", payload);
+                break;
+            case "UPDATE_ROLE":
+                commit("updateRole", payload);
+                break;
+            case "ADD_REPORT_TO_ROLE":
+                commit("addReportToRole", payload);
+                break;
+            case "DELETE_ROLE":
+                commit("deleteRole", payload);
+                break;
+            case "DELETE_ROLES":
+                commit("deleteRoles", payload);
+                break;
+            case "ADD_ROLE_USER":
+                commit("addRoleUser", payload);
+                break;
+            case "ADD_ROLE_PERMISSION":
+                commit("addRolePermission", payload);
+                break;
+            case "ADD_PERMISSIONS":
+                state.permissions = {
+                    ...payload,
+                    page: JSON.parse(payload.page),
+                    tab: JSON.parse(payload.tab),
+                    other: JSON.parse(payload.other),
+                    crud: JSON.parse(payload.crud),
+                    organization: JSON.parse(payload.organization)
+                };
+                break;
+            default:
+                state.roles = payload.map(r => {
+                    r.permissions = JSON.parse(r.permissions);
+                    r.report_to = JSON.parse(r.report_to);
+                    return r;
+                });
+                break;
         }
     },
     async dispatchJobCategory({ commit }, { type = "", payload }) {
@@ -222,6 +269,29 @@ const actions = {
             console.log(err);
         }
     },
+    async dispatchUnit({ commit }, { type = "", payload }) {
+        try {
+            switch (type) {
+                case "ADD_NEW_UNIT":
+                    commit("addNewUnit", payload);
+                    break;
+                case "UPDATE_UNIT":
+                    commit("updateUnit", payload);
+                    break;
+                case "DELETE_UNIT":
+                    commit("deleteUnit", payload);
+                    break;
+                case "DELETE_UNITS":
+                    commit("deleteUnits", payload);
+                    break;
+                default:
+                    commit("addUnits", payload);
+                    break;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    },
     async dispatchPosition({ commit }, { type = "", payload }) {
         try {
             switch (type) {
@@ -307,15 +377,6 @@ const mutations = {
             },
             ...state.users.data
         ];
-    },
-    assignUserRole: (state, data) => {
-        data.ids.forEach(id => {
-            state.users.data.forEach(u => {
-                if (u.id === id) {
-                    u.role = data.role;
-                }
-            });
-        });
     },
     assignUserStatus: (state, data) => {
         data.ids.forEach(id => {
@@ -445,12 +506,23 @@ const mutations = {
     },
 
     addDepartments: (state, data) => (state.departments = data),
+    addUnits: (state, data) => (state.units = data),
     addNewDepartment: (state, data) => {
         state.departments = [data, ...state.departments];
+    },
+    addNewUnit: (state, data) => {
+        state.units = [data, ...state.units];
     },
     updateDepartment: (state, data) => {
         state.departments.splice(
             state.departments.findIndex(u => u.id === data.id),
+            1,
+            data
+        );
+    },
+    updateUnit: (state, data) => {
+        state.units.splice(
+            state.units.findIndex(u => u.id === data.id),
             1,
             data
         );
@@ -461,10 +533,24 @@ const mutations = {
             1
         );
     },
+    deleteUnit: (state, id) => {
+        state.units.splice(
+            state.units.findIndex(u => u.id === id),
+            1
+        );
+    },
     deleteDepartments: (state, ids) => {
         ids.forEach(id => {
             state.departments.splice(
                 state.departments.findIndex(u => u.id === id),
+                1
+            );
+        });
+    },
+    deleteUnits: (state, ids) => {
+        ids.forEach(id => {
+            state.units.splice(
+                state.units.findIndex(u => u.id === id),
                 1
             );
         });
@@ -496,14 +582,104 @@ const mutations = {
     },
 
     deleteShifts: (state, ids) => {
-        console.log("====================================");
-        console.log(ids);
-        console.log("====================================");
         ids.forEach(id => {
             state.workShifts.splice(
                 state.workShifts.findIndex(s => s.id === id),
                 1
             );
+        });
+    },
+
+    /**
+     *
+     * @param {*} state
+     * @param {*} payload
+     */
+    addNewRole: (state, payload) => {
+        state.roles = [
+            {
+                ...payload,
+                permissions: JSON.parse(payload.permissions),
+                staff: JSON.parse(payload.staff),
+                report_to: JSON.parse(payload.report_to)
+            },
+            ...state.roles
+        ];
+    },
+    /**
+     *
+     * @param {*} state
+     * @param {*} payload
+     */
+    updateRole: (state, payload) => {
+        state.roles = state.roles.map(r => {
+            if (r.id === payload.id) {
+                r.role = payload.data;
+            }
+            return r;
+        });
+    },
+    /**
+     *
+     * @param {*} state
+     * @param {*} id
+     */
+    deleteRole: (state, id) => {
+        state.roles.splice(
+            state.roles.findIndex(u => u.id === id),
+            1
+        );
+    },
+    /**
+     *
+     * @param {*} state
+     * @param {*} payload
+     */
+    deleteRoles: (state, ids) => {
+        ids.forEach(id => {
+            state.roles.splice(
+                state.roles.findIndex(u => u.id === id),
+                1
+            );
+        });
+    },
+    /**
+     *
+     * @param {*} state
+     * @param {*} payload
+     */
+    addRoleUser: (state, payload) => {
+        state.roles = state.roles.map(r => {
+            if (r.id === payload.id) {
+                r.staff = payload.data;
+            }
+            return r;
+        });
+    },
+    /**
+     *
+     * @param {*} state
+     * @param {*} payload
+     */
+    addReportToRole: (state, payload) => {
+        state.roles = state.roles.map(r => {
+            if (r.id === payload.id) {
+                r.report_to = payload.data;
+            }
+            return r;
+        });
+    },
+    /**
+     *
+     * @param {*} state
+     * @param {*} payload
+     */
+    addRolePermission: (state, payload) => {
+        state.roles = state.roles.map(r => {
+            if (r.id === payload.id) {
+                r.permissions = payload.data;
+            }
+            return r;
         });
     }
 };

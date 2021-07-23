@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Branch;
 use App\Models\Position;
 use App\Models\Department;
+use App\Models\Unit;
 use App\Traits\Organization;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
     use Organization;
-
     public function addBranch(Request $request)
     {
         return $this->createBranch($request);
@@ -20,6 +20,10 @@ class OrganizationController extends Controller
     public function addDepartment(Request $request)
     {
         return $this->createDepartment($request);
+    }
+    public function addUnit(Request $request)
+    {
+        return $this->createUnit($request);
     }
     public function addPosition(Request $request)
     {
@@ -34,6 +38,10 @@ class OrganizationController extends Controller
     {
         return $this->updateDepartment($request, $department);
     }
+    public function editUnit(Request $request, Unit $unit)
+    {
+        return $this->updateUnit($request, $unit);
+    }
     public function editPosition(Request $request, Position $position)
     {
         return $this->updatePosition($request, $position);
@@ -46,11 +54,7 @@ class OrganizationController extends Controller
     }
     public function deleteBranches($branches)
     {
-        $ids = json_decode($branches);
-        for ($i = 0; $i < count($ids); $i++) {
-            $branch = Branch::find($ids[$i]);
-            $branch->delete();
-        }
+        Branch::whereIn('id', json_decode($branches))->delete();
         return response()->json(['deleted' => true]);
     }
     public function deleteDepartment(Department $department)
@@ -58,13 +62,22 @@ class OrganizationController extends Controller
         $department->delete();
         return response()->json(['deleted' => true]);
     }
+
+    public function deleteUnit(Unit $unit)
+    {
+        $unit->delete();
+        return response()->json(['deleted' => true]);
+    }
+
     public function deleteDepartments($departments)
     {
-        $ids = json_decode($departments);
-        for ($i = 0; $i < count($ids); $i++) {
-            $department = Department::find($ids[$i]);
-            $department->delete();
-        }
+
+        Department::whereIn('id', json_decode($departments))->delete();
+        return response()->json(['deleted' => true]);
+    }
+    public function deleteUnits($units)
+    {
+        Unit::whereIn('id', json_decode($units))->delete();
         return response()->json(['deleted' => true]);
     }
     public function deletePosition(Position $position)
@@ -74,11 +87,7 @@ class OrganizationController extends Controller
     }
     public function deletePositions($positions)
     {
-        $ids = json_decode($positions);
-        for ($i = 0; $i < count($ids); $i++) {
-            $position = Position::find($ids[$i]);
-            $position->delete();
-        }
+        Position::whereIn('id', json_decode($positions))->delete();
         return response()->json(['deleted' => true]);
     }
 

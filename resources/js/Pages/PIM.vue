@@ -1,10 +1,10 @@
 <template>
   <section class="main__content">
     <tabs stickyTab="main__content__sticky">
-      <tab label="Staff List">
+      <tab label="Staff List" v-if="isPermission('staff_list')">
         <StaffListComponent />
       </tab>
-      <tab label="Work Shifts">
+      <!-- <tab label="Work Shifts">
         <ShiftListComponent />
       </tab>
       <tab label="Reports">
@@ -293,11 +293,10 @@
             </div>
           </div>
         </section>
-      </tab>
-      <tab label="Configurations">
+      </tab> -->
+      <!-- <tab label="Configurations">
         <b-tabs type="is-toggle" size="is-small" :animated="false" expanded>
-          <!-- <b-tab-item label="Optional Fields"></b-tab-item>
-            <b-tab-item label="Custom Fields"></b-tab-item>-->
+          
           <b-tab-item label="Reporting Methods">
             <section class="b__collapse__section">
               <b-collapse
@@ -494,7 +493,7 @@
             </section>
           </b-tab-item>
         </b-tabs>
-      </tab>
+      </tab> -->
     </tabs>
   </section>
 </template>
@@ -526,9 +525,9 @@ export default {
     employmentStatuses: Array,
     branches: Array,
     departments: Array,
+    units: Array,
     positions: Array,
     jobCategories: Array,
-    rolePermissions: Object,
     workShifts: Array,
   },
   created() {
@@ -537,12 +536,9 @@ export default {
     this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
     this.dispatchBranch({ payload: this.branches });
     this.dispatchDepartment({ payload: this.departments });
+    this.dispatchUnit({ payload: this.units });
     this.dispatchPosition({ payload: this.positions });
     this.dispatchJobCategory({ payload: this.jobCategories });
-    this.dispatchUserAccount({
-      type: "ADD_ROLE_PERMISSION",
-      payload: JSON.parse(this.rolePermissions.role_permission),
-    });
     this.dispatchWorkShift({ payload: this.workShifts });
   },
   data() {
@@ -558,6 +554,7 @@ export default {
       "dispatchEmploymentStatus",
       "dispatchBranch",
       "dispatchDepartment",
+      "dispatchUnit",
       "dispatchPosition",
       "dispatchJobCategory",
       "dispatchWorkShift",

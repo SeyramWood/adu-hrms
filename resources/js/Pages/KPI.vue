@@ -4,7 +4,7 @@
       <tab label="Appraisal">
         <Appraisal />
       </tab>
-      <tab label="Configurations">
+      <tab label="Configurations" v-if="isPermission('kpi_configuration')">
         <ManageAppraisal />
       </tab>
     </tabs>
@@ -36,17 +36,16 @@ export default {
   props: {
     branches: Array,
     departments: Array,
+    units: Array,
     jobTitles: Array,
-    rolePermissions: Object,
+    roles: Array,
   },
   created() {
     this.dispatchKPI({ payload: 1 });
+    this.dispatchRole({ payload: this.roles });
     this.dispatchBranch({ payload: this.branches });
+    this.dispatchUnit({ payload: this.units });
     this.dispatchDepartment({ payload: this.departments });
-    this.dispatchUserAccount({
-      type: "ADD_ROLE_PERMISSION",
-      payload: JSON.parse(this.rolePermissions.role_permission),
-    });
     this.dispatchJobTitle({ payload: this.jobTitles });
   },
   methods: {
@@ -54,8 +53,10 @@ export default {
       "dispatchKPI",
       "dispatchUserAccount",
       "dispatchBranch",
+      "dispatchUnit",
       "dispatchDepartment",
       "dispatchJobTitle",
+      "dispatchRole",
     ]),
   },
 };

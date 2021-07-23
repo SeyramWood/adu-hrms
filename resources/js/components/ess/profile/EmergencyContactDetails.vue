@@ -5,13 +5,13 @@
         <!-- <p class="card-header-title">Emergency Contacts</p> -->
       </header>
       <div class="profile-detail-bar">
-        <p class="p-text">Employee Emergency Contacts</p>
+        <p class="p-text">{{ $t("app.emergency_contact_cta") }}</p>
       </div>
       <div class="card-content">
         <div class="content">
           <section
             class="b__collapse__section"
-            v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+            v-if="userOrPermission('create', getProfile.user_id)"
           >
             <b-collapse
               class="card"
@@ -27,7 +27,7 @@
                 aria-controls="addreportingmethod"
               >
                 <p class="card-header-title has-text-info">
-                  Add Emergency Contact
+                  {{ $t("app.add_emergency_contact") }}
                 </p>
                 <a class="card-header-icon">
                   <b-icon
@@ -43,7 +43,7 @@
                     <div class="columns">
                       <div class="column is-6">
                         <b-field
-                          label="Name"
+                          :label="$t('app.name')"
                           expanded
                           :type="{
                             'is-danger': emergencyContactErrors.name.length > 0,
@@ -58,7 +58,7 @@
                       </div>
                       <div class="column is-6">
                         <b-field
-                          label="Relationship"
+                          :label="$t('app.relationship')"
                           expanded
                           :type="{
                             'is-danger':
@@ -76,7 +76,7 @@
                     <div class="columns">
                       <div class="column is-4">
                         <b-field
-                          label="Mobile"
+                          :label="$t('app.mobile')"
                           expanded
                           :type="{
                             'is-danger':
@@ -92,7 +92,7 @@
                       </div>
                       <div class="column is-4">
                         <b-field
-                          label="Home Telephone"
+                          :label="$t('app.home_tel')"
                           expanded
                           :type="{
                             'is-danger':
@@ -108,7 +108,7 @@
                       </div>
                       <div class="column is-4">
                         <b-field
-                          label="Work Telephone"
+                          :label="$t('app.work_tel')"
                           expanded
                           :type="{
                             'is-danger':
@@ -131,13 +131,15 @@
                         :disabled="isSubmittingEmergencyContact"
                       >
                         {{
-                          isSubmittingEmergencyContact ? "Submitting..." : "Add"
+                          isSubmittingEmergencyContact
+                            ? `${$t("app.submitting")}...`
+                            : $t("app.submit")
                         }}
                       </button>
                       <b-button
                         class="is-danger is-light"
                         @click="cancelEmergencyContactDetailsForm()"
-                        >Cancel</b-button
+                        >{{ $t("app.cancel") }}</b-button
                       >
                     </div>
                   </form>
@@ -163,56 +165,67 @@
             aria-page-label="Page"
             aria-current-label="Current page"
           >
-            <b-table-column field="name" label="Name" sortable v-slot="props">{{
-              props.row.name
-            }}</b-table-column>
+            <b-table-column
+              field="name"
+              :label="$t('app.name')"
+              sortable
+              v-slot="props"
+              >{{ props.row.name }}</b-table-column
+            >
             <b-table-column
               field="relationship"
-              label="Relationship"
+              :label="$t('app.relationship')"
               sortable
               v-slot="props"
               >{{ props.row.relationship }}</b-table-column
             >
             <b-table-column
               field="mobile"
-              label="Mobile"
+              :label="$t('app.mobile')"
               sortable
               v-slot="props"
               >{{ props.row.mobile }}</b-table-column
             >
+
+            <b-table-column
+              field="worktelephone"
+              :label="$t('app.work_tel')"
+              sortable
+              v-slot="props"
+              >{{ props.row.workTelephone }}</b-table-column
+            >
             <b-table-column
               field="telephone"
-              label="Home Telephone"
+              :label="$t('app.home_tel')"
               sortable
               v-slot="props"
               >{{ props.row.homeTelephone }}</b-table-column
             >
             <b-table-column
-              field="worktelephone"
-              label="Work Telephone"
-              sortable
+              field="actions"
+              :label="$tc('app.action', 2)"
               v-slot="props"
-              >{{ props.row.workTelephone }}</b-table-column
             >
-            <b-table-column field="actions" label="Actions" v-slot="props">
               <div class="b-tooltips">
-                <b-tooltip label="Edit contact" type="is-dark">
+                <b-tooltip :label="$t('app.editContact')" type="is-dark">
                   <b-button
                     class="is-info is-light"
                     size="is-small"
                     pack="fas"
                     icon-right="pen"
-                    :id="`contact-id${props.row.id}`"
+                    :id="`contact-id${getContactDropperId}`"
                     @click="openContactDropper(props.row)"
+                    :disabled="!userOrPermission('update', getProfile.user_id)"
                   ></b-button>
                 </b-tooltip>
-                <b-tooltip label="Delete" type="is-dark">
+                <b-tooltip :label="$t('app.delete')" type="is-dark">
                   <b-button
                     class="is-danger is-light"
                     size="is-small"
                     pack="fas"
                     icon-right="trash"
                     @click="deleteEmergencyContact(props.row.id)"
+                    :disabled="!userOrPermission('delete', getProfile.user_id)"
                   ></b-button>
                 </b-tooltip>
               </div>

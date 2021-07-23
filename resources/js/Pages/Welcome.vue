@@ -8,7 +8,7 @@
         <div class="login__container__panel__form">
           <div class="login__container__panel__form__header">
             <div class="login__container__panel__form__header__text">
-              <h4>Login Panel</h4>
+              <h4>{{ $t("app.login_pannel") }}</h4>
             </div>
           </div>
           <div class="login__container__panel__form__container">
@@ -24,7 +24,7 @@
                       type="email"
                       pack="fas"
                       icon="envelope"
-                      placeholder="yourstaffemail@gmail.com"
+                      :placeholder="$t('app.username_placeholder')"
                       v-model="credentials.username"
                       autocomplete="email"
                       autofocus
@@ -40,19 +40,20 @@
                       pack="fas"
                       icon="key"
                       class="is-dander"
-                      placeholder="Password"
+                      :placeholder="$t('app.password')"
                       v-model="credentials.password"
                       autocomplete="current-password"
+                      password-reveal
                     ></b-input>
                   </b-field>
                   <b-field>
                     <b-checkbox v-model="credentials.remember" type="is-info">
-                      Remember me
+                      {{ $t("app.remember_me") }}
                     </b-checkbox>
                   </b-field>
                   <div class="login-button">
                     <button type="submit" class="button is-primary">
-                      Login
+                      {{ $t("app.login") }}
                     </button>
                     <p class="login-error" v-if="credentialError">
                       {{ credentialError }}
@@ -60,11 +61,18 @@
                   </div>
                 </form>
 
-                <p class="pt-2 login-forget-password">
-                  <inertia-link href="/password-reset-link"
-                    >I forget my password</inertia-link
-                  >
-                </p>
+                <div class="login__footer">
+                  <p class="login-forget-password">
+                    <inertia-link href="/password-reset-link">{{
+                      $t("app.forget_pass_text")
+                    }}</inertia-link>
+                  </p>
+                  <p class="toggle__lang">
+                    <a @click="changeLocale()">{{
+                      locale === "fr" ? "English" : "French"
+                    }}</a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -83,6 +91,12 @@ export default {
       title: `Login`,
     };
   },
+  mounted() {
+    if (localStorage.getItem("locale")) {
+      this.locale = localStorage.getItem("locale");
+      this.$lang.setLocale(this.locale);
+    }
+  },
   data() {
     return {
       credentials: {
@@ -93,6 +107,7 @@ export default {
       usernameError: "",
       passwordError: "",
       credentialError: "",
+      locale: "",
     };
   },
   methods: {
@@ -101,12 +116,28 @@ export default {
       this.passwordError = "";
       Inertia.post("/login", this.credentials, {
         errorBag: "userLogin",
+        headers: {
+          Locale: this.$lang.getLocale(),
+        },
         onError: (err) => {
-          this.usernameError = err.username ? err.username : "";
-          this.passwordError = err.username ? err.username : "";
-          this.credentialError = err.credentialError ? err.credentialError : "";
+          this.usernameError = err.username || "";
+          this.passwordError = err.password || "";
+          this.credentialError = err.credentialError || "";
         },
       });
+    },
+    async changeLocale() {
+      const locale = this.locale === "fr" ? "en" : "fr";
+      try {
+        const res = await this.$axios.get(`/lang/${locale}`);
+        if (res.status === 200) {
+          this.locale = locale;
+          this.$lang.setLocale(locale);
+          localStorage.setItem("locale", locale);
+        }
+      } catch (error) {
+        console.trace(error);
+      }
     },
   },
 };

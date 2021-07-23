@@ -101,6 +101,7 @@
                     label="View Appraisee"
                     size="is-small"
                     type="is-dark"
+                    v-if="isPermission('review_appraisal')"
                   >
                     <b-button
                       class="is-light"
@@ -108,6 +109,7 @@
                       pack="fas"
                       icon-right="users"
                       @click="openRatingAppraiseeModal(props.row)"
+                      :disabled="!isPermission('read')"
                     ></b-button>
                   </b-tooltip>
                 </div>

@@ -158,6 +158,21 @@
         </b-field>
         <b-field
           horizontal
+          label="Unit"
+          :type="{
+            'is-danger': appraisalErrors.applicableFor.unit.length > 0,
+          }"
+          :message="appraisalErrors.applicableFor.unit"
+        >
+          <treeselect
+            :multiple="true"
+            :options="getUnitss"
+            placeholder="Select unit(s)..."
+            v-model="appraisal.applicableFor.unit"
+          />
+        </b-field>
+        <b-field
+          horizontal
           label="Role"
           :type="{
             'is-danger': appraisalErrors.applicableFor.role.length > 0,
@@ -166,7 +181,7 @@
         >
           <treeselect
             :multiple="true"
-            :options="getRoles"
+            :options="getAllRoles"
             placeholder="Select role(s)..."
             v-model="appraisal.applicableFor.role"
           />
@@ -200,20 +215,13 @@ export default {
   computed: {
     ...mapGetters([
       "getUsers",
-      "getRolePermissions",
+      "getRoles",
       "getBranches",
       "getDepartments",
-      "getRolePermissions",
+      "getUnits",
       "getWorkShifts",
     ]),
-    getRoles() {
-      return this.getRolePermissions.map((r) => {
-        return {
-          id: r.role,
-          label: r.role,
-        };
-      });
-    },
+
     getBrhs() {
       const data = this.getBranches.map((b) => {
         return {
@@ -223,7 +231,7 @@ export default {
       });
       return [
         {
-          id: 0,
+          id: "all",
           label: "All",
         },
         ...data,
@@ -238,7 +246,49 @@ export default {
       });
       return [
         {
-          id: 0,
+          id: "none",
+          label: "None",
+        },
+        {
+          id: "all",
+          label: "All",
+        },
+        ...data,
+      ];
+    },
+    getUnitss() {
+      const data = this.getUnits.map((d) => {
+        return {
+          id: d.id,
+          label: d.name,
+        };
+      });
+      return [
+        {
+          id: "none",
+          label: "None",
+        },
+        {
+          id: "all",
+          label: "All",
+        },
+        ...data,
+      ];
+    },
+    getAllRoles() {
+      const data = this.getRoles.map((r) => {
+        return {
+          id: r.role,
+          label: r.role,
+        };
+      });
+      return [
+        {
+          id: "none",
+          label: "None",
+        },
+        {
+          id: "all",
           label: "All",
         },
         ...data,
@@ -267,6 +317,7 @@ export default {
         applicableFor: {
           branch: [],
           department: [],
+          unit: [],
           role: [],
         },
       },
@@ -288,6 +339,7 @@ export default {
         applicableFor: {
           branch: [],
           department: [],
+          unit: [],
           role: [],
         },
       },
@@ -352,6 +404,7 @@ export default {
         applicableFor: {
           branch: [],
           department: [],
+          unit: [],
           role: [],
         },
       };
@@ -375,6 +428,7 @@ export default {
         applicableFor: {
           branch: err["applicableFor.branch"] || [],
           department: err["applicableFor.department"] || [],
+          unit: err["applicableFor.unit"] || [],
           role: err["applicableFor.role"] || [],
         },
       };

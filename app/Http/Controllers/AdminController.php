@@ -22,11 +22,7 @@ class AdminController extends Controller
     }
     public function deleteUsers($users)
     {
-        $ids = json_decode($users);
-        for ($i = 0; $i < count($ids); $i++) {
-            $user = User::find($ids[$i]);
-            $user->delete();
-        }
+        User::whereIn('id', explode(',', $users))->delete();
         return response()->json(['deleted' => true, 'staffCount' => $this->getStaffCount()]);
     }
     public function assignUsersRole(Request $request)

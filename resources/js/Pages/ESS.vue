@@ -40,7 +40,7 @@
                 </p>
                 <p>
                   <b-icon pack="fas" icon="umbrella"></b-icon>
-                  <span>{{ getBranch(getProfile) }}</span>
+                  <span>{{ getUserDepartment(getProfile) }}</span>
                 </p>
                 <p>
                   <b-icon pack="fas" icon="briefcase"></b-icon>
@@ -75,16 +75,16 @@
     </div>
     <div class="content__split__right">
       <tabs stickyTab="content__split__right__sticky" :tabIndex="tabIndex">
-        <tab label="My Leave" v-if="!regex.test($page.url)">
+        <tab :label="$t('app.profile')">
+          <ProfileComponent />
+        </tab>
+        <!-- <tab label="My Leave" v-if="!regex.test($page.url)">
           <MyLeaveComponent />
         </tab>
         <tab label="Entitlements" v-if="!regex.test($page.url)">
           <MyEntitlementComponent />
-        </tab>
-        <tab label="Profile">
-          <ProfileComponent />
-        </tab>
-        <tab label="Configurations" v-if="!regex.test($page.url)">
+        </tab> -->
+        <tab :label="$tc('app.configuration', 2)" v-if="!regex.test($page.url)">
           <ConfigurationComponent />
         </tab>
       </tabs>
@@ -124,6 +124,14 @@ export default {
     employmentStatuses: Array,
     branches: Array,
     departments: Array,
+    units: Array,
+    positions: Array,
+    supervisors: Array,
+    hods: Array,
+    managers: Array,
+    reportTo: Array,
+    reportToMe: Array,
+    directorates: Array,
   },
   computed: {
     ...mapGetters([
@@ -133,8 +141,11 @@ export default {
       "getEmploymentStatus",
       "getBranches",
       "getDepartments",
+      "getUnits",
+      "getCountries",
     ]),
   },
+  beforeMount() {},
   created() {
     this.dispatchProfile({ payload: this.profile });
     this.dispatchJobCategory({ payload: this.jobCategories });
@@ -142,11 +153,26 @@ export default {
     this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
     this.dispatchBranch({ payload: this.branches });
     this.dispatchDepartment({ payload: this.departments });
+    this.dispatchUnit({ payload: this.units });
+    this.dispatchPosition({ payload: this.positions });
+    this.dispatchProfile({
+      type: "ADD_MY_LEADERS",
+      payload: {
+        supervisors: this.supervisors,
+        hods: this.hods,
+        managers: this.managers,
+        reportTo: this.reportTo,
+        reportToMe: this.reportToMe,
+        directorates: this.directorates,
+      },
+    });
+    this.getAllCountries();
   },
   data() {
     return {
       tabIndex: 0,
       regex: new RegExp("^/dashboard/ess/[0-9]+/[a-z-]*$"),
+      countries: [],
     };
   },
   methods: {
@@ -157,13 +183,23 @@ export default {
       "dispatchEmploymentStatus",
       "dispatchBranch",
       "dispatchDepartment",
+      "dispatchUnit",
+      "dispatchPosition",
+      "dispatchMyLeaders",
+      "dispatchCountry",
     ]),
-    getBranch(profile) {
-      if (profile.job) {
-        const branch = this.getDepartments.find(
+    getUserDepartment(profile) {
+      if (profile.job && profile.job.department) {
+        const result = this.getDepartments.find(
           (b) => b.id === parseInt(profile.job.department)
         );
-        return branch.name;
+        return result.name;
+      }
+      if (profile.job && profile.job.unit) {
+        const result = this.getUnits.find(
+          (b) => b.id === parseInt(profile.job.unit)
+        );
+        return result.name;
       }
       return "";
     },
@@ -175,6 +211,23 @@ export default {
         return status.status;
       }
       return "";
+    },
+    async getAllCountries() {
+      if (!localStorage.getItem("countries")) {
+        localStorage.setItem("countries", JSON.stringify([]));
+      }
+      if (JSON.parse(localStorage.getItem("countries")).length === 0) {
+        try {
+          const data = await this.$axios.get(
+            `https://restcountries.eu/rest/v2/all`
+          );
+          localStorage.setItem("countries", JSON.stringify(data.data));
+        } catch (error) {}
+      } else {
+        this.dispatchCountry({
+          payload: JSON.parse(localStorage.getItem("countries")),
+        });
+      }
     },
   },
 };

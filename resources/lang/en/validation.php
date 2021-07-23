@@ -147,6 +147,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'current_password_text'      => 'The current password is incorrect',
+        'credentialError'      => 'The provided credentials do not match our records.',
+    ],
 
 ];

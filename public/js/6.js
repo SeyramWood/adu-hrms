@@ -58,28 +58,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: {
     branches: Array,
     departments: Array,
+    units: Array,
     jobTitles: Array,
-    rolePermissions: Object
+    roles: Array
   },
   created: function created() {
     this.dispatchKPI({
       payload: 1
     });
+    this.dispatchRole({
+      payload: this.roles
+    });
     this.dispatchBranch({
       payload: this.branches
     });
+    this.dispatchUnit({
+      payload: this.units
+    });
     this.dispatchDepartment({
       payload: this.departments
-    });
-    this.dispatchUserAccount({
-      type: "ADD_ROLE_PERMISSION",
-      payload: JSON.parse(this.rolePermissions.role_permission)
     });
     this.dispatchJobTitle({
       payload: this.jobTitles
     });
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchKPI", "dispatchUserAccount", "dispatchBranch", "dispatchDepartment", "dispatchJobTitle"]))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchKPI", "dispatchUserAccount", "dispatchBranch", "dispatchUnit", "dispatchDepartment", "dispatchJobTitle", "dispatchRole"]))
 });
 
 /***/ }),
@@ -211,6 +214,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  watch: {// state(v) {
+    //   console.log(v);
+    // },
+  },
   data: function data() {
     return {
       order: "is-right",
@@ -244,6 +251,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -1692,6 +1701,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1718,7 +1729,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     });
-    console.log(this.getAppraisees.data);
   },
   data: function data() {
     return {
@@ -1728,7 +1738,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       selectedKPIs: [],
       isSubmitting: false,
       isLoading: false,
-      noAppraisalFound: false
+      noAppraisalFound: false,
+      showAssignRoleForm: false,
+      showAssignStatusForm: false
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchKPI"])), {}, {
@@ -1746,7 +1758,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return "";
     },
     isNull: function isNull(el) {
-      if (el === "null" || null) {
+      if (el === "null" || el === null) {
         return "";
       }
 
@@ -1982,6 +1994,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1990,15 +2017,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     Treeselect: _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getUsers", "getRolePermissions", "getBranches", "getDepartments", "getRolePermissions", "getWorkShifts"])), {}, {
-    getRoles: function getRoles() {
-      return this.getRolePermissions.map(function (r) {
-        return {
-          id: r.role,
-          label: r.role
-        };
-      });
-    },
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getUsers", "getRoles", "getBranches", "getDepartments", "getUnits", "getWorkShifts"])), {}, {
     getBrhs: function getBrhs() {
       var data = this.getBranches.map(function (b) {
         return {
@@ -2007,7 +2026,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         };
       });
       return [{
-        id: 0,
+        id: "all",
         label: "All"
       }].concat(_toConsumableArray(data));
     },
@@ -2019,7 +2038,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         };
       });
       return [{
-        id: 0,
+        id: "none",
+        label: "None"
+      }, {
+        id: "all",
+        label: "All"
+      }].concat(_toConsumableArray(data));
+    },
+    getUnitss: function getUnitss() {
+      var data = this.getUnits.map(function (d) {
+        return {
+          id: d.id,
+          label: d.name
+        };
+      });
+      return [{
+        id: "none",
+        label: "None"
+      }, {
+        id: "all",
+        label: "All"
+      }].concat(_toConsumableArray(data));
+    },
+    getAllRoles: function getAllRoles() {
+      var data = this.getRoles.map(function (r) {
+        return {
+          id: r.role,
+          label: r.role
+        };
+      });
+      return [{
+        id: "none",
+        label: "None"
+      }, {
+        id: "all",
         label: "All"
       }].concat(_toConsumableArray(data));
     }
@@ -2046,6 +2098,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         applicableFor: {
           branch: [],
           department: [],
+          unit: [],
           role: []
         }
       },
@@ -2067,6 +2120,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         applicableFor: {
           branch: [],
           department: [],
+          unit: [],
           role: []
         }
       }
@@ -2134,6 +2188,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         applicableFor: {
           branch: [],
           department: [],
+          unit: [],
           role: []
         }
       };
@@ -2158,6 +2213,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         applicableFor: {
           branch: err["applicableFor.branch"] || [],
           department: err["applicableFor.department"] || [],
+          unit: err["applicableFor.unit"] || [],
           role: err["applicableFor.role"] || []
         }
       };
@@ -2404,10 +2460,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RateAppraiseeModal",
   components: {
+    // "vue-mce": component,
     Editor: _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {},
@@ -2445,6 +2510,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -2761,9 +2828,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tinymce/tinymce-vue */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Paginate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Paginate */ "./resources/js/components/Paginate.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3378,7 +3452,67 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3390,22 +3524,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   components: {
-    Paginate: _Paginate__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Editor: _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Paginate: _Paginate__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getAppraisees", "getJobTitles"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["getAppraisees", "getJobTitles"])),
   beforeMount: function beforeMount() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      _this.dispatchKPI({
-        type: "ADD_APPRAISEES",
-        payload: {
-          id: _this.appraisal.id,
-          page: 1
-        }
-      });
-    });
+    // this.$nextTick(() => {
+    //   this.dispatchKPI({
+    //     type: "ADD_APPRAISEES",
+    //     payload: { id: this.appraisal.id, page: 1 },
+    //   });
+    // });
+    this.getAppraisalKeyGoal(this.appraisal.id);
   },
   data: function data() {
     return {
@@ -3419,12 +3548,78 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       activeStep: 0,
       keyGoals: [{
         goal: ""
-      }]
+      }],
+      myGoals: [{
+        id: "".concat(Math.random(16)).split(".")[1],
+        goal: ""
+      }],
+      unitGoals: [{
+        id: "".concat(Math.random(16)).split(".")[1],
+        goal: ""
+      }],
+      dptGoals: [{
+        id: "".concat(Math.random(16)).split(".")[1],
+        goal: ""
+      }],
+      branchGoals: [{
+        id: "".concat(Math.random(16)).split(".")[1],
+        goal: ""
+      }],
+      myGoalErrors: {},
+      unitGoalErrors: {},
+      dptGoalErrors: {},
+      branchGoalErrors: {}
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchKPI"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["dispatchKPI"])), {}, {
     cancelModal: function cancelModal() {
       this.$emit("close");
+    },
+    addKeyGoal: function addKeyGoal(type) {
+      switch (type) {
+        case "branch":
+          break;
+
+        case "department":
+          break;
+
+        case "unit":
+          break;
+
+        default:
+          var data = {
+            type: "my-goal",
+            id: this.$page.props.authUser.id,
+            appraisal: this.appraisal.id,
+            goal: this.myGoals
+          };
+          this.myGoalErrors = {};
+          this.saveKeyGoal("my-goal", data);
+          break;
+      }
+    },
+    saveKeyGoal: function saveKeyGoal(type, data) {
+      var _this = this;
+
+      this.$axios.post("/dashboard/add-key-goal", data).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        if (type === "my-goal") {
+          _this.myGoalErrors = err.response.data.errors;
+        }
+
+        if (type === "unit") {
+          _this.unitGoalErrors = err.response.data.errors;
+        }
+
+        if (type === "department") {
+          _this.dptGoalErrors = err.response.data.errors;
+        }
+
+        if (type === "branch") {
+          _this.branchGoalErrors = err.response.data.errors;
+        }
+      });
     },
     getJobTitle: function getJobTitle(id) {
       if (id) {
@@ -3446,15 +3641,99 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getFullName: function getFullName(staff) {
       return "".concat(this.isNull(staff.title), " ").concat(staff.firstName, " ").concat(this.isNull(staff.middleName), " ").concat(staff.lastName);
     },
-    appendNewGoal: function appendNewGoal() {
-      this.keyGoals = [].concat(_toConsumableArray(this.keyGoals), [{
-        goal: ""
-      }]);
-    },
-    removeGoal: function removeGoal(index) {
-      if (this.keyGoals.length > 1) {
-        this.keyGoals.splice(index, 1);
+    appendNewGoal: function appendNewGoal(type) {
+      switch (type) {
+        case "branch":
+          this.branchGoals = [].concat(_toConsumableArray(this.branchGoals), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            goal: ""
+          }]);
+          break;
+
+        case "department":
+          this.dptGoals = [].concat(_toConsumableArray(this.dptGoals), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            goal: ""
+          }]);
+          break;
+
+        case "unit":
+          this.unitGoals = [].concat(_toConsumableArray(this.unitGoals), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            goal: ""
+          }]);
+          break;
+
+        default:
+          this.myGoals = [].concat(_toConsumableArray(this.myGoals), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            goal: ""
+          }]);
+          break;
       }
+    },
+    removeGoal: function removeGoal(index, type) {
+      switch (type) {
+        case "branch":
+          if (this.branchGoals.length > 1) {
+            this.branchGoals.splice(index, 1);
+          }
+
+          break;
+
+        case "department":
+          if (this.dptGoals.length > 1) {
+            this.dptGoals.splice(index, 1);
+          }
+
+          break;
+
+        case "unit":
+          if (this.unitGoals.length > 1) {
+            this.unitGoals.splice(index, 1);
+          }
+
+          break;
+
+        default:
+          if (this.myGoals.length > 1) {
+            this.myGoals.splice(index, 1);
+          }
+
+          break;
+      }
+    },
+    getAppraisalKeyGoal: function getAppraisalKeyGoal(id) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var goals;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _this2.$axios.get("/dashboard/get-appraisal-goal/".concat(id));
+
+              case 3:
+                goals = _context.sent;
+                console.log(goals);
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
     }
   })
 });
@@ -3486,12 +3765,14 @@ var render = function() {
         [
           _c("tab", { attrs: { label: "Appraisal" } }, [_c("Appraisal")], 1),
           _vm._v(" "),
-          _c(
-            "tab",
-            { attrs: { label: "Configurations" } },
-            [_c("ManageAppraisal")],
-            1
-          )
+          _vm.isPermission("kpi_configuration")
+            ? _c(
+                "tab",
+                { attrs: { label: "Configurations" } },
+                [_c("ManageAppraisal")],
+                1
+              )
+            : _vm._e()
         ],
         1
       )
@@ -3827,34 +4108,37 @@ var render = function() {
                                   1
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    attrs: {
-                                      label: "View Appraisee",
-                                      size: "is-small",
-                                      type: "is-dark"
-                                    }
-                                  },
-                                  [
-                                    _c("b-button", {
-                                      staticClass: "is-light",
-                                      attrs: {
-                                        size: "is-small",
-                                        pack: "fas",
-                                        "icon-right": "users"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.openRatingAppraiseeModal(
-                                            props.row
-                                          )
+                                _vm.isPermission("review_appraisal")
+                                  ? _c(
+                                      "b-tooltip",
+                                      {
+                                        attrs: {
+                                          label: "View Appraisee",
+                                          size: "is-small",
+                                          type: "is-dark"
                                         }
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
+                                      },
+                                      [
+                                        _c("b-button", {
+                                          staticClass: "is-light",
+                                          attrs: {
+                                            size: "is-small",
+                                            pack: "fas",
+                                            "icon-right": "users",
+                                            disabled: !_vm.isPermission("read")
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.openRatingAppraiseeModal(
+                                                props.row
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
                               ],
                               1
                             )
@@ -6211,7 +6495,8 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "eye"
+                                          "icon-right": "eye",
+                                          disabled: !_vm.isPermission("read")
                                         }
                                       })
                                     ],
@@ -6233,7 +6518,8 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "trash"
+                                          "icon-right": "trash",
+                                          disabled: !_vm.isPermission("delete")
                                         },
                                         on: {
                                           click: function($event) {
@@ -6672,6 +6958,38 @@ var render = function() {
                 {
                   attrs: {
                     horizontal: "",
+                    label: "Unit",
+                    type: {
+                      "is-danger":
+                        _vm.appraisalErrors.applicableFor.unit.length > 0
+                    },
+                    message: _vm.appraisalErrors.applicableFor.unit
+                  }
+                },
+                [
+                  _c("treeselect", {
+                    attrs: {
+                      multiple: true,
+                      options: _vm.getUnitss,
+                      placeholder: "Select unit(s)..."
+                    },
+                    model: {
+                      value: _vm.appraisal.applicableFor.unit,
+                      callback: function($$v) {
+                        _vm.$set(_vm.appraisal.applicableFor, "unit", $$v)
+                      },
+                      expression: "appraisal.applicableFor.unit"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-field",
+                {
+                  attrs: {
+                    horizontal: "",
                     label: "Role",
                     type: {
                       "is-danger":
@@ -6684,7 +7002,7 @@ var render = function() {
                   _c("treeselect", {
                     attrs: {
                       multiple: true,
-                      options: _vm.getRoles,
+                      options: _vm.getAllRoles,
                       placeholder: "Select role(s)..."
                     },
                     model: {
@@ -7402,7 +7720,14 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _c("editor", { attrs: { init: _vm.initEditor } })
+                              _c("editor", {
+                                attrs: {
+                                  "api-key":
+                                    "25qhafbs9v6uleue5kg84jeofqdrwawb30mv1o6mgvx4cdbb",
+                                  id: "improvement",
+                                  init: _vm.initEditor
+                                }
+                              })
                             ],
                             1
                           ),
@@ -7415,7 +7740,14 @@ var render = function() {
                                 _vm._v("Overall assessment")
                               ]),
                               _vm._v(" "),
-                              _c("editor", { attrs: { init: _vm.initEditor } })
+                              _c("editor", {
+                                attrs: {
+                                  "api-key":
+                                    "25qhafbs9v6uleue5kg84jeofqdrwawb30mv1o6mgvx4cdbb",
+                                  id: "assessment",
+                                  init: _vm.initEditor
+                                }
+                              })
                             ],
                             1
                           )
@@ -7770,7 +8102,10 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "star"
+                                          "icon-right": "star",
+                                          disabled: !_vm.isPermission(
+                                            "review_appraisal"
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -7797,7 +8132,8 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "trash"
+                                          "icon-right": "trash",
+                                          disabled: !_vm.isPermission("delete")
                                         },
                                         on: {
                                           click: function($event) {
@@ -7891,45 +8227,26 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("section", { staticClass: "modal-card-body" }, [
-        _c(
-          "section",
-          { staticClass: "appraisal__title" },
-          [
-            _c("p", [_vm._v(_vm._s(_vm.appraisal.name))]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "\n        " +
-                  _vm._s(
-                    " " +
-                      _vm.formatDate2(_vm.appraisal.period.from) +
-                      " - " +
-                      _vm.formatDate2(_vm.appraisal.period.to)
-                  ) +
-                  "\n      "
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "b-taglist",
-              { attrs: { attached: "" } },
-              [
-                _c("b-tag", { attrs: { type: "is-dark", size: "is-medium" } }, [
-                  _vm._v("Total Staff")
-                ]),
-                _vm._v(" "),
-                _c("b-tag", { attrs: { type: "is-info", size: "is-medium" } }, [
-                  _vm._v(_vm._s(_vm.appraisal.staff.length))
-                ])
-              ],
-              1
+        _c("section", { staticClass: "appraisal__title" }, [
+          _c("p", [_vm._v(_vm._s(_vm.appraisal.name))]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n        " +
+                _vm._s(
+                  " " +
+                    _vm.formatDate2(_vm.appraisal.period.from) +
+                    " - " +
+                    _vm.formatDate2(_vm.appraisal.period.to)
+                ) +
+                "\n      "
             )
-          ],
-          1
-        ),
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "section",
+          { staticClass: "kpi__table__wrapper" },
           [
             _c(
               "b-steps",
@@ -7940,9 +8257,10 @@ var render = function() {
                   "has-navigation": true,
                   "icon-prev": "chevron-left",
                   "icon-next": "chevron-right",
-                  "label-position": "bottom",
-                  "mobile-mode": "minimalist",
-                  type: "is-info"
+                  "label-position": "left",
+                  "mobile-mode": "compact",
+                  type: "is-info",
+                  vertical: ""
                 },
                 scopedSlots: _vm._u([
                   {
@@ -7953,7 +8271,7 @@ var render = function() {
                       return [
                         _c(
                           "section",
-                          { staticClass: "step__buttons" },
+                          { staticClass: "step__buttons position" },
                           [
                             _c(
                               "b-button",
@@ -8021,31 +8339,31 @@ var render = function() {
                         [
                           _c("thead", [
                             _c("tr", [
-                              _c(
-                                "th",
-                                { staticClass: "has-text-centered text-main" },
-                                [_vm._v("My Key Goals")]
-                              ),
+                              _c("th", { staticClass: "text-main" }, [
+                                _vm._v("My Key Goals")
+                              ]),
                               _vm._v(" "),
-                              _c(
-                                "th",
-                                { staticClass: "has-text-centered text-main" },
-                                [
-                                  _vm._v(
-                                    "\n                    Supervisor Key Goals\n                  "
-                                  )
-                                ]
-                              ),
+                              this.$page.props.authUser.unit_id ||
+                              _vm.anyPermission("admin", "president")
+                                ? _c("th", { staticClass: "text-main" }, [
+                                    _vm._v(
+                                      "\n                    Unit Key Goals\n                  "
+                                    )
+                                  ])
+                                : _vm._e(),
                               _vm._v(" "),
-                              _c(
-                                "th",
-                                { staticClass: "has-text-centered text-main" },
-                                [
-                                  _vm._v(
-                                    "\n                    Manager Key Goals\n                  "
-                                  )
-                                ]
-                              )
+                              this.$page.props.authUser.department_id ||
+                              _vm.anyPermission("admin", "president", "hod")
+                                ? _c("th", { staticClass: "text-main" }, [
+                                    _vm._v(
+                                      "\n                    Department Key Goals\n                  "
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-main" }, [
+                                _vm._v("Branch Key Goals")
+                              ])
                             ])
                           ]),
                           _vm._v(" "),
@@ -8066,151 +8384,523 @@ var render = function() {
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    !_vm.isUserRole("Manager") &&
-                                    !_vm.isUserRole("Supervisor")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _vm._l(_vm.keyGoals, function(
-                                              kg,
-                                              index
-                                            ) {
-                                              return [
-                                                _c(
-                                                  "b-field",
-                                                  { key: index },
-                                                  [
-                                                    _c("b-input", {
-                                                      attrs: {
-                                                        placeholder:
-                                                          "Enter new goal...",
-                                                        type: "text",
-                                                        expanded: ""
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.keyGoals[index][
-                                                            "goal"
-                                                          ],
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.keyGoals[index],
-                                                            "goal",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "keyGoals[index]['goal']"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "p",
-                                                      {
-                                                        staticClass: "control"
-                                                      },
-                                                      [
-                                                        _c("b-button", {
-                                                          attrs: {
-                                                            type:
-                                                              "is-danger is-light",
-                                                            "icon-left":
-                                                              "times",
-                                                            disabled:
-                                                              _vm.keyGoals
-                                                                .length === 1
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.removeGoal(
-                                                                index
-                                                              )
-                                                            }
-                                                          }
-                                                        })
+                                    _c(
+                                      "form",
+                                      {
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.addKeyGoal()
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._l(_vm.myGoals, function(
+                                          kg,
+                                          index
+                                        ) {
+                                          return [
+                                            _c(
+                                              "b-field",
+                                              {
+                                                key: index,
+                                                attrs: {
+                                                  type: {
+                                                    "is-danger":
+                                                      Object.keys(
+                                                        _vm.myGoalErrors
+                                                      ).length > 0 &&
+                                                      _vm.myGoalErrors[
+                                                        "goal." +
+                                                          index +
+                                                          ".goal"
+                                                      ] &&
+                                                      _vm.myGoalErrors[
+                                                        "goal." +
+                                                          index +
+                                                          ".goal"
+                                                      ].length > 0
+                                                  },
+                                                  message:
+                                                    Object.keys(
+                                                      _vm.myGoalErrors
+                                                    ).length > 0
+                                                      ? _vm.myGoalErrors[
+                                                          "goal." +
+                                                            index +
+                                                            ".goal"
+                                                        ]
+                                                      : []
+                                                }
+                                              },
+                                              [
+                                                _c("b-input", {
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Enter new goal...",
+                                                    type: "text",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.myGoals[index][
+                                                        "goal"
                                                       ],
-                                                      1
-                                                    )
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.myGoals[index],
+                                                        "goal",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "myGoals[index]['goal']"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "control" },
+                                                  [
+                                                    _c("b-button", {
+                                                      attrs: {
+                                                        type:
+                                                          "is-danger is-light",
+                                                        "icon-left": "times",
+                                                        disabled:
+                                                          _vm.myGoals.length ===
+                                                          1
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.removeGoal(
+                                                            index
+                                                          )
+                                                        }
+                                                      }
+                                                    })
                                                   ],
                                                   1
                                                 )
-                                              ]
-                                            }),
-                                            _vm._v(" "),
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "section",
+                                          { staticClass: "goal__btns" },
+                                          [
                                             _c(
-                                              "section",
-                                              { staticClass: "goal__btns" },
+                                              "div",
+                                              {},
                                               [
                                                 _c(
-                                                  "div",
-                                                  {},
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-info is-light",
-                                                        attrs: {
-                                                          "icon-left": "plus"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.appendNewGoal()
-                                                          }
-                                                        }
-                                                      },
-                                                      [_vm._v("Add New")]
-                                                    )
-                                                  ],
-                                                  1
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-info is-light",
+                                                    attrs: {
+                                                      "icon-left": "plus"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.appendNewGoal()
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Add New")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "block" },
+                                              [
+                                                _c(
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-default is-light"
+                                                  },
+                                                  [_vm._v("Cancel")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
-                                                  "div",
-                                                  { staticClass: "block" },
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "button is-success is-light",
+                                                    attrs: { type: "submit" }
+                                                  },
                                                   [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-default is-light"
-                                                      },
-                                                      [_vm._v("Cancel")]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "button is-success is-light",
-                                                        attrs: {
-                                                          type: "submit"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                              Submit\n                            "
-                                                        )
-                                                      ]
+                                                    _vm._v(
+                                                      "\n                              Submit\n                            "
                                                     )
-                                                  ],
-                                                  1
+                                                  ]
                                                 )
-                                              ]
+                                              ],
+                                              1
                                             )
-                                          ],
-                                          2
+                                          ]
                                         )
-                                      : _vm._e()
+                                      ],
+                                      2
+                                    )
                                   ]
                                 )
                               ]),
+                              _vm._v(" "),
+                              this.$page.props.authUser.unit_id ||
+                              _vm.anyPermission(
+                                "admin",
+                                "president",
+                                "supervisor"
+                              )
+                                ? _c("td", [
+                                    _c(
+                                      "section",
+                                      { staticClass: "kpi_goals__wrapper" },
+                                      [
+                                        _c("div", { staticClass: "content" }, [
+                                          _c("ol", { attrs: { type: "1" } }, [
+                                            _c("li", [_vm._v("Coffee")]),
+                                            _vm._v(" "),
+                                            _c("li", [_vm._v("Tea")]),
+                                            _vm._v(" "),
+                                            _c("li", [_vm._v("Milk")])
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _vm.anyPermission("admin", "supervisor")
+                                          ? _c(
+                                              "form",
+                                              [
+                                                _vm._l(_vm.unitGoals, function(
+                                                  kg,
+                                                  index
+                                                ) {
+                                                  return [
+                                                    _c(
+                                                      "b-field",
+                                                      { key: index },
+                                                      [
+                                                        _c("b-input", {
+                                                          attrs: {
+                                                            placeholder:
+                                                              "Enter new goal...",
+                                                            type: "text",
+                                                            expanded: ""
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.unitGoals[
+                                                                index
+                                                              ]["goal"],
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.unitGoals[
+                                                                  index
+                                                                ],
+                                                                "goal",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "unitGoals[index]['goal']"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "p",
+                                                          {
+                                                            staticClass:
+                                                              "control"
+                                                          },
+                                                          [
+                                                            _c("b-button", {
+                                                              attrs: {
+                                                                type:
+                                                                  "is-danger is-light",
+                                                                "icon-left":
+                                                                  "times",
+                                                                disabled:
+                                                                  _vm.unitGoals
+                                                                    .length ===
+                                                                  1
+                                                              },
+                                                              on: {
+                                                                click: function(
+                                                                  $event
+                                                                ) {
+                                                                  return _vm.removeGoal(
+                                                                    index,
+                                                                    "unit"
+                                                                  )
+                                                                }
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "section",
+                                                  { staticClass: "goal__btns" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {},
+                                                      [
+                                                        _c(
+                                                          "b-button",
+                                                          {
+                                                            staticClass:
+                                                              "is-info is-light",
+                                                            attrs: {
+                                                              "icon-left":
+                                                                "plus"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.appendNewGoal(
+                                                                  "unit"
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [_vm._v("Add New")]
+                                                        )
+                                                      ],
+                                                      1
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      { staticClass: "block" },
+                                                      [
+                                                        _c(
+                                                          "b-button",
+                                                          {
+                                                            staticClass:
+                                                              "is-default is-light"
+                                                          },
+                                                          [_vm._v("Cancel")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "button is-success is-light",
+                                                            attrs: {
+                                                              type: "submit"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                              Submit\n                            "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              2
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              this.$page.props.authUser.department_id ||
+                              _vm.anyPermission("admin", "president", "hod")
+                                ? _c("td", [
+                                    _c(
+                                      "section",
+                                      { staticClass: "kpi_goals__wrapper" },
+                                      [
+                                        _c("div", { staticClass: "content" }, [
+                                          _c("ol", { attrs: { type: "1" } }, [
+                                            _c("li", [_vm._v("Coffee")]),
+                                            _vm._v(" "),
+                                            _c("li", [_vm._v("Tea")]),
+                                            _vm._v(" "),
+                                            _c("li", [_vm._v("Milk")])
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _vm.anyPermission("admin", "hod")
+                                          ? _c(
+                                              "form",
+                                              [
+                                                _vm._l(_vm.dptGoals, function(
+                                                  kg,
+                                                  index
+                                                ) {
+                                                  return [
+                                                    _c(
+                                                      "b-field",
+                                                      { key: index },
+                                                      [
+                                                        _c("b-input", {
+                                                          attrs: {
+                                                            placeholder:
+                                                              "Enter new goal...",
+                                                            type: "text",
+                                                            expanded: ""
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.dptGoals[
+                                                                index
+                                                              ]["goal"],
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.dptGoals[
+                                                                  index
+                                                                ],
+                                                                "goal",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "dptGoals[index]['goal']"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "p",
+                                                          {
+                                                            staticClass:
+                                                              "control"
+                                                          },
+                                                          [
+                                                            _c("b-button", {
+                                                              attrs: {
+                                                                type:
+                                                                  "is-danger is-light",
+                                                                "icon-left":
+                                                                  "times",
+                                                                disabled:
+                                                                  _vm.dptGoals
+                                                                    .length ===
+                                                                  1
+                                                              },
+                                                              on: {
+                                                                click: function(
+                                                                  $event
+                                                                ) {
+                                                                  return _vm.removeGoal(
+                                                                    index,
+                                                                    "department"
+                                                                  )
+                                                                }
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "section",
+                                                  { staticClass: "goal__btns" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {},
+                                                      [
+                                                        _c(
+                                                          "b-button",
+                                                          {
+                                                            staticClass:
+                                                              "is-info is-light",
+                                                            attrs: {
+                                                              "icon-left":
+                                                                "plus"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.appendNewGoal(
+                                                                  "department"
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [_vm._v("Add New")]
+                                                        )
+                                                      ],
+                                                      1
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      { staticClass: "block" },
+                                                      [
+                                                        _c(
+                                                          "b-button",
+                                                          {
+                                                            staticClass:
+                                                              "is-default is-light"
+                                                          },
+                                                          [_vm._v("Cancel")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "button is-success is-light",
+                                                            attrs: {
+                                                              type: "submit"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                              Submit\n                            "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              2
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e(),
                               _vm._v(" "),
                               _c("td", [
                                 _c(
@@ -8227,11 +8917,11 @@ var render = function() {
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    _vm.isUserRole("Supervisor")
+                                    _vm.anyPermission("admin", "branch_manager")
                                       ? _c(
                                           "form",
                                           [
-                                            _vm._l(_vm.keyGoals, function(
+                                            _vm._l(_vm.branchGoals, function(
                                               kg,
                                               index
                                             ) {
@@ -8249,20 +8939,22 @@ var render = function() {
                                                       },
                                                       model: {
                                                         value:
-                                                          _vm.keyGoals[index][
-                                                            "goal"
-                                                          ],
+                                                          _vm.branchGoals[
+                                                            index
+                                                          ]["goal"],
                                                         callback: function(
                                                           $$v
                                                         ) {
                                                           _vm.$set(
-                                                            _vm.keyGoals[index],
+                                                            _vm.branchGoals[
+                                                              index
+                                                            ],
                                                             "goal",
                                                             $$v
                                                           )
                                                         },
                                                         expression:
-                                                          "keyGoals[index]['goal']"
+                                                          "branchGoals[index]['goal']"
                                                       }
                                                     }),
                                                     _vm._v(" "),
@@ -8279,7 +8971,7 @@ var render = function() {
                                                             "icon-left":
                                                               "times",
                                                             disabled:
-                                                              _vm.keyGoals
+                                                              _vm.branchGoals
                                                                 .length === 1
                                                           },
                                                           on: {
@@ -8287,7 +8979,8 @@ var render = function() {
                                                               $event
                                                             ) {
                                                               return _vm.removeGoal(
-                                                                index
+                                                                index,
+                                                                "branch"
                                                               )
                                                             }
                                                           }
@@ -8321,167 +9014,9 @@ var render = function() {
                                                           click: function(
                                                             $event
                                                           ) {
-                                                            return _vm.appendNewGoal()
-                                                          }
-                                                        }
-                                                      },
-                                                      [_vm._v("Add New")]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  { staticClass: "block" },
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-default is-light"
-                                                      },
-                                                      [_vm._v("Cancel")]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "button is-success is-light",
-                                                        attrs: {
-                                                          type: "submit"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                              Submit\n                            "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              ]
-                                            )
-                                          ],
-                                          2
-                                        )
-                                      : _vm._e()
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "section",
-                                  { staticClass: "kpi_goals__wrapper" },
-                                  [
-                                    _c("div", { staticClass: "content" }, [
-                                      _c("ol", { attrs: { type: "1" } }, [
-                                        _c("li", [_vm._v("Coffee")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Tea")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Milk")])
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm.isUserRole("Manager")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _vm._l(_vm.keyGoals, function(
-                                              kg,
-                                              index
-                                            ) {
-                                              return [
-                                                _c(
-                                                  "b-field",
-                                                  { key: index },
-                                                  [
-                                                    _c("b-input", {
-                                                      attrs: {
-                                                        placeholder:
-                                                          "Enter new goal...",
-                                                        type: "text",
-                                                        expanded: ""
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.keyGoals[index][
-                                                            "goal"
-                                                          ],
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.keyGoals[index],
-                                                            "goal",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "keyGoals[index]['goal']"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "p",
-                                                      {
-                                                        staticClass: "control"
-                                                      },
-                                                      [
-                                                        _c("b-button", {
-                                                          attrs: {
-                                                            type:
-                                                              "is-danger is-light",
-                                                            "icon-left":
-                                                              "times",
-                                                            disabled:
-                                                              _vm.keyGoals
-                                                                .length === 1
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.removeGoal(
-                                                                index
-                                                              )
-                                                            }
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              ]
-                                            }),
-                                            _vm._v(" "),
-                                            _c(
-                                              "section",
-                                              { staticClass: "goal__btns" },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {},
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-info is-light",
-                                                        attrs: {
-                                                          "icon-left": "plus"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.appendNewGoal()
+                                                            return _vm.appendNewGoal(
+                                                              "branch"
+                                                            )
                                                           }
                                                         }
                                                       },
@@ -8575,8 +9110,7 @@ var render = function() {
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    !_vm.isUserRole("Manager") &&
-                                    !_vm.isUserRole("Supervisor")
+                                    !_vm.isPermission("admin")
                                       ? _c(
                                           "form",
                                           [
@@ -8764,8 +9298,7 @@ var render = function() {
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    !_vm.isUserRole("Manager") &&
-                                    !_vm.isUserRole("Supervisor")
+                                    !_vm.isPermission("admin")
                                       ? _c(
                                           "form",
                                           [
@@ -8962,8 +9495,7 @@ var render = function() {
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    !_vm.isUserRole("Manager") &&
-                                    !_vm.isUserRole("Supervisor")
+                                    !_vm.isPermission("admin")
                                       ? _c(
                                           "form",
                                           [
@@ -9160,8 +9692,7 @@ var render = function() {
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    !_vm.isUserRole("Manager") &&
-                                    !_vm.isUserRole("Supervisor")
+                                    !_vm.isPermission("admin")
                                       ? _c(
                                           "form",
                                           [
@@ -9339,19 +9870,9 @@ var render = function() {
                                   "section",
                                   { staticClass: "kpi_goals__wrapper" },
                                   [
-                                    _c(
-                                      "div",
-                                      { staticClass: "content" },
-                                      [
-                                        _c("editor", {
-                                          attrs: { init: _vm.initEditor }
-                                        })
-                                      ],
-                                      1
-                                    ),
+                                    _c("div", { staticClass: "content" }),
                                     _vm._v(" "),
-                                    !_vm.isUserRole("Manager") &&
-                                    !_vm.isUserRole("Supervisor")
+                                    !_vm.isPermission("admin")
                                       ? _c(
                                           "form",
                                           [

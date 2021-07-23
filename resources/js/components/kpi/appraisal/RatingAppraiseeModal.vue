@@ -189,6 +189,7 @@
                       pack="fas"
                       icon-right="star"
                       @click="openRateAppraiseeModal()"
+                      :disabled="!isPermission('review_appraisal')"
                     ></b-button>
                   </b-tooltip>
                   <b-tooltip label="Delete" size="is-small" type="is-dark">
@@ -198,6 +199,7 @@
                       pack="fas"
                       icon-right="trash"
                       @click="deleteUser(props.row.id)"
+                      :disabled="!isPermission('delete')"
                     ></b-button>
                   </b-tooltip>
                 </div>

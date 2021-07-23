@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Traits\Organization;
-use App\Traits\Staff;
+use App\Models\User;
 use App\Traits\StaffProfile;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -45,21 +45,10 @@ class HandleInertiaRequests extends Middleware
             'authUser' => fn () => $this->authProfile()
                 ? $this->authProfile()
                 : null,
-            'userRoles' => fn () => $this->getUserRoles($request->user()),
             'orgInfo' => fn () => $this->getOrganizationMetadata()
                 ? $this->getOrganizationMetadata()
                 : null,
-            'locale' => fn () =>  app()->getLocale(),
-
+            'userPermissions' => fn () =>  $request->user() ? $request->user()->getUserPermissions() : null
         ]);
-    }
-    public function getUserRoles($user)
-    {
-        if ($user) {
-            if ($user->role)
-                return json_decode($user->role);
-            return null;
-        }
-        return null;
     }
 }

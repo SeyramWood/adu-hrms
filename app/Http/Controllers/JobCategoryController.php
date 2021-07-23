@@ -25,11 +25,7 @@ class JobCategoryController extends Controller
     }
     public function deleteCategories($jobCategories)
     {
-        $ids = json_decode($jobCategories);
-        for ($i = 0; $i < count($ids); $i++) {
-            $category = JobCategory::find($ids[$i]);
-            $category->delete();
-        }
+        JobCategory::whereIn('id', json_decode($jobCategories))->delete();
         return response()->json(['deleted' => true]);
     }
 }

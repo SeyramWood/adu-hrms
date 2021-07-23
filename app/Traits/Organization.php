@@ -8,6 +8,7 @@ use App\Models\Position;
 use App\Models\Department;
 use Illuminate\Support\Facades\DB;
 use App\Models\OrganizationMetadata;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -26,6 +27,27 @@ trait Organization
   public function getDepartments()
   {
     return DB::table('departments')
+      ->orderBy('id', 'desc')
+      ->get();
+  }
+  public function getUnits($id = null)
+  {
+    if ($id) {
+      return DB::table('units')
+        ->where('units.id', $id)
+        ->leftJoin('departments', 'departments.id', '=', 'units.department_id')
+        ->select(
+          'units.*',
+          'departments.name as department'
+        )
+        ->first();
+    }
+    return DB::table('units')
+      ->leftJoin('departments', 'departments.id', '=', 'units.department_id')
+      ->select(
+        'units.*',
+        'departments.name as department'
+      )
       ->orderBy('id', 'desc')
       ->get();
   }
@@ -59,6 +81,39 @@ trait Organization
     ]);
 
     return Department::create($request->all());
+  }
+  public function updateDepartment($request, $department)
+  {
+    $request->validate([
+      'name' => 'required|string',
+    ]);
+    $department->name = $request->name;
+    $department->save();
+    return response()->json(['updated' => true, 'department' => Department::where('id', $department->id)->first()]);
+  }
+
+  public function createUnit($request)
+  {
+    $request->validate([
+      'name' => 'required|string',
+      'department' => 'required|numeric',
+    ]);
+    $unit = Unit::create([
+      'department_id' => $request->department,
+      'name' => $request->name,
+    ]);
+    return response()->json(['created' => true, 'unit' => $this->getUnits($unit->id)]);
+  }
+  public function updateUnit($request, $unit)
+  {
+    $request->validate([
+      'name' => 'required|string',
+      'department' => 'required|numeric',
+    ]);
+    $unit->name = $request->name;
+    $unit->department_id = $request->department;
+    $unit->save();
+    return response()->json(['updated' => true, 'unit' => $this->getUnits($unit->id)]);
   }
   public function createPosition($request)
   {
@@ -102,6 +157,7 @@ trait Organization
       'logo' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
     ]);
     $meta = DB::table('organization_metadata')->first();
+    // dd($meta);
     $file = $this->processBrandLogo($request, $meta);
     if ($meta && $meta->logo) {
       DB::table('organization_metadata')->where('id', $meta->id)->update([
@@ -109,6 +165,7 @@ trait Organization
       ]);
     } else {
       OrganizationMetadata::create(['logo' => $file]);
+      return response()->json(['updated' => true, 'org' => OrganizationMetadata::first()]);
     }
     return response()->json(['updated' => true, 'logo' => $file]);
   }

@@ -16,7 +16,9 @@
                 role="button"
                 aria-controls="myleavelist"
               >
-                <p class="card-header-title has-text-info">Change Password</p>
+                <p class="card-header-title has-text-info">
+                  {{ $t("app.change_password") }}
+                </p>
                 <a class="card-header-icon">
                   <b-icon
                     type="is-info"
@@ -29,7 +31,7 @@
                 <div class="content">
                   <form @submit.prevent="changePassword()">
                     <b-field
-                      label="Current Password"
+                      :label="$t('app.current_password')"
                       :type="{
                         'is-danger':
                           credentialErrors.current_password.length > 0,
@@ -37,7 +39,7 @@
                       :message="credentialErrors.current_password"
                     >
                       <b-input
-                        placeholder="Current password"
+                        :placeholder="$t('app.current_password')"
                         type="password"
                         value=""
                         icon-pack="fas"
@@ -47,14 +49,14 @@
                       </b-input>
                     </b-field>
                     <b-field
-                      label="New Password"
+                      :label="$t('app.new_password')"
                       :type="{
                         'is-danger': credentialErrors.new_password.length > 0,
                       }"
                       :message="credentialErrors.new_password"
                     >
                       <b-input
-                        placeholder="New password"
+                        :placeholder="$t('app.new_password')"
                         type="password"
                         value=""
                         icon-pack="fas"
@@ -64,7 +66,7 @@
                       </b-input>
                     </b-field>
                     <b-field
-                      label="Confirm New Password"
+                      :label="$t('app.confirm_password')"
                       :type="{
                         'is-danger':
                           credentialErrors.confirm_new_password.length > 0,
@@ -72,7 +74,7 @@
                       :message="credentialErrors.confirm_new_password"
                     >
                       <b-input
-                        placeholder="Confirm new password"
+                        :placeholder="$t('app.confirm_password')"
                         type="password"
                         value=""
                         icon-pack="fas"
@@ -89,22 +91,68 @@
                           type="submit"
                           :disabled="isUpdatingPassword"
                         >
-                          {{ isUpdatingPassword ? "Updating..." : "Update" }}
+                          {{
+                            isUpdatingPassword
+                              ? `${$t("app.updating")}...`
+                              : $t("app.update")
+                          }}
                         </button>
 
                         <b-button
                           class="is-danger is-light"
                           @click="cancelChangePassword()"
-                          >Cancel</b-button
+                          >{{ $t("app.cancel") }}</b-button
                         >
                       </div>
                       <p class="login-forget-password">
-                        <inertia-link href="/password-reset-link"
-                          >I forget my password</inertia-link
-                        >
+                        <inertia-link href="/password-reset-link">{{
+                          $t("app.forget_pass_text")
+                        }}</inertia-link>
                       </p>
                     </div>
                   </form>
+                </div>
+              </div>
+            </b-collapse>
+          </section>
+        </div>
+        <div class="column is-3">
+          <section class="b__collapse__section">
+            <b-collapse
+              v-model="openChangeLanguage"
+              class="card"
+              animation="slide"
+              aria-id="myleavelist"
+            >
+              <div
+                slot="trigger"
+                class="card-header"
+                role="button"
+                aria-controls="myleavelist"
+              >
+                <p class="card-header-title has-text-info">
+                  {{ $t("app.change_language") }}
+                </p>
+                <a class="card-header-icon">
+                  <b-icon
+                    type="is-info"
+                    pack="fas"
+                    :icon="openChangeLanguage ? 'angle-down' : 'angle-up'"
+                  ></b-icon>
+                </a>
+              </div>
+              <div class="card-content">
+                <div class="content">
+                  <b-field v-for="l in languages" :key="l.name">
+                    <b-radio
+                      v-model="locale"
+                      :native-value="l.locale"
+                      type="is-info"
+                      size="is-medium"
+                    >
+                      {{ l.name }}
+                    </b-radio>
+                  </b-field>
                 </div>
               </div>
             </b-collapse>
@@ -122,16 +170,33 @@ export default {
   computed: {
     ...mapGetters([]),
   },
-  created() {},
   beforeMount() {
     this.authUser = this.$page.props.authUser;
   },
-  mounted() {},
+  mounted() {
+    // console.log(this.$lang.getLocale());
+  },
+  created() {
+    this.$watch(
+      () => this.locale,
+      (value) => {
+        if (value) {
+          this.changeLocale(value);
+        }
+      }
+    );
+  },
   data() {
     return {
       isUpdatingPassword: false,
       openChangePassword: true,
+      openChangeLanguage: true,
       authUser: null,
+      locale: this.$lang.getLocale(),
+      languages: [
+        { name: "English", locale: "en" },
+        { name: "French", locale: "fr" },
+      ],
       credentials: {
         current_password: "",
         new_password: "",
@@ -183,6 +248,18 @@ export default {
         new_password: obj.new_password || [],
         confirm_new_password: obj.confirm_new_password || [],
       };
+    },
+
+    async changeLocale(locale) {
+      try {
+        const res = await this.$axios.get(`/lang/${locale}`);
+        if (res.status === 200) {
+          this.$lang.setLocale(locale);
+          localStorage.setItem("locale", locale);
+        }
+      } catch (error) {
+        console.trace(error);
+      }
     },
   },
 };

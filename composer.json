@@ -16,6 +16,7 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "mariuzzo/laravel-js-localization": "^1.8",
         "spatie/laravel-activitylog": "^3.17",
         "stichoza/google-translate-php": "^4.1",
         "wildbit/swiftmailer-postmark": "^3.3"

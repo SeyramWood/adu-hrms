@@ -185,55 +185,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -244,9 +195,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // all titles will be injected into this template
     titleTemplate: "%s | Human Resource Management System"
   },
+  props: {
+    userPermissions: {
+      require: true,
+      type: Array
+    }
+  },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["getBranches", "getDepartments", "getOrganizationProfile", "getProfile", "getAuthUser", "getJobTitles"])), {}, {
     authUserName: function authUserName() {
-      return "".concat(this.isNull(this.getAuthUser.title), " ").concat(this.getAuthUser.lastName);
+      return "".concat(this.isNull(this.getAuthUser.title), " ").concat(this.getAuthUser.lastName, " ").concat(this.getAuthUser.firstName, " ").concat(this.isNull(this.getAuthUser.middleName));
     },
     authJobTitle: function authJobTitle() {
       var _this = this;
@@ -259,9 +216,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return "";
+    },
+    getLogo: function getLogo() {
+      if (this.getOrganizationProfile) {
+        return this.getOrganizationProfile.logo;
+      }
+    },
+    getOrgName: function getOrgName() {
+      if (this.getOrganizationProfile) {
+        return this.getOrganizationProfile.name;
+      }
     }
   }),
-  props: {},
   beforeMount: function beforeMount() {
     var _this2 = this;
 
@@ -269,6 +235,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__["Inertia"].on("navigate", function (event) {
       _this2.activePage = event.detail.page.url;
     });
+
+    if (localStorage.getItem("locale")) {
+      this.$lang.setLocale(localStorage.getItem("locale"));
+    } else {
+      this.$lang.setLocale("en");
+    }
   },
   created: function created() {
     this.dispatchAuthUser({
@@ -308,9 +280,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return el;
-    },
-    changeLang: function changeLang() {
-      location.reload();
     }
   })
 });
@@ -389,7 +358,7 @@ var render = function() {
         _c("div", { staticClass: "brand__logo__main" }, [
           _c("img", {
             attrs: {
-              src: "/storage/logo/" + _vm.getOrganizationProfile.logo,
+              src: "/storage/logo/" + _vm.getLogo,
               alt: "Brand Logo",
               srcset: ""
             }
@@ -420,7 +389,7 @@ var render = function() {
                         headers: { "Custom-Header": "poopjpo" }
                       }
                     },
-                    [_vm._v("Dashboard")]
+                    [_vm._v(_vm._s(_vm.$t("app.dashboard")))]
                   )
                 ],
                 1
@@ -443,117 +412,108 @@ var render = function() {
                     {
                       attrs: { href: "/dashboard/ess", "preserve-scroll": "" }
                     },
-                    [_vm._v("ESS")]
+                    [_vm._v(_vm._s(_vm.$t("app.employee")))]
                   )
                 ],
                 1
               ),
               _vm._v(" "),
-              _vm.isUserRole("Admin")
-                ? [
-                    _c(
-                      "li",
-                      {
-                        class:
-                          "header__nav__list__item " +
-                          (_vm.activePage === "/dashboard/admin"
-                            ? "active-left"
-                            : "")
-                      },
-                      [
-                        _c(
-                          "inertia-link",
-                          {
-                            attrs: {
-                              href: "/dashboard/admin",
-                              "preserve-scroll": ""
-                            }
-                          },
-                          [_vm._v("Admin")]
-                        )
-                      ],
-                      1
-                    )
-                  ]
+              _vm.isPermission("view_admin")
+                ? _c(
+                    "li",
+                    {
+                      class:
+                        "header__nav__list__item " +
+                        (_vm.activePage === "/dashboard/admin"
+                          ? "active-left"
+                          : "")
+                    },
+                    [
+                      _c(
+                        "inertia-link",
+                        {
+                          attrs: {
+                            href: "/dashboard/admin",
+                            "preserve-scroll": ""
+                          }
+                        },
+                        [_vm._v(_vm._s(_vm.$t("app.admin")))]
+                      )
+                    ],
+                    1
+                  )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.isUserRole("Admin") ||
-              _vm.isUserRole("Manager") ||
-              _vm.isUserRole("Supervisor")
-                ? [
-                    _c(
-                      "li",
-                      {
-                        class:
-                          "header__nav__list__item " +
-                          (_vm.activePage === "/dashboard/pim"
-                            ? "active-left"
-                            : "")
-                      },
-                      [
-                        _c(
-                          "inertia-link",
-                          {
-                            attrs: {
-                              href: "/dashboard/pim",
-                              "preserve-scroll": ""
-                            }
-                          },
-                          [_vm._v("PIM")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        class:
-                          "header__nav__list__item " +
-                          (_vm.activePage === "/dashboard/leave"
-                            ? "active-left"
-                            : "")
-                      },
-                      [
-                        _c(
-                          "inertia-link",
-                          {
-                            attrs: {
-                              href: "/dashboard/leave",
-                              "preserve-scroll": ""
-                            }
-                          },
-                          [_vm._v("Leave")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        class:
-                          "header__nav__list__item " +
-                          (_vm.activePage === "/dashboard/kpi"
-                            ? "active-left"
-                            : "")
-                      },
-                      [
-                        _c(
-                          "inertia-link",
-                          {
-                            attrs: {
-                              href: "/dashboard/kpi",
-                              "preserve-scroll": ""
-                            }
-                          },
-                          [_vm._v("KPI")]
-                        )
-                      ],
-                      1
-                    )
-                  ]
+              _vm.isPermission("view_pim")
+                ? _c(
+                    "li",
+                    {
+                      class:
+                        "header__nav__list__item " +
+                        (_vm.activePage === "/dashboard/pim"
+                          ? "active-left"
+                          : "")
+                    },
+                    [
+                      _c(
+                        "inertia-link",
+                        {
+                          attrs: {
+                            href: "/dashboard/pim",
+                            "preserve-scroll": ""
+                          }
+                        },
+                        [_vm._v(_vm._s(_vm.$t("app.pim")))]
+                      )
+                    ],
+                    1
+                  )
                 : _vm._e(),
+              _vm._v(" "),
+              _vm.isPermission("view_leave")
+                ? _c(
+                    "li",
+                    {
+                      class:
+                        "header__nav__list__item " +
+                        (_vm.activePage === "/dashboard/leave"
+                          ? "active-left"
+                          : "")
+                    },
+                    [
+                      _c(
+                        "inertia-link",
+                        {
+                          attrs: {
+                            href: "/dashboard/leave",
+                            "preserve-scroll": ""
+                          }
+                        },
+                        [_vm._v(_vm._s(_vm.$t("app.leave")))]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  class:
+                    "header__nav__list__item " +
+                    (_vm.activePage === "/dashboard/kpi" ? "active-left" : "")
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: { href: "/dashboard/kpi", "preserve-scroll": "" }
+                    },
+                    [_vm._v(_vm._s(_vm.$t("app.kpi")))]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "li",
@@ -573,13 +533,12 @@ var render = function() {
                         "preserve-scroll": ""
                       }
                     },
-                    [_vm._v("Staff Directory")]
+                    [_vm._v(_vm._s(_vm.$t("app.staff_directory")))]
                   )
                 ],
                 1
               )
-            ],
-            2
+            ]
           ),
           _vm._v(" "),
           _c(
@@ -701,8 +660,13 @@ var render = function() {
                         { attrs: { "aria-role": "listitem" } },
                         [
                           _c(
-                            "a",
-                            { staticClass: "default", attrs: { href: "#" } },
+                            "inertia-link",
+                            {
+                              attrs: {
+                                href: "/dashboard/ess",
+                                "preserve-scroll": ""
+                              }
+                            },
                             [
                               _c("b-icon", {
                                 attrs: {
@@ -711,55 +675,16 @@ var render = function() {
                                   size: "is-small"
                                 }
                               }),
-                              _vm._v("\n                  Profile")
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(_vm.$t("app.profile")) +
+                                  "\n              "
+                              )
                             ],
                             1
                           )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-item",
-                        { attrs: { "aria-role": "listitem" } },
-                        [
-                          _c(
-                            "a",
-                            { attrs: { href: "#" } },
-                            [
-                              _c("b-icon", {
-                                attrs: {
-                                  pack: "fas",
-                                  icon: "lock",
-                                  size: "is-small"
-                                }
-                              }),
-                              _vm._v("\n                  Change Password")
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-item",
-                        { attrs: { "aria-role": "listitem" } },
-                        [
-                          _c(
-                            "a",
-                            { attrs: { href: "#" } },
-                            [
-                              _c("b-icon", {
-                                attrs: {
-                                  pack: "fas",
-                                  icon: "cog",
-                                  size: "is-small"
-                                }
-                              }),
-                              _vm._v("\n                  Settings")
-                            ],
-                            1
-                          )
-                        ]
+                        ],
+                        1
                       ),
                       _vm._v(" "),
                       _c(
@@ -784,34 +709,15 @@ var render = function() {
                                   size: "is-small"
                                 }
                               }),
-                              _vm._v("\n                  Logout")
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(_vm.$t("app.logout"))
+                              )
                             ],
                             1
                           )
                         ],
                         1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-item",
-                        { attrs: { "aria-role": "listitem" } },
-                        [
-                          _c(
-                            "a",
-                            { attrs: { href: "#" } },
-                            [
-                              _c("b-icon", {
-                                attrs: {
-                                  pack: "fas",
-                                  icon: "cog",
-                                  size: "is-small"
-                                }
-                              }),
-                              _vm._v("\n                  French")
-                            ],
-                            1
-                          )
-                        ]
                       )
                     ],
                     1
@@ -847,7 +753,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "header__details__brand__name" }, [
-            _c("h4", [_vm._v(_vm._s(_vm.getOrganizationProfile.name))])
+            _c("h4", [_vm._v(_vm._s(_vm.getOrgName))])
           ])
         ])
       ]),

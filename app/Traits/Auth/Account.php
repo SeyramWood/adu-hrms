@@ -3,24 +3,16 @@
 namespace App\Traits\Auth;
 
 use App\Models\User;
-use Inertia\Inertia;
 use App\Traits\Admin;
 use App\Traits\Staff;
 use App\Models\Profile;
-use App\Models\Lecturer;
 use App\Traits\Generator;
 use Illuminate\Support\Str;
-use App\Traits\StaffProfile;
+use App\Jobs\AccountCreated;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use App\Models\Administration;
-use GuzzleHttp\Promise\Create;
-use App\Models\LecturerProgramme;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
-use App\Notifications\NewAccountCreated;
-use Illuminate\Contracts\Auth\StatefulGuard;
 
 /**
  * CreateAccount
@@ -40,17 +32,14 @@ trait Account
       'middle_name' => 'nullable|string|max:255',
       'last_name' => 'required|string|max:255',
       'email' => 'required|string|email|max:255|unique:users',
-      'role' => 'required',
       'status' => 'required|integer',
     ]);
     $password = $this->generatePassword(8);
     $user = User::create([
       'email' => $request->email,
       'password' => Hash::make($password),
-      'role' => json_encode($request->role),
+      'roles' => json_encode([]),
       'status' => $request->status,
-
-
     ]);
     if ($response = $this->registered($request, $user, $password)) {
       return $response;
@@ -79,18 +68,21 @@ trait Account
       'qualifications' => json_encode((object)$qualifications),
       'slug' => Str::slug($slug, '-'),
     ]);
-    $user->notify((new NewAccountCreated($user, $password, $request->all())));
+    AccountCreated::dispatchAfterResponse($user, $password, $request->all());
     return response()->json(['user' => $this->getUser($user->id), 'staffCount' => $this->getStaffCount()]);
   }
 
 
   public function login($request)
   {
+    if ($request->hasHeader('Locale')) {
+      Session()->put('locale', $request->header('Locale'));
+      app()->setLocale(session('locale'));
+    }
     $request->validate([
       'username' => 'required|email',
       'password' => 'required|string',
     ]);
-
     $credentials = $this->credentials($request);
 
     if (Auth::attempt($credentials, $request->remember)) {
@@ -98,7 +90,7 @@ trait Account
       return redirect()->intended(RouteServiceProvider::DASHBOARD);
     }
     return back()->withErrors([
-      'credentialError' => 'The provided credentials do not match our records.',
+      'credentialError' => trans("validation.attributes.credentialError"),
     ]);
   }
 
@@ -128,12 +120,13 @@ trait Account
 
   public function updatePassword($request)
   {
+    // dd($request->session('locale'));
     $request->validate([
       'current_password' => [
         'required', 'string',
         function ($attribute, $value, $fail) {
           if (!Hash::check($value, Auth::user()->password)) {
-            $fail('The current password is incorrect.');
+            $fail("" . trans("validation.attributes.current_password_text") . ".");
           }
         }
       ],

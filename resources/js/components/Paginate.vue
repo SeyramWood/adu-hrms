@@ -103,6 +103,11 @@ export default {
       },
     },
   },
+  watch: {
+    // state(v) {
+    //   console.log(v);
+    // },
+  },
   data() {
     return {
       order: "is-right",

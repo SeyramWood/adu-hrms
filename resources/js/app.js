@@ -1,5 +1,4 @@
 require("./bootstrap");
-import i18n from "./i18n";
 import { App, plugin } from "@inertiajs/inertia-vue";
 import Vue from "vue";
 import { InertiaProgress } from "@inertiajs/progress";
@@ -11,12 +10,14 @@ import Buefy from "buefy";
 import VueMeta from "vue-meta";
 import VueConfirmDialog from "vue-confirm-dialog";
 
-import "buefy/dist/buefy.css";
+import "../sass/buefy.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { DateTime, Interval, Duration } from "luxon";
 // import Interval from "luxon/src/interval.js";
+import VueLang from "@eli5/vue-lang-js";
+import translations from "./lang.js";
 
 InertiaProgress.init();
 
@@ -31,10 +32,17 @@ Vue.use(VueMeta, {
     // optional pluginOptions
     refreshOnceOnNavigation: true
 });
+
 Vue.use(VueConfirmDialog);
 
 Vue.component("vue-confirm-dialog", VueConfirmDialog.default);
 Vue.use(dropper);
+
+Vue.use(VueLang, {
+    messages: translations, // Provide locale file
+    locale: "en", // Set locale
+    fallback: "en" // Set fallback lacale
+});
 
 Object.defineProperty(Vue.prototype, "$luxon", { value: DateTime });
 Object.defineProperty(Vue.prototype, "$axios", { value: axios });
@@ -56,25 +64,43 @@ Vue.mixin({
             defaultHost: process.env.MIX_APP_URL,
             initEditor: {
                 plugins: [
-                    "print preview searchreplace autolink lists link image paste help wordcount"
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste code help wordcount"
                 ],
                 toolbar:
-                    "undo redo | formatselect | bold italic strikethrough forecolor backcolor link | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help"
+                    "undo redo | formatselect | bold italic backcolor | \
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | removeformat | help"
             }
         };
     },
     methods: {
-        isUserRole(role) {
-            return this.$page.props.userRoles.includes(role) && true;
+        isPermission(permission) {
+            return (
+                this.$page.props.userPermissions.includes(permission) && true
+            );
         },
-        roleOrUserPermission(role, profileId) {
+        userOrPermission(permission, profileId) {
             if (
-                this.isUserRole(role) ||
+                this.isPermission(permission) ||
                 profileId === this.$page.props.authUser.id
             ) {
                 return true;
             }
             return false;
+        },
+        anyPermission(...rest) {
+            const intersection = rest.filter(x =>
+                this.$page.props.userPermissions.includes(x)
+            );
+            return intersection.length > 0 && true;
+        },
+        isNull(el) {
+            if (el === "null" || el === null) {
+                return "";
+            }
+            return el;
         },
         formatDate(str) {
             const date = this.$luxon.fromISO(str).toFormat("MMMM dd, y");
@@ -158,7 +184,6 @@ Vue.mixin({
 const el = document.getElementById("app");
 
 new Vue({
-    i18n,
     store,
     render: h =>
         h(App, {

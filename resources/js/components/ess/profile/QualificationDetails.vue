@@ -6,13 +6,13 @@
           <!-- <p class="card-header-title">Work Experience</p> -->
         </header>
         <div class="profile-detail-bar">
-          <p class="p-text">Employee Qualifications</p>
+          <p class="p-text">{{ $t("app.qualification_cta") }}</p>
         </div>
         <div class="card-content">
           <div class="content">
             <section
               class="b__collapse__section"
-              v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+              v-if="userOrPermission('create', getProfile.user_id)"
             >
               <b-collapse
                 class="card"
@@ -28,7 +28,7 @@
                   aria-controls="addreportingmethod"
                 >
                   <p class="card-header-title has-text-info">
-                    Add Working Experience
+                    {{ $t("app.add_wrk_experience") }}
                   </p>
                   <a class="card-header-icon">
                     <b-icon
@@ -44,7 +44,7 @@
                       <div class="columns">
                         <div class="column is-6">
                           <b-field
-                            label="Company"
+                            :label="$t('app.company')"
                             expanded
                             :type="{
                               'is-danger':
@@ -64,7 +64,7 @@
                         </div>
                         <div class="column is-6">
                           <b-field
-                            label="Job Title"
+                            :label="$t('app.jobTitle')"
                             expanded
                             :type="{
                               'is-danger':
@@ -86,7 +86,7 @@
                       <div class="columns">
                         <div class="column is-6">
                           <b-field
-                            label="From (Year)"
+                            :label="`${$t('app.from')} (${$t('app.year')})`"
                             expanded
                             :type="{
                               'is-danger':
@@ -97,7 +97,7 @@
                           >
                             <b-select
                               v-model="qualifications.workExperience.from"
-                              placeholder="Select year..."
+                              :placeholder="$t('app.selectYear')"
                               size=""
                               expanded
                             >
@@ -113,7 +113,7 @@
                         </div>
                         <div class="column is-6">
                           <b-field
-                            label="To (Year)"
+                            :label="`${$t('app.to')} (${$t('app.year')})`"
                             expanded
                             :type="{
                               'is-danger':
@@ -124,7 +124,7 @@
                           >
                             <b-select
                               v-model="qualifications.workExperience.to"
-                              placeholder="Select year..."
+                              :placeholder="$t('app.selectYear')"
                               size=""
                               expanded
                             >
@@ -142,7 +142,7 @@
                       <div class="columns">
                         <div class="column is-6">
                           <b-field
-                            label="Comment"
+                            :label="$tc('app.comment', 1)"
                             :type="{
                               'is-danger':
                                 qualificationsErrors.workExperience.comment
@@ -155,7 +155,7 @@
                             <b-input
                               size=""
                               type="textarea"
-                              placeholder="Type your comment..."
+                              :placeholder="$t('app.placeholder_comment')"
                               v-model="qualifications.workExperience.comment"
                             ></b-input>
                           </b-field>
@@ -169,13 +169,15 @@
                           :disabled="isSubmittingWorkExperience"
                         >
                           {{
-                            isSubmittingWorkExperience ? "Submitting..." : "Add"
+                            isSubmittingWorkExperience
+                              ? `${$t("app.edit_wrk_experience")}...`
+                              : $t("app.add")
                           }}
                         </button>
                         <b-button
                           class="is-danger is-light"
                           @click="cancelWorkExperienceForm()"
-                          >Cancel</b-button
+                          >{{ $t("app.cancel") }}</b-button
                         >
                       </b-field>
                     </form>
@@ -193,38 +195,49 @@
             >
               <b-table-column
                 field="company"
-                label="Company"
+                :label="$t('app.company')"
                 sortable
                 v-slot="props"
                 >{{ props.row.company }}</b-table-column
               >
               <b-table-column
                 field="jtitle"
-                label="Job Title"
+                :label="$t('app.jobTitle')"
                 sortable
                 v-slot="props"
                 >{{ props.row.jobTitle }}</b-table-column
               >
               <b-table-column
                 field="from"
-                label="From"
+                :label="$t('app.from')"
                 sortable
                 v-slot="props"
                 >{{ props.row.from }}</b-table-column
               >
-              <b-table-column field="to" label="To" sortable v-slot="props">{{
-                props.row.to
-              }}</b-table-column>
+              <b-table-column
+                field="to"
+                :label="$t('app.to')"
+                sortable
+                v-slot="props"
+                >{{ props.row.to }}</b-table-column
+              >
               <b-table-column
                 field="comment"
-                label="Comment"
+                :label="$tc('app.comment', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.comment }}</b-table-column
               >
-              <b-table-column field="actions" label="Actions" v-slot="props">
+              <b-table-column
+                field="actions"
+                :label="$tc('app.action', 2)"
+                v-slot="props"
+              >
                 <div class="b-tooltips">
-                  <b-tooltip label="Edit" type="is-dark">
+                  <b-tooltip
+                    :label="$t('app.edit_wrk_experience')"
+                    type="is-dark"
+                  >
                     <b-button
                       class="is-info is-light"
                       size="is-small"
@@ -232,15 +245,21 @@
                       icon-right="pen"
                       :id="`wrk-experince-id${props.row.id}`"
                       @click="openWorkExperienceDropper(props.row)"
+                      :disabled="
+                        !userOrPermission('update', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Delete" type="is-dark">
+                  <b-tooltip :label="$t('app.delete')" type="is-dark">
                     <b-button
                       class="is-danger is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
                       @click="deleteHandler('workExperience', props.row.id)"
+                      :disabled="
+                        !userOrPermission('delete', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
                 </div>
@@ -253,13 +272,13 @@
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">Education</p>
+          <p class="card-header-title">{{ $t("app.education") }}</p>
         </header>
         <div class="card-content">
           <div class="content">
             <section
               class="b__collapse__section"
-              v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+              v-if="userOrPermission('create', getProfile.user_id)"
             >
               <b-collapse
                 class="card"
@@ -274,7 +293,9 @@
                   role="button"
                   aria-controls="addreportingmethod"
                 >
-                  <p class="card-header-title has-text-info">Add Education</p>
+                  <p class="card-header-title has-text-info">
+                    {{ $t("app.add_education") }}
+                  </p>
                   <a class="card-header-icon">
                     <b-icon
                       pack="fas"
@@ -289,7 +310,7 @@
                       <div class="columns">
                         <div class="column is-4">
                           <b-field
-                            label="Institution"
+                            :label="$t('app.institution')"
                             expanded
                             :type="{
                               'is-danger':
@@ -309,7 +330,7 @@
                         </div>
                         <div class="column is-4">
                           <b-field
-                            label="Major/Specialization"
+                            :label="$t('app.major_spec')"
                             expanded
                             :type="{
                               'is-danger':
@@ -329,7 +350,7 @@
                         </div>
                         <div class="column is-4">
                           <b-field
-                            label="GPA/Score"
+                            :label="$t('app.gpa')"
                             expanded
                             :type="{
                               'is-danger':
@@ -348,7 +369,7 @@
                       <div class="columns">
                         <div class="column is-6">
                           <b-field
-                            label="Started"
+                            :label="$t('app.started')"
                             expanded
                             :type="{
                               'is-danger':
@@ -359,7 +380,7 @@
                           >
                             <b-select
                               v-model="qualifications.education.started"
-                              placeholder="Select year..."
+                              :placeholder="$t('app.selectYear')"
                               size=""
                               expanded
                             >
@@ -375,7 +396,7 @@
                         </div>
                         <div class="column is-6">
                           <b-field
-                            label="Completed"
+                            :label="$t('app.completed')"
                             expanded
                             :type="{
                               'is-danger':
@@ -386,7 +407,7 @@
                           >
                             <b-select
                               v-model="qualifications.education.completed"
-                              placeholder="Select year..."
+                              :placeholder="$t('app.selectYear')"
                               size=""
                               expanded
                             >
@@ -408,12 +429,16 @@
                           type="submit"
                           :disabled="isSubmittingEducation"
                         >
-                          {{ isSubmittingEducation ? "Submitting..." : "Add" }}
+                          {{
+                            isSubmittingEducation
+                              ? `${$t("app.submitting")}`
+                              : $t("app.add")
+                          }}
                         </button>
                         <b-button
                           class="is-danger is-light"
                           @click="cancelEducationForm()"
-                          >Cancel</b-button
+                          >{{ $t("app.cancel") }}</b-button
                         >
                       </b-field>
                     </form>
@@ -431,58 +456,68 @@
             >
               <b-table-column
                 field="institution"
-                label="Institution"
+                :label="$t('app.institution')"
                 sortable
                 v-slot="props"
                 >{{ props.row.institution }}</b-table-column
               >
               <b-table-column
                 field="specialization"
-                label="Specialization"
+                :label="$t('app.specialization')"
                 sortable
                 v-slot="props"
                 >{{ props.row.specialization }}</b-table-column
               >
               <b-table-column
                 field="gpa"
-                label="GPA/Score"
+                :label="$t('app.gpa')"
                 sortable
                 v-slot="props"
                 >{{ props.row.gpa }}</b-table-column
               >
               <b-table-column
                 field="started"
-                label="Started"
+                :label="$t('app.started')"
                 sortable
                 v-slot="props"
                 >{{ props.row.started }}</b-table-column
               >
               <b-table-column
                 field="completed"
-                label="Completed"
+                :label="$t('app.completed')"
                 sortable
                 v-slot="props"
                 >{{ props.row.completed }}</b-table-column
               >
-              <b-table-column field="actions" label="Actions" v-slot="props">
+              <b-table-column
+                field="actions"
+                :label="$tc('app.action', 2)"
+                v-slot="props"
+              >
                 <div class="b-tooltips">
-                  <b-tooltip label="Edit" type="is-dark">
+                  <b-tooltip :label="$t('app.edit_education')" type="is-dark">
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`education-id${props.row.id}`"
+                      :id="`education-id${getAttachmentDropperId}`"
                       @click="openEducationDropper(props.row)"
+                      :disabled="
+                        !userOrPermission('update', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Delete" type="is-dark">
+                  <b-tooltip :label="$t('app.delete')" type="is-dark">
                     <b-button
                       class="is-danger is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
                       @click="deleteHandler('education', props.row.id)"
+                      :disabled="
+                        !userOrPermission('delete', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
                 </div>
@@ -495,13 +530,13 @@
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">Skills</p>
+          <p class="card-header-title">{{ $tc("app.skill", 2) }}</p>
         </header>
         <div class="card-content">
           <div class="content">
             <section
               class="b__collapse__section"
-              v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+              v-if="userOrPermission('create', getProfile.user_id)"
             >
               <b-collapse
                 class="card"
@@ -516,7 +551,9 @@
                   role="button"
                   aria-controls="addreportingmethod"
                 >
-                  <p class="card-header-title has-text-info">Add Skill</p>
+                  <p class="card-header-title has-text-info">
+                    {{ $t("app.add_skills") }}
+                  </p>
                   <a class="card-header-icon">
                     <b-icon
                       pack="fas"
@@ -525,59 +562,55 @@
                     ></b-icon>
                   </a>
                 </div>
+
                 <div class="card-content">
                   <div class="content">
                     <form @submit.prevent="addSkills()">
                       <div class="columns">
                         <div class="column is-6">
-                          <div class="columns">
-                            <div class="column is-12">
-                              <b-field
-                                label="Skill"
-                                expanded
-                                :type="{
-                                  'is-danger':
-                                    qualificationsErrors.skills.skill.length >
-                                    0,
-                                }"
-                                :message="qualificationsErrors.skills.skill"
-                              >
-                                <b-input
-                                  size=""
-                                  expanded
-                                  v-model="qualifications.skills.skill"
-                                ></b-input>
-                              </b-field>
-                            </div>
-                          </div>
-                          <div class="columns">
-                            <div class="column is-12">
-                              <b-field
-                                label="Years of experience"
-                                expanded
-                                :type="{
-                                  'is-danger':
-                                    qualificationsErrors.skills.yearOfExperience
-                                      .length > 0,
-                                }"
-                                :message="
-                                  qualificationsErrors.skills.yearOfExperience
-                                "
-                              >
-                                <b-input
-                                  size=""
-                                  expanded
-                                  v-model="
-                                    qualifications.skills.yearOfExperience
-                                  "
-                                ></b-input>
-                              </b-field>
-                            </div>
-                          </div>
+                          <b-field
+                            :label="$tc('app.skill', 1)"
+                            expanded
+                            :type="{
+                              'is-danger':
+                                qualificationsErrors.skills.skill.length > 0,
+                            }"
+                            :message="qualificationsErrors.skills.skill"
+                          >
+                            <b-input
+                              size=""
+                              expanded
+                              v-model="qualifications.skills.skill"
+                            ></b-input>
+                          </b-field>
                         </div>
+                      </div>
+                      <div class="columns">
                         <div class="column is-6">
                           <b-field
-                            label="Comment"
+                            :label="$t('app.year_of_expe')"
+                            expanded
+                            :type="{
+                              'is-danger':
+                                qualificationsErrors.skills.yearOfExperience
+                                  .length > 0,
+                            }"
+                            :message="
+                              qualificationsErrors.skills.yearOfExperience
+                            "
+                          >
+                            <b-input
+                              size=""
+                              expanded
+                              v-model="qualifications.skills.yearOfExperience"
+                            ></b-input>
+                          </b-field>
+                        </div>
+                      </div>
+                      <div class="columns">
+                        <div class="column is-6">
+                          <b-field
+                            :label="$tc('app.comment', 1)"
                             :type="{
                               'is-danger':
                                 qualificationsErrors.skills.comment.length > 0,
@@ -586,7 +619,7 @@
                           >
                             <b-input
                               type="textarea"
-                              placeholder="Type your comment..."
+                              :placeholder="$t('app.comment_placeholder')"
                               size=""
                               v-model="qualifications.skills.comment"
                             ></b-input>
@@ -601,12 +634,16 @@
                           type="submit"
                           :disabled="isSubmittingSkills"
                         >
-                          {{ isSubmittingSkills ? "Submitting..." : "Add" }}
+                          {{
+                            isSubmittingSkills
+                              ? `${$t("app.submitting")}`
+                              : $t("app.add")
+                          }}
                         </button>
                         <b-button
                           class="is-danger is-light"
                           @click="cancelSkillsForm()"
-                          >Cancel</b-button
+                          >{{ $t("app.cancel") }}</b-button
                         >
                       </b-field>
                     </form>
@@ -624,44 +661,54 @@
             >
               <b-table-column
                 field="skill"
-                label="Skill"
+                :label="$tc('app.skill', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.skill }}</b-table-column
               >
               <b-table-column
                 field="yoe"
-                label="Year of Experience"
+                :label="$t('app.year_of_expe')"
                 sortable
                 v-slot="props"
                 >{{ props.row.yearOfExperience }}</b-table-column
               >
               <b-table-column
                 field="comment"
-                label="Commment"
+                :label="$tc('app.comment', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.comment }}</b-table-column
               >
-              <b-table-column field="actions" label="Actions" v-slot="props">
+              <b-table-column
+                field="actions"
+                :label="$tc('app.action', 2)"
+                v-slot="props"
+              >
                 <div class="b-tooltips">
-                  <b-tooltip label="Edit" type="is-dark">
+                  <b-tooltip :label="$t('app.edit_skill')" type="is-dark">
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`skill-id${props.row.id}`"
+                      :id="`skill-id${getAttachmentDropperId}`"
                       @click="openSkillDropper(props.row)"
+                      :disabled="
+                        !userOrPermission('update', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Delete" type="is-dark">
+                  <b-tooltip :label="$t('app.delete')" type="is-dark">
                     <b-button
                       class="is-danger is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
                       @click="deleteHandler('skills', props.row.id)"
+                      :disabled="
+                        !userOrPermission('delete', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
                 </div>
@@ -674,13 +721,13 @@
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">Languages</p>
+          <p class="card-header-title">{{ $tc("app.language", 2) }}</p>
         </header>
         <div class="card-content">
           <div class="content">
             <section
               class="b__collapse__section"
-              v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+              v-if="userOrPermission('create', getProfile.user_id)"
             >
               <b-collapse
                 class="card"
@@ -695,7 +742,9 @@
                   role="button"
                   aria-controls="addreportingmethod"
                 >
-                  <p class="card-header-title has-text-info">Add Language</p>
+                  <p class="card-header-title has-text-info">
+                    {{ $t("app.add_language") }}
+                  </p>
                   <a class="card-header-icon">
                     <b-icon
                       pack="fas"
@@ -709,67 +758,62 @@
                     <form @submit.prevent="addLanguage()">
                       <div class="columns">
                         <div class="column is-6">
-                          <div class="columns">
-                            <div class="column is-12">
-                              <b-field
-                                label="Language"
-                                expanded
-                                :type="{
-                                  'is-danger':
-                                    qualificationsErrors.languages.language
-                                      .length > 0,
-                                }"
-                                :message="
-                                  qualificationsErrors.languages.language
-                                "
-                              >
-                                <b-select
-                                  size=""
-                                  expanded
-                                  v-model="qualifications.languages.language"
-                                >
-                                  <option value="English">English</option>
-                                  <option value="French">French</option>
-                                  <option value="Ewe">Ewe</option>
-                                  <option value="Ga">Ga</option>
-                                  <option value="Twi">Twi</option>
-                                </b-select>
-                              </b-field>
-                            </div>
-                          </div>
-                          <div class="columns">
-                            <div class="column is-12">
-                              <b-field
-                                label="Fluency"
-                                expanded
-                                :type="{
-                                  'is-danger':
-                                    qualificationsErrors.languages.fluency
-                                      .length > 0,
-                                }"
-                                :message="
-                                  qualificationsErrors.languages.fluency
-                                "
-                              >
-                                <b-select
-                                  size=""
-                                  expanded
-                                  v-model="qualifications.languages.fluency"
-                                >
-                                  <option value="Poor">Poor</option>
-                                  <option value="Good">Good</option>
-                                  <option value="Very Good">Very Good</option>
-                                  <option value="Mother Tongue">
-                                    Mother Tongue
-                                  </option>
-                                </b-select>
-                              </b-field>
-                            </div>
-                          </div>
+                          <b-field
+                            :label="$tc('app.language', 1)"
+                            expanded
+                            :type="{
+                              'is-danger':
+                                qualificationsErrors.languages.language.length >
+                                0,
+                            }"
+                            :message="qualificationsErrors.languages.language"
+                          >
+                            <b-input
+                              size=""
+                              expanded
+                              v-model="qualifications.languages.language"
+                            >
+                            </b-input>
+                          </b-field>
                         </div>
+                      </div>
+                      <div class="columns">
                         <div class="column is-6">
                           <b-field
-                            label="Comment"
+                            :label="$t('app.fluency')"
+                            expanded
+                            :type="{
+                              'is-danger':
+                                qualificationsErrors.languages.fluency.length >
+                                0,
+                            }"
+                            :message="qualificationsErrors.languages.fluency"
+                          >
+                            <b-select
+                              size=""
+                              expanded
+                              v-model="qualifications.languages.fluency"
+                            >
+                              <option :value="$t('app.poor')">
+                                {{ $t("app.poor") }}
+                              </option>
+                              <option :value="$t('app.good')">
+                                {{ $t("app.good") }}
+                              </option>
+                              <option :value="$t('app.very_good')">
+                                {{ $t("app.very_good") }}
+                              </option>
+                              <option :value="$t('app.mother_tongue')">
+                                {{ $t("app.mother_tongue") }}
+                              </option>
+                            </b-select>
+                          </b-field>
+                        </div>
+                      </div>
+                      <div class="columns">
+                        <div class="column is-6">
+                          <b-field
+                            :label="$tc('app.comment', 1)"
                             :type="{
                               'is-danger':
                                 qualificationsErrors.languages.comment.length >
@@ -780,13 +824,12 @@
                             <b-input
                               type="textarea"
                               size=""
-                              placeholder="Type your comment..."
+                              :placeholder="$t('app.comment_placeholder')"
                               v-model="qualifications.languages.comment"
                             ></b-input>
                           </b-field>
                         </div>
                       </div>
-
                       <hr />
                       <b-field class="buttons">
                         <button
@@ -794,12 +837,16 @@
                           type="submit"
                           :disabled="isSubmittingLanguage"
                         >
-                          {{ isSubmittingLanguage ? "Submitting..." : "Add" }}
+                          {{
+                            isSubmittingLanguage
+                              ? `${$t("app.submitting")}`
+                              : $t("app.add")
+                          }}
                         </button>
                         <b-button
                           class="is-danger is-light"
                           @click="cancelLanguageForm()"
-                          >Cancel</b-button
+                          >{{ $t("app.cancel") }}</b-button
                         >
                       </b-field>
                     </form>
@@ -817,44 +864,54 @@
             >
               <b-table-column
                 field="language"
-                label="Language"
+                :label="$tc('app.language', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.language }}</b-table-column
               >
               <b-table-column
                 field="fluency"
-                label="Fluency"
+                :label="$t('app.fluency')"
                 sortable
                 v-slot="props"
                 >{{ props.row.fluency }}</b-table-column
               >
               <b-table-column
                 field="comment"
-                label="Commment"
+                :label="$tc('app.comment', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.comment }}</b-table-column
               >
-              <b-table-column field="actions" label="Actions" v-slot="props">
+              <b-table-column
+                field="actions"
+                :label="$tc('app.action', 2)"
+                v-slot="props"
+              >
                 <div class="b-tooltips">
-                  <b-tooltip label="Edit" type="is-dark">
+                  <b-tooltip :label="$t('app.edit_language')" type="is-dark">
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`language-id${props.row.id}`"
+                      :id="`language-id${getAttachmentDropperId}`"
                       @click="openLanguageDropper(props.row)"
+                      :disabled="
+                        !userOrPermission('update', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Delete" type="is-dark">
+                  <b-tooltip :label="$t('app.delete')" type="is-dark">
                     <b-button
                       class="is-danger is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
                       @click="deleteHandler('languages', props.row.id)"
+                      :disabled="
+                        !userOrPermission('delete', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
                 </div>
@@ -867,13 +924,13 @@
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">Attachments</p>
+          <p class="card-header-title">{{ $tc("app.attachment", 2) }}</p>
         </header>
         <div class="card-content">
           <div class="content">
             <section
               class="b__collapse__section"
-              v-if="roleOrUserPermission('Admin', getProfile.user_id)"
+              v-if="userOrPermission('create', getProfile.user_id)"
             >
               <b-collapse
                 class="card"
@@ -888,7 +945,9 @@
                   role="button"
                   aria-controls="addreportingmethod"
                 >
-                  <p class="card-header-title has-text-info">Add Attachment</p>
+                  <p class="card-header-title has-text-info">
+                    {{ $t("app.addAttament") }}
+                  </p>
                   <a class="card-header-icon">
                     <b-icon
                       pack="fas"
@@ -916,7 +975,7 @@
                                       size="is-small"
                                     ></b-icon>
                                   </p>
-                                  <p>Drop or click to upload attachment</p>
+                                  <p>{{ $t("app.placeholder_attachment1") }}</p>
                                 </div>
                               </section>
                             </b-upload>
@@ -954,7 +1013,7 @@
                           >
                             <b-input
                               type="textarea"
-                              placeholder="Type your comment..."
+                              :placeholder="$t('app.placeholder_comment')"
                               v-model="qualifications.attachment.comment"
                             ></b-input>
                           </b-field>
@@ -969,14 +1028,14 @@
                         >
                           {{
                             isSubmittingQualificationAttachment
-                              ? "Submitting..."
-                              : "Add"
+                              ? `${$t("app.submitting")}`
+                              : $t("app.add")
                           }}
                         </button>
                         <b-button
                           class="is-danger is-light"
                           @click="cancelQualificationAttachmentForm()"
-                          >Cancel</b-button
+                          >{{ $t("app.cancel") }}</b-button
                         >
                       </b-field>
                     </form>
@@ -992,7 +1051,12 @@
               :pagination-simple="true"
               pagination-position="bottom"
             >
-              <b-table-column field="file" label="File" sortable v-slot="props">
+              <b-table-column
+                field="file"
+                :label="$tc('app.file', 1)"
+                sortable
+                v-slot="props"
+              >
                 <a
                   @click="
                     viewAttachment(
@@ -1004,40 +1068,56 @@
               </b-table-column>
               <b-table-column
                 field="comment"
-                label="Commment"
+                :label="$tc('app.comment', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.comment }}</b-table-column
               >
-              <b-table-column field="actions" label="Actions" v-slot="props">
+              <b-table-column
+                field="actions"
+                :label="$tc('app.action', 2)"
+                v-slot="props"
+              >
                 <div class="b-tooltips">
-                  <b-tooltip label="Replace attachment" type="is-dark">
+                  <b-tooltip
+                    :label="$t('app.replaceAttachment')"
+                    type="is-dark"
+                  >
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="upload"
-                      :id="`comment-id${props.row.id}`"
+                      :id="`comment-id${getAttachmentDropperId}`"
                       @click="openAttachmentDropper(props.row, 'attachment')"
+                      :disabled="
+                        !userOrPermission('update', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Edit" type="is-dark">
+                  <b-tooltip :label="$t('app.editComment')" type="is-dark">
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`comment-id${props.row.id}`"
+                      :id="`comment-id${getAttachmentDropperId}`"
                       @click="openAttachmentDropper(props.row, 'comment')"
+                      :disabled="
+                        !userOrPermission('update', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
-                  <b-tooltip label="Delete" type="is-dark">
+                  <b-tooltip :label="$t('app.delete')" type="is-dark">
                     <b-button
                       class="is-danger is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
                       @click="deleteHandler('attachments', props.row.id)"
+                      :disabled="
+                        !userOrPermission('delete', getProfile.user_id)
+                      "
                     ></b-button>
                   </b-tooltip>
                 </div>

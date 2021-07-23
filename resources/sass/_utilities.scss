@@ -143,3 +143,11 @@
     font-size: 1rem;
     color: $text;
 }
+button.inertia__link__btn,
+button.inertia__link__btn:active {
+    border: none;
+}
+
+.form-width {
+    min-width: 30rem;
+}

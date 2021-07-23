@@ -5,19 +5,28 @@
         <!-- <p class="card-header-title">Job Details</p> -->
       </header>
       <div class="profile-detail-bar">
-        <p class="p-text">Employee Job Details</p>
+        <p class="p-text">{{ $t("app.job_details_cta") }}</p>
       </div>
       <div class="card-content">
         <div class="content">
+          <template v-if="isPermission('update')">
+            <div class="buttons mb-4" v-if="isEditJob">
+              <b-button
+                class="is-info is-light"
+                @click="isEditJob = !isEditJob"
+                icon-left="pen"
+                >{{ $t("app.edit") }}</b-button
+              >
+            </div>
+          </template>
           <fieldset :disabled="isEditJob">
             <form @submit.prevent="updateJob()">
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Job Category" expanded></b-field>
+                  <b-field :label="$t('app.jobCategory')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field
-                    label
                     expanded
                     :type="{ 'is-danger': jobErrors.category.length > 0 }"
                     :message="jobErrors.category"
@@ -36,7 +45,7 @@
               </div>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Job Title" expanded></b-field>
+                  <b-field :label="$t('app.jobTitle')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field
@@ -59,12 +68,14 @@
               </div>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Job Specification" expanded></b-field>
+                  <b-field :label="$t('app.jobSpec')" expanded></b-field>
                 </div>
                 <div class="column is-8">
                   <b-field label expanded>
                     <p>
-                      <span v-if="job.specification === ''">Not Defined</span>
+                      <span v-if="job.specification === ''">{{
+                        $t("app.notDefined")
+                      }}</span>
                       <a
                         v-else-if="!jobSpecification && job.specification"
                         @click="
@@ -80,7 +91,7 @@
               </div>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Employment Status" expanded></b-field>
+                  <b-field :label="$t('app.empStatus')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field
@@ -103,10 +114,10 @@
                   </b-field>
                 </div>
               </div>
-              <h5 class="text-main">Organization</h5>
+              <h5 class="text-main">{{ $t("app.organization") }}</h5>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Branch" expanded></b-field>
+                  <b-field :label="$t('app.branch')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field
@@ -129,7 +140,7 @@
               </div>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Department/Unit" expanded></b-field>
+                  <b-field :label="$t('app.department')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field
@@ -141,6 +152,7 @@
                     :message="jobErrors.department"
                   >
                     <b-select size="" expanded v-model="job.department">
+                      <option value="none">None</option>
                       <option
                         :value="dept.id"
                         v-for="(dept, index) in getDepartments"
@@ -152,11 +164,63 @@
                   </b-field>
                 </div>
               </div>
-
-              <h5 class="text-main">Employment Contract</h5>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Start Date" expanded></b-field>
+                  <b-field :label="$t('app.unit')" expanded></b-field>
+                </div>
+                <div class="column is-4">
+                  <b-field
+                    label
+                    expanded
+                    :type="{
+                      'is-danger': jobErrors.unit.length > 0,
+                    }"
+                    :message="jobErrors.unit"
+                  >
+                    <b-select size="" expanded v-model="job.unit">
+                      <option value="">None</option>
+                      <option
+                        :value="u.id"
+                        v-for="(u, index) in departmentUnits"
+                        :key="u + index"
+                      >
+                        {{ u.name }}
+                      </option>
+                    </b-select>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-3">
+                  <b-field :label="$t('app.position')" expanded></b-field>
+                </div>
+                <div class="column is-4">
+                  <b-field
+                    label
+                    expanded
+                    :type="{
+                      'is-danger': jobErrors.position.length > 0,
+                    }"
+                    :message="jobErrors.position"
+                  >
+                    <b-select size="" expanded v-model="job.position">
+                      <option value="">None</option>
+                      <option
+                        :value="p.id"
+                        v-for="(p, index) in getPositions"
+                        :key="p + index"
+                      >
+                        {{ p.name }}
+                      </option>
+                    </b-select>
+                  </b-field>
+                </div>
+              </div>
+
+              <h5 class="text-main">{{ $t("app.empContract") }}</h5>
+              <div class="columns">
+                <div class="column is-3">
+                  <b-field :label="$t('app.sDate')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field
@@ -182,7 +246,7 @@
               </div>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="End Date" expanded></b-field>
+                  <b-field :label="$t('app.eDate')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field
@@ -205,17 +269,17 @@
               </div>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Contract Status" expanded></b-field>
+                  <b-field :label="$t('app.conStatus')" expanded></b-field>
                 </div>
                 <div class="column is-4">
                   <b-field label expanded>
                     <p>
                       {{
                         job.contractStatus === "award"
-                          ? "Active"
+                          ? $t("app.active")
                           : job.contractStatus === "terminate"
-                          ? "Terminated"
-                          : "Not Defined"
+                          ? $t("app.terminated")
+                          : $t("app.notDefined")
                       }}
                     </p>
                   </b-field>
@@ -223,13 +287,16 @@
               </div>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field label="Contract Details" expanded></b-field>
+                  <b-field :label="$t('app.conDetails')" expanded></b-field>
                 </div>
                 <div class="column is-4">
-                  <b-field expanded v-if="!job.contractDetailsAvailable">
-                    <p>Not Defined</p>
+                  <b-field
+                    expanded
+                    v-if="!isNull(job.contractDetailsAvailable)"
+                  >
+                    <p>{{ $t("app.notDefined") }}</p>
                   </b-field>
-                  <b-field expanded v-if="job.contractDetailsAvailable">
+                  <b-field expanded v-if="isNull(job.contractDetailsAvailable)">
                     <p>
                       <a
                         @click="
@@ -280,7 +347,7 @@
                       name="contractDetailsControl"
                       native-value="kc"
                       v-model="contractDetailsControl"
-                      >Keep Current</b-radio
+                      >{{ $t("app.keepCurrent") }}</b-radio
                     >
                     <b-radio
                       size=""
@@ -288,7 +355,7 @@
                       name="contractDetailsControl"
                       native-value="dc"
                       v-model="contractDetailsControl"
-                      >Delete Current</b-radio
+                      >{{ $t("app.deleteCurrent") }}</b-radio
                     >
                     <b-radio
                       size=""
@@ -296,7 +363,7 @@
                       name="contractDetailsControl"
                       native-value="rc"
                       v-model="contractDetailsControl"
-                      >Replace Current</b-radio
+                      >{{ $t("app.replaceCurrent") }}</b-radio
                     >
                   </div>
                   <b-field
@@ -318,7 +385,7 @@
                             icon="upload"
                             size="is-small"
                           ></b-icon>
-                          <span class="file-label">Upload</span>
+                          <span class="file-label">{{ $t("app.upload") }}</span>
                         </span>
                         <span class="file-name" v-if="job.contractDetails">{{
                           job.contractDetails.name
@@ -334,12 +401,16 @@
                   class="button is-success is-light"
                   :disabled="isSubmittingJob"
                 >
-                  {{ isSubmittingJob ? "Submitting..." : "Save" }}
+                  {{
+                    isSubmittingJob
+                      ? `${$t("app.submitting")}...`
+                      : $t("app.save")
+                  }}
                 </button>
-                <b-button class="is-danger is-light" @click="cancelJobForm()"
-                  >Cancel</b-button
-                >
-                <template v-if="isUserRole('Admin')">
+                <b-button class="is-danger is-light" @click="cancelJobForm()">{{
+                  $t("app.cancel")
+                }}</b-button>
+                <template v-if="isPermission('update')">
                   <b-button
                     class="is-dark is-light"
                     v-if="job.contractStatus === 'award'"
@@ -347,8 +418,8 @@
                   >
                     {{
                       isAwardingContract
-                        ? "Terminating Contract..."
-                        : "Terminate Contract"
+                        ? $t("app.terminatingContract")
+                        : $t("app.terminateContract")
                     }}
                   </b-button>
                   <b-button
@@ -361,24 +432,21 @@
                   >
                     {{
                       isAwardingContract
-                        ? "Awarding Contract..."
-                        : "Award Contract"
+                        ? $t("app.awardingContract")
+                        : $t("app.awardContract")
                     }}
                   </b-button>
                 </template>
               </div>
             </form>
           </fieldset>
-          <template v-if="isUserRole('Admin') || isUserRole('Manager')">
-            <div
-              class="buttons"
-              v-if="this.$page.props.authUser.role && isEditJob"
-            >
+          <template v-if="isPermission('update')">
+            <div class="buttons" v-if="isEditJob">
               <b-button
                 class="is-info is-light"
                 @click="isEditJob = !isEditJob"
                 icon-left="pen"
-                >Edit</b-button
+                >{{ $t("app.edit") }}</b-button
               >
             </div>
           </template>
@@ -402,6 +470,8 @@ export default {
       "getEmploymentStatus",
       "getBranches",
       "getDepartments",
+      "getUnits",
+      "getPositions",
     ]),
     filteredJobTitles() {
       return this.jTitles;
@@ -432,11 +502,32 @@ export default {
       },
       { immediate: true }
     );
+    this.$watch(
+      () => this.job.department,
+      (value) => {
+        this.departmentUnits = this.getUnits.filter(
+          (u) => u.department_id === parseInt(value)
+        );
+        if (this.getProfile.job.unit) {
+          if (this.departmentUnits.length === 0) {
+            this.departmentUnits = this.getUnits.filter(
+              (u) => u.id === parseInt(this.getProfile.job.unit)
+            );
+          }
+          this.job.unit = parseInt(this.getProfile.job.unit);
+        }
+        if (this.departmentUnits.length === 0) {
+          this.job.unit = "";
+        }
+      },
+      { immediate: true }
+    );
   },
   data() {
     return {
-      isAdmin: true,
+      showUserUnit: true,
       jTitles: [],
+      departmentUnits: [],
       jobSpecification: "",
       contractDetailsControl: "kc",
       isEditJob: true,
@@ -448,6 +539,8 @@ export default {
         specification: "",
         employmentStatus: "",
         department: "",
+        unit: "",
+        position: "",
         branch: "",
         startDate: null,
         endDate: null,
@@ -461,6 +554,8 @@ export default {
         category: [],
         employmentStatus: [],
         department: [],
+        unit: [],
+        position: [],
         branch: [],
         startDate: [],
         endDate: [],
@@ -477,7 +572,9 @@ export default {
           title: jobDetails.title,
           category: jobDetails.category,
           employmentStatus: jobDetails.employmentStatus,
-          department: jobDetails.department,
+          department: jobDetails.department || "none",
+          unit: jobDetails.unit || "",
+          position: jobDetails.position || "",
           branch: jobDetails.branch,
           startDate: new Date(jobDetails.startDate),
           endDate: new Date(jobDetails.endDate),
@@ -497,9 +594,17 @@ export default {
       data.append("title", this.job.title);
       data.append("employmentStatus", this.job.employmentStatus);
       data.append("department", this.job.department);
+      data.append("unit", this.job.unit);
+      data.append("position", this.job.position);
       data.append("branch", this.job.branch);
-      data.append("startDate", this.job.startDate.toISOString());
-      data.append("endDate", this.job.endDate.toISOString());
+      data.append(
+        "startDate",
+        this.job.startDate ? this.job.startDate.toISOString() : ""
+      );
+      data.append(
+        "endDate",
+        this.job.endDate ? this.job.endDate.toISOString() : ""
+      );
       data.append("contractStatus", this.job.contractStatus);
       data.append("contractDetailsControl", this.contractDetailsControl);
       if (this.job.contractDetailsAvailable) {
@@ -577,6 +682,8 @@ export default {
       this.job.category = "";
       this.job.employmentStatus = "";
       this.job.department = "";
+      this.job.unit = "";
+      this.job.position = "";
       this.job.branch = "";
       this.job.startDate = null;
       this.job.endDate = null;
@@ -585,21 +692,17 @@ export default {
       this.job.contractStatus = null;
     },
     setJobErrors(error = {}) {
-      this.jobErrors.title = error.title ? error.title : [];
-      this.jobErrors.specification = error.specification
-        ? error.specification
-        : [];
-      this.jobErrors.category = error.category ? error.category : [];
-      this.jobErrors.employmentStatus = error.employmentStatus
-        ? error.employmentStatus
-        : [];
-      this.jobErrors.department = error.department ? error.department : [];
-      this.jobErrors.branch = error.branch ? error.branch : [];
-      this.jobErrors.startDate = error.startDate ? error.startDate : [];
-      this.jobErrors.endDate = error.endDate ? error.endDate : [];
-      this.jobErrors.contractDetails = error.contractDetails
-        ? error.contractDetails
-        : [];
+      this.jobErrors.title = error.title || [];
+      this.jobErrors.specification = error.specification || [];
+      this.jobErrors.category = error.category || [];
+      this.jobErrors.employmentStatus = error.employmentStatus || [];
+      this.jobErrors.department = error.department || [];
+      this.jobErrors.unit = error.unit || [];
+      this.jobErrors.position = error.position || [];
+      this.jobErrors.branch = error.branch || [];
+      this.jobErrors.startDate = error.startDate || [];
+      this.jobErrors.endDate = error.endDate || [];
+      this.jobErrors.contractDetails = error.contractDetails || [];
     },
     cancelJobForm() {
       // this.clearJobForm();

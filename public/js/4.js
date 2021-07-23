@@ -9,14 +9,22 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Dashboard */ "./resources/js/components/Dashboard.vue");
-/* harmony import */ var _components_Tab__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Tab */ "./resources/js/components/Tab.vue");
-/* harmony import */ var _components_Tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Tabs */ "./resources/js/components/Tabs.vue");
-/* harmony import */ var _components_ess_ProfileComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/ess/ProfileComponent */ "./resources/js/components/ess/ProfileComponent.vue");
-/* harmony import */ var _components_ess_MyLeaveComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ess/MyLeaveComponent */ "./resources/js/components/ess/MyLeaveComponent.vue");
-/* harmony import */ var _components_ess_MyEntitlementComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/ess/MyEntitlementComponent */ "./resources/js/components/ess/MyEntitlementComponent.vue");
-/* harmony import */ var _components_ess_ConfigurationComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/ess/ConfigurationComponent */ "./resources/js/components/ess/ConfigurationComponent.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Dashboard */ "./resources/js/components/Dashboard.vue");
+/* harmony import */ var _components_Tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Tab */ "./resources/js/components/Tab.vue");
+/* harmony import */ var _components_Tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Tabs */ "./resources/js/components/Tabs.vue");
+/* harmony import */ var _components_ess_ProfileComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ess/ProfileComponent */ "./resources/js/components/ess/ProfileComponent.vue");
+/* harmony import */ var _components_ess_MyLeaveComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/ess/MyLeaveComponent */ "./resources/js/components/ess/MyLeaveComponent.vue");
+/* harmony import */ var _components_ess_MyEntitlementComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/ess/MyEntitlementComponent */ "./resources/js/components/ess/MyEntitlementComponent.vue");
+/* harmony import */ var _components_ess_ConfigurationComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/ess/ConfigurationComponent */ "./resources/js/components/ess/ConfigurationComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -133,14 +141,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   components: {
-    Tab: _components_Tab__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Tabs: _components_Tabs__WEBPACK_IMPORTED_MODULE_2__["default"],
-    ProfileComponent: _components_ess_ProfileComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
-    MyLeaveComponent: _components_ess_MyLeaveComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
-    MyEntitlementComponent: _components_ess_MyEntitlementComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
-    ConfigurationComponent: _components_ess_ConfigurationComponent__WEBPACK_IMPORTED_MODULE_6__["default"]
+    Tab: _components_Tab__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Tabs: _components_Tabs__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ProfileComponent: _components_ess_ProfileComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    MyLeaveComponent: _components_ess_MyLeaveComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
+    MyEntitlementComponent: _components_ess_MyEntitlementComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ConfigurationComponent: _components_ess_ConfigurationComponent__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  layout: _components_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
+  layout: _components_Dashboard__WEBPACK_IMPORTED_MODULE_1__["default"],
   props: {
     profile: {
       require: true,
@@ -150,9 +158,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     jobTitles: Array,
     employmentStatuses: Array,
     branches: Array,
-    departments: Array
+    departments: Array,
+    units: Array,
+    positions: Array,
+    supervisors: Array,
+    hods: Array,
+    managers: Array,
+    reportTo: Array,
+    reportToMe: Array,
+    directorates: Array
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getBranches", "getDepartments"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getBranches", "getDepartments", "getUnits", "getCountries"])),
+  beforeMount: function beforeMount() {},
   created: function created() {
     this.dispatchProfile({
       payload: this.profile
@@ -172,20 +189,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.dispatchDepartment({
       payload: this.departments
     });
+    this.dispatchUnit({
+      payload: this.units
+    });
+    this.dispatchPosition({
+      payload: this.positions
+    });
+    this.dispatchProfile({
+      type: "ADD_MY_LEADERS",
+      payload: {
+        supervisors: this.supervisors,
+        hods: this.hods,
+        managers: this.managers,
+        reportTo: this.reportTo,
+        reportToMe: this.reportToMe,
+        directorates: this.directorates
+      }
+    });
+    this.getAllCountries();
   },
   data: function data() {
     return {
       tabIndex: 0,
-      regex: new RegExp("^/dashboard/ess/[0-9]+/[a-z-]*$")
+      regex: new RegExp("^/dashboard/ess/[0-9]+/[a-z-]*$"),
+      countries: []
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapActions"])(["dispatchProfile", "dispatchJobCategory", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment"])), {}, {
-    getBranch: function getBranch(profile) {
-      if (profile.job) {
-        var branch = this.getDepartments.find(function (b) {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(["dispatchProfile", "dispatchJobCategory", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchMyLeaders", "dispatchCountry"])), {}, {
+    getUserDepartment: function getUserDepartment(profile) {
+      if (profile.job && profile.job.department) {
+        var result = this.getDepartments.find(function (b) {
           return b.id === parseInt(profile.job.department);
         });
-        return branch.name;
+        return result.name;
+      }
+
+      if (profile.job && profile.job.unit) {
+        var _result = this.getUnits.find(function (b) {
+          return b.id === parseInt(profile.job.unit);
+        });
+
+        return _result.name;
       }
 
       return "";
@@ -199,6 +243,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return "";
+    },
+    getAllCountries: function getAllCountries() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!localStorage.getItem("countries")) {
+                  localStorage.setItem("countries", JSON.stringify([]));
+                }
+
+                if (!(JSON.parse(localStorage.getItem("countries")).length === 0)) {
+                  _context.next = 13;
+                  break;
+                }
+
+                _context.prev = 2;
+                _context.next = 5;
+                return _this.$axios.get("https://restcountries.eu/rest/v2/all");
+
+              case 5:
+                data = _context.sent;
+                localStorage.setItem("countries", JSON.stringify(data.data));
+                _context.next = 11;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
+
+              case 11:
+                _context.next = 14;
+                break;
+
+              case 13:
+                _this.dispatchCountry({
+                  payload: JSON.parse(localStorage.getItem("countries"))
+                });
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 9]]);
+      }))();
     }
   })
 });
@@ -268,13 +361,69 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -395,17 +544,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ConfigurationComponent",
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])([])),
-  created: function created() {},
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])([])),
   beforeMount: function beforeMount() {
     this.authUser = this.$page.props.authUser;
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {// console.log(this.$lang.getLocale());
+  },
+  created: function created() {
+    var _this = this;
+
+    this.$watch(function () {
+      return _this.locale;
+    }, function (value) {
+      if (value) {
+        _this.changeLocale(value);
+      }
+    });
+  },
   data: function data() {
     return {
       isUpdatingPassword: false,
       openChangePassword: true,
+      openChangeLanguage: true,
       authUser: null,
+      locale: this.$lang.getLocale(),
+      languages: [{
+        name: "English",
+        locale: "en"
+      }, {
+        name: "French",
+        locale: "fr"
+      }],
       credentials: {
         current_password: "",
         new_password: "",
@@ -418,23 +587,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])([])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])([])), {}, {
     changePassword: function changePassword() {
-      var _this = this;
+      var _this2 = this;
 
       this.setCredentialErrors();
       this.isUpdatingPassword = true;
       this.$axios.put("/change-password", this.credentials).then(function (res) {
-        _this.isUpdatingPassword = false;
+        _this2.isUpdatingPassword = false;
 
         if (res.status === 200 && res.data.changed) {
-          _this.clearCredentials();
+          _this2.clearCredentials();
 
-          _this.snackbar("Your password was successfuly changed.", "is-dark");
+          _this2.snackbar("Your password was successfuly changed.", "is-dark");
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this.isUpdatingPassword = false, _this.setCredentialErrors(err.response.data.errors);
+          _this2.isUpdatingPassword = false, _this2.setCredentialErrors(err.response.data.errors);
         }
       });
     },
@@ -457,6 +626,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         new_password: obj.new_password || [],
         confirm_new_password: obj.confirm_new_password || []
       };
+    },
+    changeLocale: function changeLocale(locale) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _this3.$axios.get("/lang/".concat(locale));
+
+              case 3:
+                res = _context.sent;
+
+                if (res.status === 200) {
+                  _this3.$lang.setLocale(locale);
+
+                  localStorage.setItem("locale", locale);
+                }
+
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                console.trace(_context.t0);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
     }
   })
 });
@@ -1060,133 +1267,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_EmergencyContactDetails__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./profile/EmergencyContactDetails */ "./resources/js/components/ess/profile/EmergencyContactDetails.vue");
 /* harmony import */ var _profile_JobDetails__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./profile/JobDetails */ "./resources/js/components/ess/profile/JobDetails.vue");
 /* harmony import */ var _profile_QualificationDetails__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./profile/QualificationDetails */ "./resources/js/components/ess/profile/QualificationDetails.vue");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _profile_ReportToDetails__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./profile/ReportToDetails */ "./resources/js/components/ess/profile/ReportToDetails.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1200,25 +1307,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ContactDetails: _profile_ContactDetails__WEBPACK_IMPORTED_MODULE_2__["default"],
     EmergencyContactDetails: _profile_EmergencyContactDetails__WEBPACK_IMPORTED_MODULE_3__["default"],
     JobDetails: _profile_JobDetails__WEBPACK_IMPORTED_MODULE_4__["default"],
-    QualificationDetails: _profile_QualificationDetails__WEBPACK_IMPORTED_MODULE_5__["default"]
+    QualificationDetails: _profile_QualificationDetails__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ReportToDetails: _profile_ReportToDetails__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile"])),
-  created: function created() {// this.fetchJobs();
-    // this.fetchBranches();
-    // this.fetchDepartments();
-    // this.setPersonalDetails();
-    // this.setContactDetails();
-    // this.setJob();
-  },
+  computed: {},
+  beforeMount: function beforeMount() {},
+  created: function created() {},
   data: function data() {
-    return {
-      reports: [{
-        id: "1",
-        name: "PIM Report"
-      }]
-    };
+    return {};
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchAuthUser", "dispatchProfile", "fetchJobs", "fetchBranches", "fetchDepartments", "fetchAuthUser", "fetchProfile"]))
+  methods: {}
 });
 
 /***/ }),
@@ -1443,16 +1541,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactDetails",
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile", "getCountries"])),
   created: function created() {},
   beforeMount: function beforeMount() {
     this.setContactDetails(this.getProfile.contact_details);
   },
   data: function data() {
     return {
+      locale: this.$lang.getLocale(),
       isEditContactDetails: true,
       isSubmittingContactDetails: false,
       contactDetails: {
@@ -1583,6 +1701,19 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2476,6 +2607,74 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2483,7 +2682,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     ViewPdf: _ViewPdf__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getBranches", "getDepartments"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getBranches", "getDepartments", "getUnits", "getPositions"])), {}, {
     filteredJobTitles: function filteredJobTitles() {
       return this.jTitles;
     }
@@ -2516,11 +2715,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, {
       immediate: true
     });
+    this.$watch(function () {
+      return _this.job.department;
+    }, function (value) {
+      _this.departmentUnits = _this.getUnits.filter(function (u) {
+        return u.department_id === parseInt(value);
+      });
+
+      if (_this.getProfile.job.unit) {
+        if (_this.departmentUnits.length === 0) {
+          _this.departmentUnits = _this.getUnits.filter(function (u) {
+            return u.id === parseInt(_this.getProfile.job.unit);
+          });
+        }
+
+        _this.job.unit = parseInt(_this.getProfile.job.unit);
+      }
+
+      if (_this.departmentUnits.length === 0) {
+        _this.job.unit = "";
+      }
+    }, {
+      immediate: true
+    });
   },
   data: function data() {
     return {
-      isAdmin: true,
+      showUserUnit: true,
       jTitles: [],
+      departmentUnits: [],
       jobSpecification: "",
       contractDetailsControl: "kc",
       isEditJob: true,
@@ -2532,6 +2755,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         specification: "",
         employmentStatus: "",
         department: "",
+        unit: "",
+        position: "",
         branch: "",
         startDate: null,
         endDate: null,
@@ -2545,6 +2770,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category: [],
         employmentStatus: [],
         department: [],
+        unit: [],
+        position: [],
         branch: [],
         startDate: [],
         endDate: [],
@@ -2559,7 +2786,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: jobDetails.title,
           category: jobDetails.category,
           employmentStatus: jobDetails.employmentStatus,
-          department: jobDetails.department,
+          department: jobDetails.department || "none",
+          unit: jobDetails.unit || "",
+          position: jobDetails.position || "",
           branch: jobDetails.branch,
           startDate: new Date(jobDetails.startDate),
           endDate: new Date(jobDetails.endDate),
@@ -2578,9 +2807,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data.append("title", this.job.title);
       data.append("employmentStatus", this.job.employmentStatus);
       data.append("department", this.job.department);
+      data.append("unit", this.job.unit);
+      data.append("position", this.job.position);
       data.append("branch", this.job.branch);
-      data.append("startDate", this.job.startDate.toISOString());
-      data.append("endDate", this.job.endDate.toISOString());
+      data.append("startDate", this.job.startDate ? this.job.startDate.toISOString() : "");
+      data.append("endDate", this.job.endDate ? this.job.endDate.toISOString() : "");
       data.append("contractStatus", this.job.contractStatus);
       data.append("contractDetailsControl", this.contractDetailsControl);
 
@@ -2659,6 +2890,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.job.category = "";
       this.job.employmentStatus = "";
       this.job.department = "";
+      this.job.unit = "";
+      this.job.position = "";
       this.job.branch = "";
       this.job.startDate = null;
       this.job.endDate = null;
@@ -2668,15 +2901,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     setJobErrors: function setJobErrors() {
       var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.jobErrors.title = error.title ? error.title : [];
-      this.jobErrors.specification = error.specification ? error.specification : [];
-      this.jobErrors.category = error.category ? error.category : [];
-      this.jobErrors.employmentStatus = error.employmentStatus ? error.employmentStatus : [];
-      this.jobErrors.department = error.department ? error.department : [];
-      this.jobErrors.branch = error.branch ? error.branch : [];
-      this.jobErrors.startDate = error.startDate ? error.startDate : [];
-      this.jobErrors.endDate = error.endDate ? error.endDate : [];
-      this.jobErrors.contractDetails = error.contractDetails ? error.contractDetails : [];
+      this.jobErrors.title = error.title || [];
+      this.jobErrors.specification = error.specification || [];
+      this.jobErrors.category = error.category || [];
+      this.jobErrors.employmentStatus = error.employmentStatus || [];
+      this.jobErrors.department = error.department || [];
+      this.jobErrors.unit = error.unit || [];
+      this.jobErrors.position = error.position || [];
+      this.jobErrors.branch = error.branch || [];
+      this.jobErrors.startDate = error.startDate || [];
+      this.jobErrors.endDate = error.endDate || [];
+      this.jobErrors.contractDetails = error.contractDetails || [];
     },
     cancelJobForm: function cancelJobForm() {
       // this.clearJobForm();
@@ -3296,6 +3531,62 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3303,7 +3594,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     ViewPdf: _ViewPdf__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile", "getCountries"])), {}, {
     getPersonalAttachments: function getPersonalAttachments() {
       if (typeof this.getProfile.personal_details.attachments === "string") return JSON.parse(this.getProfile.personal_details.attachments);
       return [];
@@ -3346,7 +3637,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         otherId: "",
         birthDate: new Date(),
         maritalStatus: "",
-        nationality: "",
         gender: "",
         attachment: {
           file: null,
@@ -3367,7 +3657,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         otherId: [],
         birthDate: [],
         maritalStatus: [],
-        nationality: [],
         gender: []
       }
     };
@@ -3403,7 +3692,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         otherId: details.otherId || "",
         birthDate: details.birthDate ? new Date(details.birthDate) : new Date(),
         maritalStatus: details.maritalStatus || "",
-        nationality: details.nationality || "",
         gender: details.gender || ""
       });
     },
@@ -3482,6 +3770,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data.append("comment", this.personalDetails.attachment.comment);
       this.$axios.post("/dashboard/ess/update-personal-details-attachment/".concat(this.getProfile.user_id), data).then(function (res) {
         if (res.status === 200) {
+          _this4.personalDetails.attachment = {
+            file: null,
+            comment: ""
+          };
+
           _this4.dispatchProfile({
             type: "UPDATE_PERSONAL_DETAILS_ATTACHMENT",
             payload: res.data.attachments
@@ -3593,7 +3886,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.personalDetailsErrors.otherId = error.otherId || [];
       this.personalDetailsErrors.birthDate = error.birthDate || [];
       this.personalDetailsErrors.maritalStatus = error.maritalStatus || [];
-      this.personalDetailsErrors.nationality = error.nationality || [];
       this.personalDetailsErrors.gender = error.gender || [];
     },
     cancelPersonalDetailsForm: function cancelPersonalDetailsForm() {
@@ -3609,7 +3901,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     cancelPersonalDetailsAttachmentForm: function cancelPersonalDetailsAttachmentForm() {
       this.personalDetails.attachment = {
-        file: [],
+        file: null,
         comment: ""
       };
       this.personalDetailsAttachmentError = {
@@ -3640,6 +3932,86 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5870,6 +6242,248 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ReportToDetails",
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile", "getMyLeaders"])),
+  created: function created() {},
+  data: function data() {
+    return {};
+  },
+  methods: {
+    getFullName: function getFullName(staff) {
+      return "".concat(this.isNull(staff.title), " ").concat(staff.firstName, " ").concat(this.isNull(staff.middleName), " ").concat(staff.lastName);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/ConfigurationComponent.vue?vue&type=style&index=0&id=408372c8&lang=scss&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ess/ConfigurationComponent.vue?vue&type=style&index=0&id=408372c8&lang=scss&scoped=true& ***!
@@ -5921,6 +6535,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".report_to_label[data-v-80913e30] {\n  display: block;\n  font-size: 1rem;\n  color: #686767b5;\n  letter-spacing: 2px;\n}\n.report_to_text[data-v-80913e30]:not(:last-child) {\n  margin-bottom: 0.15rem !important;\n}", ""]);
 
 // exports
 
@@ -6010,6 +6643,36 @@ options.transform = transform
 options.insertInto = undefined;
 
 var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -6123,7 +6786,9 @@ var render = function() {
                   [
                     _c("b-icon", { attrs: { pack: "fas", icon: "umbrella" } }),
                     _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(_vm.getBranch(_vm.getProfile)))])
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.getUserDepartment(_vm.getProfile)))
+                    ])
                   ],
                   1
                 ),
@@ -6211,27 +6876,9 @@ var render = function() {
             }
           },
           [
-            !_vm.regex.test(_vm.$page.url)
-              ? _c(
-                  "tab",
-                  { attrs: { label: "My Leave" } },
-                  [_c("MyLeaveComponent")],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.regex.test(_vm.$page.url)
-              ? _c(
-                  "tab",
-                  { attrs: { label: "Entitlements" } },
-                  [_c("MyEntitlementComponent")],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
             _c(
               "tab",
-              { attrs: { label: "Profile" } },
+              { attrs: { label: _vm.$t("app.profile") } },
               [_c("ProfileComponent")],
               1
             ),
@@ -6239,7 +6886,7 @@ var render = function() {
             !_vm.regex.test(_vm.$page.url)
               ? _c(
                   "tab",
-                  { attrs: { label: "Configurations" } },
+                  { attrs: { label: _vm.$tc("app.configuration", 2) } },
                   [_c("ConfigurationComponent")],
                   1
                 )
@@ -6353,7 +7000,13 @@ var render = function() {
                       _c(
                         "p",
                         { staticClass: "card-header-title has-text-info" },
-                        [_vm._v("Change Password")]
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.$t("app.change_password")) +
+                              "\n              "
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -6392,7 +7045,7 @@ var render = function() {
                             "b-field",
                             {
                               attrs: {
-                                label: "Current Password",
+                                label: _vm.$t("app.current_password"),
                                 type: {
                                   "is-danger":
                                     _vm.credentialErrors.current_password
@@ -6404,7 +7057,7 @@ var render = function() {
                             [
                               _c("b-input", {
                                 attrs: {
-                                  placeholder: "Current password",
+                                  placeholder: _vm.$t("app.current_password"),
                                   type: "password",
                                   value: "",
                                   "icon-pack": "fas",
@@ -6430,7 +7083,7 @@ var render = function() {
                             "b-field",
                             {
                               attrs: {
-                                label: "New Password",
+                                label: _vm.$t("app.new_password"),
                                 type: {
                                   "is-danger":
                                     _vm.credentialErrors.new_password.length > 0
@@ -6441,7 +7094,7 @@ var render = function() {
                             [
                               _c("b-input", {
                                 attrs: {
-                                  placeholder: "New password",
+                                  placeholder: _vm.$t("app.new_password"),
                                   type: "password",
                                   value: "",
                                   "icon-pack": "fas",
@@ -6467,7 +7120,7 @@ var render = function() {
                             "b-field",
                             {
                               attrs: {
-                                label: "Confirm New Password",
+                                label: _vm.$t("app.confirm_password"),
                                 type: {
                                   "is-danger":
                                     _vm.credentialErrors.confirm_new_password
@@ -6480,7 +7133,7 @@ var render = function() {
                             [
                               _c("b-input", {
                                 attrs: {
-                                  placeholder: "Confirm new password",
+                                  placeholder: _vm.$t("app.confirm_password"),
                                   type: "password",
                                   value: "",
                                   "icon-pack": "fas",
@@ -6523,8 +7176,8 @@ var render = function() {
                                       "\n                        " +
                                         _vm._s(
                                           _vm.isUpdatingPassword
-                                            ? "Updating..."
-                                            : "Update"
+                                            ? _vm.$t("app.updating") + "..."
+                                            : _vm.$t("app.update")
                                         ) +
                                         "\n                      "
                                     )
@@ -6541,7 +7194,7 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_vm._v("Cancel")]
+                                  [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                 )
                               ],
                               1
@@ -6554,7 +7207,11 @@ var render = function() {
                                 _c(
                                   "inertia-link",
                                   { attrs: { href: "/password-reset-link" } },
-                                  [_vm._v("I forget my password")]
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.$t("app.forget_pass_text"))
+                                    )
+                                  ]
                                 )
                               ],
                               1
@@ -6564,6 +7221,115 @@ var render = function() {
                         1
                       )
                     ])
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column is-3" }, [
+          _c(
+            "section",
+            { staticClass: "b__collapse__section" },
+            [
+              _c(
+                "b-collapse",
+                {
+                  staticClass: "card",
+                  attrs: { animation: "slide", "aria-id": "myleavelist" },
+                  model: {
+                    value: _vm.openChangeLanguage,
+                    callback: function($$v) {
+                      _vm.openChangeLanguage = $$v
+                    },
+                    expression: "openChangeLanguage"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "card-header",
+                      attrs: {
+                        slot: "trigger",
+                        role: "button",
+                        "aria-controls": "myleavelist"
+                      },
+                      slot: "trigger"
+                    },
+                    [
+                      _c(
+                        "p",
+                        { staticClass: "card-header-title has-text-info" },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.$t("app.change_language")) +
+                              "\n              "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        { staticClass: "card-header-icon" },
+                        [
+                          _c("b-icon", {
+                            attrs: {
+                              type: "is-info",
+                              pack: "fas",
+                              icon: _vm.openChangeLanguage
+                                ? "angle-down"
+                                : "angle-up"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-content" }, [
+                    _c(
+                      "div",
+                      { staticClass: "content" },
+                      _vm._l(_vm.languages, function(l) {
+                        return _c(
+                          "b-field",
+                          { key: l.name },
+                          [
+                            _c(
+                              "b-radio",
+                              {
+                                attrs: {
+                                  "native-value": l.locale,
+                                  type: "is-info",
+                                  size: "is-medium"
+                                },
+                                model: {
+                                  value: _vm.locale,
+                                  callback: function($$v) {
+                                    _vm.locale = $$v
+                                  },
+                                  expression: "locale"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(l.name) +
+                                    "\n                  "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      }),
+                      1
+                    )
                   ])
                 ]
               )
@@ -7983,233 +8749,45 @@ var render = function() {
         [
           _c(
             "b-tab-item",
-            { attrs: { label: "Personal Details" } },
+            { attrs: { label: _vm.$t("app.personal_details") } },
             [_c("PersonalDetails")],
             1
           ),
           _vm._v(" "),
           _c(
             "b-tab-item",
-            { attrs: { label: "Contact Details" } },
+            { attrs: { label: _vm.$t("app.contact_details") } },
             [_c("ContactDetails")],
             1
           ),
           _vm._v(" "),
           _c(
             "b-tab-item",
-            { attrs: { label: "Emergency Contacts" } },
+            { attrs: { label: _vm.$t("app.emergency_contacts") } },
             [_c("EmergencyContactDetails")],
             1
           ),
           _vm._v(" "),
-          _c("b-tab-item", { attrs: { label: "Job" } }, [_c("JobDetails")], 1),
+          _c(
+            "b-tab-item",
+            { attrs: { label: _vm.$t("app.job") } },
+            [_c("JobDetails")],
+            1
+          ),
           _vm._v(" "),
           _c(
             "b-tab-item",
-            { attrs: { label: "Qualifications" } },
+            { attrs: { label: _vm.$tc("app.qualification", 2) } },
             [_c("QualificationDetails")],
             1
           ),
           _vm._v(" "),
-          _c("b-tab-item", { attrs: { label: "Report-to" } }, [
-            _c("section", { staticClass: "b__collapse__section" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "profile-detail-bar" }, [
-                  _c("p", { staticClass: "p-text" }, [
-                    _vm._v("Assigned Supervisors")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "content" },
-                    [
-                      _c(
-                        "b-table",
-                        { attrs: { data: _vm.reports } },
-                        [
-                          _c("b-table-column", {
-                            attrs: {
-                              field: "id",
-                              label: "ID",
-                              width: "40",
-                              sortable: "",
-                              numeric: ""
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function(props) {
-                                  return [_vm._v(_vm._s(props.row.id))]
-                                }
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c("b-table-column", {
-                            attrs: {
-                              field: "name",
-                              label: "Name",
-                              sortable: ""
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function(props) {
-                                  return [_vm._v(_vm._s(props.row.name))]
-                                }
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "b-table-column",
-                            { attrs: { field: "actions", label: "Actions" } },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "buttons" },
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      staticClass: "is-info is-light",
-                                      attrs: {
-                                        size: "is-small",
-                                        pack: "fas",
-                                        "icon-right": "pen"
-                                      }
-                                    },
-                                    [_vm._v("Edit")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-button",
-                                    {
-                                      staticClass: "is-danger is-light",
-                                      attrs: {
-                                        size: "is-small",
-                                        pack: "fas",
-                                        "icon-right": "trash"
-                                      }
-                                    },
-                                    [_vm._v("Delete")]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("section", { staticClass: "b__collapse__section" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("header", { staticClass: "card-header" }, [
-                  _c("p", { staticClass: "card-header-title" }, [
-                    _vm._v("Assigned Assintant Supervisors")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "content" },
-                    [
-                      _c(
-                        "b-table",
-                        { attrs: { data: _vm.reports } },
-                        [
-                          _c("b-table-column", {
-                            attrs: {
-                              field: "id",
-                              label: "ID",
-                              width: "40",
-                              sortable: "",
-                              numeric: ""
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function(props) {
-                                  return [_vm._v(_vm._s(props.row.id))]
-                                }
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c("b-table-column", {
-                            attrs: {
-                              field: "name",
-                              label: "Name",
-                              sortable: ""
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function(props) {
-                                  return [_vm._v(_vm._s(props.row.name))]
-                                }
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "b-table-column",
-                            { attrs: { field: "actions", label: "Actions" } },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "buttons" },
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      staticClass: "is-info is-light",
-                                      attrs: {
-                                        size: "is-small",
-                                        pack: "fas",
-                                        "icon-right": "pen"
-                                      }
-                                    },
-                                    [_vm._v("Edit")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-button",
-                                    {
-                                      staticClass: "is-danger is-light",
-                                      attrs: {
-                                        size: "is-small",
-                                        pack: "fas",
-                                        "icon-right": "trash"
-                                      }
-                                    },
-                                    [_vm._v("Delete")]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ])
-          ])
+          _c(
+            "b-tab-item",
+            { attrs: { label: _vm.$t("app.report_to1") } },
+            [_c("ReportToDetails")],
+            1
+          )
         ],
         1
       )
@@ -8243,13 +8821,44 @@ var render = function() {
     _c("div", { staticClass: "card" }, [
       _c("header", { staticClass: "card-header" }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "profile-detail-bar" }, [
+        _c("p", { staticClass: "p-text" }, [
+          _vm._v(_vm._s(_vm.$t("app.contact_detail_cta")))
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-content" }, [
         _c(
           "div",
           { staticClass: "content" },
           [
+            _vm.userOrPermission("update", _vm.getProfile.user_id)
+              ? [
+                  _vm.isEditContactDetails
+                    ? _c(
+                        "b-field",
+                        { staticClass: "mb-4" },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "is-info is-light",
+                              attrs: { "icon-left": "pen" },
+                              on: {
+                                click: function($event) {
+                                  _vm.isEditContactDetails = !_vm.isEditContactDetails
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.$t("app.edit")))]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ]
+              : _vm._e(),
+            _vm._v(" "),
             _c("fieldset", { attrs: { disabled: _vm.isEditContactDetails } }, [
               _c(
                 "form",
@@ -8271,7 +8880,7 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "Address (1)",
+                              label: " " + _vm.$t("app.address") + " (1)",
                               type: {
                                 "is-danger":
                                   _vm.contactDetailsErrors.address1.length > 0
@@ -8283,8 +8892,10 @@ var render = function() {
                             _c("b-input", {
                               attrs: {
                                 type: "textarea",
-                                maxlength: "150",
-                                placeholder: "Type your address(1)",
+                                placeholder:
+                                  " " +
+                                  _vm.$t("app.address_placehoder") +
+                                  "...",
                                 size: ""
                               },
                               model: {
@@ -8310,7 +8921,7 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "Address (2)",
+                              label: " " + _vm.$t("app.address") + " (2)",
                               type: {
                                 "is-danger":
                                   _vm.contactDetailsErrors.address2.length > 0
@@ -8322,8 +8933,10 @@ var render = function() {
                             _c("b-input", {
                               attrs: {
                                 type: "textarea",
-                                maxlength: "150",
-                                placeholder: "Type your address(2)",
+                                placeholder:
+                                  " " +
+                                  _vm.$t("app.address_placehoder") +
+                                  "...",
                                 size: ""
                               },
                               model: {
@@ -8351,7 +8964,7 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "City",
+                              label: _vm.$t("app.city"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8386,7 +8999,10 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "State/Region",
+                              label:
+                                _vm.$t("app.state") +
+                                "/" +
+                                _vm.$t("app.region"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8421,7 +9037,7 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "Country",
+                              label: _vm.$t("app.country"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8443,15 +9059,24 @@ var render = function() {
                                   expression: "contactDetails.country"
                                 }
                               },
-                              [
-                                _c("option", { attrs: { value: "Ghana" } }, [
-                                  _vm._v("Ghana")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "Nigeria" } }, [
-                                  _vm._v("Nigeria")
-                                ])
-                              ]
+                              _vm._l(_vm.getCountries, function(c) {
+                                return _c(
+                                  "option",
+                                  { key: c.name, domProps: { value: c.name } },
+                                  [
+                                    _vm._v(
+                                      "\n                      " +
+                                        _vm._s(
+                                          _vm.locale !== "en"
+                                            ? c.translations["" + _vm.locale]
+                                            : c.name
+                                        ) +
+                                        "\n                    "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
                             )
                           ],
                           1
@@ -8470,7 +9095,7 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "Mobile",
+                              label: _vm.$t("app.mobile"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8505,7 +9130,7 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "Work Telephone",
+                              label: _vm.$t("app.work_tel"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8545,7 +9170,7 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "Home Telephone",
+                              label: _vm.$t("app.home_tel"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8581,13 +9206,13 @@ var render = function() {
                   _c("div", { staticClass: "columns" }, [
                     _c(
                       "div",
-                      { staticClass: "column is-6" },
+                      { staticClass: "column is-4" },
                       [
                         _c(
                           "b-field",
                           {
                             attrs: {
-                              label: "Work Email",
+                              label: _vm.$t("app.work_email"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8616,13 +9241,13 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "column is-6" },
+                      { staticClass: "column is-4" },
                       [
                         _c(
                           "b-field",
                           {
                             attrs: {
-                              label: "Other Email",
+                              label: _vm.$t("app.other_email"),
                               expanded: "",
                               type: {
                                 "is-danger":
@@ -8676,8 +9301,8 @@ var render = function() {
                                   "\n                  " +
                                     _vm._s(
                                       _vm.isSubmittingContactDetails
-                                        ? "Saving..."
-                                        : "Save"
+                                        ? _vm.$t("app.saving") + "..."
+                                        : _vm.$t("app.save")
                                     ) +
                                     "\n                "
                                 )
@@ -8694,7 +9319,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Cancel")]
+                              [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                             )
                           ],
                           1
@@ -8706,7 +9331,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+            _vm.userOrPermission("update", _vm.getProfile.user_id)
               ? [
                   _vm.isEditContactDetails
                     ? _c(
@@ -8723,7 +9348,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Edit")]
+                            [_vm._v(_vm._s(_vm.$t("app.edit")))]
                           )
                         ],
                         1
@@ -8738,16 +9363,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-detail-bar" }, [
-      _c("p", { staticClass: "p-text" }, [_vm._v("Employee Contact Details")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -8776,14 +9392,18 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("header", { staticClass: "card-header" }),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "profile-detail-bar" }, [
+          _c("p", { staticClass: "p-text" }, [
+            _vm._v(_vm._s(_vm.$t("app.emergency_contact_cta")))
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-content" }, [
           _c(
             "div",
             { staticClass: "content" },
             [
-              _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+              _vm.userOrPermission("create", _vm.getProfile.user_id)
                 ? _c(
                     "section",
                     { staticClass: "b__collapse__section" },
@@ -8819,7 +9439,13 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                Add Emergency Contact\n              "
+                                            "\n                " +
+                                              _vm._s(
+                                                _vm.$t(
+                                                  "app.add_emergency_contact"
+                                                )
+                                              ) +
+                                              "\n              "
                                           )
                                         ]
                                       ),
@@ -8847,7 +9473,7 @@ var render = function() {
                             ],
                             null,
                             false,
-                            2026274011
+                            1740276904
                           ),
                           model: {
                             value: _vm.closeEmergencyContactDetailsForm,
@@ -8881,7 +9507,7 @@ var render = function() {
                                           "b-field",
                                           {
                                             attrs: {
-                                              label: "Name",
+                                              label: _vm.$t("app.name"),
                                               expanded: "",
                                               type: {
                                                 "is-danger":
@@ -8924,7 +9550,7 @@ var render = function() {
                                           "b-field",
                                           {
                                             attrs: {
-                                              label: "Relationship",
+                                              label: _vm.$t("app.relationship"),
                                               expanded: "",
                                               type: {
                                                 "is-danger":
@@ -8971,7 +9597,7 @@ var render = function() {
                                           "b-field",
                                           {
                                             attrs: {
-                                              label: "Mobile",
+                                              label: _vm.$t("app.mobile"),
                                               expanded: "",
                                               type: {
                                                 "is-danger":
@@ -9015,7 +9641,7 @@ var render = function() {
                                           "b-field",
                                           {
                                             attrs: {
-                                              label: "Home Telephone",
+                                              label: _vm.$t("app.home_tel"),
                                               expanded: "",
                                               type: {
                                                 "is-danger":
@@ -9060,7 +9686,7 @@ var render = function() {
                                           "b-field",
                                           {
                                             attrs: {
-                                              label: "Work Telephone",
+                                              label: _vm.$t("app.work_tel"),
                                               expanded: "",
                                               type: {
                                                 "is-danger":
@@ -9120,8 +9746,9 @@ var render = function() {
                                             "\n                      " +
                                               _vm._s(
                                                 _vm.isSubmittingEmergencyContact
-                                                  ? "Submitting..."
-                                                  : "Add"
+                                                  ? _vm.$t("app.submitting") +
+                                                      "..."
+                                                  : _vm.$t("app.submit")
                                               ) +
                                               "\n                    "
                                           )
@@ -9138,7 +9765,7 @@ var render = function() {
                                             }
                                           }
                                         },
-                                        [_vm._v("Cancel")]
+                                        [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                       )
                                     ],
                                     1
@@ -9178,7 +9805,11 @@ var render = function() {
                 },
                 [
                   _c("b-table-column", {
-                    attrs: { field: "name", label: "Name", sortable: "" },
+                    attrs: {
+                      field: "name",
+                      label: _vm.$t("app.name"),
+                      sortable: ""
+                    },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -9192,7 +9823,7 @@ var render = function() {
                   _c("b-table-column", {
                     attrs: {
                       field: "relationship",
-                      label: "Relationship",
+                      label: _vm.$t("app.relationship"),
                       sortable: ""
                     },
                     scopedSlots: _vm._u([
@@ -9206,7 +9837,11 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("b-table-column", {
-                    attrs: { field: "mobile", label: "Mobile", sortable: "" },
+                    attrs: {
+                      field: "mobile",
+                      label: _vm.$t("app.mobile"),
+                      sortable: ""
+                    },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -9219,8 +9854,24 @@ var render = function() {
                   _vm._v(" "),
                   _c("b-table-column", {
                     attrs: {
+                      field: "worktelephone",
+                      label: _vm.$t("app.work_tel"),
+                      sortable: ""
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(props) {
+                          return [_vm._v(_vm._s(props.row.workTelephone))]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("b-table-column", {
+                    attrs: {
                       field: "telephone",
-                      label: "Home Telephone",
+                      label: _vm.$t("app.home_tel"),
                       sortable: ""
                     },
                     scopedSlots: _vm._u([
@@ -9235,22 +9886,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("b-table-column", {
                     attrs: {
-                      field: "worktelephone",
-                      label: "Work Telephone",
-                      sortable: ""
+                      field: "actions",
+                      label: _vm.$tc("app.action", 2)
                     },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return [_vm._v(_vm._s(props.row.workTelephone))]
-                        }
-                      }
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("b-table-column", {
-                    attrs: { field: "actions", label: "Actions" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -9264,7 +9902,7 @@ var render = function() {
                                   "b-tooltip",
                                   {
                                     attrs: {
-                                      label: "Edit contact",
+                                      label: _vm.$t("app.editContact"),
                                       type: "is-dark"
                                     }
                                   },
@@ -9275,7 +9913,13 @@ var render = function() {
                                         size: "is-small",
                                         pack: "fas",
                                         "icon-right": "pen",
-                                        id: "contact-id" + props.row.id
+                                        id:
+                                          "contact-id" +
+                                          _vm.getContactDropperId,
+                                        disabled: !_vm.userOrPermission(
+                                          "update",
+                                          _vm.getProfile.user_id
+                                        )
                                       },
                                       on: {
                                         click: function($event) {
@@ -9292,7 +9936,10 @@ var render = function() {
                                 _c(
                                   "b-tooltip",
                                   {
-                                    attrs: { label: "Delete", type: "is-dark" }
+                                    attrs: {
+                                      label: _vm.$t("app.delete"),
+                                      type: "is-dark"
+                                    }
                                   },
                                   [
                                     _c("b-button", {
@@ -9300,7 +9947,11 @@ var render = function() {
                                       attrs: {
                                         size: "is-small",
                                         pack: "fas",
-                                        "icon-right": "trash"
+                                        "icon-right": "trash",
+                                        disabled: !_vm.userOrPermission(
+                                          "delete",
+                                          _vm.getProfile.user_id
+                                        )
                                       },
                                       on: {
                                         click: function($event) {
@@ -9608,18 +10259,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-detail-bar" }, [
-      _c("p", { staticClass: "p-text" }, [
-        _vm._v("Employee Emergency Contacts")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -9645,13 +10285,44 @@ var render = function() {
     _c("div", { staticClass: "card" }, [
       _c("header", { staticClass: "card-header" }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "profile-detail-bar" }, [
+        _c("p", { staticClass: "p-text" }, [
+          _vm._v(_vm._s(_vm.$t("app.job_details_cta")))
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-content" }, [
         _c(
           "div",
           { staticClass: "content" },
           [
+            _vm.isPermission("update")
+              ? [
+                  _vm.isEditJob
+                    ? _c(
+                        "div",
+                        { staticClass: "buttons mb-4" },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "is-info is-light",
+                              attrs: { "icon-left": "pen" },
+                              on: {
+                                click: function($event) {
+                                  _vm.isEditJob = !_vm.isEditJob
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.$t("app.edit")))]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ]
+              : _vm._e(),
+            _vm._v(" "),
             _c("fieldset", { attrs: { disabled: _vm.isEditJob } }, [
               _c(
                 "form",
@@ -9670,7 +10341,10 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Job Category", expanded: "" }
+                          attrs: {
+                            label: _vm.$t("app.jobCategory"),
+                            expanded: ""
+                          }
                         })
                       ],
                       1
@@ -9684,7 +10358,6 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              label: "",
                               expanded: "",
                               type: {
                                 "is-danger": _vm.jobErrors.category.length > 0
@@ -9734,7 +10407,7 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Job Title", expanded: "" }
+                          attrs: { label: _vm.$t("app.jobTitle"), expanded: "" }
                         })
                       ],
                       1
@@ -9801,7 +10474,7 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Job Specification", expanded: "" }
+                          attrs: { label: _vm.$t("app.jobSpec"), expanded: "" }
                         })
                       ],
                       1
@@ -9814,7 +10487,9 @@ var render = function() {
                         _c("b-field", { attrs: { label: "", expanded: "" } }, [
                           _c("p", [
                             _vm.job.specification === ""
-                              ? _c("span", [_vm._v("Not Defined")])
+                              ? _c("span", [
+                                  _vm._v(_vm._s(_vm.$t("app.notDefined")))
+                                ])
                               : !_vm.jobSpecification && _vm.job.specification
                               ? _c(
                                   "a",
@@ -9844,7 +10519,10 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Employment Status", expanded: "" }
+                          attrs: {
+                            label: _vm.$t("app.empStatus"),
+                            expanded: ""
+                          }
                         })
                       ],
                       1
@@ -9910,7 +10588,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("h5", { staticClass: "text-main" }, [
-                    _vm._v("Organization")
+                    _vm._v(_vm._s(_vm.$t("app.organization")))
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "columns" }, [
@@ -9919,7 +10597,7 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Branch", expanded: "" }
+                          attrs: { label: _vm.$t("app.branch"), expanded: "" }
                         })
                       ],
                       1
@@ -9986,7 +10664,10 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Department/Unit", expanded: "" }
+                          attrs: {
+                            label: _vm.$t("app.department"),
+                            expanded: ""
+                          }
                         })
                       ],
                       1
@@ -10021,20 +10702,178 @@ var render = function() {
                                   expression: "job.department"
                                 }
                               },
-                              _vm._l(_vm.getDepartments, function(dept, index) {
-                                return _c(
-                                  "option",
-                                  { key: index, domProps: { value: dept.id } },
-                                  [
-                                    _vm._v(
-                                      "\n                      " +
-                                        _vm._s(dept.name) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
+                              [
+                                _c("option", { attrs: { value: "none" } }, [
+                                  _vm._v("None")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.getDepartments, function(
+                                  dept,
+                                  index
+                                ) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: index,
+                                      domProps: { value: dept.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                      " +
+                                          _vm._s(dept.name) +
+                                          "\n                    "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column is-3" },
+                      [
+                        _c("b-field", {
+                          attrs: { label: _vm.$t("app.unit"), expanded: "" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column is-4" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "",
+                              expanded: "",
+                              type: {
+                                "is-danger": _vm.jobErrors.unit.length > 0
+                              },
+                              message: _vm.jobErrors.unit
+                            }
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { size: "", expanded: "" },
+                                model: {
+                                  value: _vm.job.unit,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.job, "unit", $$v)
+                                  },
+                                  expression: "job.unit"
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("None")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.departmentUnits, function(u, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: u + index,
+                                      domProps: { value: u.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                      " +
+                                          _vm._s(u.name) +
+                                          "\n                    "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column is-3" },
+                      [
+                        _c("b-field", {
+                          attrs: { label: _vm.$t("app.position"), expanded: "" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column is-4" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "",
+                              expanded: "",
+                              type: {
+                                "is-danger": _vm.jobErrors.position.length > 0
+                              },
+                              message: _vm.jobErrors.position
+                            }
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { size: "", expanded: "" },
+                                model: {
+                                  value: _vm.job.position,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.job, "position", $$v)
+                                  },
+                                  expression: "job.position"
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("None")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.getPositions, function(p, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: p + index,
+                                      domProps: { value: p.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                      " +
+                                          _vm._s(p.name) +
+                                          "\n                    "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
                             )
                           ],
                           1
@@ -10045,7 +10884,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("h5", { staticClass: "text-main" }, [
-                    _vm._v("Employment Contract")
+                    _vm._v(_vm._s(_vm.$t("app.empContract")))
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "columns" }, [
@@ -10054,7 +10893,7 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Start Date", expanded: "" }
+                          attrs: { label: _vm.$t("app.sDate"), expanded: "" }
                         })
                       ],
                       1
@@ -10109,7 +10948,7 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "End Date", expanded: "" }
+                          attrs: { label: _vm.$t("app.eDate"), expanded: "" }
                         })
                       ],
                       1
@@ -10163,7 +11002,10 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Contract Status", expanded: "" }
+                          attrs: {
+                            label: _vm.$t("app.conStatus"),
+                            expanded: ""
+                          }
                         })
                       ],
                       1
@@ -10179,10 +11021,10 @@ var render = function() {
                               "\n                    " +
                                 _vm._s(
                                   _vm.job.contractStatus === "award"
-                                    ? "Active"
+                                    ? _vm.$t("app.active")
                                     : _vm.job.contractStatus === "terminate"
-                                    ? "Terminated"
-                                    : "Not Defined"
+                                    ? _vm.$t("app.terminated")
+                                    : _vm.$t("app.notDefined")
                                 ) +
                                 "\n                  "
                             )
@@ -10199,7 +11041,10 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: "Contract Details", expanded: "" }
+                          attrs: {
+                            label: _vm.$t("app.conDetails"),
+                            expanded: ""
+                          }
                         })
                       ],
                       1
@@ -10209,13 +11054,15 @@ var render = function() {
                       "div",
                       { staticClass: "column is-4" },
                       [
-                        !_vm.job.contractDetailsAvailable
+                        !_vm.isNull(_vm.job.contractDetailsAvailable)
                           ? _c("b-field", { attrs: { expanded: "" } }, [
-                              _c("p", [_vm._v("Not Defined")])
+                              _c("p", [
+                                _vm._v(_vm._s(_vm.$t("app.notDefined")))
+                              ])
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _vm.job.contractDetailsAvailable
+                        _vm.isNull(_vm.job.contractDetailsAvailable)
                           ? _c("b-field", { attrs: { expanded: "" } }, [
                               _c("p", [
                                 _c(
@@ -10355,7 +11202,7 @@ var render = function() {
                                       expression: "contractDetailsControl"
                                     }
                                   },
-                                  [_vm._v("Keep Current")]
+                                  [_vm._v(_vm._s(_vm.$t("app.keepCurrent")))]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -10375,7 +11222,7 @@ var render = function() {
                                       expression: "contractDetailsControl"
                                     }
                                   },
-                                  [_vm._v("Delete Current")]
+                                  [_vm._v(_vm._s(_vm.$t("app.deleteCurrent")))]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -10395,7 +11242,7 @@ var render = function() {
                                       expression: "contractDetailsControl"
                                     }
                                   },
-                                  [_vm._v("Replace Current")]
+                                  [_vm._v(_vm._s(_vm.$t("app.replaceCurrent")))]
                                 )
                               ],
                               1
@@ -10455,7 +11302,11 @@ var render = function() {
                                             _c(
                                               "span",
                                               { staticClass: "file-label" },
-                                              [_vm._v("Upload")]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("app.upload"))
+                                                )
+                                              ]
                                             )
                                           ],
                                           1
@@ -10506,8 +11357,8 @@ var render = function() {
                                 "\n                " +
                                   _vm._s(
                                     _vm.isSubmittingJob
-                                      ? "Submitting..."
-                                      : "Save"
+                                      ? _vm.$t("app.submitting") + "..."
+                                      : _vm.$t("app.save")
                                   ) +
                                   "\n              "
                               )
@@ -10524,10 +11375,10 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Cancel")]
+                            [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                           ),
                           _vm._v(" "),
-                          _vm.isUserRole("Admin")
+                          _vm.isPermission("update")
                             ? [
                                 _vm.job.contractStatus === "award"
                                   ? _c(
@@ -10547,8 +11398,12 @@ var render = function() {
                                           "\n                  " +
                                             _vm._s(
                                               _vm.isAwardingContract
-                                                ? "Terminating Contract..."
-                                                : "Terminate Contract"
+                                                ? _vm.$t(
+                                                    "app.terminatingContract"
+                                                  )
+                                                : _vm.$t(
+                                                    "app.terminateContract"
+                                                  )
                                             ) +
                                             "\n                "
                                         )
@@ -10573,8 +11428,8 @@ var render = function() {
                                           "\n                  " +
                                             _vm._s(
                                               _vm.isAwardingContract
-                                                ? "Awarding Contract..."
-                                                : "Award Contract"
+                                                ? _vm.$t("app.awardingContract")
+                                                : _vm.$t("app.awardContract")
                                             ) +
                                             "\n                "
                                         )
@@ -10591,9 +11446,9 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm.isUserRole("Admin") || _vm.isUserRole("Manager")
+            _vm.isPermission("update")
               ? [
-                  this.$page.props.authUser.role && _vm.isEditJob
+                  _vm.isEditJob
                     ? _c(
                         "div",
                         { staticClass: "buttons" },
@@ -10609,7 +11464,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Edit")]
+                            [_vm._v(_vm._s(_vm.$t("app.edit")))]
                           )
                         ],
                         1
@@ -10624,16 +11479,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-detail-bar" }, [
-      _c("p", { staticClass: "p-text" }, [_vm._v("Employee Job Details")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -10666,13 +11512,21 @@ var render = function() {
             _c("div", { staticClass: "content" }, [
               _c("div", { staticClass: "personal__details" }, [
                 _c("div", { staticClass: "personal__details__photo" }, [
-                  _vm._m(0),
+                  _c("div", { staticClass: "p-text" }, [
+                    _c("p", [
+                      _vm._v(
+                        "\n                  " +
+                          _vm._s(_vm.$t("app.personal_detail_cta")) +
+                          "\n                "
+                      )
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "personal__details__photo__display" },
                     [
-                      _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                      _vm.userOrPermission("update", _vm.getProfile.user_id)
                         ? _c(
                             "div",
                             { staticClass: "profile__photo__overlay" },
@@ -10684,7 +11538,9 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Upload profile photo",
+                                        label: _vm.$t(
+                                          "app.upload_profile_photo"
+                                        ),
                                         type: "is-dark"
                                       }
                                     },
@@ -10756,7 +11612,7 @@ var render = function() {
                               src:
                                 "/storage/avatar/" +
                                 _vm.getProfile.personal_details.avatar,
-                              alt: "Profile Photo",
+                              alt: _vm.$t("app.profile_photo"),
                               srcset: ""
                             }
                           })
@@ -10773,6 +11629,33 @@ var render = function() {
                   "div",
                   { staticClass: "personal__details__detail" },
                   [
+                    _vm.userOrPermission("update", _vm.getProfile.user_id)
+                      ? [
+                          _vm.isEditPersonalDetails
+                            ? _c(
+                                "b-field",
+                                { staticClass: "mb-4" },
+                                [
+                                  _c(
+                                    "b-button",
+                                    {
+                                      staticClass: "is-info is-light",
+                                      attrs: { "icon-left": "pen" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.isEditPersonalDetails = !_vm.isEditPersonalDetails
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(_vm.$t("app.edit")))]
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ]
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "fieldset",
                       {
@@ -10800,7 +11683,7 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Title",
+                                        label: _vm.$t("app.title"),
                                         type: {
                                           "is-danger":
                                             _vm.personalDetailsErrors.title
@@ -10830,19 +11713,91 @@ var render = function() {
                                           _c(
                                             "option",
                                             { attrs: { value: "Mr." } },
-                                            [_vm._v("Mr.")]
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.$tc("app.mr", 1))
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Miss" } },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(_vm.$t("app.miss")) +
+                                                  "\n                          "
+                                              )
+                                            ]
                                           ),
                                           _vm._v(" "),
                                           _c(
                                             "option",
                                             { attrs: { value: "Mrs." } },
-                                            [_vm._v("Mrs.")]
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(_vm.$t("app.mrs")) +
+                                                  "\n                          "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Hon." } },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(_vm.$t("app.hon")) +
+                                                  "\n                          "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Rev." } },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(_vm.$t("app.rev")) +
+                                                  "\n                          "
+                                              )
+                                            ]
                                           ),
                                           _vm._v(" "),
                                           _c(
                                             "option",
                                             { attrs: { value: "Dr." } },
-                                            [_vm._v("Dr.")]
+                                            [_vm._v(_vm._s(_vm.$t("app.dr")))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Prof." } },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(_vm.$t("app.prof")) +
+                                                  "\n                          "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Other" } },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    _vm.$tc("app.other", 1)
+                                                  ) +
+                                                  "\n                          "
+                                              )
+                                            ]
                                           )
                                         ]
                                       )
@@ -10861,7 +11816,7 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "First Name",
+                                        label: _vm.$t("app.firstName"),
                                         expanded: "",
                                         type: {
                                           "is-danger":
@@ -10903,7 +11858,7 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Middle Name",
+                                        label: _vm.$t("app.middleName"),
                                         expanded: "",
                                         type: {
                                           "is-danger":
@@ -10945,7 +11900,7 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Last Name",
+                                        label: _vm.$t("app.lastName"),
                                         expanded: "",
                                         type: {
                                           "is-danger":
@@ -10988,7 +11943,7 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Birth Date",
+                                        label: _vm.$t("app.birthDate"),
                                         type: {
                                           "is-danger":
                                             _vm.personalDetailsErrors.birthDate
@@ -11001,7 +11956,9 @@ var render = function() {
                                     [
                                       _c("b-datepicker", {
                                         attrs: {
-                                          placeholder: "Click to select...",
+                                          placeholder: _vm.$t(
+                                            "placeholder_birthdate"
+                                          ),
                                           pack: "fas",
                                           icon: "calendar",
                                           "trap-focus": ""
@@ -11034,7 +11991,7 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Marital Status",
+                                        label: _vm.$t("app.maritalStatus"),
                                         type: {
                                           "is-danger":
                                             _vm.personalDetailsErrors
@@ -11067,84 +12024,95 @@ var render = function() {
                                         [
                                           _c(
                                             "option",
-                                            { attrs: { value: "Single" } },
-                                            [_vm._v("Single")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "Married" } },
-                                            [_vm._v("Married")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "Other" } },
-                                            [_vm._v("Other")]
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: "Nationality",
-                                        type: {
-                                          "is-danger":
-                                            _vm.personalDetailsErrors
-                                              .nationality.length > 0
-                                        },
-                                        message:
-                                          _vm.personalDetailsErrors.nationality
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "b-select",
-                                        {
-                                          attrs: { size: "", expanded: "" },
-                                          model: {
-                                            value:
-                                              _vm.personalDetails.nationality,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.personalDetails,
-                                                "nationality",
-                                                $$v
-                                              )
+                                            {
+                                              domProps: {
+                                                value: _vm.$tc("app.single", 1)
+                                              }
                                             },
-                                            expression:
-                                              "personalDetails.nationality"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "Ghana" } },
-                                            [_vm._v("Ghana")]
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    _vm.$tc("app.single", 1)
+                                                  ) +
+                                                  "\n                          "
+                                              )
+                                            ]
                                           ),
                                           _vm._v(" "),
                                           _c(
                                             "option",
-                                            { attrs: { value: "Nigeria" } },
-                                            [_vm._v("Nigeria")]
+                                            {
+                                              domProps: {
+                                                value: _vm.$tc("app.married", 1)
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    _vm.$tc("app.married", 1)
+                                                  ) +
+                                                  "\n                          "
+                                              )
+                                            ]
                                           ),
                                           _vm._v(" "),
                                           _c(
                                             "option",
-                                            { attrs: { value: "USA" } },
-                                            [_vm._v("USA")]
+                                            {
+                                              domProps: {
+                                                value: _vm.$tc(
+                                                  "app.divorced",
+                                                  1
+                                                )
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    _vm.$tc("app.divorced", 1)
+                                                  ) +
+                                                  "\n                          "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            {
+                                              domProps: {
+                                                value: _vm.$tc("app.widowed", 1)
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    _vm.$tc("app.widowed", 1)
+                                                  ) +
+                                                  "\n                          "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            {
+                                              domProps: {
+                                                value: _vm.$tc("app.other", 1)
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                            " +
+                                                  _vm._s(
+                                                    _vm.$tc("app.other", 1)
+                                                  ) +
+                                                  "\n                          "
+                                              )
+                                            ]
                                           )
                                         ]
                                       )
@@ -11163,7 +12131,7 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Gender",
+                                        label: "" + _vm.$tc("app.gender", 1),
                                         type: {
                                           "is-danger":
                                             _vm.personalDetailsErrors.gender
@@ -11206,7 +12174,11 @@ var render = function() {
                                                   "personalDetails.gender"
                                               }
                                             },
-                                            [_vm._v("Male")]
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.$tc("app.male", 1))
+                                              )
+                                            ]
                                           ),
                                           _vm._v(" "),
                                           _c(
@@ -11232,7 +12204,11 @@ var render = function() {
                                                   "personalDetails.gender"
                                               }
                                             },
-                                            [_vm._v("Female")]
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.$tc("app.female", 1))
+                                              )
+                                            ]
                                           )
                                         ],
                                         1
@@ -11247,13 +12223,13 @@ var render = function() {
                             _c("div", { staticClass: "columns" }, [
                               _c(
                                 "div",
-                                { staticClass: "column is-6" },
+                                { staticClass: "column is-3" },
                                 [
                                   _c(
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Staff Id",
+                                        label: _vm.$tc("app.staffId"),
                                         expanded: "",
                                         type: {
                                           "is-danger":
@@ -11288,13 +12264,13 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "div",
-                                { staticClass: "column is-6" },
+                                { staticClass: "column is-3" },
                                 [
                                   _c(
                                     "b-field",
                                     {
                                       attrs: {
-                                        label: "Other Id",
+                                        label: _vm.$tc("app.otherId"),
                                         expanded: "",
                                         type: {
                                           "is-danger":
@@ -11350,8 +12326,8 @@ var render = function() {
                                             "\n                        " +
                                               _vm._s(
                                                 _vm.isSubmittingPersonalDetails
-                                                  ? "Saving..."
-                                                  : "Save"
+                                                  ? _vm.$t("app.saving") + "..."
+                                                  : _vm.$t("app.save")
                                               ) +
                                               "\n                      "
                                           )
@@ -11368,7 +12344,7 @@ var render = function() {
                                             }
                                           }
                                         },
-                                        [_vm._v("Cancel")]
+                                        [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                       )
                                     ],
                                     1
@@ -11381,7 +12357,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                    _vm.userOrPermission("update", _vm.getProfile.user_id)
                       ? [
                           _vm.isEditPersonalDetails
                             ? _c(
@@ -11398,7 +12374,7 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [_vm._v("Edit")]
+                                    [_vm._v(_vm._s(_vm.$t("app.edit")))]
                                   )
                                 ],
                                 1
@@ -11417,14 +12393,18 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "b__collapse__section" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(1),
+          _c("header", { staticClass: "card-header" }, [
+            _c("p", { staticClass: "card-header-title" }, [
+              _vm._v(_vm._s(_vm.$tc("app.attachment", 2)))
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-content" }, [
             _c(
               "div",
               { staticClass: "content" },
               [
-                _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                _vm.userOrPermission("update", _vm.getProfile.user_id)
                   ? _c(
                       "section",
                       { staticClass: "b__collapse__section" },
@@ -11459,7 +12439,15 @@ var render = function() {
                                             staticClass:
                                               "card-header-title has-text-info"
                                           },
-                                          [_vm._v("Add Attachment")]
+                                          [
+                                            _vm._v(
+                                              "\n                  " +
+                                                _vm._s(
+                                                  _vm.$t("app.addAttament")
+                                                ) +
+                                                "\n                "
+                                            )
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -11485,7 +12473,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              3286137795
+                              1106428251
                             )
                           },
                           [
@@ -11591,7 +12579,13 @@ var render = function() {
                                                                   _vm._v(" "),
                                                                   _c("p", [
                                                                     _vm._v(
-                                                                      "Drop or click to upload attachment"
+                                                                      "\n                                    " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "app.placeholder_attachment"
+                                                                          )
+                                                                        ) +
+                                                                        "\n                                  "
                                                                     )
                                                                   ])
                                                                 ]
@@ -11691,7 +12685,9 @@ var render = function() {
                                                         attrs: {
                                                           type: "textarea",
                                                           placeholder:
-                                                            "Type your comment here..."
+                                                            _vm.$tc(
+                                                              "app.placeholder_comment"
+                                                            ) + "..."
                                                         },
                                                         model: {
                                                           value:
@@ -11746,8 +12742,12 @@ var render = function() {
                                                           "\n                            " +
                                                             _vm._s(
                                                               _vm.isSubmittingPersonalDetailsAttachment
-                                                                ? "Submitting..."
-                                                                : "Submit"
+                                                                ? _vm.$t(
+                                                                    "app.submitting"
+                                                                  ) + "..."
+                                                                : _vm.$t(
+                                                                    "app.submit"
+                                                                  )
                                                             ) +
                                                             "\n                          "
                                                         )
@@ -11767,7 +12767,13 @@ var render = function() {
                                                           }
                                                         }
                                                       },
-                                                      [_vm._v("Cancel")]
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t("app.cancel")
+                                                          )
+                                                        )
+                                                      ]
                                                     )
                                                   ],
                                                   1
@@ -11795,7 +12801,7 @@ var render = function() {
                                                 }
                                               }
                                             },
-                                            [_vm._v("Add")]
+                                            [_vm._v(_vm._s(_vm.$t("app.add")))]
                                           )
                                         ],
                                         1
@@ -11826,7 +12832,11 @@ var render = function() {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "file", label: "File", sortable: "" },
+                      attrs: {
+                        field: "file",
+                        label: "" + _vm.$tc("app.file", 1),
+                        sortable: ""
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -11855,7 +12865,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "comment",
-                        label: "Comment",
+                        label: _vm.$tc("app.comment", 1),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -11869,7 +12879,10 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "actions", label: "Actions" },
+                      attrs: {
+                        field: "actions",
+                        label: _vm.$tc("app.action", 2)
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -11883,7 +12896,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Replace attachment",
+                                        label: _vm.$t("app.replaceAttachment"),
                                         type: "is-dark"
                                       }
                                     },
@@ -11893,7 +12906,10 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "upload"
+                                          "icon-right": "upload",
+                                          id:
+                                            "comment-id" +
+                                            _vm.getAttachmentDropperId
                                         },
                                         on: {
                                           click: function($event) {
@@ -11912,7 +12928,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Edit comment",
+                                        label: _vm.$t("app.editComment"),
                                         type: "is-dark"
                                       }
                                     },
@@ -11920,7 +12936,9 @@ var render = function() {
                                       _c("b-button", {
                                         staticClass: "is-info is-light",
                                         attrs: {
-                                          id: "comment-id" + props.row.id,
+                                          id:
+                                            "comment-id" +
+                                            _vm.getAttachmentDropperId,
                                           size: "is-small",
                                           pack: "fas",
                                           "icon-right": "pen"
@@ -11942,7 +12960,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Delete",
+                                        label: _vm.$t("app.delete"),
                                         type: "is-dark"
                                       }
                                     },
@@ -12002,6 +13020,8 @@ var render = function() {
             ? _c(
                 "form",
                 {
+                  staticClass: "p-4",
+                  staticStyle: { width: "30rem" },
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
@@ -12012,7 +13032,15 @@ var render = function() {
                   }
                 },
                 [
-                  _c("h3", { staticClass: "label" }, [_vm._v("Edit Comment")]),
+                  _c("h3", { staticClass: "label text-main" }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(
+                          _vm.$t("app.edit") + " " + _vm.$tc("app.comment", 1)
+                        ) +
+                        "\n      "
+                    )
+                  ]),
                   _vm._v(" "),
                   _c(
                     "b-field",
@@ -12030,7 +13058,9 @@ var render = function() {
                       _c("b-input", {
                         attrs: {
                           type: "textarea",
-                          placeholder: "Type your comment here..."
+                          placeholder:
+                            _vm.$t("app.placeholder_comment") + "...",
+                          expanded: ""
                         },
                         model: {
                           value: _vm.personalDetails.attachment.comment,
@@ -12062,7 +13092,9 @@ var render = function() {
                         _vm._v(
                           "\n          " +
                             _vm._s(
-                              _vm.isUpdatingFileComment ? "Saving..." : "Save"
+                              _vm.isUpdatingFileComment
+                                ? _vm.$t("app.saving") + "..."
+                                : _vm.$t("app.save")
                             ) +
                             "\n        "
                         )
@@ -12083,7 +13115,13 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n          Cancel\n        ")]
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(_vm.$t("app.cancel")) +
+                            "\n        "
+                        )
+                      ]
                     )
                   ])
                 ],
@@ -12095,6 +13133,8 @@ var render = function() {
             ? _c(
                 "form",
                 {
+                  staticClass: "p-4",
+                  staticStyle: { width: "30rem" },
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
@@ -12105,11 +13145,17 @@ var render = function() {
                   }
                 },
                 [
-                  _c("h3", { staticClass: "label has-text-info" }, [
-                    _vm._v("Replace Attachment")
+                  _c("h3", { staticClass: "label text-main" }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(
+                          _vm.$tc("app.replace", 1) +
+                            " " +
+                            _vm.$tc("app.attachment", 1)
+                        ) +
+                        "\n      "
+                    )
                   ]),
-                  _vm._v(" "),
-                  _c("hr"),
                   _vm._v(" "),
                   _c(
                     "b-field",
@@ -12150,7 +13196,13 @@ var render = function() {
                                   1
                                 ),
                                 _vm._v(" "),
-                                _c("p", [_vm._v("Click to replace attachment")])
+                                _c("p", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$t("app.placeholder_attachment1")
+                                    )
+                                  )
+                                ])
                               ]
                             )
                           ])
@@ -12211,7 +13263,9 @@ var render = function() {
                         _vm._v(
                           "\n          " +
                             _vm._s(
-                              _vm.isUpdatingFileComment ? "Saving..." : "Save"
+                              _vm.isUpdatingFileComment
+                                ? _vm.$t("app.saving") + "..."
+                                : _vm.$t("app.save")
                             ) +
                             "\n        "
                         )
@@ -12232,7 +13286,13 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n          Cancel\n        ")]
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(_vm.$t("app.cancel")) +
+                            "\n        "
+                        )
+                      ]
                     )
                   ])
                 ],
@@ -12245,24 +13305,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-text" }, [
-      _c("p", [_vm._v("Employee Personal Profile")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("p", { staticClass: "card-header-title" }, [_vm._v("Attachments")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -12291,14 +13334,18 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("header", { staticClass: "card-header" }),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "profile-detail-bar" }, [
+            _c("p", { staticClass: "p-text" }, [
+              _vm._v(_vm._s(_vm.$t("app.qualification_cta")))
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-content" }, [
             _c(
               "div",
               { staticClass: "content" },
               [
-                _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                _vm.userOrPermission("create", _vm.getProfile.user_id)
                   ? _c(
                       "section",
                       { staticClass: "b__collapse__section" },
@@ -12334,7 +13381,13 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                  Add Working Experience\n                "
+                                              "\n                  " +
+                                                _vm._s(
+                                                  _vm.$t(
+                                                    "app.add_wrk_experience"
+                                                  )
+                                                ) +
+                                                "\n                "
                                             )
                                           ]
                                         ),
@@ -12362,7 +13415,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              1739651533
+                              1722479601
                             ),
                             model: {
                               value: _vm.isEditWorkExperience,
@@ -12396,7 +13449,7 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Company",
+                                                label: _vm.$t("app.company"),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -12446,7 +13499,7 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Job Title",
+                                                label: _vm.$t("app.jobTitle"),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -12498,7 +13551,11 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "From (Year)",
+                                                label:
+                                                  _vm.$t("app.from") +
+                                                  " (" +
+                                                  _vm.$t("app.year") +
+                                                  ")",
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -12516,8 +13573,9 @@ var render = function() {
                                                 "b-select",
                                                 {
                                                   attrs: {
-                                                    placeholder:
-                                                      "Select year...",
+                                                    placeholder: _vm.$t(
+                                                      "app.selectYear"
+                                                    ),
                                                     size: "",
                                                     expanded: ""
                                                   },
@@ -12573,7 +13631,11 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "To (Year)",
+                                                label:
+                                                  _vm.$t("app.to") +
+                                                  " (" +
+                                                  _vm.$t("app.year") +
+                                                  ")",
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -12591,8 +13653,9 @@ var render = function() {
                                                 "b-select",
                                                 {
                                                   attrs: {
-                                                    placeholder:
-                                                      "Select year...",
+                                                    placeholder: _vm.$t(
+                                                      "app.selectYear"
+                                                    ),
                                                     size: "",
                                                     expanded: ""
                                                   },
@@ -12650,7 +13713,10 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Comment",
+                                                label: _vm.$tc(
+                                                  "app.comment",
+                                                  1
+                                                ),
                                                 type: {
                                                   "is-danger":
                                                     _vm.qualificationsErrors
@@ -12667,8 +13733,9 @@ var render = function() {
                                                 attrs: {
                                                   size: "",
                                                   type: "textarea",
-                                                  placeholder:
-                                                    "Type your comment..."
+                                                  placeholder: _vm.$t(
+                                                    "app.placeholder_comment"
+                                                  )
                                                 },
                                                 model: {
                                                   value:
@@ -12716,8 +13783,10 @@ var render = function() {
                                               "\n                        " +
                                                 _vm._s(
                                                   _vm.isSubmittingWorkExperience
-                                                    ? "Submitting..."
-                                                    : "Add"
+                                                    ? _vm.$t(
+                                                        "app.edit_wrk_experience"
+                                                      ) + "..."
+                                                    : _vm.$t("app.add")
                                                 ) +
                                                 "\n                      "
                                             )
@@ -12734,7 +13803,7 @@ var render = function() {
                                               }
                                             }
                                           },
-                                          [_vm._v("Cancel")]
+                                          [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                         )
                                       ],
                                       1
@@ -12767,7 +13836,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "company",
-                        label: "Company",
+                        label: _vm.$t("app.company"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -12783,7 +13852,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "jtitle",
-                        label: "Job Title",
+                        label: _vm.$t("app.jobTitle"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -12797,7 +13866,11 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "from", label: "From", sortable: "" },
+                      attrs: {
+                        field: "from",
+                        label: _vm.$t("app.from"),
+                        sortable: ""
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -12809,7 +13882,11 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "to", label: "To", sortable: "" },
+                      attrs: {
+                        field: "to",
+                        label: _vm.$t("app.to"),
+                        sortable: ""
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -12823,7 +13900,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "comment",
-                        label: "Comment",
+                        label: _vm.$tc("app.comment", 1),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -12837,7 +13914,10 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "actions", label: "Actions" },
+                      attrs: {
+                        field: "actions",
+                        label: _vm.$tc("app.action", 2)
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -12850,7 +13930,12 @@ var render = function() {
                                   _c(
                                     "b-tooltip",
                                     {
-                                      attrs: { label: "Edit", type: "is-dark" }
+                                      attrs: {
+                                        label: _vm.$t(
+                                          "app.edit_wrk_experience"
+                                        ),
+                                        type: "is-dark"
+                                      }
                                     },
                                     [
                                       _c("b-button", {
@@ -12859,7 +13944,11 @@ var render = function() {
                                           size: "is-small",
                                           pack: "fas",
                                           "icon-right": "pen",
-                                          id: "wrk-experince-id" + props.row.id
+                                          id: "wrk-experince-id" + props.row.id,
+                                          disabled: !_vm.userOrPermission(
+                                            "update",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -12877,7 +13966,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Delete",
+                                        label: _vm.$t("app.delete"),
                                         type: "is-dark"
                                       }
                                     },
@@ -12887,7 +13976,11 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "trash"
+                                          "icon-right": "trash",
+                                          disabled: !_vm.userOrPermission(
+                                            "delete",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -12921,14 +14014,18 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "b__collapse__section" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(1),
+          _c("header", { staticClass: "card-header" }, [
+            _c("p", { staticClass: "card-header-title" }, [
+              _vm._v(_vm._s(_vm.$t("app.education")))
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-content" }, [
             _c(
               "div",
               { staticClass: "content" },
               [
-                _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                _vm.userOrPermission("create", _vm.getProfile.user_id)
                   ? _c(
                       "section",
                       { staticClass: "b__collapse__section" },
@@ -12962,7 +14059,15 @@ var render = function() {
                                             staticClass:
                                               "card-header-title has-text-info"
                                           },
-                                          [_vm._v("Add Education")]
+                                          [
+                                            _vm._v(
+                                              "\n                  " +
+                                                _vm._s(
+                                                  _vm.$t("app.add_education")
+                                                ) +
+                                                "\n                "
+                                            )
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -12988,7 +14093,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              3578189272
+                              1913714004
                             ),
                             model: {
                               value: _vm.isEditEducation,
@@ -13022,7 +14127,9 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Institution",
+                                                label: _vm.$t(
+                                                  "app.institution"
+                                                ),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -13072,7 +14179,7 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Major/Specialization",
+                                                label: _vm.$t("app.major_spec"),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -13122,7 +14229,7 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "GPA/Score",
+                                                label: _vm.$t("app.gpa"),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -13173,7 +14280,7 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Started",
+                                                label: _vm.$t("app.started"),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -13191,8 +14298,9 @@ var render = function() {
                                                 "b-select",
                                                 {
                                                   attrs: {
-                                                    placeholder:
-                                                      "Select year...",
+                                                    placeholder: _vm.$t(
+                                                      "app.selectYear"
+                                                    ),
                                                     size: "",
                                                     expanded: ""
                                                   },
@@ -13248,7 +14356,7 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Completed",
+                                                label: _vm.$t("app.completed"),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
@@ -13266,8 +14374,9 @@ var render = function() {
                                                 "b-select",
                                                 {
                                                   attrs: {
-                                                    placeholder:
-                                                      "Select year...",
+                                                    placeholder: _vm.$t(
+                                                      "app.selectYear"
+                                                    ),
                                                     size: "",
                                                     expanded: ""
                                                   },
@@ -13338,8 +14447,9 @@ var render = function() {
                                               "\n                        " +
                                                 _vm._s(
                                                   _vm.isSubmittingEducation
-                                                    ? "Submitting..."
-                                                    : "Add"
+                                                    ? "" +
+                                                        _vm.$t("app.submitting")
+                                                    : _vm.$t("app.add")
                                                 ) +
                                                 "\n                      "
                                             )
@@ -13356,7 +14466,7 @@ var render = function() {
                                               }
                                             }
                                           },
-                                          [_vm._v("Cancel")]
+                                          [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                         )
                                       ],
                                       1
@@ -13389,7 +14499,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "institution",
-                        label: "Institution",
+                        label: _vm.$t("app.institution"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -13405,7 +14515,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "specialization",
-                        label: "Specialization",
+                        label: _vm.$t("app.specialization"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -13419,7 +14529,11 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "gpa", label: "GPA/Score", sortable: "" },
+                      attrs: {
+                        field: "gpa",
+                        label: _vm.$t("app.gpa"),
+                        sortable: ""
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -13433,7 +14547,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "started",
-                        label: "Started",
+                        label: _vm.$t("app.started"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -13449,7 +14563,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "completed",
-                        label: "Completed",
+                        label: _vm.$t("app.completed"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -13463,7 +14577,10 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "actions", label: "Actions" },
+                      attrs: {
+                        field: "actions",
+                        label: _vm.$tc("app.action", 2)
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -13476,7 +14593,10 @@ var render = function() {
                                   _c(
                                     "b-tooltip",
                                     {
-                                      attrs: { label: "Edit", type: "is-dark" }
+                                      attrs: {
+                                        label: _vm.$t("app.edit_education"),
+                                        type: "is-dark"
+                                      }
                                     },
                                     [
                                       _c("b-button", {
@@ -13485,7 +14605,13 @@ var render = function() {
                                           size: "is-small",
                                           pack: "fas",
                                           "icon-right": "pen",
-                                          id: "education-id" + props.row.id
+                                          id:
+                                            "education-id" +
+                                            _vm.getAttachmentDropperId,
+                                          disabled: !_vm.userOrPermission(
+                                            "update",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -13503,7 +14629,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Delete",
+                                        label: _vm.$t("app.delete"),
                                         type: "is-dark"
                                       }
                                     },
@@ -13513,7 +14639,11 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "trash"
+                                          "icon-right": "trash",
+                                          disabled: !_vm.userOrPermission(
+                                            "delete",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -13547,14 +14677,18 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "b__collapse__section" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(2),
+          _c("header", { staticClass: "card-header" }, [
+            _c("p", { staticClass: "card-header-title" }, [
+              _vm._v(_vm._s(_vm.$tc("app.skill", 2)))
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-content" }, [
             _c(
               "div",
               { staticClass: "content" },
               [
-                _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                _vm.userOrPermission("create", _vm.getProfile.user_id)
                   ? _c(
                       "section",
                       { staticClass: "b__collapse__section" },
@@ -13588,7 +14722,15 @@ var render = function() {
                                             staticClass:
                                               "card-header-title has-text-info"
                                           },
-                                          [_vm._v("Add Skill")]
+                                          [
+                                            _vm._v(
+                                              "\n                  " +
+                                                _vm._s(
+                                                  _vm.$t("app.add_skills")
+                                                ) +
+                                                "\n                "
+                                            )
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -13614,7 +14756,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              2926460067
+                              2915969084
                             ),
                             model: {
                               value: _vm.isEditSkills,
@@ -13645,131 +14787,51 @@ var render = function() {
                                         { staticClass: "column is-6" },
                                         [
                                           _c(
-                                            "div",
-                                            { staticClass: "columns" },
+                                            "b-field",
+                                            {
+                                              attrs: {
+                                                label: _vm.$tc("app.skill", 1),
+                                                expanded: "",
+                                                type: {
+                                                  "is-danger":
+                                                    _vm.qualificationsErrors
+                                                      .skills.skill.length > 0
+                                                },
+                                                message:
+                                                  _vm.qualificationsErrors
+                                                    .skills.skill
+                                              }
+                                            },
                                             [
-                                              _c(
-                                                "div",
-                                                { staticClass: "column is-12" },
-                                                [
-                                                  _c(
-                                                    "b-field",
-                                                    {
-                                                      attrs: {
-                                                        label: "Skill",
-                                                        expanded: "",
-                                                        type: {
-                                                          "is-danger":
-                                                            _vm
-                                                              .qualificationsErrors
-                                                              .skills.skill
-                                                              .length > 0
-                                                        },
-                                                        message:
-                                                          _vm
-                                                            .qualificationsErrors
-                                                            .skills.skill
-                                                      }
-                                                    },
-                                                    [
-                                                      _c("b-input", {
-                                                        attrs: {
-                                                          size: "",
-                                                          expanded: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.qualifications
-                                                              .skills.skill,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.qualifications
-                                                                .skills,
-                                                              "skill",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "qualifications.skills.skill"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            { staticClass: "columns" },
-                                            [
-                                              _c(
-                                                "div",
-                                                { staticClass: "column is-12" },
-                                                [
-                                                  _c(
-                                                    "b-field",
-                                                    {
-                                                      attrs: {
-                                                        label:
-                                                          "Years of experience",
-                                                        expanded: "",
-                                                        type: {
-                                                          "is-danger":
-                                                            _vm
-                                                              .qualificationsErrors
-                                                              .skills
-                                                              .yearOfExperience
-                                                              .length > 0
-                                                        },
-                                                        message:
-                                                          _vm
-                                                            .qualificationsErrors
-                                                            .skills
-                                                            .yearOfExperience
-                                                      }
-                                                    },
-                                                    [
-                                                      _c("b-input", {
-                                                        attrs: {
-                                                          size: "",
-                                                          expanded: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.qualifications
-                                                              .skills
-                                                              .yearOfExperience,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.qualifications
-                                                                .skills,
-                                                              "yearOfExperience",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "\n                                  qualifications.skills.yearOfExperience\n                                "
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
+                                              _c("b-input", {
+                                                attrs: {
+                                                  size: "",
+                                                  expanded: ""
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.qualifications.skills
+                                                      .skill,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.qualifications.skills,
+                                                      "skill",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "qualifications.skills.skill"
+                                                }
+                                              })
+                                            ],
+                                            1
                                           )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "columns" }, [
                                       _c(
                                         "div",
                                         { staticClass: "column is-6" },
@@ -13778,7 +14840,63 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Comment",
+                                                label: _vm.$t(
+                                                  "app.year_of_expe"
+                                                ),
+                                                expanded: "",
+                                                type: {
+                                                  "is-danger":
+                                                    _vm.qualificationsErrors
+                                                      .skills.yearOfExperience
+                                                      .length > 0
+                                                },
+                                                message:
+                                                  _vm.qualificationsErrors
+                                                    .skills.yearOfExperience
+                                              }
+                                            },
+                                            [
+                                              _c("b-input", {
+                                                attrs: {
+                                                  size: "",
+                                                  expanded: ""
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.qualifications.skills
+                                                      .yearOfExperience,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.qualifications.skills,
+                                                      "yearOfExperience",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "qualifications.skills.yearOfExperience"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "columns" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "column is-6" },
+                                        [
+                                          _c(
+                                            "b-field",
+                                            {
+                                              attrs: {
+                                                label: _vm.$tc(
+                                                  "app.comment",
+                                                  1
+                                                ),
                                                 type: {
                                                   "is-danger":
                                                     _vm.qualificationsErrors
@@ -13793,8 +14911,9 @@ var render = function() {
                                               _c("b-input", {
                                                 attrs: {
                                                   type: "textarea",
-                                                  placeholder:
-                                                    "Type your comment...",
+                                                  placeholder: _vm.$t(
+                                                    "app.comment_placeholder"
+                                                  ),
                                                   size: ""
                                                 },
                                                 model: {
@@ -13841,8 +14960,9 @@ var render = function() {
                                               "\n                        " +
                                                 _vm._s(
                                                   _vm.isSubmittingSkills
-                                                    ? "Submitting..."
-                                                    : "Add"
+                                                    ? "" +
+                                                        _vm.$t("app.submitting")
+                                                    : _vm.$t("app.add")
                                                 ) +
                                                 "\n                      "
                                             )
@@ -13859,7 +14979,7 @@ var render = function() {
                                               }
                                             }
                                           },
-                                          [_vm._v("Cancel")]
+                                          [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                         )
                                       ],
                                       1
@@ -13890,7 +15010,11 @@ var render = function() {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "skill", label: "Skill", sortable: "" },
+                      attrs: {
+                        field: "skill",
+                        label: _vm.$tc("app.skill", 1),
+                        sortable: ""
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -13904,7 +15028,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "yoe",
-                        label: "Year of Experience",
+                        label: _vm.$t("app.year_of_expe"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -13920,7 +15044,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "comment",
-                        label: "Commment",
+                        label: _vm.$tc("app.comment", 1),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -13934,7 +15058,10 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "actions", label: "Actions" },
+                      attrs: {
+                        field: "actions",
+                        label: _vm.$tc("app.action", 2)
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -13947,7 +15074,10 @@ var render = function() {
                                   _c(
                                     "b-tooltip",
                                     {
-                                      attrs: { label: "Edit", type: "is-dark" }
+                                      attrs: {
+                                        label: _vm.$t("app.edit_skill"),
+                                        type: "is-dark"
+                                      }
                                     },
                                     [
                                       _c("b-button", {
@@ -13956,7 +15086,13 @@ var render = function() {
                                           size: "is-small",
                                           pack: "fas",
                                           "icon-right": "pen",
-                                          id: "skill-id" + props.row.id
+                                          id:
+                                            "skill-id" +
+                                            _vm.getAttachmentDropperId,
+                                          disabled: !_vm.userOrPermission(
+                                            "update",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -13974,7 +15110,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Delete",
+                                        label: _vm.$t("app.delete"),
                                         type: "is-dark"
                                       }
                                     },
@@ -13984,7 +15120,11 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "trash"
+                                          "icon-right": "trash",
+                                          disabled: !_vm.userOrPermission(
+                                            "delete",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -14018,14 +15158,18 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "b__collapse__section" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(3),
+          _c("header", { staticClass: "card-header" }, [
+            _c("p", { staticClass: "card-header-title" }, [
+              _vm._v(_vm._s(_vm.$tc("app.language", 2)))
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-content" }, [
             _c(
               "div",
               { staticClass: "content" },
               [
-                _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                _vm.userOrPermission("create", _vm.getProfile.user_id)
                   ? _c(
                       "section",
                       { staticClass: "b__collapse__section" },
@@ -14059,7 +15203,15 @@ var render = function() {
                                             staticClass:
                                               "card-header-title has-text-info"
                                           },
-                                          [_vm._v("Add Language")]
+                                          [
+                                            _vm._v(
+                                              "\n                  " +
+                                                _vm._s(
+                                                  _vm.$t("app.add_language")
+                                                ) +
+                                                "\n                "
+                                            )
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -14085,7 +15237,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              1421197440
+                              2403258220
                             ),
                             model: {
                               value: _vm.isEditLanguage,
@@ -14116,240 +15268,56 @@ var render = function() {
                                         { staticClass: "column is-6" },
                                         [
                                           _c(
-                                            "div",
-                                            { staticClass: "columns" },
+                                            "b-field",
+                                            {
+                                              attrs: {
+                                                label: _vm.$tc(
+                                                  "app.language",
+                                                  1
+                                                ),
+                                                expanded: "",
+                                                type: {
+                                                  "is-danger":
+                                                    _vm.qualificationsErrors
+                                                      .languages.language
+                                                      .length > 0
+                                                },
+                                                message:
+                                                  _vm.qualificationsErrors
+                                                    .languages.language
+                                              }
+                                            },
                                             [
-                                              _c(
-                                                "div",
-                                                { staticClass: "column is-12" },
-                                                [
-                                                  _c(
-                                                    "b-field",
-                                                    {
-                                                      attrs: {
-                                                        label: "Language",
-                                                        expanded: "",
-                                                        type: {
-                                                          "is-danger":
-                                                            _vm
-                                                              .qualificationsErrors
-                                                              .languages
-                                                              .language.length >
-                                                            0
-                                                        },
-                                                        message:
-                                                          _vm
-                                                            .qualificationsErrors
-                                                            .languages.language
-                                                      }
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "b-select",
-                                                        {
-                                                          attrs: {
-                                                            size: "",
-                                                            expanded: ""
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.qualifications
-                                                                .languages
-                                                                .language,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm
-                                                                  .qualifications
-                                                                  .languages,
-                                                                "language",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "qualifications.languages.language"
-                                                          }
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "English"
-                                                              }
-                                                            },
-                                                            [_vm._v("English")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "French"
-                                                              }
-                                                            },
-                                                            [_vm._v("French")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "Ewe"
-                                                              }
-                                                            },
-                                                            [_vm._v("Ewe")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "Ga"
-                                                              }
-                                                            },
-                                                            [_vm._v("Ga")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "Twi"
-                                                              }
-                                                            },
-                                                            [_vm._v("Twi")]
-                                                          )
-                                                        ]
-                                                      )
-                                                    ],
-                                                    1
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            { staticClass: "columns" },
-                                            [
-                                              _c(
-                                                "div",
-                                                { staticClass: "column is-12" },
-                                                [
-                                                  _c(
-                                                    "b-field",
-                                                    {
-                                                      attrs: {
-                                                        label: "Fluency",
-                                                        expanded: "",
-                                                        type: {
-                                                          "is-danger":
-                                                            _vm
-                                                              .qualificationsErrors
-                                                              .languages.fluency
-                                                              .length > 0
-                                                        },
-                                                        message:
-                                                          _vm
-                                                            .qualificationsErrors
-                                                            .languages.fluency
-                                                      }
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "b-select",
-                                                        {
-                                                          attrs: {
-                                                            size: "",
-                                                            expanded: ""
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.qualifications
-                                                                .languages
-                                                                .fluency,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm
-                                                                  .qualifications
-                                                                  .languages,
-                                                                "fluency",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "qualifications.languages.fluency"
-                                                          }
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "Poor"
-                                                              }
-                                                            },
-                                                            [_vm._v("Poor")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "Good"
-                                                              }
-                                                            },
-                                                            [_vm._v("Good")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value:
-                                                                  "Very Good"
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "Very Good"
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value:
-                                                                  "Mother Tongue"
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                  Mother Tongue\n                                "
-                                                              )
-                                                            ]
-                                                          )
-                                                        ]
-                                                      )
-                                                    ],
-                                                    1
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
+                                              _c("b-input", {
+                                                attrs: {
+                                                  size: "",
+                                                  expanded: ""
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.qualifications.languages
+                                                      .language,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.qualifications
+                                                        .languages,
+                                                      "language",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "qualifications.languages.language"
+                                                }
+                                              })
+                                            ],
+                                            1
                                           )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "columns" }, [
                                       _c(
                                         "div",
                                         { staticClass: "column is-6" },
@@ -14358,7 +15326,150 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: "Comment",
+                                                label: _vm.$t("app.fluency"),
+                                                expanded: "",
+                                                type: {
+                                                  "is-danger":
+                                                    _vm.qualificationsErrors
+                                                      .languages.fluency
+                                                      .length > 0
+                                                },
+                                                message:
+                                                  _vm.qualificationsErrors
+                                                    .languages.fluency
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "b-select",
+                                                {
+                                                  attrs: {
+                                                    size: "",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.qualifications
+                                                        .languages.fluency,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.qualifications
+                                                          .languages,
+                                                        "fluency",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "qualifications.languages.fluency"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "option",
+                                                    {
+                                                      domProps: {
+                                                        value: _vm.$t(
+                                                          "app.poor"
+                                                        )
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                              " +
+                                                          _vm._s(
+                                                            _vm.$t("app.poor")
+                                                          ) +
+                                                          "\n                            "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "option",
+                                                    {
+                                                      domProps: {
+                                                        value: _vm.$t(
+                                                          "app.good"
+                                                        )
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                              " +
+                                                          _vm._s(
+                                                            _vm.$t("app.good")
+                                                          ) +
+                                                          "\n                            "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "option",
+                                                    {
+                                                      domProps: {
+                                                        value: _vm.$t(
+                                                          "app.very_good"
+                                                        )
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                              " +
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "app.very_good"
+                                                            )
+                                                          ) +
+                                                          "\n                            "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "option",
+                                                    {
+                                                      domProps: {
+                                                        value: _vm.$t(
+                                                          "app.mother_tongue"
+                                                        )
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                              " +
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "app.mother_tongue"
+                                                            )
+                                                          ) +
+                                                          "\n                            "
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "columns" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "column is-6" },
+                                        [
+                                          _c(
+                                            "b-field",
+                                            {
+                                              attrs: {
+                                                label: _vm.$tc(
+                                                  "app.comment",
+                                                  1
+                                                ),
                                                 type: {
                                                   "is-danger":
                                                     _vm.qualificationsErrors
@@ -14375,8 +15486,9 @@ var render = function() {
                                                 attrs: {
                                                   type: "textarea",
                                                   size: "",
-                                                  placeholder:
-                                                    "Type your comment..."
+                                                  placeholder: _vm.$t(
+                                                    "app.comment_placeholder"
+                                                  )
                                                 },
                                                 model: {
                                                   value:
@@ -14423,8 +15535,9 @@ var render = function() {
                                               "\n                        " +
                                                 _vm._s(
                                                   _vm.isSubmittingLanguage
-                                                    ? "Submitting..."
-                                                    : "Add"
+                                                    ? "" +
+                                                        _vm.$t("app.submitting")
+                                                    : _vm.$t("app.add")
                                                 ) +
                                                 "\n                      "
                                             )
@@ -14441,7 +15554,7 @@ var render = function() {
                                               }
                                             }
                                           },
-                                          [_vm._v("Cancel")]
+                                          [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                         )
                                       ],
                                       1
@@ -14474,7 +15587,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "language",
-                        label: "Language",
+                        label: _vm.$tc("app.language", 1),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -14490,7 +15603,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "fluency",
-                        label: "Fluency",
+                        label: _vm.$t("app.fluency"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -14506,7 +15619,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "comment",
-                        label: "Commment",
+                        label: _vm.$tc("app.comment", 1),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -14520,7 +15633,10 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "actions", label: "Actions" },
+                      attrs: {
+                        field: "actions",
+                        label: _vm.$tc("app.action", 2)
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -14533,7 +15649,10 @@ var render = function() {
                                   _c(
                                     "b-tooltip",
                                     {
-                                      attrs: { label: "Edit", type: "is-dark" }
+                                      attrs: {
+                                        label: _vm.$t("app.edit_language"),
+                                        type: "is-dark"
+                                      }
                                     },
                                     [
                                       _c("b-button", {
@@ -14542,7 +15661,13 @@ var render = function() {
                                           size: "is-small",
                                           pack: "fas",
                                           "icon-right": "pen",
-                                          id: "language-id" + props.row.id
+                                          id:
+                                            "language-id" +
+                                            _vm.getAttachmentDropperId,
+                                          disabled: !_vm.userOrPermission(
+                                            "update",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -14560,7 +15685,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Delete",
+                                        label: _vm.$t("app.delete"),
                                         type: "is-dark"
                                       }
                                     },
@@ -14570,7 +15695,11 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "trash"
+                                          "icon-right": "trash",
+                                          disabled: !_vm.userOrPermission(
+                                            "delete",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -14604,14 +15733,18 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "b__collapse__section" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(4),
+          _c("header", { staticClass: "card-header" }, [
+            _c("p", { staticClass: "card-header-title" }, [
+              _vm._v(_vm._s(_vm.$tc("app.attachment", 2)))
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-content" }, [
             _c(
               "div",
               { staticClass: "content" },
               [
-                _vm.roleOrUserPermission("Admin", _vm.getProfile.user_id)
+                _vm.userOrPermission("create", _vm.getProfile.user_id)
                   ? _c(
                       "section",
                       { staticClass: "b__collapse__section" },
@@ -14645,7 +15778,15 @@ var render = function() {
                                             staticClass:
                                               "card-header-title has-text-info"
                                           },
-                                          [_vm._v("Add Attachment")]
+                                          [
+                                            _vm._v(
+                                              "\n                  " +
+                                                _vm._s(
+                                                  _vm.$t("app.addAttament")
+                                                ) +
+                                                "\n                "
+                                            )
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -14671,7 +15812,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              1303806347
+                              3963300691
                             ),
                             model: {
                               value: _vm.isEditQualificationAttachment,
@@ -14756,7 +15897,11 @@ var render = function() {
                                                           _vm._v(" "),
                                                           _c("p", [
                                                             _vm._v(
-                                                              "Drop or click to upload attachment"
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "app.placeholder_attachment1"
+                                                                )
+                                                              )
                                                             )
                                                           ])
                                                         ]
@@ -14849,8 +15994,9 @@ var render = function() {
                                               _c("b-input", {
                                                 attrs: {
                                                   type: "textarea",
-                                                  placeholder:
-                                                    "Type your comment..."
+                                                  placeholder: _vm.$t(
+                                                    "app.placeholder_comment"
+                                                  )
                                                 },
                                                 model: {
                                                   value:
@@ -14898,8 +16044,9 @@ var render = function() {
                                               "\n                        " +
                                                 _vm._s(
                                                   _vm.isSubmittingQualificationAttachment
-                                                    ? "Submitting..."
-                                                    : "Add"
+                                                    ? "" +
+                                                        _vm.$t("app.submitting")
+                                                    : _vm.$t("app.add")
                                                 ) +
                                                 "\n                      "
                                             )
@@ -14916,7 +16063,7 @@ var render = function() {
                                               }
                                             }
                                           },
-                                          [_vm._v("Cancel")]
+                                          [_vm._v(_vm._s(_vm.$t("app.cancel")))]
                                         )
                                       ],
                                       1
@@ -14947,7 +16094,11 @@ var render = function() {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "file", label: "File", sortable: "" },
+                      attrs: {
+                        field: "file",
+                        label: _vm.$tc("app.file", 1),
+                        sortable: ""
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -14976,7 +16127,7 @@ var render = function() {
                     _c("b-table-column", {
                       attrs: {
                         field: "comment",
-                        label: "Commment",
+                        label: _vm.$tc("app.comment", 1),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
@@ -14990,7 +16141,10 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "actions", label: "Actions" },
+                      attrs: {
+                        field: "actions",
+                        label: _vm.$tc("app.action", 2)
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -15004,7 +16158,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Replace attachment",
+                                        label: _vm.$t("app.replaceAttachment"),
                                         type: "is-dark"
                                       }
                                     },
@@ -15015,7 +16169,13 @@ var render = function() {
                                           size: "is-small",
                                           pack: "fas",
                                           "icon-right": "upload",
-                                          id: "comment-id" + props.row.id
+                                          id:
+                                            "comment-id" +
+                                            _vm.getAttachmentDropperId,
+                                          disabled: !_vm.userOrPermission(
+                                            "update",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -15033,7 +16193,10 @@ var render = function() {
                                   _c(
                                     "b-tooltip",
                                     {
-                                      attrs: { label: "Edit", type: "is-dark" }
+                                      attrs: {
+                                        label: _vm.$t("app.editComment"),
+                                        type: "is-dark"
+                                      }
                                     },
                                     [
                                       _c("b-button", {
@@ -15042,7 +16205,13 @@ var render = function() {
                                           size: "is-small",
                                           pack: "fas",
                                           "icon-right": "pen",
-                                          id: "comment-id" + props.row.id
+                                          id:
+                                            "comment-id" +
+                                            _vm.getAttachmentDropperId,
+                                          disabled: !_vm.userOrPermission(
+                                            "update",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -15061,7 +16230,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: "Delete",
+                                        label: _vm.$t("app.delete"),
                                         type: "is-dark"
                                       }
                                     },
@@ -15071,7 +16240,11 @@ var render = function() {
                                         attrs: {
                                           size: "is-small",
                                           pack: "fas",
-                                          "icon-right": "trash"
+                                          "icon-right": "trash",
+                                          disabled: !_vm.userOrPermission(
+                                            "delete",
+                                            _vm.getProfile.user_id
+                                          )
                                         },
                                         on: {
                                           click: function($event) {
@@ -16488,48 +17661,532 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-detail-bar" }, [
-      _c("p", { staticClass: "p-text" }, [_vm._v("Employee Qualifications")])
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "b__collapse__section" }, [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "profile-detail-bar" }, [
+        _c("p", { staticClass: "p-text" }, [
+          _vm._v(_vm._s(_vm.$t("app.report_to_cta")))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-content" }, [
+        _c("div", { staticClass: "content" }, [
+          _c("div", { staticClass: "columns" }, [
+            _c("div", { staticClass: "column is-4" }, [
+              _c("h5", { staticClass: "text-main" }, [
+                _vm._v(_vm._s(_vm.$t("app.report_to")))
+              ]),
+              _vm._v(" "),
+              _vm.getMyLeaders.managers.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "mb-3" },
+                    _vm._l(_vm.getMyLeaders.managers, function(s, i) {
+                      return _c(
+                        "div",
+                        { key: i },
+                        [
+                          _vm.getProfile.branch_id === s.branch_id
+                            ? [
+                                _c("h5", {}, [
+                                  _vm._v(_vm._s(_vm.$t("app.manager")) + "(s)")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(
+                                        _vm.getFullName({
+                                          title: s.title,
+                                          lastName: s.lastName,
+                                          firstName: s.firstName,
+                                          middleName: s.middleName
+                                        })
+                                      ) +
+                                      "\n                  "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(s.mobile) +
+                                      "\n                  "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(s.mail) +
+                                      "\n                  "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(s.position) +
+                                      "\n                  "
+                                  )
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.getMyLeaders.hods.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "mb-3" },
+                    _vm._l(_vm.getMyLeaders.hods, function(s, i) {
+                      return _c(
+                        "div",
+                        { key: i },
+                        [
+                          _vm.getProfile.department_id === s.department_id
+                            ? [
+                                _c("h5", {}, [
+                                  _vm._v(_vm._s(_vm.$t("app.hod")) + "(s)")
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "report_to_text" }, [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(
+                                        _vm.getFullName({
+                                          title: s.title,
+                                          lastName: s.lastName,
+                                          firstName: s.firstName,
+                                          middleName: s.middleName
+                                        })
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                  _c(
+                                    "span",
+                                    { staticClass: "report_to_label" },
+                                    [_vm._v("Name")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                s.mobile
+                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(s.mobile) +
+                                          "\n                    "
+                                      ),
+                                      _c(
+                                        "span",
+                                        { staticClass: "report_to_label" },
+                                        [_vm._v("Mobile")]
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                s.mail
+                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(s.mail) +
+                                          "\n                    "
+                                      ),
+                                      _c(
+                                        "span",
+                                        { staticClass: "report_to_label" },
+                                        [_vm._v("Email")]
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                s.position
+                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(s.position) +
+                                          "\n                    "
+                                      ),
+                                      _c(
+                                        "span",
+                                        { staticClass: "report_to_label" },
+                                        [_vm._v("Position")]
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.getMyLeaders.supervisors.length > 0
+                ? _c(
+                    "div",
+                    {},
+                    _vm._l(_vm.getMyLeaders.supervisors, function(s, i) {
+                      return _c(
+                        "div",
+                        { key: i },
+                        [
+                          _vm.getProfile.unit_id === s.unit_id
+                            ? [
+                                _c("h5", {}, [
+                                  _vm._v(
+                                    _vm._s(_vm.$t("app.supervisor")) + "(s)"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "report_to_text" }, [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(
+                                        _vm.getFullName({
+                                          title: s.title,
+                                          lastName: s.lastName,
+                                          firstName: s.firstName,
+                                          middleName: s.middleName
+                                        })
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                  _c(
+                                    "span",
+                                    { staticClass: "report_to_label" },
+                                    [_vm._v("Name")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                s.mobile
+                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(s.mobile) +
+                                          "\n                    "
+                                      ),
+                                      _c(
+                                        "span",
+                                        { staticClass: "report_to_label" },
+                                        [_vm._v("Mobile")]
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                s.mail
+                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(s.mail) +
+                                          "\n                    "
+                                      ),
+                                      _c(
+                                        "span",
+                                        { staticClass: "report_to_label" },
+                                        [_vm._v("Email")]
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                s.position
+                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(s.position) +
+                                          "\n                    "
+                                      ),
+                                      _c(
+                                        "span",
+                                        { staticClass: "report_to_label" },
+                                        [_vm._v("Position")]
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column is-4" }, [
+              _c("h5", { staticClass: "text-main" }, [
+                _vm._v(_vm._s(_vm.$t("app.report_to_me")))
+              ]),
+              _vm._v(" "),
+              _vm.getMyLeaders.reportToMe.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "mb-3" },
+                    _vm._l(_vm.getMyLeaders.reportToMe, function(s, i) {
+                      return _c("div", { key: i }, [
+                        _c("p", [
+                          _vm._v(
+                            "\n                  " +
+                              _vm._s(
+                                _vm.getFullName({
+                                  title: s.title,
+                                  lastName: s.lastName,
+                                  firstName: s.firstName,
+                                  middleName: s.middleName
+                                })
+                              ) +
+                              "\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                  " +
+                              _vm._s(s.mobile) +
+                              "\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                  " +
+                              _vm._s(s.mail) +
+                              "\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                  " +
+                              _vm._s(s.position) +
+                              "\n                "
+                          )
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm.$page.props.authUser.report_to_roles &&
+            JSON.parse(_vm.$page.props.authUser.report_to_roles).length > 0
+              ? _c("div", { staticClass: "column is-4" }, [
+                  _c("h5", { staticClass: "text-main" }, [
+                    _vm._v(_vm._s("Directorate/Office"))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "mb-3" },
+                    _vm._l(
+                      JSON.parse(_vm.$page.props.authUser.report_to_roles),
+                      function(office, i) {
+                        return _c(
+                          "div",
+                          { key: i },
+                          [
+                            _c("h5", {}, [
+                              _vm._v(_vm._s(_vm.$t("app.report_to")))
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.getMyLeaders.directorates, function(
+                              d,
+                              j
+                            ) {
+                              return [
+                                JSON.parse(d.roles).includes(office)
+                                  ? _c("article", { key: j }, [
+                                      _c(
+                                        "p",
+                                        { staticClass: "report_to_text" },
+                                        [
+                                          _vm._v(
+                                            "\n                      " +
+                                              _vm._s(
+                                                _vm.getFullName({
+                                                  title: d.title,
+                                                  lastName: d.lastName,
+                                                  firstName: d.firstName,
+                                                  middleName: d.middleName
+                                                })
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "report_to_label" },
+                                            [_vm._v("Name")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      d.mobile
+                                        ? _c(
+                                            "p",
+                                            { staticClass: "report_to_text" },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(_vm.s.mobile) +
+                                                  "\n                      "
+                                              ),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass: "report_to_label"
+                                                },
+                                                [_vm._v("Mobile")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      d.mail
+                                        ? _c(
+                                            "p",
+                                            { staticClass: "report_to_text" },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(_vm.s.mail) +
+                                                  "\n                      "
+                                              ),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass: "report_to_label"
+                                                },
+                                                [_vm._v("Email")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      office
+                                        ? _c(
+                                            "p",
+                                            { staticClass: "report_to_text" },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(office) +
+                                                  "\n                      "
+                                              ),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass: "report_to_label"
+                                                },
+                                                [_vm._v("Office")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ])
+                                  : _vm._e()
+                              ]
+                            })
+                          ],
+                          2
+                        )
+                      }
+                    ),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _vm.getMyLeaders.reportToMe.length > 0
+                    ? _c(
+                        "div",
+                        { staticClass: "mb-3" },
+                        _vm._l(_vm.getMyLeaders.reportToMe, function(s, i) {
+                          return _c("div", { key: i }, [
+                            _c("h5", {}, [
+                              _vm._v(_vm._s(_vm.$t("app.report_to_me")))
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(
+                                    _vm.getFullName({
+                                      title: s.title,
+                                      lastName: s.lastName,
+                                      firstName: s.firstName,
+                                      middleName: s.middleName
+                                    })
+                                  ) +
+                                  "\n                "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(s.mobile) +
+                                  "\n                "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(s.mail) +
+                                  "\n                "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(s.position) +
+                                  "\n                "
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e()
+          ])
+        ])
+      ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("p", { staticClass: "card-header-title" }, [_vm._v("Education")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("p", { staticClass: "card-header-title" }, [_vm._v("Skills")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("p", { staticClass: "card-header-title" }, [_vm._v("Languages")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("p", { staticClass: "card-header-title" }, [_vm._v("Attachments")])
-    ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -17456,6 +19113,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QualificationDetails_vue_vue_type_template_id_9268b5a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QualificationDetails_vue_vue_type_template_id_9268b5a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ess/profile/ReportToDetails.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/ess/profile/ReportToDetails.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReportToDetails_vue_vue_type_template_id_80913e30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true& */ "./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true&");
+/* harmony import */ var _ReportToDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReportToDetails.vue?vue&type=script&lang=js& */ "./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ReportToDetails_vue_vue_type_style_index_0_id_80913e30_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true& */ "./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ReportToDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReportToDetails_vue_vue_type_template_id_80913e30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReportToDetails_vue_vue_type_template_id_80913e30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "80913e30",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ess/profile/ReportToDetails.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportToDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true&":
+/*!***************************************************************************************************************************!*\
+  !*** ./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_style_index_0_id_80913e30_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=style&index=0&id=80913e30&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_style_index_0_id_80913e30_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_style_index_0_id_80913e30_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_style_index_0_id_80913e30_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_style_index_0_id_80913e30_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_template_id_80913e30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ess/profile/ReportToDetails.vue?vue&type=template&id=80913e30&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_template_id_80913e30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportToDetails_vue_vue_type_template_id_80913e30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

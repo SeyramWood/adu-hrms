@@ -23,7 +23,10 @@
                       </div>
                       <div class="brand-logo">
                         <img
-                          :src="`/storage/logo/${getOrganizationProfile.logo}`"
+                          :src="`/storage/logo/${
+                            getOrganizationProfile &&
+                            getOrganizationProfile.logo
+                          }`"
                           alt="Brand Logo"
                         />
                       </div>
@@ -840,7 +843,7 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`department-id${props.row.id.toString()}`"
+                          :id="`department-id${getDropperId}`.toString()"
                           @click="openDepartmentDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
@@ -851,6 +854,206 @@
                           pack="fas"
                           icon-right="trash"
                           @click="deleteDepartment(props.row.id)"
+                        ></b-button>
+                      </b-tooltip>
+                    </div>
+                  </b-table-column>
+                </b-table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </b-tab-item>
+      <b-tab-item label="Unit">
+        <section class="b__collapse__section">
+          <b-collapse
+            class="card"
+            v-model="toggleAddOrganizationUnit"
+            animation="slide"
+            aria-id="addreason"
+          >
+            <div
+              slot="trigger"
+              slot-scope="props"
+              class="card-header"
+              role="button"
+              aria-controls="addreason"
+            >
+              <p class="card-header-title">
+                <b-icon type="is-info" pack="fas" icon="plus"></b-icon>
+                <span class="has-text-info">Add New Unit</span>
+              </p>
+              <a class="card-header-icon">
+                <b-icon
+                  type="is-info"
+                  pack="fas"
+                  :icon="props.open ? 'angle-up' : 'angle-down'"
+                ></b-icon>
+              </a>
+            </div>
+            <div class="card-content">
+              <div class="content">
+                <form @submit.prevent="addOrganizationUnit()">
+                  <div class="columns">
+                    <div class="column is-2">
+                      <label class="label">Unit Name</label>
+                    </div>
+                    <div class="column is-4">
+                      <b-field
+                        :type="{
+                          'is-danger': organizationUnitErrors.name.length > 0,
+                        }"
+                        :message="organizationUnitErrors.name"
+                      >
+                        <b-input
+                          size=""
+                          expanded
+                          v-model="organizationUnit.name"
+                        ></b-input>
+                      </b-field>
+                    </div>
+                  </div>
+                  <div class="columns">
+                    <div class="column is-2">
+                      <label class="label">Select Department</label>
+                    </div>
+                    <div class="column is-4">
+                      <b-field
+                        :type="{
+                          'is-danger':
+                            organizationUnitErrors.department.length > 0,
+                        }"
+                        :message="organizationUnitErrors.department"
+                      >
+                        <b-select
+                          type="is-info"
+                          expanded
+                          v-model="organizationUnit.department"
+                        >
+                          <option
+                            :value="d.id"
+                            v-for="(d, i) in getDepartments"
+                            :key="d.name + i"
+                          >
+                            {{ d.name }}
+                          </option>
+                        </b-select>
+                      </b-field>
+                    </div>
+                  </div>
+
+                  <hr />
+                  <b-field class="buttons">
+                    <button
+                      class="button is-success is-light"
+                      :disabled="isSubmittingNewUnit"
+                    >
+                      {{ isSubmittingNewUnit ? "Submitting..." : "Add" }}
+                    </button>
+                    <b-button
+                      class="is-danger is-light"
+                      @click="cancelAddOrganizationUnit()"
+                      >Cancel</b-button
+                    >
+                  </b-field>
+                </form>
+              </div>
+            </div>
+          </b-collapse>
+        </section>
+        <section class="b__collapse__section">
+          <div class="card">
+            <header class="card-header">
+              <article class="table__header">
+                <h5 class="table__header__title">Units</h5>
+              </article>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <section class="py-4 multiples-actions">
+                  <b-dropdown
+                    aria-role="list"
+                    :disabled="checkedUnits.length > 0 ? false : true"
+                  >
+                    <template #trigger="{ active }">
+                      <b-button
+                        type="is-info is-light"
+                        label="Actions"
+                        pack="fas"
+                        :icon-right="active ? 'angle-up' : 'angle-down'"
+                      />
+                    </template>
+                    <b-dropdown-item aria-role="listitem" @click="deleteUnits()"
+                      >Delete units</b-dropdown-item
+                    >
+                  </b-dropdown>
+                </section>
+                <b-table
+                  :data="getUnits"
+                  :paginated="isPaginated"
+                  :per-page="perPage"
+                  :current-page="currentPage"
+                  :pagination-simple="isPaginationSimple"
+                  :pagination-position="paginationPosition"
+                  :default-sort-direction="defaultSortDirection"
+                  :sort-icon="sortIcon"
+                  :sort-icon-size="sortIconSize"
+                  :checked-rows.sync="checkedUnits"
+                  checkable
+                  striped
+                  hoverable
+                  default-sort="id"
+                  aria-next-label="Next page"
+                  aria-previous-label="Previous page"
+                  aria-page-label="Page"
+                  aria-current-label="Current page"
+                >
+                  <b-table-column
+                    field="id"
+                    label="ID"
+                    width="40"
+                    sortable
+                    numeric
+                    v-slot="props"
+                    >{{ props.row.id }}</b-table-column
+                  >
+                  <b-table-column
+                    field="name"
+                    label="Unit"
+                    sortable
+                    v-slot="props"
+                    >{{ props.row.name }}</b-table-column
+                  >
+                  <b-table-column
+                    field="department"
+                    label="Department"
+                    sortable
+                    v-slot="props"
+                    >{{ props.row.department }}</b-table-column
+                  >
+                  <b-table-column
+                    field="actions"
+                    label="Actions"
+                    v-slot="props"
+                  >
+                    <div class="b-tooltips">
+                      <b-tooltip label="Edit" size="is-small" type="is-dark">
+                        <b-button
+                          class="is-info is-light"
+                          size="is-small"
+                          pack="fas"
+                          icon-right="pen"
+                          :id="`unit-id${getUnitDropperId}`.toString()"
+                          @click="openUnitDropper(props.row)"
+                        ></b-button>
+                      </b-tooltip>
+                      <b-tooltip label="Delete" size="is-small" type="is-dark">
+                        <b-button
+                          class="is-danger is-light"
+                          size="is-small"
+                          pack="fas"
+                          icon-right="trash"
+                          @click="deleteUnit(props.row.id)"
                         ></b-button>
                       </b-tooltip>
                     </div>
@@ -1007,7 +1210,7 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`position-id${props.row.id.toString()}`"
+                          :id="`position-id${getPositionDropperId}`.toString()"
                           @click="openPositionDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
@@ -1039,8 +1242,9 @@
       :z-index="1000"
     >
       <form @submit.prevent="updateOrganizationDepartment()">
+        <h5 class="text-main pb-3">Update Department</h5>
         <b-field
-          label="Update department"
+          label="Department"
           :type="{
             'is-danger': organizationDepartmentErrors.name.length > 0,
           }"
@@ -1072,6 +1276,65 @@
       </form>
     </dropper>
     <dropper
+      :join="`#unit-id${getUnitDropperId}`"
+      ref="unitDropper"
+      @esc-keydown="closeUnitDropper"
+      @other-area-clicked="closeUnitDropper"
+      class="dropper"
+      :z-index="1000"
+    >
+      <form @submit.prevent="updateOrganizationUnit()">
+        <h5 class="text-main pb-3">Update Unit</h5>
+        <b-field
+          label="Unit"
+          :type="{
+            'is-danger': organizationUnitErrors.name.length > 0,
+          }"
+          :message="organizationUnitErrors.name"
+        >
+          <b-input size="" expanded v-model="organizationUnit.name"></b-input>
+        </b-field>
+        <b-field
+          label="Department"
+          :type="{
+            'is-danger': organizationUnitErrors.department.length > 0,
+          }"
+          :message="organizationUnitErrors.department"
+        >
+          <b-select
+            type="is-info"
+            expanded
+            v-model="organizationUnit.department"
+          >
+            <option
+              :value="d.id"
+              v-for="(d, i) in getDepartments"
+              :key="d.name + i"
+            >
+              {{ d.name }}
+            </option>
+          </b-select>
+        </b-field>
+        <b-field class="buttons">
+          <button
+            class="button is-success is-light"
+            type="submit"
+            :disabled="isSubmittingNewUnit"
+          >
+            {{ isSubmittingNewUnit ? "Saving..." : "Save" }}
+          </button>
+          <button
+            class="button is-danger is-light"
+            type="button"
+            :disabled="isSubmittingNewUnit"
+            @click="closeUnitDropper()"
+          >
+            Cancel
+          </button>
+        </b-field>
+      </form>
+    </dropper>
+    <dropper
       :join="`#position-id${getPositionDropperId}`"
       ref="positionDropper"
       @esc-keydown="closePositionDropper"
@@ -1080,8 +1343,9 @@
       :z-index="1000"
     >
       <form @submit.prevent="updateOrganizationPosition()">
+        <h5 class="text-main pb-3">Update Position</h5>
         <b-field
-          label="Update Position"
+          label="Position"
           :type="{
             'is-danger': organizationPositionErrors.name.length > 0,
           }"
@@ -1151,12 +1415,16 @@ export default {
     ...mapGetters([
       "getBranches",
       "getDepartments",
+      "getUnits",
       "getPositions",
       "getOrganizationProfile",
       "getStaffCount",
     ]),
     getDropperId() {
       return this.dropperId.toString();
+    },
+    getUnitDropperId() {
+      return this.unitDropperId.toString();
     },
     getPositionDropperId() {
       return this.positionDropperId.toString();
@@ -1173,17 +1441,23 @@ export default {
     },
   },
   beforeMount() {
+    if (this.getOrganizationProfile) {
+      this.organizationMetadata = {
+        ...this.organizationMetadata,
+        name: this.getOrganizationProfile.name,
+        telephone: this.getOrganizationProfile.telephone,
+        email: this.getOrganizationProfile.email,
+        address: this.getOrganizationProfile.address,
+        city: this.getOrganizationProfile.city,
+        landmark: this.getOrganizationProfile.landmark,
+        district: this.getOrganizationProfile.district,
+        region: this.getOrganizationProfile.region,
+        regNumber: this.getOrganizationProfile.reg_number,
+        tin: this.getOrganizationProfile.tin,
+      };
+    }
     this.organizationMetadata = {
-      name: this.getOrganizationProfile.name,
-      telephone: this.getOrganizationProfile.telephone,
-      email: this.getOrganizationProfile.email,
-      address: this.getOrganizationProfile.address,
-      city: this.getOrganizationProfile.city,
-      landmark: this.getOrganizationProfile.landmark,
-      district: this.getOrganizationProfile.district,
-      region: this.getOrganizationProfile.region,
-      regNumber: this.getOrganizationProfile.reg_number,
-      tin: this.getOrganizationProfile.tin,
+      ...this.organizationMetadata,
       currentStaff: this.getStaffCount.current,
       pastStaff: this.getStaffCount.past,
       totalStaff: this.getStaffCount.total,
@@ -1193,10 +1467,12 @@ export default {
     return {
       toggleAddOrganizationBranch: false,
       toggleAddOrganizationDepartment: false,
+      toggleAddOrganizationUnit: false,
       toggleAddOrganizationLeadership: false,
       isSubmittingNewBranch: false,
       isSubmittingPosition: false,
       isSubmittingNewDepartment: false,
+      isSubmittingNewUnit: false,
       isUdateDepartmentModalActive: false,
       isUploadingBrandLogo: false,
       isPaginated: true,
@@ -1211,9 +1487,11 @@ export default {
       perPage: 50,
       checkedBranches: [],
       checkedDepartments: [],
+      checkedUnits: [],
       checkedPositions: [],
 
       dropperId: "",
+      unitDropperId: "",
       positionDropperId: "",
       branchId: null,
       brandLogo: null,
@@ -1227,6 +1505,7 @@ export default {
         address: "",
       },
       organizationDepartment: { name: "", id: "" },
+      organizationUnit: { name: "", department: "", id: "" },
       organizationPosition: { name: "", id: "" },
 
       organizationBranchErrors: {
@@ -1238,6 +1517,7 @@ export default {
         address: [],
       },
       organizationDepartmentErrors: { name: [] },
+      organizationUnitErrors: { name: [], department: [] },
       organizationPositionErrors: { name: [] },
       organizationMetadata: {
         name: "",
@@ -1272,6 +1552,7 @@ export default {
     ...mapActions([
       "dispatchBranch",
       "dispatchDepartment",
+      "dispatchUnit",
       "dispatchPosition",
       "dispatchOrgnizationProfile",
     ]),
@@ -1290,6 +1571,27 @@ export default {
         this.organizationDepartment.id = "";
         this.organizationDepartment.name = "";
         this.organizationDepartmentErrors.name = [];
+        dropper.close();
+      }
+    },
+    openUnitDropper(data) {
+      const dropper = this.$refs.unitDropper;
+      this.unitDropperId = data.id;
+      if (dropper) {
+        this.organizationUnit.id = data.id;
+        this.organizationUnit.name = data.name;
+        this.organizationUnit.department = data.department_id;
+        dropper.open();
+      }
+    },
+    closeUnitDropper() {
+      const dropper = this.$refs.unitDropper;
+      if (dropper) {
+        this.organizationUnit.id = "";
+        this.organizationUnit.name = "";
+        this.organizationUnit.department = "";
+        this.organizationUnitErrors.name = [];
+        this.organizationUnitErrors.department = [];
         dropper.close();
       }
     },
@@ -1319,10 +1621,19 @@ export default {
         .post(`/dashboard/update-brand-logo`, data)
         .then((res) => {
           if (res.status === 200 && res.data.updated) {
-            this.dispatchOrgnizationProfile({
-              type: "UPDATE_LOGO",
-              payload: res.data.logo,
-            });
+            if (res.data.logo) {
+              this.dispatchOrgnizationProfile({
+                type: "UPDATE_LOGO",
+                payload: res.data.logo,
+              });
+            }
+            if (res.data.org) {
+              this.dispatchOrgnizationProfile({
+                type: "UPDATE_INFO",
+                payload: res.data.org,
+              });
+            }
+
             setTimeout(() => {
               this.snackbar("Logo updated successfully", "is-dark");
               this.isUploadingBrandLogo = false;
@@ -1503,6 +1814,39 @@ export default {
           }
         });
     },
+    addOrganizationUnit() {
+      this.isSubmittingNewUnit = true;
+      this.organizationUnitErrors.name = [];
+      this.organizationUnitErrors.department = [];
+      this.$axios
+        .post("/dashboard/create-unit", this.organizationUnit)
+        .then((res) => {
+          this.organizationUnit.name = "";
+          this.organizationUnit.department = "";
+          if (res.status === 200 && res.data.created) {
+            this.dispatchUnit({
+              type: "ADD_NEW_UNIT",
+              payload: res.data.unit,
+            });
+            setTimeout(() => {
+              this.snackbar("Unit added successfully", "is-dark");
+              this.isSubmittingNewUnit = false;
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 422) {
+            this.isSubmittingNewUnit = false;
+            setTimeout(() => {
+              this.organizationUnitErrors.name =
+                err.response.data.errors.name || [];
+              this.organizationUnitErrors.department =
+                err.response.data.errors.name || [];
+            }, 1000);
+          }
+        });
+    },
+
     updateOrganizationDepartment() {
       this.isSubmittingNewDepartment = true;
       this.organizationDepartmentErrors.name = [];
@@ -1517,6 +1861,7 @@ export default {
               type: "UPDATE_DEPARTMENT",
               payload: res.data.department,
             });
+            this.closeDepartmentDropper();
             setTimeout(() => {
               this.snackbar("Department updated successfully", "is-dark");
               this.isSubmittingNewDepartment = false;
@@ -1535,6 +1880,43 @@ export default {
           }
         });
     },
+    updateOrganizationUnit() {
+      this.isSubmittingNewUnit = true;
+      this.organizationUnitErrors.name = [];
+      this.organizationUnitErrors.department = [];
+      this.$axios
+        .put(
+          `/dashboard/edit-unit/${this.organizationUnit.id}`,
+          this.organizationUnit
+        )
+        .then((res) => {
+          this.organizationUnit.name = "";
+          this.organizationUnit.department = "";
+          if (res.status === 200 && res.data.updated) {
+            this.dispatchUnit({
+              type: "UPDATE_UNIT",
+              payload: res.data.unit,
+            });
+            this.closeUnitDropper();
+            setTimeout(() => {
+              this.snackbar("Unit updated successfully", "is-dark");
+              this.isSubmittingNewUnit = false;
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 422) {
+            this.isSubmittingNewUnit = false;
+            setTimeout(() => {
+              this.organizationUnitErrors.name =
+                err.response.data.errors.name || [];
+              this.organizationUnitErrors.department =
+                err.response.data.errors.name || [];
+            }, 1000);
+          }
+        });
+    },
+
     deleteDepartment(id) {
       this.$axios
         .delete(`/dashboard/delete-department/${id}`)
@@ -1546,6 +1928,24 @@ export default {
             });
             setTimeout(() => {
               this.snackbar("Department deleted successfully", "is-dark");
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteUnit(id) {
+      this.$axios
+        .delete(`/dashboard/delete-unit/${id}`)
+        .then((res) => {
+          if (res.status === 200 && res.data.deleted) {
+            this.dispatchUnit({
+              type: "DELETE_UNIT",
+              payload: id,
+            });
+            setTimeout(() => {
+              this.snackbar("Unit deleted successfully", "is-dark");
             }, 1000);
           }
         })
@@ -1573,6 +1973,27 @@ export default {
           console.log(err);
         });
     },
+    deleteUnits() {
+      const ids = this.checkedUnits.map((r) => r.id);
+      this.$axios
+        .delete(`/dashboard/delete-units/${JSON.stringify(ids)}`)
+        .then((res) => {
+          if (res.status === 200 && res.data.deleted) {
+            this.dispatchUnit({
+              type: "DELETE_UNITS",
+              payload: ids,
+            });
+            this.checkedUnits = [];
+            setTimeout(() => {
+              this.snackbar("Units deleted successfully", "is-dark");
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     addOrganizationPosition() {
       this.isSubmittingPosition = true;
       this.organizationPositionErrors.name = [];
@@ -1723,11 +2144,18 @@ export default {
         this.toggleAddOrganizationBranch = !this.toggleAddOrganizationBranch;
       }
     },
+
     cancelAddOrganizationDepartment() {
       this.organizationDepartmentErrors.name = [];
       this.toggleAddOrganizationDepartment =
         !this.toggleAddOrganizationDepartment;
     },
+    cancelAddOrganizationUnit() {
+      this.organizationUnitErrors.name = [];
+      this.organizationUnitErrors.department = [];
+      this.toggleAddOrganizationUnit = !this.toggleAddOrganizationUnit;
+    },
+
     cancelAddOrganizationPosition() {
       this.organizationPositionErrors.name = [];
       this.toggleAddOrganizationPosition = !this.toggleAddOrganizationPosition;

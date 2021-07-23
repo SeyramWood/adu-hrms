@@ -31,8 +31,14 @@ Route::get('/config', function () {
 Route::get('/notification', function () {
   // AccountCreated::dispatch();
   $user = User::find(4);
-  $password = 'sdfdsfdsf';
-  $user->notify(new NewAccountCreated($user, $password, ['first_name' => 'Woodson', 'last_name' => 'Prikah']));
+  $password = 'password';
+
+  AccountCreated::dispatchAfterResponse($user, $password);
+  // dispatch(function () use ($user, $password) {
+
+  //   $user->notify(new NewAccountCreated($user, $password, ['first_name' => 'Woodson', 'last_name' => 'Prikah']));
+  // })->afterResponse();
+
   return (new NewAccountCreated($user, $password, ['first_name' => 'Woodson', 'last_name' => 'Prikah']))
     ->toMail($user);
 });
@@ -105,6 +111,11 @@ Route::prefix('dashboard')->group(function () {
   Route::delete('/delete-department/{department}', 'OrganizationController@deleteDepartment')->name('delete.department');
   Route::delete('/delete-departments/{departments}', 'OrganizationController@deleteDepartments')->name('delete.departments');
 
+  Route::post('/create-unit', 'OrganizationController@addUnit');
+  Route::put('/edit-unit/{unit}', 'OrganizationController@editUnit');
+  Route::delete('/delete-unit/{unit}', 'OrganizationController@deleteUnit');
+  Route::delete('/delete-units/{units}', 'OrganizationController@deleteUnits');
+
   Route::post('/create-position', 'OrganizationController@addPosition')->name('create.position');
   Route::put('/edit-position/{position}', 'OrganizationController@editPosition')->name('update.position');
   Route::delete('/delete-position/{position}', 'OrganizationController@deletePosition')->name('delete.position');
@@ -113,6 +124,18 @@ Route::prefix('dashboard')->group(function () {
   Route::post('/update-brand-logo', 'OrganizationController@editBrandLogo')->name('update.logo');
   Route::post('/update-organization-metadata', 'OrganizationController@editMetadata')->name('update.metadata');
 
+  /**
+   * Table Pagination Routes
+   */
+  Route::post('/add-role', 'RoleController@addNewRole');
+  Route::put('/update-role/{role}', 'RoleController@editRole');
+  Route::put('/add-role-user/{role}', 'RoleController@addRoleUser');
+  Route::put('/delete-role-user/{role}/{staff}', 'RoleController@deleteRoleUser');
+  Route::put('/add-role-permission/{role}', 'RoleController@addRolePermission');
+  Route::delete('/delete-role/{role}', 'RoleController@deleteRole');
+  Route::delete('/delete-roles/{roles}', 'RoleController@deleteRoles');
+  Route::put('/add-report-to-role/{role}', 'RoleController@addReportToRole');
+  Route::put('/remove-report-to-role/{role}/{reportTo}', 'RoleController@deleteReportToRole');
 
   /**
    * ESS Routes
@@ -145,6 +168,8 @@ Route::prefix('dashboard')->group(function () {
    * KPI Routes
    */
   Route::post('/add-appraisal', 'KPIController@storeAppraisal');
+  Route::get('/get-appraisal-goal/{appraisal}', 'KPIController@getAppraisalGoal');
+  Route::post('/add-key-goal', 'KeyGoalController@store');
 
 
 

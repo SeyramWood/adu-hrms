@@ -521,7 +521,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -548,9 +547,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     employmentStatuses: Array,
     branches: Array,
     departments: Array,
+    units: Array,
     positions: Array,
     jobCategories: Array,
-    rolePermissions: Object,
     workShifts: Array
   },
   created: function created() {
@@ -569,15 +568,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.dispatchDepartment({
       payload: this.departments
     });
+    this.dispatchUnit({
+      payload: this.units
+    });
     this.dispatchPosition({
       payload: this.positions
     });
     this.dispatchJobCategory({
       payload: this.jobCategories
-    });
-    this.dispatchUserAccount({
-      type: "ADD_ROLE_PERMISSION",
-      payload: JSON.parse(this.rolePermissions.role_permission)
     });
     this.dispatchWorkShift({
       payload: this.workShifts
@@ -591,7 +589,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchUserAccount", "dispatchStaff", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment", "dispatchPosition", "dispatchJobCategory", "dispatchWorkShift"]))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchUserAccount", "dispatchStaff", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchJobCategory", "dispatchWorkShift"]))
 });
 
 /***/ }),
@@ -1227,6 +1225,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1300,7 +1305,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return "";
     },
-    openAssignShiftModal: function openAssignShiftModal(staffToAssignId) {
+    openAssignModal: function openAssignModal(staffToAssign) {
       this.$buefy.modal.open({
         parent: this,
         component: _modal_AssignmentModal__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -1308,7 +1313,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         trapFocus: true,
         canCancel: ["escape"],
         props: {
-          staffToAssignId: staffToAssignId
+          staffToAssign: staffToAssign
         }
       });
     }
@@ -1849,22 +1854,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AssignmentModal",
   props: {
-    staffToAssignId: {
+    staffToAssign: {
       require: true
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getPositions", "getEmploymentStatus", "getBranches", "getDepartments", "getJobTitles", "getJobCategories"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getPositions", "getEmploymentStatus", "getBranches", "getDepartments", "getUnits", "getJobTitles", "getJobCategories"])),
+  beforeMount: function beforeMount() {
+    this.empStatus.value = this.staffToAssign.employmentStatusId;
+    this.jobTitle.value = this.staffToAssign.jobTitleId;
+    this.department.value = this.staffToAssign.department_id;
+    this.unit.value = this.staffToAssign.unit_id;
+    this.branch.value = this.staffToAssign.branch_id;
+  },
   data: function data() {
     return {
       isSubmittingJobTitle: false,
       isSubmittingEmpStatus: false,
       isSubmittingBranch: false,
       isSubmittingDepartment: false,
+      isSubmittingUnit: false,
       isSubmittingPosition: false,
+      departmentUnits: [],
       jobTitle: {
         value: "",
         errors: []
@@ -1877,11 +1908,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         value: "",
         errors: []
       },
-      deparment: {
+      department: {
         value: "",
         errors: []
       },
-      position: {
+      unit: {
         value: "",
         errors: []
       },
@@ -1891,6 +1922,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchStaff"])), {}, {
     cancelModal: function cancelModal() {
       this.$emit("close");
+    },
+    getStaffDepartmentUnits: function getStaffDepartmentUnits(id) {
+      if (this.isNull(id)) {
+        return this.getUnits.map(function (u) {
+          return u.deparment_id === id;
+        });
+      }
+
+      return [];
     },
     updateAssignment: function updateAssignment(type) {
       var _this = this;
@@ -1921,29 +1961,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (type === "department") {
         this.isSubmittingDepartment = true;
         data = {
-          department: this.deparment.value
+          department: this.department.value
         };
       }
 
-      if (type === "position") {
-        this["this"].isSubmittingPosition = false;
+      if (type === "unit") {
+        this.isSubmittingUnit = true;
         data = {
-          position: this.position.value
+          unit: this.unit.value
         };
       }
 
-      this.$axios.put("/dashboard/ess/update-job-assignment/".concat(this.staffToAssignId, "/").concat(type), data).then(function (res) {
+      this.$axios.put("/dashboard/ess/update-job-assignment/".concat(this.staffToAssign.id, "/").concat(type), data).then(function (res) {
         _this.isSubmittingJobTitle = false;
         _this.isSubmittingEmpStatus = false;
         _this.isSubmittingBranch = false;
         _this.isSubmittingDepartment = false;
+        _this.isSubmittingUnit = false;
         _this.isSubmittingPosition = false;
 
         if (res.status === 200 && res.data.assigned) {
           _this.dispatchStaff({
             type: "UPDATE_JOB",
             payload: {
-              id: _this.staffToAssignId,
+              id: _this.staffToAssign.id,
               data: res.data.staff
             }
           });
@@ -1955,8 +1996,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.nodataErr = "";
           }, 5000);
         }
-
-        console.log(res);
       })["catch"](function (err) {});
     }
   })
@@ -2134,1294 +2173,14 @@ var render = function() {
         "tabs",
         { attrs: { stickyTab: "main__content__sticky" } },
         [
-          _c(
-            "tab",
-            { attrs: { label: "Staff List" } },
-            [_c("StaffListComponent")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "tab",
-            { attrs: { label: "Work Shifts" } },
-            [_c("ShiftListComponent")],
-            1
-          ),
-          _vm._v(" "),
-          _c("tab", { attrs: { label: "Reports" } }, [
-            _c(
-              "section",
-              { staticClass: "b__collapse__section" },
-              [
-                _c(
-                  "b-collapse",
-                  {
-                    staticClass: "card",
-                    attrs: {
-                      open: false,
-                      animation: "slide",
-                      "aria-id": "definereport"
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "trigger",
-                        fn: function(props) {
-                          return _c(
-                            "div",
-                            {
-                              staticClass: "card-header",
-                              attrs: {
-                                role: "button",
-                                "aria-controls": "definereport"
-                              }
-                            },
-                            [
-                              _c("p", { staticClass: "card-header-title" }, [
-                                _vm._v("Generate Report")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                { staticClass: "card-header-icon" },
-                                [
-                                  _c("b-icon", {
-                                    attrs: {
-                                      pack: "fas",
-                                      icon: props.open
-                                        ? "caret-down"
-                                        : "caret-up"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        }
-                      }
-                    ])
-                  },
-                  [
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-content" }, [
-                      _c("div", { staticClass: "content" }, [
-                        _c(
-                          "form",
-                          { attrs: { action: "" } },
-                          [
-                            _c("div", { staticClass: "columns" }, [
-                              _c("div", { staticClass: "column is-2" }, [
-                                _c("label", { staticClass: "label" }, [
-                                  _vm._v("Report Name")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c("b-input", {
-                                    attrs: { size: "is-small", expanded: "" }
-                                  })
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "columns" }, [
-                              _c("div", { staticClass: "column is-2" }, [
-                                _c("label", { staticClass: "label" }, [
-                                  _vm._v("Selection Criteria")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-select",
-                                    {
-                                      attrs: { size: "is-small", expanded: "" }
-                                    },
-                                    [
-                                      _c("option", [_vm._v("Full-Time")]),
-                                      _vm._v(" "),
-                                      _c("option", [_vm._v("Part-Time")]),
-                                      _vm._v(" "),
-                                      _c("option", [_vm._v("Other")])
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column is-2" },
-                                [
-                                  _c(
-                                    "b-button",
-                                    { attrs: { size: "is-small" } },
-                                    [_vm._v("Add")]
-                                  )
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("h6", [_vm._v("Selected Criterion")]),
-                            _vm._v(" "),
-                            _c("section", [
-                              _c("div", { staticClass: "columns" }, [
-                                _c("div", { staticClass: "column is-2" }, [
-                                  _c("label", { staticClass: "label" }, [
-                                    _vm._v("Include")
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "column is-3" },
-                                  [
-                                    _c(
-                                      "b-select",
-                                      {
-                                        attrs: {
-                                          size: "is-small",
-                                          expanded: ""
-                                        }
-                                      },
-                                      [
-                                        _c("option", [_vm._v("Full-Time")]),
-                                        _vm._v(" "),
-                                        _c("option", [_vm._v("Part-Time")]),
-                                        _vm._v(" "),
-                                        _c("option", [_vm._v("Other")])
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("section", [
-                                _c("div", { staticClass: "columns" }, [
-                                  _c("div", { staticClass: "column is-2" }, [
-                                    _c("label", { staticClass: "label" }, [
-                                      _vm._v("Staff Name")
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "column is-3" },
-                                    [
-                                      _c("b-input", {
-                                        attrs: {
-                                          size: "is-small",
-                                          expanded: ""
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "column is-2" },
-                                    [
-                                      _c(
-                                        "b-button",
-                                        { attrs: { size: "is-small" } },
-                                        [_vm._v("Delete")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "columns" }, [
-                                  _c("div", { staticClass: "column is-2" }, [
-                                    _c("label", { staticClass: "label" }, [
-                                      _vm._v("Eployment Status")
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "column is-3" },
-                                    [
-                                      _c(
-                                        "b-select",
-                                        {
-                                          attrs: {
-                                            size: "is-small",
-                                            expanded: ""
-                                          }
-                                        },
-                                        [
-                                          _c("option", [_vm._v("Full-Time")]),
-                                          _vm._v(" "),
-                                          _c("option", [_vm._v("Part-Time")]),
-                                          _vm._v(" "),
-                                          _c("option", [_vm._v("Other")])
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "column is-2" },
-                                    [
-                                      _c(
-                                        "b-button",
-                                        { attrs: { size: "is-small" } },
-                                        [_vm._v("Delete")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("hr"),
-                            _vm._v(" "),
-                            _c("section", [
-                              _c("div", { staticClass: "columns" }, [
-                                _c("div", { staticClass: "column is-2" }, [
-                                  _c("label", { staticClass: "label" }, [
-                                    _vm._v("Select Field Groups")
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "column is-3" },
-                                  [
-                                    _c(
-                                      "b-select",
-                                      {
-                                        attrs: {
-                                          size: "is-small",
-                                          expanded: ""
-                                        }
-                                      },
-                                      [
-                                        _c("option", [_vm._v("Full-Time")]),
-                                        _vm._v(" "),
-                                        _c("option", [_vm._v("Part-Time")]),
-                                        _vm._v(" "),
-                                        _c("option", [_vm._v("Other")])
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "column is-2" },
-                                  [
-                                    _c(
-                                      "b-button",
-                                      { attrs: { size: "is-small" } },
-                                      [_vm._v("Add")]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "columns" }, [
-                                _c("div", { staticClass: "column is-2" }, [
-                                  _c("label", { staticClass: "label" }, [
-                                    _vm._v("Select Fields")
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "column is-3" },
-                                  [
-                                    _c(
-                                      "b-select",
-                                      {
-                                        attrs: {
-                                          size: "is-small",
-                                          expanded: ""
-                                        }
-                                      },
-                                      [
-                                        _c("option", [_vm._v("Full-Time")]),
-                                        _vm._v(" "),
-                                        _c("option", [_vm._v("Part-Time")]),
-                                        _vm._v(" "),
-                                        _c("option", [_vm._v("Other")])
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "column is-2" },
-                                  [
-                                    _c(
-                                      "b-button",
-                                      { attrs: { size: "is-small" } },
-                                      [_vm._v("Add")]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("hr"),
-                            _vm._v(" "),
-                            _c("h6", [_vm._v("Display Fields")]),
-                            _vm._v(" "),
-                            _c("section", [
-                              _c(
-                                "ul",
-                                { staticClass: "report__display__fields" },
-                                [
-                                  _c(
-                                    "li",
-                                    {
-                                      staticClass:
-                                        "report__display__fields__list"
-                                    },
-                                    [
-                                      _c(
-                                        "span",
-                                        [
-                                          _c("b-icon", {
-                                            attrs: {
-                                              size: "is-small",
-                                              pack: "fas",
-                                              icon: "times",
-                                              type: "is-danger"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("span", [
-                                            _vm._v(
-                                              "Persoanal Details (Include header)"
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("b-checkbox", {
-                                            attrs: { size: "is-small" }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "ul",
-                                        {
-                                          staticClass:
-                                            "report__display__fields__list__deep"
-                                        },
-                                        [
-                                          _c(
-                                            "li",
-                                            {
-                                              staticClass:
-                                                "report__display__fields__list__deep__list"
-                                            },
-                                            [
-                                              _c("b-icon", {
-                                                attrs: {
-                                                  size: "is-small",
-                                                  pack: "fas",
-                                                  icon: "times",
-                                                  type: "is-danger"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("span", [_vm._v("First Name")])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "li",
-                                            {
-                                              staticClass:
-                                                "report__display__fields__list__deep__list"
-                                            },
-                                            [
-                                              _c("b-icon", {
-                                                attrs: {
-                                                  size: "is-small",
-                                                  pack: "fas",
-                                                  icon: "times",
-                                                  type: "is-danger"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("span", [_vm._v("Last Name")])
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "report__display__fields" },
-                                [
-                                  _c(
-                                    "li",
-                                    {
-                                      staticClass:
-                                        "report__display__fields__list"
-                                    },
-                                    [
-                                      _c(
-                                        "span",
-                                        [
-                                          _c("b-icon", {
-                                            attrs: {
-                                              size: "is-small",
-                                              pack: "fas",
-                                              icon: "times",
-                                              type: "is-danger"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("span", [
-                                            _vm._v("Skills (Include header)")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("b-checkbox", {
-                                            attrs: { size: "is-small" }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "ul",
-                                        {
-                                          staticClass:
-                                            "report__display__fields__list__deep"
-                                        },
-                                        [
-                                          _c(
-                                            "li",
-                                            {
-                                              staticClass:
-                                                "report__display__fields__list__deep__list"
-                                            },
-                                            [
-                                              _c("b-icon", {
-                                                attrs: {
-                                                  size: "is-small",
-                                                  pack: "fas",
-                                                  icon: "times",
-                                                  type: "is-danger"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("span", [_vm._v("Skill")])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "li",
-                                            {
-                                              staticClass:
-                                                "report__display__fields__list__deep__list"
-                                            },
-                                            [
-                                              _c("b-icon", {
-                                                attrs: {
-                                                  size: "is-small",
-                                                  pack: "fas",
-                                                  icon: "times",
-                                                  type: "is-danger"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("span", [_vm._v("Skill")])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "li",
-                                            {
-                                              staticClass:
-                                                "report__display__fields__list__deep__list"
-                                            },
-                                            [
-                                              _c("b-icon", {
-                                                attrs: {
-                                                  size: "is-small",
-                                                  pack: "fas",
-                                                  icon: "times",
-                                                  type: "is-danger"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("span", [_vm._v("Skill")])
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("hr"),
-                            _vm._v(" "),
-                            _c(
-                              "b-field",
-                              { staticClass: "buttons" },
-                              [
-                                _c(
-                                  "b-button",
-                                  { staticClass: "is-success is-light" },
-                                  [_vm._v("Generate")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-button",
-                                  { staticClass: "is-danger is-light" },
-                                  [_vm._v("Cancel")]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("section", { staticClass: "b__collapse__section" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("header", { staticClass: "card-header" }, [
-                  _c("p", { staticClass: "card-header-title" }, [
-                    _vm._v("Reports")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "content" },
-                    [
-                      [
-                        _c("div", { staticClass: "columns" }, [
-                          _c(
-                            "div",
-                            { staticClass: "column is-6" },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  placeholder: "Search...",
-                                  pack: "fas",
-                                  icon: "search",
-                                  size: "is-small"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ],
-                      _vm._v(" "),
-                      _c(
-                        "b-table",
-                        { attrs: { data: _vm.reports } },
-                        [
-                          _c("b-table-column", {
-                            attrs: {
-                              field: "id",
-                              label: "ID",
-                              width: "40",
-                              sortable: "",
-                              numeric: ""
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function(props) {
-                                  return [_vm._v(_vm._s(props.row.id))]
-                                }
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c("b-table-column", {
-                            attrs: {
-                              field: "name",
-                              label: "Name",
-                              sortable: ""
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function(props) {
-                                  return [_vm._v(_vm._s(props.row.name))]
-                                }
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "b-table-column",
-                            { attrs: { field: "actions", label: "Actions" } },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "b-tooltips" },
-                                [
-                                  _c(
-                                    "b-tooltip",
-                                    {
-                                      attrs: { label: "View", size: "is-small" }
-                                    },
-                                    [
-                                      _c("b-button", {
-                                        staticClass: "is-light",
-                                        attrs: {
-                                          size: "is-small",
-                                          pack: "fas",
-                                          "icon-right": "eye"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-tooltip",
-                                    {
-                                      attrs: { label: "Edit", size: "is-small" }
-                                    },
-                                    [
-                                      _c("b-button", {
-                                        staticClass: "is-info is-light",
-                                        attrs: {
-                                          size: "is-small",
-                                          pack: "fas",
-                                          "icon-right": "pen"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-tooltip",
-                                    {
-                                      attrs: {
-                                        label: "Delete",
-                                        size: "is-small"
-                                      }
-                                    },
-                                    [
-                                      _c("b-button", {
-                                        staticClass: "is-danger is-light",
-                                        attrs: {
-                                          size: "is-small",
-                                          pack: "fas",
-                                          "icon-right": "trash"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    2
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "tab",
-            { attrs: { label: "Configurations" } },
-            [
-              _c(
-                "b-tabs",
-                {
-                  attrs: {
-                    type: "is-toggle",
-                    size: "is-small",
-                    animated: false,
-                    expanded: ""
-                  }
-                },
-                [
-                  _c("b-tab-item", { attrs: { label: "Reporting Methods" } }, [
-                    _c(
-                      "section",
-                      { staticClass: "b__collapse__section" },
-                      [
-                        _c(
-                          "b-collapse",
-                          {
-                            staticClass: "card",
-                            attrs: {
-                              open: false,
-                              animation: "slide",
-                              "aria-id": "addreportingmethod"
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "trigger",
-                                fn: function(props) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      staticClass: "card-header",
-                                      attrs: {
-                                        role: "button",
-                                        "aria-controls": "addreportingmethod"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "p",
-                                        { staticClass: "card-header-title" },
-                                        [_vm._v("Add Reporting Methods")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "a",
-                                        { staticClass: "card-header-icon" },
-                                        [
-                                          _c("b-icon", {
-                                            attrs: {
-                                              pack: "fas",
-                                              icon: props.open
-                                                ? "caret-down"
-                                                : "caret-up"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ]
-                                  )
-                                }
-                              }
-                            ])
-                          },
-                          [
-                            _vm._v(" "),
-                            _c("div", { staticClass: "card-content" }, [
-                              _c("div", { staticClass: "content" }, [
-                                _c(
-                                  "form",
-                                  { attrs: { action: "" } },
-                                  [
-                                    _c("div", { staticClass: "columns" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-2" },
-                                        [
-                                          _c(
-                                            "label",
-                                            { staticClass: "label" },
-                                            [_vm._v("Method")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-5" },
-                                        [
-                                          _c("b-input", {
-                                            attrs: {
-                                              size: "is-small",
-                                              expanded: ""
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-2" },
-                                        [
-                                          _c(
-                                            "b-button",
-                                            { attrs: { size: "is-small" } },
-                                            [_vm._v("Add")]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("hr"),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-field",
-                                      { staticClass: "buttons" },
-                                      [
-                                        _c(
-                                          "b-button",
-                                          {
-                                            staticClass: "is-success is-light"
-                                          },
-                                          [_vm._v("Save")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-button",
-                                          { staticClass: "is-danger is-light" },
-                                          [_vm._v("Cancel")]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ])
-                            ])
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("section", { staticClass: "b__collapse__section" }, [
-                      _c("div", { staticClass: "card" }, [
-                        _c("header", { staticClass: "card-header" }, [
-                          _c("p", { staticClass: "card-header-title" }, [
-                            _vm._v("Reports")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-content" }, [
-                          _c(
-                            "div",
-                            { staticClass: "content" },
-                            [
-                              _c(
-                                "b-table",
-                                { attrs: { data: _vm.reports } },
-                                [
-                                  _c("b-table-column", {
-                                    attrs: {
-                                      field: "id",
-                                      label: "ID",
-                                      width: "40",
-                                      sortable: "",
-                                      numeric: ""
-                                    },
-                                    scopedSlots: _vm._u([
-                                      {
-                                        key: "default",
-                                        fn: function(props) {
-                                          return [_vm._v(_vm._s(props.row.id))]
-                                        }
-                                      }
-                                    ])
-                                  }),
-                                  _vm._v(" "),
-                                  _c("b-table-column", {
-                                    attrs: {
-                                      field: "name",
-                                      label: "Name",
-                                      sortable: ""
-                                    },
-                                    scopedSlots: _vm._u([
-                                      {
-                                        key: "default",
-                                        fn: function(props) {
-                                          return [
-                                            _vm._v(_vm._s(props.row.name))
-                                          ]
-                                        }
-                                      }
-                                    ])
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-table-column",
-                                    {
-                                      attrs: {
-                                        field: "actions",
-                                        label: "Actions"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "b-tooltips" },
-                                        [
-                                          _c(
-                                            "b-tooltip",
-                                            {
-                                              attrs: {
-                                                label: "Edit",
-                                                size: "is-small"
-                                              }
-                                            },
-                                            [
-                                              _c("b-button", {
-                                                staticClass: "is-info is-light",
-                                                attrs: {
-                                                  size: "is-small",
-                                                  pack: "fas",
-                                                  "icon-right": "pen"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "b-tooltip",
-                                            {
-                                              attrs: {
-                                                label: "Delete",
-                                                size: "is-small"
-                                              }
-                                            },
-                                            [
-                                              _c("b-button", {
-                                                staticClass:
-                                                  "is-danger is-light",
-                                                attrs: {
-                                                  size: "is-small",
-                                                  pack: "fas",
-                                                  "icon-right": "trash"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "b-tab-item",
-                    { attrs: { label: "Termination Reasons" } },
-                    [
-                      _c(
-                        "section",
-                        { staticClass: "b__collapse__section" },
-                        [
-                          _c(
-                            "b-collapse",
-                            {
-                              staticClass: "card",
-                              attrs: {
-                                open: false,
-                                animation: "slide",
-                                "aria-id": "addreason"
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "trigger",
-                                  fn: function(props) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        staticClass: "card-header",
-                                        attrs: {
-                                          role: "button",
-                                          "aria-controls": "addreason"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "p",
-                                          { staticClass: "card-header-title" },
-                                          [_vm._v("Add Termination Reasons")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "a",
-                                          { staticClass: "card-header-icon" },
-                                          [
-                                            _c("b-icon", {
-                                              attrs: {
-                                                pack: "fas",
-                                                icon: props.open
-                                                  ? "caret-down"
-                                                  : "caret-up"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ]
-                                    )
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _vm._v(" "),
-                              _c("div", { staticClass: "card-content" }, [
-                                _c("div", { staticClass: "content" }, [
-                                  _c(
-                                    "form",
-                                    { attrs: { action: "" } },
-                                    [
-                                      _c("div", { staticClass: "columns" }, [
-                                        _c(
-                                          "div",
-                                          { staticClass: "column is-2" },
-                                          [
-                                            _c(
-                                              "label",
-                                              { staticClass: "label" },
-                                              [_vm._v("Reason")]
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "column is-5" },
-                                          [
-                                            _c("b-input", {
-                                              attrs: {
-                                                size: "is-small",
-                                                expanded: ""
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "column is-2" },
-                                          [
-                                            _c(
-                                              "b-button",
-                                              { attrs: { size: "is-small" } },
-                                              [_vm._v("Add")]
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("hr"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-field",
-                                        { staticClass: "buttons" },
-                                        [
-                                          _c(
-                                            "b-button",
-                                            {
-                                              staticClass: "is-success is-light"
-                                            },
-                                            [_vm._v("Save")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "b-button",
-                                            {
-                                              staticClass: "is-danger is-light"
-                                            },
-                                            [_vm._v("Cancel")]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("section", { staticClass: "b__collapse__section" }, [
-                        _c("div", { staticClass: "card" }, [
-                          _c("header", { staticClass: "card-header" }, [
-                            _c("p", { staticClass: "card-header-title" }, [
-                              _vm._v("Reports")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "card-content" }, [
-                            _c(
-                              "div",
-                              { staticClass: "content" },
-                              [
-                                _c(
-                                  "b-table",
-                                  { attrs: { data: _vm.reports } },
-                                  [
-                                    _c("b-table-column", {
-                                      attrs: {
-                                        field: "id",
-                                        label: "ID",
-                                        width: "40",
-                                        sortable: "",
-                                        numeric: ""
-                                      },
-                                      scopedSlots: _vm._u([
-                                        {
-                                          key: "default",
-                                          fn: function(props) {
-                                            return [
-                                              _vm._v(_vm._s(props.row.id))
-                                            ]
-                                          }
-                                        }
-                                      ])
-                                    }),
-                                    _vm._v(" "),
-                                    _c("b-table-column", {
-                                      attrs: {
-                                        field: "name",
-                                        label: "Name",
-                                        sortable: ""
-                                      },
-                                      scopedSlots: _vm._u([
-                                        {
-                                          key: "default",
-                                          fn: function(props) {
-                                            return [
-                                              _vm._v(_vm._s(props.row.name))
-                                            ]
-                                          }
-                                        }
-                                      ])
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-table-column",
-                                      {
-                                        attrs: {
-                                          field: "actions",
-                                          label: "Actions"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          { staticClass: "b-tooltips" },
-                                          [
-                                            _c(
-                                              "b-tooltip",
-                                              {
-                                                attrs: {
-                                                  label: "Edit",
-                                                  size: "is-small"
-                                                }
-                                              },
-                                              [
-                                                _c("b-button", {
-                                                  staticClass:
-                                                    "is-info is-light",
-                                                  attrs: {
-                                                    size: "is-small",
-                                                    pack: "fas",
-                                                    "icon-right": "pen"
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "b-tooltip",
-                                              {
-                                                attrs: {
-                                                  label: "Delete",
-                                                  size: "is-small"
-                                                }
-                                              },
-                                              [
-                                                _c("b-button", {
-                                                  staticClass:
-                                                    "is-danger is-light",
-                                                  attrs: {
-                                                    size: "is-small",
-                                                    pack: "fas",
-                                                    "icon-right": "trash"
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                ],
+          _vm.isPermission("staff_list")
+            ? _c(
+                "tab",
+                { attrs: { label: "Staff List" } },
+                [_c("StaffListComponent")],
                 1
               )
-            ],
-            1
-          )
+            : _vm._e()
         ],
         1
       )
@@ -4632,7 +3391,7 @@ var render = function() {
                   _c("b-table-column", {
                     attrs: {
                       field: "department",
-                      label: "Department",
+                      label: "Department/Unit",
                       sortable: ""
                     },
                     scopedSlots: _vm._u([
@@ -4641,7 +3400,13 @@ var render = function() {
                         fn: function(props) {
                           return [
                             _c("span", [
-                              _vm._v(_vm._s(props.row.department || "N/A"))
+                              _vm._v(
+                                _vm._s(
+                                  props.row.department ||
+                                    props.row.unit ||
+                                    "N/A"
+                                )
+                              )
                             ])
                           ]
                         }
@@ -4691,17 +3456,16 @@ var render = function() {
                                   },
                                   [
                                     _c("b-button", {
-                                      staticClass: "is-light",
+                                      staticClass: "is-light is-info",
                                       attrs: {
                                         size: "is-small",
                                         pack: "fas",
-                                        "icon-right": "user-cog"
+                                        "icon-right": "user-cog",
+                                        disabled: !_vm.isPermission("update")
                                       },
                                       on: {
                                         click: function($event) {
-                                          return _vm.openAssignShiftModal(
-                                            props.row.id
-                                          )
+                                          return _vm.openAssignModal(props.row)
                                         }
                                       }
                                     })
@@ -4729,7 +3493,8 @@ var render = function() {
                                                 props.row.id +
                                                 "/" +
                                                 props.row.slug,
-                                              "preserve-scroll": ""
+                                              "preserve-scroll": "",
+                                              disabled: !_vm.isPermission("rea")
                                             }
                                           },
                                           [
@@ -4747,9 +3512,14 @@ var render = function() {
                                       : _c(
                                           "inertia-link",
                                           {
+                                            staticClass: "inertia__link__btn",
                                             attrs: {
                                               href: "/dashboard/ess",
-                                              "preserve-scroll": ""
+                                              "preserve-scroll": "",
+                                              as: "button",
+                                              disabled: !_vm.isPermission(
+                                                "read"
+                                              )
                                             }
                                           },
                                           [
@@ -5356,7 +4126,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "is-flex is-justify-content-space-between is-align-items-flex-end",
+                  "\n          is-flex is-justify-content-space-between is-align-items-flex-end\n        ",
                 staticStyle: { width: "35rem" }
               },
               [
@@ -5447,7 +4217,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "is-flex is-justify-content-space-between is-align-items-flex-end",
+                  "\n          is-flex is-justify-content-space-between is-align-items-flex-end\n        ",
                 staticStyle: { width: "35rem" }
               },
               [
@@ -5540,7 +4310,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "is-flex is-justify-content-space-between is-align-items-flex-end",
+                  "\n          is-flex is-justify-content-space-between is-align-items-flex-end\n        ",
                 staticStyle: { width: "35rem" }
               },
               [
@@ -5615,195 +4385,193 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "mb-5",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.updateAssignment("department")
-              }
-            }
-          },
-          [
-            _c(
-              "div",
+        _vm.staffToAssign.department_id
+          ? _c(
+              "form",
               {
-                staticClass:
-                  "is-flex is-justify-content-space-between is-align-items-flex-end",
-                staticStyle: { width: "35rem" }
+                staticClass: "mb-5",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateAssignment("department")
+                  }
+                }
               },
               [
                 _c(
-                  "b-field",
+                  "div",
                   {
-                    staticClass: "expand-input",
-                    attrs: {
-                      label: "Assign Department",
-                      type: {
-                        "is-danger": _vm.deparment.errors.length > 0
-                      },
-                      message: _vm.deparment.errors
-                    }
+                    staticClass:
+                      "\n          is-flex is-justify-content-space-between is-align-items-flex-end\n        ",
+                    staticStyle: { width: "35rem" }
                   },
                   [
                     _c(
-                      "b-select",
+                      "b-field",
                       {
-                        attrs: { type: "is-info", expanded: "" },
-                        model: {
-                          value: _vm.deparment.value,
-                          callback: function($$v) {
-                            _vm.$set(_vm.deparment, "value", $$v)
+                        staticClass: "expand-input",
+                        attrs: {
+                          label: "Assign Department",
+                          type: {
+                            "is-danger": _vm.department.errors.length > 0
                           },
-                          expression: "deparment.value"
-                        }
-                      },
-                      _vm._l(_vm.getDepartments, function(b, i) {
-                        return _c(
-                          "option",
-                          { key: i, domProps: { value: b.id } },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(b.name) +
-                                "\n            "
-                            )
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("b-field", { staticClass: "buttons" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "button is-success is-light",
-                      attrs: {
-                        type: "submit",
-                        disabled: _vm.isSubmittingDepartment
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(
-                            _vm.isSubmittingDepartment
-                              ? "Assigning..."
-                              : "Assign"
-                          ) +
-                          "\n          "
-                      )
-                    ]
-                  )
-                ])
-              ],
-              1
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "mb-5",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.updateAssignment("position")
-              }
-            }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-flex is-justify-content-space-between is-align-items-flex-end",
-                staticStyle: { width: "35rem" }
-              },
-              [
-                _c(
-                  "b-field",
-                  {
-                    staticClass: "expand-input",
-                    attrs: {
-                      label: "Assign Position",
-                      type: {
-                        "is-danger": _vm.position.errors.length > 0
-                      },
-                      message: _vm.position.errors
-                    }
-                  },
-                  [
-                    _c(
-                      "b-select",
-                      {
-                        attrs: { type: "is-info", expanded: "" },
-                        model: {
-                          value: _vm.position.value,
-                          callback: function($$v) {
-                            _vm.$set(_vm.position, "value", $$v)
-                          },
-                          expression: "position.value"
+                          message: _vm.department.errors
                         }
                       },
                       [
-                        _vm._l(_vm.getPositions, function(p) {
-                          return _c(
-                            "option",
-                            { key: p.id, domProps: { value: p.id } },
-                            [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(p.name) +
-                                  "\n            "
-                              )
-                            ]
-                          )
-                        }),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "remove" } }, [
-                          _vm._v("Strip Position")
-                        ])
+                        _c(
+                          "b-select",
+                          {
+                            attrs: { type: "is-info", expanded: "" },
+                            model: {
+                              value: _vm.department.value,
+                              callback: function($$v) {
+                                _vm.$set(_vm.department, "value", $$v)
+                              },
+                              expression: "department.value"
+                            }
+                          },
+                          _vm._l(_vm.getDepartments, function(b, i) {
+                            return _c(
+                              "option",
+                              { key: i, domProps: { value: b.id } },
+                              [
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(b.name) +
+                                    "\n            "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
                       ],
-                      2
-                    )
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("b-field", { staticClass: "buttons" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button is-success is-light",
+                          attrs: {
+                            type: "submit",
+                            disabled: _vm.isSubmittingDepartment
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(
+                                _vm.isSubmittingDepartment
+                                  ? "Assigning..."
+                                  : "Assign"
+                              ) +
+                              "\n          "
+                          )
+                        ]
+                      )
+                    ])
                   ],
                   1
-                ),
-                _vm._v(" "),
-                _c("b-field", { staticClass: "buttons" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "button is-success is-light",
-                      attrs: {
-                        type: "submit",
-                        disabled: _vm.isSubmittingPosition
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(
-                            _vm.isSubmittingPosition ? "Assigning..." : "Assign"
-                          ) +
-                          "\n          "
-                      )
-                    ]
-                  )
-                ])
-              ],
-              1
+                )
+              ]
             )
-          ]
-        )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.staffToAssign.unit_id
+          ? _c(
+              "form",
+              {
+                staticClass: "mb-5",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateAssignment("unit")
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "\n          is-flex is-justify-content-space-between is-align-items-flex-end\n        ",
+                    staticStyle: { width: "35rem" }
+                  },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        staticClass: "expand-input",
+                        attrs: {
+                          label: "Assign Unit",
+                          type: {
+                            "is-danger": _vm.unit.errors.length > 0
+                          },
+                          message: _vm.unit.errors
+                        }
+                      },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            attrs: { type: "is-info", expanded: "" },
+                            model: {
+                              value: _vm.unit.value,
+                              callback: function($$v) {
+                                _vm.$set(_vm.unit, "value", $$v)
+                              },
+                              expression: "unit.value"
+                            }
+                          },
+                          _vm._l(_vm.getUnits, function(u, i) {
+                            return _c(
+                              "option",
+                              { key: i, domProps: { value: u.id } },
+                              [
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(u.name) +
+                                    "\n            "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("b-field", { staticClass: "buttons" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button is-success is-light",
+                          attrs: {
+                            type: "submit",
+                            disabled: _vm.isSubmittingUnit
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(
+                                _vm.isSubmittingUnit ? "Assigning..." : "Assign"
+                              ) +
+                              "\n          "
+                          )
+                        ]
+                      )
+                    ])
+                  ],
+                  1
+                )
+              ]
+            )
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c(

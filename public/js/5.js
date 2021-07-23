@@ -79,19 +79,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     employmentStatuses: Array,
     branches: Array,
     departments: Array,
+    units: Array,
     positions: Array,
-    rolePermissions: Object,
     staffCount: Object,
-    workShifts: Array
+    workShifts: Array,
+    roles: Array,
+    permissions: Object
   },
   computed: {},
   created: function created() {
     this.dispatchUserAccount({
       payload: 1
     });
-    this.dispatchUserAccount({
-      type: "ADD_ROLE_PERMISSION",
-      payload: JSON.parse(this.rolePermissions.role_permission)
+    this.dispatchRole({
+      payload: this.roles
+    });
+    this.dispatchRole({
+      type: "ADD_PERMISSIONS",
+      payload: this.permissions
     });
     this.dispatchJobCategory({
       payload: this.jobCategories
@@ -107,6 +112,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
     this.dispatchDepartment({
       payload: this.departments
+    });
+    this.dispatchUnit({
+      payload: this.units
     });
     this.dispatchPosition({
       payload: this.positions
@@ -128,7 +136,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       test: ""
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchUserAccount", "dispatchJobCategory", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment", "dispatchPosition", "dispatchOrgnizationProfile", "dispatchStaffCount", "dispatchWorkShift"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchUserAccount", "dispatchRole", "dispatchJobCategory", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchOrgnizationProfile", "dispatchStaffCount", "dispatchWorkShift"])), {}, {
     changeLang: function changeLang(lang) {
       localStorage.setItem("lang", lang);
       window.location.reload();
@@ -264,6 +272,10 @@ __webpack_require__.r(__webpack_exports__);
         return this.state.total || 0;
       }
     }
+  },
+  watch: {// state(v) {
+    //   console.log(v);
+    // },
   },
   data: function data() {
     return {
@@ -1587,6 +1599,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @riophae/vue-treeselect/dist/vue-treeselect.css */ "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css");
 /* harmony import */ var _riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _user_management_AddPermissionModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user_management/AddPermissionModal */ "./resources/js/components/admin/user_management/AddPermissionModal.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2355,6 +2368,145 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2363,18 +2515,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "ManageUserComponent",
   components: {
     Paginate: _Paginate__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Treeselect: _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2___default.a
+    Treeselect: _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_2___default.a,
+    AddPermissionModal: _user_management_AddPermissionModal__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   props: {},
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getUsers", "getRolePermissions"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getUsers", "getRoles", "getRolePermissions", "getProfile"])), {}, {
     getDropperId: function getDropperId() {
-      return this.dropperId.toString();
+      return this.dropperId;
+    },
+    getEditRoleDropperId: function getEditRoleDropperId() {
+      return this.editRoleDropperId;
+    },
+    getReportToDropperId: function getReportToDropperId() {
+      return this.reportToDropperId;
     },
     getStaff: function getStaff() {
       return this.getUsers.data.map(function (s) {
         return {
           id: s.id,
           label: "".concat(s.personal_details.title || "", " ").concat(s.personal_details.firstName, " ").concat(s.personal_details.middleName || "", " ").concat(s.personal_details.lastName)
+        };
+      });
+    },
+    getFormatedRoles: function getFormatedRoles() {
+      return this.getRoles.map(function (r) {
+        return {
+          id: r.id,
+          label: r.role
         };
       });
     }
@@ -2414,26 +2581,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       sortIcon: "arrow-up",
       sortIconSize: "is-small",
       selectedUsers: [],
-      checkedRoles: [],
+      selectedRoles: [],
       toggleUserForm: false,
       toggleQueryForm: false,
       showAssignRoleForm: false,
       showAssignStatusForm: false,
       isSubmitting: false,
+      isSubmittingRole: false,
+      isSubmittingReportTo: false,
       noUserFound: false,
       isLoading: false,
-      isSubmittingRole: false,
       dropperId: "",
-      newStaff: {
-        value: [],
-        errors: []
+      editRoleDropperId: "",
+      reportToDropperId: "",
+      role: {
+        role: "",
+        error: []
+      },
+      roleUser: {
+        staff: [],
+        error: []
+      },
+      reportTo: {
+        roles: [],
+        error: []
       },
       user: {
         firstName: "",
         middleName: "",
         lastName: "",
         username: "",
-        role: ["ESS"],
         status: "1"
       },
       userPersonalDetails: {
@@ -2457,17 +2634,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         username: [],
         password: [],
         confirmPassword: [],
-        role: [],
         status: []
       },
-      roleData: ["ESS"],
-      statusData: "",
-      permissions: ["Create", "Edit", "Delete"]
+      statusData: ""
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchUserAccount", "dispatchStaffCount"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchUserAccount", "dispatchRole", "dispatchStaffCount"])), {}, {
     openRoleDropper: function openRoleDropper() {
-      var dropper = this.$refs.roleDropper; // this.positionDropperId = data.id;
+      var dropper = this.$refs.roleDropper;
 
       if (dropper) {
         dropper.open();
@@ -2477,20 +2651,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var dropper = this.$refs.roleDropper;
 
       if (dropper) {
+        this.role.error = [];
         dropper.close();
       }
     },
-    openAddStaffDropper: function openAddStaffDropper(index) {
-      var dropper = this.$refs.addStaffDropper;
+    openRoleUserDropper: function openRoleUserDropper(index) {
+      var dropper = this.$refs.roleUserDropper;
       this.dropperId = index;
-      console.log(dropper);
 
       if (dropper) {
         dropper.open();
       }
     },
-    closeAddStaffDropper: function closeAddStaffDropper() {
-      var dropper = this.$refs.addStaffDropper;
+    closeRoleUserDropper: function closeRoleUserDropper() {
+      var dropper = this.$refs.roleUserDropper;
+
+      if (dropper) {
+        this.roleUser.error = [];
+        dropper.close();
+      }
+    },
+    openEditRoleDropper: function openEditRoleDropper(data) {
+      var dropper = this.$refs.editRoleDropper;
+      this.editRoleDropperId = data.id;
+      this.role.role = data.role;
+
+      if (dropper) {
+        dropper.open();
+      }
+    },
+    closeEditRoleDropper: function closeEditRoleDropper() {
+      var dropper = this.$refs.editRoleDropper;
+
+      if (dropper) {
+        this.role.error = [];
+        dropper.close();
+      }
+    },
+    openReportToDropper: function openReportToDropper(data) {
+      var dropper = this.$refs.reportToDropper;
+      this.reportToDropperId = data.id;
+
+      if (dropper) {
+        dropper.open();
+      }
+    },
+    closeReportToDropper: function closeReportToDropper() {
+      var dropper = this.$refs.reportToDropper;
 
       if (dropper) {
         dropper.close();
@@ -2503,19 +2710,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     openQueryForm: function openQueryForm() {
       this.toggleQueryForm = !this.toggleQueryForm;
     },
-    openAssignRoleForm: function openAssignRoleForm() {
-      this.showAssignStatusForm = false;
-      this.showAssignRoleForm = !this.showAssignRoleForm;
-    },
     openAssignStatusForm: function openAssignStatusForm() {
-      this.showAssignRoleForm = false;
       this.showAssignStatusForm = !this.showAssignStatusForm;
     },
     cancelAssignForm: function cancelAssignForm() {
-      this.showAssignRoleForm = false;
-      this.showAssignRoleForm = false;
       this.selectedUsers = [];
-      this.roleData = ["ESS"];
       this.statusData = "";
     },
     addUser: function addUser() {
@@ -2528,7 +2727,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         middle_name: this.user.middleName,
         last_name: this.user.lastName,
         email: this.user.username,
-        role: this.user.role,
         status: this.user.status,
         userPersonalDetails: _objectSpread(_objectSpread({}, this.userPersonalDetails), {}, {
           firstName: this.user.firstName,
@@ -2567,39 +2765,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    assignUserRole: function assignUserRole() {
-      var _this3 = this;
-
-      var ids = this.selectedUsers.map(function (r) {
-        return r.id;
-      });
-      this.$axios.put("/dashboard/assign-users-role", {
-        ids: ids,
-        role: this.roleData
-      }).then(function (res) {
-        if (res.data.assigned) {
-          _this3.dispatchUserAccount({
-            type: "ASSIGN_ROLE",
-            payload: {
-              ids: ids,
-              role: JSON.stringify(_this3.roleData)
-            }
-          });
-
-          _this3.selectedUsers = [];
-          _this3.roleData = ["ESS"];
-          setTimeout(function () {
-            _this3.snackbar("Role assigned successfully.", "is-success");
-          }, 1000);
-        }
-      })["catch"](function (err) {
-        setTimeout(function () {
-          _this3.snackbar("There was a problem assigning role.", "is-danger");
-        }, 1000);
-      });
-    },
     assignUserStatus: function assignUserStatus() {
-      var _this4 = this;
+      var _this3 = this;
 
       var ids = this.selectedUsers.map(function (r) {
         return r.id;
@@ -2609,29 +2776,76 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         status: this.statusData
       }).then(function (res) {
         if (res.data.assigned) {
-          _this4.dispatchUserAccount({
+          _this3.dispatchUserAccount({
             type: "ASSIGN_STATUS",
             payload: {
               ids: ids,
-              status: _this4.statusData
+              status: _this3.statusData
             }
           });
 
-          _this4.selectedUsers = [];
-          _this4.statusData = "";
+          _this3.selectedUsers = [];
+          _this3.statusData = "";
           setTimeout(function () {
-            _this4.snackbar("Status assigned successfully.", "is-success");
+            _this3.snackbar("Status assigned successfully.", "is-success");
           }, 1000);
         }
       })["catch"](function (err) {
         setTimeout(function () {
-          _this4.snackbar("There was a problem assigning role.", "is-danger");
+          _this3.snackbar("There was a problem assigning role.", "is-danger");
         }, 1000);
       });
     },
     deleteUser: function deleteUser(id) {
+      var _this4 = this;
+
+      this.$confirm({
+        auth: true,
+        message: "Are you sure you want to delete this user?",
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
+        callback: function callback(confirm, password) {
+          if (confirm) {
+            _this4.$axios.get("/dashboard/check-user-password/".concat(_this4.authUser.id, "/").concat(password)).then(function (res) {
+              if (res.data.confirmed) {
+                _this4.$axios["delete"]("/dashboard/delete-user/".concat(id)).then(function (res) {
+                  if (res.status === 200 && res.data.deleted) {
+                    _this4.dispatchUserAccount({
+                      type: "DELETE_USER",
+                      payload: id
+                    });
+
+                    _this4.dispatchStaffCount({
+                      payload: res.data.staffCount
+                    });
+
+                    setTimeout(function () {
+                      _this4.snackbar("User deleted successfully.", "is-success");
+                    }, 1000);
+                  }
+                })["catch"](function (err) {
+                  setTimeout(function () {
+                    _this4.toast("There was a problem deleting user.", "is-danger");
+                  }, 1000);
+                });
+              } else {
+                setTimeout(function () {
+                  _this4.toast("Your password is incorrect!", "is-danger");
+                }, 1000);
+              }
+            });
+          }
+        }
+      });
+    },
+    deleteUsers: function deleteUsers() {
       var _this5 = this;
 
+      var ids = this.selectedUsers.map(function (r) {
+        return r.id;
+      });
       this.$confirm({
         auth: true,
         message: "Are you sure you want to delete this user?",
@@ -2643,27 +2857,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           if (confirm) {
             _this5.$axios.get("/dashboard/check-user-password/".concat(_this5.authUser.id, "/").concat(password)).then(function (res) {
               if (res.data.confirmed) {
-                _this5.$axios["delete"]("/dashboard/delete-user/".concat(id)).then(function (res) {
-                  _this5.dispatchUserAccount({
-                    type: "DELETE_USER",
-                    payload: id
-                  });
+                _this5.$axios["delete"]("/dashboard/delete-users/".concat(ids)).then(function (res) {
+                  if (res.status === 200 && res.data.deleted) {
+                    _this5.dispatchUserAccount({
+                      type: "DELETE_USERS",
+                      payload: ids
+                    });
 
-                  _this5.dispatchStaffCount({
-                    payload: res.data.staffCount
-                  });
-
-                  setTimeout(function () {
-                    _this5.snackbar("User deleted successfully.", "is-success");
-                  }, 1000);
+                    _this5.selectedUsers = [];
+                    setTimeout(function () {
+                      _this5.snackbar("User deleted successfully.", "is-success");
+                    }, 1000);
+                  }
                 })["catch"](function (err) {
                   setTimeout(function () {
-                    _this5.toast("There was a problem deleting user.", "is-danger");
+                    _this5.snackbar("There was a problem deleting user.", "is-danger");
                   }, 1000);
                 });
               } else {
                 setTimeout(function () {
-                  _this5.toast("Your password is incorrect!", "is-danger");
+                  _this5.snackbar("Your password is incorrect!", "is-danger");
                 }, 1000);
               }
             });
@@ -2671,46 +2884,252 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    deleteUsers: function deleteUsers() {
+    addNewRole: function addNewRole() {
       var _this6 = this;
 
-      var ids = this.selectedUsers.map(function (r) {
+      this.isSubmittingRole = true;
+      this.role.error = [];
+      this.$axios.post("/dashboard/add-role", {
+        role: this.role.role
+      }).then(function (res) {
+        _this6.isSubmittingRole = false;
+
+        if (res.status === 200 && res.data.created) {
+          _this6.role.role = "", _this6.dispatchRole({
+            type: "ADD_NEW_ROLE",
+            payload: res.data.role
+          });
+          setTimeout(function () {
+            _this6.snackbar("Role added successfully.", "is-success");
+
+            _this6.isSubmitting = false;
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        _this6.isSubmittingRole = false;
+
+        if (err.response.status === 422) {
+          _this6.isSubmitting = false;
+          _this6.role.error = err.response.data.errors.role;
+        } else {
+          console.log(err);
+        }
+      });
+    },
+    editRole: function editRole(id) {
+      var _this7 = this;
+
+      this.isSubmittingRole = true;
+      this.role.error = [];
+      this.$axios.put("/dashboard/update-role/".concat(id), {
+        role: this.role.role
+      }).then(function (res) {
+        _this7.isSubmittingRole = false;
+
+        if (res.status === 200 && res.data.updated) {
+          _this7.dispatchRole({
+            type: "UPDATE_ROLE",
+            payload: {
+              id: id,
+              data: _this7.role.role
+            }
+          });
+
+          _this7.closeEditRoleDropper();
+
+          setTimeout(function () {
+            _this7.snackbar("Role updated successfully.", "is-success");
+
+            _this7.isSubmitting = false;
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        _this7.isSubmittingRole = false;
+
+        if (err.response.status === 422) {
+          _this7.isSubmitting = false;
+          _this7.role.error = err.response.data.errors.role;
+        } else {
+          console.log(err);
+        }
+      });
+    },
+    deleteRole: function deleteRole(id) {
+      var _this8 = this;
+
+      this.$axios["delete"]("/dashboard/delete-role/".concat(id)).then(function (res) {
+        if (res.status === 200 && res.data.deleted) {
+          _this8.dispatchRole({
+            type: "DELETE_ROLE",
+            payload: id
+          });
+
+          setTimeout(function () {
+            _this8.snackbar("Role deleted successfully.", "is-success");
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deleteRoles: function deleteRoles() {
+      var _this9 = this;
+
+      var ids = this.selectedRoles.map(function (r) {
         return r.id;
       });
-      this.$confirm({
-        auth: true,
-        message: "Are you sure you want to delete this user?",
-        button: {
-          no: "No",
-          yes: "Yes"
-        },
-        callback: function callback(confirm, password) {
-          if (confirm) {
-            _this6.$axios.get("/dashboard/check-user-password/".concat(_this6.authUser.id, "/").concat(password)).then(function (res) {
-              if (res.data.confirmed) {
-                _this6.$axios["delete"]("/dashboard/delete-users/".concat(JSON.stringify(ids))).then(function (res) {
-                  _this6.dispatchUserAccount({
-                    type: "DELETE_USERS",
-                    payload: ids
-                  });
+      this.$axios["delete"]("/dashboard/delete-roles/".concat(ids)).then(function (res) {
+        if (res.status === 200 && res.data.deleted) {
+          _this9.dispatchRole({
+            type: "DELETE_ROLES",
+            payload: ids
+          });
 
-                  _this6.selectedUsers = [];
-                  setTimeout(function () {
-                    _this6.snackbar("User deleted successfully.", "is-success");
-                  }, 1000);
-                })["catch"](function (err) {
-                  setTimeout(function () {
-                    _this6.snackbar("There was a problem deleting user.", "is-danger");
-                  }, 1000);
-                });
-              } else {
-                setTimeout(function () {
-                  _this6.snackbar("Your password is incorrect!", "is-danger");
-                }, 1000);
-              }
-            });
-          }
+          _this9.selectedRoles = [];
+          setTimeout(function () {
+            _this9.snackbar("Roles deleted successfully.", "is-success");
+          }, 1000);
         }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    addRoleUser: function addRoleUser(id) {
+      var _this10 = this;
+
+      this.isSubmittingRole = true;
+      this.roleUser.error = [];
+      this.$axios.put("/dashboard/add-role-user/".concat(id), {
+        staff: this.roleUser.staff
+      }).then(function (res) {
+        if (res.status === 200 && res.data.created) {
+          _this10.isSubmittingRole = false;
+
+          _this10.dispatchRole({
+            type: "ADD_ROLE_USER",
+            payload: {
+              id: id,
+              data: res.data.staff
+            }
+          });
+
+          _this10.roleUser.staff = [];
+
+          _this10.closeRoleUserDropper();
+
+          setTimeout(function () {
+            _this10.snackbar("Staff added successfully.", "is-success");
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        _this10.isSubmittingRole = false;
+
+        if (err.response.status === 422) {
+          _this10.roleUser.error = err.response.data.errors.staff;
+        } else {
+          console.log(err);
+        }
+      });
+    },
+    deleteRoleUser: function deleteRoleUser(data) {
+      var _this11 = this;
+
+      var roles = this.getRoles.filter(function (r, i) {
+        return r.staff[i] && r.staff[i]["id"] === data.staff;
+      }).filter(function (r, i) {
+        return r.staff[i] && r.id !== data.role;
+      }).map(function (r) {
+        return r.id;
+      });
+      this.$axios.put("/dashboard/delete-role-user/".concat(data.role, "/").concat(data.staff), {
+        roles: roles
+      }).then(function (res) {
+        if (res.status === 200 && res.data.created) {
+          _this11.dispatchRole({
+            type: "ADD_ROLE_USER",
+            payload: {
+              id: data.role,
+              data: res.data.staff
+            }
+          });
+
+          setTimeout(function () {
+            _this11.snackbar("Staff removed from role successfully.", "is-success");
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    addPermission: function addPermission(role) {
+      this.$buefy.modal.open({
+        parent: this,
+        component: _user_management_AddPermissionModal__WEBPACK_IMPORTED_MODULE_4__["default"],
+        hasModalCard: true,
+        trapFocus: true,
+        canCancel: ["escape"],
+        props: {
+          role: role
+        }
+      });
+    },
+    addReportToRole: function addReportToRole(id) {
+      var _this12 = this;
+
+      this.isSubmittingReportTo = true;
+      this.reportTo.error = [];
+      this.$axios.put("/dashboard/add-report-to-role/".concat(id), {
+        roles: this.reportTo.roles
+      }).then(function (res) {
+        if (res.status === 200 && res.data.created) {
+          console.log(res.data.roles);
+
+          _this12.dispatchRole({
+            type: "ADD_REPORT_TO_ROLE",
+            payload: {
+              id: id,
+              data: res.data.roles
+            }
+          });
+
+          _this12.isSubmittingReportTo = false;
+          _this12.reportTo.roles = [];
+
+          _this12.closeReportToDropper();
+
+          setTimeout(function () {
+            _this12.snackbar("Role added successfully.", "is-success");
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        _this12.isSubmittingReportTo = false;
+
+        if (err.response.status === 422) {
+          _this12.reportTo.error = err.response.data.errors.roles || [];
+        } else {
+          console.log(err);
+        }
+      });
+    },
+    removeReportToRole: function removeReportToRole(data) {
+      var _this13 = this;
+
+      this.$axios.put("/dashboard/remove-report-to-role/".concat(data.role, "/").concat(data.reportTo)).then(function (res) {
+        if (res.status === 200 && res.data.deleted) {
+          _this13.dispatchRole({
+            type: "ADD_REPORT_TO_ROLE",
+            payload: {
+              id: data.role,
+              data: res.data.roles
+            }
+          });
+
+          setTimeout(function () {
+            _this13.snackbar("Role removed successfully.", "is-success");
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        console.log(err);
       });
     },
     setUserErrors: function setUserErrors() {
@@ -2720,7 +3139,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         middleName: error.middle_name || [],
         lastName: error.last_name || [],
         username: error.email || [],
-        role: error.role || [],
         status: error.status || []
       };
     },
@@ -2730,9 +3148,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         middleName: "",
         lastName: "",
         username: "",
-        role: ["ESS"],
         status: "1"
       };
+    },
+    isNull: function isNull(el) {
+      if (el === "null" || el === null) {
+        return "";
+      }
+
+      return el;
+    },
+    getFullName: function getFullName(staff) {
+      return "".concat(this.isNull(staff.title), " ").concat(staff.firstName, " ").concat(this.isNull(staff.middleName), " ").concat(staff.lastName);
     }
   })
 });
@@ -3898,6 +4325,270 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3906,9 +4597,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     UpdateBranchModal: _organization_UpdateBranchModal__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {},
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getBranches", "getDepartments", "getPositions", "getOrganizationProfile", "getStaffCount"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getBranches", "getDepartments", "getUnits", "getPositions", "getOrganizationProfile", "getStaffCount"])), {}, {
     getDropperId: function getDropperId() {
       return this.dropperId.toString();
+    },
+    getUnitDropperId: function getUnitDropperId() {
+      return this.unitDropperId.toString();
     },
     getPositionDropperId: function getPositionDropperId() {
       return this.positionDropperId.toString();
@@ -3925,30 +4619,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   beforeMount: function beforeMount() {
-    this.organizationMetadata = {
-      name: this.getOrganizationProfile.name,
-      telephone: this.getOrganizationProfile.telephone,
-      email: this.getOrganizationProfile.email,
-      address: this.getOrganizationProfile.address,
-      city: this.getOrganizationProfile.city,
-      landmark: this.getOrganizationProfile.landmark,
-      district: this.getOrganizationProfile.district,
-      region: this.getOrganizationProfile.region,
-      regNumber: this.getOrganizationProfile.reg_number,
-      tin: this.getOrganizationProfile.tin,
+    if (this.getOrganizationProfile) {
+      this.organizationMetadata = _objectSpread(_objectSpread({}, this.organizationMetadata), {}, {
+        name: this.getOrganizationProfile.name,
+        telephone: this.getOrganizationProfile.telephone,
+        email: this.getOrganizationProfile.email,
+        address: this.getOrganizationProfile.address,
+        city: this.getOrganizationProfile.city,
+        landmark: this.getOrganizationProfile.landmark,
+        district: this.getOrganizationProfile.district,
+        region: this.getOrganizationProfile.region,
+        regNumber: this.getOrganizationProfile.reg_number,
+        tin: this.getOrganizationProfile.tin
+      });
+    }
+
+    this.organizationMetadata = _objectSpread(_objectSpread({}, this.organizationMetadata), {}, {
       currentStaff: this.getStaffCount.current,
       pastStaff: this.getStaffCount.past,
       totalStaff: this.getStaffCount.total
-    };
+    });
   },
   data: function data() {
     return {
       toggleAddOrganizationBranch: false,
       toggleAddOrganizationDepartment: false,
+      toggleAddOrganizationUnit: false,
       toggleAddOrganizationLeadership: false,
       isSubmittingNewBranch: false,
       isSubmittingPosition: false,
       isSubmittingNewDepartment: false,
+      isSubmittingNewUnit: false,
       isUdateDepartmentModalActive: false,
       isUploadingBrandLogo: false,
       isPaginated: true,
@@ -3963,8 +4664,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       perPage: 50,
       checkedBranches: [],
       checkedDepartments: [],
+      checkedUnits: [],
       checkedPositions: [],
       dropperId: "",
+      unitDropperId: "",
       positionDropperId: "",
       branchId: null,
       brandLogo: null,
@@ -3981,6 +4684,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         name: "",
         id: ""
       },
+      organizationUnit: {
+        name: "",
+        department: "",
+        id: ""
+      },
       organizationPosition: {
         name: "",
         id: ""
@@ -3995,6 +4703,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       organizationDepartmentErrors: {
         name: []
+      },
+      organizationUnitErrors: {
+        name: [],
+        department: []
       },
       organizationPositionErrors: {
         name: []
@@ -4028,7 +4740,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchBranch", "dispatchDepartment", "dispatchPosition", "dispatchOrgnizationProfile"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchBranch", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchOrgnizationProfile"])), {}, {
     openDepartmentDropper: function openDepartmentDropper(data) {
       var dropper = this.$refs.departmentDropper;
       this.dropperId = data.id;
@@ -4046,6 +4758,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.organizationDepartment.id = "";
         this.organizationDepartment.name = "";
         this.organizationDepartmentErrors.name = [];
+        dropper.close();
+      }
+    },
+    openUnitDropper: function openUnitDropper(data) {
+      var dropper = this.$refs.unitDropper;
+      this.unitDropperId = data.id;
+
+      if (dropper) {
+        this.organizationUnit.id = data.id;
+        this.organizationUnit.name = data.name;
+        this.organizationUnit.department = data.department_id;
+        dropper.open();
+      }
+    },
+    closeUnitDropper: function closeUnitDropper() {
+      var dropper = this.$refs.unitDropper;
+
+      if (dropper) {
+        this.organizationUnit.id = "";
+        this.organizationUnit.name = "";
+        this.organizationUnit.department = "";
+        this.organizationUnitErrors.name = [];
+        this.organizationUnitErrors.department = [];
         dropper.close();
       }
     },
@@ -4077,10 +4812,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data.append("logo", file);
       this.$axios.post("/dashboard/update-brand-logo", data).then(function (res) {
         if (res.status === 200 && res.data.updated) {
-          _this.dispatchOrgnizationProfile({
-            type: "UPDATE_LOGO",
-            payload: res.data.logo
-          });
+          if (res.data.logo) {
+            _this.dispatchOrgnizationProfile({
+              type: "UPDATE_LOGO",
+              payload: res.data.logo
+            });
+          }
+
+          if (res.data.org) {
+            _this.dispatchOrgnizationProfile({
+              type: "UPDATE_INFO",
+              payload: res.data.org
+            });
+          }
 
           setTimeout(function () {
             _this.snackbar("Logo updated successfully", "is-dark");
@@ -4269,45 +5013,131 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    updateOrganizationDepartment: function updateOrganizationDepartment() {
+    addOrganizationUnit: function addOrganizationUnit() {
       var _this8 = this;
+
+      this.isSubmittingNewUnit = true;
+      this.organizationUnitErrors.name = [];
+      this.organizationUnitErrors.department = [];
+      this.$axios.post("/dashboard/create-unit", this.organizationUnit).then(function (res) {
+        _this8.organizationUnit.name = "";
+        _this8.organizationUnit.department = "";
+
+        if (res.status === 200 && res.data.created) {
+          _this8.dispatchUnit({
+            type: "ADD_NEW_UNIT",
+            payload: res.data.unit
+          });
+
+          setTimeout(function () {
+            _this8.snackbar("Unit added successfully", "is-dark");
+
+            _this8.isSubmittingNewUnit = false;
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this8.isSubmittingNewUnit = false;
+          setTimeout(function () {
+            _this8.organizationUnitErrors.name = err.response.data.errors.name || [];
+            _this8.organizationUnitErrors.department = err.response.data.errors.name || [];
+          }, 1000);
+        }
+      });
+    },
+    updateOrganizationDepartment: function updateOrganizationDepartment() {
+      var _this9 = this;
 
       this.isSubmittingNewDepartment = true;
       this.organizationDepartmentErrors.name = [];
       this.$axios.put("/dashboard/edit-department/".concat(this.organizationDepartment.id), this.organizationDepartment).then(function (res) {
         if (res.status === 200 && res.data.updated) {
-          _this8.dispatchDepartment({
+          _this9.dispatchDepartment({
             type: "UPDATE_DEPARTMENT",
             payload: res.data.department
           });
 
-          setTimeout(function () {
-            _this8.snackbar("Department updated successfully", "is-dark");
+          _this9.closeDepartmentDropper();
 
-            _this8.isSubmittingNewDepartment = false;
+          setTimeout(function () {
+            _this9.snackbar("Department updated successfully", "is-dark");
+
+            _this9.isSubmittingNewDepartment = false;
           }, 1000);
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
           setTimeout(function () {
-            _this8.organizationDepartmentErrors.name = err.response.data.errors.name ? err.response.data.errors.name : [];
-            _this8.isSubmittingNewDepartment = false;
+            _this9.organizationDepartmentErrors.name = err.response.data.errors.name ? err.response.data.errors.name : [];
+            _this9.isSubmittingNewDepartment = false;
+          }, 1000);
+        }
+      });
+    },
+    updateOrganizationUnit: function updateOrganizationUnit() {
+      var _this10 = this;
+
+      this.isSubmittingNewUnit = true;
+      this.organizationUnitErrors.name = [];
+      this.organizationUnitErrors.department = [];
+      this.$axios.put("/dashboard/edit-unit/".concat(this.organizationUnit.id), this.organizationUnit).then(function (res) {
+        _this10.organizationUnit.name = "";
+        _this10.organizationUnit.department = "";
+
+        if (res.status === 200 && res.data.updated) {
+          _this10.dispatchUnit({
+            type: "UPDATE_UNIT",
+            payload: res.data.unit
+          });
+
+          _this10.closeUnitDropper();
+
+          setTimeout(function () {
+            _this10.snackbar("Unit updated successfully", "is-dark");
+
+            _this10.isSubmittingNewUnit = false;
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this10.isSubmittingNewUnit = false;
+          setTimeout(function () {
+            _this10.organizationUnitErrors.name = err.response.data.errors.name || [];
+            _this10.organizationUnitErrors.department = err.response.data.errors.name || [];
           }, 1000);
         }
       });
     },
     deleteDepartment: function deleteDepartment(id) {
-      var _this9 = this;
+      var _this11 = this;
 
       this.$axios["delete"]("/dashboard/delete-department/".concat(id)).then(function (res) {
         if (res.status === 200 && res.data.deleted) {
-          _this9.dispatchDepartment({
+          _this11.dispatchDepartment({
             type: "DELETE_DEPARTMENT",
             payload: id
           });
 
           setTimeout(function () {
-            _this9.snackbar("Department deleted successfully", "is-dark");
+            _this11.snackbar("Department deleted successfully", "is-dark");
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deleteUnit: function deleteUnit(id) {
+      var _this12 = this;
+
+      this.$axios["delete"]("/dashboard/delete-unit/".concat(id)).then(function (res) {
+        if (res.status === 200 && res.data.deleted) {
+          _this12.dispatchUnit({
+            type: "DELETE_UNIT",
+            payload: id
+          });
+
+          setTimeout(function () {
+            _this12.snackbar("Unit deleted successfully", "is-dark");
           }, 1000);
         }
       })["catch"](function (err) {
@@ -4315,21 +5145,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     deleteDepartments: function deleteDepartments() {
-      var _this10 = this;
+      var _this13 = this;
 
       var ids = this.checkedDepartments.map(function (r) {
         return r.id;
       });
       this.$axios["delete"]("/dashboard/delete-departments/".concat(JSON.stringify(ids))).then(function (res) {
         if (res.status === 200 && res.data.deleted) {
-          _this10.dispatchDepartment({
+          _this13.dispatchDepartment({
             type: "DELETE_DEPARTMENTS",
             payload: ids
           });
 
-          _this10.checkedDepartments = [];
+          _this13.checkedDepartments = [];
           setTimeout(function () {
-            _this10.snackbar("Department deleted successfully", "is-dark");
+            _this13.snackbar("Department deleted successfully", "is-dark");
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deleteUnits: function deleteUnits() {
+      var _this14 = this;
+
+      var ids = this.checkedUnits.map(function (r) {
+        return r.id;
+      });
+      this.$axios["delete"]("/dashboard/delete-units/".concat(JSON.stringify(ids))).then(function (res) {
+        if (res.status === 200 && res.data.deleted) {
+          _this14.dispatchUnit({
+            type: "DELETE_UNITS",
+            payload: ids
+          });
+
+          _this14.checkedUnits = [];
+          setTimeout(function () {
+            _this14.snackbar("Units deleted successfully", "is-dark");
           }, 1000);
         }
       })["catch"](function (err) {
@@ -4337,73 +5189,73 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     addOrganizationPosition: function addOrganizationPosition() {
-      var _this11 = this;
+      var _this15 = this;
 
       this.isSubmittingPosition = true;
       this.organizationPositionErrors.name = [];
       this.$axios.post("/dashboard/create-position", this.organizationPosition).then(function (res) {
-        _this11.organizationPosition.name = "";
+        _this15.organizationPosition.name = "";
 
         if (res.status === 201) {
-          _this11.dispatchPosition({
+          _this15.dispatchPosition({
             type: "ADD_NEW_POSITION",
             payload: res.data
           });
 
           setTimeout(function () {
-            _this11.snackbar("Position added successfully", "is-dark");
+            _this15.snackbar("Position added successfully", "is-dark");
 
-            _this11.isSubmittingPosition = false;
+            _this15.isSubmittingPosition = false;
           }, 1000);
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
           setTimeout(function () {
-            _this11.organizationPositionErrors.name = err.response.data.errors.name ? err.response.data.errors.name : [];
-            _this11.isSubmittingPosition = false;
+            _this15.organizationPositionErrors.name = err.response.data.errors.name ? err.response.data.errors.name : [];
+            _this15.isSubmittingPosition = false;
           }, 1000);
         }
       });
     },
     updateOrganizationPosition: function updateOrganizationPosition() {
-      var _this12 = this;
+      var _this16 = this;
 
       this.isSubmittingPosition = true;
       this.organizationPositionErrors.name = [];
       this.$axios.put("/dashboard/edit-position/".concat(this.organizationPosition.id), this.organizationPosition).then(function (res) {
         if (res.status === 200 && res.data.updated) {
-          _this12.dispatchPosition({
+          _this16.dispatchPosition({
             type: "UPDATE_POSITION",
             payload: res.data.position
           });
 
           setTimeout(function () {
-            _this12.snackbar("Position updated successfully", "is-dark");
+            _this16.snackbar("Position updated successfully", "is-dark");
 
-            _this12.isSubmittingPosition = false;
+            _this16.isSubmittingPosition = false;
           }, 1000);
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
           setTimeout(function () {
-            _this12.organizationPositionErrors.name = err.response.data.errors.name ? err.response.data.errors.name : [];
-            _this12.isSubmittingPosition = false;
+            _this16.organizationPositionErrors.name = err.response.data.errors.name ? err.response.data.errors.name : [];
+            _this16.isSubmittingPosition = false;
           }, 1000);
         }
       });
     },
     deletePosition: function deletePosition(id) {
-      var _this13 = this;
+      var _this17 = this;
 
       this.$axios["delete"]("/dashboard/delete-position/".concat(id)).then(function (res) {
         if (res.status === 200 && res.data.deleted) {
-          _this13.dispatchPosition({
+          _this17.dispatchPosition({
             type: "DELETE_POSITION",
             payload: id
           });
 
           setTimeout(function () {
-            _this13.snackbar("Position deleted successfully", "is-dark");
+            _this17.snackbar("Position deleted successfully", "is-dark");
           }, 1000);
         }
       })["catch"](function (err) {
@@ -4411,21 +5263,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     deletePositions: function deletePositions() {
-      var _this14 = this;
+      var _this18 = this;
 
       var ids = this.checkedPositions.map(function (r) {
         return r.id;
       });
       this.$axios["delete"]("/dashboard/delete-positions/".concat(JSON.stringify(ids))).then(function (res) {
         if (res.status === 200 && res.data.deleted) {
-          _this14.dispatchPosition({
+          _this18.dispatchPosition({
             type: "DELETE_POSITIONS",
             payload: ids
           });
 
-          _this14.checkedPositions = [];
+          _this18.checkedPositions = [];
           setTimeout(function () {
-            _this14.snackbar("Position deleted successfully", "is-dark");
+            _this18.snackbar("Position deleted successfully", "is-dark");
           }, 1000);
         }
       })["catch"](function (err) {
@@ -4437,12 +5289,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.workShift.assignedStaff = this.selectedStaff;
     },
     removeStaff: function removeStaff() {
-      var _this15 = this;
+      var _this19 = this;
 
       this.assignedStaffIndex.forEach(function (val) {
-        _this15.selectedStaff.forEach(function (value, index) {
+        _this19.selectedStaff.forEach(function (value, index) {
           if (val === index) {
-            _this15.selectedStaff.splice(index, _this15.assignedStaffIndex.length);
+            _this19.selectedStaff.splice(index, _this19.assignedStaffIndex.length);
           }
         });
       });
@@ -4483,6 +5335,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     cancelAddOrganizationDepartment: function cancelAddOrganizationDepartment() {
       this.organizationDepartmentErrors.name = [];
       this.toggleAddOrganizationDepartment = !this.toggleAddOrganizationDepartment;
+    },
+    cancelAddOrganizationUnit: function cancelAddOrganizationUnit() {
+      this.organizationUnitErrors.name = [];
+      this.organizationUnitErrors.department = [];
+      this.toggleAddOrganizationUnit = !this.toggleAddOrganizationUnit;
     },
     cancelAddOrganizationPosition: function cancelAddOrganizationPosition() {
       this.organizationPositionErrors.name = [];
@@ -5840,6 +6697,203 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "AddPermissionsModal",
+  props: {
+    role: {
+      require: true,
+      type: Object
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getPermissions", "getProfile"])),
+  beforeMount: function beforeMount() {
+    this.rolePermissions = _objectSpread({}, this.role.permissions);
+  },
+  data: function data() {
+    return {
+      isSubmitting: false,
+      rolePermissions: {
+        page: [],
+        tab: [],
+        other: [],
+        crud: ["read"],
+        organization: []
+      }
+    };
+  },
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchRole"])), {}, {
+    addRolePermission: function addRolePermission() {
+      var _this = this;
+
+      this.isSubmitting = true;
+      this.$axios.put("/dashboard/add-role-permission/".concat(this.role.id), this.rolePermissions).then(function (res) {
+        _this.isSubmitting = false;
+
+        if (res.status === 200 && res.data.created) {
+          _this.dispatchRole({
+            type: "ADD_ROLE_PERMISSION",
+            payload: {
+              id: _this.role.id,
+              data: _this.rolePermissions
+            }
+          });
+
+          _this.closeModal();
+
+          setTimeout(function () {
+            _this.snackbar("Permission added successfully.", "is-success");
+          }, 1000);
+          _this.rolePermissions = {
+            page: [],
+            tab: [],
+            other: [],
+            crud: ["read"],
+            organization: []
+          };
+        }
+      })["catch"](function (err) {
+        _this.isSubmitting = false;
+        console.log(err);
+      });
+    },
+    closeModal: function closeModal() {
+      this.rolePermissions = {
+        page: [],
+        tab: [],
+        other: [],
+        crud: ["read"],
+        organization: []
+      };
+      this.$emit("close");
+    }
+  })
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/ManageUserComponent.vue?vue&type=style&index=0&id=276c2ef2&lang=scss&scoped=true& ***!
@@ -5961,28 +7015,27 @@ var render = function() {
         "tabs",
         { attrs: { stickyTab: "main__content__sticky" } },
         [
-          _c(
-            "tab",
-            { attrs: { label: "User Management" } },
-            [_c("ManageUserComponent")],
-            1
-          ),
+          _vm.isPermission("user_management")
+            ? _c(
+                "tab",
+                { attrs: { label: "User Management" } },
+                [_c("ManageUserComponent")],
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c("tab", { attrs: { label: "Job" } }, [_c("JobComponent")], 1),
+          _vm.isPermission("job")
+            ? _c("tab", { attrs: { label: "Job" } }, [_c("JobComponent")], 1)
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "tab",
-            { attrs: { label: "Shift Management" } },
-            [_c("WorkShiftComponent")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "tab",
-            { attrs: { label: "Organization" } },
-            [_c("OrganizationComponent")],
-            1
-          )
+          _vm.isPermission("organization")
+            ? _c(
+                "tab",
+                { attrs: { label: "Organization" } },
+                [_c("OrganizationComponent")],
+                1
+              )
+            : _vm._e()
         ],
         1
       )
@@ -7990,467 +9043,429 @@ var render = function() {
         },
         [
           _c("b-tab-item", { attrs: { label: "Staff Account" } }, [
-            _c(
-              "section",
-              { staticClass: "b__collapse__section" },
-              [
-                _c(
-                  "b-collapse",
-                  {
-                    staticClass: "card",
-                    attrs: { animation: "slide", "aria-id": "querystaff" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "trigger",
-                        fn: function(props) {
-                          return _c(
-                            "div",
-                            {
-                              staticClass: "card-header",
-                              attrs: {
-                                role: "button",
-                                "aria-controls": "querystaff"
-                              }
-                            },
-                            [
-                              _c(
-                                "p",
-                                { staticClass: "card-header-title" },
-                                [
-                                  _c("b-icon", {
-                                    attrs: {
-                                      type: "is-info",
-                                      pack: "fas",
-                                      icon: "plus"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "has-text-info" }, [
-                                    _vm._v(" Add New User")
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                { staticClass: "card-header-icon" },
-                                [
-                                  _c("b-icon", {
-                                    attrs: {
-                                      type: "is-info",
-                                      pack: "fas",
-                                      icon: props.open
-                                        ? "angle-up"
-                                        : "angle-down"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        }
-                      }
-                    ]),
-                    model: {
-                      value: _vm.toggleUserForm,
-                      callback: function($$v) {
-                        _vm.toggleUserForm = $$v
-                      },
-                      expression: "toggleUserForm"
-                    }
-                  },
+            _vm.isPermission("create")
+              ? _c(
+                  "section",
+                  { staticClass: "b__collapse__section" },
                   [
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-content" }, [
-                      _c("div", { staticClass: "content" }, [
-                        _c(
-                          "form",
-                          {
-                            on: {
-                              submit: function($event) {
-                                $event.preventDefault()
-                                return _vm.addUser()
-                              }
-                            }
-                          },
+                    _c(
+                      "b-collapse",
+                      {
+                        staticClass: "card",
+                        attrs: { animation: "slide", "aria-id": "querystaff" },
+                        scopedSlots: _vm._u(
                           [
-                            _c("h5", { staticClass: "text-main" }, [
-                              _vm._v("Full Name")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "columns" }, [
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: "Last Name",
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.userError.lastName.length > 0
-                                        },
-                                        message: _vm.userError.lastName
-                                      }
-                                    },
-                                    [
-                                      _c("b-input", {
-                                        attrs: {
-                                          expanded: "",
-                                          placeholder: "Enter last name"
-                                        },
-                                        model: {
-                                          value: _vm.user.lastName,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.user, "lastName", $$v)
-                                          },
-                                          expression: "user.lastName"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: "First Name",
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.userError.firstName.length > 0
-                                        },
-                                        message: _vm.userError.firstName
-                                      }
-                                    },
-                                    [
-                                      _c("b-input", {
-                                        attrs: {
-                                          expanded: "",
-                                          placeholder: "Enter first name"
-                                        },
-                                        model: {
-                                          value: _vm.user.firstName,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.user, "firstName", $$v)
-                                          },
-                                          expression: "user.firstName"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: "Middle Name",
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.userError.middleName.length > 0
-                                        },
-                                        message: _vm.userError.middleName
-                                      }
-                                    },
-                                    [
-                                      _c("b-input", {
-                                        attrs: {
-                                          expanded: "",
-                                          placeholder: "Enter middle name"
-                                        },
-                                        model: {
-                                          value: _vm.user.middleName,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.user,
-                                              "middleName",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "user.middleName"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("h5", { staticClass: "text-main" }, [
-                              _vm._v("Login Credentials")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "columns" }, [
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: "Username",
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.userError.username.length > 0
-                                        },
-                                        message: _vm.userError.username
-                                      }
-                                    },
-                                    [
-                                      _c("b-input", {
-                                        attrs: {
-                                          expanded: "",
-                                          placeholder: "Enter email"
-                                        },
-                                        model: {
-                                          value: _vm.user.username,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.user, "username", $$v)
-                                          },
-                                          expression: "user.username"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("h5", { staticClass: "text-main" }, [
-                              _vm._v("Access Level")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "columns" }, [
-                              _c(
-                                "div",
-                                { staticClass: "column is-12" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: "User Role",
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.userError.role.length > 0
-                                        },
-                                        message: _vm.userError.role
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "block" },
-                                        _vm._l(_vm.getRolePermissions, function(
-                                          r,
-                                          i
-                                        ) {
-                                          return _c(
-                                            "b-checkbox",
-                                            {
-                                              key: i,
-                                              attrs: {
-                                                "native-value": r.role,
-                                                disabled: r.role === "ESS"
-                                              },
-                                              model: {
-                                                value: _vm.user.role,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.user,
-                                                    "role",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression: "user.role"
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          " +
-                                                  _vm._s(r.role) +
-                                                  "\n                        "
-                                              )
-                                            ]
-                                          )
-                                        }),
-                                        1
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "columns" }, [
-                              _c(
-                                "div",
-                                { staticClass: "column is-12" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: "Status",
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.userError.status.length > 0
-                                        },
-                                        message: _vm.userError.status
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "block" },
-                                        [
-                                          _c(
-                                            "b-radio",
-                                            {
-                                              attrs: {
-                                                type: "is-info",
-                                                name: "status",
-                                                "native-value": "1"
-                                              },
-                                              model: {
-                                                value: _vm.user.status,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.user,
-                                                    "status",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression: "user.status"
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          Enable\n                        "
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "b-radio",
-                                            {
-                                              attrs: {
-                                                type: "is-info",
-                                                name: "status",
-                                                "native-value": "0"
-                                              },
-                                              model: {
-                                                value: _vm.user.status,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.user,
-                                                    "status",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression: "user.status"
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          Disable\n                        "
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("hr"),
-                            _vm._v(" "),
-                            _c(
-                              "b-field",
-                              { staticClass: "buttons" },
-                              [
-                                _c(
-                                  "button",
+                            {
+                              key: "trigger",
+                              fn: function(props) {
+                                return _c(
+                                  "div",
                                   {
-                                    staticClass: "button is-success is-light",
+                                    staticClass: "card-header",
                                     attrs: {
-                                      type: "submit",
-                                      disabled: _vm.isSubmitting
+                                      role: "button",
+                                      "aria-controls": "querystaff"
                                     }
                                   },
                                   [
-                                    _vm._v(
-                                      "\n                    " +
-                                        _vm._s(
-                                          _vm.isSubmitting
-                                            ? "Submitting..."
-                                            : "Add"
-                                        ) +
-                                        "\n                  "
+                                    _c(
+                                      "p",
+                                      { staticClass: "card-header-title" },
+                                      [
+                                        _c("b-icon", {
+                                          attrs: {
+                                            type: "is-info",
+                                            pack: "fas",
+                                            icon: "plus"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "has-text-info" },
+                                          [_vm._v(" Add New User")]
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      { staticClass: "card-header-icon" },
+                                      [
+                                        _c("b-icon", {
+                                          attrs: {
+                                            type: "is-info",
+                                            pack: "fas",
+                                            icon: props.open
+                                              ? "angle-up"
+                                              : "angle-down"
+                                          }
+                                        })
+                                      ],
+                                      1
                                     )
                                   ]
-                                ),
+                                )
+                              }
+                            }
+                          ],
+                          null,
+                          false,
+                          2441900739
+                        ),
+                        model: {
+                          value: _vm.toggleUserForm,
+                          callback: function($$v) {
+                            _vm.toggleUserForm = $$v
+                          },
+                          expression: "toggleUserForm"
+                        }
+                      },
+                      [
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-content" }, [
+                          _c("div", { staticClass: "content" }, [
+                            _c(
+                              "form",
+                              {
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.addUser()
+                                  }
+                                }
+                              },
+                              [
+                                _c("h5", { staticClass: "text-main" }, [
+                                  _vm._v("Full Name")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "columns" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "column is-3" },
+                                    [
+                                      _c(
+                                        "b-field",
+                                        {
+                                          attrs: {
+                                            label: "Last Name",
+                                            expanded: "",
+                                            type: {
+                                              "is-danger":
+                                                _vm.userError.lastName.length >
+                                                0
+                                            },
+                                            message: _vm.userError.lastName
+                                          }
+                                        },
+                                        [
+                                          _c("b-input", {
+                                            attrs: {
+                                              expanded: "",
+                                              placeholder: "Enter last name"
+                                            },
+                                            model: {
+                                              value: _vm.user.lastName,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.user,
+                                                  "lastName",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "user.lastName"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "column is-3" },
+                                    [
+                                      _c(
+                                        "b-field",
+                                        {
+                                          attrs: {
+                                            label: "First Name",
+                                            expanded: "",
+                                            type: {
+                                              "is-danger":
+                                                _vm.userError.firstName.length >
+                                                0
+                                            },
+                                            message: _vm.userError.firstName
+                                          }
+                                        },
+                                        [
+                                          _c("b-input", {
+                                            attrs: {
+                                              expanded: "",
+                                              placeholder: "Enter first name"
+                                            },
+                                            model: {
+                                              value: _vm.user.firstName,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.user,
+                                                  "firstName",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "user.firstName"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "column is-3" },
+                                    [
+                                      _c(
+                                        "b-field",
+                                        {
+                                          attrs: {
+                                            label: "Middle Name",
+                                            expanded: "",
+                                            type: {
+                                              "is-danger":
+                                                _vm.userError.middleName
+                                                  .length > 0
+                                            },
+                                            message: _vm.userError.middleName
+                                          }
+                                        },
+                                        [
+                                          _c("b-input", {
+                                            attrs: {
+                                              expanded: "",
+                                              placeholder: "Enter middle name"
+                                            },
+                                            model: {
+                                              value: _vm.user.middleName,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.user,
+                                                  "middleName",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "user.middleName"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("h5", { staticClass: "text-main" }, [
+                                  _vm._v("Login Credentials")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "columns" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "column is-3" },
+                                    [
+                                      _c(
+                                        "b-field",
+                                        {
+                                          attrs: {
+                                            label: "Username",
+                                            expanded: "",
+                                            type: {
+                                              "is-danger":
+                                                _vm.userError.username.length >
+                                                0
+                                            },
+                                            message: _vm.userError.username
+                                          }
+                                        },
+                                        [
+                                          _c("b-input", {
+                                            attrs: {
+                                              expanded: "",
+                                              placeholder: "Enter email"
+                                            },
+                                            model: {
+                                              value: _vm.user.username,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.user,
+                                                  "username",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "user.username"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("h5", { staticClass: "text-main" }, [
+                                  _vm._v("Account Status")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "columns" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "column is-12" },
+                                    [
+                                      _c(
+                                        "b-field",
+                                        {
+                                          attrs: {
+                                            label: "Status",
+                                            expanded: "",
+                                            type: {
+                                              "is-danger":
+                                                _vm.userError.status.length > 0
+                                            },
+                                            message: _vm.userError.status
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "block" },
+                                            [
+                                              _c(
+                                                "b-radio",
+                                                {
+                                                  attrs: {
+                                                    type: "is-info",
+                                                    name: "status",
+                                                    "native-value": "1"
+                                                  },
+                                                  model: {
+                                                    value: _vm.user.status,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.user,
+                                                        "status",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression: "user.status"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Enable\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "b-radio",
+                                                {
+                                                  attrs: {
+                                                    type: "is-info",
+                                                    name: "status",
+                                                    "native-value": "0"
+                                                  },
+                                                  model: {
+                                                    value: _vm.user.status,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.user,
+                                                        "status",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression: "user.status"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Disable\n                        "
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("hr"),
                                 _vm._v(" "),
                                 _c(
-                                  "b-button",
-                                  {
-                                    staticClass: "is-danger is-light",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.closeUserForm()
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Cancel")]
+                                  "b-field",
+                                  { staticClass: "buttons" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "button is-success is-light",
+                                        attrs: {
+                                          type: "submit",
+                                          disabled: _vm.isSubmitting
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                    " +
+                                            _vm._s(
+                                              _vm.isSubmitting
+                                                ? "Submitting..."
+                                                : "Add"
+                                            ) +
+                                            "\n                  "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-button",
+                                      {
+                                        staticClass: "is-danger is-light",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.closeUserForm()
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Cancel")]
+                                    )
+                                  ],
+                                  1
                                 )
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
-                      ])
-                    ])
-                  ]
+                          ])
+                        ])
+                      ]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            ),
+              : _vm._e(),
             _vm._v(" "),
             _c("section", { staticClass: "b__collapse__section" }, [
               _c("div", { staticClass: "card" }, [
@@ -8804,20 +9819,10 @@ var render = function() {
                               _c(
                                 "b-dropdown-item",
                                 {
-                                  attrs: { "aria-role": "listitem" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.openAssignRoleForm()
-                                    }
-                                  }
-                                },
-                                [_vm._v("Assign user role")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-dropdown-item",
-                                {
-                                  attrs: { "aria-role": "listitem" },
+                                  attrs: {
+                                    "aria-role": "listitem",
+                                    disabled: !_vm.isPermission("update")
+                                  },
                                   on: {
                                     click: function($event) {
                                       return _vm.openAssignStatusForm()
@@ -8830,7 +9835,10 @@ var render = function() {
                               _c(
                                 "b-dropdown-item",
                                 {
-                                  attrs: { "aria-role": "listitem" },
+                                  attrs: {
+                                    "aria-role": "listitem",
+                                    disabled: !_vm.isPermission("delete")
+                                  },
                                   on: {
                                     click: function($event) {
                                       return _vm.deleteUsers()
@@ -8844,95 +9852,6 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("transition", { attrs: { name: "fade" } }, [
-                            _vm.showAssignRoleForm &&
-                            _vm.selectedUsers.length > 0
-                              ? _c(
-                                  "form",
-                                  { attrs: { action: "" } },
-                                  [
-                                    _c(
-                                      "b-field",
-                                      {
-                                        attrs: {
-                                          label: "Choose Role",
-                                          expanded: ""
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          { staticClass: "block" },
-                                          _vm._l(
-                                            _vm.getRolePermissions,
-                                            function(r, i) {
-                                              return _c(
-                                                "b-checkbox",
-                                                {
-                                                  key: i,
-                                                  attrs: {
-                                                    "native-value": r.role,
-                                                    disabled: r.role === "ESS"
-                                                  },
-                                                  model: {
-                                                    value: _vm.roleData,
-                                                    callback: function($$v) {
-                                                      _vm.roleData = $$v
-                                                    },
-                                                    expression: "roleData"
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(r.role) +
-                                                      "\n                        "
-                                                  )
-                                                ]
-                                              )
-                                            }
-                                          ),
-                                          1
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-field",
-                                      { staticClass: "buttons" },
-                                      [
-                                        _c(
-                                          "b-button",
-                                          {
-                                            staticClass: "is-success is-light",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.assignUserRole()
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("Save")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-button",
-                                          {
-                                            staticClass: "is-danger is-light",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.cancelAssignForm()
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("Cancel")]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
                             _vm.showAssignStatusForm &&
                             _vm.selectedUsers.length > 0
                               ? _c(
@@ -9172,15 +10091,9 @@ var render = function() {
                                   return [
                                     _vm._v(
                                       _vm._s(
-                                        (props.row.personal_details.title ||
-                                          "") +
-                                          " " +
-                                          props.row.personal_details.firstName +
-                                          " " +
-                                          (props.row.personal_details
-                                            .middleName || "") +
-                                          " " +
-                                          props.row.personal_details.lastName
+                                        _vm.getFullName(
+                                          props.row.personal_details
+                                        )
                                       )
                                     )
                                   ]
@@ -9200,7 +10113,7 @@ var render = function() {
                                 key: "default",
                                 fn: function(props) {
                                   return _vm._l(
-                                    JSON.parse(props.row.role),
+                                    JSON.parse(props.row.roles),
                                     function(r) {
                                       return _c(
                                         "b-tag",
@@ -9296,7 +10209,10 @@ var render = function() {
                                                       attrs: {
                                                         size: "is-small",
                                                         pack: "fas",
-                                                        "icon-right": "eye"
+                                                        "icon-right": "eye",
+                                                        disabled: !_vm.isPermission(
+                                                          "read"
+                                                        )
                                                       }
                                                     })
                                                   ],
@@ -9316,7 +10232,10 @@ var render = function() {
                                                       attrs: {
                                                         size: "is-small",
                                                         pack: "fas",
-                                                        "icon-right": "eye"
+                                                        "icon-right": "eye",
+                                                        disabled: !_vm.isPermission(
+                                                          "read"
+                                                        )
                                                       }
                                                     })
                                                   ],
@@ -9341,7 +10260,10 @@ var render = function() {
                                               attrs: {
                                                 size: "is-small",
                                                 pack: "fas",
-                                                "icon-right": "trash"
+                                                "icon-right": "trash",
+                                                disabled: !_vm.isPermission(
+                                                  "delete"
+                                                )
                                               },
                                               on: {
                                                 click: function($event) {
@@ -9372,6 +10294,7 @@ var render = function() {
               ])
             ])
           ]),
+          _vm._v(" "),
           _c("b-tab-item", { attrs: { label: "Roles & Permissions" } }, [
             _c("section", { staticClass: "b__collapse__section" }, [
               _c("div", { staticClass: "card" }, [
@@ -9382,29 +10305,34 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("section", { staticClass: "table__header__lists" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "table__header__lists__item",
-                          attrs: { id: "add-new-role" }
-                        },
-                        [
-                          _c(
-                            "b-tooltip",
+                      _vm.isPermission("create")
+                        ? _c(
+                            "div",
                             {
-                              attrs: { label: "Add new role", type: "is-dark" }
+                              staticClass: "table__header__lists__item",
+                              attrs: { id: "add-new-role" }
                             },
                             [
-                              _c("b-icon", {
-                                staticClass: "icon--wrapper",
-                                attrs: { icon: "plus" }
-                              })
+                              _c(
+                                "b-tooltip",
+                                {
+                                  attrs: {
+                                    label: "Add new role",
+                                    type: "is-dark"
+                                  }
+                                },
+                                [
+                                  _c("b-icon", {
+                                    staticClass: "icon--wrapper",
+                                    attrs: { icon: "plus" }
+                                  })
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
-                        ],
-                        1
-                      )
+                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -9415,10 +10343,67 @@ var render = function() {
                     { staticClass: "content" },
                     [
                       _c(
+                        "section",
+                        { staticClass: "py-4 multiples-actions" },
+                        [
+                          _c(
+                            "b-dropdown",
+                            {
+                              attrs: {
+                                "aria-role": "list",
+                                disabled:
+                                  _vm.selectedRoles.length > 0 ? false : true
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "trigger",
+                                  fn: function(ref) {
+                                    var active = ref.active
+                                    return [
+                                      _c("b-button", {
+                                        attrs: {
+                                          type: "is-info is-light",
+                                          label: "Actions",
+                                          pack: "fas",
+                                          "icon-right": active
+                                            ? "angle-up"
+                                            : "angle-down"
+                                        }
+                                      })
+                                    ]
+                                  }
+                                }
+                              ])
+                            },
+                            [
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown-item",
+                                {
+                                  attrs: {
+                                    "aria-role": "listitem",
+                                    disabled: !_vm.isPermission("delete")
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteRoles()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Delete roles")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "b-table",
                         {
                           attrs: {
-                            data: ["hphophpo"],
+                            data: _vm.getRoles,
                             paginated: true,
                             "per-page": 100,
                             "current-page": 1,
@@ -9427,7 +10412,7 @@ var render = function() {
                             "default-sort-direction": "desc",
                             "sort-icon": "arrow-up",
                             "sort-icon-size": "is-small",
-                            "checked-rows": _vm.checkedRoles,
+                            "checked-rows": _vm.selectedRoles,
                             checkable: "",
                             hoverable: "",
                             "default-sort": "id",
@@ -9438,224 +10423,411 @@ var render = function() {
                           },
                           on: {
                             "update:checkedRows": function($event) {
-                              _vm.checkedRoles = $event
+                              _vm.selectedRoles = $event
                             },
                             "update:checked-rows": function($event) {
-                              _vm.checkedRoles = $event
+                              _vm.selectedRoles = $event
                             }
                           }
                         },
                         [
-                          _c(
-                            "b-table-column",
-                            {
-                              attrs: {
-                                field: "role",
-                                label: "Role",
-                                sortable: ""
-                              }
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "role",
+                              label: "Role",
+                              sortable: ""
                             },
-                            [
-                              _vm._v(
-                                "\n                  dsjkgfjkaasg\n                "
-                              )
-                            ]
-                          ),
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _vm._v(
+                                      "\n                  " +
+                                        _vm._s(props.row.role) +
+                                        "\n                "
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
                           _vm._v(" "),
-                          _c(
-                            "b-table-column",
-                            {
-                              attrs: {
-                                field: "staff",
-                                label: "Staff",
-                                sortable: ""
-                              }
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "staff",
+                              label: "Staff",
+                              sortable: ""
                             },
-                            [
-                              _vm._l(["dsdsgds"], function(member, index) {
-                                return _c(
-                                  "div",
-                                  { key: index, staticClass: "role-user" },
-                                  [
-                                    _c(
-                                      "b-button",
-                                      {
-                                        attrs: {
-                                          rounded: "",
-                                          size: "",
-                                          type: "is-danger is-light"
-                                        }
-                                      },
-                                      [
-                                        _c("b-icon", {
-                                          attrs: {
-                                            icon: "minus",
-                                            size: "is-small"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c("span", [_vm._v(_vm._s(member))])
-                                  ],
-                                  1
-                                )
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "b-button",
-                                {
-                                  attrs: {
-                                    rounded: "",
-                                    "icon-left": "plus",
-                                    size: "",
-                                    type: "is-info is-light",
-                                    id: "add-staff-" + 546546
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.openAddStaffDropper(546546)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Add\n                  ")]
-                              )
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-table-column",
-                            {
-                              attrs: {
-                                field: "permissions",
-                                label: "Permissions",
-                                sortable: ""
-                              }
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "block",
-                                  staticStyle: { display: "block" }
-                                },
-                                _vm._l(_vm.permissions, function(p, i) {
-                                  return _c(
-                                    "b-checkbox",
-                                    {
-                                      key: i,
-                                      attrs: {
-                                        "native-value": p.id,
-                                        size: "",
-                                        type: "is-success"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                      " +
-                                          _vm._s(p) +
-                                          "\n                    "
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _vm._l(props.row.staff, function(
+                                      staff,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: index,
+                                          staticClass: "role-user"
+                                        },
+                                        [
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                rounded: "",
+                                                size: "",
+                                                type: "is-danger is-light",
+                                                disabled: !_vm.isPermission(
+                                                  "delete"
+                                                )
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteRoleUser({
+                                                    staff: staff.user_id,
+                                                    role: props.row.id
+                                                  })
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("b-icon", {
+                                                attrs: {
+                                                  icon: "minus",
+                                                  size: "is-small"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(_vm.getFullName(staff))
+                                            )
+                                          ])
+                                        ],
+                                        1
                                       )
-                                    ]
-                                  )
-                                }),
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      attrs: {
-                                        "icon-left": "file",
-                                        rounded: "",
-                                        size: "",
-                                        type: "is-info is-light"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.savePermissions()
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("span", { ref: "abs" }, [
-                                        _vm._v("Save")
-                                      ])
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-table-column",
-                            {
-                              attrs: {
-                                field: "report-to",
-                                label: "Report to",
-                                sortable: ""
-                              }
-                            },
-                            [
-                              _vm._l(["dsdsgds"], function(member, index) {
-                                return _c(
-                                  "div",
-                                  { key: index, staticClass: "role-user" },
-                                  [
+                                    }),
+                                    _vm._v(" "),
                                     _c(
                                       "b-button",
                                       {
                                         attrs: {
                                           rounded: "",
+                                          "icon-left": "plus",
                                           size: "",
-                                          type: "is-danger is-light"
+                                          type: "is-info is-light",
+                                          id: "role-user-" + _vm.getDropperId,
+                                          disabled: !_vm.isPermission("create")
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openRoleUserDropper(
+                                              props.row.id
+                                            )
+                                          }
                                         }
                                       },
-                                      [
-                                        _c("b-icon", {
-                                          attrs: {
-                                            icon: "minus",
-                                            size: "is-small"
-                                          }
-                                        })
-                                      ],
+                                      [_vm._v("Add\n                  ")]
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "permissions",
+                              label: "Permissions",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "block",
+                                        staticStyle: {
+                                          "margin-bottom": "-0.02rem"
+                                        }
+                                      },
+                                      _vm._l(
+                                        props.row.permissions.page,
+                                        function(p) {
+                                          return _c(
+                                            "b-tag",
+                                            {
+                                              key: p,
+                                              staticClass: "mr-2",
+                                              attrs: { type: "is-success" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(p) +
+                                                  "\n                    "
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      ),
                                       1
                                     ),
                                     _vm._v(" "),
-                                    _c("span", [_vm._v(_vm._s(member))])
-                                  ],
-                                  1
-                                )
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "b-button",
-                                {
-                                  attrs: {
-                                    rounded: "",
-                                    "icon-left": "plus",
-                                    size: "",
-                                    type: "is-info is-light",
-                                    id: "add-staff-" + 546546
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.openAddStaffDropper(546546)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Add\n                  ")]
-                              )
-                            ],
-                            2
-                          ),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "block",
+                                        staticStyle: {
+                                          "margin-bottom": "-0.02rem"
+                                        }
+                                      },
+                                      _vm._l(
+                                        props.row.permissions.tab,
+                                        function(t) {
+                                          return _c(
+                                            "b-tag",
+                                            {
+                                              key: t,
+                                              staticClass: "mr-2",
+                                              attrs: { type: "is-success" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(t) +
+                                                  "\n                    "
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      ),
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "block",
+                                        staticStyle: {
+                                          "margin-bottom": "-0.02rem"
+                                        }
+                                      },
+                                      _vm._l(
+                                        props.row.permissions.other,
+                                        function(d) {
+                                          return _c(
+                                            "b-tag",
+                                            {
+                                              key: d,
+                                              staticClass: "mr-2",
+                                              attrs: { type: "is-success" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(d) +
+                                                  "\n                    "
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      ),
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "block",
+                                        staticStyle: {
+                                          "margin-bottom": "-0.02rem"
+                                        }
+                                      },
+                                      _vm._l(
+                                        props.row.permissions.crud,
+                                        function(crud) {
+                                          return _c(
+                                            "b-tag",
+                                            {
+                                              key: crud,
+                                              staticClass: "mr-2",
+                                              attrs: { type: "is-success" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(crud) +
+                                                  "\n                    "
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      ),
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "block" },
+                                      _vm._l(
+                                        props.row.permissions.organization,
+                                        function(org) {
+                                          return _c(
+                                            "b-tag",
+                                            {
+                                              key: org,
+                                              staticClass: "mr-2",
+                                              attrs: { type: "is-success" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                      " +
+                                                  _vm._s(org) +
+                                                  "\n                    "
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      ),
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      [
+                                        _c(
+                                          "b-button",
+                                          {
+                                            attrs: {
+                                              "icon-left": "plus",
+                                              rounded: "",
+                                              size: "",
+                                              type: "is-info is-light",
+                                              disabled: !_vm.isPermission(
+                                                "create"
+                                              )
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.addPermission(
+                                                  props.row
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("span", { ref: "abs" }, [
+                                              _vm._v("Add")
+                                            ])
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "report-to",
+                              label: "Report to",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _vm._l(props.row.report_to, function(
+                                      r,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: index + r,
+                                          staticClass: "role-user"
+                                        },
+                                        [
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                rounded: "",
+                                                size: "",
+                                                type: "is-danger is-light"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.removeReportToRole(
+                                                    {
+                                                      reportTo: r,
+                                                      role: props.row.id
+                                                    }
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("b-icon", {
+                                                attrs: {
+                                                  icon: "minus",
+                                                  size: "is-small"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c("span", [_vm._v(_vm._s(r))])
+                                        ],
+                                        1
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          rounded: "",
+                                          "icon-left": "plus",
+                                          size: "",
+                                          type: "is-info is-light",
+                                          id:
+                                            "report-to-role-" +
+                                            _vm.getReportToDropperId,
+                                          disabled: !_vm.isPermission("create")
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openReportToDropper(
+                                              props.row
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Add\n                  ")]
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
                           _vm._v(" "),
                           _c("b-table-column", {
                             attrs: { field: "actions", label: "Actions" },
@@ -9672,23 +10844,29 @@ var render = function() {
                                           "b-tooltip",
                                           {
                                             attrs: {
-                                              label: "Assign",
+                                              label: "Edit role",
                                               size: "is-small",
                                               type: "is-dark"
                                             }
                                           },
                                           [
                                             _c("b-button", {
-                                              staticClass: "is-light",
+                                              staticClass: "is-light is-info",
                                               attrs: {
                                                 size: "is-small",
                                                 pack: "fas",
-                                                "icon-right": "user-cog"
+                                                "icon-right": "pen",
+                                                id:
+                                                  "edit-role-" +
+                                                  _vm.getEditRoleDropperId,
+                                                disabled: !_vm.isPermission(
+                                                  "update"
+                                                )
                                               },
                                               on: {
                                                 click: function($event) {
-                                                  return _vm.getStaffToAssign(
-                                                    props.row.id
+                                                  return _vm.openEditRoleDropper(
+                                                    props.row
                                                   )
                                                 }
                                               }
@@ -9701,58 +10879,30 @@ var render = function() {
                                           "b-tooltip",
                                           {
                                             attrs: {
-                                              label: "View Profile",
+                                              label: "Delete role",
                                               size: "is-small",
                                               type: "is-dark"
                                             }
                                           },
                                           [
-                                            _vm.$page.props.authUser.id !==
-                                            props.row.id
-                                              ? _c(
-                                                  "inertia-link",
-                                                  {
-                                                    attrs: {
-                                                      href:
-                                                        "/dashboard/ess/" +
-                                                        props.row.id +
-                                                        "/" +
-                                                        props.row.slug,
-                                                      "preserve-scroll": ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("b-button", {
-                                                      staticClass: "is-light",
-                                                      attrs: {
-                                                        size: "is-small",
-                                                        pack: "fas",
-                                                        "icon-right": "eye"
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
+                                            _c("b-button", {
+                                              staticClass: "is-light is-danger",
+                                              attrs: {
+                                                size: "is-small",
+                                                pack: "fas",
+                                                "icon-right": "trash",
+                                                disabled: !_vm.isPermission(
+                                                  "delete"
                                                 )
-                                              : _c(
-                                                  "inertia-link",
-                                                  {
-                                                    attrs: {
-                                                      href: "/dashboard/ess",
-                                                      "preserve-scroll": ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("b-button", {
-                                                      staticClass: "is-light",
-                                                      attrs: {
-                                                        size: "is-small",
-                                                        pack: "fas",
-                                                        "icon-right": "eye"
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
-                                                )
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteRole(
+                                                    props.row.id
+                                                  )
+                                                }
+                                              }
+                                            })
                                           ],
                                           1
                                         )
@@ -9794,10 +10944,24 @@ var render = function() {
           _vm._v(" "),
           _c(
             "form",
-            { staticStyle: { width: "25rem" } },
+            {
+              staticStyle: { width: "25rem" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addNewRole()
+                }
+              }
+            },
             [
               _c(
                 "b-field",
+                {
+                  attrs: {
+                    type: { "is-danger": _vm.role.error.length > 0 },
+                    message: _vm.role.error
+                  }
+                },
                 [
                   _c("b-input", {
                     staticClass: "is-info",
@@ -9805,6 +10969,13 @@ var render = function() {
                       placeholder: "Enter new role",
                       type: "text",
                       expanded: ""
+                    },
+                    model: {
+                      value: _vm.role.role,
+                      callback: function($$v) {
+                        _vm.$set(_vm.role, "role", $$v)
+                      },
+                      expression: "role.role"
                     }
                   })
                 ],
@@ -9850,12 +11021,15 @@ var render = function() {
       _c(
         "dropper",
         {
-          ref: "addStaffDropper",
+          ref: "roleUserDropper",
           staticClass: "dropper",
-          attrs: { join: "#add-staff-" + _vm.getDropperId, "z-index": 9999 },
+          attrs: {
+            join: ("#role-user-" + _vm.getDropperId).toString(),
+            "z-index": 9999
+          },
           on: {
-            "esc-keydown": _vm.closeAddStaffDropper,
-            "other-area-clicked": _vm.closeAddStaffDropper
+            "esc-keydown": _vm.closeRoleUserDropper,
+            "other-area-clicked": _vm.closeRoleUserDropper
           }
         },
         [
@@ -9865,7 +11039,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "form",
-            { staticStyle: { width: "25rem" } },
+            {
+              staticStyle: { width: "25rem" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addRoleUser(_vm.getDropperId)
+                }
+              }
+            },
             [
               _c(
                 "b-field",
@@ -9873,9 +11055,9 @@ var render = function() {
                   staticClass: "expand-input",
                   attrs: {
                     type: {
-                      "is-danger": _vm.newStaff.errors.length > 0
+                      "is-danger": _vm.roleUser.error.length > 0
                     },
-                    message: _vm.newStaff.errors
+                    message: _vm.roleUser.error
                   }
                 },
                 [
@@ -9883,14 +11065,108 @@ var render = function() {
                     attrs: {
                       multiple: true,
                       options: _vm.getStaff,
-                      placeholder: "Select staff..."
+                      placeholder: "Select staff...",
+                      "max-height": 200
                     },
                     model: {
-                      value: _vm.newStaff.value,
+                      value: _vm.roleUser.staff,
                       callback: function($$v) {
-                        _vm.$set(_vm.newStaff, "value", $$v)
+                        _vm.$set(_vm.roleUser, "staff", $$v)
                       },
-                      expression: "newStaff.value"
+                      expression: "roleUser.staff"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("b-field", { staticClass: "buttons pt-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-success is-light",
+                    attrs: { type: "submit", disabled: _vm.isSubmittingRole }
+                  },
+                  [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(_vm.isSubmittingRole ? "Saving..." : "Save") +
+                        "\n        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-danger is-light",
+                    attrs: { type: "button", disabled: _vm.isSubmittingRole },
+                    on: {
+                      click: function($event) {
+                        return _vm.closeRoleUserDropper()
+                      }
+                    }
+                  },
+                  [_vm._v("\n          Cancel\n        ")]
+                )
+              ])
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "dropper",
+        {
+          ref: "editRoleDropper",
+          staticClass: "dropper",
+          attrs: {
+            join: ("#edit-role-" + _vm.editRoleDropperId).toString(),
+            "z-index": 9999
+          },
+          on: {
+            "esc-keydown": _vm.closeEditRoleDropper,
+            "other-area-clicked": _vm.closeEditRoleDropper
+          }
+        },
+        [
+          _c("h5", { staticClass: "text-main py-4" }, [_vm._v("Edit Role")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticStyle: { width: "25rem" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.editRole(_vm.getEditRoleDropperId)
+                }
+              }
+            },
+            [
+              _c(
+                "b-field",
+                {
+                  attrs: {
+                    type: { "is-danger": _vm.role.error.length > 0 },
+                    message: _vm.role.error
+                  }
+                },
+                [
+                  _c("b-input", {
+                    staticClass: "is-info",
+                    attrs: {
+                      placeholder: "Enter new role",
+                      type: "text",
+                      expanded: ""
+                    },
+                    model: {
+                      value: _vm.role.role,
+                      callback: function($$v) {
+                        _vm.$set(_vm.role, "role", $$v)
+                      },
+                      expression: "role.role"
                     }
                   })
                 ],
@@ -9921,6 +11197,112 @@ var render = function() {
                     on: {
                       click: function($event) {
                         return _vm.closeRoleDropper()
+                      }
+                    }
+                  },
+                  [_vm._v("\n          Cancel\n        ")]
+                )
+              ])
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "dropper",
+        {
+          ref: "reportToDropper",
+          staticClass: "dropper",
+          attrs: {
+            join: ("#report-to-role-" + _vm.getReportToDropperId).toString(),
+            "z-index": 9999
+          },
+          on: {
+            "esc-keydown": _vm.closeReportToDropper,
+            "other-area-clicked": _vm.closeReportToDropper
+          }
+        },
+        [
+          _c("h5", { staticClass: "text-main py-4" }, [
+            _vm._v("Assign Report To Roles")
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticStyle: { width: "25rem" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addReportToRole(_vm.getReportToDropperId)
+                }
+              }
+            },
+            [
+              _c(
+                "b-field",
+                {
+                  staticClass: "expand-input",
+                  attrs: {
+                    type: {
+                      "is-danger": _vm.reportTo.error.length > 0
+                    },
+                    message: _vm.reportTo.error
+                  }
+                },
+                [
+                  _c("treeselect", {
+                    attrs: {
+                      multiple: true,
+                      options: _vm.getFormatedRoles,
+                      placeholder: "Select staff...",
+                      "max-height": 200
+                    },
+                    model: {
+                      value: _vm.reportTo.roles,
+                      callback: function($$v) {
+                        _vm.$set(_vm.reportTo, "roles", $$v)
+                      },
+                      expression: "reportTo.roles"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("b-field", { staticClass: "buttons pt-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-success is-light",
+                    attrs: {
+                      type: "submit",
+                      disabled: _vm.isSubmittingReportTo
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(
+                          _vm.isSubmittingReportTo ? "Saving..." : "Save"
+                        ) +
+                        "\n        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-danger is-light",
+                    attrs: {
+                      type: "button",
+                      disabled: _vm.isSubmittingReportTo
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.closeReportToDropper()
                       }
                     }
                   },
@@ -10021,7 +11403,8 @@ var render = function() {
                                     attrs: {
                                       src:
                                         "/storage/logo/" +
-                                        _vm.getOrganizationProfile.logo,
+                                        (_vm.getOrganizationProfile &&
+                                          _vm.getOrganizationProfile.logo),
                                       alt: "Brand Logo"
                                     }
                                   })
@@ -12334,9 +13717,10 @@ var render = function() {
                                                 size: "is-small",
                                                 pack: "fas",
                                                 "icon-right": "pen",
-                                                id:
+                                                id: (
                                                   "department-id" +
-                                                  props.row.id.toString()
+                                                  _vm.getDropperId
+                                                ).toString()
                                               },
                                               on: {
                                                 click: function($event) {
@@ -12370,6 +13754,508 @@ var render = function() {
                                               on: {
                                                 click: function($event) {
                                                   return _vm.deleteDepartment(
+                                                    props.row.id
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("b-tab-item", { attrs: { label: "Unit" } }, [
+            _c(
+              "section",
+              { staticClass: "b__collapse__section" },
+              [
+                _c(
+                  "b-collapse",
+                  {
+                    staticClass: "card",
+                    attrs: { animation: "slide", "aria-id": "addreason" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "trigger",
+                        fn: function(props) {
+                          return _c(
+                            "div",
+                            {
+                              staticClass: "card-header",
+                              attrs: {
+                                role: "button",
+                                "aria-controls": "addreason"
+                              }
+                            },
+                            [
+                              _c(
+                                "p",
+                                { staticClass: "card-header-title" },
+                                [
+                                  _c("b-icon", {
+                                    attrs: {
+                                      type: "is-info",
+                                      pack: "fas",
+                                      icon: "plus"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "has-text-info" }, [
+                                    _vm._v("Add New Unit")
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                { staticClass: "card-header-icon" },
+                                [
+                                  _c("b-icon", {
+                                    attrs: {
+                                      type: "is-info",
+                                      pack: "fas",
+                                      icon: props.open
+                                        ? "angle-up"
+                                        : "angle-down"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.toggleAddOrganizationUnit,
+                      callback: function($$v) {
+                        _vm.toggleAddOrganizationUnit = $$v
+                      },
+                      expression: "toggleAddOrganizationUnit"
+                    }
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-content" }, [
+                      _c("div", { staticClass: "content" }, [
+                        _c(
+                          "form",
+                          {
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.addOrganizationUnit()
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "columns" }, [
+                              _c("div", { staticClass: "column is-2" }, [
+                                _c("label", { staticClass: "label" }, [
+                                  _vm._v("Unit Name")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column is-4" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      attrs: {
+                                        type: {
+                                          "is-danger":
+                                            _vm.organizationUnitErrors.name
+                                              .length > 0
+                                        },
+                                        message: _vm.organizationUnitErrors.name
+                                      }
+                                    },
+                                    [
+                                      _c("b-input", {
+                                        attrs: { size: "", expanded: "" },
+                                        model: {
+                                          value: _vm.organizationUnit.name,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.organizationUnit,
+                                              "name",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "organizationUnit.name"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "columns" }, [
+                              _c("div", { staticClass: "column is-2" }, [
+                                _c("label", { staticClass: "label" }, [
+                                  _vm._v("Select Department")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column is-4" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      attrs: {
+                                        type: {
+                                          "is-danger":
+                                            _vm.organizationUnitErrors
+                                              .department.length > 0
+                                        },
+                                        message:
+                                          _vm.organizationUnitErrors.department
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "b-select",
+                                        {
+                                          attrs: {
+                                            type: "is-info",
+                                            expanded: ""
+                                          },
+                                          model: {
+                                            value:
+                                              _vm.organizationUnit.department,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.organizationUnit,
+                                                "department",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "organizationUnit.department"
+                                          }
+                                        },
+                                        _vm._l(_vm.getDepartments, function(
+                                          d,
+                                          i
+                                        ) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              key: d.name + i,
+                                              domProps: { value: d.id }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          " +
+                                                  _vm._s(d.name) +
+                                                  "\n                        "
+                                              )
+                                            ]
+                                          )
+                                        }),
+                                        0
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c(
+                              "b-field",
+                              { staticClass: "buttons" },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "button is-success is-light",
+                                    attrs: { disabled: _vm.isSubmittingNewUnit }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                    " +
+                                        _vm._s(
+                                          _vm.isSubmittingNewUnit
+                                            ? "Submitting..."
+                                            : "Add"
+                                        ) +
+                                        "\n                  "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-button",
+                                  {
+                                    staticClass: "is-danger is-light",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.cancelAddOrganizationUnit()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cancel")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("section", { staticClass: "b__collapse__section" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("header", { staticClass: "card-header" }, [
+                  _c("article", { staticClass: "table__header" }, [
+                    _c("h5", { staticClass: "table__header__title" }, [
+                      _vm._v("Units")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c(
+                    "div",
+                    { staticClass: "content" },
+                    [
+                      _c(
+                        "section",
+                        { staticClass: "py-4 multiples-actions" },
+                        [
+                          _c(
+                            "b-dropdown",
+                            {
+                              attrs: {
+                                "aria-role": "list",
+                                disabled:
+                                  _vm.checkedUnits.length > 0 ? false : true
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "trigger",
+                                  fn: function(ref) {
+                                    var active = ref.active
+                                    return [
+                                      _c("b-button", {
+                                        attrs: {
+                                          type: "is-info is-light",
+                                          label: "Actions",
+                                          pack: "fas",
+                                          "icon-right": active
+                                            ? "angle-up"
+                                            : "angle-down"
+                                        }
+                                      })
+                                    ]
+                                  }
+                                }
+                              ])
+                            },
+                            [
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown-item",
+                                {
+                                  attrs: { "aria-role": "listitem" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteUnits()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Delete units")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table",
+                        {
+                          attrs: {
+                            data: _vm.getUnits,
+                            paginated: _vm.isPaginated,
+                            "per-page": _vm.perPage,
+                            "current-page": _vm.currentPage,
+                            "pagination-simple": _vm.isPaginationSimple,
+                            "pagination-position": _vm.paginationPosition,
+                            "default-sort-direction": _vm.defaultSortDirection,
+                            "sort-icon": _vm.sortIcon,
+                            "sort-icon-size": _vm.sortIconSize,
+                            "checked-rows": _vm.checkedUnits,
+                            checkable: "",
+                            striped: "",
+                            hoverable: "",
+                            "default-sort": "id",
+                            "aria-next-label": "Next page",
+                            "aria-previous-label": "Previous page",
+                            "aria-page-label": "Page",
+                            "aria-current-label": "Current page"
+                          },
+                          on: {
+                            "update:checkedRows": function($event) {
+                              _vm.checkedUnits = $event
+                            },
+                            "update:checked-rows": function($event) {
+                              _vm.checkedUnits = $event
+                            }
+                          }
+                        },
+                        [
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "id",
+                              label: "ID",
+                              width: "40",
+                              sortable: "",
+                              numeric: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [_vm._v(_vm._s(props.row.id))]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "name",
+                              label: "Unit",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [_vm._v(_vm._s(props.row.name))]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: {
+                              field: "department",
+                              label: "Department",
+                              sortable: ""
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [_vm._v(_vm._s(props.row.department))]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "actions", label: "Actions" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "div",
+                                      { staticClass: "b-tooltips" },
+                                      [
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: "Edit",
+                                              size: "is-small",
+                                              type: "is-dark"
+                                            }
+                                          },
+                                          [
+                                            _c("b-button", {
+                                              staticClass: "is-info is-light",
+                                              attrs: {
+                                                size: "is-small",
+                                                pack: "fas",
+                                                "icon-right": "pen",
+                                                id: (
+                                                  "unit-id" +
+                                                  _vm.getUnitDropperId
+                                                ).toString()
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.openUnitDropper(
+                                                    props.row
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: "Delete",
+                                              size: "is-small",
+                                              type: "is-dark"
+                                            }
+                                          },
+                                          [
+                                            _c("b-button", {
+                                              staticClass: "is-danger is-light",
+                                              attrs: {
+                                                size: "is-small",
+                                                pack: "fas",
+                                                "icon-right": "trash"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteUnit(
                                                     props.row.id
                                                   )
                                                 }
@@ -12748,9 +14634,10 @@ var render = function() {
                                                 size: "is-small",
                                                 pack: "fas",
                                                 "icon-right": "pen",
-                                                id:
+                                                id: (
                                                   "position-id" +
-                                                  props.row.id.toString()
+                                                  _vm.getPositionDropperId
+                                                ).toString()
                                               },
                                               on: {
                                                 click: function($event) {
@@ -12837,11 +14724,15 @@ var render = function() {
               }
             },
             [
+              _c("h5", { staticClass: "text-main pb-3" }, [
+                _vm._v("Update Department")
+              ]),
+              _vm._v(" "),
               _c(
                 "b-field",
                 {
                   attrs: {
-                    label: "Update department",
+                    label: "Department",
                     type: {
                       "is-danger":
                         _vm.organizationDepartmentErrors.name.length > 0
@@ -12911,6 +14802,140 @@ var render = function() {
       _c(
         "dropper",
         {
+          ref: "unitDropper",
+          staticClass: "dropper",
+          attrs: { join: "#unit-id" + _vm.getUnitDropperId, "z-index": 1000 },
+          on: {
+            "esc-keydown": _vm.closeUnitDropper,
+            "other-area-clicked": _vm.closeUnitDropper
+          }
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.updateOrganizationUnit()
+                }
+              }
+            },
+            [
+              _c("h5", { staticClass: "text-main pb-3" }, [
+                _vm._v("Update Unit")
+              ]),
+              _vm._v(" "),
+              _c(
+                "b-field",
+                {
+                  attrs: {
+                    label: "Unit",
+                    type: {
+                      "is-danger": _vm.organizationUnitErrors.name.length > 0
+                    },
+                    message: _vm.organizationUnitErrors.name
+                  }
+                },
+                [
+                  _c("b-input", {
+                    attrs: { size: "", expanded: "" },
+                    model: {
+                      value: _vm.organizationUnit.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.organizationUnit, "name", $$v)
+                      },
+                      expression: "organizationUnit.name"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-field",
+                {
+                  attrs: {
+                    label: "Department",
+                    type: {
+                      "is-danger":
+                        _vm.organizationUnitErrors.department.length > 0
+                    },
+                    message: _vm.organizationUnitErrors.department
+                  }
+                },
+                [
+                  _c(
+                    "b-select",
+                    {
+                      attrs: { type: "is-info", expanded: "" },
+                      model: {
+                        value: _vm.organizationUnit.department,
+                        callback: function($$v) {
+                          _vm.$set(_vm.organizationUnit, "department", $$v)
+                        },
+                        expression: "organizationUnit.department"
+                      }
+                    },
+                    _vm._l(_vm.getDepartments, function(d, i) {
+                      return _c(
+                        "option",
+                        { key: d.name + i, domProps: { value: d.id } },
+                        [
+                          _vm._v(
+                            "\n            " + _vm._s(d.name) + "\n          "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("b-field", { staticClass: "buttons" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-success is-light",
+                    attrs: { type: "submit", disabled: _vm.isSubmittingNewUnit }
+                  },
+                  [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(_vm.isSubmittingNewUnit ? "Saving..." : "Save") +
+                        "\n        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-danger is-light",
+                    attrs: {
+                      type: "button",
+                      disabled: _vm.isSubmittingNewUnit
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.closeUnitDropper()
+                      }
+                    }
+                  },
+                  [_vm._v("\n          Cancel\n        ")]
+                )
+              ])
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "dropper",
+        {
           ref: "positionDropper",
           staticClass: "dropper",
           attrs: {
@@ -12934,11 +14959,15 @@ var render = function() {
               }
             },
             [
+              _c("h5", { staticClass: "text-main pb-3" }, [
+                _vm._v("Update Position")
+              ]),
+              _vm._v(" "),
               _c(
                 "b-field",
                 {
                   attrs: {
-                    label: "Update Position",
+                    label: "Position",
                     type: {
                       "is-danger":
                         _vm.organizationPositionErrors.name.length > 0
@@ -14886,6 +16915,289 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.addRolePermission()
+        }
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "modal-card py-4", staticStyle: { width: "700px" } },
+        [
+          _c("header", { staticClass: "modal-card-head" }, [
+            _c("h4", { staticClass: "modal-card-title text-main label pt-2" }, [
+              _vm._v(
+                "\n        Manage Permission for " +
+                  _vm._s(_vm.role.role) +
+                  "\n      "
+              )
+            ]),
+            _vm._v(" "),
+            _c("button", {
+              staticClass: "delete",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.$emit("close")
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "modal-card-body" }, [
+            _c("div", { staticClass: "columns" }, [
+              _c("div", { staticClass: "column is-6" }, [
+                _c("h5", { staticClass: "text-main pb-4" }, [_vm._v("Page")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "block", staticStyle: { display: "block" } },
+                  _vm._l(_vm.getPermissions.page, function(p, i) {
+                    return _c(
+                      "b-checkbox",
+                      {
+                        key: p + i,
+                        attrs: {
+                          "native-value": p,
+                          size: "",
+                          type: "is-success"
+                        },
+                        model: {
+                          value: _vm.rolePermissions.page,
+                          callback: function($$v) {
+                            _vm.$set(_vm.rolePermissions, "page", $$v)
+                          },
+                          expression: "rolePermissions.page"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(p) + "\n            "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "column is-6" },
+                [
+                  _c("h5", { staticClass: "text-main pb-4" }, [_vm._v("Tabs")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getPermissions.tab, function(t, i) {
+                    return _c(
+                      "b-checkbox",
+                      {
+                        key: t + i,
+                        attrs: {
+                          "native-value": t,
+                          size: "",
+                          type: "is-success"
+                        },
+                        model: {
+                          value: _vm.rolePermissions.tab,
+                          callback: function($$v) {
+                            _vm.$set(_vm.rolePermissions, "tab", $$v)
+                          },
+                          expression: "rolePermissions.tab"
+                        }
+                      },
+                      [_vm._v("\n            " + _vm._s(t) + "\n          ")]
+                    )
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns" }, [
+              _c("div", { staticClass: "column is-6" }, [
+                _c("h5", { staticClass: "text-main pb-4" }, [_vm._v("CRUD")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "block", staticStyle: { display: "block" } },
+                  _vm._l(_vm.getPermissions.crud, function(crud, i) {
+                    return _c(
+                      "b-checkbox",
+                      {
+                        key: crud + i,
+                        attrs: {
+                          "native-value": crud,
+                          size: "",
+                          type: "is-success"
+                        },
+                        model: {
+                          value: _vm.rolePermissions.crud,
+                          callback: function($$v) {
+                            _vm.$set(_vm.rolePermissions, "crud", $$v)
+                          },
+                          expression: "rolePermissions.crud"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(crud) + "\n            "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "column is-6" },
+                [
+                  _c("h5", { staticClass: "text-main pb-4" }, [
+                    _vm._v("Other")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.getPermissions.other, function(d, i) {
+                    return _c(
+                      "b-checkbox",
+                      {
+                        key: d + i,
+                        attrs: {
+                          "native-value": d,
+                          size: "",
+                          type: "is-success"
+                        },
+                        model: {
+                          value: _vm.rolePermissions.other,
+                          callback: function($$v) {
+                            _vm.$set(_vm.rolePermissions, "other", $$v)
+                          },
+                          expression: "rolePermissions.other"
+                        }
+                      },
+                      [_vm._v("\n            " + _vm._s(d) + "\n          ")]
+                    )
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns" }, [
+              _c("div", { staticClass: "column is-6" }, [
+                _c("h5", { staticClass: "text-main pb-4" }, [
+                  _vm._v("Organization")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "block", staticStyle: { display: "block" } },
+                  _vm._l(_vm.getPermissions.organization, function(org, i) {
+                    return _c(
+                      "b-checkbox",
+                      {
+                        key: org + i,
+                        attrs: {
+                          "native-value": org,
+                          size: "",
+                          type: "is-success"
+                        },
+                        model: {
+                          value: _vm.rolePermissions.organization,
+                          callback: function($$v) {
+                            _vm.$set(_vm.rolePermissions, "organization", $$v)
+                          },
+                          expression: "rolePermissions.organization"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(org) + "\n            "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "footer",
+            { staticClass: "modal-card-foot" },
+            [
+              _c(
+                "b-field",
+                { staticClass: "buttons" },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button is-success is-light",
+                      attrs: { disabled: _vm.isSubmitting }
+                    },
+                    [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(_vm.isSubmitting ? "Saving..." : "Save") +
+                          "\n        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "is-danger is-light",
+                      attrs: { disabled: _vm.isSubmitting },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeModal()
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Administration.vue":
 /*!***********************************************!*\
   !*** ./resources/js/Pages/Administration.vue ***!
@@ -15607,6 +17919,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditShiftModal_vue_vue_type_template_id_c3c67ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditShiftModal_vue_vue_type_template_id_c3c67ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/user_management/AddPermissionModal.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/admin/user_management/AddPermissionModal.vue ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddPermissionModal_vue_vue_type_template_id_4438b8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true& */ "./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true&");
+/* harmony import */ var _AddPermissionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddPermissionModal.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddPermissionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddPermissionModal_vue_vue_type_template_id_4438b8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddPermissionModal_vue_vue_type_template_id_4438b8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4438b8c0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/user_management/AddPermissionModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPermissionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddPermissionModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPermissionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true&":
+/*!*************************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true& ***!
+  \*************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPermissionModal_vue_vue_type_template_id_4438b8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/user_management/AddPermissionModal.vue?vue&type=template&id=4438b8c0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPermissionModal_vue_vue_type_template_id_4438b8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPermissionModal_vue_vue_type_template_id_4438b8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

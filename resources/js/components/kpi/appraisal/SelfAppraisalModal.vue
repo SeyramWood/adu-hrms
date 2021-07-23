@@ -14,14 +14,8 @@
             )}`
           }}
         </p>
-        <b-taglist attached>
-          <b-tag type="is-dark" size="is-medium">Total Staff</b-tag>
-          <b-tag type="is-info" size="is-medium">{{
-            appraisal.staff.length
-          }}</b-tag>
-        </b-taglist>
       </section>
-      <section>
+      <section class="kpi__table__wrapper">
         <b-steps
           v-model="activeStep"
           :animated="true"
@@ -29,22 +23,36 @@
           :has-navigation="true"
           icon-prev="chevron-left"
           icon-next="chevron-right"
-          label-position="bottom"
-          mobile-mode="minimalist"
+          label-position="left"
+          mobile-mode="compact"
           type="is-info"
+          vertical
         >
           <b-step-item step="1" label="Key Goals">
             <section class="kpi__table">
               <table class="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
-                    <th class="has-text-centered text-main">My Key Goals</th>
-                    <th class="has-text-centered text-main">
-                      Supervisor Key Goals
+                    <th class="text-main">My Key Goals</th>
+                    <th
+                      class="text-main"
+                      v-if="
+                        this.$page.props.authUser.unit_id ||
+                        anyPermission('admin', 'president')
+                      "
+                    >
+                      Unit Key Goals
                     </th>
-                    <th class="has-text-centered text-main">
-                      Manager Key Goals
+                    <th
+                      class="text-main"
+                      v-if="
+                        this.$page.props.authUser.department_id ||
+                        anyPermission('admin', 'president', 'hod')
+                      "
+                    >
+                      Department Key Goals
                     </th>
+                    <th class="text-main">Branch Key Goals</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,25 +66,34 @@
                             <li>Milk</li>
                           </ol>
                         </div>
-                        <form
-                          v-if="
-                            !isUserRole('Manager') && !isUserRole('Supervisor')
-                          "
-                        >
-                          <template v-for="(kg, index) in keyGoals">
-                            <b-field :key="index">
+                        <form @submit.prevent="addKeyGoal()">
+                          <template v-for="(kg, index) in myGoals">
+                            <b-field
+                              :key="index"
+                              :type="{
+                                'is-danger':
+                                  Object.keys(myGoalErrors).length > 0 &&
+                                  myGoalErrors[`goal.${index}.goal`] &&
+                                  myGoalErrors[`goal.${index}.goal`].length > 0,
+                              }"
+                              :message="
+                                Object.keys(myGoalErrors).length > 0
+                                  ? myGoalErrors[`goal.${index}.goal`]
+                                  : []
+                              "
+                            >
                               <b-input
                                 placeholder="Enter new goal..."
                                 type="text"
                                 expanded
-                                v-model="keyGoals[index]['goal']"
+                                v-model="myGoals[index]['goal']"
                               >
                               </b-input>
                               <p class="control">
                                 <b-button
                                   type="is-danger is-light"
                                   icon-left="times"
-                                  :disabled="keyGoals.length === 1"
+                                  :disabled="myGoals.length === 1"
                                   @click="removeGoal(index)"
                                 />
                               </p>
@@ -107,7 +124,12 @@
                         </form>
                       </section>
                     </td>
-                    <td>
+                    <td
+                      v-if="
+                        this.$page.props.authUser.unit_id ||
+                        anyPermission('admin', 'president', 'supervisor')
+                      "
+                    >
                       <section class="kpi_goals__wrapper">
                         <div class="content">
                           <ol type="1">
@@ -116,22 +138,22 @@
                             <li>Milk</li>
                           </ol>
                         </div>
-                        <form v-if="isUserRole('Supervisor')">
-                          <template v-for="(kg, index) in keyGoals">
+                        <form v-if="anyPermission('admin', 'supervisor')">
+                          <template v-for="(kg, index) in unitGoals">
                             <b-field :key="index">
                               <b-input
                                 placeholder="Enter new goal..."
                                 type="text"
                                 expanded
-                                v-model="keyGoals[index]['goal']"
+                                v-model="unitGoals[index]['goal']"
                               >
                               </b-input>
                               <p class="control">
                                 <b-button
                                   type="is-danger is-light"
                                   icon-left="times"
-                                  :disabled="keyGoals.length === 1"
-                                  @click="removeGoal(index)"
+                                  :disabled="unitGoals.length === 1"
+                                  @click="removeGoal(index, 'unit')"
                                 />
                               </p>
                             </b-field>
@@ -142,7 +164,66 @@
                               <b-button
                                 class="is-info is-light"
                                 icon-left="plus"
-                                @click="appendNewGoal()"
+                                @click="appendNewGoal('unit')"
+                                >Add New</b-button
+                              >
+                            </div>
+                            <div class="block">
+                              <b-button class="is-default is-light"
+                                >Cancel</b-button
+                              >
+                              <button
+                                type="submit"
+                                class="button is-success is-light"
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </section>
+                        </form>
+                      </section>
+                    </td>
+                    <td
+                      v-if="
+                        this.$page.props.authUser.department_id ||
+                        anyPermission('admin', 'president', 'hod')
+                      "
+                    >
+                      <section class="kpi_goals__wrapper">
+                        <div class="content">
+                          <ol type="1">
+                            <li>Coffee</li>
+                            <li>Tea</li>
+                            <li>Milk</li>
+                          </ol>
+                        </div>
+                        <form v-if="anyPermission('admin', 'hod')">
+                          <template v-for="(kg, index) in dptGoals">
+                            <b-field :key="index">
+                              <b-input
+                                placeholder="Enter new goal..."
+                                type="text"
+                                expanded
+                                v-model="dptGoals[index]['goal']"
+                              >
+                              </b-input>
+                              <p class="control">
+                                <b-button
+                                  type="is-danger is-light"
+                                  icon-left="times"
+                                  :disabled="dptGoals.length === 1"
+                                  @click="removeGoal(index, 'department')"
+                                />
+                              </p>
+                            </b-field>
+                          </template>
+
+                          <section class="goal__btns">
+                            <div class="">
+                              <b-button
+                                class="is-info is-light"
+                                icon-left="plus"
+                                @click="appendNewGoal('department')"
                                 >Add New</b-button
                               >
                             </div>
@@ -170,22 +251,22 @@
                             <li>Milk</li>
                           </ol>
                         </div>
-                        <form v-if="isUserRole('Manager')">
-                          <template v-for="(kg, index) in keyGoals">
+                        <form v-if="anyPermission('admin', 'branch_manager')">
+                          <template v-for="(kg, index) in branchGoals">
                             <b-field :key="index">
                               <b-input
                                 placeholder="Enter new goal..."
                                 type="text"
                                 expanded
-                                v-model="keyGoals[index]['goal']"
+                                v-model="branchGoals[index]['goal']"
                               >
                               </b-input>
                               <p class="control">
                                 <b-button
                                   type="is-danger is-light"
                                   icon-left="times"
-                                  :disabled="keyGoals.length === 1"
-                                  @click="removeGoal(index)"
+                                  :disabled="branchGoals.length === 1"
+                                  @click="removeGoal(index, 'branch')"
                                 />
                               </p>
                             </b-field>
@@ -196,7 +277,7 @@
                               <b-button
                                 class="is-info is-light"
                                 icon-left="plus"
-                                @click="appendNewGoal()"
+                                @click="appendNewGoal('branch')"
                                 >Add New</b-button
                               >
                             </div>
@@ -240,11 +321,7 @@
                             <li>Milk</li>
                           </ol>
                         </div>
-                        <form
-                          v-if="
-                            !isUserRole('Manager') && !isUserRole('Supervisor')
-                          "
-                        >
+                        <form v-if="!isPermission('admin')">
                           <template v-for="(kg, index) in keyGoals">
                             <b-field :key="index">
                               <b-input
@@ -314,11 +391,7 @@
                             <li>Milk</li>
                           </ol>
                         </div>
-                        <form
-                          v-if="
-                            !isUserRole('Manager') && !isUserRole('Supervisor')
-                          "
-                        >
+                        <form v-if="!isPermission('admin')">
                           <template v-for="(kg, index) in keyGoals">
                             <b-field :key="index">
                               <b-input
@@ -389,11 +462,7 @@
                             <li>Milk</li>
                           </ol>
                         </div>
-                        <form
-                          v-if="
-                            !isUserRole('Manager') && !isUserRole('Supervisor')
-                          "
-                        >
+                        <form v-if="!isPermission('admin')">
                           <template v-for="(kg, index) in keyGoals">
                             <b-field :key="index">
                               <b-input
@@ -464,11 +533,7 @@
                             <li>Milk</li>
                           </ol>
                         </div>
-                        <form
-                          v-if="
-                            !isUserRole('Manager') && !isUserRole('Supervisor')
-                          "
-                        >
+                        <form v-if="!isPermission('admin')">
                           <template v-for="(kg, index) in keyGoals">
                             <b-field :key="index">
                               <b-input
@@ -531,13 +596,9 @@
                     <td>
                       <section class="kpi_goals__wrapper">
                         <div class="content">
-                          <editor :init="initEditor" />
+                          <!-- <editor :init="initEditor" /> -->
                         </div>
-                        <form
-                          v-if="
-                            !isUserRole('Manager') && !isUserRole('Supervisor')
-                          "
-                        >
+                        <form v-if="!isPermission('admin')">
                           <b-field>
                             <vue-mce></vue-mce>
                           </b-field>
@@ -562,7 +623,7 @@
             </section>
           </b-step-item>
           <template #navigation="{ previous, next }">
-            <section class="step__buttons">
+            <section class="step__buttons position">
               <b-button
                 outlined
                 type="is-danger"
@@ -596,24 +657,24 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Editor from "@tinymce/tinymce-vue";
 import Paginate from "../../Paginate";
 export default {
   name: "SelfAppraisalModal",
   props: {
     appraisal: { require: true, type: Object },
   },
-  components: { Paginate, Editor },
+  components: { Paginate },
   computed: {
     ...mapGetters(["getAppraisees", "getJobTitles"]),
   },
   beforeMount() {
-    this.$nextTick(() => {
-      this.dispatchKPI({
-        type: "ADD_APPRAISEES",
-        payload: { id: this.appraisal.id, page: 1 },
-      });
-    });
+    // this.$nextTick(() => {
+    //   this.dispatchKPI({
+    //     type: "ADD_APPRAISEES",
+    //     payload: { id: this.appraisal.id, page: 1 },
+    //   });
+    // });
+    this.getAppraisalKeyGoal(this.appraisal.id);
   },
   data() {
     return {
@@ -630,6 +691,35 @@ export default {
           goal: "",
         },
       ],
+      myGoals: [
+        {
+          id: `${Math.random(16)}`.split(".")[1],
+          goal: "",
+        },
+      ],
+      unitGoals: [
+        {
+          id: `${Math.random(16)}`.split(".")[1],
+          goal: "",
+        },
+      ],
+      dptGoals: [
+        {
+          id: `${Math.random(16)}`.split(".")[1],
+          goal: "",
+        },
+      ],
+      branchGoals: [
+        {
+          id: `${Math.random(16)}`.split(".")[1],
+          goal: "",
+        },
+      ],
+
+      myGoalErrors: {},
+      unitGoalErrors: {},
+      dptGoalErrors: {},
+      branchGoalErrors: {},
     };
   },
   methods: {
@@ -637,6 +727,50 @@ export default {
     cancelModal() {
       this.$emit("close");
     },
+
+    addKeyGoal(type) {
+      switch (type) {
+        case "branch":
+          break;
+        case "department":
+          break;
+
+        case "unit":
+          break;
+        default:
+          const data = {
+            type: "my-goal",
+            id: this.$page.props.authUser.id,
+            appraisal: this.appraisal.id,
+            goal: this.myGoals,
+          };
+          this.myGoalErrors = {};
+          this.saveKeyGoal("my-goal", data);
+          break;
+      }
+    },
+    saveKeyGoal(type, data) {
+      this.$axios
+        .post(`/dashboard/add-key-goal`, data)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          if (type === "my-goal") {
+            this.myGoalErrors = err.response.data.errors;
+          }
+          if (type === "unit") {
+            this.unitGoalErrors = err.response.data.errors;
+          }
+          if (type === "department") {
+            this.dptGoalErrors = err.response.data.errors;
+          }
+          if (type === "branch") {
+            this.branchGoalErrors = err.response.data.errors;
+          }
+        });
+    },
+
     getJobTitle(id) {
       if (id) {
         const t = this.getJobTitles.find((t) => t.id === parseInt(id));
@@ -655,12 +789,83 @@ export default {
         staff.middleName
       )} ${staff.lastName}`;
     },
-    appendNewGoal() {
-      this.keyGoals = [...this.keyGoals, { goal: "" }];
+    appendNewGoal(type) {
+      switch (type) {
+        case "branch":
+          this.branchGoals = [
+            ...this.branchGoals,
+            {
+              id: `${Math.random(16)}`.split(".")[1],
+              goal: "",
+            },
+          ];
+          break;
+        case "department":
+          this.dptGoals = [
+            ...this.dptGoals,
+            {
+              id: `${Math.random(16)}`.split(".")[1],
+              goal: "",
+            },
+          ];
+          break;
+
+        case "unit":
+          this.unitGoals = [
+            ...this.unitGoals,
+            {
+              id: `${Math.random(16)}`.split(".")[1],
+              goal: "",
+            },
+          ];
+          break;
+
+        default:
+          this.myGoals = [
+            ...this.myGoals,
+            {
+              id: `${Math.random(16)}`.split(".")[1],
+              goal: "",
+            },
+          ];
+          break;
+      }
     },
-    removeGoal(index) {
-      if (this.keyGoals.length > 1) {
-        this.keyGoals.splice(index, 1);
+    removeGoal(index, type) {
+      switch (type) {
+        case "branch":
+          if (this.branchGoals.length > 1) {
+            this.branchGoals.splice(index, 1);
+          }
+          break;
+        case "department":
+          if (this.dptGoals.length > 1) {
+            this.dptGoals.splice(index, 1);
+          }
+          break;
+
+        case "unit":
+          if (this.unitGoals.length > 1) {
+            this.unitGoals.splice(index, 1);
+          }
+          break;
+
+        default:
+          if (this.myGoals.length > 1) {
+            this.myGoals.splice(index, 1);
+          }
+          break;
+      }
+    },
+
+    async getAppraisalKeyGoal(id) {
+      try {
+        const goals = await this.$axios.get(
+          `/dashboard/get-appraisal-goal/${id}`
+        );
+        console.log(goals);
+      } catch (err) {
+        console.log(err);
       }
     },
   },
@@ -669,8 +874,3 @@ export default {
 
 <style lang="scss" scoped>
 </style>
-
-Please add a DNS record with the following parameters:
-Record type: TXT
-Domain name: _acme-challenge.hrms.novatechltd.net
-Record: WSa5ZYnEmus6z80Vu_t2w93qaowFSS0xHr-MLNBVtos

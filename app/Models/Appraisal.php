@@ -9,4 +9,9 @@ class Appraisal extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function keyGoals()
+    {
+        // return $this->hasMany(KeyGoal::class);
+    }
 }

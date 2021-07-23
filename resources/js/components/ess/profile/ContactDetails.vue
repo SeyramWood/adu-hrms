@@ -5,16 +5,26 @@
         <!-- <p class="card-header-title">Contact Details</p> -->
       </header>
       <div class="profile-detail-bar">
-        <p class="p-text">Employee Contact Details</p>
+        <p class="p-text">{{ $t("app.contact_detail_cta") }}</p>
       </div>
       <div class="card-content">
         <div class="content">
+          <template v-if="userOrPermission('update', getProfile.user_id)">
+            <b-field v-if="isEditContactDetails" class="mb-4">
+              <b-button
+                class="is-info is-light"
+                icon-left="pen"
+                @click="isEditContactDetails = !isEditContactDetails"
+                >{{ $t("app.edit") }}</b-button
+              >
+            </b-field>
+          </template>
           <fieldset :disabled="isEditContactDetails">
             <form @submit.prevent="updateContactDetails()">
               <div class="columns">
                 <div class="column is-6">
                   <b-field
-                    label="Address (1)"
+                    :label="` ${$t('app.address')} (1)`"
                     :type="{
                       'is-danger': contactDetailsErrors.address1.length > 0,
                     }"
@@ -22,8 +32,7 @@
                   >
                     <b-input
                       type="textarea"
-                      maxlength="150"
-                      placeholder="Type your address(1)"
+                      :placeholder="` ${$t('app.address_placehoder')}...`"
                       v-model="contactDetails.address1"
                       size=""
                     ></b-input>
@@ -31,7 +40,7 @@
                 </div>
                 <div class="column is-6">
                   <b-field
-                    label="Address (2)"
+                    :label="` ${$t('app.address')} (2)`"
                     :type="{
                       'is-danger': contactDetailsErrors.address2.length > 0,
                     }"
@@ -39,8 +48,7 @@
                   >
                     <b-input
                       type="textarea"
-                      maxlength="150"
-                      placeholder="Type your address(2)"
+                      :placeholder="` ${$t('app.address_placehoder')}...`"
                       v-model="contactDetails.address2"
                       size=""
                     ></b-input>
@@ -50,7 +58,7 @@
               <div class="columns">
                 <div class="column is-4">
                   <b-field
-                    label="City"
+                    :label="$t('app.city')"
                     expanded
                     :type="{
                       'is-danger': contactDetailsErrors.city.length > 0,
@@ -62,7 +70,7 @@
                 </div>
                 <div class="column is-4">
                   <b-field
-                    label="State/Region"
+                    :label="`${$t('app.state')}/${$t('app.region')}`"
                     expanded
                     :type="{
                       'is-danger': contactDetailsErrors.region.length > 0,
@@ -74,7 +82,7 @@
                 </div>
                 <div class="column is-4">
                   <b-field
-                    label="Country"
+                    :label="$t('app.country')"
                     expanded
                     :type="{
                       'is-danger': contactDetailsErrors.country.length > 0,
@@ -82,8 +90,15 @@
                     :message="contactDetailsErrors.country"
                   >
                     <b-select size="" expanded v-model="contactDetails.country">
-                      <option value="Ghana">Ghana</option>
-                      <option value="Nigeria">Nigeria</option>
+                      <option
+                        :value="c.name"
+                        v-for="c in getCountries"
+                        :key="c.name"
+                      >
+                        {{
+                          locale !== "en" ? c.translations[`${locale}`] : c.name
+                        }}
+                      </option>
                     </b-select>
                   </b-field>
                 </div>
@@ -91,7 +106,7 @@
               <div class="columns">
                 <div class="column is-4">
                   <b-field
-                    label="Mobile"
+                    :label="$t('app.mobile')"
                     expanded
                     :type="{
                       'is-danger': contactDetailsErrors.mobile.length > 0,
@@ -103,7 +118,7 @@
                 </div>
                 <div class="column is-4">
                   <b-field
-                    label="Work Telephone"
+                    :label="$t('app.work_tel')"
                     expanded
                     :type="{
                       'is-danger':
@@ -119,7 +134,7 @@
                 </div>
                 <div class="column is-4">
                   <b-field
-                    label="Home Telephone"
+                    :label="$t('app.home_tel')"
                     expanded
                     :type="{
                       'is-danger':
@@ -135,9 +150,9 @@
                 </div>
               </div>
               <div class="columns">
-                <div class="column is-6">
+                <div class="column is-4">
                   <b-field
-                    label="Work Email"
+                    :label="$t('app.work_email')"
                     expanded
                     :type="{
                       'is-danger': contactDetailsErrors.workEmail.length > 0,
@@ -150,9 +165,9 @@
                     ></b-input>
                   </b-field>
                 </div>
-                <div class="column is-6">
+                <div class="column is-4">
                   <b-field
-                    label="Other Email"
+                    :label="$t('app.other_email')"
                     expanded
                     :type="{
                       'is-danger': contactDetailsErrors.otherEmail.length > 0,
@@ -174,25 +189,29 @@
                     type="submit"
                     :disabled="isSubmittingContactDetails"
                   >
-                    {{ isSubmittingContactDetails ? "Saving..." : "Save" }}
+                    {{
+                      isSubmittingContactDetails
+                        ? `${$t("app.saving")}...`
+                        : $t("app.save")
+                    }}
                   </button>
 
                   <b-button
                     class="is-danger is-light"
                     @click="cancelContactDetailsForm()"
-                    >Cancel</b-button
+                    >{{ $t("app.cancel") }}</b-button
                   >
                 </div>
               </b-field>
             </form>
           </fieldset>
-          <template v-if="roleOrUserPermission('Admin', getProfile.user_id)">
+          <template v-if="userOrPermission('update', getProfile.user_id)">
             <b-field v-if="isEditContactDetails">
               <b-button
                 class="is-info is-light"
                 icon-left="pen"
                 @click="isEditContactDetails = !isEditContactDetails"
-                >Edit</b-button
+                >{{ $t("app.edit") }}</b-button
               >
             </b-field>
           </template>
@@ -207,7 +226,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "ContactDetails",
   computed: {
-    ...mapGetters(["getProfile"]),
+    ...mapGetters(["getProfile", "getCountries"]),
   },
   created() {},
   beforeMount() {
@@ -215,6 +234,7 @@ export default {
   },
   data() {
     return {
+      locale: this.$lang.getLocale(),
       isEditContactDetails: true,
       isSubmittingContactDetails: false,
       contactDetails: {

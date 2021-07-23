@@ -1,17 +1,17 @@
-use Inertia\Inertia;
+
 <template>
   <section class="main__content">
     <tabs stickyTab="main__content__sticky">
-      <tab label="User Management">
+      <tab label="User Management" v-if="isPermission('user_management')">
         <ManageUserComponent />
       </tab>
-      <tab label="Job">
+      <tab label="Job" v-if="isPermission('job')">
         <JobComponent />
       </tab>
-      <tab label="Shift Management">
+      <!-- <tab label="Shift Management" v-if="isPermission('shift_management')">
         <WorkShiftComponent />
-      </tab>
-      <tab label="Organization">
+      </tab> -->
+      <tab label="Organization" v-if="isPermission('organization')">
         <OrganizationComponent />
       </tab>
     </tabs>
@@ -53,23 +53,24 @@ export default {
     employmentStatuses: Array,
     branches: Array,
     departments: Array,
+    units: Array,
     positions: Array,
-    rolePermissions: Object,
     staffCount: Object,
     workShifts: Array,
+    roles: Array,
+    permissions: Object,
   },
   computed: {},
   created() {
     this.dispatchUserAccount({ payload: 1 });
-    this.dispatchUserAccount({
-      type: "ADD_ROLE_PERMISSION",
-      payload: JSON.parse(this.rolePermissions.role_permission),
-    });
+    this.dispatchRole({ payload: this.roles });
+    this.dispatchRole({ type: "ADD_PERMISSIONS", payload: this.permissions });
     this.dispatchJobCategory({ payload: this.jobCategories });
     this.dispatchJobTitle({ payload: this.jobTitles });
     this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
     this.dispatchBranch({ payload: this.branches });
     this.dispatchDepartment({ payload: this.departments });
+    this.dispatchUnit({ payload: this.units });
     this.dispatchPosition({ payload: this.positions });
     this.dispatchStaffCount({ payload: this.staffCount });
     this.dispatchWorkShift({ payload: this.workShifts });
@@ -89,11 +90,13 @@ export default {
   methods: {
     ...mapActions([
       "dispatchUserAccount",
+      "dispatchRole",
       "dispatchJobCategory",
       "dispatchJobTitle",
       "dispatchEmploymentStatus",
       "dispatchBranch",
       "dispatchDepartment",
+      "dispatchUnit",
       "dispatchPosition",
       "dispatchOrgnizationProfile",
       "dispatchStaffCount",

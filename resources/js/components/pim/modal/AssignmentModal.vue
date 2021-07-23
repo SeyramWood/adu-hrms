@@ -8,7 +8,9 @@
       <p v-if="nodataErr" class="has-text-danger mb-2">{{ nodataErr }}</p>
       <form @submit.prevent="updateAssignment('title')" class="mb-5">
         <div
-          class="is-flex is-justify-content-space-between is-align-items-flex-end"
+          class="
+            is-flex is-justify-content-space-between is-align-items-flex-end
+          "
           style="width: 35rem"
         >
           <b-field
@@ -38,7 +40,9 @@
       </form>
       <form @submit.prevent="updateAssignment('employmentStatus')" class="mb-5">
         <div
-          class="is-flex is-justify-content-space-between is-align-items-flex-end"
+          class="
+            is-flex is-justify-content-space-between is-align-items-flex-end
+          "
           style="width: 35rem"
         >
           <b-field
@@ -72,7 +76,9 @@
       </form>
       <form @submit.prevent="updateAssignment('branch')" class="mb-5">
         <div
-          class="is-flex is-justify-content-space-between is-align-items-flex-end"
+          class="
+            is-flex is-justify-content-space-between is-align-items-flex-end
+          "
           style="width: 35rem"
         >
           <b-field
@@ -100,20 +106,26 @@
           </b-field>
         </div>
       </form>
-      <form @submit.prevent="updateAssignment('department')" class="mb-5">
+      <form
+        @submit.prevent="updateAssignment('department')"
+        class="mb-5"
+        v-if="staffToAssign.department_id"
+      >
         <div
-          class="is-flex is-justify-content-space-between is-align-items-flex-end"
+          class="
+            is-flex is-justify-content-space-between is-align-items-flex-end
+          "
           style="width: 35rem"
         >
           <b-field
             label="Assign Department"
             class="expand-input"
             :type="{
-              'is-danger': deparment.errors.length > 0,
+              'is-danger': department.errors.length > 0,
             }"
-            :message="deparment.errors"
+            :message="department.errors"
           >
-            <b-select type="is-info" expanded v-model="deparment.value">
+            <b-select type="is-info" expanded v-model="department.value">
               <option :value="b.id" v-for="(b, i) in getDepartments" :key="i">
                 {{ b.name }}
               </option>
@@ -130,33 +142,38 @@
           </b-field>
         </div>
       </form>
-      <form @submit.prevent="updateAssignment('position')" class="mb-5">
+      <form
+        @submit.prevent="updateAssignment('unit')"
+        class="mb-5"
+        v-if="staffToAssign.unit_id"
+      >
         <div
-          class="is-flex is-justify-content-space-between is-align-items-flex-end"
+          class="
+            is-flex is-justify-content-space-between is-align-items-flex-end
+          "
           style="width: 35rem"
         >
           <b-field
-            label="Assign Position"
+            label="Assign Unit"
             class="expand-input"
             :type="{
-              'is-danger': position.errors.length > 0,
+              'is-danger': unit.errors.length > 0,
             }"
-            :message="position.errors"
+            :message="unit.errors"
           >
-            <b-select type="is-info" expanded v-model="position.value">
-              <option :value="p.id" v-for="p in getPositions" :key="p.id">
-                {{ p.name }}
+            <b-select type="is-info" expanded v-model="unit.value">
+              <option :value="u.id" v-for="(u, i) in getUnits" :key="i">
+                {{ u.name }}
               </option>
-              <option value="remove">Strip Position</option>
             </b-select>
           </b-field>
           <b-field class="buttons">
             <button
               class="button is-success is-light"
               type="submit"
-              :disabled="isSubmittingPosition"
+              :disabled="isSubmittingUnit"
             >
-              {{ isSubmittingPosition ? "Assigning..." : "Assign" }}
+              {{ isSubmittingUnit ? "Assigning..." : "Assign" }}
             </button>
           </b-field>
         </div>
@@ -172,16 +189,24 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "AssignmentModal",
-  props: { staffToAssignId: { require: true } },
+  props: { staffToAssign: { require: true } },
   computed: {
     ...mapGetters([
       "getPositions",
       "getEmploymentStatus",
       "getBranches",
       "getDepartments",
+      "getUnits",
       "getJobTitles",
       "getJobCategories",
     ]),
+  },
+  beforeMount() {
+    this.empStatus.value = this.staffToAssign.employmentStatusId;
+    this.jobTitle.value = this.staffToAssign.jobTitleId;
+    this.department.value = this.staffToAssign.department_id;
+    this.unit.value = this.staffToAssign.unit_id;
+    this.branch.value = this.staffToAssign.branch_id;
   },
   data() {
     return {
@@ -189,7 +214,9 @@ export default {
       isSubmittingEmpStatus: false,
       isSubmittingBranch: false,
       isSubmittingDepartment: false,
+      isSubmittingUnit: false,
       isSubmittingPosition: false,
+      departmentUnits: [],
       jobTitle: {
         value: "",
         errors: [],
@@ -202,11 +229,11 @@ export default {
         value: "",
         errors: [],
       },
-      deparment: {
+      department: {
         value: "",
         errors: [],
       },
-      position: {
+      unit: {
         value: "",
         errors: [],
       },
@@ -217,6 +244,12 @@ export default {
     ...mapActions(["dispatchStaff"]),
     cancelModal() {
       this.$emit("close");
+    },
+    getStaffDepartmentUnits(id) {
+      if (this.isNull(id)) {
+        return this.getUnits.map((u) => u.deparment_id === id);
+      }
+      return [];
     },
     updateAssignment(type) {
       let data;
@@ -234,16 +267,15 @@ export default {
       }
       if (type === "department") {
         this.isSubmittingDepartment = true;
-        data = { department: this.deparment.value };
+        data = { department: this.department.value };
       }
-      if (type === "position") {
-        this.this.isSubmittingPosition = false;
-        data = { position: this.position.value };
+      if (type === "unit") {
+        this.isSubmittingUnit = true;
+        data = { unit: this.unit.value };
       }
-
       this.$axios
         .put(
-          `/dashboard/ess/update-job-assignment/${this.staffToAssignId}/${type}`,
+          `/dashboard/ess/update-job-assignment/${this.staffToAssign.id}/${type}`,
           data
         )
         .then((res) => {
@@ -251,11 +283,12 @@ export default {
           this.isSubmittingEmpStatus = false;
           this.isSubmittingBranch = false;
           this.isSubmittingDepartment = false;
+          this.isSubmittingUnit = false;
           this.isSubmittingPosition = false;
           if (res.status === 200 && res.data.assigned) {
             this.dispatchStaff({
               type: "UPDATE_JOB",
-              payload: { id: this.staffToAssignId, data: res.data.staff },
+              payload: { id: this.staffToAssign.id, data: res.data.staff },
             });
           }
           if (res.status === 200 && res.data.nodata) {
@@ -265,8 +298,6 @@ export default {
               this.nodataErr = "";
             }, 5000);
           }
-
-          console.log(res);
         })
         .catch((err) => {});
     },

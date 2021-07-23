@@ -10,6 +10,7 @@ class SendMailAccountCreated extends Command
      * The name and signature of the console command.
      *
      * @var string
+     * 
      */
     protected $signature = 'sendMail:newAccount';
 

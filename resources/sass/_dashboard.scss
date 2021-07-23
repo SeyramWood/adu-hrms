@@ -1,0 +1,238 @@
+.dashboard__wrapper {
+    padding: 3rem;
+}
+.org__card {
+    border: 1px solid #eee;
+    padding: 1rem;
+    & > h6 {
+        margin-bottom: 0.5rem !important;
+    }
+}
+.dashboard__wrapper {
+    padding: 3rem 10rem;
+}
+.basic__info {
+    width: 100%;
+    display: flex;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    &__card {
+        @include grid-3;
+        // &:not(:last-child) {
+        //     margin-right: $column-gutter;
+        // }
+    }
+}
+.dashboard__cards {
+    width: $max-width;
+    &:not(:last-child) {
+        margin-bottom: $row-gutter;
+    }
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    @include respond-only(xs) {
+        flex-direction: column;
+    }
+    &__card {
+        &:not(:last-child) {
+            margin-right: $column-gutter;
+            margin-bottom: $row-gutter;
+        }
+        &__transaction {
+            width: 100%;
+            height: 7rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            color: $white !important;
+            &:hover &__icon > i {
+                transform: scale(1.3);
+            }
+            &__text {
+                & > p {
+                    letter-spacing: 1.3px;
+                    font-size: 1rem !important;
+                    &:first-child {
+                        font-weight: bold;
+                        font-size: 1.2rem !important;
+                        padding-bottom: 0.3rem;
+                    }
+                }
+            }
+            &__icon {
+                & > i {
+                    font-size: 3rem !important;
+                    color: $white !important;
+                    transition: all 0.7s ease-in !important;
+                }
+            }
+        }
+    }
+    &__card.c--12 {
+        @include grid-12;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--9 {
+        @include grid-9;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--8 {
+        @include grid-8;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--7 {
+        @include grid-7;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--6 {
+        @include grid-6;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--5 {
+        @include grid-5;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--4 {
+        @include grid-4;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--3 {
+        @include grid-3;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--2 {
+        @include grid-2;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+    &__card.c--1 {
+        @include grid-1;
+        @include respond-down(xs) {
+            @include grid-12;
+        }
+    }
+}
+
+.ui__card {
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        color: $white;
+        &__icon {
+            & > span {
+                & > svg {
+                    width: 6rem !important;
+                    height: 4rem !important;
+                    margin: 2rem 0 0 5rem;
+                }
+            }
+        }
+        &__text {
+            text-align: right;
+        }
+    }
+    &__link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & > a {
+            color: $main-2;
+            &:hover {
+                color: $main-2;
+                text-decoration: underline;
+            }
+        }
+        & > span {
+            display: inline-block;
+            font-size: 2rem;
+            animation-name: fadeInn;
+            animation-fill-mode: backwards;
+            animation-timing-function: ease-in;
+            animation-iteration-count: infinite;
+        }
+        & a:hover + span {
+            animation-duration: 2s;
+        }
+    }
+}
+
+.side_card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $main-1;
+    & > a {
+        color: $main-2;
+        &:hover {
+            color: $main-2;
+            text-decoration: underline;
+        }
+    }
+}
+@keyframes fadeInn {
+    from {
+        opacity: 0.7;
+        transform: translateX(-2rem);
+        color: $main-2;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0.3rem);
+        color: $main-1;
+    }
+}
+
+.gradient--1 {
+    background: rgb(0, 212, 255);
+    background: linear-gradient(
+        42deg,
+        rgba(0, 212, 255, 0.8687850140056023) 29%,
+        rgba(30, 108, 228, 0.8127626050420168) 85%
+    );
+}
+.gradient--2 {
+    background: rgb(28, 209, 164);
+    background: linear-gradient(
+        275deg,
+        rgba(28, 209, 164, 0.6881127450980392) 10%,
+        rgba(36, 157, 50, 0.8099614845938375) 98%
+    );
+}
+.gradient--3 {
+    background: rgb(252, 69, 177);
+    background: linear-gradient(
+        49deg,
+        rgba(252, 69, 177, 0.7595413165266106) 10%,
+        rgba(253, 29, 29, 0.6418942577030813) 98%
+    );
+}
+.gradient--4 {
+    background: rgb(255, 213, 65);
+    background: linear-gradient(
+        341deg,
+        rgba(255, 213, 65, 1) 10%,
+        rgba(255, 138, 85, 1) 98%
+    );
+}

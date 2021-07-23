@@ -42,12 +42,12 @@ const actions = {
 
 const mutations = {
     addStaff: (state, data) => {
-        if (data.length > 0) {
-            state.staffList = data.map(u => {
-                u.personal_details = JSON.parse(u.personal_details);
-                u.job = u.job ? JSON.parse(u.job) : u.job;
-                return u;
-            });
+        state.staffList = data.map(u => {
+            u.personal_details = JSON.parse(u.personal_details);
+            u.job = u.job ? JSON.parse(u.job) : u.job;
+            return u;
+        });
+        if (data && data.length > 0) {
         }
     },
     updateJob: (state, data) => {

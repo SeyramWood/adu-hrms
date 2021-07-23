@@ -5,7 +5,6 @@ namespace App\Traits;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\WorkShift;
-use App\Models\RolePermission;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 
@@ -102,9 +101,5 @@ trait Admin
       $user->save();
     }
     return response()->json(['assigned' => true]);
-  }
-  public function getRolePermissions()
-  {
-    return RolePermission::get()->first();
   }
 }
