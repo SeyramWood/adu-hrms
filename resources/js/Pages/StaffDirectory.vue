@@ -174,7 +174,11 @@ export default {
         let url = `/dashboard/search-staff?page=${this.searchPage}&search=${nv}`;
         this.searchPage = 1;
         this.$axios.get(url).then(({ data }) => {
-          this.searchResults = data.data;
+          this.searchResults = data.data.map((u) => {
+            u.personal_details = JSON.parse(u.personal_details);
+            u.job = u.job ? JSON.parse(u.job) : u.job;
+            return u;
+          });
           this.triggerSearch = true;
         });
       } else {
@@ -201,7 +205,7 @@ export default {
   methods: {
     ...mapActions(["dispatchStaff"]),
     getFullName(details) {
-      let { title, lastName, firstName, middleName } = JSON.parse(details);
+      let { title, lastName, firstName, middleName } = details;
       return `${title || ""} ${lastName || ""} ${firstName || ""} ${
         middleName || ""
       }`;
@@ -237,7 +241,14 @@ export default {
         if (data.data.length) {
           this.searchPage += 1;
           if (!intersection.length) {
-            this.searchResults = [...this.searchResults, ...data.data];
+            this.searchResults = [
+              ...this.searchResults,
+              ...data.data.map((u) => {
+                u.personal_details = JSON.parse(u.personal_details);
+                u.job = u.job ? JSON.parse(u.job) : u.job;
+                return u;
+              }),
+            ];
           }
           $state.loaded();
         } else {

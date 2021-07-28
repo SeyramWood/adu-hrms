@@ -18,10 +18,7 @@ const actions = {
                     commit("addNewUser", payload);
                     break;
                 case "ADD_DIRECTORY":
-                    state.staffDirectory = [
-                        ...state.staffDirectory,
-                        ...payload
-                    ];
+                    commit("addStaffDirectory", payload);
                     break;
                 case "ASSIGN_ROLE":
                     commit("assignUserRole", payload);
@@ -67,6 +64,18 @@ const mutations = {
             1,
             staff
         );
+    },
+    addStaffDirectory: (state, data) => {
+        state.staffDirectory = [
+            ...state.staffDirectory,
+            ...data.map(u => {
+                u.personal_details = JSON.parse(u.personal_details);
+                u.job = u.job ? JSON.parse(u.job) : u.job;
+                return u;
+            })
+        ];
+
+        console.log(data);
     }
 };
 
