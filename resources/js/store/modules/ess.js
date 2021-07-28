@@ -8,9 +8,8 @@ const state = {
     contactDetails: [],
     emergencyContacts: [],
     userJob: [],
-    workExperience: [],
     education: [],
-    skills: [],
+    expertise: [],
     languages: [],
     qualificationAttachments: [],
     myLeaders: {},
@@ -25,9 +24,8 @@ const getters = {
     getContactDetails: state => state.contactDetails,
     getEmergencyContacts: state => state.emergencyContacts,
     getUserJob: state => state.userJob,
-    getWorkExperience: state => state.workExperience,
     getEducation: state => state.education,
-    getSkills: state => state.skills,
+    getExpertise: state => state.expertise,
     getLanguages: state => state.languages,
     getQualificationAttachments: state => state.qualificationAttachments,
     getMyLeaders: state => state.myLeaders,
@@ -82,14 +80,14 @@ const actions = {
                 case "ADD_EDUCATION":
                     state.profile.qualifications.education = payload;
                     break;
-                case "ADD_SKILL":
-                    state.profile.qualifications.skills = payload;
+                case "ADD_CONTINUOUS_DEV":
+                    state.profile.qualifications.continuousDev = payload;
+                    break;
+                case "ADD_EXPERTISE":
+                    state.profile.qualifications.expertise = payload;
                     break;
                 case "ADD_LANGUAGE":
                     state.profile.qualifications.languages = payload;
-                    break;
-                case "ADD_ATTACHMENT":
-                    state.profile.qualifications.attachments = payload;
                     break;
                 case "UDATE_QUALIFICATION":
                     state.profile.qualifications[payload.type] = payload.data;
@@ -171,12 +169,9 @@ const mutations = {
     setContactDetails: (state, data) => (state.contactDetails = data),
     setEmergencyContacts: (state, data) => (state.emergencyContacts = data),
     setUserJob: (state, data) => (state.userJob = data),
-    setWorkExperience: (state, data) => (state.workExperience = data),
     setEducation: (state, data) => (state.education = data),
-    setSkills: (state, data) => (state.skills = data),
-    setLanguages: (state, data) => (state.languages = data),
-    setQualificationAttachments: (state, data) =>
-        (state.qualificationAttachments = data)
+    setExpertise: (state, data) => (state.expertise = data),
+    setLanguages: (state, data) => (state.languages = data)
 };
 
 export default {

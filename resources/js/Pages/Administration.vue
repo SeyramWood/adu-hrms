@@ -51,7 +51,6 @@ export default {
     jobCategories: Array,
     jobTitles: Array,
     employmentStatuses: Array,
-    branches: Array,
     departments: Array,
     units: Array,
     positions: Array,
@@ -68,18 +67,11 @@ export default {
     this.dispatchJobCategory({ payload: this.jobCategories });
     this.dispatchJobTitle({ payload: this.jobTitles });
     this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
-    this.dispatchBranch({ payload: this.branches });
     this.dispatchDepartment({ payload: this.departments });
     this.dispatchUnit({ payload: this.units });
     this.dispatchPosition({ payload: this.positions });
     this.dispatchStaffCount({ payload: this.staffCount });
     this.dispatchWorkShift({ payload: this.workShifts });
-
-    // this.$axios.get("/api/bio").then((res) => {
-    //   this.test = res.data.data;
-    //   // window.location.reload();
-    //   // console.log(res.data);
-    // });
   },
   data() {
     return {

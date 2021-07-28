@@ -562,9 +562,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.dispatchEmploymentStatus({
       payload: this.employmentStatuses
     });
-    this.dispatchBranch({
-      payload: this.branches
-    });
     this.dispatchDepartment({
       payload: this.departments
     });
@@ -589,7 +586,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchUserAccount", "dispatchStaff", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchJobCategory", "dispatchWorkShift"]))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchUserAccount", "dispatchStaff", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchJobCategory", "dispatchWorkShift"]))
 });
 
 /***/ }),

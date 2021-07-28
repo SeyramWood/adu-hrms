@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUnitKeyGoalsTable extends Migration
+class CreateSelfAppraisalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateUnitKeyGoalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('unit_key_goals', function (Blueprint $table) {
+        Schema::create('self_appraisals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('appraisal_id')->constrained('appraisals')->onDelete('cascade');
-            $table->unsignedBigInteger('unit_id', false)->nullable();
+            $table->unsignedBigInteger('user_id', false)->nullable();
             $table->json('goals')->nullable();
+            $table->json('achievements')->nullable();
+            $table->json('difficulties')->nullable();
+            $table->json('initiatives')->nullable();
+            $table->json('other_initiatives')->nullable();
+            $table->longText('feedback')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ class CreateUnitKeyGoalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unit_key_goals');
+        Schema::dropIfExists('self_appraisals');
     }
 }

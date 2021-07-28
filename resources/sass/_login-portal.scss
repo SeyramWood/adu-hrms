@@ -1,6 +1,14 @@
 .login__container {
     width: 100%;
     height: 100vh;
+    background-image: repeating-linear-gradient(
+            rgba(0, 0, 0, 0.644),
+            rgba(0, 0, 0, 0.623)
+        ),
+        url("/storage/bgs/bg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     &__brand {
         height: 20%;
         background-color: $main-1;
@@ -18,6 +26,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        @include respond-down(sm) {
+            width: 55vw;
+        }
+        @include respond-down(xs) {
+            width: 90vw;
+        }
         &__logo {
             position: absolute;
             width: 16rem;
@@ -32,6 +47,14 @@
             background-repeat: no-repeat;
             background-size: cover;
             padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+            @include respond-down(xs) {
+                position: static;
+                align-self: center;
+                border-width: 20px;
+                width: 20rem;
+                height: 20rem;
+                margin-bottom: 3rem;
+            }
             & img {
                 width: 100%;
                 height: 100%;
@@ -49,6 +72,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            @include respond-down(xs) {
+                position: static;
+                width: 100%;
+                height: 25rem;
+                align-self: center;
+                margin-top: 3rem;
+            }
             & .control > input {
                 &:focus {
                     outline-color: $main !important;
@@ -77,6 +108,10 @@
                         letter-spacing: 0.05rem;
                         text-transform: uppercase;
                     }
+                    @include respond-down(xs) {
+                        width: 100%;
+                        padding: 0 2rem;
+                    }
                 }
             }
             &__container {
@@ -85,6 +120,11 @@
                 display: flex;
                 justify-content: flex-end;
                 padding-right: 4rem;
+                background-color: $white;
+                @include respond-down(xs) {
+                    justify-content: flex-start;
+                    padding-right: 0px;
+                }
                 &__body {
                     width: 75%;
                     height: 100%;
@@ -92,6 +132,10 @@
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
+                    @include respond-down(xs) {
+                        width: 100%;
+                        padding: 0 2rem;
+                    }
                 }
             }
         }

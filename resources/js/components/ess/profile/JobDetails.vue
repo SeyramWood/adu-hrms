@@ -117,29 +117,6 @@
               <h5 class="text-main">{{ $t("app.organization") }}</h5>
               <div class="columns">
                 <div class="column is-3">
-                  <b-field :label="$t('app.branch')" expanded></b-field>
-                </div>
-                <div class="column is-4">
-                  <b-field
-                    label
-                    expanded
-                    :type="{ 'is-danger': jobErrors.branch.length > 0 }"
-                    :message="jobErrors.branch"
-                  >
-                    <b-select size="" expanded v-model="job.branch">
-                      <option
-                        :value="branch.id"
-                        v-for="(branch, index) in getBranches"
-                        :key="index"
-                      >
-                        {{ branch.name }}
-                      </option>
-                    </b-select>
-                  </b-field>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="column is-3">
                   <b-field :label="$t('app.department')" expanded></b-field>
                 </div>
                 <div class="column is-4">
@@ -468,7 +445,6 @@ export default {
       "getJobCategories",
       "getJobTitles",
       "getEmploymentStatus",
-      "getBranches",
       "getDepartments",
       "getUnits",
       "getPositions",
@@ -541,7 +517,6 @@ export default {
         department: "",
         unit: "",
         position: "",
-        branch: "",
         startDate: null,
         endDate: null,
         contractDetails: null,
@@ -556,7 +531,6 @@ export default {
         department: [],
         unit: [],
         position: [],
-        branch: [],
         startDate: [],
         endDate: [],
         contractDetails: [],
@@ -575,7 +549,6 @@ export default {
           department: jobDetails.department || "none",
           unit: jobDetails.unit || "",
           position: jobDetails.position || "",
-          branch: jobDetails.branch,
           startDate: new Date(jobDetails.startDate),
           endDate: new Date(jobDetails.endDate),
           contractDetailsAvailable: jobDetails.contractDetails,
@@ -596,7 +569,7 @@ export default {
       data.append("department", this.job.department);
       data.append("unit", this.job.unit);
       data.append("position", this.job.position);
-      data.append("branch", this.job.branch);
+
       data.append(
         "startDate",
         this.job.startDate ? this.job.startDate.toISOString() : ""
@@ -684,7 +657,6 @@ export default {
       this.job.department = "";
       this.job.unit = "";
       this.job.position = "";
-      this.job.branch = "";
       this.job.startDate = null;
       this.job.endDate = null;
       this.job.contractDetails = null;
@@ -699,7 +671,6 @@ export default {
       this.jobErrors.department = error.department || [];
       this.jobErrors.unit = error.unit || [];
       this.jobErrors.position = error.position || [];
-      this.jobErrors.branch = error.branch || [];
       this.jobErrors.startDate = error.startDate || [];
       this.jobErrors.endDate = error.endDate || [];
       this.jobErrors.contractDetails = error.contractDetails || [];

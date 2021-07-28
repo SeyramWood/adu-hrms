@@ -56,11 +56,10 @@ trait Account
   {
     $slug = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
     $qualifications = [
-      'workExperience' => [],
       'education' => [],
-      'skills' => [],
+      'expertise' => [],
       'languages' => [],
-      'attachments' => [],
+      'continuousDev' => [],
     ];
     Profile::create([
       'user_id' => $user->id,

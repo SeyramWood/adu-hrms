@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\WorkShift;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -46,34 +47,6 @@ trait Staff
     }
     if (Gate::any(['admin', 'president'], Auth::user())) {
       return User::join('profiles', 'profiles.user_id', '=', 'users.id')
-        ->leftJoin('branches', 'branches.id', '=', 'profiles.branch_id')
-        ->leftJoin('departments', 'departments.id', '=', 'profiles.department_id')
-        ->leftJoin('units', 'units.id', '=', 'profiles.unit_id')
-        ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
-        ->select(
-          'users.*',
-          'profiles.branch_id',
-          'profiles.department_id',
-          'profiles.unit_id',
-          'profiles.position_id',
-          'profiles.job->title as jobTitleId',
-          'profiles.job->employmentStatus as employmentStatusId',
-          'profiles.personal_details',
-          'contact_details->mobile as mobile',
-          'profiles.job',
-          'profiles.slug',
-          'branches.name as branch',
-          'departments.name as department',
-          'units.name as unit',
-          'positions.name as position',
-        )
-        ->orderBy('users.id', 'desc')
-        ->get();
-    }
-
-    if (Gate::allows('branch_manager', Auth::user())) {
-      return User::join('profiles', 'profiles.user_id', '=', 'users.id')
-        ->where('profiles.branch_id', '=', Auth::user()->profile->branch_id)
         ->leftJoin('branches', 'branches.id', '=', 'profiles.branch_id')
         ->leftJoin('departments', 'departments.id', '=', 'profiles.department_id')
         ->leftJoin('units', 'units.id', '=', 'profiles.unit_id')
@@ -195,21 +168,58 @@ trait Staff
     return (object)$data;
   }
 
-  public function staffDirInfo()
+  public function getStaffDirInfo($searchTerm = null)
   {
+    if ($searchTerm) {
+      return User::join('profiles', 'profiles.user_id', '=', 'users.id')
+        ->leftJoin('departments', 'departments.id', '=', 'profiles.department_id')
+        ->leftJoin('units', 'units.id', '=', 'profiles.unit_id')
+        ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
+        ->orWhere('profiles.personal_details->lastName', 'like', "%{$searchTerm}%")
+        ->orWhere('profiles.personal_details->firstName', 'like', "%{$searchTerm}%")
+        ->orWhere('profiles.personal_details->middleName', 'like', "%{$searchTerm}%")
+        ->orWhere('profiles.personal_details->title', 'like', "%{$searchTerm}%")
+        ->orWhere('departments.name', 'like', "%{$searchTerm}%")
+        ->orWhere('units.name', 'like', "%{$searchTerm}%")
+        ->select(
+          'users.*',
+          'profiles.department_id',
+          'profiles.unit_id',
+          'profiles.position_id',
+          'profiles.job->title as jobTitleId',
+          'profiles.job->employmentStatus as employmentStatusId',
+          'profiles.personal_details',
+          'contact_details->mobile as mobile',
+          'profiles.job',
+          'profiles.slug',
+          'departments.name as department',
+          'units.name as unit',
+          'positions.name as position',
+        )
+        ->orderBy('users.id', 'desc')
+        ->paginate(25);
+    }
     return User::join('profiles', 'profiles.user_id', '=', 'users.id')
-      ->leftJoin('branches', 'branches.id', '=', 'profiles.branch_id')
       ->leftJoin('departments', 'departments.id', '=', 'profiles.department_id')
+      ->leftJoin('units', 'units.id', '=', 'profiles.unit_id')
+      ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
       ->select(
         'users.*',
+        'profiles.department_id',
+        'profiles.unit_id',
+        'profiles.position_id',
+        'profiles.job->title as jobTitleId',
+        'profiles.job->employmentStatus as employmentStatusId',
         'profiles.personal_details',
+        'contact_details->mobile as mobile',
         'profiles.job',
         'profiles.slug',
-        'branches.name as branch',
         'departments.name as department',
+        'units.name as unit',
+        'positions.name as position',
       )
       ->orderBy('users.id', 'desc')
-      ->get();
+      ->paginate(25);
   }
   public function getSupervisors()
   {
@@ -250,7 +260,6 @@ trait Staff
     $hods = [];
     $profiles = User::join('profiles', 'profiles.user_id', '=', 'users.id')
       ->where('users.id', '!=', Auth::id())
-      ->where('profiles.branch_id', '=', Auth::user()->profile->branch_id)
       ->where('profiles.department_id', '=', Auth::user()->profile->department_id)
       ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
       ->select(
@@ -277,34 +286,6 @@ trait Staff
       }
     }
     return $hods;
-  }
-  public function getManagers()
-  {
-    $managers = [];
-    $profiles = User::join('profiles', 'profiles.user_id', '=', 'users.id')
-      ->where('users.id', '!=', Auth::id())
-      ->where('profiles.branch_id', '=', Auth::user()->profile->branch_id)
-      ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
-      ->select(
-        'users.*',
-        'profiles.branch_id',
-        'profiles.department_id',
-        'profiles.unit_id',
-        'profiles.position_id',
-        'profiles.personal_details',
-        'contact_details',
-        'positions.name as position',
-      )
-      ->orderBy('users.id', 'desc')
-      ->get();
-    for ($i = 0; $i < count($profiles); $i++) {
-      if ($profiles[$i]->roles) {
-        if ($this->checkUserPermissions('branch_manager', $profiles[$i]->roles)) {
-          array_push($managers, $profiles[$i]);
-        }
-      }
-    }
-    return $managers;
   }
   public function getPresidents()
   {

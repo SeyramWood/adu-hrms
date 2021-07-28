@@ -16,272 +16,6 @@
             >
               <b-collapse
                 class="card"
-                v-model="isEditWorkExperience"
-                animation="slide"
-                aria-id="addreportingmethod"
-              >
-                <div
-                  slot="trigger"
-                  slot-scope="props"
-                  class="card-header"
-                  role="button"
-                  aria-controls="addreportingmethod"
-                >
-                  <p class="card-header-title has-text-info">
-                    {{ $t("app.add_wrk_experience") }}
-                  </p>
-                  <a class="card-header-icon">
-                    <b-icon
-                      pack="fas"
-                      type="is-info"
-                      :icon="props.open ? 'angle-down' : 'angle-up'"
-                    ></b-icon>
-                  </a>
-                </div>
-                <div class="card-content">
-                  <div class="content">
-                    <form @submit.prevent="addWorkExperience()">
-                      <div class="columns">
-                        <div class="column is-6">
-                          <b-field
-                            :label="$t('app.company')"
-                            expanded
-                            :type="{
-                              'is-danger':
-                                qualificationsErrors.workExperience.company
-                                  .length > 0,
-                            }"
-                            :message="
-                              qualificationsErrors.workExperience.company
-                            "
-                          >
-                            <b-input
-                              size=""
-                              expanded
-                              v-model="qualifications.workExperience.company"
-                            ></b-input>
-                          </b-field>
-                        </div>
-                        <div class="column is-6">
-                          <b-field
-                            :label="$t('app.jobTitle')"
-                            expanded
-                            :type="{
-                              'is-danger':
-                                qualificationsErrors.workExperience.jobTitle
-                                  .length > 0,
-                            }"
-                            :message="
-                              qualificationsErrors.workExperience.jobTitle
-                            "
-                          >
-                            <b-input
-                              size=""
-                              expanded
-                              v-model="qualifications.workExperience.jobTitle"
-                            ></b-input>
-                          </b-field>
-                        </div>
-                      </div>
-                      <div class="columns">
-                        <div class="column is-6">
-                          <b-field
-                            :label="`${$t('app.from')} (${$t('app.year')})`"
-                            expanded
-                            :type="{
-                              'is-danger':
-                                qualificationsErrors.workExperience.from
-                                  .length > 0,
-                            }"
-                            :message="qualificationsErrors.workExperience.from"
-                          >
-                            <b-select
-                              v-model="qualifications.workExperience.from"
-                              :placeholder="$t('app.selectYear')"
-                              size=""
-                              expanded
-                            >
-                              <option
-                                :value="year"
-                                v-for="(year, index) in getYears"
-                                :key="index"
-                              >
-                                {{ year }}
-                              </option>
-                            </b-select>
-                          </b-field>
-                        </div>
-                        <div class="column is-6">
-                          <b-field
-                            :label="`${$t('app.to')} (${$t('app.year')})`"
-                            expanded
-                            :type="{
-                              'is-danger':
-                                qualificationsErrors.workExperience.to.length >
-                                0,
-                            }"
-                            :message="qualificationsErrors.workExperience.to"
-                          >
-                            <b-select
-                              v-model="qualifications.workExperience.to"
-                              :placeholder="$t('app.selectYear')"
-                              size=""
-                              expanded
-                            >
-                              <option
-                                :value="year"
-                                v-for="(year, index) in getYears"
-                                :key="index"
-                              >
-                                {{ year }}
-                              </option>
-                            </b-select>
-                          </b-field>
-                        </div>
-                      </div>
-                      <div class="columns">
-                        <div class="column is-6">
-                          <b-field
-                            :label="$tc('app.comment', 1)"
-                            :type="{
-                              'is-danger':
-                                qualificationsErrors.workExperience.comment
-                                  .length > 0,
-                            }"
-                            :message="
-                              qualificationsErrors.workExperience.comment
-                            "
-                          >
-                            <b-input
-                              size=""
-                              type="textarea"
-                              :placeholder="$t('app.placeholder_comment')"
-                              v-model="qualifications.workExperience.comment"
-                            ></b-input>
-                          </b-field>
-                        </div>
-                      </div>
-                      <hr />
-                      <b-field class="buttons">
-                        <button
-                          class="button is-success is-light"
-                          type="submit"
-                          :disabled="isSubmittingWorkExperience"
-                        >
-                          {{
-                            isSubmittingWorkExperience
-                              ? `${$t("app.edit_wrk_experience")}...`
-                              : $t("app.add")
-                          }}
-                        </button>
-                        <b-button
-                          class="is-danger is-light"
-                          @click="cancelWorkExperienceForm()"
-                          >{{ $t("app.cancel") }}</b-button
-                        >
-                      </b-field>
-                    </form>
-                  </div>
-                </div>
-              </b-collapse>
-            </section>
-            <b-table
-              :data="getWorkExperience || []"
-              :paginated="true"
-              :per-page="5"
-              :current-page="1"
-              :pagination-simple="true"
-              pagination-position="bottom"
-            >
-              <b-table-column
-                field="company"
-                :label="$t('app.company')"
-                sortable
-                v-slot="props"
-                >{{ props.row.company }}</b-table-column
-              >
-              <b-table-column
-                field="jtitle"
-                :label="$t('app.jobTitle')"
-                sortable
-                v-slot="props"
-                >{{ props.row.jobTitle }}</b-table-column
-              >
-              <b-table-column
-                field="from"
-                :label="$t('app.from')"
-                sortable
-                v-slot="props"
-                >{{ props.row.from }}</b-table-column
-              >
-              <b-table-column
-                field="to"
-                :label="$t('app.to')"
-                sortable
-                v-slot="props"
-                >{{ props.row.to }}</b-table-column
-              >
-              <b-table-column
-                field="comment"
-                :label="$tc('app.comment', 1)"
-                sortable
-                v-slot="props"
-                >{{ props.row.comment }}</b-table-column
-              >
-              <b-table-column
-                field="actions"
-                :label="$tc('app.action', 2)"
-                v-slot="props"
-              >
-                <div class="b-tooltips">
-                  <b-tooltip
-                    :label="$t('app.edit_wrk_experience')"
-                    type="is-dark"
-                  >
-                    <b-button
-                      class="is-info is-light"
-                      size="is-small"
-                      pack="fas"
-                      icon-right="pen"
-                      :id="`wrk-experince-id${props.row.id}`"
-                      @click="openWorkExperienceDropper(props.row)"
-                      :disabled="
-                        !userOrPermission('update', getProfile.user_id)
-                      "
-                    ></b-button>
-                  </b-tooltip>
-                  <b-tooltip :label="$t('app.delete')" type="is-dark">
-                    <b-button
-                      class="is-danger is-light"
-                      size="is-small"
-                      pack="fas"
-                      icon-right="trash"
-                      @click="deleteHandler('workExperience', props.row.id)"
-                      :disabled="
-                        !userOrPermission('delete', getProfile.user_id)
-                      "
-                    ></b-button>
-                  </b-tooltip>
-                </div>
-              </b-table-column>
-            </b-table>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="b__collapse__section">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">{{ $t("app.education") }}</p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <section
-              class="b__collapse__section"
-              v-if="userOrPermission('create', getProfile.user_id)"
-            >
-              <b-collapse
-                class="card"
                 v-model="isEditEducation"
                 animation="slide"
                 aria-id="addreportingmethod"
@@ -308,7 +42,7 @@
                   <div class="content">
                     <form @submit.prevent="addEducation()">
                       <div class="columns">
-                        <div class="column is-4">
+                        <div class="column is-6">
                           <b-field
                             :label="$t('app.institution')"
                             expanded
@@ -328,7 +62,7 @@
                             ></b-input>
                           </b-field>
                         </div>
-                        <div class="column is-4">
+                        <div class="column is-6">
                           <b-field
                             :label="$t('app.major_spec')"
                             expanded
@@ -345,23 +79,6 @@
                               size=""
                               expanded
                               v-model="qualifications.education.specialization"
-                            ></b-input>
-                          </b-field>
-                        </div>
-                        <div class="column is-4">
-                          <b-field
-                            :label="$t('app.gpa')"
-                            expanded
-                            :type="{
-                              'is-danger':
-                                qualificationsErrors.education.gpa.length > 0,
-                            }"
-                            :message="qualificationsErrors.education.gpa"
-                          >
-                            <b-input
-                              size=""
-                              expanded
-                              v-model="qualifications.education.gpa"
                             ></b-input>
                           </b-field>
                         </div>
@@ -447,7 +164,7 @@
               </b-collapse>
             </section>
             <b-table
-              :data="getEducation || []"
+              :data="getEducation"
               :paginated="true"
               :per-page="5"
               :current-page="1"
@@ -467,13 +184,6 @@
                 sortable
                 v-slot="props"
                 >{{ props.row.specialization }}</b-table-column
-              >
-              <b-table-column
-                field="gpa"
-                :label="$t('app.gpa')"
-                sortable
-                v-slot="props"
-                >{{ props.row.gpa }}</b-table-column
               >
               <b-table-column
                 field="started"
@@ -527,10 +237,13 @@
         </div>
       </div>
     </section>
+
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">{{ $tc("app.skill", 2) }}</p>
+          <p class="card-header-title">
+            {{ $tc("app.expertise", 1) }}
+          </p>
         </header>
         <div class="card-content">
           <div class="content">
@@ -540,7 +253,7 @@
             >
               <b-collapse
                 class="card"
-                v-model="isEditSkills"
+                v-model="isEditExpertise"
                 animation="slide"
                 aria-id="addreportingmethod"
               >
@@ -552,7 +265,7 @@
                   aria-controls="addreportingmethod"
                 >
                   <p class="card-header-title has-text-info">
-                    {{ $t("app.add_skills") }}
+                    {{ $t("app.add_expertise") }}
                   </p>
                   <a class="card-header-icon">
                     <b-icon
@@ -565,22 +278,23 @@
 
                 <div class="card-content">
                   <div class="content">
-                    <form @submit.prevent="addSkills()">
+                    <form @submit.prevent="addExpertise()">
                       <div class="columns">
                         <div class="column is-6">
                           <b-field
-                            :label="$tc('app.skill', 1)"
+                            :label="$tc('app.expertise', 1)"
                             expanded
                             :type="{
                               'is-danger':
-                                qualificationsErrors.skills.skill.length > 0,
+                                qualificationsErrors.expertise.expertise
+                                  .length > 0,
                             }"
-                            :message="qualificationsErrors.skills.skill"
+                            :message="qualificationsErrors.expertise.expertise"
                           >
                             <b-input
                               size=""
                               expanded
-                              v-model="qualifications.skills.skill"
+                              v-model="qualifications.expertise.expertise"
                             ></b-input>
                           </b-field>
                         </div>
@@ -592,17 +306,19 @@
                             expanded
                             :type="{
                               'is-danger':
-                                qualificationsErrors.skills.yearOfExperience
+                                qualificationsErrors.expertise.yearOfExperience
                                   .length > 0,
                             }"
                             :message="
-                              qualificationsErrors.skills.yearOfExperience
+                              qualificationsErrors.expertise.yearOfExperience
                             "
                           >
                             <b-input
                               size=""
                               expanded
-                              v-model="qualifications.skills.yearOfExperience"
+                              v-model="
+                                qualifications.expertise.yearOfExperience
+                              "
                             ></b-input>
                           </b-field>
                         </div>
@@ -613,15 +329,16 @@
                             :label="$tc('app.comment', 1)"
                             :type="{
                               'is-danger':
-                                qualificationsErrors.skills.comment.length > 0,
+                                qualificationsErrors.expertise.comment.length >
+                                0,
                             }"
-                            :message="qualificationsErrors.skills.comment"
+                            :message="qualificationsErrors.expertise.comment"
                           >
                             <b-input
                               type="textarea"
                               :placeholder="$t('app.comment_placeholder')"
                               size=""
-                              v-model="qualifications.skills.comment"
+                              v-model="qualifications.expertise.comment"
                             ></b-input>
                           </b-field>
                         </div>
@@ -632,17 +349,17 @@
                         <button
                           class="button is-success is-light"
                           type="submit"
-                          :disabled="isSubmittingSkills"
+                          :disabled="isSubmittingExpertise"
                         >
                           {{
-                            isSubmittingSkills
+                            isSubmittingExpertise
                               ? `${$t("app.submitting")}`
                               : $t("app.add")
                           }}
                         </button>
                         <b-button
                           class="is-danger is-light"
-                          @click="cancelSkillsForm()"
+                          @click="cancelExpertiseForm()"
                           >{{ $t("app.cancel") }}</b-button
                         >
                       </b-field>
@@ -652,7 +369,7 @@
               </b-collapse>
             </section>
             <b-table
-              :data="getSkills || []"
+              :data="getExpertise"
               :paginated="true"
               :per-page="5"
               :current-page="1"
@@ -660,11 +377,11 @@
               pagination-position="bottom"
             >
               <b-table-column
-                field="skill"
-                :label="$tc('app.skill', 1)"
+                field="expertise"
+                :label="$tc('app.expertise', 1)"
                 sortable
                 v-slot="props"
-                >{{ props.row.skill }}</b-table-column
+                >{{ props.row.expertise }}</b-table-column
               >
               <b-table-column
                 field="yoe"
@@ -686,14 +403,14 @@
                 v-slot="props"
               >
                 <div class="b-tooltips">
-                  <b-tooltip :label="$t('app.edit_skill')" type="is-dark">
+                  <b-tooltip :label="$t('app.edit_expertise')" type="is-dark">
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`skill-id${getAttachmentDropperId}`"
-                      @click="openSkillDropper(props.row)"
+                      :id="`expertise-id${getAttachmentDropperId}`"
+                      @click="openExpertiseDropper(props.row)"
                       :disabled="
                         !userOrPermission('update', getProfile.user_id)
                       "
@@ -705,7 +422,7 @@
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
-                      @click="deleteHandler('skills', props.row.id)"
+                      @click="deleteHandler('expertise', props.row.id)"
                       :disabled="
                         !userOrPermission('delete', getProfile.user_id)
                       "
@@ -718,6 +435,7 @@
         </div>
       </div>
     </section>
+
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
@@ -855,7 +573,7 @@
               </b-collapse>
             </section>
             <b-table
-              :data="getLanguages || []"
+              :data="getLanguages"
               :paginated="true"
               :per-page="5"
               :current-page="1"
@@ -921,10 +639,13 @@
         </div>
       </div>
     </section>
+
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">{{ $tc("app.attachment", 2) }}</p>
+          <p class="card-header-title">
+            {{ $t("app.continuous_dev") }}
+          </p>
         </header>
         <div class="card-content">
           <div class="content">
@@ -934,7 +655,7 @@
             >
               <b-collapse
                 class="card"
-                v-model="isEditQualificationAttachment"
+                v-model="isEditContinuousDev"
                 animation="slide"
                 aria-id="addreportingmethod"
               >
@@ -946,7 +667,7 @@
                   aria-controls="addreportingmethod"
                 >
                   <p class="card-header-title has-text-info">
-                    {{ $t("app.addAttament") }}
+                    {{ $t("app.add_continuous_dev") }}
                   </p>
                   <a class="card-header-icon">
                     <b-icon
@@ -958,64 +679,108 @@
                 </div>
                 <div class="card-content">
                   <div class="content">
-                    <form @submit.prevent="addQualificationAttachment()">
+                    <form @submit.prevent="addContinuousDev()">
                       <div class="columns">
-                        <div class="column is-3">
-                          <b-field>
-                            <b-upload
-                              v-model="qualifications.attachment.file"
-                              drag-drop
-                              size="is-small"
-                            >
-                              <section class="section">
-                                <div class="content has-text-centered">
-                                  <p>
-                                    <b-icon
-                                      icon="upload"
-                                      size="is-small"
-                                    ></b-icon>
-                                  </p>
-                                  <p>{{ $t("app.placeholder_attachment1") }}</p>
-                                </div>
-                              </section>
-                            </b-upload>
-                          </b-field>
-                          <div
-                            class="tags"
-                            v-if="qualifications.attachment.file"
-                          >
-                            <span class="tag is-large is-info is-light">
-                              {{ qualifications.attachment.file.name }}
-                              <button
-                                class="delete is-small"
-                                type="button"
-                                @click="qualifications.attachment.file = null"
-                              ></button>
-                            </span>
-                          </div>
+                        <div class="column is-6">
                           <b-field
+                            :label="$t('app.institution')"
+                            expanded
                             :type="{
                               'is-danger':
-                                qualificationsErrors.attachment.file.length > 0,
+                                qualificationsErrors.continuousDev.institution
+                                  .length > 0,
                             }"
-                            :message="qualificationsErrors.attachment.file"
-                          >
-                          </b-field>
-                        </div>
-                        <div class="column is-4">
-                          <b-field
-                            :type="{
-                              'is-danger':
-                                qualificationsErrors.attachment.comment.length >
-                                0,
-                            }"
-                            :message="qualificationsErrors.attachment.comment"
+                            :message="
+                              qualificationsErrors.continuousDev.institution
+                            "
                           >
                             <b-input
-                              type="textarea"
-                              :placeholder="$t('app.placeholder_comment')"
-                              v-model="qualifications.attachment.comment"
+                              size=""
+                              expanded
+                              v-model="qualifications.continuousDev.institution"
                             ></b-input>
+                          </b-field>
+                        </div>
+                        <div class="column is-6">
+                          <b-field
+                            :label="$t('app.major_spec')"
+                            expanded
+                            :type="{
+                              'is-danger':
+                                qualificationsErrors.continuousDev
+                                  .specialization.length > 0,
+                            }"
+                            :message="
+                              qualificationsErrors.continuousDev.specialization
+                            "
+                          >
+                            <b-input
+                              size=""
+                              expanded
+                              v-model="
+                                qualifications.continuousDev.specialization
+                              "
+                            ></b-input>
+                          </b-field>
+                        </div>
+                      </div>
+                      <div class="columns">
+                        <div class="column is-6">
+                          <b-field
+                            :label="$t('app.started')"
+                            expanded
+                            :type="{
+                              'is-danger':
+                                qualificationsErrors.continuousDev.started
+                                  .length > 0,
+                            }"
+                            :message="
+                              qualificationsErrors.continuousDev.started
+                            "
+                          >
+                            <b-select
+                              v-model="qualifications.continuousDev.started"
+                              :placeholder="$t('app.selectYear')"
+                              size=""
+                              expanded
+                            >
+                              <option
+                                :value="year"
+                                v-for="(year, index) in getYears"
+                                :key="index"
+                              >
+                                {{ year }}
+                              </option>
+                            </b-select>
+                          </b-field>
+                        </div>
+                        <div class="column is-6">
+                          <b-field
+                            :label="$t('app.completed')"
+                            expanded
+                            :type="{
+                              'is-danger':
+                                qualificationsErrors.continuousDev.completed
+                                  .length > 0,
+                            }"
+                            :message="
+                              qualificationsErrors.continuousDev.completed
+                            "
+                          >
+                            <b-select
+                              v-model="qualifications.continuousDev.completed"
+                              :placeholder="$t('app.selectYear')"
+                              size=""
+                              expanded
+                            >
+                              <option
+                                :value="year"
+                                v-for="(year, index) in getYears"
+                                :key="index"
+                              >
+                                {{ year }}
+                              </option>
+                            </b-select>
                           </b-field>
                         </div>
                       </div>
@@ -1024,17 +789,17 @@
                         <button
                           class="button is-success is-light"
                           type="submit"
-                          :disabled="isSubmittingQualificationAttachment"
+                          :disabled="isSubmittingContinuousDev"
                         >
                           {{
-                            isSubmittingQualificationAttachment
+                            isSubmittingContinuousDev
                               ? `${$t("app.submitting")}`
                               : $t("app.add")
                           }}
                         </button>
                         <b-button
                           class="is-danger is-light"
-                          @click="cancelQualificationAttachmentForm()"
+                          @click="cancelContinuousDevForm()"
                           >{{ $t("app.cancel") }}</b-button
                         >
                       </b-field>
@@ -1044,34 +809,40 @@
               </b-collapse>
             </section>
             <b-table
-              :data="getAttachments || []"
+              :data="getContinuousDev"
               :paginated="true"
-              :per-page="10"
+              :per-page="5"
               :current-page="1"
               :pagination-simple="true"
               pagination-position="bottom"
             >
               <b-table-column
-                field="file"
-                :label="$tc('app.file', 1)"
+                field="institution"
+                :label="$t('app.institution')"
                 sortable
                 v-slot="props"
+                >{{ props.row.institution }}</b-table-column
               >
-                <a
-                  @click="
-                    viewAttachment(
-                      `/attachments/qualification/${props.row.file}`
-                    )
-                  "
-                  >{{ props.row.file }}</a
-                >
-              </b-table-column>
               <b-table-column
-                field="comment"
-                :label="$tc('app.comment', 1)"
+                field="specialization"
+                :label="$t('app.specialization')"
                 sortable
                 v-slot="props"
-                >{{ props.row.comment }}</b-table-column
+                >{{ props.row.specialization }}</b-table-column
+              >
+              <b-table-column
+                field="started"
+                :label="$t('app.started')"
+                sortable
+                v-slot="props"
+                >{{ props.row.started }}</b-table-column
+              >
+              <b-table-column
+                field="completed"
+                :label="$t('app.completed')"
+                sortable
+                v-slot="props"
+                >{{ props.row.completed }}</b-table-column
               >
               <b-table-column
                 field="actions"
@@ -1079,30 +850,14 @@
                 v-slot="props"
               >
                 <div class="b-tooltips">
-                  <b-tooltip
-                    :label="$t('app.replaceAttachment')"
-                    type="is-dark"
-                  >
-                    <b-button
-                      class="is-info is-light"
-                      size="is-small"
-                      pack="fas"
-                      icon-right="upload"
-                      :id="`comment-id${getAttachmentDropperId}`"
-                      @click="openAttachmentDropper(props.row, 'attachment')"
-                      :disabled="
-                        !userOrPermission('update', getProfile.user_id)
-                      "
-                    ></b-button>
-                  </b-tooltip>
-                  <b-tooltip :label="$t('app.editComment')" type="is-dark">
+                  <b-tooltip :label="$t('app.edit_education')" type="is-dark">
                     <b-button
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`comment-id${getAttachmentDropperId}`"
-                      @click="openAttachmentDropper(props.row, 'comment')"
+                      :id="`continuous-dev-id${getAttachmentDropperId}`"
+                      @click="openContinuousDevDropper(props.row)"
                       :disabled="
                         !userOrPermission('update', getProfile.user_id)
                       "
@@ -1114,7 +869,7 @@
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
-                      @click="deleteHandler('attachments', props.row.id)"
+                      @click="deleteHandler('continuousDev', props.row.id)"
                       :disabled="
                         !userOrPermission('delete', getProfile.user_id)
                       "
@@ -1129,142 +884,6 @@
     </section>
 
     <dropper
-      :join="`#wrk-experince-id${getAttachmentDropperId}`"
-      ref="workExperienceDropper"
-      @esc-keydown="closeWorkExperienceDropper"
-      @other-area-clicked="closeWorkExperienceDropper"
-      class="dropper"
-      :z-index="1000"
-    >
-      <form @submit.prevent="updateWorkExperience()">
-        <h3 class="label text-main">Edit Work Experience</h3>
-        <hr />
-        <div class="columns">
-          <div class="column is-6">
-            <b-field
-              label="Company"
-              expanded
-              :type="{
-                'is-danger':
-                  qualificationsErrors.workExperience.company.length > 0,
-              }"
-              :message="qualificationsErrors.workExperience.company"
-            >
-              <b-input
-                size=""
-                expanded
-                v-model="qualifications.workExperience.company"
-              ></b-input>
-            </b-field>
-          </div>
-          <div class="column is-6">
-            <b-field
-              label="Job Title"
-              expanded
-              :type="{
-                'is-danger':
-                  qualificationsErrors.workExperience.jobTitle.length > 0,
-              }"
-              :message="qualificationsErrors.workExperience.jobTitle"
-            >
-              <b-input
-                size=""
-                expanded
-                v-model="qualifications.workExperience.jobTitle"
-              ></b-input>
-            </b-field>
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-6">
-            <b-field
-              label="From (Year)"
-              expanded
-              :type="{
-                'is-danger':
-                  qualificationsErrors.workExperience.from.length > 0,
-              }"
-              :message="qualificationsErrors.workExperience.from"
-            >
-              <b-select
-                v-model="qualifications.workExperience.from"
-                placeholder="Select year..."
-                size=""
-                expanded
-              >
-                <option
-                  :value="year"
-                  v-for="(year, index) in getYears"
-                  :key="index"
-                >
-                  {{ year }}
-                </option>
-              </b-select>
-            </b-field>
-          </div>
-          <div class="column is-6">
-            <b-field
-              label="To (Year)"
-              expanded
-              :type="{
-                'is-danger': qualificationsErrors.workExperience.to.length > 0,
-              }"
-              :message="qualificationsErrors.workExperience.to"
-            >
-              <b-select
-                v-model="qualifications.workExperience.to"
-                placeholder="Select year..."
-                size=""
-                expanded
-              >
-                <option
-                  :value="year"
-                  v-for="(year, index) in getYears"
-                  :key="index"
-                >
-                  {{ year }}
-                </option>
-              </b-select>
-            </b-field>
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-12">
-            <b-field
-              label="Comment"
-              :type="{
-                'is-danger':
-                  qualificationsErrors.workExperience.comment.length > 0,
-              }"
-              :message="qualificationsErrors.workExperience.comment"
-            >
-              <b-input
-                size=""
-                type="textarea"
-                placeholder="Type your comment..."
-                v-model="qualifications.workExperience.comment"
-              ></b-input>
-            </b-field>
-          </div>
-        </div>
-        <hr />
-        <b-field class="buttons">
-          <button
-            class="button is-success is-light"
-            type="submit"
-            :disabled="isSubmittingWorkExperience"
-          >
-            {{ isSubmittingWorkExperience ? "Saving..." : "Save" }}
-          </button>
-          <b-button
-            class="is-danger is-light"
-            @click="closeWorkExperienceDropper()"
-            >Cancel</b-button
-          >
-        </b-field>
-      </form>
-    </dropper>
-    <dropper
       :join="`#education-id${getAttachmentDropperId}`"
       ref="educationDropper"
       @esc-keydown="closeEducationDropper"
@@ -1272,7 +891,7 @@
       class="dropper"
       :z-index="1000"
     >
-      <form @submit.prevent="updateEducation()">
+      <form @submit.prevent="updateEducation()" style="width: 30rem">
         <h3 class="label text-main">Edit Educational Details</h3>
         <hr />
         <div class="columns">
@@ -1365,22 +984,6 @@
               </b-select>
             </b-field>
           </div>
-          <div class="column is-4">
-            <b-field
-              label="GPA/Score"
-              expanded
-              :type="{
-                'is-danger': qualificationsErrors.education.gpa.length > 0,
-              }"
-              :message="qualificationsErrors.education.gpa"
-            >
-              <b-input
-                size=""
-                expanded
-                v-model="qualifications.education.gpa"
-              ></b-input>
-            </b-field>
-          </div>
         </div>
         <hr />
         <b-field class="buttons">
@@ -1398,30 +1001,151 @@
       </form>
     </dropper>
     <dropper
-      :join="`#skill-id${getAttachmentDropperId}`"
-      ref="skillDropper"
-      @esc-keydown="closeSkillDropper"
-      @other-area-clicked="closeSkillDropper"
+      :join="`#continuous-dev-id${getAttachmentDropperId}`"
+      ref="continuousDevDropper"
+      @esc-keydown="closeContinuousDevDropper"
+      @other-area-clicked="closeContinuousDevDropper"
       class="dropper"
       :z-index="1000"
     >
-      <form @submit.prevent="updateSkills()">
-        <h3 class="label text-main">Edit Skill</h3>
+      <form @submit.prevent="updateContinuousDev()" style="width: 30rem">
+        <h3 class="label text-main">Edit Continuous Development</h3>
         <hr />
         <div class="columns">
-          <div class="column is-6">
+          <div class="column is-12">
             <b-field
-              label="Skill"
+              label="Institution"
               expanded
               :type="{
-                'is-danger': qualificationsErrors.skills.skill.length > 0,
+                'is-danger':
+                  qualificationsErrors.continuousDev.institution.length > 0,
               }"
-              :message="qualificationsErrors.skills.skill"
+              :message="qualificationsErrors.continuousDev.institution"
             >
               <b-input
                 size=""
                 expanded
-                v-model="qualifications.skills.skill"
+                v-model="qualifications.continuousDev.institution"
+              ></b-input>
+            </b-field>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-12">
+            <b-field
+              label="Major/Specialization"
+              expanded
+              :type="{
+                'is-danger':
+                  qualificationsErrors.continuousDev.specialization.length > 0,
+              }"
+              :message="qualificationsErrors.continuousDev.specialization"
+            >
+              <b-input
+                size=""
+                expanded
+                v-model="qualifications.continuousDev.specialization"
+              ></b-input>
+            </b-field>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-4">
+            <b-field
+              label="Started"
+              expanded
+              :type="{
+                'is-danger':
+                  qualificationsErrors.continuousDev.started.length > 0,
+              }"
+              :message="qualificationsErrors.continuousDev.started"
+            >
+              <b-select
+                v-model="qualifications.continuousDev.started"
+                placeholder="Select year..."
+                size=""
+                expanded
+              >
+                <option
+                  :value="year"
+                  v-for="(year, index) in getYears"
+                  :key="index"
+                >
+                  {{ year }}
+                </option>
+              </b-select>
+            </b-field>
+          </div>
+          <div class="column is-4">
+            <b-field
+              label="Completed"
+              expanded
+              :type="{
+                'is-danger':
+                  qualificationsErrors.continuousDev.completed.length > 0,
+              }"
+              :message="qualificationsErrors.continuousDev.completed"
+            >
+              <b-select
+                v-model="qualifications.continuousDev.completed"
+                placeholder="Select year..."
+                size=""
+                expanded
+              >
+                <option
+                  :value="year"
+                  v-for="(year, index) in getYears"
+                  :key="index"
+                >
+                  {{ year }}
+                </option>
+              </b-select>
+            </b-field>
+          </div>
+        </div>
+        <hr />
+        <b-field class="buttons">
+          <button
+            class="button is-success is-light"
+            type="submit"
+            :disabled="isSubmittingContinuousDev"
+          >
+            {{ isSubmittingContinuousDev ? "Saving..." : "Save" }}
+          </button>
+          <b-button
+            class="is-danger is-light"
+            @click="closeContinuousDevDropper()"
+            >Cancel</b-button
+          >
+        </b-field>
+      </form>
+    </dropper>
+    <dropper
+      :join="`#expertise-id${getAttachmentDropperId}`"
+      ref="expertiseDropper"
+      @esc-keydown="closeExpertiseDropper"
+      @other-area-clicked="closeExpertiseDropper"
+      class="dropper"
+      :z-index="1000"
+    >
+      <form @submit.prevent="updateExpertise()" style="width: 30rem">
+        <h3 class="label text-main">Edit Expertise</h3>
+        <hr />
+        <div class="columns">
+          <div class="column is-6">
+            <b-field
+              label="Expertise"
+              expanded
+              :type="{
+                'is-danger':
+                  qualificationsErrors.expertise.expertise.length > 0,
+              }"
+              :message="qualificationsErrors.expertise.expertise"
+            >
+              <b-input
+                size=""
+                expanded
+                v-model="qualifications.expertise.expertise"
               ></b-input>
             </b-field>
           </div>
@@ -1431,14 +1155,14 @@
               expanded
               :type="{
                 'is-danger':
-                  qualificationsErrors.skills.yearOfExperience.length > 0,
+                  qualificationsErrors.expertise.yearOfExperience.length > 0,
               }"
-              :message="qualificationsErrors.skills.yearOfExperience"
+              :message="qualificationsErrors.expertise.yearOfExperience"
             >
               <b-input
                 size=""
                 expanded
-                v-model="qualifications.skills.yearOfExperience"
+                v-model="qualifications.expertise.yearOfExperience"
               ></b-input>
             </b-field>
           </div>
@@ -1449,15 +1173,15 @@
             <b-field
               label="Comment"
               :type="{
-                'is-danger': qualificationsErrors.skills.comment.length > 0,
+                'is-danger': qualificationsErrors.expertise.comment.length > 0,
               }"
-              :message="qualificationsErrors.skills.comment"
+              :message="qualificationsErrors.expertise.comment"
             >
               <b-input
                 type="textarea"
                 placeholder="Type your comment..."
                 size=""
-                v-model="qualifications.skills.comment"
+                v-model="qualifications.expertise.comment"
               ></b-input>
             </b-field>
           </div>
@@ -1467,11 +1191,11 @@
           <button
             class="button is-success is-light"
             type="submit"
-            :disabled="isSubmittingSkills"
+            :disabled="isSubmittingExpertise"
           >
-            {{ isSubmittingSkills ? "Saving..." : "Save" }}
+            {{ isSubmittingExpertise ? "Saving..." : "Save" }}
           </button>
-          <b-button class="is-danger is-light" @click="closeSkillDropper()"
+          <b-button class="is-danger is-light" @click="closeExpertiseDropper()"
             >Cancel</b-button
           >
         </b-field>
@@ -1485,7 +1209,7 @@
       class="dropper"
       :z-index="1000"
     >
-      <form @submit.prevent="updateLanguage()">
+      <form @submit.prevent="updateLanguage()" style="width: 30rem">
         <h3 class="label text-main">Edit Language</h3>
         <hr />
         <div class="columns">
@@ -1567,125 +1291,29 @@
         </b-field>
       </form>
     </dropper>
-    <dropper
-      :join="`#comment-id${getAttachmentDropperId}`"
-      ref="attachmentDropper"
-      @esc-keydown="closeAttachmentDropper"
-      @other-area-clicked="closeAttachmentDropper"
-      class="dropper"
-      :z-index="1000"
-    >
-      <form
-        @submit.prevent="replaceAttachment(attachmentUpdateType)"
-        v-if="attachmentUpdateType === 'comment'"
-      >
-        <h3 class="label text-main">Edit Comment</h3>
-        <hr />
-        <b-field
-          :type="{
-            'is-danger': qualificationsErrors.attachment.comment.length > 0,
-          }"
-          :message="qualificationsErrors.attachment.comment"
-        >
-          <b-input
-            type="textarea"
-            placeholder="Type your comment..."
-            v-model="qualifications.attachment.comment"
-          ></b-input>
-        </b-field>
-        <hr />
-        <b-field class="buttons">
-          <button
-            class="button is-success is-light"
-            type="submit"
-            :disabled="isSubmittingQualificationAttachment"
-          >
-            {{ isSubmittingQualificationAttachment ? "Saving..." : "Save" }}
-          </button>
-          <b-button class="is-danger is-light" @click="closeAttachmentDropper()"
-            >Cancel</b-button
-          >
-        </b-field>
-      </form>
-      <form
-        @submit.prevent="replaceAttachment(attachmentUpdateType)"
-        v-if="attachmentUpdateType === 'attachment'"
-      >
-        <h3 class="label has-text-info">Replace Attachment</h3>
-        <hr />
-        <b-field>
-          <b-upload
-            v-model="qualifications.attachment.file"
-            size="is-small"
-            style="cursor: pointer"
-          >
-            <section class="section">
-              <div class="content has-text-centered">
-                <p>
-                  <b-icon icon="upload" size="is-small"></b-icon>
-                </p>
-                <p>Click to replace attachment</p>
-              </div>
-            </section>
-          </b-upload>
-        </b-field>
-        <div class="tags" v-if="qualifications.attachment.file">
-          <span class="tag is-large is-info is-light">
-            {{ qualifications.attachment.file.name }}
-            <button
-              class="delete is-small"
-              type="button"
-              @click="qualifications.attachment.file = null"
-            ></button>
-          </span>
-        </div>
-        <b-field
-          :type="{
-            'is-danger': qualificationsErrors.attachment.file.length > 0,
-          }"
-          :message="qualificationsErrors.attachment.file"
-        >
-        </b-field>
-
-        <hr />
-        <b-field class="buttons">
-          <button
-            class="button is-success is-light"
-            type="submit"
-            :disabled="isSubmittingQualificationAttachment"
-          >
-            {{ isSubmittingQualificationAttachment ? "Saving..." : "Save" }}
-          </button>
-          <b-button class="is-danger is-light" @click="closeAttachmentDropper()"
-            >Cancel</b-button
-          >
-        </b-field>
-      </form>
-    </dropper>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import ViewPdf from "../../ViewPdf";
 export default {
   name: "QualificayionDetails",
-  components: { ViewPdf },
+  components: {},
   computed: {
     ...mapGetters(["getProfile"]),
-    getWorkExperience() {
-      if (typeof this.getProfile.qualifications.workExperience === "string")
-        return JSON.parse(this.getProfile.qualifications.workExperience);
-      return [];
-    },
     getEducation() {
       if (typeof this.getProfile.qualifications.education === "string")
         return JSON.parse(this.getProfile.qualifications.education);
       return [];
     },
-    getSkills() {
-      if (typeof this.getProfile.qualifications.skills === "string")
-        return JSON.parse(this.getProfile.qualifications.skills);
+    getContinuousDev() {
+      if (typeof this.getProfile.qualifications.continuousDev === "string")
+        return JSON.parse(this.getProfile.qualifications.continuousDev);
+      return [];
+    },
+    getExpertise() {
+      if (typeof this.getProfile.qualifications.expertise === "string")
+        return JSON.parse(this.getProfile.qualifications.expertise);
       return [];
     },
     getLanguages() {
@@ -1693,12 +1321,6 @@ export default {
         return JSON.parse(this.getProfile.qualifications.languages);
       return [];
     },
-    getAttachments() {
-      if (typeof this.getProfile.qualifications.attachments === "string")
-        return JSON.parse(this.getProfile.qualifications.attachments);
-      return [];
-    },
-
     getAttachmentDropperId() {
       return this.attachmentDropperId;
     },
@@ -1706,37 +1328,32 @@ export default {
   created() {},
   data() {
     return {
-      isEditWorkExperience: false,
       isEditEducation: false,
-      isEditSkills: false,
+      isEditExpertise: false,
       isEditLanguage: false,
-      isEditQualificationAttachment: false,
+      isEditContinuousDev: false,
       isSubmitting: false,
       attachmentUpdateType: null,
       attachmentDropperId: null,
-      // isviewSpecification: false,
-      isSubmittingWorkExperience: false,
       isSubmittingEducation: false,
-      isSubmittingSkills: false,
+      isSubmittingContinuousDev: false,
+      isSubmittingExpertise: false,
       isSubmittingLanguage: false,
-      isSubmittingQualificationAttachment: false,
       qualifications: {
-        workExperience: {
-          company: "",
-          jobTitle: "",
-          from: null,
-          to: null,
-          comment: "",
-        },
         education: {
           institution: "",
           specialization: "",
-          gpa: null,
           started: null,
           completed: null,
         },
-        skills: {
-          skill: "",
+        continuousDev: {
+          institution: "",
+          specialization: "",
+          started: null,
+          completed: null,
+        },
+        expertise: {
+          expertise: "",
           yearOfExperience: "",
           comment: "",
         },
@@ -1745,28 +1362,22 @@ export default {
           fluency: "",
           comment: "",
         },
-        attachment: {
-          file: null,
-          comment: "",
-        },
       },
       qualificationsErrors: {
-        workExperience: {
-          company: [],
-          jobTitle: [],
-          from: [],
-          to: [],
-          comment: [],
-        },
         education: {
           institution: [],
           specialization: [],
-          gpa: [],
           started: [],
           completed: [],
         },
-        skills: {
-          skill: [],
+        continuousDev: {
+          institution: [],
+          specialization: [],
+          started: [],
+          completed: [],
+        },
+        expertise: {
+          expertise: [],
           yearOfExperience: [],
           comment: [],
         },
@@ -1775,56 +1386,11 @@ export default {
           fluency: [],
           comment: [],
         },
-        attachment: {
-          file: [],
-          comment: [],
-        },
       },
     };
   },
   methods: {
     ...mapActions(["dispatchProfile"]),
-    openAttachmentDropper(data, type) {
-      const dropper = this.$refs.attachmentDropper;
-      this.attachmentDropperId = data.id;
-      this.attachmentUpdateType = type;
-      if (dropper) {
-        this.qualifications.attachment = {
-          comment: data.comment,
-        };
-        dropper.open();
-      }
-    },
-    closeAttachmentDropper() {
-      const dropper = this.$refs.attachmentDropper;
-      this.attachmentUpdateType = "";
-      if (dropper) {
-        this.cancelQualificationAttachmentForm();
-        dropper.close();
-      }
-    },
-    openWorkExperienceDropper(data) {
-      const dropper = this.$refs.workExperienceDropper;
-      this.attachmentDropperId = data.id;
-      if (dropper) {
-        this.qualifications.workExperience = {
-          company: data.company,
-          jobTitle: data.jobTitle,
-          from: data.from,
-          to: data.to,
-          comment: data.comment,
-        };
-        dropper.open();
-      }
-    },
-    closeWorkExperienceDropper() {
-      const dropper = this.$refs.workExperienceDropper;
-      this.attachmentUpdateType = "";
-      if (dropper) {
-        this.cancelWorkExperienceForm();
-        dropper.close();
-      }
-    },
     openEducationDropper(data) {
       const dropper = this.$refs.educationDropper;
       this.attachmentDropperId = data.id;
@@ -1847,23 +1413,44 @@ export default {
         dropper.close();
       }
     },
-    openSkillDropper(data) {
-      const dropper = this.$refs.skillDropper;
+    openContinuousDevDropper(data) {
+      const dropper = this.$refs.continuousDevDropper;
       this.attachmentDropperId = data.id;
       if (dropper) {
-        this.qualifications.skills = {
-          skill: data.skill,
+        this.qualifications.continuousDev = {
+          institution: data.institution,
+          specialization: data.specialization,
+          started: data.started,
+          completed: data.completed,
+        };
+        dropper.open();
+      }
+    },
+    closeContinuousDevDropper() {
+      const dropper = this.$refs.continuousDevDropper;
+      this.attachmentUpdateType = "";
+      if (dropper) {
+        this.cancelContinuousDevForm();
+        dropper.close();
+      }
+    },
+    openExpertiseDropper(data) {
+      const dropper = this.$refs.expertiseDropper;
+      this.attachmentDropperId = data.id;
+      if (dropper) {
+        this.qualifications.expertise = {
+          expertise: data.expertise,
           yearOfExperience: data.yearOfExperience,
           comment: data.comment,
         };
         dropper.open();
       }
     },
-    closeSkillDropper() {
-      const dropper = this.$refs.skillDropper;
+    closeExpertiseDropper() {
+      const dropper = this.$refs.expertiseDropper;
       this.attachmentUpdateType = "";
       if (dropper) {
-        this.cancelSkillsForm();
+        this.cancelExpertiseForm();
         dropper.close();
       }
     },
@@ -1887,61 +1474,7 @@ export default {
         dropper.close();
       }
     },
-    addWorkExperience() {
-      this.isSubmittingWorkExperience = true;
-      this.setWorkExperienceErrors();
-      this.$axios
-        .put(
-          `/dashboard/ess/add-work-experience/${this.getProfile.user_id}`,
-          this.qualifications.workExperience
-        )
-        .then((res) => {
-          if (res.status === 200 && res.data.added) {
-            this.clearWorkExperienceForm();
-            this.dispatchProfile({
-              type: "ADD_WORK_EXPERIENCE",
-              payload: res.data.data,
-            });
-            setTimeout(() => {
-              this.snackbar("Work experience added successfully", "is-dark");
-              this.isSubmittingWorkExperience = false;
-            }, 1000);
-          }
-        })
-        .catch((err) => {
-          if (err.response.status === 422) {
-            this.setWorkExperienceErrors(err.response.data.errors);
-          }
-          this.isSubmittingWorkExperience = false;
-        });
-    },
-    updateWorkExperience() {
-      this.isSubmittingWorkExperience = true;
-      this.setWorkExperienceErrors();
-      this.$axios
-        .put(
-          `/dashboard/ess/update-work-experience/${this.getProfile.user_id}/${this.attachmentDropperId}`,
-          this.qualifications.workExperience
-        )
-        .then((res) => {
-          if (res.status === 200 && res.data.updated) {
-            this.dispatchProfile({
-              type: "ADD_WORK_EXPERIENCE",
-              payload: res.data.data,
-            });
-            setTimeout(() => {
-              this.snackbar("Work experience updated successfully", "is-dark");
-              this.isSubmittingWorkExperience = false;
-            }, 1000);
-          }
-        })
-        .catch((err) => {
-          if (err.response.status === 422) {
-            this.setWorkExperienceErrors(err.response.data.errors);
-          }
-          this.isSubmittingWorkExperience = false;
-        });
-    },
+
     addEducation() {
       this.isSubmittingEducation = true;
       this.setEducationErrors();
@@ -1980,6 +1513,7 @@ export default {
         )
         .then((res) => {
           if (res.status === 200 && res.data.updated) {
+            this.closeEducationDropper();
             this.dispatchProfile({
               type: "ADD_EDUCATION",
               payload: res.data.data,
@@ -1997,59 +1531,116 @@ export default {
           this.isSubmittingEducation = false;
         });
     },
-    addSkills() {
-      this.isSubmittingSkills = true;
-      this.setSkillsErrors();
+    addContinuousDev() {
+      this.isSubmittingContinuousDev = true;
+      this.setContinuousDevErrors();
       this.$axios
         .put(
-          `/dashboard/ess/add-skill/${this.getProfile.user_id}`,
-          this.qualifications.skills
+          `/dashboard/ess/add-continuous-dev/${this.getProfile.user_id}`,
+          this.qualifications.continuousDev
         )
         .then((res) => {
           if (res.status === 200 && res.data.added) {
-            this.clearSkillsForm();
             this.dispatchProfile({
-              type: "ADD_SKILL",
+              type: "ADD_CONTINUOUS_DEV",
               payload: res.data.data,
             });
+            this.clearContinuousDevForm();
             setTimeout(() => {
-              this.snackbar("Skill added successfully", "is-dark");
-              this.isSubmittingSkills = false;
+              this.snackbar("Development added successfully", "is-dark");
+              this.isSubmittingContinuousDev = false;
             }, 1000);
           }
         })
         .catch((err) => {
           if (err.response.status === 422) {
-            this.setSkillsErrors(err.response.data.errors);
+            this.setContinuousDevErrors(err.response.data.errors);
           }
-          this.isSubmittingSkills = false;
+          this.isSubmittingContinuousDev = false;
         });
     },
-    updateSkills() {
-      this.isSubmittingSkills = true;
-      this.setSkillsErrors();
+    updateContinuousDev() {
+      this.isSubmittingContinuousDev = true;
+      this.setContinuousDevErrors();
       this.$axios
         .put(
-          `/dashboard/ess/update-skill/${this.getProfile.user_id}/${this.attachmentDropperId}`,
-          this.qualifications.skills
+          `/dashboard/ess/update-continuous-dev/${this.getProfile.user_id}/${this.attachmentDropperId}`,
+          this.qualifications.continuousDev
         )
         .then((res) => {
           if (res.status === 200 && res.data.updated) {
+            this.closeContinuousDevDropper();
             this.dispatchProfile({
-              type: "ADD_SKILL",
+              type: "ADD_CONTINUOUS_DEV",
               payload: res.data.data,
             });
             setTimeout(() => {
-              this.snackbar("Skill updated successfully", "is-dark");
-              this.isSubmittingSkills = false;
+              this.snackbar("Development updated successfully", "is-dark");
+              this.isSubmittingContinuousDev = false;
             }, 1000);
           }
         })
         .catch((err) => {
           if (err.response.status === 422) {
-            this.setSkillsErrors(err.response.data.errors);
+            this.setContinuousDevErrors(err.response.data.errors);
           }
-          this.isSubmittingSkills = false;
+          this.isSubmittingContinuousDev = false;
+        });
+    },
+    addExpertise() {
+      this.isSubmittingExpertise = true;
+      this.setExpertiseErrors();
+      this.$axios
+        .put(
+          `/dashboard/ess/add-expertise/${this.getProfile.user_id}`,
+          this.qualifications.expertise
+        )
+        .then((res) => {
+          if (res.status === 200 && res.data.added) {
+            this.clearExpertiseForm();
+            this.dispatchProfile({
+              type: "ADD_EXPERTISE",
+              payload: res.data.data,
+            });
+            setTimeout(() => {
+              this.snackbar("Expertise added successfully", "is-dark");
+              this.isSubmittingExpertise = false;
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 422) {
+            this.setExpertiseErrors(err.response.data.errors);
+          }
+          this.isSubmittingExpertise = false;
+        });
+    },
+    updateExpertise() {
+      this.isSubmittingExpertise = true;
+      this.setExpertiseErrors();
+      this.$axios
+        .put(
+          `/dashboard/ess/update-expertise/${this.getProfile.user_id}/${this.attachmentDropperId}`,
+          this.qualifications.expertise
+        )
+        .then((res) => {
+          if (res.status === 200 && res.data.updated) {
+            this.closeExpertiseDropper();
+            this.dispatchProfile({
+              type: "ADD_EXPERTISE",
+              payload: res.data.data,
+            });
+            setTimeout(() => {
+              this.snackbar("Expertise updated successfully", "is-dark");
+              this.isSubmittingExpertise = false;
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 422) {
+            this.setExpertiseErrors(err.response.data.errors);
+          }
+          this.isSubmittingExpertise = false;
         });
     },
     addLanguage() {
@@ -2090,6 +1681,7 @@ export default {
         )
         .then((res) => {
           if (res.status === 200 && res.data.added) {
+            this.closeLanguageDropper();
             this.dispatchProfile({
               type: "ADD_LANGUAGE",
               payload: res.data.data,
@@ -2107,90 +1699,7 @@ export default {
           this.isSubmittingLanguage = false;
         });
     },
-    addQualificationAttachment() {
-      this.isSubmittingQualificationAttachment = true;
-      this.setQualificationAttachmentErrors();
-      const data = new FormData();
-      data.append("file", this.qualifications.attachment.file);
-      data.append("comment", this.qualifications.attachment.comment);
-      this.$axios
-        .post(
-          `/dashboard/ess/add-qualification-attachment/${this.getProfile.user_id}`,
-          data
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            this.clearQualificationAttachmentForm();
-            this.dispatchProfile({
-              type: "ADD_ATTACHMENT",
-              payload: res.data.data,
-            });
-            setTimeout(() => {
-              this.snackbar("Attachment added successfully", "is-dark");
-              this.isSubmittingQualificationAttachment = false;
-            }, 1000);
-          }
-        })
-        .catch((err) => {
-          if (err.response.status === 422) {
-            this.setQualificationAttachmentErrors(err.response.data.errors);
-          }
-          this.isSubmittingQualificationAttachment = false;
-        });
-    },
-    replaceAttachment(type) {
-      this.isSubmittingQualificationAttachment = true;
-      this.setQualificationAttachmentErrors();
-      const data = new FormData();
-      if (type === "comment") {
-        data.append(`id`, this.attachmentDropperId);
-        data.append("comment", this.qualifications.attachment.comment);
-      }
-      if (type === "attachment") {
-        data.append(`id`, this.attachmentDropperId);
-        data.append("file", this.qualifications.attachment.file);
-      }
-      this.$axios
-        .post(
-          `/dashboard/ess/replace-qualification-attachment/${this.getProfile.user_id}`,
-          data
-        )
-        .then((res) => {
-          if (res.status === 200 && res.data.updated) {
-            this.qualifications.attachment.file = null;
-            this.dispatchProfile({
-              type: "ADD_ATTACHMENT",
-              payload: res.data.data,
-            });
-            setTimeout(() => {
-              if (type === "comment") {
-                this.snackbar("Comment updated successfully", "is-dark");
-              }
-              if (type === "attachment") {
-                this.snackbar("Attachment updated successfully", "is-dark");
-              }
-              this.isSubmittingQualificationAttachment = false;
-            }, 1000);
-          }
-        })
-        .catch((err) => {
-          if (err.response.status == 422) {
-            setTimeout(() => {
-              this.setQualificationAttachmentErrors(err.response.data.errors);
-              this.isSubmittingQualificationAttachment = false;
-            }, 1000);
-          }
-        });
-    },
-    viewAttachment(file) {
-      this.$buefy.modal.open({
-        parent: this,
-        component: ViewPdf,
-        hasModalCard: true,
-        trapFocus: true,
-        props: { file },
-      });
-    },
+
     deleteHandler(type, id) {
       this.$axios
         .delete(
@@ -2211,112 +1720,76 @@ export default {
           console.log(err);
         });
     },
-    clearWorkExperienceForm() {
-      this.qualifications.workExperience.company = "";
-      this.qualifications.workExperience.jobTitle = "";
-      this.qualifications.workExperience.from = "";
-      this.qualifications.workExperience.to = "";
-      this.qualifications.workExperience.comment = "";
-    },
     clearEducationForm() {
       this.qualifications.education.institution = "";
       this.qualifications.education.specialization = "";
-      this.qualifications.education.gpa = "";
       this.qualifications.education.started = "";
       this.qualifications.education.completed = "";
     },
-    clearSkillsForm() {
-      this.qualifications.skills.skill = "";
-      this.qualifications.skills.yearOfExperience = "";
-      this.qualifications.skills.comment = "";
+    clearContinuousDevForm() {
+      this.qualifications.continuousDev.institution = "";
+      this.qualifications.continuousDev.specialization = "";
+      this.qualifications.continuousDev.started = "";
+      this.qualifications.continuousDev.completed = "";
+    },
+    clearExpertiseForm() {
+      this.qualifications.expertise.expertise = "";
+      this.qualifications.expertise.yearOfExperience = "";
+      this.qualifications.expertise.comment = "";
     },
     clearLanguageForm() {
       this.qualifications.languages.language = "";
       this.qualifications.languages.fluency = "";
       this.qualifications.languages.comment = "";
     },
-    clearQualificationAttachmentForm() {
-      this.qualifications.attachment.file = null;
-      this.qualifications.attachment.comment = "";
-    },
-    cancelWorkExperienceForm() {
-      this.isEditWorkExperience = false;
-      this.clearWorkExperienceForm();
-      this.setWorkExperienceErrors();
-    },
     cancelEducationForm() {
       this.isEditEducation = false;
       this.clearEducationForm();
       this.setEducationErrors();
+    },
+    cancelContinuousDevForm() {
+      this.isEditContinuousDev = false;
+      this.clearContinuousDevForm();
+      this.setContinuousDevErrors();
     },
     cancelLanguageForm() {
       this.isEditLanguage = false;
       this.clearLanguageForm();
       this.setLanguageErrors();
     },
-    cancelSkillsForm() {
-      this.isEditSkills = false;
-      this.clearSkillsForm();
-      this.setSkillsErrors();
-    },
-    cancelQualificationAttachmentForm() {
-      this.isEditQualificationAttachment = false;
-      this.clearQualificationAttachmentForm();
-      this.setQualificationAttachmentErrors();
-    },
-    setWorkExperienceErrors(error = {}) {
-      this.qualificationsErrors.workExperience.company = error.company
-        ? error.company
-        : [];
-      this.qualificationsErrors.workExperience.jobTitle = error.jobTitle
-        ? error.jobTitle
-        : [];
-      this.qualificationsErrors.workExperience.from = error.from
-        ? error.from
-        : [];
-      this.qualificationsErrors.workExperience.to = error.to ? error.to : [];
-      this.qualificationsErrors.workExperience.comment = error.comment
-        ? error.comment
-        : [];
+    cancelExpertiseForm() {
+      this.isEditExpertise = false;
+      this.clearExpertiseForm();
+      this.setExpertiseErrors();
     },
     setEducationErrors(error = {}) {
-      this.qualificationsErrors.education.institution = error.institution
-        ? error.institution
-        : [];
-      this.qualificationsErrors.education.specialization = error.specialization
-        ? error.specialization
-        : [];
-      this.qualificationsErrors.education.gpa = error.gpa ? error.gpa : [];
-      this.qualificationsErrors.education.started = error.started
-        ? error.started
-        : [];
-      this.qualificationsErrors.education.completed = error.completed
-        ? error.completed
-        : [];
+      this.qualificationsErrors.education = {
+        institution: error.institution || [],
+        specialization: error.specialization || [],
+        started: error.started || [],
+        completed: error.completed || [],
+      };
     },
-    setSkillsErrors(error = {}) {
-      this.qualificationsErrors.skills.skill = error.skill ? error.skill : [];
-      this.qualificationsErrors.skills.yearOfExperience = error.yearOfExperience
-        ? error.yearOfExperience
+    setContinuousDevErrors(error = {}) {
+      this.qualificationsErrors.continuousDev = {
+        institution: error.institution || [],
+        specialization: error.specialization || [],
+        started: error.started || [],
+        completed: error.completed || [],
+      };
+    },
+    setExpertiseErrors(error = {}) {
+      this.qualificationsErrors.expertise.expertise = error.expertise
+        ? error.expertise
         : [];
-      this.qualificationsErrors.skills.comment = error.comment
-        ? error.comment
-        : [];
+      this.qualificationsErrors.expertise.yearOfExperience =
+        error.yearOfExperience || [];
+      this.qualificationsErrors.expertise.comment = error.comment || [];
     },
     setLanguageErrors(error = {}) {
-      this.qualificationsErrors.languages.language = error.language
-        ? error.language
-        : [];
-      this.qualificationsErrors.languages.fluency = error.fluency
-        ? error.fluency
-        : [];
-      this.qualificationsErrors.languages.comment = error.comment
-        ? error.comment
-        : [];
-    },
-    setQualificationAttachmentErrors(error = {}) {
-      this.qualificationsErrors.attachment.file = error.file || [];
-      this.qualificationsErrors.attachment.comment = error.comment || [];
+      this.qualificationsErrors.languages.language = error.language || [];
+      this.qualificationsErrors.languages.fluency = error.fluency || [];
+      this.qualificationsErrors.languages.comment = error.comment || [];
     },
   },
 };

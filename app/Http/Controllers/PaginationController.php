@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Appraisal;
 use App\Traits\Admin;
 use App\Traits\ManageKPI;
+use App\Traits\Staff;
 use Illuminate\Http\Request;
 
 class PaginationController extends Controller
 {
-    use Admin, ManageKPI;
+    use Admin, ManageKPI, Staff;
     public function usersPerPage()
     {
         return $this->getUsers();
@@ -21,5 +22,9 @@ class PaginationController extends Controller
     public function appraiseesPerPage(Appraisal $appraisal)
     {
         return $this->getAppraisees($appraisal);
+    }
+    public function searchStaffDirectory(Request $request)
+    {
+        return $this->getStaffDirInfo($request->search ?? null);
     }
 }

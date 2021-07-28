@@ -139,7 +139,6 @@ export default {
       "getJobCategories",
       "getJobTitles",
       "getEmploymentStatus",
-      "getBranches",
       "getDepartments",
       "getUnits",
       "getCountries",
@@ -151,7 +150,6 @@ export default {
     this.dispatchJobCategory({ payload: this.jobCategories });
     this.dispatchJobTitle({ payload: this.jobTitles });
     this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
-    this.dispatchBranch({ payload: this.branches });
     this.dispatchDepartment({ payload: this.departments });
     this.dispatchUnit({ payload: this.units });
     this.dispatchPosition({ payload: this.positions });
@@ -160,7 +158,6 @@ export default {
       payload: {
         supervisors: this.supervisors,
         hods: this.hods,
-        managers: this.managers,
         reportTo: this.reportTo,
         reportToMe: this.reportToMe,
         directorates: this.directorates,
@@ -181,7 +178,6 @@ export default {
       "dispatchJobCategory",
       "dispatchJobTitle",
       "dispatchEmploymentStatus",
-      "dispatchBranch",
       "dispatchDepartment",
       "dispatchUnit",
       "dispatchPosition",

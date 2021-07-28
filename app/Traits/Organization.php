@@ -157,9 +157,8 @@ trait Organization
       'logo' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
     ]);
     $meta = DB::table('organization_metadata')->first();
-    // dd($meta);
     $file = $this->processBrandLogo($request, $meta);
-    if ($meta && $meta->logo) {
+    if ($meta) {
       DB::table('organization_metadata')->where('id', $meta->id)->update([
         'logo' => $file
       ]);

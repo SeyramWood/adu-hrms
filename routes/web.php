@@ -101,11 +101,6 @@ Route::prefix('dashboard')->group(function () {
   Route::delete('/delete-employment-status/{employmentStatus}', 'EmploymentStatusController@delete')->name('delete.employmentStatus');
   Route::delete('/delete-employment-statuses/{employmentStatuses}', 'EmploymentStatusController@deleteEmpStatuses')->name('delete.employmentStatusese');
 
-  Route::post('/create-branch', 'OrganizationController@addBranch')->name('create.branch');
-  Route::put('/update-branch/{branch}', 'OrganizationController@editBranch')->name('update.branch');
-  Route::delete('/delete-branch/{branch}', 'OrganizationController@deleteBranch')->name('delete.branch');
-  Route::delete('/delete-branches/{branches}', 'OrganizationController@deleteBranches')->name('delete.branches');
-
   Route::post('/create-department', 'OrganizationController@addDepartment')->name('create.department');
   Route::put('/edit-department/{department}', 'OrganizationController@editDepartment')->name('update.department');
   Route::delete('/delete-department/{department}', 'OrganizationController@deleteDepartment')->name('delete.department');
@@ -152,9 +147,11 @@ Route::prefix('dashboard')->group(function () {
   Route::put('/ess/add-work-experience/{profile:user_id}', 'ESSController@addWorkExperience');
   Route::put('/ess/update-work-experience/{profile:user_id}/{id}', 'ESSController@editWorkExperience');
   Route::put('/ess/add-education/{profile:user_id}', 'ESSController@addEducation');
+  Route::put('/ess/add-continuous-dev/{profile:user_id}', 'ESSController@addContinuousDev');
   Route::put('/ess/update-education/{profile:user_id}/{id}', 'ESSController@editEducation');
-  Route::put('/ess/add-skill/{profile:user_id}', 'ESSController@addSkill');
-  Route::put('/ess/update-skill/{profile:user_id}/{id}', 'ESSController@editSkill');
+  Route::put('/ess/update-continuous-dev/{profile:user_id}/{id}', 'ESSController@editContinuousDev');
+  Route::put('/ess/add-expertise/{profile:user_id}', 'ESSController@addExpertise');
+  Route::put('/ess/update-expertise/{profile:user_id}/{id}', 'ESSController@editExpertise');
   Route::put('/ess/add-language/{profile:user_id}', 'ESSController@addLanguage');
   Route::put('/ess/update-language/{profile:user_id}/{id}', 'ESSController@editLanguage');
   Route::post('/ess/add-qualification-attachment/{profile:user_id}', 'ESSController@addQualificationAttachment');
@@ -169,7 +166,8 @@ Route::prefix('dashboard')->group(function () {
    */
   Route::post('/add-appraisal', 'KPIController@storeAppraisal');
   Route::get('/get-appraisal-goal/{appraisal}', 'KPIController@getAppraisalGoal');
-  Route::post('/add-key-goal', 'KeyGoalController@store');
+  Route::post('/add-key-goal', 'SelfAppraisalController@storeKeyGoal');
+  Route::post('/add-self-appraisal', 'SelfAppraisalController@storeSelfAppraisal');
 
 
 
@@ -181,4 +179,5 @@ Route::prefix('dashboard')->group(function () {
   Route::get('/get-users', 'PaginationController@usersPerPage');
   Route::get('/get-appraisals', 'PaginationController@appraisalsPerPage');
   Route::get('/get-appraisees/{appraisal}', 'PaginationController@appraiseesPerPage');
+  Route::get('/search-staff', 'PaginationController@searchStaffDirectory');
 });

@@ -56,7 +56,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   layout: _components_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
   props: {
-    branches: Array,
     departments: Array,
     units: Array,
     jobTitles: Array,
@@ -69,9 +68,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.dispatchRole({
       payload: this.roles
     });
-    this.dispatchBranch({
-      payload: this.branches
-    });
     this.dispatchUnit({
       payload: this.units
     });
@@ -82,7 +78,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       payload: this.jobTitles
     });
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchKPI", "dispatchUserAccount", "dispatchBranch", "dispatchUnit", "dispatchDepartment", "dispatchJobTitle", "dispatchRole"]))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["dispatchKPI", "dispatchUserAccount", "dispatchUnit", "dispatchDepartment", "dispatchJobTitle", "dispatchRole"]))
 });
 
 /***/ }),
@@ -2832,6 +2828,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Paginate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Paginate */ "./resources/js/components/Paginate.vue");
+/* harmony import */ var _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @tinymce/tinymce-vue */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3513,6 +3510,119 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3524,7 +3634,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   components: {
-    Paginate: _Paginate__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Paginate: _Paginate__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Editor: _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["getAppraisees", "getJobTitles"])),
   beforeMount: function beforeMount() {
@@ -3543,12 +3654,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       sortIconSize: "is-small",
       selectedKPIs: [],
       isSubmitting: false,
+      isSubmittingMyGoal: false,
+      isSubmittingUnitGoal: false,
+      isSubmittingDptGoal: false,
       isLoading: false,
       noAppraisalFound: false,
       activeStep: 0,
-      keyGoals: [{
-        goal: ""
-      }],
       myGoals: [{
         id: "".concat(Math.random(16)).split(".")[1],
         goal: ""
@@ -3561,63 +3672,171 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: "".concat(Math.random(16)).split(".")[1],
         goal: ""
       }],
-      branchGoals: [{
+      achievements: [{
         id: "".concat(Math.random(16)).split(".")[1],
-        goal: ""
+        achievement: ""
       }],
+      difficulties: [{
+        id: "".concat(Math.random(16)).split(".")[1],
+        difficulty: ""
+      }],
+      initiatives: [{
+        id: "".concat(Math.random(16)).split(".")[1],
+        initiative: ""
+      }],
+      otherInitiatives: [{
+        id: "".concat(Math.random(16)).split(".")[1],
+        initiative: ""
+      }],
+      feedback: "",
       myGoalErrors: {},
       unitGoalErrors: {},
       dptGoalErrors: {},
-      branchGoalErrors: {}
+      achievementErrors: {},
+      difficultyErrors: {},
+      initiativeErrors: {},
+      otherInitiativeErrors: {},
+      feedbackErrors: []
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["dispatchKPI"])), {}, {
     cancelModal: function cancelModal() {
       this.$emit("close");
     },
-    addKeyGoal: function addKeyGoal(type) {
+    addSelfAppraisal: function addSelfAppraisal(type) {
       switch (type) {
-        case "branch":
-          break;
-
         case "department":
+          this.isSubmittingDptGoal = true;
+          this.saveKeyGoal(this.generateAppraisalData("department-goal", this.$page.props.authUser.department_id, this.appraisal.id, this.dptGoals));
+          this.dptGoalErrors = {};
           break;
 
         case "unit":
+          this.isSubmittingUnitGoal = true;
+          this.saveKeyGoal(this.generateAppraisalData("unit-goal", this.$page.props.authUser.unit_id, this.appraisal.id, this.unitGoals));
+          this.unitGoalErrors = {};
+          break;
+
+        case "achievement":
+          this.saveSelfAppraisal({
+            type: "achievement",
+            id: this.$page.props.authUser.id,
+            appraisal: this.appraisal.id,
+            achievement: this.achievements
+          });
+          this.achievementErrors = {};
+          break;
+
+        case "difficulty":
+          this.saveSelfAppraisal({
+            type: "difficulty",
+            id: this.$page.props.authUser.id,
+            appraisal: this.appraisal.id,
+            difficulty: this.difficulties
+          });
+          this.difficultyErrors = {};
+          break;
+
+        case "initiative":
+          this.saveSelfAppraisal({
+            type: "initiative",
+            id: this.$page.props.authUser.id,
+            appraisal: this.appraisal.id,
+            initiative: this.initiatives
+          });
+          this.initiativeErrors = {};
+          break;
+
+        case "otherInitiative":
+          this.saveSelfAppraisal({
+            type: "otherInitiative",
+            id: this.$page.props.authUser.id,
+            appraisal: this.appraisal.id,
+            initiative: this.otherInitiatives
+          });
+          this.otherInitiativeErrors = {};
+          break;
+
+        case "feedback":
+          this.saveSelfAppraisal({
+            type: "feedback",
+            id: this.$page.props.authUser.id,
+            appraisal: this.appraisal.id,
+            feedback: this.feedback
+          });
+          this.feedbackErrors = [];
           break;
 
         default:
-          var data = {
-            type: "my-goal",
-            id: this.$page.props.authUser.id,
-            appraisal: this.appraisal.id,
-            goal: this.myGoals
-          };
+          this.isSubmittingMyGoal = true;
+          this.saveKeyGoal(this.generateAppraisalData("my-goal", this.$page.props.authUser.id, this.appraisal.id, this.myGoals));
           this.myGoalErrors = {};
-          this.saveKeyGoal("my-goal", data);
           break;
       }
     },
-    saveKeyGoal: function saveKeyGoal(type, data) {
+    saveKeyGoal: function saveKeyGoal(data) {
       var _this = this;
 
       this.$axios.post("/dashboard/add-key-goal", data).then(function (res) {
         console.log(res.data);
+
+        if (data.type === "my-goal") {
+          _this.isSubmittingMyGoal = false;
+        }
+
+        if (data.type === "unit-goal") {
+          _this.isSubmittingUnitGoal = false;
+        }
+
+        if (data.type === "department-goal") {
+          _this.isSubmittingDptGoal = false;
+        }
       })["catch"](function (err) {
-        if (type === "my-goal") {
+        _this.isSubmittingMyGoal = false;
+        _this.isSubmittingUnitGoal = false;
+        _this.isSubmittingDptGoal = false;
+
+        if (data.type === "my-goal") {
           _this.myGoalErrors = err.response.data.errors;
         }
 
-        if (type === "unit") {
+        if (data.type === "unit-goal") {
           _this.unitGoalErrors = err.response.data.errors;
         }
 
-        if (type === "department") {
+        if (data.type === "department-goal") {
           _this.dptGoalErrors = err.response.data.errors;
         }
+      });
+    },
+    saveSelfAppraisal: function saveSelfAppraisal(data) {
+      var _this2 = this;
 
-        if (type === "branch") {
-          _this.branchGoalErrors = err.response.data.errors;
+      this.isSubmitting = true;
+      this.$axios.post("/dashboard/add-self-appraisal", data).then(function (res) {
+        _this2.isSubmitting = false;
+        console.log(res.data);
+      })["catch"](function (err) {
+        _this2.isSubmitting = false;
+
+        if (data.type === "achievement") {
+          _this2.achievementErrors = err.response.data.errors;
+        }
+
+        if (data.type === "difficulty") {
+          _this2.difficultyErrors = err.response.data.errors;
+        }
+
+        if (data.type === "initiative") {
+          _this2.initiativeErrors = err.response.data.errors;
+        }
+
+        if (data.type === "otherInitiative") {
+          _this2.otherInitiativeErrors = err.response.data.errors;
+        }
+
+        if (data.type === "feedback") {
+          _this2.feedbackErrors = err.response.data.errors.feedback;
         }
       });
     },
@@ -3664,6 +3883,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }]);
           break;
 
+        case "achievement":
+          this.achievements = [].concat(_toConsumableArray(this.achievements), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            achievement: ""
+          }]);
+          break;
+
+        case "difficulty":
+          this.difficulties = [].concat(_toConsumableArray(this.difficulties), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            difficulty: ""
+          }]);
+          break;
+
+        case "initiative":
+          this.initiatives = [].concat(_toConsumableArray(this.initiatives), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            initiative: ""
+          }]);
+          break;
+
+        case "otherInitiative":
+          this.otherInitiatives = [].concat(_toConsumableArray(this.otherInitiatives), [{
+            id: "".concat(Math.random(16)).split(".")[1],
+            initiative: ""
+          }]);
+          break;
+
         default:
           this.myGoals = [].concat(_toConsumableArray(this.myGoals), [{
             id: "".concat(Math.random(16)).split(".")[1],
@@ -3673,17 +3920,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     removeGoal: function removeGoal(index, type) {
+      var _this3 = this;
+
       switch (type) {
-        case "branch":
-          if (this.branchGoals.length > 1) {
-            this.branchGoals.splice(index, 1);
-          }
-
-          break;
-
         case "department":
           if (this.dptGoals.length > 1) {
             this.dptGoals.splice(index, 1);
+            this.$nextTick(function () {
+              if (Object.keys(_this3.dptGoalErrors).length) {
+                _this3.dptGoalErrors["goal.".concat(index, ".goal")] = "";
+              }
+            });
           }
 
           break;
@@ -3691,6 +3938,59 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         case "unit":
           if (this.unitGoals.length > 1) {
             this.unitGoals.splice(index, 1);
+            this.$nextTick(function () {
+              if (Object.keys(_this3.unitGoalErrors).length) {
+                _this3.unitGoalErrors["goal.".concat(index, ".goal")] = "";
+              }
+            });
+          }
+
+          break;
+
+        case "achievement":
+          if (this.achievements.length > 1) {
+            this.achievements.splice(index, 1);
+            this.$nextTick(function () {
+              if (Object.keys(_this3.achievementErrors).length) {
+                _this3.achievementErrors["achievement.".concat(index, ".achievement")] = "";
+              }
+            });
+          }
+
+          break;
+
+        case "difficulty":
+          if (this.difficulties.length > 1) {
+            this.difficulties.splice(index, 1);
+            this.$nextTick(function () {
+              if (Object.keys(_this3.difficultyErrors).length) {
+                _this3.difficultyErrors["difficulty.".concat(index, ".difficulty")] = "";
+              }
+            });
+          }
+
+          break;
+
+        case "initiative":
+          if (this.initiatives.length > 1) {
+            this.initiatives.splice(index, 1);
+            this.$nextTick(function () {
+              if (Object.keys(_this3.initiativeErrors).length) {
+                _this3.initiativeErrors["initiative.".concat(index, ".initiative")] = "";
+              }
+            });
+          }
+
+          break;
+
+        case "otherInitiative":
+          if (this.otherInitiatives.length > 1) {
+            this.otherInitiatives.splice(index, 1);
+            this.$nextTick(function () {
+              if (Object.keys(_this3.otherInitiativeErrors).length) {
+                _this3.otherInitiativeErrors["initiative.".concat(index, ".initiative")] = "";
+              }
+            });
           }
 
           break;
@@ -3698,13 +3998,101 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         default:
           if (this.myGoals.length > 1) {
             this.myGoals.splice(index, 1);
+            this.$nextTick(function () {
+              if (Object.keys(_this3.myGoalErrors).length) {
+                _this3.myGoalErrors["goal.".concat(index, ".goal")] = "";
+              }
+            });
           }
 
           break;
       }
     },
+    cancelGoalForm: function cancelGoalForm(type) {
+      var _this4 = this;
+
+      switch (type) {
+        case "department":
+          this.dptGoals = [{
+            goal: ""
+          }];
+          this.$nextTick(function () {
+            _this4.dptGoalErrors = {};
+          });
+          break;
+
+        case "unit":
+          this.unitGoals = [{
+            goal: ""
+          }];
+          this.$nextTick(function () {
+            _this4.unitGoalErrors = {};
+          });
+          break;
+
+        case "achievement":
+          this.achievements = [{
+            achievement: ""
+          }];
+          this.$nextTick(function () {
+            _this4.achievementErrors = {};
+          });
+          break;
+
+        case "difficulty":
+          this.difficulties = [{
+            difficulty: ""
+          }];
+          this.$nextTick(function () {
+            _this4.difficultyErrors = {};
+          });
+          break;
+
+        case "initiative":
+          this.initiatives = [{
+            initiative: ""
+          }];
+          this.$nextTick(function () {
+            _this4.initiativeErrors = {};
+          });
+          break;
+
+        case "otherInitiative":
+          this.otherInitiatives = [{
+            initiative: ""
+          }];
+          this.$nextTick(function () {
+            _this4.otherInitiativeErrors = {};
+          });
+          break;
+
+        case "feedback":
+          this.feedback = "";
+          this.$nextTick(function () {
+            _this4.feedbackErrors = [];
+          });
+          break;
+
+        default:
+          this.myGoals = [{
+            goal: ""
+          }];
+          this.$nextTick(function () {
+            _this4.myGoalErrors = {};
+          });
+          break;
+      }
+    },
+    generateAppraisalData: function generateAppraisalData(type, id, appraisal, goals) {
+      return {
+        type: type,
+        id: id,
+        appraisal: appraisal,
+        goals: goals
+      };
+    },
     getAppraisalKeyGoal: function getAppraisalKeyGoal(id) {
-      var _this2 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var goals;
@@ -3714,25 +4102,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _this2.$axios.get("/dashboard/get-appraisal-goal/".concat(id));
+                return _this5.$axios.get("/dashboard/get-appraisal-goal/".concat(id));
 
               case 3:
                 goals = _context.sent;
-                console.log(goals);
-                _context.next = 10;
+                _context.next = 9;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 6:
+                _context.prev = 6;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 6]]);
       }))();
     }
   })
@@ -8343,7 +8730,7 @@ var render = function() {
                                 _vm._v("My Key Goals")
                               ]),
                               _vm._v(" "),
-                              this.$page.props.authUser.unit_id ||
+                              _vm.$page.props.authUser.unit_id ||
                               _vm.anyPermission("admin", "president")
                                 ? _c("th", { staticClass: "text-main" }, [
                                     _vm._v(
@@ -8352,18 +8739,14 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              this.$page.props.authUser.department_id ||
+                              _vm.$page.props.authUser.department_id ||
                               _vm.anyPermission("admin", "president", "hod")
                                 ? _c("th", { staticClass: "text-main" }, [
                                     _vm._v(
                                       "\n                    Department Key Goals\n                  "
                                     )
                                   ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c("th", { staticClass: "text-main" }, [
-                                _vm._v("Branch Key Goals")
-                              ])
+                                : _vm._e()
                             ])
                           ]),
                           _vm._v(" "),
@@ -8390,7 +8773,7 @@ var render = function() {
                                         on: {
                                           submit: function($event) {
                                             $event.preventDefault()
-                                            return _vm.addKeyGoal()
+                                            return _vm.addSelfAppraisal()
                                           }
                                         }
                                       },
@@ -8409,7 +8792,7 @@ var render = function() {
                                                     "is-danger":
                                                       Object.keys(
                                                         _vm.myGoalErrors
-                                                      ).length > 0 &&
+                                                      ).length &&
                                                       _vm.myGoalErrors[
                                                         "goal." +
                                                           index +
@@ -8419,18 +8802,17 @@ var render = function() {
                                                         "goal." +
                                                           index +
                                                           ".goal"
-                                                      ].length > 0
+                                                      ].length
                                                   },
-                                                  message:
-                                                    Object.keys(
-                                                      _vm.myGoalErrors
-                                                    ).length > 0
-                                                      ? _vm.myGoalErrors[
-                                                          "goal." +
-                                                            index +
-                                                            ".goal"
-                                                        ]
-                                                      : []
+                                                  message: Object.keys(
+                                                    _vm.myGoalErrors
+                                                  ).length
+                                                    ? _vm.myGoalErrors[
+                                                        "goal." +
+                                                          index +
+                                                          ".goal"
+                                                      ]
+                                                    : []
                                                 }
                                               },
                                               [
@@ -8526,7 +8908,16 @@ var render = function() {
                                                   "b-button",
                                                   {
                                                     staticClass:
-                                                      "is-default is-light"
+                                                      "is-default is-light",
+                                                    attrs: {
+                                                      disabled:
+                                                        _vm.isSubmittingMyGoal
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.cancelGoalForm()
+                                                      }
+                                                    }
                                                   },
                                                   [_vm._v("Cancel")]
                                                 ),
@@ -8536,11 +8927,21 @@ var render = function() {
                                                   {
                                                     staticClass:
                                                       "button is-success is-light",
-                                                    attrs: { type: "submit" }
+                                                    attrs: {
+                                                      type: "submit",
+                                                      disabled:
+                                                        _vm.isSubmittingMyGoal
+                                                    }
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                              Submit\n                            "
+                                                      "\n                              " +
+                                                        _vm._s(
+                                                          _vm.isSubmittingMyGoal
+                                                            ? "Submitting..."
+                                                            : "Add"
+                                                        ) +
+                                                        "\n                            "
                                                     )
                                                   ]
                                                 )
@@ -8556,7 +8957,7 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              this.$page.props.authUser.unit_id ||
+                              _vm.$page.props.authUser.unit_id ||
                               _vm.anyPermission(
                                 "admin",
                                 "president",
@@ -8580,6 +8981,16 @@ var render = function() {
                                         _vm.anyPermission("admin", "supervisor")
                                           ? _c(
                                               "form",
+                                              {
+                                                on: {
+                                                  submit: function($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.addSelfAppraisal(
+                                                      "unit"
+                                                    )
+                                                  }
+                                                }
+                                              },
                                               [
                                                 _vm._l(_vm.unitGoals, function(
                                                   kg,
@@ -8588,7 +8999,39 @@ var render = function() {
                                                   return [
                                                     _c(
                                                       "b-field",
-                                                      { key: index },
+                                                      {
+                                                        key: index,
+                                                        attrs: {
+                                                          type: {
+                                                            "is-danger":
+                                                              Object.keys(
+                                                                _vm.unitGoalErrors
+                                                              ).length &&
+                                                              _vm
+                                                                .unitGoalErrors[
+                                                                "goal." +
+                                                                  index +
+                                                                  ".goal"
+                                                              ] &&
+                                                              _vm
+                                                                .unitGoalErrors[
+                                                                "goal." +
+                                                                  index +
+                                                                  ".goal"
+                                                              ].length
+                                                          },
+                                                          message: Object.keys(
+                                                            _vm.unitGoalErrors
+                                                          ).length
+                                                            ? _vm
+                                                                .unitGoalErrors[
+                                                                "goal." +
+                                                                  index +
+                                                                  ".goal"
+                                                              ]
+                                                            : []
+                                                        }
+                                                      },
                                                       [
                                                         _c("b-input", {
                                                           attrs: {
@@ -8697,7 +9140,20 @@ var render = function() {
                                                           "b-button",
                                                           {
                                                             staticClass:
-                                                              "is-default is-light"
+                                                              "is-default is-light",
+                                                            attrs: {
+                                                              disabled:
+                                                                _vm.isSubmittingUnitGoal
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.cancelGoalForm(
+                                                                  "unit"
+                                                                )
+                                                              }
+                                                            }
                                                           },
                                                           [_vm._v("Cancel")]
                                                         ),
@@ -8708,12 +9164,20 @@ var render = function() {
                                                             staticClass:
                                                               "button is-success is-light",
                                                             attrs: {
-                                                              type: "submit"
+                                                              type: "submit",
+                                                              disabled:
+                                                                _vm.isSubmittingUnitGoal
                                                             }
                                                           },
                                                           [
                                                             _vm._v(
-                                                              "\n                              Submit\n                            "
+                                                              "\n                              " +
+                                                                _vm._s(
+                                                                  _vm.isSubmittingUnitGoal
+                                                                    ? "Submitting..."
+                                                                    : "Add"
+                                                                ) +
+                                                                "\n                            "
                                                             )
                                                           ]
                                                         )
@@ -8731,7 +9195,7 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              this.$page.props.authUser.department_id ||
+                              _vm.$page.props.authUser.department_id ||
                               _vm.anyPermission("admin", "president", "hod")
                                 ? _c("td", [
                                     _c(
@@ -8751,6 +9215,16 @@ var render = function() {
                                         _vm.anyPermission("admin", "hod")
                                           ? _c(
                                               "form",
+                                              {
+                                                on: {
+                                                  submit: function($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.addSelfAppraisal(
+                                                      "department"
+                                                    )
+                                                  }
+                                                }
+                                              },
                                               [
                                                 _vm._l(_vm.dptGoals, function(
                                                   kg,
@@ -8759,7 +9233,36 @@ var render = function() {
                                                   return [
                                                     _c(
                                                       "b-field",
-                                                      { key: index },
+                                                      {
+                                                        key: index,
+                                                        attrs: {
+                                                          type: {
+                                                            "is-danger":
+                                                              Object.keys(
+                                                                _vm.dptGoalErrors
+                                                              ).length &&
+                                                              _vm.dptGoalErrors[
+                                                                "goal." +
+                                                                  index +
+                                                                  ".goal"
+                                                              ] &&
+                                                              _vm.dptGoalErrors[
+                                                                "goal." +
+                                                                  index +
+                                                                  ".goal"
+                                                              ].length
+                                                          },
+                                                          message: Object.keys(
+                                                            _vm.dptGoalErrors
+                                                          ).length
+                                                            ? _vm.dptGoalErrors[
+                                                                "goal." +
+                                                                  index +
+                                                                  ".goal"
+                                                              ]
+                                                            : []
+                                                        }
+                                                      },
                                                       [
                                                         _c("b-input", {
                                                           attrs: {
@@ -8868,7 +9371,20 @@ var render = function() {
                                                           "b-button",
                                                           {
                                                             staticClass:
-                                                              "is-default is-light"
+                                                              "is-default is-light",
+                                                            attrs: {
+                                                              disabled:
+                                                                _vm.isSubmittingDptGoal
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.cancelGoalForm(
+                                                                  "department"
+                                                                )
+                                                              }
+                                                            }
                                                           },
                                                           [_vm._v("Cancel")]
                                                         ),
@@ -8879,12 +9395,20 @@ var render = function() {
                                                             staticClass:
                                                               "button is-success is-light",
                                                             attrs: {
-                                                              type: "submit"
+                                                              type: "submit",
+                                                              disabled:
+                                                                _vm.isSubmittingDptGoal
                                                             }
                                                           },
                                                           [
                                                             _vm._v(
-                                                              "\n                              Submit\n                            "
+                                                              "\n                              " +
+                                                                _vm._s(
+                                                                  _vm.isSubmittingDptGoal
+                                                                    ? "Submitting..."
+                                                                    : "Add"
+                                                                ) +
+                                                                "\n                            "
                                                             )
                                                           ]
                                                         )
@@ -8900,172 +9424,7 @@ var render = function() {
                                       ]
                                     )
                                   ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "section",
-                                  { staticClass: "kpi_goals__wrapper" },
-                                  [
-                                    _c("div", { staticClass: "content" }, [
-                                      _c("ol", { attrs: { type: "1" } }, [
-                                        _c("li", [_vm._v("Coffee")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Tea")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Milk")])
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm.anyPermission("admin", "branch_manager")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _vm._l(_vm.branchGoals, function(
-                                              kg,
-                                              index
-                                            ) {
-                                              return [
-                                                _c(
-                                                  "b-field",
-                                                  { key: index },
-                                                  [
-                                                    _c("b-input", {
-                                                      attrs: {
-                                                        placeholder:
-                                                          "Enter new goal...",
-                                                        type: "text",
-                                                        expanded: ""
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.branchGoals[
-                                                            index
-                                                          ]["goal"],
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.branchGoals[
-                                                              index
-                                                            ],
-                                                            "goal",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "branchGoals[index]['goal']"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "p",
-                                                      {
-                                                        staticClass: "control"
-                                                      },
-                                                      [
-                                                        _c("b-button", {
-                                                          attrs: {
-                                                            type:
-                                                              "is-danger is-light",
-                                                            "icon-left":
-                                                              "times",
-                                                            disabled:
-                                                              _vm.branchGoals
-                                                                .length === 1
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.removeGoal(
-                                                                index,
-                                                                "branch"
-                                                              )
-                                                            }
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              ]
-                                            }),
-                                            _vm._v(" "),
-                                            _c(
-                                              "section",
-                                              { staticClass: "goal__btns" },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {},
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-info is-light",
-                                                        attrs: {
-                                                          "icon-left": "plus"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.appendNewGoal(
-                                                              "branch"
-                                                            )
-                                                          }
-                                                        }
-                                                      },
-                                                      [_vm._v("Add New")]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  { staticClass: "block" },
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-default is-light"
-                                                      },
-                                                      [_vm._v("Cancel")]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "button is-success is-light",
-                                                        attrs: {
-                                                          type: "submit"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                              Submit\n                            "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              ]
-                                            )
-                                          ],
-                                          2
-                                        )
-                                      : _vm._e()
-                                  ]
-                                )
-                              ])
+                                : _vm._e()
                             ])
                           ])
                         ]
@@ -9100,157 +9459,215 @@ var render = function() {
                                   "section",
                                   { staticClass: "kpi_goals__wrapper" },
                                   [
-                                    _c("div", { staticClass: "content" }, [
-                                      _c("ol", { attrs: { type: "1" } }, [
-                                        _c("li", [_vm._v("Coffee")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Tea")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Milk")])
-                                      ])
-                                    ]),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "content",
+                                        staticStyle: { width: "30rem" }
+                                      },
+                                      [
+                                        _c("ol", { attrs: { type: "1" } }, [
+                                          _c("li", [_vm._v("Coffee")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Tea")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Milk")])
+                                        ])
+                                      ]
+                                    ),
                                     _vm._v(" "),
-                                    !_vm.isPermission("admin")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _vm._l(_vm.keyGoals, function(
-                                              kg,
-                                              index
-                                            ) {
-                                              return [
-                                                _c(
-                                                  "b-field",
-                                                  { key: index },
-                                                  [
-                                                    _c("b-input", {
-                                                      attrs: {
-                                                        placeholder:
-                                                          "Enter new achievement recorded...",
-                                                        type: "text",
-                                                        expanded: ""
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.keyGoals[index][
-                                                            "goal"
-                                                          ],
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.keyGoals[index],
-                                                            "goal",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "keyGoals[index]['goal']"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "p",
-                                                      {
-                                                        staticClass: "control"
-                                                      },
-                                                      [
-                                                        _c("b-button", {
-                                                          attrs: {
-                                                            type:
-                                                              "is-danger is-light",
-                                                            "icon-left":
-                                                              "times",
-                                                            disabled:
-                                                              _vm.keyGoals
-                                                                .length === 1
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.removeGoal(
-                                                                index
-                                                              )
-                                                            }
-                                                          }
-                                                        })
+                                    _c(
+                                      "form",
+                                      {
+                                        staticStyle: { width: "30rem" },
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.addSelfAppraisal(
+                                              "achievement"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._l(_vm.achievements, function(
+                                          a,
+                                          index
+                                        ) {
+                                          return [
+                                            _c(
+                                              "b-field",
+                                              {
+                                                key: index,
+                                                attrs: {
+                                                  type: {
+                                                    "is-danger":
+                                                      Object.keys(
+                                                        _vm.achievementErrors
+                                                      ).length &&
+                                                      _vm.achievementErrors[
+                                                        "achievement." +
+                                                          index +
+                                                          ".achievement"
+                                                      ] &&
+                                                      _vm.achievementErrors[
+                                                        "achievement." +
+                                                          index +
+                                                          ".achievement"
+                                                      ].length
+                                                  },
+                                                  message: Object.keys(
+                                                    _vm.achievementErrors
+                                                  ).length
+                                                    ? _vm.achievementErrors[
+                                                        "achievement." +
+                                                          index +
+                                                          ".achievement"
+                                                      ]
+                                                    : []
+                                                }
+                                              },
+                                              [
+                                                _c("b-input", {
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Enter new achievement recorded...",
+                                                    type: "text",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.achievements[index][
+                                                        "achievement"
                                                       ],
-                                                      1
-                                                    )
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.achievements[index],
+                                                        "achievement",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "achievements[index]['achievement']"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "control" },
+                                                  [
+                                                    _c("b-button", {
+                                                      attrs: {
+                                                        type:
+                                                          "is-danger is-light",
+                                                        "icon-left": "times",
+                                                        disabled:
+                                                          _vm.achievements
+                                                            .length === 1
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.removeGoal(
+                                                            index,
+                                                            "achievement"
+                                                          )
+                                                        }
+                                                      }
+                                                    })
                                                   ],
                                                   1
                                                 )
-                                              ]
-                                            }),
-                                            _vm._v(" "),
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "section",
+                                          { staticClass: "goal__btns" },
+                                          [
                                             _c(
-                                              "section",
-                                              { staticClass: "goal__btns" },
+                                              "div",
+                                              {},
                                               [
                                                 _c(
-                                                  "div",
-                                                  {},
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-info is-light",
-                                                        attrs: {
-                                                          "icon-left": "plus"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.appendNewGoal()
-                                                          }
-                                                        }
-                                                      },
-                                                      [_vm._v("Add New")]
-                                                    )
-                                                  ],
-                                                  1
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-info is-light",
+                                                    attrs: {
+                                                      "icon-left": "plus"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.appendNewGoal(
+                                                          "achievement"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Add New")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "block" },
+                                              [
+                                                _c(
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-default is-light",
+                                                    attrs: {
+                                                      disabled: _vm.isSubmitting
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.cancelGoalForm(
+                                                          "achievement"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Cancel")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
-                                                  "div",
-                                                  { staticClass: "block" },
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "button is-success is-light",
+                                                    attrs: {
+                                                      type: "submit",
+                                                      disabled: _vm.isSubmitting
+                                                    }
+                                                  },
                                                   [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-default is-light"
-                                                      },
-                                                      [_vm._v("Cancel")]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "button is-success is-light",
-                                                        attrs: {
-                                                          type: "submit"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                              Submit\n                            "
-                                                        )
-                                                      ]
+                                                    _vm._v(
+                                                      "\n                              " +
+                                                        _vm._s(
+                                                          _vm.isSubmitting
+                                                            ? "Submitting..."
+                                                            : "Add"
+                                                        ) +
+                                                        "\n                            "
                                                     )
-                                                  ],
-                                                  1
+                                                  ]
                                                 )
-                                              ]
+                                              ],
+                                              1
                                             )
-                                          ],
-                                          2
+                                          ]
                                         )
-                                      : _vm._e()
+                                      ],
+                                      2
+                                    )
                                   ]
                                 )
                               ])
@@ -9288,157 +9705,215 @@ var render = function() {
                                   "section",
                                   { staticClass: "kpi_goals__wrapper" },
                                   [
-                                    _c("div", { staticClass: "content" }, [
-                                      _c("ol", { attrs: { type: "1" } }, [
-                                        _c("li", [_vm._v("Coffee")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Tea")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Milk")])
-                                      ])
-                                    ]),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "content",
+                                        staticStyle: { width: "30rem" }
+                                      },
+                                      [
+                                        _c("ol", { attrs: { type: "1" } }, [
+                                          _c("li", [_vm._v("Coffee")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Tea")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Milk")])
+                                        ])
+                                      ]
+                                    ),
                                     _vm._v(" "),
-                                    !_vm.isPermission("admin")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _vm._l(_vm.keyGoals, function(
-                                              kg,
-                                              index
-                                            ) {
-                                              return [
-                                                _c(
-                                                  "b-field",
-                                                  { key: index },
-                                                  [
-                                                    _c("b-input", {
-                                                      attrs: {
-                                                        placeholder:
-                                                          "Enter new difficulty faced...",
-                                                        type: "text",
-                                                        expanded: ""
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.keyGoals[index][
-                                                            "goal"
-                                                          ],
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.keyGoals[index],
-                                                            "goal",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "keyGoals[index]['goal']"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "p",
-                                                      {
-                                                        staticClass: "control"
-                                                      },
-                                                      [
-                                                        _c("b-button", {
-                                                          attrs: {
-                                                            type:
-                                                              "is-danger is-light",
-                                                            "icon-left":
-                                                              "times",
-                                                            disabled:
-                                                              _vm.keyGoals
-                                                                .length === 1
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.removeGoal(
-                                                                index
-                                                              )
-                                                            }
-                                                          }
-                                                        })
+                                    _c(
+                                      "form",
+                                      {
+                                        staticStyle: { width: "30rem" },
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.addSelfAppraisal(
+                                              "difficulty"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._l(_vm.difficulties, function(
+                                          d,
+                                          index
+                                        ) {
+                                          return [
+                                            _c(
+                                              "b-field",
+                                              {
+                                                key: index,
+                                                attrs: {
+                                                  type: {
+                                                    "is-danger":
+                                                      Object.keys(
+                                                        _vm.difficultyErrors
+                                                      ).length &&
+                                                      _vm.difficultyErrors[
+                                                        "difficulty." +
+                                                          index +
+                                                          ".difficulty"
+                                                      ] &&
+                                                      _vm.difficultyErrors[
+                                                        "difficulty." +
+                                                          index +
+                                                          ".difficulty"
+                                                      ].length
+                                                  },
+                                                  message: Object.keys(
+                                                    _vm.difficultyErrors
+                                                  ).length
+                                                    ? _vm.difficultyErrors[
+                                                        "difficulty." +
+                                                          index +
+                                                          ".difficulty"
+                                                      ]
+                                                    : []
+                                                }
+                                              },
+                                              [
+                                                _c("b-input", {
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Enter new difficulty faced...",
+                                                    type: "text",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.difficulties[index][
+                                                        "difficulty"
                                                       ],
-                                                      1
-                                                    )
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.difficulties[index],
+                                                        "difficulty",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "difficulties[index]['difficulty']"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "control" },
+                                                  [
+                                                    _c("b-button", {
+                                                      attrs: {
+                                                        type:
+                                                          "is-danger is-light",
+                                                        "icon-left": "times",
+                                                        disabled:
+                                                          _vm.difficulties
+                                                            .length === 1
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.removeGoal(
+                                                            index,
+                                                            "difficulty"
+                                                          )
+                                                        }
+                                                      }
+                                                    })
                                                   ],
                                                   1
                                                 )
-                                              ]
-                                            }),
-                                            _vm._v(" "),
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "section",
+                                          { staticClass: "goal__btns" },
+                                          [
                                             _c(
-                                              "section",
-                                              { staticClass: "goal__btns" },
+                                              "div",
+                                              {},
                                               [
                                                 _c(
-                                                  "div",
-                                                  {},
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-info is-light",
-                                                        attrs: {
-                                                          "icon-left": "plus"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.appendNewGoal()
-                                                          }
-                                                        }
-                                                      },
-                                                      [_vm._v("Add New")]
-                                                    )
-                                                  ],
-                                                  1
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-info is-light",
+                                                    attrs: {
+                                                      "icon-left": "plus"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.appendNewGoal(
+                                                          "difficulty"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Add New")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "block" },
+                                              [
+                                                _c(
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-default is-light",
+                                                    attrs: {
+                                                      disabled: _vm.isSubmitting
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.cancelGoalForm(
+                                                          "difficulty"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Cancel")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
-                                                  "div",
-                                                  { staticClass: "block" },
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "button is-success is-light",
+                                                    attrs: {
+                                                      type: "submit",
+                                                      disabled: _vm.isSubmitting
+                                                    }
+                                                  },
                                                   [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-default is-light"
-                                                      },
-                                                      [_vm._v("Cancel")]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "button is-success is-light",
-                                                        attrs: {
-                                                          type: "submit"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                              Submit\n                            "
-                                                        )
-                                                      ]
+                                                    _vm._v(
+                                                      "\n                              " +
+                                                        _vm._s(
+                                                          _vm.isSubmitting
+                                                            ? "Submitting..."
+                                                            : "Add"
+                                                        ) +
+                                                        "\n                            "
                                                     )
-                                                  ],
-                                                  1
+                                                  ]
                                                 )
-                                              ]
+                                              ],
+                                              1
                                             )
-                                          ],
-                                          2
+                                          ]
                                         )
-                                      : _vm._e()
+                                      ],
+                                      2
+                                    )
                                   ]
                                 )
                               ])
@@ -9485,157 +9960,215 @@ var render = function() {
                                   "section",
                                   { staticClass: "kpi_goals__wrapper" },
                                   [
-                                    _c("div", { staticClass: "content" }, [
-                                      _c("ol", { attrs: { type: "1" } }, [
-                                        _c("li", [_vm._v("Coffee")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Tea")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Milk")])
-                                      ])
-                                    ]),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "content",
+                                        staticStyle: { width: "30rem" }
+                                      },
+                                      [
+                                        _c("ol", { attrs: { type: "1" } }, [
+                                          _c("li", [_vm._v("Coffee")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Tea")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Milk")])
+                                        ])
+                                      ]
+                                    ),
                                     _vm._v(" "),
-                                    !_vm.isPermission("admin")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _vm._l(_vm.keyGoals, function(
-                                              kg,
-                                              index
-                                            ) {
-                                              return [
-                                                _c(
-                                                  "b-field",
-                                                  { key: index },
-                                                  [
-                                                    _c("b-input", {
-                                                      attrs: {
-                                                        placeholder:
-                                                          "Enter new project or initiative...",
-                                                        type: "text",
-                                                        expanded: ""
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.keyGoals[index][
-                                                            "goal"
-                                                          ],
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.keyGoals[index],
-                                                            "goal",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "keyGoals[index]['goal']"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "p",
-                                                      {
-                                                        staticClass: "control"
-                                                      },
-                                                      [
-                                                        _c("b-button", {
-                                                          attrs: {
-                                                            type:
-                                                              "is-danger is-light",
-                                                            "icon-left":
-                                                              "times",
-                                                            disabled:
-                                                              _vm.keyGoals
-                                                                .length === 1
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.removeGoal(
-                                                                index
-                                                              )
-                                                            }
-                                                          }
-                                                        })
+                                    _c(
+                                      "form",
+                                      {
+                                        staticStyle: { width: "30rem" },
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.addSelfAppraisal(
+                                              "initiative"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._l(_vm.initiatives, function(
+                                          i,
+                                          index
+                                        ) {
+                                          return [
+                                            _c(
+                                              "b-field",
+                                              {
+                                                key: index,
+                                                attrs: {
+                                                  type: {
+                                                    "is-danger":
+                                                      Object.keys(
+                                                        _vm.initiativeErrors
+                                                      ).length &&
+                                                      _vm.initiativeErrors[
+                                                        "initiative." +
+                                                          index +
+                                                          ".initiative"
+                                                      ] &&
+                                                      _vm.initiativeErrors[
+                                                        "initiative." +
+                                                          index +
+                                                          ".initiative"
+                                                      ].length
+                                                  },
+                                                  message: Object.keys(
+                                                    _vm.initiativeErrors
+                                                  ).length
+                                                    ? _vm.initiativeErrors[
+                                                        "initiative." +
+                                                          index +
+                                                          ".initiative"
+                                                      ]
+                                                    : []
+                                                }
+                                              },
+                                              [
+                                                _c("b-input", {
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Enter new project or initiative...",
+                                                    type: "text",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.initiatives[index][
+                                                        "initiative"
                                                       ],
-                                                      1
-                                                    )
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.initiatives[index],
+                                                        "initiative",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "initiatives[index]['initiative']"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "control" },
+                                                  [
+                                                    _c("b-button", {
+                                                      attrs: {
+                                                        type:
+                                                          "is-danger is-light",
+                                                        "icon-left": "times",
+                                                        disabled:
+                                                          _vm.initiatives
+                                                            .length === 1
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.removeGoal(
+                                                            index,
+                                                            "initiative"
+                                                          )
+                                                        }
+                                                      }
+                                                    })
                                                   ],
                                                   1
                                                 )
-                                              ]
-                                            }),
-                                            _vm._v(" "),
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "section",
+                                          { staticClass: "goal__btns" },
+                                          [
                                             _c(
-                                              "section",
-                                              { staticClass: "goal__btns" },
+                                              "div",
+                                              {},
                                               [
                                                 _c(
-                                                  "div",
-                                                  {},
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-info is-light",
-                                                        attrs: {
-                                                          "icon-left": "plus"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.appendNewGoal()
-                                                          }
-                                                        }
-                                                      },
-                                                      [_vm._v("Add New")]
-                                                    )
-                                                  ],
-                                                  1
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-info is-light",
+                                                    attrs: {
+                                                      "icon-left": "plus"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.appendNewGoal(
+                                                          "initiative"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Add New")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "block" },
+                                              [
+                                                _c(
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-default is-light",
+                                                    attrs: {
+                                                      disabled: _vm.isSubmitting
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.cancelGoalForm(
+                                                          "initiative"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Cancel")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
-                                                  "div",
-                                                  { staticClass: "block" },
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "button is-success is-light",
+                                                    attrs: {
+                                                      type: "submit",
+                                                      disabled: _vm.isSubmitting
+                                                    }
+                                                  },
                                                   [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-default is-light"
-                                                      },
-                                                      [_vm._v("Cancel")]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "button is-success is-light",
-                                                        attrs: {
-                                                          type: "submit"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                              Submit\n                            "
-                                                        )
-                                                      ]
+                                                    _vm._v(
+                                                      "\n                              " +
+                                                        _vm._s(
+                                                          _vm.isSubmitting
+                                                            ? "Submitting..."
+                                                            : "Add"
+                                                        ) +
+                                                        "\n                            "
                                                     )
-                                                  ],
-                                                  1
+                                                  ]
                                                 )
-                                              ]
+                                              ],
+                                              1
                                             )
-                                          ],
-                                          2
+                                          ]
                                         )
-                                      : _vm._e()
+                                      ],
+                                      2
+                                    )
                                   ]
                                 )
                               ])
@@ -9682,157 +10215,217 @@ var render = function() {
                                   "section",
                                   { staticClass: "kpi_goals__wrapper" },
                                   [
-                                    _c("div", { staticClass: "content" }, [
-                                      _c("ol", { attrs: { type: "1" } }, [
-                                        _c("li", [_vm._v("Coffee")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Tea")]),
-                                        _vm._v(" "),
-                                        _c("li", [_vm._v("Milk")])
-                                      ])
-                                    ]),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "content",
+                                        staticStyle: { width: "30rem" }
+                                      },
+                                      [
+                                        _c("ol", { attrs: { type: "1" } }, [
+                                          _c("li", [_vm._v("Coffee")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Tea")]),
+                                          _vm._v(" "),
+                                          _c("li", [_vm._v("Milk")])
+                                        ])
+                                      ]
+                                    ),
                                     _vm._v(" "),
-                                    !_vm.isPermission("admin")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _vm._l(_vm.keyGoals, function(
-                                              kg,
-                                              index
-                                            ) {
-                                              return [
+                                    _c(
+                                      "form",
+                                      {
+                                        staticStyle: { width: "30rem" },
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.addSelfAppraisal(
+                                              "otherInitiative"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._l(_vm.otherInitiatives, function(
+                                          oi,
+                                          index
+                                        ) {
+                                          return [
+                                            _c(
+                                              "b-field",
+                                              {
+                                                key: index,
+                                                attrs: {
+                                                  type: {
+                                                    "is-danger":
+                                                      Object.keys(
+                                                        _vm.otherInitiativeErrors
+                                                      ).length &&
+                                                      _vm.otherInitiativeErrors[
+                                                        "initiative." +
+                                                          index +
+                                                          ".initiative"
+                                                      ] &&
+                                                      _vm.otherInitiativeErrors[
+                                                        "initiative." +
+                                                          index +
+                                                          ".initiative"
+                                                      ].length
+                                                  },
+                                                  message: Object.keys(
+                                                    _vm.otherInitiativeErrors
+                                                  ).length
+                                                    ? _vm.otherInitiativeErrors[
+                                                        "initiative." +
+                                                          index +
+                                                          ".initiative"
+                                                      ]
+                                                    : []
+                                                }
+                                              },
+                                              [
+                                                _c("b-input", {
+                                                  attrs: {
+                                                    placeholder:
+                                                      "Enter new project or initiative...",
+                                                    type: "text",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.otherInitiatives[
+                                                        index
+                                                      ]["initiative"],
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.otherInitiatives[
+                                                          index
+                                                        ],
+                                                        "initiative",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "otherInitiatives[index]['initiative']"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
                                                 _c(
-                                                  "b-field",
-                                                  { key: index },
+                                                  "p",
+                                                  { staticClass: "control" },
                                                   [
-                                                    _c("b-input", {
+                                                    _c("b-button", {
                                                       attrs: {
-                                                        placeholder:
-                                                          "Enter new project or initiative...",
-                                                        type: "text",
-                                                        expanded: ""
+                                                        type:
+                                                          "is-danger is-light",
+                                                        "icon-left": "times",
+                                                        disabled:
+                                                          _vm.otherInitiatives
+                                                            .length === 1
                                                       },
-                                                      model: {
-                                                        value:
-                                                          _vm.keyGoals[index][
-                                                            "goal"
-                                                          ],
-                                                        callback: function(
-                                                          $$v
+                                                      on: {
+                                                        click: function(
+                                                          $event
                                                         ) {
-                                                          _vm.$set(
-                                                            _vm.keyGoals[index],
-                                                            "goal",
-                                                            $$v
+                                                          return _vm.removeGoal(
+                                                            index,
+                                                            "otherInitiative"
                                                           )
-                                                        },
-                                                        expression:
-                                                          "keyGoals[index]['goal']"
+                                                        }
                                                       }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "p",
-                                                      {
-                                                        staticClass: "control"
-                                                      },
-                                                      [
-                                                        _c("b-button", {
-                                                          attrs: {
-                                                            type:
-                                                              "is-danger is-light",
-                                                            "icon-left":
-                                                              "times",
-                                                            disabled:
-                                                              _vm.keyGoals
-                                                                .length === 1
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.removeGoal(
-                                                                index
-                                                              )
-                                                            }
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    )
+                                                    })
                                                   ],
                                                   1
                                                 )
-                                              ]
-                                            }),
-                                            _vm._v(" "),
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "section",
+                                          { staticClass: "goal__btns" },
+                                          [
                                             _c(
-                                              "section",
-                                              { staticClass: "goal__btns" },
+                                              "div",
+                                              {},
                                               [
                                                 _c(
-                                                  "div",
-                                                  {},
-                                                  [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-info is-light",
-                                                        attrs: {
-                                                          "icon-left": "plus"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.appendNewGoal()
-                                                          }
-                                                        }
-                                                      },
-                                                      [_vm._v("Add New")]
-                                                    )
-                                                  ],
-                                                  1
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-info is-light",
+                                                    attrs: {
+                                                      "icon-left": "plus"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.appendNewGoal(
+                                                          "otherInitiative"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Add New")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "block" },
+                                              [
+                                                _c(
+                                                  "b-button",
+                                                  {
+                                                    staticClass:
+                                                      "is-default is-light",
+                                                    attrs: {
+                                                      disabled: _vm.isSubmitting
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.cancelGoalForm(
+                                                          "otherInitiative"
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Cancel")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
-                                                  "div",
-                                                  { staticClass: "block" },
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "button is-success is-light",
+                                                    attrs: {
+                                                      type: "submit",
+                                                      disabled: _vm.isSubmitting
+                                                    }
+                                                  },
                                                   [
-                                                    _c(
-                                                      "b-button",
-                                                      {
-                                                        staticClass:
-                                                          "is-default is-light"
-                                                      },
-                                                      [_vm._v("Cancel")]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "button is-success is-light",
-                                                        attrs: {
-                                                          type: "submit"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                              Submit\n                            "
-                                                        )
-                                                      ]
+                                                    _vm._v(
+                                                      "\n                              " +
+                                                        _vm._s(
+                                                          _vm.isSubmitting
+                                                            ? "Submitting..."
+                                                            : "Add"
+                                                        ) +
+                                                        "\n                            "
                                                     )
-                                                  ],
-                                                  1
+                                                  ]
                                                 )
-                                              ]
+                                              ],
+                                              1
                                             )
-                                          ],
-                                          2
+                                          ]
                                         )
-                                      : _vm._e()
+                                      ],
+                                      2
+                                    )
                                   ]
                                 )
                               ])
@@ -9846,7 +10439,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "b-step-item",
-                  { attrs: { step: "5", label: "Overall Feedback" } },
+                  { attrs: { step: "5", label: "Overall feedback" } },
                   [
                     _c("section", { staticClass: "kpi__table" }, [
                       _c(
@@ -9858,7 +10451,7 @@ var render = function() {
                               _c(
                                 "th",
                                 { staticClass: "has-text-centered text-main" },
-                                [_vm._v("Feedback")]
+                                [_vm._v("feedback")]
                               )
                             ])
                           ]),
@@ -9870,52 +10463,111 @@ var render = function() {
                                   "section",
                                   { staticClass: "kpi_goals__wrapper" },
                                   [
-                                    _c("div", { staticClass: "content" }),
-                                    _vm._v(" "),
-                                    !_vm.isPermission("admin")
-                                      ? _c(
-                                          "form",
-                                          [
-                                            _c("b-field", [_c("vue-mce")], 1),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "bolck justify-c-end"
+                                    _c(
+                                      "form",
+                                      {
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.addSelfAppraisal(
+                                              "feedback"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "b-field",
+                                          {
+                                            attrs: {
+                                              type: {
+                                                "is-danger":
+                                                  _vm.feedbackErrors.length
                                               },
+                                              message: _vm.feedbackErrors
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "section",
+                                              { staticClass: "content" },
                                               [
-                                                _c(
-                                                  "b-button",
-                                                  {
-                                                    staticClass:
-                                                      "is-default is-light"
+                                                _c("editor", {
+                                                  attrs: {
+                                                    "api-key":
+                                                      "25qhafbs9v6uleue5kg84jeofqdrwawb30mv1o6mgvx4cdbb",
+                                                    id: "feedback",
+                                                    init: _vm.initEditor
                                                   },
-                                                  [_vm._v("Cancel")]
-                                                ),
-                                                _vm._v(
-                                                  "\n                            \n                          "
-                                                ),
-                                                _c(
-                                                  "button",
-                                                  {
-                                                    staticClass:
-                                                      "button is-success is-light",
-                                                    attrs: { type: "submit" }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                            Submit\n                          "
-                                                    )
-                                                  ]
-                                                )
+                                                  model: {
+                                                    value: _vm.feedback,
+                                                    callback: function($$v) {
+                                                      _vm.feedback = $$v
+                                                    },
+                                                    expression: "feedback"
+                                                  }
+                                                })
                                               ],
                                               1
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "bolck justify-c-start"
+                                          },
+                                          [
+                                            _c(
+                                              "b-button",
+                                              {
+                                                staticClass:
+                                                  "is-default is-light",
+                                                attrs: {
+                                                  disabled: _vm.isSubmitting
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.cancelGoalForm(
+                                                      "feedback"
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("Cancel")]
+                                            ),
+                                            _vm._v(
+                                              "\n                            \n                          "
+                                            ),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "button is-success is-light",
+                                                attrs: {
+                                                  type: "submit",
+                                                  disabled: _vm.isSubmitting
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                            " +
+                                                    _vm._s(
+                                                      _vm.isSubmitting
+                                                        ? "Submitting..."
+                                                        : "Add"
+                                                    ) +
+                                                    "\n                          "
+                                                )
+                                              ]
                                             )
                                           ],
                                           1
                                         )
-                                      : _vm._e()
+                                      ],
+                                      1
+                                    )
                                   ]
                                 )
                               ])

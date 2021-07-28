@@ -207,6 +207,22 @@
                       </div>
                       <div class="column is-3">
                         <b-field
+                          :label="$tc('app.staffId')"
+                          expanded
+                          :type="{
+                            'is-danger':
+                              personalDetailsErrors.staffId.length > 0,
+                          }"
+                          :message="personalDetailsErrors.staffId"
+                        >
+                          <b-input
+                            size=""
+                            v-model="personalDetails.staffId"
+                          ></b-input>
+                        </b-field>
+                      </div>
+                      <div class="column is-3">
+                        <b-field
                           :label="`${$tc('app.gender', 1)}`"
                           :type="{
                             'is-danger':
@@ -236,40 +252,6 @@
                       </div>
                     </div>
 
-                    <div class="columns">
-                      <div class="column is-3">
-                        <b-field
-                          :label="$tc('app.staffId')"
-                          expanded
-                          :type="{
-                            'is-danger':
-                              personalDetailsErrors.staffId.length > 0,
-                          }"
-                          :message="personalDetailsErrors.staffId"
-                        >
-                          <b-input
-                            size=""
-                            v-model="personalDetails.staffId"
-                          ></b-input>
-                        </b-field>
-                      </div>
-                      <div class="column is-3">
-                        <b-field
-                          :label="$tc('app.otherId')"
-                          expanded
-                          :type="{
-                            'is-danger':
-                              personalDetailsErrors.otherId.length > 0,
-                          }"
-                          :message="personalDetailsErrors.otherId"
-                        >
-                          <b-input
-                            size=""
-                            v-model="personalDetails.otherId"
-                          ></b-input>
-                        </b-field>
-                      </div>
-                    </div>
                     <b-field v-if="!isEditPersonalDetails">
                       <div class="buttons">
                         <button
@@ -311,7 +293,12 @@
     <section class="b__collapse__section">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">{{ $tc("app.attachment", 2) }}</p>
+          <p class="card-header-title">
+            {{ $tc("app.attachment", 2) }}
+            <span style="color: #686767c5"
+              >&nbsp;({{ $t("app.pdAttachmentDesc") }})</span
+            >
+          </p>
         </header>
         <div class="card-content">
           <div class="content">
@@ -692,7 +679,6 @@ export default {
         middleName: "",
         lastName: "",
         staffId: "",
-        otherId: "",
         birthDate: new Date(),
         maritalStatus: "",
         gender: "",
@@ -712,7 +698,6 @@ export default {
         middleName: [],
         lastName: [],
         staffId: [],
-        otherId: [],
         birthDate: [],
         maritalStatus: [],
         gender: [],
@@ -747,7 +732,6 @@ export default {
         middleName: details.middleName || "",
         lastName: details.lastName || "",
         staffId: details.staffId || "",
-        otherId: details.otherId || "",
         birthDate: details.birthDate ? new Date(details.birthDate) : new Date(),
         maritalStatus: details.maritalStatus || "",
         gender: details.gender || "",
@@ -935,7 +919,6 @@ export default {
       this.personalDetailsErrors.middleName = error.middleName || [];
       this.personalDetailsErrors.lastName = error.lastName || [];
       this.personalDetailsErrors.staffId = error.staffId || [];
-      this.personalDetailsErrors.otherId = error.otherId || [];
       this.personalDetailsErrors.birthDate = error.birthDate || [];
       this.personalDetailsErrors.maritalStatus = error.maritalStatus || [];
       this.personalDetailsErrors.gender = error.gender || [];

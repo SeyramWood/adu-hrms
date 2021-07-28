@@ -43,7 +43,6 @@ class DashboarController extends Controller
             'jobTitles' => fn () => $this->getJobTitle(),
             'workShifts' => fn () => $this->getShifts(),
             'employmentStatuses' => fn () => $this->getEmploymentStatus(),
-            'branches' => fn () => $this->getBranches(),
             'departments' => fn () => $this->getDepartments(),
             'units' => fn () => $this->getUnits(),
             'positions' => fn () => $this->getPositions(),
@@ -73,7 +72,6 @@ class DashboarController extends Controller
             'positions' => fn () => $this->getPositions(),
             'supervisors' => fn () => $this->getSupervisors(),
             'hods' => fn () => $this->getHODs(),
-            'managers' => fn () => $this->getManagers(),
             'reportTo' => fn () => $this->getReportTo(),
             'reportToMe' => fn () => $this->getReportToMe(),
             'directorates' => fn () => $this->getDirectorates(),
@@ -90,7 +88,6 @@ class DashboarController extends Controller
             'employmentStatuses' => fn () => $this->getEmploymentStatus(),
             'positions' => fn () => $this->getPositions(),
             'jobCategories' => fn () => $this->getJobCategory(),
-            'branches' => fn () => $this->getBranches(),
             'departments' => fn () => $this->getDepartments(),
             'units' => fn () => $this->getUnits(),
             'workShifts' => fn () => $this->getShifts(),
@@ -109,7 +106,6 @@ class DashboarController extends Controller
         //     abort(401);
         // }
         return inertia('KPI', [
-            'branches' => $this->getBranches(),
             'departments' => $this->getDepartments(),
             'units' => $this->getUnits(),
             'jobTitles' => $this->getJobTitle(),
@@ -122,7 +118,7 @@ class DashboarController extends Controller
         //     abort(401);
         // }
         return inertia('StaffDirectory', [
-            "staffList" => $this->getStaffList(),
+            //
         ]);
     }
 }

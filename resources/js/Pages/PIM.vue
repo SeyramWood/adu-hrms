@@ -534,7 +534,6 @@ export default {
     this.dispatchStaff({ payload: this.staffList });
     this.dispatchJobTitle({ payload: this.jobTitles });
     this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
-    this.dispatchBranch({ payload: this.branches });
     this.dispatchDepartment({ payload: this.departments });
     this.dispatchUnit({ payload: this.units });
     this.dispatchPosition({ payload: this.positions });
@@ -552,7 +551,6 @@ export default {
       "dispatchStaff",
       "dispatchJobTitle",
       "dispatchEmploymentStatus",
-      "dispatchBranch",
       "dispatchDepartment",
       "dispatchUnit",
       "dispatchPosition",

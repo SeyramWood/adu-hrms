@@ -89,7 +89,41 @@
         } // Extra Large devices (large desktops, 1200px and up)
     }
 }
+@mixin flexbox {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
 
+@mixin flex($values) {
+    -webkit-box-flex: $values;
+    -moz-box-flex: $values;
+    -webkit-flex: $values;
+    -ms-flex: $values;
+    flex: $values;
+}
+@mixin grid-column($width, $height, $gutter) {
+    height: $height;
+    margin: $gutter;
+    width: calc(#{$width} - (#{$gutter} * 2));
+}
+@mixin grid-row {
+    width: $max-width;
+    @include flexbox;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+@mixin card-bg {
+    background-color: #fff;
+    border-radius: 3px;
+    -webkit-box-shadow: -8px 2px 52px -8px rgba(238, 238, 238, 0.95);
+    -moz-box-shadow: -8px 2px 52px -8px rgba(238, 238, 238, 0.95);
+    box-shadow: -8px 2px 52px -8px rgba(238, 238, 238, 0.95);
+    padding: 1rem;
+}
 @mixin grid-1 {
     width: calc((#{$max-width} - (#{$column-gutter} * 11)) / 12);
 }
@@ -103,25 +137,42 @@
     width: calc((#{$max-width} - (#{$column-gutter} * 2)) / 3);
 }
 @mixin grid-5 {
-    width: calc(((#{$max-width} - (#{$column-gutter} * 11)) / 12) * 5 + #{$column-gutter} * 4);
+    width: calc(
+        ((#{$max-width} - (#{$column-gutter} * 11)) / 12) * 5 + #{$column-gutter} *
+            4
+    );
 }
 @mixin grid-6 {
     width: calc((#{$max-width} - #{$column-gutter}) / 2);
 }
 @mixin grid-7 {
-    width: calc(((#{$max-width} - (#{$column-gutter} * 11)) / 12) * 7 + #{$column-gutter} * 6);
+    width: calc(
+        ((#{$max-width} - (#{$column-gutter} * 11)) / 12) * 7 + #{$column-gutter} *
+            6
+    );
 }
 @mixin grid-8 {
-    width: calc(((#{$max-width} - (#{$column-gutter} * 2)) / 3) * 2 + #{$column-gutter});
+    width: calc(
+        ((#{$max-width} - (#{$column-gutter} * 2)) / 3) * 2 + #{$column-gutter}
+    );
 }
 @mixin grid-9 {
-    width: calc(((#{$max-width} - (#{$column-gutter} * 3)) / 4) * 3 + #{$column-gutter}* 2);
+    width: calc(
+        ((#{$max-width} - (#{$column-gutter} * 3)) / 4) * 3 + #{$column-gutter}*
+            2
+    );
 }
 @mixin grid-10 {
-    width: calc(((#{$max-width} - (#{$column-gutter} * 5)) / 6) * 5 + #{$column-gutter}* 4);
+    width: calc(
+        ((#{$max-width} - (#{$column-gutter} * 5)) / 6) * 5 + #{$column-gutter}*
+            4
+    );
 }
 @mixin grid-11 {
-    width: calc(((#{$max-width} - (#{$column-gutter} * 11)) / 12) * 11 + #{$column-gutter}* 10);
+    width: calc(
+        ((#{$max-width} - (#{$column-gutter} * 11)) / 12) * 11 + #{$column-gutter}*
+            10
+    );
 }
 @mixin grid-12 {
     width: calc(#{$max-width});

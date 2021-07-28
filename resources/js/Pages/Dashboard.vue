@@ -11,12 +11,15 @@
                     <b-icon icon="users"></b-icon>
                   </div>
                   <div class="ui__card__content__text">
-                    <p>5465</p>
+                    <p>{{ getStaffCount.total }}</p>
                     <p>Total Staff</p>
                   </div>
                 </div>
-                <div class="ui__card__link">
-                  <inertia-link>View Staff</inertia-link>
+                <div
+                  class="ui__card__link"
+                  v-if="anyPermission('admin', 'hod', 'supervisor')"
+                >
+                  <inertia-link href="/dashboard/pim">View Staff</inertia-link>
                   <span>&rarr;</span>
                 </div>
               </div>
@@ -34,12 +37,14 @@
                     <b-icon icon="building"></b-icon>
                   </div>
                   <div class="ui__card__content__text">
-                    <p>5465</p>
+                    <p>{{ departments.length }}</p>
                     <p>Departments</p>
                   </div>
                 </div>
-                <div class="ui__card__link">
-                  <inertia-link>View Departments</inertia-link>
+                <div class="ui__card__link" v-if="anyPermission('admin')">
+                  <inertia-link href="/dashboard/admin"
+                    >View Departments</inertia-link
+                  >
                   <span>&rarr;</span>
                 </div>
               </div>
@@ -57,12 +62,14 @@
                     <b-icon icon="umbrella"></b-icon>
                   </div>
                   <div class="ui__card__content__text">
-                    <p>5465</p>
+                    <p>{{ units.length }}</p>
                     <p>Units</p>
                   </div>
                 </div>
-                <div class="ui__card__link">
-                  <inertia-link>View Units</inertia-link>
+                <div class="ui__card__link" v-if="anyPermission('admin')">
+                  <inertia-link href="/dashboard/admin"
+                    >View Units</inertia-link
+                  >
                   <span>&rarr;</span>
                 </div>
               </div>
@@ -80,12 +87,14 @@
                     <b-icon icon="city"></b-icon>
                   </div>
                   <div class="ui__card__content__text">
-                    <p>5465</p>
-                    <p>Branches</p>
+                    <p>ADU</p>
+                    <p>Organization</p>
                   </div>
                 </div>
-                <div class="ui__card__link">
-                  <inertia-link>View Branches</inertia-link>
+                <div class="ui__card__link" v-if="anyPermission('admin')">
+                  <inertia-link href="/dashboard/admin"
+                    >View Organization</inertia-link
+                  >
                   <span>&rarr;</span>
                 </div>
               </div>
@@ -95,7 +104,7 @@
       </div>
     </div>
     <div class="dashboard__cards">
-      <div class="dashboard__cards__card c--6">
+      <div class="dashboard__cards__card c--9">
         <div class="card">
           <div class="card-content">
             <div class="content">
@@ -105,65 +114,78 @@
           </div>
         </div>
       </div>
-      <div class="dashboard__cards__card c--3">
+      <!-- <div class="dashboard__cards__card c--9">
         <b-datepicker
           v-model="date"
           inline
           :unselectable-days-of-week="disableWeekends ? [0, 6] : null"
         >
         </b-datepicker>
-      </div>
+      </div> -->
 
       <div class="dashboard__cards__card c--3">
-        <div class="dashboard__cards">
+        <div
+          class="dashboard__cards"
+          v-if="anyPermission('admin', 'hod', 'supervisor')"
+        >
           <div class="dashboard__cards__card c--6">
             <div class="card">
               <div class="card-content">
                 <div class="content">
                   <div class="side_card">
                     <span class=""><b-icon icon="user-friends"></b-icon></span>
-                    <inertia-link href="#">Organization</inertia-link>
+                    <inertia-link href="/dashboard/pim">PIM</inertia-link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="dashboard__cards__card c--6">
+          <div
+            class="dashboard__cards__card c--6"
+            v-if="anyPermission('admin')"
+          >
             <div class="card">
               <div class="card-content">
                 <div class="content">
                   <div class="side_card">
                     <span class=""><b-icon icon="cogs"></b-icon></span>
-                    <inertia-link href="#">Admin</inertia-link>
+                    <inertia-link href="/dashboard/admin"
+                      >Staff Accounts</inertia-link
+                    >
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="dashboard__cards">
           <div class="dashboard__cards__card c--6">
             <div class="card">
               <div class="card-content">
                 <div class="content">
                   <div class="side_card">
                     <span class=""><b-icon icon="user-cog"></b-icon></span>
-                    <inertia-link href="#">Profile</inertia-link>
+                    <inertia-link href="/dashboard/ess">Profile</inertia-link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- <div class="dashboard__cards__card c--6">
+          <div
+            class="dashboard__cards__card c--6"
+            v-if="anyPermission('admin')"
+          >
             <div class="card">
               <div class="card-content">
                 <div class="content">
                   <div class="side_card">
                     <span class=""><b-icon icon="user-cog"></b-icon></span>
-                    <inertia-link href="#">Profile</inertia-link>
+                    <inertia-link href="/dashboard/admin">Admin</inertia-link>
                   </div>
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -177,7 +199,7 @@ export default {
   name: "Dashboard",
   metaInfo() {
     return {
-      title: `Welcome`,
+      title: `Dashboard`,
     };
   },
   components: {

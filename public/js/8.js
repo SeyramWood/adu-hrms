@@ -72,7 +72,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "PasswordResetLink",
   metaInfo: function metaInfo() {
     return {
-      title: "Password Reset Link"
+      title: "Password Reset Link | ADU Human Resource Management System"
     };
   },
   data: function data() {

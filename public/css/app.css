@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;
 
-400;600;700&display=swap);.align-center {
+0,700;1,300&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap);.align-center {
   align-self: center;
   padding-right: 1rem;
 }
@@ -189,7 +189,8 @@ button.inertia__link__btn:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.644), rgba(0, 0, 0, 0.623)), url("/storage/bgs/profile_bg.jpg");
+  background-image: repeating-linear-gradient(rgba(38, 38, 38, 0.644), rgba(153, 0, 28, 0.623)), url("/storage/bgs/profile_bg.jpg");
+  background-position: center;
 }
 
 .profile-detail-bar > .p-text {
@@ -258,8 +259,7 @@ button.inertia__link__btn:active {
 }
 
 .kpi__table__wrapper {
-  width: 95%;
-  margin: 2rem auto;
+  width: 100%;
 }
 
 .kpi__table {
@@ -342,13 +342,13 @@ html {
 body {
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
-  font-family: "Open+Sans", sans-serif !important;
+  font-family: "Open Sans", sans-serif !important;
   font-weight: 400;
   line-height: 1.7;
   color: #686767;
   font-size: 1.2rem !important;
   background: #f8fafc !important;
-  min-height: 100vh;
+  min-height: 100vh !important;
 }
 
 a,
@@ -534,6 +534,10 @@ span.icon.is-right.has-text-primary.is-clickable {
 .login__container {
   width: 100%;
   height: 100vh;
+  background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.644), rgba(0, 0, 0, 0.623)), url("/storage/bgs/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .login__container__brand {
@@ -557,6 +561,18 @@ span.icon.is-right.has-text-primary.is-clickable {
   align-items: center;
 }
 
+@media only screen and (max-width: 47.999em) {
+  .login__container__panel {
+    width: 55vw;
+  }
+}
+
+@media only screen and (max-width: 35.999em) {
+  .login__container__panel {
+    width: 90vw;
+  }
+}
+
 .login__container__panel__logo {
   position: absolute;
   width: 16rem;
@@ -571,6 +587,17 @@ span.icon.is-right.has-text-primary.is-clickable {
   background-repeat: no-repeat;
   background-size: cover;
   padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+}
+
+@media only screen and (max-width: 35.999em) {
+  .login__container__panel__logo {
+    position: static;
+    align-self: center;
+    border-width: 20px;
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 3rem;
+  }
 }
 
 .login__container__panel__logo img {
@@ -590,6 +617,16 @@ span.icon.is-right.has-text-primary.is-clickable {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media only screen and (max-width: 35.999em) {
+  .login__container__panel__form {
+    position: static;
+    width: 100%;
+    height: 25rem;
+    align-self: center;
+    margin-top: 3rem;
+  }
 }
 
 .login__container__panel__form .control > input:focus {
@@ -621,12 +658,27 @@ span.icon.is-right.has-text-primary.is-clickable {
   text-transform: uppercase;
 }
 
+@media only screen and (max-width: 35.999em) {
+  .login__container__panel__form__header__text {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
 .login__container__panel__form__container {
   width: 100%;
   height: 85%;
   display: flex;
   justify-content: flex-end;
   padding-right: 4rem;
+  background-color: #fff;
+}
+
+@media only screen and (max-width: 35.999em) {
+  .login__container__panel__form__container {
+    justify-content: flex-start;
+    padding-right: 0px;
+  }
 }
 
 .login__container__panel__form__container__body {
@@ -636,6 +688,13 @@ span.icon.is-right.has-text-primary.is-clickable {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+@media only screen and (max-width: 35.999em) {
+  .login__container__panel__form__container__body {
+    width: 100%;
+    padding: 0 2rem;
+  }
 }
 
 .login-button {
@@ -1042,7 +1101,7 @@ span.icon.is-right.has-text-primary.is-clickable {
 }
 
 .dashboard__cards__card.c--9 {
-  width: calc(((100% - (1rem * 3)) / 4) * 3 + 1rem* 2);
+  width: calc( ((100% - (1rem * 3)) / 4) * 3 + 1rem* 2 );
 }
 
 @media only screen and (max-width: 35.999em) {
@@ -1052,7 +1111,7 @@ span.icon.is-right.has-text-primary.is-clickable {
 }
 
 .dashboard__cards__card.c--8 {
-  width: calc(((100% - (1rem * 2)) / 3) * 2 + 1rem);
+  width: calc( ((100% - (1rem * 2)) / 3) * 2 + 1rem );
 }
 
 @media only screen and (max-width: 35.999em) {
@@ -1062,7 +1121,7 @@ span.icon.is-right.has-text-primary.is-clickable {
 }
 
 .dashboard__cards__card.c--7 {
-  width: calc(((100% - (1rem * 11)) / 12) * 7 + 1rem * 6);
+  width: calc( ((100% - (1rem * 11)) / 12) * 7 + 1rem * 6 );
 }
 
 @media only screen and (max-width: 35.999em) {
@@ -1082,7 +1141,7 @@ span.icon.is-right.has-text-primary.is-clickable {
 }
 
 .dashboard__cards__card.c--5 {
-  width: calc(((100% - (1rem * 11)) / 12) * 5 + 1rem * 4);
+  width: calc( ((100% - (1rem * 11)) / 12) * 5 + 1rem * 4 );
 }
 
 @media only screen and (max-width: 35.999em) {
@@ -1257,7 +1316,8 @@ span.icon.is-right.has-text-primary.is-clickable {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.644), rgba(0, 0, 0, 0.623)), url("/storage/bgs/profile_bg.jpg");
+  background-image: repeating-linear-gradient(rgba(38, 38, 38, 0.644), rgba(153, 0, 28, 0.623)), url("/storage/bgs/profile_bg.jpg");
+  background-position: center;
 }
 
 .personal__details__photo > .p-text {
@@ -1374,42 +1434,81 @@ span.icon.is-right.has-text-primary.is-clickable {
 
 .staff__directory__container {
   width: 60%;
+  min-height: 100%;
+  /**
+      MOBILE FIRST APPROACH
+      Extra small devices (portrait phones, less than 576px)
+      No media query for `xs` since this is the default
+      No media query necessary for xs breakpoint as it's effectively `@media (min-width: 0) { ... }`
+  **/
   margin: 0 auto;
-  padding: 5rem 0;
+  position: relative;
+}
+
+@media only screen and (min-width: 62em) {
+  .staff__directory__container {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 61.999em) {
+  .staff__directory__container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 47.999em) {
+  .staff__directory__container {
+    width: 90%;
+  }
+}
+
+.staff__directory__container__search {
+  width: 100%;
+  height: 7rem;
+  background-color: #f8fafc;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 5.5rem;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .staff__directory__container__results {
   width: 100%;
-  margin-top: 3rem;
   display: flex;
   flex-wrap: wrap;
-  flex-shrink: 1;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
 .staff__directory__container__results__card {
-  width: 16rem;
-  height: 21rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  height: 23rem;
+  margin: 0.5rem;
+  width: calc(25% - (0.5rem * 2));
   background-color: #fff;
   border-radius: 3px;
   box-shadow: -8px 2px 52px -8px rgba(238, 238, 238, 0.95);
   padding: 1rem;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.staff__directory__container__results__card:not(:last-child) {
-  margin-right: 1rem;
+@media only screen and (max-width: 35.999em) {
+  .staff__directory__container__results__card {
+    width: calc(50% - (0.5rem * 2));
+  }
 }
 
 .staff__directory__container__results__card > .avatar {
   background-color: #eee;
-  width: 6rem;
-  height: 6rem;
+  width: 8rem;
+  height: 8rem;
   border-radius: 99999px;
 }
 
@@ -1420,7 +1519,7 @@ span.icon.is-right.has-text-primary.is-clickable {
 }
 
 .staff__directory__container__results__card > .info {
-  width: inherit;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"a910c1871932fd34974e","1":"de3ab2613adc3a398c0f","2":"f518316c7973219c06ed","3":"347669814305d83f1bc0","4":"698cb6ad3d8ee217f18a","5":"3766db76f1ed24b69d00","6":"2a8f7752e5e5ad67dc60","7":"524d4d598e8273471926","8":"4dcb1f1e01a4d1cd6e7a","9":"6ad0e8d171cad30dc4ff","11":"bdaa8d39908d08aba6e5","12":"9aedf66e8bdbc645c83f","13":"cccf6443da7c847baa40","14":"a31f97ebd2a07c4e4e7b","15":"da27d9dc98c14dcbf0e1"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"f498c85bb96598a9af83","1":"c5e2f202fa879e9b8a33","2":"f518316c7973219c06ed","3":"347669814305d83f1bc0","4":"971adebc3741b44fb564","5":"dc6aea419532ffc23c54","6":"993644efde51ecb67539","7":"8b31d08a63d46882bf78","8":"e105b74d8c6c4f985190","9":"6ad0e8d171cad30dc4ff","10":"8b7c490c8e3cf69c5ec9","11":"3fa685aa9092c4cb799e","12":"c90dbe856d40cbe0f521","13":"1c680932d784e38e5c71","16":"e04685f52f09878f6cad"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -67393,6 +67393,22 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-infinite-loading/dist/vue-infinite-loading.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/vue-infinite-loading/dist/vue-infinite-loading.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * vue-infinite-loading v2.4.5
+ * (c) 2016-2020 PeachScript
+ * MIT License
+ */
+!function(t,e){ true?module.exports=e():undefined}(this,(function(){return function(t){var e={};function n(i){if(e[i])return e[i].exports;var a=e[i]={i:i,l:!1,exports:{}};return t[i].call(a.exports,a,a.exports,n),a.l=!0,a.exports}return n.m=t,n.c=e,n.d=function(t,e,i){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:i})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var i=Object.create(null);if(n.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var a in t)n.d(i,a,function(e){return t[e]}.bind(null,a));return i},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=9)}([function(t,e,n){var i=n(6);"string"==typeof i&&(i=[[t.i,i,""]]),i.locals&&(t.exports=i.locals);(0,n(3).default)("6223ff68",i,!0,{})},function(t,e,n){var i=n(8);"string"==typeof i&&(i=[[t.i,i,""]]),i.locals&&(t.exports=i.locals);(0,n(3).default)("27f0e51f",i,!0,{})},function(t,e){t.exports=function(t){var e=[];return e.toString=function(){return this.map((function(e){var n=function(t,e){var n=t[1]||"",i=t[3];if(!i)return n;if(e&&"function"==typeof btoa){var a=(o=i,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))+" */"),r=i.sources.map((function(t){return"/*# sourceURL="+i.sourceRoot+t+" */"}));return[n].concat(r).concat([a]).join("\n")}var o;return[n].join("\n")}(e,t);return e[2]?"@media "+e[2]+"{"+n+"}":n})).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var i={},a=0;a<this.length;a++){var r=this[a][0];"number"==typeof r&&(i[r]=!0)}for(a=0;a<t.length;a++){var o=t[a];"number"==typeof o[0]&&i[o[0]]||(n&&!o[2]?o[2]=n:n&&(o[2]="("+o[2]+") and ("+n+")"),e.push(o))}},e}},function(t,e,n){"use strict";function i(t,e){for(var n=[],i={},a=0;a<e.length;a++){var r=e[a],o=r[0],s={id:t+":"+a,css:r[1],media:r[2],sourceMap:r[3]};i[o]?i[o].parts.push(s):n.push(i[o]={id:o,parts:[s]})}return n}n.r(e),n.d(e,"default",(function(){return f}));var a="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!a)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var r={},o=a&&(document.head||document.getElementsByTagName("head")[0]),s=null,l=0,d=!1,c=function(){},u=null,p="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());function f(t,e,n,a){d=n,u=a||{};var o=i(t,e);return b(o),function(e){for(var n=[],a=0;a<o.length;a++){var s=o[a];(l=r[s.id]).refs--,n.push(l)}e?b(o=i(t,e)):o=[];for(a=0;a<n.length;a++){var l;if(0===(l=n[a]).refs){for(var d=0;d<l.parts.length;d++)l.parts[d]();delete r[l.id]}}}}function b(t){for(var e=0;e<t.length;e++){var n=t[e],i=r[n.id];if(i){i.refs++;for(var a=0;a<i.parts.length;a++)i.parts[a](n.parts[a]);for(;a<n.parts.length;a++)i.parts.push(m(n.parts[a]));i.parts.length>n.parts.length&&(i.parts.length=n.parts.length)}else{var o=[];for(a=0;a<n.parts.length;a++)o.push(m(n.parts[a]));r[n.id]={id:n.id,refs:1,parts:o}}}}function h(){var t=document.createElement("style");return t.type="text/css",o.appendChild(t),t}function m(t){var e,n,i=document.querySelector('style[data-vue-ssr-id~="'+t.id+'"]');if(i){if(d)return c;i.parentNode.removeChild(i)}if(p){var a=l++;i=s||(s=h()),e=w.bind(null,i,a,!1),n=w.bind(null,i,a,!0)}else i=h(),e=y.bind(null,i),n=function(){i.parentNode.removeChild(i)};return e(t),function(i){if(i){if(i.css===t.css&&i.media===t.media&&i.sourceMap===t.sourceMap)return;e(t=i)}else n()}}var g,v=(g=[],function(t,e){return g[t]=e,g.filter(Boolean).join("\n")});function w(t,e,n,i){var a=n?"":i.css;if(t.styleSheet)t.styleSheet.cssText=v(e,a);else{var r=document.createTextNode(a),o=t.childNodes;o[e]&&t.removeChild(o[e]),o.length?t.insertBefore(r,o[e]):t.appendChild(r)}}function y(t,e){var n=e.css,i=e.media,a=e.sourceMap;if(i&&t.setAttribute("media",i),u.ssrId&&t.setAttribute("data-vue-ssr-id",e.id),a&&(n+="\n/*# sourceURL="+a.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */"),t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}},function(t,e){function n(e){return"function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?t.exports=n=function(t){return typeof t}:t.exports=n=function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},n(e)}t.exports=n},function(t,e,n){"use strict";n.r(e);var i=n(0),a=n.n(i);for(var r in i)"default"!==r&&function(t){n.d(e,t,(function(){return i[t]}))}(r);e.default=a.a},function(t,e,n){(t.exports=n(2)(!1)).push([t.i,'.loading-wave-dots[data-v-46b20d22]{position:relative}.loading-wave-dots[data-v-46b20d22] .wave-item{position:absolute;top:50%;left:50%;display:inline-block;margin-top:-4px;width:8px;height:8px;border-radius:50%;-webkit-animation:loading-wave-dots-data-v-46b20d22 linear 2.8s infinite;animation:loading-wave-dots-data-v-46b20d22 linear 2.8s infinite}.loading-wave-dots[data-v-46b20d22] .wave-item:first-child{margin-left:-36px}.loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(2){margin-left:-20px;-webkit-animation-delay:.14s;animation-delay:.14s}.loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(3){margin-left:-4px;-webkit-animation-delay:.28s;animation-delay:.28s}.loading-wave-dots[data-v-46b20d22] .wave-item:nth-child(4){margin-left:12px;-webkit-animation-delay:.42s;animation-delay:.42s}.loading-wave-dots[data-v-46b20d22] .wave-item:last-child{margin-left:28px;-webkit-animation-delay:.56s;animation-delay:.56s}@-webkit-keyframes loading-wave-dots-data-v-46b20d22{0%{-webkit-transform:translateY(0);transform:translateY(0);background:#bbb}10%{-webkit-transform:translateY(-6px);transform:translateY(-6px);background:#999}20%{-webkit-transform:translateY(0);transform:translateY(0);background:#bbb}to{-webkit-transform:translateY(0);transform:translateY(0);background:#bbb}}@keyframes loading-wave-dots-data-v-46b20d22{0%{-webkit-transform:translateY(0);transform:translateY(0);background:#bbb}10%{-webkit-transform:translateY(-6px);transform:translateY(-6px);background:#999}20%{-webkit-transform:translateY(0);transform:translateY(0);background:#bbb}to{-webkit-transform:translateY(0);transform:translateY(0);background:#bbb}}.loading-circles[data-v-46b20d22] .circle-item{width:5px;height:5px;-webkit-animation:loading-circles-data-v-46b20d22 linear .75s infinite;animation:loading-circles-data-v-46b20d22 linear .75s infinite}.loading-circles[data-v-46b20d22] .circle-item:first-child{margin-top:-14.5px;margin-left:-2.5px}.loading-circles[data-v-46b20d22] .circle-item:nth-child(2){margin-top:-11.26px;margin-left:6.26px}.loading-circles[data-v-46b20d22] .circle-item:nth-child(3){margin-top:-2.5px;margin-left:9.5px}.loading-circles[data-v-46b20d22] .circle-item:nth-child(4){margin-top:6.26px;margin-left:6.26px}.loading-circles[data-v-46b20d22] .circle-item:nth-child(5){margin-top:9.5px;margin-left:-2.5px}.loading-circles[data-v-46b20d22] .circle-item:nth-child(6){margin-top:6.26px;margin-left:-11.26px}.loading-circles[data-v-46b20d22] .circle-item:nth-child(7){margin-top:-2.5px;margin-left:-14.5px}.loading-circles[data-v-46b20d22] .circle-item:last-child{margin-top:-11.26px;margin-left:-11.26px}@-webkit-keyframes loading-circles-data-v-46b20d22{0%{background:#dfdfdf}90%{background:#505050}to{background:#dfdfdf}}@keyframes loading-circles-data-v-46b20d22{0%{background:#dfdfdf}90%{background:#505050}to{background:#dfdfdf}}.loading-bubbles[data-v-46b20d22] .bubble-item{background:#666;-webkit-animation:loading-bubbles-data-v-46b20d22 linear .75s infinite;animation:loading-bubbles-data-v-46b20d22 linear .75s infinite}.loading-bubbles[data-v-46b20d22] .bubble-item:first-child{margin-top:-12.5px;margin-left:-.5px}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(2){margin-top:-9.26px;margin-left:8.26px}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(3){margin-top:-.5px;margin-left:11.5px}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(4){margin-top:8.26px;margin-left:8.26px}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(5){margin-top:11.5px;margin-left:-.5px}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(6){margin-top:8.26px;margin-left:-9.26px}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(7){margin-top:-.5px;margin-left:-12.5px}.loading-bubbles[data-v-46b20d22] .bubble-item:last-child{margin-top:-9.26px;margin-left:-9.26px}@-webkit-keyframes loading-bubbles-data-v-46b20d22{0%{width:1px;height:1px;box-shadow:0 0 0 3px #666}90%{width:1px;height:1px;box-shadow:0 0 0 0 #666}to{width:1px;height:1px;box-shadow:0 0 0 3px #666}}@keyframes loading-bubbles-data-v-46b20d22{0%{width:1px;height:1px;box-shadow:0 0 0 3px #666}90%{width:1px;height:1px;box-shadow:0 0 0 0 #666}to{width:1px;height:1px;box-shadow:0 0 0 3px #666}}.loading-default[data-v-46b20d22]{position:relative;border:1px solid #999;-webkit-animation:loading-rotating-data-v-46b20d22 ease 1.5s infinite;animation:loading-rotating-data-v-46b20d22 ease 1.5s infinite}.loading-default[data-v-46b20d22]:before{content:"";position:absolute;display:block;top:0;left:50%;margin-top:-3px;margin-left:-3px;width:6px;height:6px;background-color:#999;border-radius:50%}.loading-spiral[data-v-46b20d22]{border:2px solid #777;border-right-color:transparent;-webkit-animation:loading-rotating-data-v-46b20d22 linear .85s infinite;animation:loading-rotating-data-v-46b20d22 linear .85s infinite}@-webkit-keyframes loading-rotating-data-v-46b20d22{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes loading-rotating-data-v-46b20d22{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}.loading-bubbles[data-v-46b20d22],.loading-circles[data-v-46b20d22]{position:relative}.loading-bubbles[data-v-46b20d22] .bubble-item,.loading-circles[data-v-46b20d22] .circle-item{position:absolute;top:50%;left:50%;display:inline-block;border-radius:50%}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(2),.loading-circles[data-v-46b20d22] .circle-item:nth-child(2){-webkit-animation-delay:93ms;animation-delay:93ms}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(3),.loading-circles[data-v-46b20d22] .circle-item:nth-child(3){-webkit-animation-delay:.186s;animation-delay:.186s}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(4),.loading-circles[data-v-46b20d22] .circle-item:nth-child(4){-webkit-animation-delay:.279s;animation-delay:.279s}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(5),.loading-circles[data-v-46b20d22] .circle-item:nth-child(5){-webkit-animation-delay:.372s;animation-delay:.372s}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(6),.loading-circles[data-v-46b20d22] .circle-item:nth-child(6){-webkit-animation-delay:.465s;animation-delay:.465s}.loading-bubbles[data-v-46b20d22] .bubble-item:nth-child(7),.loading-circles[data-v-46b20d22] .circle-item:nth-child(7){-webkit-animation-delay:.558s;animation-delay:.558s}.loading-bubbles[data-v-46b20d22] .bubble-item:last-child,.loading-circles[data-v-46b20d22] .circle-item:last-child{-webkit-animation-delay:.651s;animation-delay:.651s}',""])},function(t,e,n){"use strict";n.r(e);var i=n(1),a=n.n(i);for(var r in i)"default"!==r&&function(t){n.d(e,t,(function(){return i[t]}))}(r);e.default=a.a},function(t,e,n){(t.exports=n(2)(!1)).push([t.i,".infinite-loading-container[data-v-644ea9c9]{clear:both;text-align:center}.infinite-loading-container[data-v-644ea9c9] [class^=loading-]{display:inline-block;margin:5px 0;width:28px;height:28px;font-size:28px;line-height:28px;border-radius:50%}.btn-try-infinite[data-v-644ea9c9]{margin-top:5px;padding:5px 10px;color:#999;font-size:14px;line-height:1;background:transparent;border:1px solid #ccc;border-radius:3px;outline:none;cursor:pointer}.btn-try-infinite[data-v-644ea9c9]:not(:active):hover{opacity:.8}",""])},function(t,e,n){"use strict";n.r(e);var i={throttleLimit:50,loopCheckTimeout:1e3,loopCheckMaxCalls:10},a=function(){var t=!1;try{var e=Object.defineProperty({},"passive",{get:function(){return t={passive:!0},!0}});window.addEventListener("testpassive",e,e),window.remove("testpassive",e,e)}catch(t){}return t}(),r={STATE_CHANGER:["emit `loaded` and `complete` event through component instance of `$refs` may cause error, so it will be deprecated soon, please use the `$state` argument instead (`$state` just the special `$event` variable):","\ntemplate:",'<infinite-loading @infinite="infiniteHandler"></infinite-loading>',"\nscript:\n...\ninfiniteHandler($state) {\n  ajax('https://www.example.com/api/news')\n    .then((res) => {\n      if (res.data.length) {\n        $state.loaded();\n      } else {\n        $state.complete();\n      }\n    });\n}\n...","","more details: https://github.com/PeachScript/vue-infinite-loading/issues/57#issuecomment-324370549"].join("\n"),INFINITE_EVENT:"`:on-infinite` property will be deprecated soon, please use `@infinite` event instead.",IDENTIFIER:"the `reset` event will be deprecated soon, please reset this component by change the `identifier` property."},o={INFINITE_LOOP:["executed the callback function more than ".concat(i.loopCheckMaxCalls," times for a short time, it looks like searched a wrong scroll wrapper that doest not has fixed height or maximum height, please check it. If you want to force to set a element as scroll wrapper ranther than automatic searching, you can do this:"),'\n\x3c!-- add a special attribute for the real scroll wrapper --\x3e\n<div infinite-wrapper>\n  ...\n  \x3c!-- set force-use-infinite-wrapper --\x3e\n  <infinite-loading force-use-infinite-wrapper></infinite-loading>\n</div>\nor\n<div class="infinite-wrapper">\n  ...\n  \x3c!-- set force-use-infinite-wrapper as css selector of the real scroll wrapper --\x3e\n  <infinite-loading force-use-infinite-wrapper=".infinite-wrapper"></infinite-loading>\n</div>\n    ',"more details: https://github.com/PeachScript/vue-infinite-loading/issues/55#issuecomment-316934169"].join("\n")},s={READY:0,LOADING:1,COMPLETE:2,ERROR:3},l={color:"#666",fontSize:"14px",padding:"10px 0"},d={mode:"development",props:{spinner:"default",distance:100,forceUseInfiniteWrapper:!1},system:i,slots:{noResults:"No results :(",noMore:"No more data :)",error:"Opps, something went wrong :(",errorBtnText:"Retry",spinner:""},WARNINGS:r,ERRORS:o,STATUS:s},c=n(4),u=n.n(c),p={BUBBLES:{render:function(t){return t("span",{attrs:{class:"loading-bubbles"}},Array.apply(Array,Array(8)).map((function(){return t("span",{attrs:{class:"bubble-item"}})})))}},CIRCLES:{render:function(t){return t("span",{attrs:{class:"loading-circles"}},Array.apply(Array,Array(8)).map((function(){return t("span",{attrs:{class:"circle-item"}})})))}},DEFAULT:{render:function(t){return t("i",{attrs:{class:"loading-default"}})}},SPIRAL:{render:function(t){return t("i",{attrs:{class:"loading-spiral"}})}},WAVEDOTS:{render:function(t){return t("span",{attrs:{class:"loading-wave-dots"}},Array.apply(Array,Array(5)).map((function(){return t("span",{attrs:{class:"wave-item"}})})))}}};function f(t,e,n,i,a,r,o,s){var l,d="function"==typeof t?t.options:t;if(e&&(d.render=e,d.staticRenderFns=n,d._compiled=!0),i&&(d.functional=!0),r&&(d._scopeId="data-v-"+r),o?(l=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),a&&a.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(o)},d._ssrRegister=l):a&&(l=s?function(){a.call(this,this.$root.$options.shadowRoot)}:a),l)if(d.functional){d._injectStyles=l;var c=d.render;d.render=function(t,e){return l.call(e),c(t,e)}}else{var u=d.beforeCreate;d.beforeCreate=u?[].concat(u,l):[l]}return{exports:t,options:d}}var b=f({name:"Spinner",computed:{spinnerView:function(){return p[(this.$attrs.spinner||"").toUpperCase()]||this.spinnerInConfig},spinnerInConfig:function(){return d.slots.spinner&&"string"==typeof d.slots.spinner?{render:function(){return this._v(d.slots.spinner)}}:"object"===u()(d.slots.spinner)?d.slots.spinner:p[d.props.spinner.toUpperCase()]||p.DEFAULT}}},(function(){var t=this.$createElement;return(this._self._c||t)(this.spinnerView,{tag:"component"})}),[],!1,(function(t){var e=n(5);e.__inject__&&e.__inject__(t)}),"46b20d22",null).exports;function h(t){"production"!==d.mode&&console.warn("[Vue-infinite-loading warn]: ".concat(t))}function m(t){console.error("[Vue-infinite-loading error]: ".concat(t))}var g={timers:[],caches:[],throttle:function(t){var e=this;-1===this.caches.indexOf(t)&&(this.caches.push(t),this.timers.push(setTimeout((function(){t(),e.caches.splice(e.caches.indexOf(t),1),e.timers.shift()}),d.system.throttleLimit)))},reset:function(){this.timers.forEach((function(t){clearTimeout(t)})),this.timers.length=0,this.caches=[]}},v={isChecked:!1,timer:null,times:0,track:function(){var t=this;this.times+=1,clearTimeout(this.timer),this.timer=setTimeout((function(){t.isChecked=!0}),d.system.loopCheckTimeout),this.times>d.system.loopCheckMaxCalls&&(m(o.INFINITE_LOOP),this.isChecked=!0)}},w={key:"_infiniteScrollHeight",getScrollElm:function(t){return t===window?document.documentElement:t},save:function(t){var e=this.getScrollElm(t);e[this.key]=e.scrollHeight},restore:function(t){var e=this.getScrollElm(t);"number"==typeof e[this.key]&&(e.scrollTop=e.scrollHeight-e[this.key]+e.scrollTop),this.remove(e)},remove:function(t){void 0!==t[this.key]&&delete t[this.key]}};function y(t){return t.replace(/[A-Z]/g,(function(t){return"-".concat(t.toLowerCase())}))}function x(t){return t.offsetWidth+t.offsetHeight>0}var k=f({name:"InfiniteLoading",data:function(){return{scrollParent:null,scrollHandler:null,isFirstLoad:!0,status:s.READY,slots:d.slots}},components:{Spinner:b},computed:{isShowSpinner:function(){return this.status===s.LOADING},isShowError:function(){return this.status===s.ERROR},isShowNoResults:function(){return this.status===s.COMPLETE&&this.isFirstLoad},isShowNoMore:function(){return this.status===s.COMPLETE&&!this.isFirstLoad},slotStyles:function(){var t=this,e={};return Object.keys(d.slots).forEach((function(n){var i=y(n);(!t.$slots[i]&&!d.slots[n].render||t.$slots[i]&&!t.$slots[i][0].tag)&&(e[n]=l)})),e}},props:{distance:{type:Number,default:d.props.distance},spinner:String,direction:{type:String,default:"bottom"},forceUseInfiniteWrapper:{type:[Boolean,String],default:d.props.forceUseInfiniteWrapper},identifier:{default:+new Date},onInfinite:Function},watch:{identifier:function(){this.stateChanger.reset()}},mounted:function(){var t=this;this.$watch("forceUseInfiniteWrapper",(function(){t.scrollParent=t.getScrollParent()}),{immediate:!0}),this.scrollHandler=function(e){t.status===s.READY&&(e&&e.constructor===Event&&x(t.$el)?g.throttle(t.attemptLoad):t.attemptLoad())},setTimeout((function(){t.scrollHandler(),t.scrollParent.addEventListener("scroll",t.scrollHandler,a)}),1),this.$on("$InfiniteLoading:loaded",(function(e){t.isFirstLoad=!1,"top"===t.direction&&t.$nextTick((function(){w.restore(t.scrollParent)})),t.status===s.LOADING&&t.$nextTick(t.attemptLoad.bind(null,!0)),e&&e.target===t||h(r.STATE_CHANGER)})),this.$on("$InfiniteLoading:complete",(function(e){t.status=s.COMPLETE,t.$nextTick((function(){t.$forceUpdate()})),t.scrollParent.removeEventListener("scroll",t.scrollHandler,a),e&&e.target===t||h(r.STATE_CHANGER)})),this.$on("$InfiniteLoading:reset",(function(e){t.status=s.READY,t.isFirstLoad=!0,w.remove(t.scrollParent),t.scrollParent.addEventListener("scroll",t.scrollHandler,a),setTimeout((function(){g.reset(),t.scrollHandler()}),1),e&&e.target===t||h(r.IDENTIFIER)})),this.stateChanger={loaded:function(){t.$emit("$InfiniteLoading:loaded",{target:t})},complete:function(){t.$emit("$InfiniteLoading:complete",{target:t})},reset:function(){t.$emit("$InfiniteLoading:reset",{target:t})},error:function(){t.status=s.ERROR,g.reset()}},this.onInfinite&&h(r.INFINITE_EVENT)},deactivated:function(){this.status===s.LOADING&&(this.status=s.READY),this.scrollParent.removeEventListener("scroll",this.scrollHandler,a)},activated:function(){this.scrollParent.addEventListener("scroll",this.scrollHandler,a)},methods:{attemptLoad:function(t){var e=this;this.status!==s.COMPLETE&&x(this.$el)&&this.getCurrentDistance()<=this.distance?(this.status=s.LOADING,"top"===this.direction&&this.$nextTick((function(){w.save(e.scrollParent)})),"function"==typeof this.onInfinite?this.onInfinite.call(null,this.stateChanger):this.$emit("infinite",this.stateChanger),!t||this.forceUseInfiniteWrapper||v.isChecked||v.track()):this.status===s.LOADING&&(this.status=s.READY)},getCurrentDistance:function(){var t;"top"===this.direction?t="number"==typeof this.scrollParent.scrollTop?this.scrollParent.scrollTop:this.scrollParent.pageYOffset:t=this.$el.getBoundingClientRect().top-(this.scrollParent===window?window.innerHeight:this.scrollParent.getBoundingClientRect().bottom);return t},getScrollParent:function(){var t,e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:this.$el;return"string"==typeof this.forceUseInfiniteWrapper&&(t=document.querySelector(this.forceUseInfiniteWrapper)),t||("BODY"===e.tagName?t=window:!this.forceUseInfiniteWrapper&&["scroll","auto"].indexOf(getComputedStyle(e).overflowY)>-1?t=e:(e.hasAttribute("infinite-wrapper")||e.hasAttribute("data-infinite-wrapper"))&&(t=e)),t||this.getScrollParent(e.parentNode)}},destroyed:function(){!this.status!==s.COMPLETE&&(g.reset(),w.remove(this.scrollParent),this.scrollParent.removeEventListener("scroll",this.scrollHandler,a))}},(function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"infinite-loading-container"},[n("div",{directives:[{name:"show",rawName:"v-show",value:t.isShowSpinner,expression:"isShowSpinner"}],staticClass:"infinite-status-prompt",style:t.slotStyles.spinner},[t._t("spinner",[n("spinner",{attrs:{spinner:t.spinner}})])],2),t._v(" "),n("div",{directives:[{name:"show",rawName:"v-show",value:t.isShowNoResults,expression:"isShowNoResults"}],staticClass:"infinite-status-prompt",style:t.slotStyles.noResults},[t._t("no-results",[t.slots.noResults.render?n(t.slots.noResults,{tag:"component"}):[t._v(t._s(t.slots.noResults))]])],2),t._v(" "),n("div",{directives:[{name:"show",rawName:"v-show",value:t.isShowNoMore,expression:"isShowNoMore"}],staticClass:"infinite-status-prompt",style:t.slotStyles.noMore},[t._t("no-more",[t.slots.noMore.render?n(t.slots.noMore,{tag:"component"}):[t._v(t._s(t.slots.noMore))]])],2),t._v(" "),n("div",{directives:[{name:"show",rawName:"v-show",value:t.isShowError,expression:"isShowError"}],staticClass:"infinite-status-prompt",style:t.slotStyles.error},[t._t("error",[t.slots.error.render?n(t.slots.error,{tag:"component",attrs:{trigger:t.attemptLoad}}):[t._v("\n        "+t._s(t.slots.error)+"\n        "),n("br"),t._v(" "),n("button",{staticClass:"btn-try-infinite",domProps:{textContent:t._s(t.slots.errorBtnText)},on:{click:t.attemptLoad}})]],{trigger:t.attemptLoad})],2)])}),[],!1,(function(t){var e=n(7);e.__inject__&&e.__inject__(t)}),"644ea9c9",null).exports;function E(t){d.mode=t.config.productionTip?"development":"production"}Object.defineProperty(k,"install",{configurable:!1,enumerable:!1,value:function(t,e){Object.assign(d.props,e&&e.props),Object.assign(d.slots,e&&e.slots),Object.assign(d.system,e&&e.system),t.component("infinite-loading",k),E(t)}}),"undefined"!=typeof window&&window.Vue&&(window.Vue.component("infinite-loading",k),E(window.Vue));e.default=k}])}));
+
+/***/ }),
+
 /***/ "./node_modules/vue-meta/dist/vue-meta.esm.js":
 /*!****************************************************!*\
   !*** ./node_modules/vue-meta/dist/vue-meta.esm.js ***!
@@ -82764,12 +82780,12 @@ var map = {
 	"./Dashboard": [
 		"./resources/js/Pages/Dashboard.vue",
 		0,
-		15
+		10
 	],
 	"./Dashboard.vue": [
 		"./resources/js/Pages/Dashboard.vue",
 		0,
-		15
+		10
 	],
 	"./ESS": [
 		"./resources/js/Pages/ESS.vue",
@@ -82844,20 +82860,20 @@ var map = {
 	"./StaffDirectory": [
 		"./resources/js/Pages/StaffDirectory.vue",
 		0,
-		13
+		16
 	],
 	"./StaffDirectory.vue": [
 		"./resources/js/Pages/StaffDirectory.vue",
 		0,
-		13
+		16
 	],
 	"./Welcome": [
 		"./resources/js/Pages/Welcome.vue",
-		14
+		13
 	],
 	"./Welcome.vue": [
 		"./resources/js/Pages/Welcome.vue",
-		14
+		13
 	]
 };
 function webpackAsyncContext(req) {
@@ -82919,6 +82935,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _eli5_vue_lang_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_eli5_vue_lang_js__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _lang_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./lang.js */ "./resources/js/lang.js");
 /* harmony import */ var _lang_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_lang_js__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vue-infinite-loading */ "./node_modules/vue-infinite-loading/dist/vue-infinite-loading.js");
+/* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_17__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -82936,6 +82954,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
  // import Interval from "luxon/src/interval.js";
+
 
 
 
@@ -82961,6 +82980,18 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(_eli5_vue_lang_js__WEBPACK_IMPORT
   // Set locale
   fallback: "en" // Set fallback lacale
 
+});
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_17___default.a, {
+  props: {
+    spinner: "spiral"
+    /* other props need to configure */
+
+  },
+  system: {
+    throttleLimit: 30
+    /* other settings need to configure */
+
+  }
 });
 Object.defineProperty(vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, "$luxon", {
   value: luxon__WEBPACK_IMPORTED_MODULE_14__["DateTime"]
@@ -82997,7 +83028,10 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.mixin({
     isPermission: function isPermission(permission) {
       return this.$page.props.userPermissions.includes(permission) && true;
     },
-    userOrPermission: function userOrPermission(permission, profileId) {
+    userOrPermission: function userOrPermission() {
+      var permission = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var profileId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
       if (this.isPermission(permission) || profileId === this.$page.props.authUser.id) {
         return true;
       }
@@ -83014,7 +83048,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.mixin({
       var intersection = rest.filter(function (x) {
         return _this.$page.props.userPermissions.includes(x);
       });
-      return intersection.length > 0 && true;
+      return intersection.length && true;
     },
     isNull: function isNull(el) {
       if (el === "null" || el === null) {
@@ -83155,10 +83189,11 @@ module.exports = {
     "active": "Active",
     "add": "Add",
     "addAttament": "Add Attachment",
+    "add_continuous_dev": "Add Continuous Development",
     "add_education": "Add Education",
     "add_emergency_contact": "Add Emergency Contact",
+    "add_expertise": "Add Expertise",
     "add_language": "Add Language",
-    "add_skills": "Add Skills",
     "add_wrk_experience": "Add Working Experience",
     "address": "Address",
     "address_placehoder": "Type your address",
@@ -83185,6 +83220,7 @@ module.exports = {
     "confirm_password": "Confirm New Password",
     "contact_detail_cta": "Employee Contact Details",
     "contact_details": "Contact Details",
+    "continuous_dev": "Continuous Development",
     "country": "Country|country",
     "current_password": "Current Password",
     "dashboard": "Dashboard",
@@ -83192,6 +83228,7 @@ module.exports = {
     "deleteCurrent": "Delete Current",
     "department": "Department",
     "departments": "Departments",
+    "directorate": "Directorate\/Office",
     "divorced": "Divorced|divorced",
     "dr": "Dr.",
     "eDate": "End Date",
@@ -83199,8 +83236,8 @@ module.exports = {
     "editComment": "Edit comment",
     "editContact": "Edit contact",
     "edit_education": "Edit Education",
+    "edit_expertise": "Edit Expertise",
     "edit_language": "Edit language",
-    "edit_skill": "Edit skill",
     "edit_wrk_experience": "Edit work experience",
     "education": "Education",
     "email": "Email|email",
@@ -83209,6 +83246,7 @@ module.exports = {
     "empContract": "Employment Contract",
     "empStatus": "Employment Status",
     "employee": "Employee",
+    "expertise": "Area of Expertise",
     "female": "Female|female",
     "file": "File|Files|file|files",
     "firstName": "First Name",
@@ -83255,6 +83293,7 @@ module.exports = {
     "otherId": "Other Id",
     "other_email": "Other Email",
     "password": "password",
+    "pdAttachmentDesc": "Upload the first page of your passport",
     "personal_detail_cta": "Employee Personal Details",
     "personal_details": "Personal Details",
     "pim": "PIM",
@@ -83278,14 +83317,13 @@ module.exports = {
     "report_to": "Report to",
     "report_to1": "Report-to",
     "report_to_cta": "Your Leaders",
-    "report_to_me": "Reporting to me",
+    "report_to_me": "Report to me",
     "rev": "Rev.",
     "sDate": "Start Date",
     "save": "Save",
     "saving": "Saving",
     "selectYear": "Select year...",
     "single": "Single|single",
-    "skill": "Skill|Skills",
     "specialization": "Specialization",
     "staffId": "Staff Id",
     "staff_directory": "Staff Directory",
@@ -83298,7 +83336,7 @@ module.exports = {
     "terminated": "Terminated",
     "terminatingContract": "Terminating Contract...",
     "time": "Time",
-    "title": "Titre",
+    "title": "Title",
     "to": "To",
     "total_staff": "Total Staff",
     "unit": "Unit",
@@ -83455,10 +83493,11 @@ module.exports = {
     "active": "Actif",
     "add": "Ajouter",
     "addAttament": "Ajouter une pi\xE8ce jointe",
+    "add_continuous_dev": "Ajouter le d\xE9veloppement continu",
     "add_education": "Ajouter une \xE9ducation",
     "add_emergency_contact": "Ajouter un contact d'urgence",
+    "add_expertise": "Ajouter une expertise",
     "add_language": "Ajouter une langue",
-    "add_skills": "Ajouter des comp\xE9tences",
     "add_wrk_experience": "Ajouter une exp\xE9rience de travail",
     "address": "Adresse",
     "address_placehoder": "Tapez votre adresse",
@@ -83485,6 +83524,7 @@ module.exports = {
     "confirm_password": "Confirmer le nouveau mot de passe",
     "contact_detail_cta": "Coordonn\xE9es de l'employ\xE9",
     "contact_details": "Coordonn\xE9es",
+    "continuous_dev": "D\xE9veloppement continu",
     "country": "Pays",
     "current_password": "Mot de passe actuel",
     "dashboard": "Tableau de bord",
@@ -83492,6 +83532,7 @@ module.exports = {
     "deleteCurrent": "Supprimer le courant",
     "department": "D\xE9partement",
     "departments": "D\xE9partements",
+    "directorate": "Direction\/Bureau",
     "divorced": "Divorc\xE9|divorc\xE9",
     "dr": "Dr.",
     "eDate": "Date de fin",
@@ -83499,8 +83540,8 @@ module.exports = {
     "editComment": "Modifier le commentaire",
     "editContact": "Modifier le contact",
     "edit_education": "Modifier l'\xE9ducation",
+    "edit_expertise": "Modifier l'expertise",
     "edit_language": "Modifier la langue",
-    "edit_skill": "Modifier la comp\xE9tence",
     "edit_wrk_experience": "Modifier l'exp\xE9rience professionnelle",
     "education": "\xC9ducation",
     "email": "Email|email",
@@ -83509,6 +83550,7 @@ module.exports = {
     "empContract": "Contrat de travail",
     "empStatus": "Statut d'emploi",
     "employee": "Employ\xE9",
+    "expertise": "Domaines d'expertise",
     "female": "Femelle|femelle",
     "file": "D\xE9poser|Des dossiers|d\xE9poser|des dossiers",
     "firstName": "Pr\xE9nom",
@@ -83555,6 +83597,7 @@ module.exports = {
     "otherId": "Autre Identifiant",
     "other_email": "Autre e-mail",
     "password": "Mot de passe",
+    "pdAttachmentDesc": "T\xE9l\xE9chargez la premi\xE8re page de votre passeport",
     "personal_detail_cta": "Profil personnel de l'employ\xE9",
     "personal_details": "Informations Personnelles",
     "pim": "PIM",
@@ -83575,17 +83618,16 @@ module.exports = {
     "remember_me": "Souviens-toi de moi",
     "replaceAttachment": "Remplacer la pi\xE8ce jointe",
     "replaceCurrent": "Remplacer le courant",
-    "report_to": "Signaler \xE0",
+    "report_to": "Reporte a",
     "report_to1": "Rapport \xE0",
     "report_to_cta": "Vos Dirigeants",
-    "report_to_me": "Se rapporte \xE0 moi",
+    "report_to_me": "Rapporte-moi",
     "rev": "Tour.",
     "sDate": "Date de d\xE9but",
     "save": "Sauvegarder",
     "saving": "\xC9pargne",
     "selectYear": "S\xE9lectionner l'ann\xE9e...",
     "single": "C\xE9libataire|c\xE9libataire",
-    "skill": "Comp\xE9tence|Comp\xE9tences",
     "specialization": "Sp\xE9cialisation",
     "staffId": "Identifiant du personnel",
     "staff_directory": "R\xE9pertoire du personnel",
@@ -83883,7 +83925,6 @@ var state = {
   jobCategories: [],
   jobTitles: [],
   employmentStatus: [],
-  branches: [],
   departments: [],
   units: [],
   positions: [],
@@ -83912,9 +83953,6 @@ var getters = {
   },
   getEmploymentStatus: function getEmploymentStatus(state) {
     return state.employmentStatus;
-  },
-  getBranches: function getBranches(state) {
-    return state.branches;
   },
   getDepartments: function getDepartments(state) {
     return state.departments;
@@ -84297,7 +84335,7 @@ var actions = {
       }, _callee6, null, [[2, 17]]);
     }))();
   },
-  dispatchBranch: function dispatchBranch(_ref13, _ref14) {
+  dispatchDepartment: function dispatchDepartment(_ref13, _ref14) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
       var commit, _ref14$type, type, payload;
 
@@ -84309,27 +84347,27 @@ var actions = {
               _ref14$type = _ref14.type, type = _ref14$type === void 0 ? "" : _ref14$type, payload = _ref14.payload;
               _context7.prev = 2;
               _context7.t0 = type;
-              _context7.next = _context7.t0 === "ADD_NEW_BRANCH" ? 6 : _context7.t0 === "UPDATE_BRANCH" ? 8 : _context7.t0 === "DELETE_BRANCH" ? 10 : _context7.t0 === "DELETE_BRANCHES" ? 12 : 14;
+              _context7.next = _context7.t0 === "ADD_NEW_DEPARTMENT" ? 6 : _context7.t0 === "UPDATE_DEPARTMENT" ? 8 : _context7.t0 === "DELETE_DEPARTMENT" ? 10 : _context7.t0 === "DELETE_DEPARTMENTS" ? 12 : 14;
               break;
 
             case 6:
-              commit("addNewBranch", payload);
+              commit("addNewDepartment", payload);
               return _context7.abrupt("break", 16);
 
             case 8:
-              commit("updateBranch", payload);
+              commit("updateDepartment", payload);
               return _context7.abrupt("break", 16);
 
             case 10:
-              commit("deleteBranch", payload);
+              commit("deleteDepartment", payload);
               return _context7.abrupt("break", 16);
 
             case 12:
-              commit("deleteBranches", payload);
+              commit("deleteDepartments", payload);
               return _context7.abrupt("break", 16);
 
             case 14:
-              commit("addBranches", payload);
+              commit("addDepartments", payload);
               return _context7.abrupt("break", 16);
 
             case 16:
@@ -84349,7 +84387,7 @@ var actions = {
       }, _callee7, null, [[2, 18]]);
     }))();
   },
-  dispatchDepartment: function dispatchDepartment(_ref15, _ref16) {
+  dispatchUnit: function dispatchUnit(_ref15, _ref16) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
       var commit, _ref16$type, type, payload;
 
@@ -84361,27 +84399,27 @@ var actions = {
               _ref16$type = _ref16.type, type = _ref16$type === void 0 ? "" : _ref16$type, payload = _ref16.payload;
               _context8.prev = 2;
               _context8.t0 = type;
-              _context8.next = _context8.t0 === "ADD_NEW_DEPARTMENT" ? 6 : _context8.t0 === "UPDATE_DEPARTMENT" ? 8 : _context8.t0 === "DELETE_DEPARTMENT" ? 10 : _context8.t0 === "DELETE_DEPARTMENTS" ? 12 : 14;
+              _context8.next = _context8.t0 === "ADD_NEW_UNIT" ? 6 : _context8.t0 === "UPDATE_UNIT" ? 8 : _context8.t0 === "DELETE_UNIT" ? 10 : _context8.t0 === "DELETE_UNITS" ? 12 : 14;
               break;
 
             case 6:
-              commit("addNewDepartment", payload);
+              commit("addNewUnit", payload);
               return _context8.abrupt("break", 16);
 
             case 8:
-              commit("updateDepartment", payload);
+              commit("updateUnit", payload);
               return _context8.abrupt("break", 16);
 
             case 10:
-              commit("deleteDepartment", payload);
+              commit("deleteUnit", payload);
               return _context8.abrupt("break", 16);
 
             case 12:
-              commit("deleteDepartments", payload);
+              commit("deleteUnits", payload);
               return _context8.abrupt("break", 16);
 
             case 14:
-              commit("addDepartments", payload);
+              commit("addUnits", payload);
               return _context8.abrupt("break", 16);
 
             case 16:
@@ -84401,7 +84439,7 @@ var actions = {
       }, _callee8, null, [[2, 18]]);
     }))();
   },
-  dispatchUnit: function dispatchUnit(_ref17, _ref18) {
+  dispatchPosition: function dispatchPosition(_ref17, _ref18) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
       var commit, _ref18$type, type, payload;
 
@@ -84413,27 +84451,27 @@ var actions = {
               _ref18$type = _ref18.type, type = _ref18$type === void 0 ? "" : _ref18$type, payload = _ref18.payload;
               _context9.prev = 2;
               _context9.t0 = type;
-              _context9.next = _context9.t0 === "ADD_NEW_UNIT" ? 6 : _context9.t0 === "UPDATE_UNIT" ? 8 : _context9.t0 === "DELETE_UNIT" ? 10 : _context9.t0 === "DELETE_UNITS" ? 12 : 14;
+              _context9.next = _context9.t0 === "ADD_NEW_POSITION" ? 6 : _context9.t0 === "UPDATE_POSITION" ? 8 : _context9.t0 === "DELETE_POSITION" ? 10 : _context9.t0 === "DELETE_POSITIONS" ? 12 : 14;
               break;
 
             case 6:
-              commit("addNewUnit", payload);
+              commit("addNewPosition", payload);
               return _context9.abrupt("break", 16);
 
             case 8:
-              commit("updateUnit", payload);
+              commit("updatePosition", payload);
               return _context9.abrupt("break", 16);
 
             case 10:
-              commit("deleteUnit", payload);
+              commit("deletePosition", payload);
               return _context9.abrupt("break", 16);
 
             case 12:
-              commit("deleteUnits", payload);
+              commit("deletePositions", payload);
               return _context9.abrupt("break", 16);
 
             case 14:
-              commit("addUnits", payload);
+              commit("addPositions", payload);
               return _context9.abrupt("break", 16);
 
             case 16:
@@ -84453,59 +84491,54 @@ var actions = {
       }, _callee9, null, [[2, 18]]);
     }))();
   },
-  dispatchPosition: function dispatchPosition(_ref19, _ref20) {
+  dispatchOrgnizationProfile: function dispatchOrgnizationProfile(_ref19, _ref20) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
-      var commit, _ref20$type, type, payload;
+      var commit, state, _ref20$type, type, payload;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
         while (1) {
           switch (_context10.prev = _context10.next) {
             case 0:
-              commit = _ref19.commit;
+              commit = _ref19.commit, state = _ref19.state;
               _ref20$type = _ref20.type, type = _ref20$type === void 0 ? "" : _ref20$type, payload = _ref20.payload;
               _context10.prev = 2;
               _context10.t0 = type;
-              _context10.next = _context10.t0 === "ADD_NEW_POSITION" ? 6 : _context10.t0 === "UPDATE_POSITION" ? 8 : _context10.t0 === "DELETE_POSITION" ? 10 : _context10.t0 === "DELETE_POSITIONS" ? 12 : 14;
+              _context10.next = _context10.t0 === "UPDATE_LOGO" ? 6 : _context10.t0 === "UPDATE_INFO" ? 8 : 10;
               break;
 
             case 6:
-              commit("addNewPosition", payload);
-              return _context10.abrupt("break", 16);
+              state.organizationProfile.logo = payload; // commit("updateOrgLogo", payload);
+
+              return _context10.abrupt("break", 12);
 
             case 8:
-              commit("updatePosition", payload);
-              return _context10.abrupt("break", 16);
+              state.organizationProfile = payload; // commit("deleteDepartment", payload);
+
+              return _context10.abrupt("break", 12);
 
             case 10:
-              commit("deletePosition", payload);
-              return _context10.abrupt("break", 16);
+              state.organizationProfile = payload; // commit("addOrganisationProfile", payload);
+
+              return _context10.abrupt("break", 12);
 
             case 12:
-              commit("deletePositions", payload);
-              return _context10.abrupt("break", 16);
-
-            case 14:
-              commit("addPositions", payload);
-              return _context10.abrupt("break", 16);
-
-            case 16:
-              _context10.next = 21;
+              _context10.next = 17;
               break;
 
-            case 18:
-              _context10.prev = 18;
+            case 14:
+              _context10.prev = 14;
               _context10.t1 = _context10["catch"](2);
               console.log(_context10.t1);
 
-            case 21:
+            case 17:
             case "end":
               return _context10.stop();
           }
         }
-      }, _callee10, null, [[2, 18]]);
+      }, _callee10, null, [[2, 14]]);
     }))();
   },
-  dispatchOrgnizationProfile: function dispatchOrgnizationProfile(_ref21, _ref22) {
+  dispatchStaffCount: function dispatchStaffCount(_ref21, _ref22) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
       var commit, state, _ref22$type, type, payload;
 
@@ -84517,79 +84550,32 @@ var actions = {
               _ref22$type = _ref22.type, type = _ref22$type === void 0 ? "" : _ref22$type, payload = _ref22.payload;
               _context11.prev = 2;
               _context11.t0 = type;
-              _context11.next = _context11.t0 === "UPDATE_LOGO" ? 6 : _context11.t0 === "UPDATE_INFO" ? 8 : 10;
+              _context11.next = _context11.t0 === "UPDATE_STAFF_COUNT" ? 6 : 8;
               break;
 
             case 6:
-              state.organizationProfile.logo = payload; // commit("updateOrgLogo", payload);
-
-              return _context11.abrupt("break", 12);
+              state.staffCount = payload;
+              return _context11.abrupt("break", 10);
 
             case 8:
-              state.organizationProfile = payload; // commit("deleteDepartment", payload);
-
-              return _context11.abrupt("break", 12);
+              state.staffCount = payload;
+              return _context11.abrupt("break", 10);
 
             case 10:
-              state.organizationProfile = payload; // commit("addOrganisationProfile", payload);
-
-              return _context11.abrupt("break", 12);
-
-            case 12:
-              _context11.next = 17;
+              _context11.next = 15;
               break;
 
-            case 14:
-              _context11.prev = 14;
+            case 12:
+              _context11.prev = 12;
               _context11.t1 = _context11["catch"](2);
               console.log(_context11.t1);
 
-            case 17:
+            case 15:
             case "end":
               return _context11.stop();
           }
         }
-      }, _callee11, null, [[2, 14]]);
-    }))();
-  },
-  dispatchStaffCount: function dispatchStaffCount(_ref23, _ref24) {
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
-      var commit, state, _ref24$type, type, payload;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
-        while (1) {
-          switch (_context12.prev = _context12.next) {
-            case 0:
-              commit = _ref23.commit, state = _ref23.state;
-              _ref24$type = _ref24.type, type = _ref24$type === void 0 ? "" : _ref24$type, payload = _ref24.payload;
-              _context12.prev = 2;
-              _context12.t0 = type;
-              _context12.next = _context12.t0 === "UPDATE_STAFF_COUNT" ? 6 : 8;
-              break;
-
-            case 6:
-              state.staffCount = payload;
-              return _context12.abrupt("break", 10);
-
-            case 8:
-              state.staffCount = payload;
-              return _context12.abrupt("break", 10);
-
-            case 10:
-              _context12.next = 15;
-              break;
-
-            case 12:
-              _context12.prev = 12;
-              _context12.t1 = _context12["catch"](2);
-              console.log(_context12.t1);
-
-            case 15:
-            case "end":
-              return _context12.stop();
-          }
-        }
-      }, _callee12, null, [[2, 12]]);
+      }, _callee11, null, [[2, 12]]);
     }))();
   }
 };
@@ -84699,29 +84685,6 @@ var mutations = {
   deleteEmpStatuses: function deleteEmpStatuses(state, ids) {
     ids.forEach(function (id) {
       state.employmentStatus.splice(state.employmentStatus.findIndex(function (u) {
-        return u.id === id;
-      }), 1);
-    });
-  },
-  addBranches: function addBranches(state, data) {
-    return state.branches = data;
-  },
-  addNewBranch: function addNewBranch(state, data) {
-    state.branches = [data].concat(_toConsumableArray(state.branches));
-  },
-  updateBranch: function updateBranch(state, data) {
-    state.branches.splice(state.branches.findIndex(function (u) {
-      return u.id === data.id;
-    }), 1, data);
-  },
-  deleteBranch: function deleteBranch(state, id) {
-    state.branches.splice(state.branches.findIndex(function (u) {
-      return u.id === id;
-    }), 1);
-  },
-  deleteBranches: function deleteBranches(state, ids) {
-    ids.forEach(function (id) {
-      state.branches.splice(state.branches.findIndex(function (u) {
         return u.id === id;
       }), 1);
     });
@@ -84944,9 +84907,8 @@ var state = {
   contactDetails: [],
   emergencyContacts: [],
   userJob: [],
-  workExperience: [],
   education: [],
-  skills: [],
+  expertise: [],
   languages: [],
   qualificationAttachments: [],
   myLeaders: {},
@@ -84974,14 +84936,11 @@ var getters = {
   getUserJob: function getUserJob(state) {
     return state.userJob;
   },
-  getWorkExperience: function getWorkExperience(state) {
-    return state.workExperience;
-  },
   getEducation: function getEducation(state) {
     return state.education;
   },
-  getSkills: function getSkills(state) {
-    return state.skills;
+  getExpertise: function getExpertise(state) {
+    return state.expertise;
   },
   getLanguages: function getLanguages(state) {
     return state.languages;
@@ -85009,7 +84968,7 @@ var actions = {
               _ref2$type = _ref2.type, type = _ref2$type === void 0 ? "" : _ref2$type, payload = _ref2.payload;
               _context.prev = 2;
               _context.t0 = type;
-              _context.next = _context.t0 === "UPDATE_AVATAR" ? 6 : _context.t0 === "UPDATE_PERSONAL_DETAILS" ? 8 : _context.t0 === "UPDATE_PERSONAL_DETAILS_ATTACHMENT" ? 10 : _context.t0 === "UPDATE_CONTACT_DETAILS" ? 12 : _context.t0 === "ADD_EMERGENCY_CONTACT_DETAILS" ? 14 : _context.t0 === "UPDATE_EMERGENCY_CONTACT_DETAILS" ? 16 : _context.t0 === "ADD_JOB" ? 18 : _context.t0 === "DELETE_EMERGENCY_CONTACT_DETAILS" ? 20 : _context.t0 === "DELETE_ATTACHMENT" ? 22 : _context.t0 === "ADD_WORK_EXPERIENCE" ? 24 : _context.t0 === "ADD_EDUCATION" ? 26 : _context.t0 === "ADD_SKILL" ? 28 : _context.t0 === "ADD_LANGUAGE" ? 30 : _context.t0 === "ADD_ATTACHMENT" ? 32 : _context.t0 === "UDATE_QUALIFICATION" ? 34 : _context.t0 === "DELETE_USER" ? 36 : _context.t0 === "DELETE_USERS" ? 38 : _context.t0 === "ADD_MY_LEADERS" ? 40 : 42;
+              _context.next = _context.t0 === "UPDATE_AVATAR" ? 6 : _context.t0 === "UPDATE_PERSONAL_DETAILS" ? 8 : _context.t0 === "UPDATE_PERSONAL_DETAILS_ATTACHMENT" ? 10 : _context.t0 === "UPDATE_CONTACT_DETAILS" ? 12 : _context.t0 === "ADD_EMERGENCY_CONTACT_DETAILS" ? 14 : _context.t0 === "UPDATE_EMERGENCY_CONTACT_DETAILS" ? 16 : _context.t0 === "ADD_JOB" ? 18 : _context.t0 === "DELETE_EMERGENCY_CONTACT_DETAILS" ? 20 : _context.t0 === "DELETE_ATTACHMENT" ? 22 : _context.t0 === "ADD_WORK_EXPERIENCE" ? 24 : _context.t0 === "ADD_EDUCATION" ? 26 : _context.t0 === "ADD_CONTINUOUS_DEV" ? 28 : _context.t0 === "ADD_EXPERTISE" ? 30 : _context.t0 === "ADD_LANGUAGE" ? 32 : _context.t0 === "UDATE_QUALIFICATION" ? 34 : _context.t0 === "DELETE_USER" ? 36 : _context.t0 === "DELETE_USERS" ? 38 : _context.t0 === "ADD_MY_LEADERS" ? 40 : 42;
               break;
 
             case 6:
@@ -85061,15 +85020,15 @@ var actions = {
               return _context.abrupt("break", 44);
 
             case 28:
-              state.profile.qualifications.skills = payload;
+              state.profile.qualifications.continuousDev = payload;
               return _context.abrupt("break", 44);
 
             case 30:
-              state.profile.qualifications.languages = payload;
+              state.profile.qualifications.expertise = payload;
               return _context.abrupt("break", 44);
 
             case 32:
-              state.profile.qualifications.attachments = payload;
+              state.profile.qualifications.languages = payload;
               return _context.abrupt("break", 44);
 
             case 34:
@@ -85218,20 +85177,14 @@ var mutations = {
   setUserJob: function setUserJob(state, data) {
     return state.userJob = data;
   },
-  setWorkExperience: function setWorkExperience(state, data) {
-    return state.workExperience = data;
-  },
   setEducation: function setEducation(state, data) {
     return state.education = data;
   },
-  setSkills: function setSkills(state, data) {
-    return state.skills = data;
+  setExpertise: function setExpertise(state, data) {
+    return state.expertise = data;
   },
   setLanguages: function setLanguages(state, data) {
     return state.languages = data;
-  },
-  setQualificationAttachments: function setQualificationAttachments(state, data) {
-    return state.qualificationAttachments = data;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -85574,78 +85527,98 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 var state = {
-  staffList: []
+  staffList: [],
+  staffDirectory: []
 };
 var getters = {
   getStaffList: function getStaffList(state) {
     return state.staffList;
+  },
+  getStaffDirectory: function getStaffDirectory(state) {
+    return state.staffDirectory;
   }
 };
 var actions = {
   dispatchStaff: function dispatchStaff(_ref, _ref2) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var commit, _ref2$type, type, payload;
+      var state, commit, _ref2$type, type, payload;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              commit = _ref.commit;
+              state = _ref.state, commit = _ref.commit;
               _ref2$type = _ref2.type, type = _ref2$type === void 0 ? "" : _ref2$type, payload = _ref2.payload;
               _context.prev = 2;
               _context.t0 = type;
-              _context.next = _context.t0 === "ADD_NEW_USER" ? 6 : _context.t0 === "ASSIGN_ROLE" ? 8 : _context.t0 === "ASSIGN_STATUS" ? 10 : _context.t0 === "UPDATE_JOB" ? 12 : _context.t0 === "DELETE_USER" ? 14 : _context.t0 === "DELETE_USERS" ? 16 : 18;
+              _context.next = _context.t0 === "ADD_NEW_USER" ? 6 : _context.t0 === "ADD_DIRECTORY" ? 8 : _context.t0 === "ASSIGN_ROLE" ? 10 : _context.t0 === "ASSIGN_STATUS" ? 12 : _context.t0 === "UPDATE_JOB" ? 14 : _context.t0 === "DELETE_USER" ? 16 : _context.t0 === "DELETE_USERS" ? 18 : 20;
               break;
 
             case 6:
               commit("addNewUser", payload);
-              return _context.abrupt("break", 20);
+              return _context.abrupt("break", 22);
 
             case 8:
-              commit("assignUserRole", payload);
-              return _context.abrupt("break", 20);
+              state.staffDirectory = [].concat(_toConsumableArray(state.staffDirectory), _toConsumableArray(payload));
+              return _context.abrupt("break", 22);
 
             case 10:
-              commit("assignUserStatus", payload);
-              return _context.abrupt("break", 20);
+              commit("assignUserRole", payload);
+              return _context.abrupt("break", 22);
 
             case 12:
-              commit("updateJob", payload);
-              return _context.abrupt("break", 20);
+              commit("assignUserStatus", payload);
+              return _context.abrupt("break", 22);
 
             case 14:
-              commit("deleteUser", payload);
-              return _context.abrupt("break", 20);
+              commit("updateJob", payload);
+              return _context.abrupt("break", 22);
 
             case 16:
-              commit("deleteUsers", payload);
-              return _context.abrupt("break", 20);
+              commit("deleteUser", payload);
+              return _context.abrupt("break", 22);
 
             case 18:
-              commit("addStaff", payload);
-              return _context.abrupt("break", 20);
+              commit("deleteUsers", payload);
+              return _context.abrupt("break", 22);
 
             case 20:
-              _context.next = 25;
-              break;
+              commit("addStaff", payload);
+              return _context.abrupt("break", 22);
 
             case 22:
-              _context.prev = 22;
+              _context.next = 27;
+              break;
+
+            case 24:
+              _context.prev = 24;
               _context.t1 = _context["catch"](2);
               console.log(_context.t1);
 
-            case 25:
+            case 27:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 22]]);
+      }, _callee, null, [[2, 24]]);
     }))();
   }
 };
@@ -85656,8 +85629,6 @@ var mutations = {
       u.job = u.job ? JSON.parse(u.job) : u.job;
       return u;
     });
-
-    if (data && data.length > 0) {}
   },
   updateJob: function updateJob(state, data) {
     var staff = _objectSpread(_objectSpread({}, data.data), {}, {
@@ -85728,8 +85699,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Seyram\Desktop\projects\hrm\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Seyram\Desktop\projects\hrm\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Seyram\Desktop\projects\adu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Seyram\Desktop\projects\adu\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

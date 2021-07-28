@@ -17,7 +17,7 @@ class CreateDepartmentKeyGoalsTable extends Migration
             $table->id();
             $table->foreignId('appraisal_id')->constrained('appraisals')->onDelete('cascade');
             $table->unsignedBigInteger('department_id', false)->nullable();
-            $table->longText('goal')->nullable();
+            $table->json('goals')->nullable();
             $table->timestamps();
         });
     }

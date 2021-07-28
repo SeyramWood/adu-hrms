@@ -21,6 +21,7 @@ trait Admin
         'profiles.personal_details',
         'profiles.slug',
       )
+      ->orderBy('users.id', 'desc')
       ->paginate(100);
   }
   public function getUser($id)

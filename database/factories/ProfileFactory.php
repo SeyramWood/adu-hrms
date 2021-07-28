@@ -24,11 +24,10 @@ class ProfileFactory extends Factory
     {
 
         $qualifications = [
-            'workExperience' => [],
             'education' => [],
-            'skills' => [],
+            'expertise' => [],
             'languages' => [],
-            'attachments' => [],
+            'continuousDev' => [],
         ];
         $userPersonalDetails = [
             'avatar' => "",

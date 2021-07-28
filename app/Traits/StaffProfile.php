@@ -107,7 +107,6 @@ trait StaffProfile
       'middleName' => 'nullable|string',
       'lastName' => 'required|string',
       'staffId' => 'required|string',
-      'otherId' => 'nullable|string',
       'birthDate' => 'required|string',
       'maritalStatus' => 'required|string',
       'gender' => 'required|string',
@@ -118,7 +117,6 @@ trait StaffProfile
       'personal_details->middleName' => $request->middleName,
       'personal_details->lastName' => $request->lastName,
       'personal_details->staffId' => $request->staffId,
-      'personal_details->otherId' => $request->otherId,
       'personal_details->birthDate' => $request->birthDate,
       'personal_details->maritalStatus' => $request->maritalStatus,
       'personal_details->gender' => $request->gender,
@@ -290,57 +288,7 @@ trait StaffProfile
     $profile->save();
     return response()->json(['deleted' => true]);
   }
-  public function createQualificationWorkExperience($request, $profile)
-  {
-    $request->validate([
-      "company" => "required|string",
-      "jobTitle" => "required|string",
-      "from" => "required|numeric",
-      "to" => "required|numeric",
-      "comment" => "nullable|string",
-    ]);
-    $workExperience = is_array(json_decode($profile->qualifications)->workExperience) ? json_decode($profile->qualifications)->workExperience : json_decode(json_decode($profile->qualifications)->workExperience);
-    array_push($workExperience, [
-      'id' => $this->uuid(16),
-      "company" => $request->company,
-      "jobTitle" => $request->jobTitle,
-      "from" => $request->from,
-      "to" => $request->to,
-      "comment" => $request->comment,
-    ]);
-    DB::table('profiles')->where('user_id', $profile->user_id)->update([
-      'qualifications->workExperience' => json_encode($workExperience),
-    ]);
-    return response()->json(['added' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->workExperience]);
-  }
-  public function updateWorkExperience($request, $profile, $id)
-  {
-    $request->validate([
-      "company" => "required|string",
-      "jobTitle" => "required|string",
-      "from" => "required|numeric",
-      "to" => "required|numeric",
-      "comment" => "nullable|string",
-    ]);
-    $workExperience = is_array(json_decode($profile->qualifications)->workExperience) ? json_decode($profile->qualifications)->workExperience : json_decode(json_decode($profile->qualifications)->workExperience);
-    for ($i = 0; $i < count($workExperience); $i++) {
-      if ($workExperience[$i]->id === $id) {
-        $workExperience[$i] = [
-          'id' => $id,
-          "company" => $request->company,
-          "jobTitle" => $request->jobTitle,
-          "from" => $request->from,
-          "to" => $request->to,
-          "comment" => $request->comment,
-        ];
-        break;
-      }
-    }
-    DB::table('profiles')->where('user_id', $profile->user_id)->update([
-      'qualifications->workExperience' => json_encode($workExperience),
-    ]);
-    return response()->json(['updated' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->workExperience]);
-  }
+
 
   public function createQualificationEducation($request, $profile)
   {
@@ -348,7 +296,6 @@ trait StaffProfile
     $request->validate([
       "institution" => "required|string",
       "specialization" => "required|string",
-      "gpa" => "required|string",
       "started" => "required|numeric",
       "completed" => "required|numeric",
     ]);
@@ -357,7 +304,6 @@ trait StaffProfile
       'id' => $this->uuid(16),
       "institution" => $request->institution,
       "specialization" => $request->specialization,
-      "gpa" => $request->gpa,
       "started" => $request->started,
       "completed" => $request->completed,
     ]);
@@ -372,7 +318,6 @@ trait StaffProfile
     $request->validate([
       "institution" => "required|string",
       "specialization" => "required|string",
-      "gpa" => "required|string",
       "started" => "required|numeric",
       "completed" => "required|numeric",
     ]);
@@ -383,7 +328,6 @@ trait StaffProfile
           'id' => $id,
           "institution" => $request->institution,
           "specialization" => $request->specialization,
-          "gpa" => $request->gpa,
           "started" => $request->started,
           "completed" => $request->completed,
         ];
@@ -395,40 +339,90 @@ trait StaffProfile
     ]);
     return response()->json(['updated' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->education]);
   }
-  public function createQualificationSkill($request, $profile)
+
+  public function createContinuousDev($request, $profile)
   {
 
     $request->validate([
-      "skill" => "required|string",
+      "institution" => "required|string",
+      "specialization" => "required|string",
+      "started" => "required|numeric",
+      "completed" => "required|numeric",
+    ]);
+    $continuousDev = is_array(json_decode($profile->qualifications)->continuousDev) ? json_decode($profile->qualifications)->continuousDev : json_decode(json_decode($profile->qualifications)->continuousDev);
+    array_push($continuousDev, [
+      'id' => $this->uuid(16),
+      "institution" => $request->institution,
+      "specialization" => $request->specialization,
+      "started" => $request->started,
+      "completed" => $request->completed,
+    ]);
+    DB::table('profiles')->where('user_id', $profile->user_id)->update([
+      'qualifications->continuousDev' => json_encode($continuousDev),
+    ]);
+    return response()->json(['added' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->continuousDev]);
+  }
+  public function updateContinuousDev($request, $profile, $id)
+  {
+
+    $request->validate([
+      "institution" => "required|string",
+      "specialization" => "required|string",
+      "started" => "required|numeric",
+      "completed" => "required|numeric",
+    ]);
+    $continuousDev = is_array(json_decode($profile->qualifications)->continuousDev) ? json_decode($profile->qualifications)->continuousDev : json_decode(json_decode($profile->qualifications)->continuousDev);
+    for ($i = 0; $i < count($continuousDev); $i++) {
+      if ($continuousDev[$i]->id === $id) {
+        $continuousDev[$i] = [
+          'id' => $id,
+          "institution" => $request->institution,
+          "specialization" => $request->specialization,
+          "started" => $request->started,
+          "completed" => $request->completed,
+        ];
+        break;
+      }
+    }
+    DB::table('profiles')->where('user_id', $profile->user_id)->update([
+      'qualifications->continuousDev' => json_encode($continuousDev),
+    ]);
+    return response()->json(['updated' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->continuousDev]);
+  }
+
+  public function createQualificationExpertise($request, $profile)
+  {
+
+    $request->validate([
+      "expertise" => "required|string",
       "yearOfExperience" => "required|string",
       "comment" => "nullable|string",
     ]);
-    $skills = is_array(json_decode($profile->qualifications)->skills) ? json_decode($profile->qualifications)->skills : json_decode(json_decode($profile->qualifications)->skills);
-    array_push($skills, [
+    $expertise = is_array(json_decode($profile->qualifications)->expertise) ? json_decode($profile->qualifications)->expertise : json_decode(json_decode($profile->qualifications)->expertise);
+    array_push($expertise, [
       'id' => $this->uuid(16),
-      "skill" => $request->skill,
+      "expertise" => $request->expertise,
       "yearOfExperience" => $request->yearOfExperience,
       "comment" => $request->comment,
     ]);
     DB::table('profiles')->where('user_id', $profile->user_id)->update([
-      'qualifications->skills' => json_encode($skills),
+      'qualifications->expertise' => json_encode($expertise),
     ]);
-    return response()->json(['added' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->skills]);
+    return response()->json(['added' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->expertise]);
   }
-  public function updateSkill($request, $profile, $id)
+  public function updateExpertise($request, $profile, $id)
   {
-
     $request->validate([
-      "skill" => "required|string",
+      "expertise" => "required|string",
       "yearOfExperience" => "required|string",
       "comment" => "nullable|string",
     ]);
-    $skills = is_array(json_decode($profile->qualifications)->skills) ? json_decode($profile->qualifications)->skills : json_decode(json_decode($profile->qualifications)->skills);
-    for ($i = 0; $i < count($skills); $i++) {
-      if ($skills[$i]->id === $id) {
-        $skills[$i] = [
+    $expertise = is_array(json_decode($profile->qualifications)->expertise) ? json_decode($profile->qualifications)->expertise : json_decode(json_decode($profile->qualifications)->expertise);
+    for ($i = 0; $i < count($expertise); $i++) {
+      if ($expertise[$i]->id === $id) {
+        $expertise[$i] = [
           'id' => $id,
-          "skill" => $request->skill,
+          "expertise" => $request->expertise,
           "yearOfExperience" => $request->yearOfExperience,
           "comment" => $request->comment,
         ];
@@ -436,9 +430,9 @@ trait StaffProfile
       }
     }
     DB::table('profiles')->where('user_id', $profile->user_id)->update([
-      'qualifications->skills' => json_encode($skills),
+      'qualifications->expertise' => json_encode($expertise),
     ]);
-    return response()->json(['updated' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->skills]);
+    return response()->json(['updated' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->expertise]);
   }
   public function createQualificationLanguage($request, $profile)
   {
@@ -485,62 +479,12 @@ trait StaffProfile
     ]);
     return response()->json(['added' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->languages]);
   }
-  public function createQualificationAttachment($request, $profile)
-  {
-    $request->validate([
-      'file' => 'required|file|mimes:pdf|max:2048',
-      'comment' => "nullable|string"
-    ]);
-    $attachments = $this->processQualificationAttachment($request, $profile);
-    DB::table('profiles')->where('user_id', $profile->user_id)->update([
-      'qualifications->attachments' => json_encode($attachments),
-    ]);
-    return response()->json(['added' => true, 'data' => json_decode(Profile::where('user_id', $profile->user_id)->first()->qualifications)->attachments]);
-  }
-  public function updateQualificationAttachment($request, $profile)
-  {
-    $attachments = json_decode(json_decode($profile->qualifications)->attachments);
-    if ($request->has('file')) {
-      $request->validate([
-        'file' => 'required|file|mimes:pdf|max:2048',
-      ]);
-      $file = $this->updateAttachment($request, $profile->personal_details, 'qualification');
-      for ($i = 0; $i < count($attachments); $i++) {
-        if ($attachments[$i]->id === $request->id) {
-          if (Storage::disk('public')->exists("attachments/qualification/{$attachments[$i]->file}")) {
-            Storage::disk('public')->delete("attachments/qualification/{$attachments[$i]->file}");
-          }
-          $attachments[$i]->file = $file;
-          break;
-        }
-      }
-    }
-    if ($request->has('comment')) {
-      $request->validate([
-        'comment' => "nullable|string"
-      ]);
-      for ($i = 0; $i < count($attachments); $i++) {
-        if ($attachments[$i]->id === $request->id) {
-          $attachments[$i]->comment = $request->comment;
-          break;
-        }
-      }
-    }
-    DB::table('profiles')->where('user_id', $profile->user_id)->update([
-      'qualifications->attachments' => json_encode($attachments),
-    ]);
-    return response()->json(['updated' => true, 'data' => json_decode(Profile::find($profile->user_id)->qualifications)->attachments]);
-  }
+
   public function deleteQualification($profile, $id, $type)
   {
     $qualifications = json_decode(json_decode($profile->qualifications)->$type);
     for ($i = 0; $i < count($qualifications); $i++) {
       if ($qualifications[$i]->id === $id) {
-        if ($type === 'attachments') {
-          if (Storage::disk('public')->exists("attachments/qualification/{$qualifications[$i]->file}")) {
-            Storage::disk('public')->delete("attachments/qualification/{$qualifications[$i]->file}");
-          }
-        }
         array_splice($qualifications, $i, 1);
         break;
       }
@@ -631,12 +575,6 @@ trait StaffProfile
         'job->employmentStatus' => $request->employmentStatus
       ]);
     }
-    if ($type === 'branch') {
-      DB::table('profiles')->where('user_id', $profile->user_id)->update([
-        'branch_id' => $request->branch,
-        'job->branch' => $request->branch,
-      ]);
-    }
     if ($type === 'department') {
       DB::table('profiles')->where('user_id', $profile->user_id)->update([
         'department_id' => $request->department,
@@ -665,20 +603,7 @@ trait StaffProfile
     ]);
     return $prevAttachments;
   }
-  protected function processQualificationAttachment($request, $profile)
 
-  {
-    $personalDetails = json_decode($profile->personal_details);
-    $prevAttachments = is_array(json_decode($profile->qualifications)->attachments) ? json_decode($profile->qualifications)->attachments : json_decode(json_decode($profile->qualifications)->attachments);
-    $fileName = strtolower("{$personalDetails->firstName}_{$personalDetails->lastName}") . '_' . $this->uuid(8) . '.' . $request->file->getClientOriginalExtension();
-    Storage::putFileAs("public/attachments/qualification", $request->file, $fileName);
-    array_push($prevAttachments, [
-      'id' => $this->uuid(16),
-      'file' => $fileName,
-      'comment' => $request->comment
-    ]);
-    return $prevAttachments;
-  }
   protected function processContractDetails($request, $profile, $delete = null)
   {
     if ($delete) {

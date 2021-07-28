@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../components/Dashboard'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Dashboard */ "./resources/js/components/Dashboard.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -211,17 +211,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
   metaInfo: function metaInfo() {
     return {
@@ -230,12 +222,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   components: {// Layout,
   },
-  layout: !(function webpackMissingModule() { var e = new Error("Cannot find module '../../components/Dashboard'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+  layout: _components_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
   props: {
-    userPermissions: {
-      require: true,
-      type: Array
-    },
     staffCount: Object,
     branches: Array,
     departments: Array,
@@ -257,7 +245,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   beforeMount: function beforeMount() {},
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["dispatchStaffCount", "dispatchBranch", "dispatchDepartment", "dispatchUnit"])),
   data: function data() {
     return {
       date: new Date(),
@@ -303,8 +290,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         centered: true
       }]
     };
-  }
-}, "methods", {}));
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["dispatchStaffCount", "dispatchBranch", "dispatchDepartment", "dispatchUnit"]))
+});
 
 /***/ }),
 
@@ -334,23 +322,33 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "ui__card__content__icon" },
-                    [_c("b-icon", { attrs: { icon: "bed" } })],
+                    [_c("b-icon", { attrs: { icon: "users" } })],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _c("div", { staticClass: "ui__card__content__text" }, [
+                    _c("p", [_vm._v(_vm._s(_vm.getStaffCount.total))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Total Staff")])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "ui__card__link" },
-                  [
-                    _c("inertia-link", [_vm._v("View Reservations")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("→")])
-                  ],
-                  1
-                )
+                _vm.anyPermission("admin", "hod", "supervisor")
+                  ? _c(
+                      "div",
+                      { staticClass: "ui__card__link" },
+                      [
+                        _c(
+                          "inertia-link",
+                          { attrs: { href: "/dashboard/pim" } },
+                          [_vm._v("View Staff")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("→")])
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ])
             ])
           ])
@@ -366,23 +364,33 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "ui__card__content__icon" },
-                    [_c("b-icon", { attrs: { icon: "users" } })],
+                    [_c("b-icon", { attrs: { icon: "building" } })],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("div", { staticClass: "ui__card__content__text" }, [
+                    _c("p", [_vm._v(_vm._s(_vm.departments.length))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Departments")])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "ui__card__link" },
-                  [
-                    _c("inertia-link", [_vm._v("View Students")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("→")])
-                  ],
-                  1
-                )
+                _vm.anyPermission("admin")
+                  ? _c(
+                      "div",
+                      { staticClass: "ui__card__link" },
+                      [
+                        _c(
+                          "inertia-link",
+                          { attrs: { href: "/dashboard/admin" } },
+                          [_vm._v("View Departments")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("→")])
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ])
             ])
           ])
@@ -398,23 +406,33 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "ui__card__content__icon" },
-                    [_c("b-icon", { attrs: { icon: "house-user" } })],
+                    [_c("b-icon", { attrs: { icon: "umbrella" } })],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c("div", { staticClass: "ui__card__content__text" }, [
+                    _c("p", [_vm._v(_vm._s(_vm.units.length))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Units")])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "ui__card__link" },
-                  [
-                    _c("inertia-link", [_vm._v("View Rooms")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("→")])
-                  ],
-                  1
-                )
+                _vm.anyPermission("admin")
+                  ? _c(
+                      "div",
+                      { staticClass: "ui__card__link" },
+                      [
+                        _c(
+                          "inertia-link",
+                          { attrs: { href: "/dashboard/admin" } },
+                          [_vm._v("View Units")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("→")])
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ])
             ])
           ])
@@ -430,23 +448,29 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "ui__card__content__icon" },
-                    [_c("b-icon", { attrs: { icon: "building" } })],
+                    [_c("b-icon", { attrs: { icon: "city" } })],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(0)
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "ui__card__link" },
-                  [
-                    _c("inertia-link", [_vm._v("View Hostels")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("→")])
-                  ],
-                  1
-                )
+                _vm.anyPermission("admin")
+                  ? _c(
+                      "div",
+                      { staticClass: "ui__card__link" },
+                      [
+                        _c(
+                          "inertia-link",
+                          { attrs: { href: "/dashboard/admin" } },
+                          [_vm._v("View Organization")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("→")])
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ])
             ])
           ])
@@ -455,7 +479,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "dashboard__cards" }, [
-      _c("div", { staticClass: "dashboard__cards__card c--6" }, [
+      _c("div", { staticClass: "dashboard__cards__card c--9" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-content" }, [
             _c(
@@ -474,109 +498,70 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "dashboard__cards__card c--3" },
-        [
-          _c("b-datepicker", {
-            attrs: {
-              inline: "",
-              "unselectable-days-of-week": _vm.disableWeekends ? [0, 6] : null
-            },
-            model: {
-              value: _vm.date,
-              callback: function($$v) {
-                _vm.date = $$v
-              },
-              expression: "date"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
       _c("div", { staticClass: "dashboard__cards__card c--3" }, [
-        _c("div", { staticClass: "dashboard__cards" }, [
-          _c("div", { staticClass: "dashboard__cards__card c--6" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-content" }, [
-                _c("div", { staticClass: "content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "side_card" },
-                    [
+        _vm.anyPermission("admin", "hod", "supervisor")
+          ? _c("div", { staticClass: "dashboard__cards" }, [
+              _c("div", { staticClass: "dashboard__cards__card c--6" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-content" }, [
+                    _c("div", { staticClass: "content" }, [
                       _c(
-                        "span",
-                        {},
-                        [_c("b-icon", { attrs: { icon: "money-check-alt" } })],
+                        "div",
+                        { staticClass: "side_card" },
+                        [
+                          _c(
+                            "span",
+                            {},
+                            [_c("b-icon", { attrs: { icon: "user-friends" } })],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "inertia-link",
+                            { attrs: { href: "/dashboard/pim" } },
+                            [_vm._v("PIM")]
+                          )
+                        ],
                         1
-                      ),
-                      _vm._v(" "),
-                      _c("inertia-link", { attrs: { href: "#" } }, [
-                        _vm._v("Payments")
-                      ])
-                    ],
-                    1
-                  )
+                      )
+                    ])
+                  ])
                 ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dashboard__cards__card c--6" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-content" }, [
-                _c("div", { staticClass: "content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "side_card" },
-                    [
-                      _c(
-                        "span",
-                        {},
-                        [_c("b-icon", { attrs: { icon: "info-circle" } })],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("inertia-link", { attrs: { href: "#" } }, [
-                        _vm._v("Notifications")
+              ]),
+              _vm._v(" "),
+              _vm.anyPermission("admin")
+                ? _c("div", { staticClass: "dashboard__cards__card c--6" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-content" }, [
+                        _c("div", { staticClass: "content" }, [
+                          _c(
+                            "div",
+                            { staticClass: "side_card" },
+                            [
+                              _c(
+                                "span",
+                                {},
+                                [_c("b-icon", { attrs: { icon: "cogs" } })],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "inertia-link",
+                                { attrs: { href: "/dashboard/admin" } },
+                                [_vm._v("Staff Accounts")]
+                              )
+                            ],
+                            1
+                          )
+                        ])
                       ])
-                    ],
-                    1
-                  )
-                ])
-              ])
+                    ])
+                  ])
+                : _vm._e()
             ])
-          ])
-        ]),
+          : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "dashboard__cards" }, [
-          _c("div", { staticClass: "dashboard__cards__card c--6" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-content" }, [
-                _c("div", { staticClass: "content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "side_card" },
-                    [
-                      _c(
-                        "span",
-                        {},
-                        [_c("b-icon", { attrs: { icon: "user-friends" } })],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("inertia-link", { attrs: { href: "#" } }, [
-                        _vm._v("Staff")
-                      ])
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
           _c("div", { staticClass: "dashboard__cards__card c--6" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-content" }, [
@@ -592,44 +577,48 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("inertia-link", { attrs: { href: "#" } }, [
-                        _vm._v("Profile")
-                      ])
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "dashboard__cards" }, [
-          _c("div", { staticClass: "dashboard__cards__card c--6" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-content" }, [
-                _c("div", { staticClass: "content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "side_card" },
-                    [
                       _c(
-                        "span",
-                        {},
-                        [_c("b-icon", { attrs: { icon: "cogs" } })],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("inertia-link", { attrs: { href: "#" } }, [
-                        _vm._v("Admin")
-                      ])
+                        "inertia-link",
+                        { attrs: { href: "/dashboard/ess" } },
+                        [_vm._v("Profile")]
+                      )
                     ],
                     1
                   )
                 ])
               ])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _vm.anyPermission("admin")
+            ? _c("div", { staticClass: "dashboard__cards__card c--6" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-content" }, [
+                    _c("div", { staticClass: "content" }, [
+                      _c(
+                        "div",
+                        { staticClass: "side_card" },
+                        [
+                          _c(
+                            "span",
+                            {},
+                            [_c("b-icon", { attrs: { icon: "user-cog" } })],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "inertia-link",
+                            { attrs: { href: "/dashboard/admin" } },
+                            [_vm._v("Admin")]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            : _vm._e()
         ])
       ])
     ])
@@ -641,39 +630,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "ui__card__content__text" }, [
-      _c("p", [_vm._v("5465")]),
+      _c("p", [_vm._v("ADU")]),
       _vm._v(" "),
-      _c("p", [_vm._v("Reservations")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ui__card__content__text" }, [
-      _c("p", [_vm._v("5465")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Students")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ui__card__content__text" }, [
-      _c("p", [_vm._v("5465")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Rooms")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ui__card__content__text" }, [
-      _c("p", [_vm._v("5465")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Hostels")])
+      _c("p", [_vm._v("Organization")])
     ])
   }
 ]

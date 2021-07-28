@@ -1,19 +1,27 @@
 import axios from "axios";
 
 const state = {
-    staffList: []
+    staffList: [],
+    staffDirectory: []
 };
 
 const getters = {
-    getStaffList: state => state.staffList
+    getStaffList: state => state.staffList,
+    getStaffDirectory: state => state.staffDirectory
 };
 
 const actions = {
-    async dispatchStaff({ commit }, { type = "", payload }) {
+    async dispatchStaff({ state, commit }, { type = "", payload }) {
         try {
             switch (type) {
                 case "ADD_NEW_USER":
                     commit("addNewUser", payload);
+                    break;
+                case "ADD_DIRECTORY":
+                    state.staffDirectory = [
+                        ...state.staffDirectory,
+                        ...payload
+                    ];
                     break;
                 case "ASSIGN_ROLE":
                     commit("assignUserRole", payload);
@@ -47,8 +55,6 @@ const mutations = {
             u.job = u.job ? JSON.parse(u.job) : u.job;
             return u;
         });
-        if (data && data.length > 0) {
-        }
     },
     updateJob: (state, data) => {
         let staff = {

@@ -168,7 +168,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     reportToMe: Array,
     directorates: Array
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getBranches", "getDepartments", "getUnits", "getCountries"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getDepartments", "getUnits", "getCountries"])),
   beforeMount: function beforeMount() {},
   created: function created() {
     this.dispatchProfile({
@@ -182,9 +182,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
     this.dispatchEmploymentStatus({
       payload: this.employmentStatuses
-    });
-    this.dispatchBranch({
-      payload: this.branches
     });
     this.dispatchDepartment({
       payload: this.departments
@@ -200,7 +197,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       payload: {
         supervisors: this.supervisors,
         hods: this.hods,
-        managers: this.managers,
         reportTo: this.reportTo,
         reportToMe: this.reportToMe,
         directorates: this.directorates
@@ -215,7 +211,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       countries: []
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(["dispatchProfile", "dispatchJobCategory", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchBranch", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchMyLeaders", "dispatchCountry"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(["dispatchProfile", "dispatchJobCategory", "dispatchJobTitle", "dispatchEmploymentStatus", "dispatchDepartment", "dispatchUnit", "dispatchPosition", "dispatchMyLeaders", "dispatchCountry"])), {}, {
     getUserDepartment: function getUserDepartment(profile) {
       if (profile.job && profile.job.department) {
         var result = this.getDepartments.find(function (b) {
@@ -2652,29 +2648,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2682,7 +2655,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     ViewPdf: _ViewPdf__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getBranches", "getDepartments", "getUnits", "getPositions"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile", "getJobCategories", "getJobTitles", "getEmploymentStatus", "getDepartments", "getUnits", "getPositions"])), {}, {
     filteredJobTitles: function filteredJobTitles() {
       return this.jTitles;
     }
@@ -2757,7 +2730,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         department: "",
         unit: "",
         position: "",
-        branch: "",
         startDate: null,
         endDate: null,
         contractDetails: null,
@@ -2772,7 +2744,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         department: [],
         unit: [],
         position: [],
-        branch: [],
         startDate: [],
         endDate: [],
         contractDetails: []
@@ -2789,7 +2760,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           department: jobDetails.department || "none",
           unit: jobDetails.unit || "",
           position: jobDetails.position || "",
-          branch: jobDetails.branch,
           startDate: new Date(jobDetails.startDate),
           endDate: new Date(jobDetails.endDate),
           contractDetailsAvailable: jobDetails.contractDetails,
@@ -2809,7 +2779,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data.append("department", this.job.department);
       data.append("unit", this.job.unit);
       data.append("position", this.job.position);
-      data.append("branch", this.job.branch);
       data.append("startDate", this.job.startDate ? this.job.startDate.toISOString() : "");
       data.append("endDate", this.job.endDate ? this.job.endDate.toISOString() : "");
       data.append("contractStatus", this.job.contractStatus);
@@ -2892,7 +2861,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.job.department = "";
       this.job.unit = "";
       this.job.position = "";
-      this.job.branch = "";
       this.job.startDate = null;
       this.job.endDate = null;
       this.job.contractDetails = null;
@@ -2908,7 +2876,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.jobErrors.department = error.department || [];
       this.jobErrors.unit = error.unit || [];
       this.jobErrors.position = error.position || [];
-      this.jobErrors.branch = error.branch || [];
       this.jobErrors.startDate = error.startDate || [];
       this.jobErrors.endDate = error.endDate || [];
       this.jobErrors.contractDetails = error.contractDetails || [];
@@ -2940,19 +2907,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3634,7 +3588,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         middleName: "",
         lastName: "",
         staffId: "",
-        otherId: "",
         birthDate: new Date(),
         maritalStatus: "",
         gender: "",
@@ -3654,7 +3607,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         middleName: [],
         lastName: [],
         staffId: [],
-        otherId: [],
         birthDate: [],
         maritalStatus: [],
         gender: []
@@ -3689,7 +3641,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         middleName: details.middleName || "",
         lastName: details.lastName || "",
         staffId: details.staffId || "",
-        otherId: details.otherId || "",
         birthDate: details.birthDate ? new Date(details.birthDate) : new Date(),
         maritalStatus: details.maritalStatus || "",
         gender: details.gender || ""
@@ -3883,7 +3834,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.personalDetailsErrors.middleName = error.middleName || [];
       this.personalDetailsErrors.lastName = error.lastName || [];
       this.personalDetailsErrors.staffId = error.staffId || [];
-      this.personalDetailsErrors.otherId = error.otherId || [];
       this.personalDetailsErrors.birthDate = error.birthDate || [];
       this.personalDetailsErrors.maritalStatus = error.maritalStatus || [];
       this.personalDetailsErrors.gender = error.gender || [];
@@ -3925,7 +3875,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _ViewPdf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ViewPdf */ "./resources/js/components/ViewPdf.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5228,403 +5177,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "QualificayionDetails",
-  components: {
-    ViewPdf: _ViewPdf__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
+  components: {},
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["getProfile"])), {}, {
-    getWorkExperience: function getWorkExperience() {
-      if (typeof this.getProfile.qualifications.workExperience === "string") return JSON.parse(this.getProfile.qualifications.workExperience);
-      return [];
-    },
     getEducation: function getEducation() {
       if (typeof this.getProfile.qualifications.education === "string") return JSON.parse(this.getProfile.qualifications.education);
       return [];
     },
-    getSkills: function getSkills() {
-      if (typeof this.getProfile.qualifications.skills === "string") return JSON.parse(this.getProfile.qualifications.skills);
+    getContinuousDev: function getContinuousDev() {
+      if (typeof this.getProfile.qualifications.continuousDev === "string") return JSON.parse(this.getProfile.qualifications.continuousDev);
+      return [];
+    },
+    getExpertise: function getExpertise() {
+      if (typeof this.getProfile.qualifications.expertise === "string") return JSON.parse(this.getProfile.qualifications.expertise);
       return [];
     },
     getLanguages: function getLanguages() {
       if (typeof this.getProfile.qualifications.languages === "string") return JSON.parse(this.getProfile.qualifications.languages);
-      return [];
-    },
-    getAttachments: function getAttachments() {
-      if (typeof this.getProfile.qualifications.attachments === "string") return JSON.parse(this.getProfile.qualifications.attachments);
       return [];
     },
     getAttachmentDropperId: function getAttachmentDropperId() {
@@ -5634,37 +5205,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {},
   data: function data() {
     return {
-      isEditWorkExperience: false,
       isEditEducation: false,
-      isEditSkills: false,
+      isEditExpertise: false,
       isEditLanguage: false,
-      isEditQualificationAttachment: false,
+      isEditContinuousDev: false,
       isSubmitting: false,
       attachmentUpdateType: null,
       attachmentDropperId: null,
-      // isviewSpecification: false,
-      isSubmittingWorkExperience: false,
       isSubmittingEducation: false,
-      isSubmittingSkills: false,
+      isSubmittingContinuousDev: false,
+      isSubmittingExpertise: false,
       isSubmittingLanguage: false,
-      isSubmittingQualificationAttachment: false,
       qualifications: {
-        workExperience: {
-          company: "",
-          jobTitle: "",
-          from: null,
-          to: null,
-          comment: ""
-        },
         education: {
           institution: "",
           specialization: "",
-          gpa: null,
           started: null,
           completed: null
         },
-        skills: {
-          skill: "",
+        continuousDev: {
+          institution: "",
+          specialization: "",
+          started: null,
+          completed: null
+        },
+        expertise: {
+          expertise: "",
           yearOfExperience: "",
           comment: ""
         },
@@ -5672,29 +5238,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           language: "",
           fluency: "",
           comment: ""
-        },
-        attachment: {
-          file: null,
-          comment: ""
         }
       },
       qualificationsErrors: {
-        workExperience: {
-          company: [],
-          jobTitle: [],
-          from: [],
-          to: [],
-          comment: []
-        },
         education: {
           institution: [],
           specialization: [],
-          gpa: [],
           started: [],
           completed: []
         },
-        skills: {
-          skill: [],
+        continuousDev: {
+          institution: [],
+          specialization: [],
+          started: [],
+          completed: []
+        },
+        expertise: {
+          expertise: [],
           yearOfExperience: [],
           comment: []
         },
@@ -5702,60 +5262,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           language: [],
           fluency: [],
           comment: []
-        },
-        attachment: {
-          file: [],
-          comment: []
         }
       }
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["dispatchProfile"])), {}, {
-    openAttachmentDropper: function openAttachmentDropper(data, type) {
-      var dropper = this.$refs.attachmentDropper;
-      this.attachmentDropperId = data.id;
-      this.attachmentUpdateType = type;
-
-      if (dropper) {
-        this.qualifications.attachment = {
-          comment: data.comment
-        };
-        dropper.open();
-      }
-    },
-    closeAttachmentDropper: function closeAttachmentDropper() {
-      var dropper = this.$refs.attachmentDropper;
-      this.attachmentUpdateType = "";
-
-      if (dropper) {
-        this.cancelQualificationAttachmentForm();
-        dropper.close();
-      }
-    },
-    openWorkExperienceDropper: function openWorkExperienceDropper(data) {
-      var dropper = this.$refs.workExperienceDropper;
-      this.attachmentDropperId = data.id;
-
-      if (dropper) {
-        this.qualifications.workExperience = {
-          company: data.company,
-          jobTitle: data.jobTitle,
-          from: data.from,
-          to: data.to,
-          comment: data.comment
-        };
-        dropper.open();
-      }
-    },
-    closeWorkExperienceDropper: function closeWorkExperienceDropper() {
-      var dropper = this.$refs.workExperienceDropper;
-      this.attachmentUpdateType = "";
-
-      if (dropper) {
-        this.cancelWorkExperienceForm();
-        dropper.close();
-      }
-    },
     openEducationDropper: function openEducationDropper(data) {
       var dropper = this.$refs.educationDropper;
       this.attachmentDropperId = data.id;
@@ -5780,25 +5291,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         dropper.close();
       }
     },
-    openSkillDropper: function openSkillDropper(data) {
-      var dropper = this.$refs.skillDropper;
+    openContinuousDevDropper: function openContinuousDevDropper(data) {
+      var dropper = this.$refs.continuousDevDropper;
       this.attachmentDropperId = data.id;
 
       if (dropper) {
-        this.qualifications.skills = {
-          skill: data.skill,
+        this.qualifications.continuousDev = {
+          institution: data.institution,
+          specialization: data.specialization,
+          started: data.started,
+          completed: data.completed
+        };
+        dropper.open();
+      }
+    },
+    closeContinuousDevDropper: function closeContinuousDevDropper() {
+      var dropper = this.$refs.continuousDevDropper;
+      this.attachmentUpdateType = "";
+
+      if (dropper) {
+        this.cancelContinuousDevForm();
+        dropper.close();
+      }
+    },
+    openExpertiseDropper: function openExpertiseDropper(data) {
+      var dropper = this.$refs.expertiseDropper;
+      this.attachmentDropperId = data.id;
+
+      if (dropper) {
+        this.qualifications.expertise = {
+          expertise: data.expertise,
           yearOfExperience: data.yearOfExperience,
           comment: data.comment
         };
         dropper.open();
       }
     },
-    closeSkillDropper: function closeSkillDropper() {
-      var dropper = this.$refs.skillDropper;
+    closeExpertiseDropper: function closeExpertiseDropper() {
+      var dropper = this.$refs.expertiseDropper;
       this.attachmentUpdateType = "";
 
       if (dropper) {
-        this.cancelSkillsForm();
+        this.cancelExpertiseForm();
         dropper.close();
       }
     },
@@ -5824,166 +5358,172 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         dropper.close();
       }
     },
-    addWorkExperience: function addWorkExperience() {
-      var _this = this;
-
-      this.isSubmittingWorkExperience = true;
-      this.setWorkExperienceErrors();
-      this.$axios.put("/dashboard/ess/add-work-experience/".concat(this.getProfile.user_id), this.qualifications.workExperience).then(function (res) {
-        if (res.status === 200 && res.data.added) {
-          _this.clearWorkExperienceForm();
-
-          _this.dispatchProfile({
-            type: "ADD_WORK_EXPERIENCE",
-            payload: res.data.data
-          });
-
-          setTimeout(function () {
-            _this.snackbar("Work experience added successfully", "is-dark");
-
-            _this.isSubmittingWorkExperience = false;
-          }, 1000);
-        }
-      })["catch"](function (err) {
-        if (err.response.status === 422) {
-          _this.setWorkExperienceErrors(err.response.data.errors);
-        }
-
-        _this.isSubmittingWorkExperience = false;
-      });
-    },
-    updateWorkExperience: function updateWorkExperience() {
-      var _this2 = this;
-
-      this.isSubmittingWorkExperience = true;
-      this.setWorkExperienceErrors();
-      this.$axios.put("/dashboard/ess/update-work-experience/".concat(this.getProfile.user_id, "/").concat(this.attachmentDropperId), this.qualifications.workExperience).then(function (res) {
-        if (res.status === 200 && res.data.updated) {
-          _this2.dispatchProfile({
-            type: "ADD_WORK_EXPERIENCE",
-            payload: res.data.data
-          });
-
-          setTimeout(function () {
-            _this2.snackbar("Work experience updated successfully", "is-dark");
-
-            _this2.isSubmittingWorkExperience = false;
-          }, 1000);
-        }
-      })["catch"](function (err) {
-        if (err.response.status === 422) {
-          _this2.setWorkExperienceErrors(err.response.data.errors);
-        }
-
-        _this2.isSubmittingWorkExperience = false;
-      });
-    },
     addEducation: function addEducation() {
-      var _this3 = this;
+      var _this = this;
 
       this.isSubmittingEducation = true;
       this.setEducationErrors();
       this.$axios.put("/dashboard/ess/add-education/".concat(this.getProfile.user_id), this.qualifications.education).then(function (res) {
         if (res.status === 200 && res.data.added) {
-          _this3.dispatchProfile({
+          _this.dispatchProfile({
             type: "ADD_EDUCATION",
             payload: res.data.data
           });
 
-          _this3.clearEducationForm();
+          _this.clearEducationForm();
 
           setTimeout(function () {
-            _this3.snackbar("Education added successfully", "is-dark");
+            _this.snackbar("Education added successfully", "is-dark");
 
-            _this3.isSubmittingEducation = false;
+            _this.isSubmittingEducation = false;
           }, 1000);
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this3.setEducationErrors(err.response.data.errors);
+          _this.setEducationErrors(err.response.data.errors);
         }
 
-        _this3.isSubmittingEducation = false;
+        _this.isSubmittingEducation = false;
       });
     },
     updateEducation: function updateEducation() {
-      var _this4 = this;
+      var _this2 = this;
 
       this.isSubmittingEducation = true;
       this.setEducationErrors();
       this.$axios.put("/dashboard/ess/update-education/".concat(this.getProfile.user_id, "/").concat(this.attachmentDropperId), this.qualifications.education).then(function (res) {
         if (res.status === 200 && res.data.updated) {
-          _this4.dispatchProfile({
+          _this2.closeEducationDropper();
+
+          _this2.dispatchProfile({
             type: "ADD_EDUCATION",
             payload: res.data.data
           });
 
           setTimeout(function () {
-            _this4.snackbar("Education updated successfully", "is-dark");
+            _this2.snackbar("Education updated successfully", "is-dark");
 
-            _this4.isSubmittingEducation = false;
+            _this2.isSubmittingEducation = false;
           }, 1000);
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this4.setEducationErrors(err.response.data.errors);
+          _this2.setEducationErrors(err.response.data.errors);
         }
 
-        _this4.isSubmittingEducation = false;
+        _this2.isSubmittingEducation = false;
       });
     },
-    addSkills: function addSkills() {
+    addContinuousDev: function addContinuousDev() {
+      var _this3 = this;
+
+      this.isSubmittingContinuousDev = true;
+      this.setContinuousDevErrors();
+      this.$axios.put("/dashboard/ess/add-continuous-dev/".concat(this.getProfile.user_id), this.qualifications.continuousDev).then(function (res) {
+        if (res.status === 200 && res.data.added) {
+          _this3.dispatchProfile({
+            type: "ADD_CONTINUOUS_DEV",
+            payload: res.data.data
+          });
+
+          _this3.clearContinuousDevForm();
+
+          setTimeout(function () {
+            _this3.snackbar("Development added successfully", "is-dark");
+
+            _this3.isSubmittingContinuousDev = false;
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this3.setContinuousDevErrors(err.response.data.errors);
+        }
+
+        _this3.isSubmittingContinuousDev = false;
+      });
+    },
+    updateContinuousDev: function updateContinuousDev() {
+      var _this4 = this;
+
+      this.isSubmittingContinuousDev = true;
+      this.setContinuousDevErrors();
+      this.$axios.put("/dashboard/ess/update-continuous-dev/".concat(this.getProfile.user_id, "/").concat(this.attachmentDropperId), this.qualifications.continuousDev).then(function (res) {
+        if (res.status === 200 && res.data.updated) {
+          _this4.closeContinuousDevDropper();
+
+          _this4.dispatchProfile({
+            type: "ADD_CONTINUOUS_DEV",
+            payload: res.data.data
+          });
+
+          setTimeout(function () {
+            _this4.snackbar("Development updated successfully", "is-dark");
+
+            _this4.isSubmittingContinuousDev = false;
+          }, 1000);
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this4.setContinuousDevErrors(err.response.data.errors);
+        }
+
+        _this4.isSubmittingContinuousDev = false;
+      });
+    },
+    addExpertise: function addExpertise() {
       var _this5 = this;
 
-      this.isSubmittingSkills = true;
-      this.setSkillsErrors();
-      this.$axios.put("/dashboard/ess/add-skill/".concat(this.getProfile.user_id), this.qualifications.skills).then(function (res) {
+      this.isSubmittingExpertise = true;
+      this.setExpertiseErrors();
+      this.$axios.put("/dashboard/ess/add-expertise/".concat(this.getProfile.user_id), this.qualifications.expertise).then(function (res) {
         if (res.status === 200 && res.data.added) {
-          _this5.clearSkillsForm();
+          _this5.clearExpertiseForm();
 
           _this5.dispatchProfile({
-            type: "ADD_SKILL",
+            type: "ADD_EXPERTISE",
             payload: res.data.data
           });
 
           setTimeout(function () {
-            _this5.snackbar("Skill added successfully", "is-dark");
+            _this5.snackbar("Expertise added successfully", "is-dark");
 
-            _this5.isSubmittingSkills = false;
+            _this5.isSubmittingExpertise = false;
           }, 1000);
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this5.setSkillsErrors(err.response.data.errors);
+          _this5.setExpertiseErrors(err.response.data.errors);
         }
 
-        _this5.isSubmittingSkills = false;
+        _this5.isSubmittingExpertise = false;
       });
     },
-    updateSkills: function updateSkills() {
+    updateExpertise: function updateExpertise() {
       var _this6 = this;
 
-      this.isSubmittingSkills = true;
-      this.setSkillsErrors();
-      this.$axios.put("/dashboard/ess/update-skill/".concat(this.getProfile.user_id, "/").concat(this.attachmentDropperId), this.qualifications.skills).then(function (res) {
+      this.isSubmittingExpertise = true;
+      this.setExpertiseErrors();
+      this.$axios.put("/dashboard/ess/update-expertise/".concat(this.getProfile.user_id, "/").concat(this.attachmentDropperId), this.qualifications.expertise).then(function (res) {
         if (res.status === 200 && res.data.updated) {
+          _this6.closeExpertiseDropper();
+
           _this6.dispatchProfile({
-            type: "ADD_SKILL",
+            type: "ADD_EXPERTISE",
             payload: res.data.data
           });
 
           setTimeout(function () {
-            _this6.snackbar("Skill updated successfully", "is-dark");
+            _this6.snackbar("Expertise updated successfully", "is-dark");
 
-            _this6.isSubmittingSkills = false;
+            _this6.isSubmittingExpertise = false;
           }, 1000);
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this6.setSkillsErrors(err.response.data.errors);
+          _this6.setExpertiseErrors(err.response.data.errors);
         }
 
-        _this6.isSubmittingSkills = false;
+        _this6.isSubmittingExpertise = false;
       });
     },
     addLanguage: function addLanguage() {
@@ -6021,6 +5561,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.setLanguageErrors();
       this.$axios.put("/dashboard/ess/update-language/".concat(this.getProfile.user_id, "/").concat(this.attachmentDropperId), this.qualifications.languages).then(function (res) {
         if (res.status === 200 && res.data.added) {
+          _this8.closeLanguageDropper();
+
           _this8.dispatchProfile({
             type: "ADD_LANGUAGE",
             payload: res.data.data
@@ -6040,102 +5582,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this8.isSubmittingLanguage = false;
       });
     },
-    addQualificationAttachment: function addQualificationAttachment() {
-      var _this9 = this;
-
-      this.isSubmittingQualificationAttachment = true;
-      this.setQualificationAttachmentErrors();
-      var data = new FormData();
-      data.append("file", this.qualifications.attachment.file);
-      data.append("comment", this.qualifications.attachment.comment);
-      this.$axios.post("/dashboard/ess/add-qualification-attachment/".concat(this.getProfile.user_id), data).then(function (res) {
-        if (res.status === 200) {
-          _this9.clearQualificationAttachmentForm();
-
-          _this9.dispatchProfile({
-            type: "ADD_ATTACHMENT",
-            payload: res.data.data
-          });
-
-          setTimeout(function () {
-            _this9.snackbar("Attachment added successfully", "is-dark");
-
-            _this9.isSubmittingQualificationAttachment = false;
-          }, 1000);
-        }
-      })["catch"](function (err) {
-        if (err.response.status === 422) {
-          _this9.setQualificationAttachmentErrors(err.response.data.errors);
-        }
-
-        _this9.isSubmittingQualificationAttachment = false;
-      });
-    },
-    replaceAttachment: function replaceAttachment(type) {
-      var _this10 = this;
-
-      this.isSubmittingQualificationAttachment = true;
-      this.setQualificationAttachmentErrors();
-      var data = new FormData();
-
-      if (type === "comment") {
-        data.append("id", this.attachmentDropperId);
-        data.append("comment", this.qualifications.attachment.comment);
-      }
-
-      if (type === "attachment") {
-        data.append("id", this.attachmentDropperId);
-        data.append("file", this.qualifications.attachment.file);
-      }
-
-      this.$axios.post("/dashboard/ess/replace-qualification-attachment/".concat(this.getProfile.user_id), data).then(function (res) {
-        if (res.status === 200 && res.data.updated) {
-          _this10.qualifications.attachment.file = null;
-
-          _this10.dispatchProfile({
-            type: "ADD_ATTACHMENT",
-            payload: res.data.data
-          });
-
-          setTimeout(function () {
-            if (type === "comment") {
-              _this10.snackbar("Comment updated successfully", "is-dark");
-            }
-
-            if (type === "attachment") {
-              _this10.snackbar("Attachment updated successfully", "is-dark");
-            }
-
-            _this10.isSubmittingQualificationAttachment = false;
-          }, 1000);
-        }
-      })["catch"](function (err) {
-        if (err.response.status == 422) {
-          setTimeout(function () {
-            _this10.setQualificationAttachmentErrors(err.response.data.errors);
-
-            _this10.isSubmittingQualificationAttachment = false;
-          }, 1000);
-        }
-      });
-    },
-    viewAttachment: function viewAttachment(file) {
-      this.$buefy.modal.open({
-        parent: this,
-        component: _ViewPdf__WEBPACK_IMPORTED_MODULE_1__["default"],
-        hasModalCard: true,
-        trapFocus: true,
-        props: {
-          file: file
-        }
-      });
-    },
     deleteHandler: function deleteHandler(type, id) {
-      var _this11 = this;
+      var _this9 = this;
 
       this.$axios["delete"]("/dashboard/ess/delete-qualification/".concat(this.getProfile.user_id, "/").concat(id, "/").concat(type)).then(function (res) {
         if (res.status === 200 && res.data.deleted) {
-          _this11.dispatchProfile({
+          _this9.dispatchProfile({
             type: "UDATE_QUALIFICATION",
             payload: {
               type: type,
@@ -6144,98 +5596,84 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
 
           setTimeout(function () {
-            _this11.snackbar("Data successfully deleted", "is-dark");
+            _this9.snackbar("Data successfully deleted", "is-dark");
           }, 1000);
         }
       })["catch"](function (err) {
         console.log(err);
       });
     },
-    clearWorkExperienceForm: function clearWorkExperienceForm() {
-      this.qualifications.workExperience.company = "";
-      this.qualifications.workExperience.jobTitle = "";
-      this.qualifications.workExperience.from = "";
-      this.qualifications.workExperience.to = "";
-      this.qualifications.workExperience.comment = "";
-    },
     clearEducationForm: function clearEducationForm() {
       this.qualifications.education.institution = "";
       this.qualifications.education.specialization = "";
-      this.qualifications.education.gpa = "";
       this.qualifications.education.started = "";
       this.qualifications.education.completed = "";
     },
-    clearSkillsForm: function clearSkillsForm() {
-      this.qualifications.skills.skill = "";
-      this.qualifications.skills.yearOfExperience = "";
-      this.qualifications.skills.comment = "";
+    clearContinuousDevForm: function clearContinuousDevForm() {
+      this.qualifications.continuousDev.institution = "";
+      this.qualifications.continuousDev.specialization = "";
+      this.qualifications.continuousDev.started = "";
+      this.qualifications.continuousDev.completed = "";
+    },
+    clearExpertiseForm: function clearExpertiseForm() {
+      this.qualifications.expertise.expertise = "";
+      this.qualifications.expertise.yearOfExperience = "";
+      this.qualifications.expertise.comment = "";
     },
     clearLanguageForm: function clearLanguageForm() {
       this.qualifications.languages.language = "";
       this.qualifications.languages.fluency = "";
       this.qualifications.languages.comment = "";
     },
-    clearQualificationAttachmentForm: function clearQualificationAttachmentForm() {
-      this.qualifications.attachment.file = null;
-      this.qualifications.attachment.comment = "";
-    },
-    cancelWorkExperienceForm: function cancelWorkExperienceForm() {
-      this.isEditWorkExperience = false;
-      this.clearWorkExperienceForm();
-      this.setWorkExperienceErrors();
-    },
     cancelEducationForm: function cancelEducationForm() {
       this.isEditEducation = false;
       this.clearEducationForm();
       this.setEducationErrors();
+    },
+    cancelContinuousDevForm: function cancelContinuousDevForm() {
+      this.isEditContinuousDev = false;
+      this.clearContinuousDevForm();
+      this.setContinuousDevErrors();
     },
     cancelLanguageForm: function cancelLanguageForm() {
       this.isEditLanguage = false;
       this.clearLanguageForm();
       this.setLanguageErrors();
     },
-    cancelSkillsForm: function cancelSkillsForm() {
-      this.isEditSkills = false;
-      this.clearSkillsForm();
-      this.setSkillsErrors();
-    },
-    cancelQualificationAttachmentForm: function cancelQualificationAttachmentForm() {
-      this.isEditQualificationAttachment = false;
-      this.clearQualificationAttachmentForm();
-      this.setQualificationAttachmentErrors();
-    },
-    setWorkExperienceErrors: function setWorkExperienceErrors() {
-      var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.qualificationsErrors.workExperience.company = error.company ? error.company : [];
-      this.qualificationsErrors.workExperience.jobTitle = error.jobTitle ? error.jobTitle : [];
-      this.qualificationsErrors.workExperience.from = error.from ? error.from : [];
-      this.qualificationsErrors.workExperience.to = error.to ? error.to : [];
-      this.qualificationsErrors.workExperience.comment = error.comment ? error.comment : [];
+    cancelExpertiseForm: function cancelExpertiseForm() {
+      this.isEditExpertise = false;
+      this.clearExpertiseForm();
+      this.setExpertiseErrors();
     },
     setEducationErrors: function setEducationErrors() {
       var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.qualificationsErrors.education.institution = error.institution ? error.institution : [];
-      this.qualificationsErrors.education.specialization = error.specialization ? error.specialization : [];
-      this.qualificationsErrors.education.gpa = error.gpa ? error.gpa : [];
-      this.qualificationsErrors.education.started = error.started ? error.started : [];
-      this.qualificationsErrors.education.completed = error.completed ? error.completed : [];
+      this.qualificationsErrors.education = {
+        institution: error.institution || [],
+        specialization: error.specialization || [],
+        started: error.started || [],
+        completed: error.completed || []
+      };
     },
-    setSkillsErrors: function setSkillsErrors() {
+    setContinuousDevErrors: function setContinuousDevErrors() {
       var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.qualificationsErrors.skills.skill = error.skill ? error.skill : [];
-      this.qualificationsErrors.skills.yearOfExperience = error.yearOfExperience ? error.yearOfExperience : [];
-      this.qualificationsErrors.skills.comment = error.comment ? error.comment : [];
+      this.qualificationsErrors.continuousDev = {
+        institution: error.institution || [],
+        specialization: error.specialization || [],
+        started: error.started || [],
+        completed: error.completed || []
+      };
+    },
+    setExpertiseErrors: function setExpertiseErrors() {
+      var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      this.qualificationsErrors.expertise.expertise = error.expertise ? error.expertise : [];
+      this.qualificationsErrors.expertise.yearOfExperience = error.yearOfExperience || [];
+      this.qualificationsErrors.expertise.comment = error.comment || [];
     },
     setLanguageErrors: function setLanguageErrors() {
       var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.qualificationsErrors.languages.language = error.language ? error.language : [];
-      this.qualificationsErrors.languages.fluency = error.fluency ? error.fluency : [];
-      this.qualificationsErrors.languages.comment = error.comment ? error.comment : [];
-    },
-    setQualificationAttachmentErrors: function setQualificationAttachmentErrors() {
-      var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.qualificationsErrors.attachment.file = error.file || [];
-      this.qualificationsErrors.attachment.comment = error.comment || [];
+      this.qualificationsErrors.languages.language = error.language || [];
+      this.qualificationsErrors.languages.fluency = error.fluency || [];
+      this.qualificationsErrors.languages.comment = error.comment || [];
     }
   })
 });
@@ -6258,13 +5696,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6553,7 +5984,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".report_to_label[data-v-80913e30] {\n  display: block;\n  font-size: 1rem;\n  color: #686767b5;\n  letter-spacing: 2px;\n}\n.report_to_text[data-v-80913e30]:not(:last-child) {\n  margin-bottom: 0.15rem !important;\n}", ""]);
+exports.push([module.i, ".report_to_label[data-v-80913e30] {\n  display: block;\n  font-size: 1rem;\n  color: #686767b5;\n  letter-spacing: 2px;\n}\n.report_to_text[data-v-80913e30]:not(:last-child) {\n  margin-bottom: 0.15rem !important;\n}\n.leader__details[data-v-80913e30]:not(:last-child) {\n  border-bottom: 1px solid #686767b5;\n}", ""]);
 
 // exports
 
@@ -10597,73 +10028,6 @@ var render = function() {
                       { staticClass: "column is-3" },
                       [
                         _c("b-field", {
-                          attrs: { label: _vm.$t("app.branch"), expanded: "" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column is-4" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "",
-                              expanded: "",
-                              type: {
-                                "is-danger": _vm.jobErrors.branch.length > 0
-                              },
-                              message: _vm.jobErrors.branch
-                            }
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { size: "", expanded: "" },
-                                model: {
-                                  value: _vm.job.branch,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.job, "branch", $$v)
-                                  },
-                                  expression: "job.branch"
-                                }
-                              },
-                              _vm._l(_vm.getBranches, function(branch, index) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: index,
-                                    domProps: { value: branch.id }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                      " +
-                                        _vm._s(branch.name) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column is-3" },
-                      [
-                        _c("b-field", {
                           attrs: {
                             label: _vm.$t("app.department"),
                             expanded: ""
@@ -12131,6 +11495,47 @@ var render = function() {
                                     "b-field",
                                     {
                                       attrs: {
+                                        label: _vm.$tc("app.staffId"),
+                                        expanded: "",
+                                        type: {
+                                          "is-danger":
+                                            _vm.personalDetailsErrors.staffId
+                                              .length > 0
+                                        },
+                                        message:
+                                          _vm.personalDetailsErrors.staffId
+                                      }
+                                    },
+                                    [
+                                      _c("b-input", {
+                                        attrs: { size: "" },
+                                        model: {
+                                          value: _vm.personalDetails.staffId,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.personalDetails,
+                                              "staffId",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "personalDetails.staffId"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column is-3" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      attrs: {
                                         label: "" + _vm.$tc("app.gender", 1),
                                         type: {
                                           "is-danger":
@@ -12214,90 +11619,6 @@ var render = function() {
                                         1
                                       )
                                     ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "columns" }, [
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: _vm.$tc("app.staffId"),
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.personalDetailsErrors.staffId
-                                              .length > 0
-                                        },
-                                        message:
-                                          _vm.personalDetailsErrors.staffId
-                                      }
-                                    },
-                                    [
-                                      _c("b-input", {
-                                        attrs: { size: "" },
-                                        model: {
-                                          value: _vm.personalDetails.staffId,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.personalDetails,
-                                              "staffId",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "personalDetails.staffId"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column is-3" },
-                                [
-                                  _c(
-                                    "b-field",
-                                    {
-                                      attrs: {
-                                        label: _vm.$tc("app.otherId"),
-                                        expanded: "",
-                                        type: {
-                                          "is-danger":
-                                            _vm.personalDetailsErrors.otherId
-                                              .length > 0
-                                        },
-                                        message:
-                                          _vm.personalDetailsErrors.otherId
-                                      }
-                                    },
-                                    [
-                                      _c("b-input", {
-                                        attrs: { size: "" },
-                                        model: {
-                                          value: _vm.personalDetails.otherId,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.personalDetails,
-                                              "otherId",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "personalDetails.otherId"
-                                        }
-                                      })
-                                    ],
-                                    1
                                   )
                                 ],
                                 1
@@ -12395,7 +11716,14 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("header", { staticClass: "card-header" }, [
             _c("p", { staticClass: "card-header-title" }, [
-              _vm._v(_vm._s(_vm.$tc("app.attachment", 2)))
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.$tc("app.attachment", 2)) +
+                  "\n          "
+              ),
+              _c("span", { staticStyle: { color: "#686767c5" } }, [
+                _vm._v(" (" + _vm._s(_vm.$t("app.pdAttachmentDesc")) + ")")
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -13383,686 +12711,6 @@ var render = function() {
                                             _vm._v(
                                               "\n                  " +
                                                 _vm._s(
-                                                  _vm.$t(
-                                                    "app.add_wrk_experience"
-                                                  )
-                                                ) +
-                                                "\n                "
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "a",
-                                          { staticClass: "card-header-icon" },
-                                          [
-                                            _c("b-icon", {
-                                              attrs: {
-                                                pack: "fas",
-                                                type: "is-info",
-                                                icon: props.open
-                                                  ? "angle-down"
-                                                  : "angle-up"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ]
-                                    )
-                                  }
-                                }
-                              ],
-                              null,
-                              false,
-                              1722479601
-                            ),
-                            model: {
-                              value: _vm.isEditWorkExperience,
-                              callback: function($$v) {
-                                _vm.isEditWorkExperience = $$v
-                              },
-                              expression: "isEditWorkExperience"
-                            }
-                          },
-                          [
-                            _vm._v(" "),
-                            _c("div", { staticClass: "card-content" }, [
-                              _c("div", { staticClass: "content" }, [
-                                _c(
-                                  "form",
-                                  {
-                                    on: {
-                                      submit: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.addWorkExperience()
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("div", { staticClass: "columns" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-6" },
-                                        [
-                                          _c(
-                                            "b-field",
-                                            {
-                                              attrs: {
-                                                label: _vm.$t("app.company"),
-                                                expanded: "",
-                                                type: {
-                                                  "is-danger":
-                                                    _vm.qualificationsErrors
-                                                      .workExperience.company
-                                                      .length > 0
-                                                },
-                                                message:
-                                                  _vm.qualificationsErrors
-                                                    .workExperience.company
-                                              }
-                                            },
-                                            [
-                                              _c("b-input", {
-                                                attrs: {
-                                                  size: "",
-                                                  expanded: ""
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.qualifications
-                                                      .workExperience.company,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.qualifications
-                                                        .workExperience,
-                                                      "company",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "qualifications.workExperience.company"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-6" },
-                                        [
-                                          _c(
-                                            "b-field",
-                                            {
-                                              attrs: {
-                                                label: _vm.$t("app.jobTitle"),
-                                                expanded: "",
-                                                type: {
-                                                  "is-danger":
-                                                    _vm.qualificationsErrors
-                                                      .workExperience.jobTitle
-                                                      .length > 0
-                                                },
-                                                message:
-                                                  _vm.qualificationsErrors
-                                                    .workExperience.jobTitle
-                                              }
-                                            },
-                                            [
-                                              _c("b-input", {
-                                                attrs: {
-                                                  size: "",
-                                                  expanded: ""
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.qualifications
-                                                      .workExperience.jobTitle,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.qualifications
-                                                        .workExperience,
-                                                      "jobTitle",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "qualifications.workExperience.jobTitle"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "columns" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-6" },
-                                        [
-                                          _c(
-                                            "b-field",
-                                            {
-                                              attrs: {
-                                                label:
-                                                  _vm.$t("app.from") +
-                                                  " (" +
-                                                  _vm.$t("app.year") +
-                                                  ")",
-                                                expanded: "",
-                                                type: {
-                                                  "is-danger":
-                                                    _vm.qualificationsErrors
-                                                      .workExperience.from
-                                                      .length > 0
-                                                },
-                                                message:
-                                                  _vm.qualificationsErrors
-                                                    .workExperience.from
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "b-select",
-                                                {
-                                                  attrs: {
-                                                    placeholder: _vm.$t(
-                                                      "app.selectYear"
-                                                    ),
-                                                    size: "",
-                                                    expanded: ""
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.qualifications
-                                                        .workExperience.from,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.qualifications
-                                                          .workExperience,
-                                                        "from",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "qualifications.workExperience.from"
-                                                  }
-                                                },
-                                                _vm._l(_vm.getYears, function(
-                                                  year,
-                                                  index
-                                                ) {
-                                                  return _c(
-                                                    "option",
-                                                    {
-                                                      key: index,
-                                                      domProps: { value: year }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                              " +
-                                                          _vm._s(year) +
-                                                          "\n                            "
-                                                      )
-                                                    ]
-                                                  )
-                                                }),
-                                                0
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-6" },
-                                        [
-                                          _c(
-                                            "b-field",
-                                            {
-                                              attrs: {
-                                                label:
-                                                  _vm.$t("app.to") +
-                                                  " (" +
-                                                  _vm.$t("app.year") +
-                                                  ")",
-                                                expanded: "",
-                                                type: {
-                                                  "is-danger":
-                                                    _vm.qualificationsErrors
-                                                      .workExperience.to
-                                                      .length > 0
-                                                },
-                                                message:
-                                                  _vm.qualificationsErrors
-                                                    .workExperience.to
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "b-select",
-                                                {
-                                                  attrs: {
-                                                    placeholder: _vm.$t(
-                                                      "app.selectYear"
-                                                    ),
-                                                    size: "",
-                                                    expanded: ""
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.qualifications
-                                                        .workExperience.to,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.qualifications
-                                                          .workExperience,
-                                                        "to",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "qualifications.workExperience.to"
-                                                  }
-                                                },
-                                                _vm._l(_vm.getYears, function(
-                                                  year,
-                                                  index
-                                                ) {
-                                                  return _c(
-                                                    "option",
-                                                    {
-                                                      key: index,
-                                                      domProps: { value: year }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                              " +
-                                                          _vm._s(year) +
-                                                          "\n                            "
-                                                      )
-                                                    ]
-                                                  )
-                                                }),
-                                                0
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "columns" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-6" },
-                                        [
-                                          _c(
-                                            "b-field",
-                                            {
-                                              attrs: {
-                                                label: _vm.$tc(
-                                                  "app.comment",
-                                                  1
-                                                ),
-                                                type: {
-                                                  "is-danger":
-                                                    _vm.qualificationsErrors
-                                                      .workExperience.comment
-                                                      .length > 0
-                                                },
-                                                message:
-                                                  _vm.qualificationsErrors
-                                                    .workExperience.comment
-                                              }
-                                            },
-                                            [
-                                              _c("b-input", {
-                                                attrs: {
-                                                  size: "",
-                                                  type: "textarea",
-                                                  placeholder: _vm.$t(
-                                                    "app.placeholder_comment"
-                                                  )
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.qualifications
-                                                      .workExperience.comment,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.qualifications
-                                                        .workExperience,
-                                                      "comment",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "qualifications.workExperience.comment"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("hr"),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-field",
-                                      { staticClass: "buttons" },
-                                      [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "button is-success is-light",
-                                            attrs: {
-                                              type: "submit",
-                                              disabled:
-                                                _vm.isSubmittingWorkExperience
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                        " +
-                                                _vm._s(
-                                                  _vm.isSubmittingWorkExperience
-                                                    ? _vm.$t(
-                                                        "app.edit_wrk_experience"
-                                                      ) + "..."
-                                                    : _vm.$t("app.add")
-                                                ) +
-                                                "\n                      "
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-button",
-                                          {
-                                            staticClass: "is-danger is-light",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.cancelWorkExperienceForm()
-                                              }
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(_vm.$t("app.cancel")))]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ])
-                            ])
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "b-table",
-                  {
-                    attrs: {
-                      data: _vm.getWorkExperience || [],
-                      paginated: true,
-                      "per-page": 5,
-                      "current-page": 1,
-                      "pagination-simple": true,
-                      "pagination-position": "bottom"
-                    }
-                  },
-                  [
-                    _c("b-table-column", {
-                      attrs: {
-                        field: "company",
-                        label: _vm.$t("app.company"),
-                        sortable: ""
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.company))]
-                          }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: {
-                        field: "jtitle",
-                        label: _vm.$t("app.jobTitle"),
-                        sortable: ""
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.jobTitle))]
-                          }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: {
-                        field: "from",
-                        label: _vm.$t("app.from"),
-                        sortable: ""
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.from))]
-                          }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: {
-                        field: "to",
-                        label: _vm.$t("app.to"),
-                        sortable: ""
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.to))]
-                          }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: {
-                        field: "comment",
-                        label: _vm.$tc("app.comment", 1),
-                        sortable: ""
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.comment))]
-                          }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: {
-                        field: "actions",
-                        label: _vm.$tc("app.action", 2)
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [
-                              _c(
-                                "div",
-                                { staticClass: "b-tooltips" },
-                                [
-                                  _c(
-                                    "b-tooltip",
-                                    {
-                                      attrs: {
-                                        label: _vm.$t(
-                                          "app.edit_wrk_experience"
-                                        ),
-                                        type: "is-dark"
-                                      }
-                                    },
-                                    [
-                                      _c("b-button", {
-                                        staticClass: "is-info is-light",
-                                        attrs: {
-                                          size: "is-small",
-                                          pack: "fas",
-                                          "icon-right": "pen",
-                                          id: "wrk-experince-id" + props.row.id,
-                                          disabled: !_vm.userOrPermission(
-                                            "update",
-                                            _vm.getProfile.user_id
-                                          )
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.openWorkExperienceDropper(
-                                              props.row
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-tooltip",
-                                    {
-                                      attrs: {
-                                        label: _vm.$t("app.delete"),
-                                        type: "is-dark"
-                                      }
-                                    },
-                                    [
-                                      _c("b-button", {
-                                        staticClass: "is-danger is-light",
-                                        attrs: {
-                                          size: "is-small",
-                                          pack: "fas",
-                                          "icon-right": "trash",
-                                          disabled: !_vm.userOrPermission(
-                                            "delete",
-                                            _vm.getProfile.user_id
-                                          )
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.deleteHandler(
-                                              "workExperience",
-                                              props.row.id
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          }
-                        }
-                      ])
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("section", { staticClass: "b__collapse__section" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("header", { staticClass: "card-header" }, [
-            _c("p", { staticClass: "card-header-title" }, [
-              _vm._v(_vm._s(_vm.$t("app.education")))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "div",
-              { staticClass: "content" },
-              [
-                _vm.userOrPermission("create", _vm.getProfile.user_id)
-                  ? _c(
-                      "section",
-                      { staticClass: "b__collapse__section" },
-                      [
-                        _c(
-                          "b-collapse",
-                          {
-                            staticClass: "card",
-                            attrs: {
-                              animation: "slide",
-                              "aria-id": "addreportingmethod"
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "trigger",
-                                  fn: function(props) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        staticClass: "card-header",
-                                        attrs: {
-                                          role: "button",
-                                          "aria-controls": "addreportingmethod"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "p",
-                                          {
-                                            staticClass:
-                                              "card-header-title has-text-info"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                  " +
-                                                _vm._s(
                                                   _vm.$t("app.add_education")
                                                 ) +
                                                 "\n                "
@@ -14121,7 +12769,7 @@ var render = function() {
                                     _c("div", { staticClass: "columns" }, [
                                       _c(
                                         "div",
-                                        { staticClass: "column is-4" },
+                                        { staticClass: "column is-6" },
                                         [
                                           _c(
                                             "b-field",
@@ -14173,7 +12821,7 @@ var render = function() {
                                       _vm._v(" "),
                                       _c(
                                         "div",
-                                        { staticClass: "column is-4" },
+                                        { staticClass: "column is-6" },
                                         [
                                           _c(
                                             "b-field",
@@ -14212,55 +12860,6 @@ var render = function() {
                                                   },
                                                   expression:
                                                     "qualifications.education.specialization"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "column is-4" },
-                                        [
-                                          _c(
-                                            "b-field",
-                                            {
-                                              attrs: {
-                                                label: _vm.$t("app.gpa"),
-                                                expanded: "",
-                                                type: {
-                                                  "is-danger":
-                                                    _vm.qualificationsErrors
-                                                      .education.gpa.length > 0
-                                                },
-                                                message:
-                                                  _vm.qualificationsErrors
-                                                    .education.gpa
-                                              }
-                                            },
-                                            [
-                                              _c("b-input", {
-                                                attrs: {
-                                                  size: "",
-                                                  expanded: ""
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.qualifications.education
-                                                      .gpa,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.qualifications
-                                                        .education,
-                                                      "gpa",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "qualifications.education.gpa"
                                                 }
                                               })
                                             ],
@@ -14487,7 +13086,7 @@ var render = function() {
                   "b-table",
                   {
                     attrs: {
-                      data: _vm.getEducation || [],
+                      data: _vm.getEducation,
                       paginated: true,
                       "per-page": 5,
                       "current-page": 1,
@@ -14523,22 +13122,6 @@ var render = function() {
                           key: "default",
                           fn: function(props) {
                             return [_vm._v(_vm._s(props.row.specialization))]
-                          }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: {
-                        field: "gpa",
-                        label: _vm.$t("app.gpa"),
-                        sortable: ""
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.gpa))]
                           }
                         }
                       ])
@@ -14679,7 +13262,11 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("header", { staticClass: "card-header" }, [
             _c("p", { staticClass: "card-header-title" }, [
-              _vm._v(_vm._s(_vm.$tc("app.skill", 2)))
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.$tc("app.expertise", 1)) +
+                  "\n        "
+              )
             ])
           ]),
           _vm._v(" "),
@@ -14726,7 +13313,7 @@ var render = function() {
                                             _vm._v(
                                               "\n                  " +
                                                 _vm._s(
-                                                  _vm.$t("app.add_skills")
+                                                  _vm.$t("app.add_expertise")
                                                 ) +
                                                 "\n                "
                                             )
@@ -14756,14 +13343,14 @@ var render = function() {
                               ],
                               null,
                               false,
-                              2915969084
+                              3298448367
                             ),
                             model: {
-                              value: _vm.isEditSkills,
+                              value: _vm.isEditExpertise,
                               callback: function($$v) {
-                                _vm.isEditSkills = $$v
+                                _vm.isEditExpertise = $$v
                               },
-                              expression: "isEditSkills"
+                              expression: "isEditExpertise"
                             }
                           },
                           [
@@ -14776,7 +13363,7 @@ var render = function() {
                                     on: {
                                       submit: function($event) {
                                         $event.preventDefault()
-                                        return _vm.addSkills()
+                                        return _vm.addExpertise()
                                       }
                                     }
                                   },
@@ -14790,16 +13377,20 @@ var render = function() {
                                             "b-field",
                                             {
                                               attrs: {
-                                                label: _vm.$tc("app.skill", 1),
+                                                label: _vm.$tc(
+                                                  "app.expertise",
+                                                  1
+                                                ),
                                                 expanded: "",
                                                 type: {
                                                   "is-danger":
                                                     _vm.qualificationsErrors
-                                                      .skills.skill.length > 0
+                                                      .expertise.expertise
+                                                      .length > 0
                                                 },
                                                 message:
                                                   _vm.qualificationsErrors
-                                                    .skills.skill
+                                                    .expertise.expertise
                                               }
                                             },
                                             [
@@ -14810,17 +13401,18 @@ var render = function() {
                                                 },
                                                 model: {
                                                   value:
-                                                    _vm.qualifications.skills
-                                                      .skill,
+                                                    _vm.qualifications.expertise
+                                                      .expertise,
                                                   callback: function($$v) {
                                                     _vm.$set(
-                                                      _vm.qualifications.skills,
-                                                      "skill",
+                                                      _vm.qualifications
+                                                        .expertise,
+                                                      "expertise",
                                                       $$v
                                                     )
                                                   },
                                                   expression:
-                                                    "qualifications.skills.skill"
+                                                    "qualifications.expertise.expertise"
                                                 }
                                               })
                                             ],
@@ -14847,12 +13439,13 @@ var render = function() {
                                                 type: {
                                                   "is-danger":
                                                     _vm.qualificationsErrors
-                                                      .skills.yearOfExperience
-                                                      .length > 0
+                                                      .expertise
+                                                      .yearOfExperience.length >
+                                                    0
                                                 },
                                                 message:
                                                   _vm.qualificationsErrors
-                                                    .skills.yearOfExperience
+                                                    .expertise.yearOfExperience
                                               }
                                             },
                                             [
@@ -14863,17 +13456,18 @@ var render = function() {
                                                 },
                                                 model: {
                                                   value:
-                                                    _vm.qualifications.skills
+                                                    _vm.qualifications.expertise
                                                       .yearOfExperience,
                                                   callback: function($$v) {
                                                     _vm.$set(
-                                                      _vm.qualifications.skills,
+                                                      _vm.qualifications
+                                                        .expertise,
                                                       "yearOfExperience",
                                                       $$v
                                                     )
                                                   },
                                                   expression:
-                                                    "qualifications.skills.yearOfExperience"
+                                                    "\n                              qualifications.expertise.yearOfExperience\n                            "
                                                 }
                                               })
                                             ],
@@ -14900,11 +13494,12 @@ var render = function() {
                                                 type: {
                                                   "is-danger":
                                                     _vm.qualificationsErrors
-                                                      .skills.comment.length > 0
+                                                      .expertise.comment
+                                                      .length > 0
                                                 },
                                                 message:
                                                   _vm.qualificationsErrors
-                                                    .skills.comment
+                                                    .expertise.comment
                                               }
                                             },
                                             [
@@ -14918,17 +13513,18 @@ var render = function() {
                                                 },
                                                 model: {
                                                   value:
-                                                    _vm.qualifications.skills
+                                                    _vm.qualifications.expertise
                                                       .comment,
                                                   callback: function($$v) {
                                                     _vm.$set(
-                                                      _vm.qualifications.skills,
+                                                      _vm.qualifications
+                                                        .expertise,
                                                       "comment",
                                                       $$v
                                                     )
                                                   },
                                                   expression:
-                                                    "qualifications.skills.comment"
+                                                    "qualifications.expertise.comment"
                                                 }
                                               })
                                             ],
@@ -14952,14 +13548,15 @@ var render = function() {
                                               "button is-success is-light",
                                             attrs: {
                                               type: "submit",
-                                              disabled: _vm.isSubmittingSkills
+                                              disabled:
+                                                _vm.isSubmittingExpertise
                                             }
                                           },
                                           [
                                             _vm._v(
                                               "\n                        " +
                                                 _vm._s(
-                                                  _vm.isSubmittingSkills
+                                                  _vm.isSubmittingExpertise
                                                     ? "" +
                                                         _vm.$t("app.submitting")
                                                     : _vm.$t("app.add")
@@ -14975,7 +13572,7 @@ var render = function() {
                                             staticClass: "is-danger is-light",
                                             on: {
                                               click: function($event) {
-                                                return _vm.cancelSkillsForm()
+                                                return _vm.cancelExpertiseForm()
                                               }
                                             }
                                           },
@@ -15000,7 +13597,7 @@ var render = function() {
                   "b-table",
                   {
                     attrs: {
-                      data: _vm.getSkills || [],
+                      data: _vm.getExpertise,
                       paginated: true,
                       "per-page": 5,
                       "current-page": 1,
@@ -15011,15 +13608,15 @@ var render = function() {
                   [
                     _c("b-table-column", {
                       attrs: {
-                        field: "skill",
-                        label: _vm.$tc("app.skill", 1),
+                        field: "expertise",
+                        label: _vm.$tc("app.expertise", 1),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
                           fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.skill))]
+                            return [_vm._v(_vm._s(props.row.expertise))]
                           }
                         }
                       ])
@@ -15075,7 +13672,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: _vm.$t("app.edit_skill"),
+                                        label: _vm.$t("app.edit_expertise"),
                                         type: "is-dark"
                                       }
                                     },
@@ -15087,7 +13684,7 @@ var render = function() {
                                           pack: "fas",
                                           "icon-right": "pen",
                                           id:
-                                            "skill-id" +
+                                            "expertise-id" +
                                             _vm.getAttachmentDropperId,
                                           disabled: !_vm.userOrPermission(
                                             "update",
@@ -15096,7 +13693,7 @@ var render = function() {
                                         },
                                         on: {
                                           click: function($event) {
-                                            return _vm.openSkillDropper(
+                                            return _vm.openExpertiseDropper(
                                               props.row
                                             )
                                           }
@@ -15129,7 +13726,7 @@ var render = function() {
                                         on: {
                                           click: function($event) {
                                             return _vm.deleteHandler(
-                                              "skills",
+                                              "expertise",
                                               props.row.id
                                             )
                                           }
@@ -15575,7 +14172,7 @@ var render = function() {
                   "b-table",
                   {
                     attrs: {
-                      data: _vm.getLanguages || [],
+                      data: _vm.getLanguages,
                       paginated: true,
                       "per-page": 5,
                       "current-page": 1,
@@ -15735,7 +14332,11 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("header", { staticClass: "card-header" }, [
             _c("p", { staticClass: "card-header-title" }, [
-              _vm._v(_vm._s(_vm.$tc("app.attachment", 2)))
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.$t("app.continuous_dev")) +
+                  "\n        "
+              )
             ])
           ]),
           _vm._v(" "),
@@ -15782,7 +14383,9 @@ var render = function() {
                                             _vm._v(
                                               "\n                  " +
                                                 _vm._s(
-                                                  _vm.$t("app.addAttament")
+                                                  _vm.$t(
+                                                    "app.add_continuous_dev"
+                                                  )
                                                 ) +
                                                 "\n                "
                                             )
@@ -15812,14 +14415,14 @@ var render = function() {
                               ],
                               null,
                               false,
-                              3963300691
+                              3950233307
                             ),
                             model: {
-                              value: _vm.isEditQualificationAttachment,
+                              value: _vm.isEditContinuousDev,
                               callback: function($$v) {
-                                _vm.isEditQualificationAttachment = $$v
+                                _vm.isEditContinuousDev = $$v
                               },
-                              expression: "isEditQualificationAttachment"
+                              expression: "isEditContinuousDev"
                             }
                           },
                           [
@@ -15832,7 +14435,7 @@ var render = function() {
                                     on: {
                                       submit: function($event) {
                                         $event.preventDefault()
-                                        return _vm.addQualificationAttachment()
+                                        return _vm.addContinuousDev()
                                       }
                                     }
                                   },
@@ -15840,180 +14443,257 @@ var render = function() {
                                     _c("div", { staticClass: "columns" }, [
                                       _c(
                                         "div",
-                                        { staticClass: "column is-3" },
+                                        { staticClass: "column is-6" },
                                         [
                                           _c(
                                             "b-field",
-                                            [
-                                              _c(
-                                                "b-upload",
-                                                {
-                                                  attrs: {
-                                                    "drag-drop": "",
-                                                    size: "is-small"
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.qualifications
-                                                        .attachment.file,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.qualifications
-                                                          .attachment,
-                                                        "file",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "qualifications.attachment.file"
-                                                  }
+                                            {
+                                              attrs: {
+                                                label: _vm.$t(
+                                                  "app.institution"
+                                                ),
+                                                expanded: "",
+                                                type: {
+                                                  "is-danger":
+                                                    _vm.qualificationsErrors
+                                                      .continuousDev.institution
+                                                      .length > 0
                                                 },
-                                                [
-                                                  _c(
-                                                    "section",
-                                                    { staticClass: "section" },
-                                                    [
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "content has-text-centered"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "p",
-                                                            [
-                                                              _c("b-icon", {
-                                                                attrs: {
-                                                                  icon:
-                                                                    "upload",
-                                                                  size:
-                                                                    "is-small"
-                                                                }
-                                                              })
-                                                            ],
-                                                            1
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c("p", [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                _vm.$t(
-                                                                  "app.placeholder_attachment1"
-                                                                )
-                                                              )
-                                                            )
-                                                          ])
-                                                        ]
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
+                                                message:
+                                                  _vm.qualificationsErrors
+                                                    .continuousDev.institution
+                                              }
+                                            },
+                                            [
+                                              _c("b-input", {
+                                                attrs: {
+                                                  size: "",
+                                                  expanded: ""
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.qualifications
+                                                      .continuousDev
+                                                      .institution,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.qualifications
+                                                        .continuousDev,
+                                                      "institution",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "qualifications.continuousDev.institution"
+                                                }
+                                              })
                                             ],
                                             1
-                                          ),
-                                          _vm._v(" "),
-                                          _vm.qualifications.attachment.file
-                                            ? _c(
-                                                "div",
-                                                { staticClass: "tags" },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    {
-                                                      staticClass:
-                                                        "tag is-large is-info is-light"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                            " +
-                                                          _vm._s(
-                                                            _vm.qualifications
-                                                              .attachment.file
-                                                              .name
-                                                          ) +
-                                                          "\n                            "
-                                                      ),
-                                                      _c("button", {
-                                                        staticClass:
-                                                          "delete is-small",
-                                                        attrs: {
-                                                          type: "button"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            _vm.qualifications.attachment.file = null
-                                                          }
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          _c("b-field", {
-                                            attrs: {
-                                              type: {
-                                                "is-danger":
-                                                  _vm.qualificationsErrors
-                                                    .attachment.file.length > 0
-                                              },
-                                              message:
-                                                _vm.qualificationsErrors
-                                                  .attachment.file
-                                            }
-                                          })
+                                          )
                                         ],
                                         1
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "div",
-                                        { staticClass: "column is-4" },
+                                        { staticClass: "column is-6" },
                                         [
                                           _c(
                                             "b-field",
                                             {
                                               attrs: {
+                                                label: _vm.$t("app.major_spec"),
+                                                expanded: "",
                                                 type: {
                                                   "is-danger":
                                                     _vm.qualificationsErrors
-                                                      .attachment.comment
-                                                      .length > 0
+                                                      .continuousDev
+                                                      .specialization.length > 0
                                                 },
                                                 message:
                                                   _vm.qualificationsErrors
-                                                    .attachment.comment
+                                                    .continuousDev
+                                                    .specialization
                                               }
                                             },
                                             [
                                               _c("b-input", {
                                                 attrs: {
-                                                  type: "textarea",
-                                                  placeholder: _vm.$t(
-                                                    "app.placeholder_comment"
-                                                  )
+                                                  size: "",
+                                                  expanded: ""
                                                 },
                                                 model: {
                                                   value:
                                                     _vm.qualifications
-                                                      .attachment.comment,
+                                                      .continuousDev
+                                                      .specialization,
                                                   callback: function($$v) {
                                                     _vm.$set(
                                                       _vm.qualifications
-                                                        .attachment,
-                                                      "comment",
+                                                        .continuousDev,
+                                                      "specialization",
                                                       $$v
                                                     )
                                                   },
                                                   expression:
-                                                    "qualifications.attachment.comment"
+                                                    "\n                              qualifications.continuousDev.specialization\n                            "
                                                 }
                                               })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "columns" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "column is-6" },
+                                        [
+                                          _c(
+                                            "b-field",
+                                            {
+                                              attrs: {
+                                                label: _vm.$t("app.started"),
+                                                expanded: "",
+                                                type: {
+                                                  "is-danger":
+                                                    _vm.qualificationsErrors
+                                                      .continuousDev.started
+                                                      .length > 0
+                                                },
+                                                message:
+                                                  _vm.qualificationsErrors
+                                                    .continuousDev.started
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "b-select",
+                                                {
+                                                  attrs: {
+                                                    placeholder: _vm.$t(
+                                                      "app.selectYear"
+                                                    ),
+                                                    size: "",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.qualifications
+                                                        .continuousDev.started,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.qualifications
+                                                          .continuousDev,
+                                                        "started",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "qualifications.continuousDev.started"
+                                                  }
+                                                },
+                                                _vm._l(_vm.getYears, function(
+                                                  year,
+                                                  index
+                                                ) {
+                                                  return _c(
+                                                    "option",
+                                                    {
+                                                      key: index,
+                                                      domProps: { value: year }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                              " +
+                                                          _vm._s(year) +
+                                                          "\n                            "
+                                                      )
+                                                    ]
+                                                  )
+                                                }),
+                                                0
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "column is-6" },
+                                        [
+                                          _c(
+                                            "b-field",
+                                            {
+                                              attrs: {
+                                                label: _vm.$t("app.completed"),
+                                                expanded: "",
+                                                type: {
+                                                  "is-danger":
+                                                    _vm.qualificationsErrors
+                                                      .continuousDev.completed
+                                                      .length > 0
+                                                },
+                                                message:
+                                                  _vm.qualificationsErrors
+                                                    .continuousDev.completed
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "b-select",
+                                                {
+                                                  attrs: {
+                                                    placeholder: _vm.$t(
+                                                      "app.selectYear"
+                                                    ),
+                                                    size: "",
+                                                    expanded: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.qualifications
+                                                        .continuousDev
+                                                        .completed,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.qualifications
+                                                          .continuousDev,
+                                                        "completed",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "qualifications.continuousDev.completed"
+                                                  }
+                                                },
+                                                _vm._l(_vm.getYears, function(
+                                                  year,
+                                                  index
+                                                ) {
+                                                  return _c(
+                                                    "option",
+                                                    {
+                                                      key: index,
+                                                      domProps: { value: year }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                              " +
+                                                          _vm._s(year) +
+                                                          "\n                            "
+                                                      )
+                                                    ]
+                                                  )
+                                                }),
+                                                0
+                                              )
                                             ],
                                             1
                                           )
@@ -16036,14 +14716,14 @@ var render = function() {
                                             attrs: {
                                               type: "submit",
                                               disabled:
-                                                _vm.isSubmittingQualificationAttachment
+                                                _vm.isSubmittingContinuousDev
                                             }
                                           },
                                           [
                                             _vm._v(
                                               "\n                        " +
                                                 _vm._s(
-                                                  _vm.isSubmittingQualificationAttachment
+                                                  _vm.isSubmittingContinuousDev
                                                     ? "" +
                                                         _vm.$t("app.submitting")
                                                     : _vm.$t("app.add")
@@ -16059,7 +14739,7 @@ var render = function() {
                                             staticClass: "is-danger is-light",
                                             on: {
                                               click: function($event) {
-                                                return _vm.cancelQualificationAttachmentForm()
+                                                return _vm.cancelContinuousDevForm()
                                               }
                                             }
                                           },
@@ -16084,9 +14764,9 @@ var render = function() {
                   "b-table",
                   {
                     attrs: {
-                      data: _vm.getAttachments || [],
+                      data: _vm.getContinuousDev,
                       paginated: true,
-                      "per-page": 10,
+                      "per-page": 5,
                       "current-page": 1,
                       "pagination-simple": true,
                       "pagination-position": "bottom"
@@ -16095,30 +14775,15 @@ var render = function() {
                   [
                     _c("b-table-column", {
                       attrs: {
-                        field: "file",
-                        label: _vm.$tc("app.file", 1),
+                        field: "institution",
+                        label: _vm.$t("app.institution"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
                           fn: function(props) {
-                            return [
-                              _c(
-                                "a",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.viewAttachment(
-                                        "/attachments/qualification/" +
-                                          props.row.file
-                                      )
-                                    }
-                                  }
-                                },
-                                [_vm._v(_vm._s(props.row.file))]
-                              )
-                            ]
+                            return [_vm._v(_vm._s(props.row.institution))]
                           }
                         }
                       ])
@@ -16126,15 +14791,47 @@ var render = function() {
                     _vm._v(" "),
                     _c("b-table-column", {
                       attrs: {
-                        field: "comment",
-                        label: _vm.$tc("app.comment", 1),
+                        field: "specialization",
+                        label: _vm.$t("app.specialization"),
                         sortable: ""
                       },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
                           fn: function(props) {
-                            return [_vm._v(_vm._s(props.row.comment))]
+                            return [_vm._v(_vm._s(props.row.specialization))]
+                          }
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: {
+                        field: "started",
+                        label: _vm.$t("app.started"),
+                        sortable: ""
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function(props) {
+                            return [_vm._v(_vm._s(props.row.started))]
+                          }
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: {
+                        field: "completed",
+                        label: _vm.$t("app.completed"),
+                        sortable: ""
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function(props) {
+                            return [_vm._v(_vm._s(props.row.completed))]
                           }
                         }
                       ])
@@ -16158,43 +14855,7 @@ var render = function() {
                                     "b-tooltip",
                                     {
                                       attrs: {
-                                        label: _vm.$t("app.replaceAttachment"),
-                                        type: "is-dark"
-                                      }
-                                    },
-                                    [
-                                      _c("b-button", {
-                                        staticClass: "is-info is-light",
-                                        attrs: {
-                                          size: "is-small",
-                                          pack: "fas",
-                                          "icon-right": "upload",
-                                          id:
-                                            "comment-id" +
-                                            _vm.getAttachmentDropperId,
-                                          disabled: !_vm.userOrPermission(
-                                            "update",
-                                            _vm.getProfile.user_id
-                                          )
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.openAttachmentDropper(
-                                              props.row,
-                                              "attachment"
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-tooltip",
-                                    {
-                                      attrs: {
-                                        label: _vm.$t("app.editComment"),
+                                        label: _vm.$t("app.edit_education"),
                                         type: "is-dark"
                                       }
                                     },
@@ -16206,7 +14867,7 @@ var render = function() {
                                           pack: "fas",
                                           "icon-right": "pen",
                                           id:
-                                            "comment-id" +
+                                            "continuous-dev-id" +
                                             _vm.getAttachmentDropperId,
                                           disabled: !_vm.userOrPermission(
                                             "update",
@@ -16215,9 +14876,8 @@ var render = function() {
                                         },
                                         on: {
                                           click: function($event) {
-                                            return _vm.openAttachmentDropper(
-                                              props.row,
-                                              "comment"
+                                            return _vm.openContinuousDevDropper(
+                                              props.row
                                             )
                                           }
                                         }
@@ -16249,7 +14909,7 @@ var render = function() {
                                         on: {
                                           click: function($event) {
                                             return _vm.deleteHandler(
-                                              "attachments",
+                                              "continuousDev",
                                               props.row.id
                                             )
                                           }
@@ -16279,341 +14939,6 @@ var render = function() {
       _c(
         "dropper",
         {
-          ref: "workExperienceDropper",
-          staticClass: "dropper",
-          attrs: {
-            join: "#wrk-experince-id" + _vm.getAttachmentDropperId,
-            "z-index": 1000
-          },
-          on: {
-            "esc-keydown": _vm.closeWorkExperienceDropper,
-            "other-area-clicked": _vm.closeWorkExperienceDropper
-          }
-        },
-        [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.updateWorkExperience()
-                }
-              }
-            },
-            [
-              _c("h3", { staticClass: "label text-main" }, [
-                _vm._v("Edit Work Experience")
-              ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("div", { staticClass: "columns" }, [
-                _c(
-                  "div",
-                  { staticClass: "column is-6" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "Company",
-                          expanded: "",
-                          type: {
-                            "is-danger":
-                              _vm.qualificationsErrors.workExperience.company
-                                .length > 0
-                          },
-                          message:
-                            _vm.qualificationsErrors.workExperience.company
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: { size: "", expanded: "" },
-                          model: {
-                            value: _vm.qualifications.workExperience.company,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.qualifications.workExperience,
-                                "company",
-                                $$v
-                              )
-                            },
-                            expression: "qualifications.workExperience.company"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "column is-6" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "Job Title",
-                          expanded: "",
-                          type: {
-                            "is-danger":
-                              _vm.qualificationsErrors.workExperience.jobTitle
-                                .length > 0
-                          },
-                          message:
-                            _vm.qualificationsErrors.workExperience.jobTitle
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: { size: "", expanded: "" },
-                          model: {
-                            value: _vm.qualifications.workExperience.jobTitle,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.qualifications.workExperience,
-                                "jobTitle",
-                                $$v
-                              )
-                            },
-                            expression: "qualifications.workExperience.jobTitle"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "columns" }, [
-                _c(
-                  "div",
-                  { staticClass: "column is-6" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "From (Year)",
-                          expanded: "",
-                          type: {
-                            "is-danger":
-                              _vm.qualificationsErrors.workExperience.from
-                                .length > 0
-                          },
-                          message: _vm.qualificationsErrors.workExperience.from
-                        }
-                      },
-                      [
-                        _c(
-                          "b-select",
-                          {
-                            attrs: {
-                              placeholder: "Select year...",
-                              size: "",
-                              expanded: ""
-                            },
-                            model: {
-                              value: _vm.qualifications.workExperience.from,
-                              callback: function($$v) {
-                                _vm.$set(
-                                  _vm.qualifications.workExperience,
-                                  "from",
-                                  $$v
-                                )
-                              },
-                              expression: "qualifications.workExperience.from"
-                            }
-                          },
-                          _vm._l(_vm.getYears, function(year, index) {
-                            return _c(
-                              "option",
-                              { key: index, domProps: { value: year } },
-                              [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(year) +
-                                    "\n              "
-                                )
-                              ]
-                            )
-                          }),
-                          0
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "column is-6" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "To (Year)",
-                          expanded: "",
-                          type: {
-                            "is-danger":
-                              _vm.qualificationsErrors.workExperience.to
-                                .length > 0
-                          },
-                          message: _vm.qualificationsErrors.workExperience.to
-                        }
-                      },
-                      [
-                        _c(
-                          "b-select",
-                          {
-                            attrs: {
-                              placeholder: "Select year...",
-                              size: "",
-                              expanded: ""
-                            },
-                            model: {
-                              value: _vm.qualifications.workExperience.to,
-                              callback: function($$v) {
-                                _vm.$set(
-                                  _vm.qualifications.workExperience,
-                                  "to",
-                                  $$v
-                                )
-                              },
-                              expression: "qualifications.workExperience.to"
-                            }
-                          },
-                          _vm._l(_vm.getYears, function(year, index) {
-                            return _c(
-                              "option",
-                              { key: index, domProps: { value: year } },
-                              [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(year) +
-                                    "\n              "
-                                )
-                              ]
-                            )
-                          }),
-                          0
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "columns" }, [
-                _c(
-                  "div",
-                  { staticClass: "column is-12" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "Comment",
-                          type: {
-                            "is-danger":
-                              _vm.qualificationsErrors.workExperience.comment
-                                .length > 0
-                          },
-                          message:
-                            _vm.qualificationsErrors.workExperience.comment
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: {
-                            size: "",
-                            type: "textarea",
-                            placeholder: "Type your comment..."
-                          },
-                          model: {
-                            value: _vm.qualifications.workExperience.comment,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.qualifications.workExperience,
-                                "comment",
-                                $$v
-                              )
-                            },
-                            expression: "qualifications.workExperience.comment"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c(
-                "b-field",
-                { staticClass: "buttons" },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "button is-success is-light",
-                      attrs: {
-                        type: "submit",
-                        disabled: _vm.isSubmittingWorkExperience
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(
-                            _vm.isSubmittingWorkExperience
-                              ? "Saving..."
-                              : "Save"
-                          ) +
-                          "\n        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-button",
-                    {
-                      staticClass: "is-danger is-light",
-                      on: {
-                        click: function($event) {
-                          return _vm.closeWorkExperienceDropper()
-                        }
-                      }
-                    },
-                    [_vm._v("Cancel")]
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "dropper",
-        {
           ref: "educationDropper",
           staticClass: "dropper",
           attrs: {
@@ -16629,6 +14954,7 @@ var render = function() {
           _c(
             "form",
             {
+              staticStyle: { width: "30rem" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
@@ -16851,41 +15177,6 @@ var render = function() {
                     )
                   ],
                   1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "column is-4" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "GPA/Score",
-                          expanded: "",
-                          type: {
-                            "is-danger":
-                              _vm.qualificationsErrors.education.gpa.length > 0
-                          },
-                          message: _vm.qualificationsErrors.education.gpa
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: { size: "", expanded: "" },
-                          model: {
-                            value: _vm.qualifications.education.gpa,
-                            callback: function($$v) {
-                              _vm.$set(_vm.qualifications.education, "gpa", $$v)
-                            },
-                            expression: "qualifications.education.gpa"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
                 )
               ]),
               _vm._v(" "),
@@ -16939,31 +15230,329 @@ var render = function() {
       _c(
         "dropper",
         {
-          ref: "skillDropper",
+          ref: "continuousDevDropper",
           staticClass: "dropper",
           attrs: {
-            join: "#skill-id" + _vm.getAttachmentDropperId,
+            join: "#continuous-dev-id" + _vm.getAttachmentDropperId,
             "z-index": 1000
           },
           on: {
-            "esc-keydown": _vm.closeSkillDropper,
-            "other-area-clicked": _vm.closeSkillDropper
+            "esc-keydown": _vm.closeContinuousDevDropper,
+            "other-area-clicked": _vm.closeContinuousDevDropper
           }
         },
         [
           _c(
             "form",
             {
+              staticStyle: { width: "30rem" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
-                  return _vm.updateSkills()
+                  return _vm.updateContinuousDev()
                 }
               }
             },
             [
               _c("h3", { staticClass: "label text-main" }, [
-                _vm._v("Edit Skill")
+                _vm._v("Edit Continuous Development")
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("div", { staticClass: "columns" }, [
+                _c(
+                  "div",
+                  { staticClass: "column is-12" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Institution",
+                          expanded: "",
+                          type: {
+                            "is-danger":
+                              _vm.qualificationsErrors.continuousDev.institution
+                                .length > 0
+                          },
+                          message:
+                            _vm.qualificationsErrors.continuousDev.institution
+                        }
+                      },
+                      [
+                        _c("b-input", {
+                          attrs: { size: "", expanded: "" },
+                          model: {
+                            value: _vm.qualifications.continuousDev.institution,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.qualifications.continuousDev,
+                                "institution",
+                                $$v
+                              )
+                            },
+                            expression:
+                              "qualifications.continuousDev.institution"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "columns" }, [
+                _c(
+                  "div",
+                  { staticClass: "column is-12" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Major/Specialization",
+                          expanded: "",
+                          type: {
+                            "is-danger":
+                              _vm.qualificationsErrors.continuousDev
+                                .specialization.length > 0
+                          },
+                          message:
+                            _vm.qualificationsErrors.continuousDev
+                              .specialization
+                        }
+                      },
+                      [
+                        _c("b-input", {
+                          attrs: { size: "", expanded: "" },
+                          model: {
+                            value:
+                              _vm.qualifications.continuousDev.specialization,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.qualifications.continuousDev,
+                                "specialization",
+                                $$v
+                              )
+                            },
+                            expression:
+                              "qualifications.continuousDev.specialization"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "columns" }, [
+                _c(
+                  "div",
+                  { staticClass: "column is-4" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Started",
+                          expanded: "",
+                          type: {
+                            "is-danger":
+                              _vm.qualificationsErrors.continuousDev.started
+                                .length > 0
+                          },
+                          message:
+                            _vm.qualificationsErrors.continuousDev.started
+                        }
+                      },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            attrs: {
+                              placeholder: "Select year...",
+                              size: "",
+                              expanded: ""
+                            },
+                            model: {
+                              value: _vm.qualifications.continuousDev.started,
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.qualifications.continuousDev,
+                                  "started",
+                                  $$v
+                                )
+                              },
+                              expression: "qualifications.continuousDev.started"
+                            }
+                          },
+                          _vm._l(_vm.getYears, function(year, index) {
+                            return _c(
+                              "option",
+                              { key: index, domProps: { value: year } },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(year) +
+                                    "\n              "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "column is-4" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Completed",
+                          expanded: "",
+                          type: {
+                            "is-danger":
+                              _vm.qualificationsErrors.continuousDev.completed
+                                .length > 0
+                          },
+                          message:
+                            _vm.qualificationsErrors.continuousDev.completed
+                        }
+                      },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            attrs: {
+                              placeholder: "Select year...",
+                              size: "",
+                              expanded: ""
+                            },
+                            model: {
+                              value: _vm.qualifications.continuousDev.completed,
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.qualifications.continuousDev,
+                                  "completed",
+                                  $$v
+                                )
+                              },
+                              expression:
+                                "qualifications.continuousDev.completed"
+                            }
+                          },
+                          _vm._l(_vm.getYears, function(year, index) {
+                            return _c(
+                              "option",
+                              { key: index, domProps: { value: year } },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(year) +
+                                    "\n              "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "b-field",
+                { staticClass: "buttons" },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button is-success is-light",
+                      attrs: {
+                        type: "submit",
+                        disabled: _vm.isSubmittingContinuousDev
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(
+                            _vm.isSubmittingContinuousDev ? "Saving..." : "Save"
+                          ) +
+                          "\n        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "is-danger is-light",
+                      on: {
+                        click: function($event) {
+                          return _vm.closeContinuousDevDropper()
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "dropper",
+        {
+          ref: "expertiseDropper",
+          staticClass: "dropper",
+          attrs: {
+            join: "#expertise-id" + _vm.getAttachmentDropperId,
+            "z-index": 1000
+          },
+          on: {
+            "esc-keydown": _vm.closeExpertiseDropper,
+            "other-area-clicked": _vm.closeExpertiseDropper
+          }
+        },
+        [
+          _c(
+            "form",
+            {
+              staticStyle: { width: "30rem" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.updateExpertise()
+                }
+              }
+            },
+            [
+              _c("h3", { staticClass: "label text-main" }, [
+                _vm._v("Edit Expertise")
               ]),
               _vm._v(" "),
               _c("hr"),
@@ -16977,24 +15566,29 @@ var render = function() {
                       "b-field",
                       {
                         attrs: {
-                          label: "Skill",
+                          label: "Expertise",
                           expanded: "",
                           type: {
                             "is-danger":
-                              _vm.qualificationsErrors.skills.skill.length > 0
+                              _vm.qualificationsErrors.expertise.expertise
+                                .length > 0
                           },
-                          message: _vm.qualificationsErrors.skills.skill
+                          message: _vm.qualificationsErrors.expertise.expertise
                         }
                       },
                       [
                         _c("b-input", {
                           attrs: { size: "", expanded: "" },
                           model: {
-                            value: _vm.qualifications.skills.skill,
+                            value: _vm.qualifications.expertise.expertise,
                             callback: function($$v) {
-                              _vm.$set(_vm.qualifications.skills, "skill", $$v)
+                              _vm.$set(
+                                _vm.qualifications.expertise,
+                                "expertise",
+                                $$v
+                              )
                             },
-                            expression: "qualifications.skills.skill"
+                            expression: "qualifications.expertise.expertise"
                           }
                         })
                       ],
@@ -17016,26 +15610,28 @@ var render = function() {
                           expanded: "",
                           type: {
                             "is-danger":
-                              _vm.qualificationsErrors.skills.yearOfExperience
-                                .length > 0
+                              _vm.qualificationsErrors.expertise
+                                .yearOfExperience.length > 0
                           },
                           message:
-                            _vm.qualificationsErrors.skills.yearOfExperience
+                            _vm.qualificationsErrors.expertise.yearOfExperience
                         }
                       },
                       [
                         _c("b-input", {
                           attrs: { size: "", expanded: "" },
                           model: {
-                            value: _vm.qualifications.skills.yearOfExperience,
+                            value:
+                              _vm.qualifications.expertise.yearOfExperience,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.qualifications.skills,
+                                _vm.qualifications.expertise,
                                 "yearOfExperience",
                                 $$v
                               )
                             },
-                            expression: "qualifications.skills.yearOfExperience"
+                            expression:
+                              "qualifications.expertise.yearOfExperience"
                           }
                         })
                       ],
@@ -17058,9 +15654,10 @@ var render = function() {
                           label: "Comment",
                           type: {
                             "is-danger":
-                              _vm.qualificationsErrors.skills.comment.length > 0
+                              _vm.qualificationsErrors.expertise.comment
+                                .length > 0
                           },
-                          message: _vm.qualificationsErrors.skills.comment
+                          message: _vm.qualificationsErrors.expertise.comment
                         }
                       },
                       [
@@ -17071,15 +15668,15 @@ var render = function() {
                             size: ""
                           },
                           model: {
-                            value: _vm.qualifications.skills.comment,
+                            value: _vm.qualifications.expertise.comment,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.qualifications.skills,
+                                _vm.qualifications.expertise,
                                 "comment",
                                 $$v
                               )
                             },
-                            expression: "qualifications.skills.comment"
+                            expression: "qualifications.expertise.comment"
                           }
                         })
                       ],
@@ -17102,14 +15699,14 @@ var render = function() {
                       staticClass: "button is-success is-light",
                       attrs: {
                         type: "submit",
-                        disabled: _vm.isSubmittingSkills
+                        disabled: _vm.isSubmittingExpertise
                       }
                     },
                     [
                       _vm._v(
                         "\n          " +
                           _vm._s(
-                            _vm.isSubmittingSkills ? "Saving..." : "Save"
+                            _vm.isSubmittingExpertise ? "Saving..." : "Save"
                           ) +
                           "\n        "
                       )
@@ -17122,7 +15719,7 @@ var render = function() {
                       staticClass: "is-danger is-light",
                       on: {
                         click: function($event) {
-                          return _vm.closeSkillDropper()
+                          return _vm.closeExpertiseDropper()
                         }
                       }
                     },
@@ -17155,6 +15752,7 @@ var render = function() {
           _c(
             "form",
             {
+              staticStyle: { width: "30rem" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
@@ -17387,275 +15985,6 @@ var render = function() {
             1
           )
         ]
-      ),
-      _vm._v(" "),
-      _c(
-        "dropper",
-        {
-          ref: "attachmentDropper",
-          staticClass: "dropper",
-          attrs: {
-            join: "#comment-id" + _vm.getAttachmentDropperId,
-            "z-index": 1000
-          },
-          on: {
-            "esc-keydown": _vm.closeAttachmentDropper,
-            "other-area-clicked": _vm.closeAttachmentDropper
-          }
-        },
-        [
-          _vm.attachmentUpdateType === "comment"
-            ? _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.replaceAttachment(_vm.attachmentUpdateType)
-                    }
-                  }
-                },
-                [
-                  _c("h3", { staticClass: "label text-main" }, [
-                    _vm._v("Edit Comment")
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "b-field",
-                    {
-                      attrs: {
-                        type: {
-                          "is-danger":
-                            _vm.qualificationsErrors.attachment.comment.length >
-                            0
-                        },
-                        message: _vm.qualificationsErrors.attachment.comment
-                      }
-                    },
-                    [
-                      _c("b-input", {
-                        attrs: {
-                          type: "textarea",
-                          placeholder: "Type your comment..."
-                        },
-                        model: {
-                          value: _vm.qualifications.attachment.comment,
-                          callback: function($$v) {
-                            _vm.$set(
-                              _vm.qualifications.attachment,
-                              "comment",
-                              $$v
-                            )
-                          },
-                          expression: "qualifications.attachment.comment"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "b-field",
-                    { staticClass: "buttons" },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button is-success is-light",
-                          attrs: {
-                            type: "submit",
-                            disabled: _vm.isSubmittingQualificationAttachment
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n          " +
-                              _vm._s(
-                                _vm.isSubmittingQualificationAttachment
-                                  ? "Saving..."
-                                  : "Save"
-                              ) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-button",
-                        {
-                          staticClass: "is-danger is-light",
-                          on: {
-                            click: function($event) {
-                              return _vm.closeAttachmentDropper()
-                            }
-                          }
-                        },
-                        [_vm._v("Cancel")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.attachmentUpdateType === "attachment"
-            ? _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.replaceAttachment(_vm.attachmentUpdateType)
-                    }
-                  }
-                },
-                [
-                  _c("h3", { staticClass: "label has-text-info" }, [
-                    _vm._v("Replace Attachment")
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "b-field",
-                    [
-                      _c(
-                        "b-upload",
-                        {
-                          staticStyle: { cursor: "pointer" },
-                          attrs: { size: "is-small" },
-                          model: {
-                            value: _vm.qualifications.attachment.file,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.qualifications.attachment,
-                                "file",
-                                $$v
-                              )
-                            },
-                            expression: "qualifications.attachment.file"
-                          }
-                        },
-                        [
-                          _c("section", { staticClass: "section" }, [
-                            _c(
-                              "div",
-                              { staticClass: "content has-text-centered" },
-                              [
-                                _c(
-                                  "p",
-                                  [
-                                    _c("b-icon", {
-                                      attrs: {
-                                        icon: "upload",
-                                        size: "is-small"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("p", [_vm._v("Click to replace attachment")])
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm.qualifications.attachment.file
-                    ? _c("div", { staticClass: "tags" }, [
-                        _c(
-                          "span",
-                          { staticClass: "tag is-large is-info is-light" },
-                          [
-                            _vm._v(
-                              "\n          " +
-                                _vm._s(
-                                  _vm.qualifications.attachment.file.name
-                                ) +
-                                "\n          "
-                            ),
-                            _c("button", {
-                              staticClass: "delete is-small",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  _vm.qualifications.attachment.file = null
-                                }
-                              }
-                            })
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("b-field", {
-                    attrs: {
-                      type: {
-                        "is-danger":
-                          _vm.qualificationsErrors.attachment.file.length > 0
-                      },
-                      message: _vm.qualificationsErrors.attachment.file
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "b-field",
-                    { staticClass: "buttons" },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button is-success is-light",
-                          attrs: {
-                            type: "submit",
-                            disabled: _vm.isSubmittingQualificationAttachment
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n          " +
-                              _vm._s(
-                                _vm.isSubmittingQualificationAttachment
-                                  ? "Saving..."
-                                  : "Save"
-                              ) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-button",
-                        {
-                          staticClass: "is-danger is-light",
-                          on: {
-                            click: function($event) {
-                              return _vm.closeAttachmentDropper()
-                            }
-                          }
-                        },
-                        [_vm._v("Cancel")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            : _vm._e()
-        ]
       )
     ],
     1
@@ -17699,69 +16028,6 @@ var render = function() {
                 _vm._v(_vm._s(_vm.$t("app.report_to")))
               ]),
               _vm._v(" "),
-              _vm.getMyLeaders.managers.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "mb-3" },
-                    _vm._l(_vm.getMyLeaders.managers, function(s, i) {
-                      return _c(
-                        "div",
-                        { key: i },
-                        [
-                          _vm.getProfile.branch_id === s.branch_id
-                            ? [
-                                _c("h5", {}, [
-                                  _vm._v(_vm._s(_vm.$t("app.manager")) + "(s)")
-                                ]),
-                                _vm._v(" "),
-                                _c("p", [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(
-                                        _vm.getFullName({
-                                          title: s.title,
-                                          lastName: s.lastName,
-                                          firstName: s.firstName,
-                                          middleName: s.middleName
-                                        })
-                                      ) +
-                                      "\n                  "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("p", [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(s.mobile) +
-                                      "\n                  "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("p", [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(s.mail) +
-                                      "\n                  "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("p", [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(s.position) +
-                                      "\n                  "
-                                  )
-                                ])
-                              ]
-                            : _vm._e()
-                        ],
-                        2
-                      )
-                    }),
-                    0
-                  )
-                : _vm._e(),
-              _vm._v(" "),
               _vm.getMyLeaders.hods.length > 0
                 ? _c(
                     "div",
@@ -17777,70 +16043,108 @@ var render = function() {
                                   _vm._v(_vm._s(_vm.$t("app.hod")) + "(s)")
                                 ]),
                                 _vm._v(" "),
-                                _c("p", { staticClass: "report_to_text" }, [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(
-                                        _vm.getFullName({
-                                          title: s.title,
-                                          lastName: s.lastName,
-                                          firstName: s.firstName,
-                                          middleName: s.middleName
-                                        })
-                                      ) +
-                                      "\n                    "
-                                  ),
-                                  _c(
-                                    "span",
-                                    { staticClass: "report_to_label" },
-                                    [_vm._v("Name")]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                s.mobile
-                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                _c(
+                                  "article",
+                                  { staticClass: "leader__details" },
+                                  [
+                                    _c("p", { staticClass: "report_to_text" }, [
                                       _vm._v(
-                                        "\n                    " +
-                                          _vm._s(s.mobile) +
-                                          "\n                    "
+                                        "\n                      " +
+                                          _vm._s(
+                                            _vm.getFullName({
+                                              title: s.title,
+                                              lastName: s.lastName,
+                                              firstName: s.firstName,
+                                              middleName: s.middleName
+                                            })
+                                          ) +
+                                          "\n                      "
                                       ),
                                       _c(
                                         "span",
                                         { staticClass: "report_to_label" },
-                                        [_vm._v("Mobile")]
+                                        [_vm._v(_vm._s(_vm.$t("app.name")))]
                                       )
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                s.mail
-                                  ? _c("p", { staticClass: "report_to_text" }, [
-                                      _vm._v(
-                                        "\n                    " +
-                                          _vm._s(s.mail) +
-                                          "\n                    "
-                                      ),
-                                      _c(
-                                        "span",
-                                        { staticClass: "report_to_label" },
-                                        [_vm._v("Email")]
-                                      )
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                s.position
-                                  ? _c("p", { staticClass: "report_to_text" }, [
-                                      _vm._v(
-                                        "\n                    " +
-                                          _vm._s(s.position) +
-                                          "\n                    "
-                                      ),
-                                      _c(
-                                        "span",
-                                        { staticClass: "report_to_label" },
-                                        [_vm._v("Position")]
-                                      )
-                                    ])
-                                  : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    s.mobile
+                                      ? _c(
+                                          "p",
+                                          { staticClass: "report_to_text" },
+                                          [
+                                            _vm._v(
+                                              "\n                      " +
+                                                _vm._s(s.mobile) +
+                                                "\n                      "
+                                            ),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "report_to_label"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("app.mobile"))
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    s.mail
+                                      ? _c(
+                                          "p",
+                                          { staticClass: "report_to_text" },
+                                          [
+                                            _vm._v(
+                                              "\n                      " +
+                                                _vm._s(s.mail) +
+                                                "\n                      "
+                                            ),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "report_to_label"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.$tc("app.email", 1)
+                                                  )
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    s.position
+                                      ? _c(
+                                          "p",
+                                          { staticClass: "report_to_text" },
+                                          [
+                                            _vm._v(
+                                              "\n                      " +
+                                                _vm._s(s.position) +
+                                                "\n                      "
+                                            ),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "report_to_label"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("app.position"))
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                )
                               ]
                             : _vm._e()
                         ],
@@ -17868,70 +16172,108 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("p", { staticClass: "report_to_text" }, [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(
-                                        _vm.getFullName({
-                                          title: s.title,
-                                          lastName: s.lastName,
-                                          firstName: s.firstName,
-                                          middleName: s.middleName
-                                        })
-                                      ) +
-                                      "\n                    "
-                                  ),
-                                  _c(
-                                    "span",
-                                    { staticClass: "report_to_label" },
-                                    [_vm._v("Name")]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                s.mobile
-                                  ? _c("p", { staticClass: "report_to_text" }, [
+                                _c(
+                                  "article",
+                                  { staticClass: "leader__details" },
+                                  [
+                                    _c("p", { staticClass: "report_to_text" }, [
                                       _vm._v(
-                                        "\n                    " +
-                                          _vm._s(s.mobile) +
-                                          "\n                    "
+                                        "\n                      " +
+                                          _vm._s(
+                                            _vm.getFullName({
+                                              title: s.title,
+                                              lastName: s.lastName,
+                                              firstName: s.firstName,
+                                              middleName: s.middleName
+                                            })
+                                          ) +
+                                          "\n                      "
                                       ),
                                       _c(
                                         "span",
                                         { staticClass: "report_to_label" },
-                                        [_vm._v("Mobile")]
+                                        [_vm._v(_vm._s(_vm.$t("app.name")))]
                                       )
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                s.mail
-                                  ? _c("p", { staticClass: "report_to_text" }, [
-                                      _vm._v(
-                                        "\n                    " +
-                                          _vm._s(s.mail) +
-                                          "\n                    "
-                                      ),
-                                      _c(
-                                        "span",
-                                        { staticClass: "report_to_label" },
-                                        [_vm._v("Email")]
-                                      )
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                s.position
-                                  ? _c("p", { staticClass: "report_to_text" }, [
-                                      _vm._v(
-                                        "\n                    " +
-                                          _vm._s(s.position) +
-                                          "\n                    "
-                                      ),
-                                      _c(
-                                        "span",
-                                        { staticClass: "report_to_label" },
-                                        [_vm._v("Position")]
-                                      )
-                                    ])
-                                  : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    s.mobile
+                                      ? _c(
+                                          "p",
+                                          { staticClass: "report_to_text" },
+                                          [
+                                            _vm._v(
+                                              "\n                      " +
+                                                _vm._s(s.mobile) +
+                                                "\n                      "
+                                            ),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "report_to_label"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("app.mobile"))
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    s.mail
+                                      ? _c(
+                                          "p",
+                                          { staticClass: "report_to_text" },
+                                          [
+                                            _vm._v(
+                                              "\n                      " +
+                                                _vm._s(s.mail) +
+                                                "\n                      "
+                                            ),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "report_to_label"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.$tc("app.email", 1)
+                                                  )
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    s.position
+                                      ? _c(
+                                          "p",
+                                          { staticClass: "report_to_text" },
+                                          [
+                                            _vm._v(
+                                              "\n                      " +
+                                                _vm._s(s.position) +
+                                                "\n                      "
+                                            ),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "report_to_label"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("app.position"))
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                )
                               ]
                             : _vm._e()
                         ],
@@ -17954,43 +16296,63 @@ var render = function() {
                     { staticClass: "mb-3" },
                     _vm._l(_vm.getMyLeaders.reportToMe, function(s, i) {
                       return _c("div", { key: i }, [
-                        _c("p", [
-                          _vm._v(
-                            "\n                  " +
-                              _vm._s(
-                                _vm.getFullName({
-                                  title: s.title,
-                                  lastName: s.lastName,
-                                  firstName: s.firstName,
-                                  middleName: s.middleName
-                                })
-                              ) +
-                              "\n                "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n                  " +
-                              _vm._s(s.mobile) +
-                              "\n                "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n                  " +
-                              _vm._s(s.mail) +
-                              "\n                "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n                  " +
-                              _vm._s(s.position) +
-                              "\n                "
-                          )
+                        _c("article", { staticClass: "leader__details" }, [
+                          _c("p", { staticClass: "report_to_text" }, [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(
+                                  _vm.getFullName({
+                                    title: s.title,
+                                    lastName: s.lastName,
+                                    firstName: s.firstName,
+                                    middleName: s.middleName
+                                  })
+                                ) +
+                                "\n                    "
+                            ),
+                            _c("span", { staticClass: "report_to_label" }, [
+                              _vm._v(_vm._s(_vm.$t("app.name")))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          s.mobile
+                            ? _c("p", { staticClass: "report_to_text" }, [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(s.mobile) +
+                                    "\n                    "
+                                ),
+                                _c("span", { staticClass: "report_to_label" }, [
+                                  _vm._v(_vm._s(_vm.$t("app.mobile")))
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          s.mail
+                            ? _c("p", { staticClass: "report_to_text" }, [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(s.mail) +
+                                    "\n                    "
+                                ),
+                                _c("span", { staticClass: "report_to_label" }, [
+                                  _vm._v(_vm._s(_vm.$tc("app.email", 1)))
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          s.position
+                            ? _c("p", { staticClass: "report_to_text" }, [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(s.position) +
+                                    "\n                    "
+                                ),
+                                _c("span", { staticClass: "report_to_label" }, [
+                                  _vm._v(_vm._s(_vm.$t("app.position")))
+                                ])
+                              ])
+                            : _vm._e()
                         ])
                       ])
                     }),
@@ -18003,7 +16365,16 @@ var render = function() {
             JSON.parse(_vm.$page.props.authUser.report_to_roles).length > 0
               ? _c("div", { staticClass: "column is-4" }, [
                   _c("h5", { staticClass: "text-main" }, [
-                    _vm._v(_vm._s("Directorate/Office"))
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(
+                          _vm.$t("app.directorate") +
+                            "  (" +
+                            _vm.$t("app.report_to") +
+                            ")"
+                        ) +
+                        "\n            "
+                    )
                   ]),
                   _vm._v(" "),
                   _c(
@@ -18016,103 +16387,141 @@ var render = function() {
                           "div",
                           { key: i },
                           [
-                            _c("h5", {}, [
-                              _vm._v(_vm._s(_vm.$t("app.report_to")))
-                            ]),
-                            _vm._v(" "),
                             _vm._l(_vm.getMyLeaders.directorates, function(
-                              d,
+                              s,
                               j
                             ) {
                               return [
-                                JSON.parse(d.roles).includes(office)
+                                JSON.parse(s.roles).includes(office)
                                   ? _c("article", { key: j }, [
                                       _c(
-                                        "p",
-                                        { staticClass: "report_to_text" },
+                                        "article",
+                                        { staticClass: "leader__details" },
                                         [
-                                          _vm._v(
-                                            "\n                      " +
-                                              _vm._s(
-                                                _vm.getFullName({
-                                                  title: d.title,
-                                                  lastName: d.lastName,
-                                                  firstName: d.firstName,
-                                                  middleName: d.middleName
-                                                })
-                                              ) +
-                                              "\n                      "
-                                          ),
                                           _c(
-                                            "span",
-                                            { staticClass: "report_to_label" },
-                                            [_vm._v("Name")]
-                                          )
+                                            "p",
+                                            { staticClass: "report_to_text" },
+                                            [
+                                              _vm._v(
+                                                "\n                        " +
+                                                  _vm._s(
+                                                    _vm.getFullName({
+                                                      title: s.title,
+                                                      lastName: s.lastName,
+                                                      firstName: s.firstName,
+                                                      middleName: s.middleName
+                                                    })
+                                                  ) +
+                                                  "\n                        "
+                                              ),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass: "report_to_label"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(_vm.$t("app.name"))
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          s.mobile
+                                            ? _c(
+                                                "p",
+                                                {
+                                                  staticClass: "report_to_text"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        " +
+                                                      _vm._s(s.mobile) +
+                                                      "\n                        "
+                                                  ),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "report_to_label"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.$t("app.mobile")
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          s.mail
+                                            ? _c(
+                                                "p",
+                                                {
+                                                  staticClass: "report_to_text"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        " +
+                                                      _vm._s(s.mail) +
+                                                      "\n                        "
+                                                  ),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "report_to_label"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.$tc(
+                                                            "app.email",
+                                                            1
+                                                          )
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          s.position
+                                            ? _c(
+                                                "p",
+                                                {
+                                                  staticClass: "report_to_text"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        " +
+                                                      _vm._s(s.position) +
+                                                      "\n                        "
+                                                  ),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "report_to_label"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.$t("app.position")
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
                                         ]
-                                      ),
-                                      _vm._v(" "),
-                                      d.mobile
-                                        ? _c(
-                                            "p",
-                                            { staticClass: "report_to_text" },
-                                            [
-                                              _vm._v(
-                                                "\n                      " +
-                                                  _vm._s(_vm.s.mobile) +
-                                                  "\n                      "
-                                              ),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass: "report_to_label"
-                                                },
-                                                [_vm._v("Mobile")]
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      d.mail
-                                        ? _c(
-                                            "p",
-                                            { staticClass: "report_to_text" },
-                                            [
-                                              _vm._v(
-                                                "\n                      " +
-                                                  _vm._s(_vm.s.mail) +
-                                                  "\n                      "
-                                              ),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass: "report_to_label"
-                                                },
-                                                [_vm._v("Email")]
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      office
-                                        ? _c(
-                                            "p",
-                                            { staticClass: "report_to_text" },
-                                            [
-                                              _vm._v(
-                                                "\n                      " +
-                                                  _vm._s(office) +
-                                                  "\n                      "
-                                              ),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass: "report_to_label"
-                                                },
-                                                [_vm._v("Office")]
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
+                                      )
                                     ])
                                   : _vm._e()
                               ]
@@ -18123,61 +16532,7 @@ var render = function() {
                       }
                     ),
                     0
-                  ),
-                  _vm._v(" "),
-                  _vm.getMyLeaders.reportToMe.length > 0
-                    ? _c(
-                        "div",
-                        { staticClass: "mb-3" },
-                        _vm._l(_vm.getMyLeaders.reportToMe, function(s, i) {
-                          return _c("div", { key: i }, [
-                            _c("h5", {}, [
-                              _vm._v(_vm._s(_vm.$t("app.report_to_me")))
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "\n                  " +
-                                  _vm._s(
-                                    _vm.getFullName({
-                                      title: s.title,
-                                      lastName: s.lastName,
-                                      firstName: s.firstName,
-                                      middleName: s.middleName
-                                    })
-                                  ) +
-                                  "\n                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "\n                  " +
-                                  _vm._s(s.mobile) +
-                                  "\n                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "\n                  " +
-                                  _vm._s(s.mail) +
-                                  "\n                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "\n                  " +
-                                  _vm._s(s.position) +
-                                  "\n                "
-                              )
-                            ])
-                          ])
-                        }),
-                        0
-                      )
-                    : _vm._e()
+                  )
                 ])
               : _vm._e()
           ])

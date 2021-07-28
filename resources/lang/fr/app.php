@@ -28,6 +28,7 @@ return [
   'password'    => 'Mot de passe',
   'new'    => 'nouveau',
   'confirm'    => 'confirmer',
+  'directorate' => 'Direction/Bureau',
 
   /**App phrases */
   'personal_detail_cta' => 'Profil personnel de l\'employé',
@@ -80,6 +81,7 @@ return [
   'city' => 'Ville',
   'state' => 'État',
   'region' => 'Région',
+  'pdAttachmentDesc' => 'Téléchargez la première page de votre passeport',
 
   'contact_detail_cta' => 'Coordonnées de l\'employé',
   'mobile' => 'Mobile',
@@ -141,9 +143,9 @@ return [
   'gpa' => 'GPA/But',
   'started' => 'A débuté',
   'completed' => 'Terminé',
-  'skill' => 'Compétence|Compétences',
-  'add_skills' => 'Ajouter des compétences',
-  'edit_skill' => 'Modifier la compétence',
+  'expertise' => 'Domaines d\'expertise',
+  'add_expertise' => 'Ajouter une expertise',
+  'edit_expertise' => 'Modifier l\'expertise',
   'year_of_expe' => 'Année d\'expérience',
   'language' => 'Langue|Langues',
   'add_language' => 'Ajouter une langue',
@@ -153,10 +155,12 @@ return [
   'good' => 'Bien',
   'very_good' => 'Très bien',
   'mother_tongue' => 'Langue Maternelle',
+  'continuous_dev' => 'Développement continu', //Développement personnel et professionnel continu
+  'add_continuous_dev' => 'Ajouter le développement continu',
 
   'report_to_cta' => 'Vos Dirigeants',
-  'report_to' => 'Signaler à',
-  'report_to_me' => 'Se rapporte à moi',
+  'report_to' => 'Reporte a',
+  'report_to_me' => 'Rapporte-moi',
   'your_leaders' => 'Tous vos leaders',
   'authourities' => 'Autorités',
   'supervisor' => 'Superviseur',

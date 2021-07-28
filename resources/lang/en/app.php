@@ -28,13 +28,14 @@ return [
   'password'    => 'password',
   'new'    => 'New',
   'confirm'    => 'confirm',
+  'directorate' => 'Directorate/Office',
 
 
   /**App phrases */
   'personal_detail_cta' => 'Employee Personal Details',
   'upload_profile_photo' => 'Upload profile photo',
   'profile_photo' => 'Profile photo',
-  'title'                 => 'Titre',
+  'title'                 => 'Title',
   'mr' => 'Mr.',
   'miss' => 'Miss',
   'mrs' => 'Mrs.',
@@ -82,6 +83,7 @@ return [
   'city' => 'City',
   'state' => 'State',
   'region' => 'Region',
+  'pdAttachmentDesc' => 'Upload the first page of your passport',
 
 
 
@@ -145,9 +147,9 @@ return [
   'gpa' => 'GPA/Score',
   'started' => 'Started',
   'completed' => 'Completed',
-  'skill' => 'Skill|Skills',
-  'add_skills' => 'Add Skills',
-  'edit_skill' => 'Edit skill',
+  'expertise' => 'Area of Expertise',
+  'add_expertise' => 'Add Expertise',
+  'edit_expertise' => 'Edit Expertise',
   'year_of_expe' => 'Year of Experience',
   'language' => 'Language|Languages',
   'add_language' => 'Add Language',
@@ -157,11 +159,13 @@ return [
   'good' => 'Good',
   'very_good' => 'Very Good',
   'mother_tongue' => 'Mother Tongue',
+  'continuous_dev' => 'Continuous Development', //Continuous Personal and Professional Development
+  'add_continuous_dev' => 'Add Continuous Development',
 
 
   'report_to_cta' => 'Your Leaders',
   'report_to' => 'Report to',
-  'report_to_me' => 'Reporting to me',
+  'report_to_me' => 'Report to me',
   'your_leaders' => 'All Your Leaders',
   'authourities' => 'Authourities',
   'supervisor' => 'Supervisor',

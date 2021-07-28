@@ -34,7 +34,6 @@ export default {
   },
   layout: Dashboard,
   props: {
-    branches: Array,
     departments: Array,
     units: Array,
     jobTitles: Array,
@@ -43,7 +42,6 @@ export default {
   created() {
     this.dispatchKPI({ payload: 1 });
     this.dispatchRole({ payload: this.roles });
-    this.dispatchBranch({ payload: this.branches });
     this.dispatchUnit({ payload: this.units });
     this.dispatchDepartment({ payload: this.departments });
     this.dispatchJobTitle({ payload: this.jobTitles });
@@ -52,7 +50,6 @@ export default {
     ...mapActions([
       "dispatchKPI",
       "dispatchUserAccount",
-      "dispatchBranch",
       "dispatchUnit",
       "dispatchDepartment",
       "dispatchJobTitle",

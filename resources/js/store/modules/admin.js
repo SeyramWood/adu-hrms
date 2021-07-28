@@ -8,7 +8,6 @@ const state = {
     jobCategories: [],
     jobTitles: [],
     employmentStatus: [],
-    branches: [],
     departments: [],
     units: [],
     positions: [],
@@ -25,7 +24,6 @@ const getters = {
     getJobCategories: state => state.jobCategories,
     getJobTitles: state => state.jobTitles,
     getEmploymentStatus: state => state.employmentStatus,
-    getBranches: state => state.branches,
     getDepartments: state => state.departments,
     getUnits: state => state.units,
     getPositions: state => state.positions,
@@ -223,29 +221,7 @@ const actions = {
             console.log(err);
         }
     },
-    async dispatchBranch({ commit }, { type = "", payload }) {
-        try {
-            switch (type) {
-                case "ADD_NEW_BRANCH":
-                    commit("addNewBranch", payload);
-                    break;
-                case "UPDATE_BRANCH":
-                    commit("updateBranch", payload);
-                    break;
-                case "DELETE_BRANCH":
-                    commit("deleteBranch", payload);
-                    break;
-                case "DELETE_BRANCHES":
-                    commit("deleteBranches", payload);
-                    break;
-                default:
-                    commit("addBranches", payload);
-                    break;
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    },
+
     async dispatchDepartment({ commit }, { type = "", payload }) {
         try {
             switch (type) {
@@ -478,33 +454,6 @@ const mutations = {
             );
         });
     },
-
-    addBranches: (state, data) => (state.branches = data),
-    addNewBranch: (state, data) => {
-        state.branches = [data, ...state.branches];
-    },
-    updateBranch: (state, data) => {
-        state.branches.splice(
-            state.branches.findIndex(u => u.id === data.id),
-            1,
-            data
-        );
-    },
-    deleteBranch: (state, id) => {
-        state.branches.splice(
-            state.branches.findIndex(u => u.id === id),
-            1
-        );
-    },
-    deleteBranches: (state, ids) => {
-        ids.forEach(id => {
-            state.branches.splice(
-                state.branches.findIndex(u => u.id === id),
-                1
-            );
-        });
-    },
-
     addDepartments: (state, data) => (state.departments = data),
     addUnits: (state, data) => (state.units = data),
     addNewDepartment: (state, data) => {

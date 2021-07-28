@@ -45,14 +45,7 @@ class ESSController extends Controller
     {
         return $this->destoryEmergencyContact($profile, $id);
     }
-    public function addWorkExperience(Request $request, Profile $profile)
-    {
-        return $this->createQualificationWorkExperience($request, $profile);
-    }
-    public function editWorkExperience(Request $request, Profile $profile, $id)
-    {
-        return $this->updateWorkExperience($request, $profile, $id);
-    }
+
     public function addEducation(Request $request, Profile $profile)
     {
         return $this->createQualificationEducation($request, $profile);
@@ -61,13 +54,21 @@ class ESSController extends Controller
     {
         return $this->updateEducation($request, $profile, $id);
     }
-    public function addSkill(Request $request, Profile $profile)
+    public function addContinuousDev(Request $request, Profile $profile)
     {
-        return $this->createQualificationSkill($request, $profile);
+        return $this->createContinuousDev($request, $profile);
     }
-    public function editSkill(Request $request, Profile $profile, $id)
+    public function editContinuousDev(Request $request, Profile $profile, $id)
     {
-        return $this->updateSkill($request, $profile, $id);
+        return $this->updateContinuousDev($request, $profile, $id);
+    }
+    public function addExpertise(Request $request, Profile $profile)
+    {
+        return $this->createQualificationExpertise($request, $profile);
+    }
+    public function editExpertise(Request $request, Profile $profile, $id)
+    {
+        return $this->updateExpertise($request, $profile, $id);
     }
     public function addLanguage(Request $request, Profile $profile)
     {
@@ -76,14 +77,6 @@ class ESSController extends Controller
     public function editLanguage(Request $request, Profile $profile, $id)
     {
         return $this->updateLanguage($request, $profile, $id);
-    }
-    public function addQualificationAttachment(Request $request, Profile $profile)
-    {
-        return $this->createQualificationAttachment($request, $profile);
-    }
-    public function replaceQualificationAttachment(Request $request, Profile $profile)
-    {
-        return $this->updateQualificationAttachment($request, $profile);
     }
     public function qualificationDeleteHandler(Profile $profile, $id, $type)
     {

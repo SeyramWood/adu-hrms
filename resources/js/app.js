@@ -18,6 +18,7 @@ import { DateTime, Interval, Duration } from "luxon";
 // import Interval from "luxon/src/interval.js";
 import VueLang from "@eli5/vue-lang-js";
 import translations from "./lang.js";
+import InfiniteLoading from "vue-infinite-loading";
 
 InertiaProgress.init();
 
@@ -43,7 +44,16 @@ Vue.use(VueLang, {
     locale: "en", // Set locale
     fallback: "en" // Set fallback lacale
 });
-
+Vue.use(InfiniteLoading, {
+    props: {
+        spinner: "spiral"
+        /* other props need to configure */
+    },
+    system: {
+        throttleLimit: 30
+        /* other settings need to configure */
+    }
+});
 Object.defineProperty(Vue.prototype, "$luxon", { value: DateTime });
 Object.defineProperty(Vue.prototype, "$axios", { value: axios });
 
@@ -81,7 +91,7 @@ Vue.mixin({
                 this.$page.props.userPermissions.includes(permission) && true
             );
         },
-        userOrPermission(permission, profileId) {
+        userOrPermission(permission = null, profileId = null) {
             if (
                 this.isPermission(permission) ||
                 profileId === this.$page.props.authUser.id
@@ -94,7 +104,7 @@ Vue.mixin({
             const intersection = rest.filter(x =>
                 this.$page.props.userPermissions.includes(x)
             );
-            return intersection.length > 0 && true;
+            return intersection.length && true;
         },
         isNull(el) {
             if (el === "null" || el === null) {

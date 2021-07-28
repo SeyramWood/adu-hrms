@@ -172,9 +172,9 @@ export default {
   name: "Dashboard",
   metaInfo: {
     // if no subcomponents specify a metaInfo.title, this title will be used
-    title: "Human Resource Management System",
+    title: "ADU Human Resource Management System",
     // all titles will be injected into this template
-    titleTemplate: "%s | Human Resource Management System",
+    titleTemplate: "%s | ADU Human Resource Management System",
   },
   props: { userPermissions: { require: true, type: Array } },
   computed: {
@@ -229,21 +229,7 @@ export default {
     this.dispatchJobTitle({ payload: this.$page.props.jobTitles });
     this.dispatchOrgnizationProfile({ payload: this.$page.props.orgInfo });
   },
-  mounted() {
-    // navigator.language = "fr";
-    // this.$inertia.visit({ headers: { "Custom-Header": "value" } });
-    // this.$inertia.on("success", (event) => {
-    //   console.log(`Successfully made a visit to ${event.detail.page.url}`);
-    // });
-    // console.log(window);
-    // this.$inertia.success({
-    //   method: "get",
-    //   data: {},
-    //   replace: false,
-    //   preserveScroll: false,
-    //   preserveState: false,
-    // });
-  },
+  mounted() {},
   data() {
     return {
       activePage: "",
