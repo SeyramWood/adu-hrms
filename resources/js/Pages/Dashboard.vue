@@ -15,10 +15,7 @@
                     <p>Total Staff</p>
                   </div>
                 </div>
-                <div
-                  class="ui__card__link"
-                  v-if="anyPermission('admin', 'hod', 'supervisor')"
-                >
+                <div class="ui__card__link" v-if="anyPermission('admin')">
                   <inertia-link href="/dashboard/pim">View Staff</inertia-link>
                   <span>&rarr;</span>
                 </div>
@@ -124,10 +121,7 @@
       </div> -->
 
       <div class="dashboard__cards__card c--3">
-        <div
-          class="dashboard__cards"
-          v-if="anyPermission('admin', 'hod', 'supervisor')"
-        >
+        <div class="dashboard__cards" v-if="anyPermission('admin')">
           <div class="dashboard__cards__card c--6">
             <div class="card">
               <div class="card-content">
