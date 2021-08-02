@@ -146,7 +146,13 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`job-cat-id${props.row.id.toString()}`"
+                          :id="
+                            `job-cat-id${
+                              props.row.id === getDropperId
+                                ? getDropperId
+                                : getDropperId
+                            }`.toString()
+                          "
                           @click="openJobCatDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
@@ -612,7 +618,11 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`emp-status-id${props.row.id.toString()}`"
+                          :id="`emp-status-id${
+                            props.row.id === getEmpStatusDropperId
+                              ? getEmpStatusDropperId
+                              : ''.toString()
+                          }`"
                           @click="openEmpStatusDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
@@ -758,10 +768,10 @@ export default {
       "getEmploymentStatus",
     ]),
     getDropperId() {
-      return this.dropperId.toString();
+      return this.dropperId;
     },
     getEmpStatusDropperId() {
-      return this.empStatusDropperId.toString();
+      return this.empStatusDropperId;
     },
   },
   data() {

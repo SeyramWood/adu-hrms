@@ -106,6 +106,10 @@ Vue.mixin({
             );
             return intersection.length && true;
         },
+        arrayIntersec(arr1, arr2) {
+            const intersec = arr1.filter(x => arr2.includes(x));
+            return intersec.length && true;
+        },
         isNull(el) {
             if (el === "null" || el === null) {
                 return "";

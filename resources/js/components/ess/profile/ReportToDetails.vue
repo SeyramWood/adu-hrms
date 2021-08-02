@@ -139,58 +139,55 @@
               </div>
             </div>
 
-            <div
-              class="column is-4"
-              v-if="
-                $page.props.authUser.report_to_roles &&
-                JSON.parse($page.props.authUser.report_to_roles).length
-              "
-            >
+            <div class="column is-4">
               <h5 class="text-main">
                 {{ `${$t("app.directorate")}  (${$t("app.report_to")})` }}
               </h5>
+
               <div class="mb-3">
-                <div
-                  v-for="(office, i) in JSON.parse(
-                    $page.props.authUser.report_to_roles
-                  )"
-                  :key="i"
-                >
+                <div>
                   <template v-for="(s, j) in getMyLeaders.directorates">
-                    <article :key="j">
-                      <article class="leader__details">
-                        <p class="report_to_text">
-                          {{
-                            getFullName({
-                              title: s.title,
-                              lastName: s.lastName,
-                              firstName: s.firstName,
-                              middleName: s.middleName,
-                            })
-                          }}
-                          <span class="report_to_label">{{
-                            $t("app.name")
-                          }}</span>
-                        </p>
-                        <p class="report_to_text" v-if="s.mobile">
-                          {{ s.mobile }}
-                          <span class="report_to_label">{{
-                            $t("app.mobile")
-                          }}</span>
-                        </p>
-                        <p class="report_to_text" v-if="s.mail">
-                          {{ s.mail }}
-                          <span class="report_to_label">{{
-                            $tc("app.email", 1)
-                          }}</span>
-                        </p>
-                        <p class="report_to_text" v-if="s.position">
-                          {{ s.position }}
-                          <span class="report_to_label">{{
-                            $t("app.position")
-                          }}</span>
-                        </p>
-                      </article>
+                    <article
+                      class="leader__details"
+                      :key="j"
+                      v-if="
+                        !arrayIntersec(
+                          JSON.parse($page.props.authUser.roles),
+                          JSON.parse(s.roles)
+                        )
+                      "
+                    >
+                      <p class="report_to_text">
+                        {{
+                          getFullName({
+                            title: s.title,
+                            lastName: s.lastName,
+                            firstName: s.firstName,
+                            middleName: s.middleName,
+                          })
+                        }}
+                        <span class="report_to_label">{{
+                          $t("app.name")
+                        }}</span>
+                      </p>
+                      <p class="report_to_text" v-if="s.mobile">
+                        {{ s.mobile }}
+                        <span class="report_to_label">{{
+                          $t("app.mobile")
+                        }}</span>
+                      </p>
+                      <p class="report_to_text" v-if="s.mail">
+                        {{ s.mail }}
+                        <span class="report_to_label">{{
+                          $tc("app.email", 1)
+                        }}</span>
+                      </p>
+                      <p class="report_to_text" v-if="s.position">
+                        {{ s.position }}
+                        <span class="report_to_label">{{
+                          $t("app.position")
+                        }}</span>
+                      </p>
                     </article>
                   </template>
                 </div>
@@ -222,21 +219,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.report_to_label {
-  display: block;
-  font-size: 1rem;
-  color: #686767b5;
-  letter-spacing: 2px;
-}
-.report_to_text {
-  &:not(:last-child) {
-    margin-bottom: 0.15rem !important;
-  }
-}
-.leader__details {
-  &:not(:last-child) {
-    border-bottom: 1px solid #686767b5;
-  }
-}
+<style lang="scss">
 </style>

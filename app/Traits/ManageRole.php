@@ -21,7 +21,7 @@ trait ManageRole
       ->orderBy('id', 'desc')
       ->get();
     for ($i = 0; $i < count($roles); $i++) {
-      $roles[$i]->staff = $this->getRoleUsers(json_decode($roles[$i]->staff));
+      $roles[$i]->staff = $this->getRoleUsers(json_decode($roles[$i]->staff ?? '[]'));
     }
     return $roles;
   }
@@ -31,7 +31,7 @@ trait ManageRole
       ->orderBy('id', 'desc')
       ->get();
     for ($i = 0; $i < count($roles); $i++) {
-      $roles[$i]->staff = $this->getRoleUsers(json_decode($roles[$i]->staff));
+      $roles[$i]->staff = $this->getRoleUsers(json_decode($roles[$i]->staff ?? '[]'));
       if ($roles[$i]->report_to)
         $roles[$i]->report_to = $this->getRoleUsers(json_decode($roles[$i]->report_to));
     }
@@ -73,15 +73,17 @@ trait ManageRole
     $request->validate([
       'staff' => 'required|array',
     ]);
-    $prevSatff = json_decode($role->staff);
-    $newStaff = array_values(array_unique(array_merge($request->staff, $prevSatff)));
-    $staff = User::whereIn('id', $request->staff)->get();
+    $requestStaff = array_values(array_diff($request->staff, json_decode($role->report_to ?? '[]')));
+    $prevSatff = json_decode($role->staff ?? '[]');
+    $newStaff = array_values(array_unique(array_merge($requestStaff, $prevSatff)));
+    $staff = User::whereIn('id', $requestStaff)->get();
     for ($i = 0; $i < count($staff); $i++) {
       if ($staff[$i]->roles) {
         $prevRoles = json_decode($staff[$i]->roles);
         array_push($prevRoles, $role->role);
         if ($role->report_to) {
           $roles = json_decode($role->report_to);
+
           if ($staff[$i]->report_to_staff) {
             $rtRoles = json_decode($staff[$i]->report_to_staff);
             User::where('id', $staff[$i]->id)->update(['report_to_staff' => json_encode(array_values(array_unique(array_merge($rtRoles, $roles))))]);
@@ -100,7 +102,7 @@ trait ManageRole
   }
   public function destroyRoleUser($request, $role, $staff)
   {
-    $prevSatff = json_decode($role->staff);
+    $prevSatff = json_decode($role->staff ?? '[]');
     $newStaff = array_unique(array_values(array_diff($prevSatff, [(int)$staff])));
     $this->deleteStaffRole((int)$staff, $role->role, $role->report_to, $request);
     $role->staff = json_encode($newStaff);
@@ -119,7 +121,7 @@ trait ManageRole
       'staff' => 'required|array',
     ]);
     $prevToStaff = $role->report_to ? json_decode($role->report_to) : [];
-    $newReportStaff = $request->staff;
+    $newReportStaff = array_values(array_diff($request->staff, json_decode($role->staff ?? '[]')));;
     $newStaff = array_values(array_unique(array_merge($newReportStaff, $prevToStaff)));
     $staff = User::whereIn('id', json_decode($role->staff))->get();
 
@@ -128,8 +130,8 @@ trait ManageRole
         $prevStaff = json_decode($staff[$i]->report_to_staff);
         $prevRoles = json_decode($staff[$i]->report_to_roles);
         User::where('id', $staff[$i]->id)->update([
-          'report_to_staff' => json_encode(array_values(array_unique(array_merge($prevStaff, $newStaff)))),
-          'report_to_roles' => json_encode(array_values(array_unique(array_merge($prevRoles, [$role->id]))))
+          'report_to_staff' => json_encode(array_values(array_unique(array_merge(($prevStaff ?? []), $newStaff)))),
+          'report_to_roles' => json_encode(array_values(array_unique(array_merge(($prevRoles ?? []), [$role->id]))))
         ]);
       } else {
         User::where('id', $staff[$i]->id)->update([
@@ -144,8 +146,8 @@ trait ManageRole
   }
   public function destroyReportToStaff($role, $reportTo)
   {
-    $prevToStaff = json_decode($role->report_to);
-    $staff = User::whereIn('id', json_decode($role->staff))->get();
+    $prevToStaff = json_decode($role->report_to ?? '[]');
+    $staff = User::whereIn('id', json_decode($role->staff ?? '[]'))->get();
     for ($i = 0; $i < count($staff); $i++) {
       if ($staff[$i]->report_to_staff && count(json_decode($staff[$i]->report_to_staff))) {
         $prevRoles = array_unique(array_values(array_diff(json_decode($staff[$i]->report_to_staff), [$reportTo])));
@@ -193,10 +195,10 @@ trait ManageRole
     if (is_array($staff)) {
       $users = User::whereIn('id', $staff)->get();
       for ($i = 0; $i < count($users); $i++) {
-        $newStaffRoles = array_filter(json_decode($users[$i]->roles), function ($r) use ($role) {
+        $newStaffRoles = array_filter(json_decode($users[$i]->roles ?? '[]'), function ($r) use ($role) {
           return $r !== $role;
         });
-        $newStaff = array_filter(json_decode($users[$i]->report_to_staff), function ($r) use ($role) {
+        $newStaff = array_filter(json_decode($users[$i]->report_to_staff ?? '[]'), function ($r) use ($role) {
           return $r !== $role;
         });
         User::where('id', $users[$i]->id)->update([
@@ -208,7 +210,7 @@ trait ManageRole
 
     if (!is_array($staff)) {
       $roleUser = User::find($staff);
-      $staffRoles = json_decode($roleUser->roles);
+      $staffRoles = json_decode($roleUser->roles ?? '[]');
       $newStaffRoles = array_filter($staffRoles, function ($r) use ($role) {
         return $r !== $role;
       });
@@ -216,12 +218,12 @@ trait ManageRole
       if ($roleUser->report_to_staff) {
         $reportToRoles = json_decode($roleUser->report_to_staff);
       }
-      $reportToRoles = array_unique(array_values(array_diff(json_decode($reportTo), $reportToRoles)));
+      $reportToRoles = array_unique(array_values(array_diff((json_decode($reportTo) ?? []), $reportToRoles)));
       if ($request && $reportTo && count($request->roles)) {
         $allRoles = Role::whereIn('id', $request->roles)->get();
         $counter = 0;
         for ($i = 0; $i < count($allRoles); $i++) {
-          if (count(array_intersect(json_decode($allRoles[$i]->report_to), json_decode($reportTo)))) {
+          if (count(array_intersect(json_decode($allRoles[$i]->report_to ?? '[]'), json_decode($reportTo)))) {
             $counter += 1;
           }
         }

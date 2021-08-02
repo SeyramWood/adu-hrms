@@ -553,7 +553,11 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`department-id${getDropperId}`.toString()"
+                          :id="
+                            `department-id${
+                              props.row.id === getDropperId ? getDropperId : ''
+                            }`.toString()
+                          "
                           @click="openDepartmentDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
@@ -753,7 +757,13 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`unit-id${getUnitDropperId}`.toString()"
+                          :id="
+                            `unit-id${
+                              getUnitDropperId === getUnitDropperId
+                                ? getUnitDropperId
+                                : ''
+                            }`.toString()
+                          "
                           @click="openUnitDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
@@ -920,7 +930,13 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`position-id${getPositionDropperId}`.toString()"
+                          :id="
+                            `position-id${
+                              props.row.id === getPositionDropperId
+                                ? getPositionDropperId
+                                : ''
+                            }`.toString()
+                          "
                           @click="openPositionDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
@@ -1131,13 +1147,13 @@ export default {
       "getStaffCount",
     ]),
     getDropperId() {
-      return this.dropperId.toString();
+      return this.dropperId;
     },
     getUnitDropperId() {
-      return this.unitDropperId.toString();
+      return this.unitDropperId;
     },
     getPositionDropperId() {
-      return this.positionDropperId.toString();
+      return this.positionDropperId;
     },
   },
   watch: {

@@ -569,7 +569,9 @@
                       icon-left="plus"
                       size=""
                       type="is-info is-light"
-                      :id="`role-user-${getDropperId}`"
+                      :id="`role-user-${
+                        props.row.id === getDropperId ? getDropperId : ''
+                      }`"
                       @click="openRoleUserDropper(props.row.id)"
                       :disabled="!isPermission('create')"
                       >Add
@@ -654,7 +656,7 @@
                     <div
                       class="role-user"
                       v-for="(staff, index) in props.row.report_to"
-                      :key="index"
+                      :key="`${index + staff.user_id}`"
                     >
                       <b-button
                         rounded
@@ -675,7 +677,13 @@
                       icon-left="plus"
                       size=""
                       type="is-info is-light"
-                      :id="`report-to-role-${getReportToDropperId}`"
+                      :id="
+                        `report-to-role-${
+                          props.row.id === getReportToDropperId
+                            ? getReportToDropperId
+                            : ''
+                        }`.toString()
+                      "
                       @click="openReportToDropper(props.row)"
                       :disabled="!isPermission('create')"
                       >Add
@@ -697,7 +705,11 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          :id="`edit-role-${getEditRoleDropperId}`"
+                          :id="`edit-role-${
+                            props.row.id === getEditRoleDropperId
+                              ? getEditRoleDropperId
+                              : ''
+                          }`"
                           @click="openEditRoleDropper(props.row)"
                           :disabled="!isPermission('update')"
                         ></b-button>

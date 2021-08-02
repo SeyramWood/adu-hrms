@@ -150,3 +150,20 @@ button.inertia__link__btn:active {
 .form-width {
     min-width: 30rem;
 }
+.report_to_label {
+    display: block;
+    font-size: 1rem;
+    color: #686767b5;
+    letter-spacing: 2px;
+}
+.report_to_text {
+    &:not(:last-child) {
+        margin-bottom: 0.15rem !important;
+    }
+}
+.leader__details {
+    margin-bottom: 1rem !important;
+    &:not(:last-child) {
+        // border-bottom: 1px solid red;
+    }
+}

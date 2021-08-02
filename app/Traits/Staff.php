@@ -327,9 +327,11 @@ trait Staff
     foreach ($roleStaff as  $value) {
       array_push($directorates, json_decode($value['staff']));
     }
-    return User::join('profiles', 'profiles.user_id', '=', 'users.id')
+    // dd(array_unique(Arr::flatten($directorates)));
+    // $abc = array_unique($directorates);
+    $abc = User::join('profiles', 'profiles.user_id', '=', 'users.id')
+      ->whereIn('users.id', array_unique(Arr::flatten($directorates)))
       ->where('users.id', '!=', Auth::id())
-      ->whereIn('users.id', Arr::flatten($directorates))
       ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
       ->select(
         'users.*',
@@ -347,7 +349,8 @@ trait Staff
       )
       ->orderBy('users.id', 'desc')
       ->get();
-    // dd($directorate);
+    return $abc;
+    // dd($abc);
   }
 
   public function checkUserPermissions($permission, $roles)
