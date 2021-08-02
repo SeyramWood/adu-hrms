@@ -148,9 +148,7 @@
                           icon-right="pen"
                           :id="
                             `job-cat-id${
-                              props.row.id === getDropperId
-                                ? getDropperId
-                                : getDropperId
+                              props.row.id === getDropperId ? getDropperId : ''
                             }`.toString()
                           "
                           @click="openJobCatDropper(props.row)"
