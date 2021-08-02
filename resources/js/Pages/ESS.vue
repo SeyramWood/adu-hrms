@@ -189,13 +189,13 @@ export default {
         const result = this.getDepartments.find(
           (b) => b.id === parseInt(profile.job.department)
         );
-        return result.name;
+        return result ? result.name : "";
       }
       if (profile.job && profile.job.unit) {
         const result = this.getUnits.find(
           (b) => b.id === parseInt(profile.job.unit)
         );
-        return result.name;
+        return result ? result.name : "";
       }
       return "";
     },
@@ -204,7 +204,7 @@ export default {
         const status = this.getEmploymentStatus.find(
           (b) => b.id === parseInt(profile.job.employmentStatus)
         );
-        return status.status;
+        return status ? status.status : "";
       }
       return "";
     },

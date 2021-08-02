@@ -347,7 +347,7 @@
                     label="Avatar"
                     sortable
                     v-slot="props"
-                    ><figure class="image is-32x32">
+                    ><figure class="table-avatar">
                       <img
                         class="is-rounded"
                         :src="`/storage/avatar/${props.row.personal_details.avatar}`"
