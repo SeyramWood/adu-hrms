@@ -77,8 +77,8 @@ const actions = {
             case "UPDATE_ROLE":
                 commit("updateRole", payload);
                 break;
-            case "ADD_REPORT_TO_ROLE":
-                commit("addReportToRole", payload);
+            case "ADD_REPORT_TO_STAFF":
+                commit("addReportToStaff", payload);
                 break;
             case "DELETE_ROLE":
                 commit("deleteRole", payload);
@@ -105,7 +105,6 @@ const actions = {
             default:
                 state.roles = payload.map(r => {
                     r.permissions = JSON.parse(r.permissions);
-                    r.report_to = JSON.parse(r.report_to);
                     return r;
                 });
                 break;
@@ -332,8 +331,8 @@ const actions = {
 
 const mutations = {
     addUsers: (state, data) => {
-        if (!data) return state;
-        if (data.data.length > 0) {
+        if (!data) return state.users;
+        if (data.data.length) {
             state.users = {
                 ...data,
                 data: data.data.map(u => {
@@ -610,7 +609,7 @@ const mutations = {
      * @param {*} state
      * @param {*} payload
      */
-    addReportToRole: (state, payload) => {
+    addReportToStaff: (state, payload) => {
         state.roles = state.roles.map(r => {
             if (r.id === payload.id) {
                 r.report_to = payload.data;

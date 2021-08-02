@@ -27,7 +27,7 @@ import ManageUserComponent from "../components/admin/ManageUserComponent";
 import JobComponent from "../components/admin/JobComponent";
 import WorkShiftComponent from "../components/admin/WorkShiftComponent";
 import OrganizationComponent from "../components/admin/OrganizationComponent";
-import { Inertia } from "@inertiajs/inertia";
+
 export default {
   name: "Administration",
   metaInfo() {

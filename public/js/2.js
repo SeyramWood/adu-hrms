@@ -1,1 +1,5468 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{1:function(t,e,a){"use strict";function s(t,e,a,s,i,n,o,r){var l,c="function"==typeof t?t.options:t;if(e&&(c.render=e,c.staticRenderFns=a,c._compiled=!0),s&&(c.functional=!0),n&&(c._scopeId="data-v-"+n),o?(l=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),i&&i.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(o)},c._ssrRegister=l):i&&(l=r?function(){i.call(this,(c.functional?this.parent:this).$root.$options.shadowRoot)}:i),l)if(c.functional){c._injectStyles=l;var p=c.render;c.render=function(t,e){return l.call(e),p(t,e)}}else{var u=c.beforeCreate;c.beforeCreate=u?[].concat(u,l):[l]}return{exports:t,options:c}}a.d(e,"a",(function(){return s}))},131:function(t,e,a){"use strict";a(39)},132:function(t,e,a){(t.exports=a(4)(!1)).push([t.i,".report_to_label[data-v-78f3d5ea]{display:block;font-size:1rem;color:rgba(104,103,103,.7098039215686275);letter-spacing:2px}.report_to_text[data-v-78f3d5ea]:not(:last-child){margin-bottom:.15rem!important}.leader__details[data-v-78f3d5ea]:not(:last-child){border-bottom:1px solid rgba(104,103,103,.7098039215686275)}",""])},133:function(t,e,a){"use strict";a(40)},134:function(t,e,a){(t.exports=a(4)(!1)).push([t.i,"",""])},135:function(t,e,a){"use strict";a(41)},136:function(t,e,a){(t.exports=a(4)(!1)).push([t.i,".is-capitalized[data-v-72e01fa9]{text-transform:capitalize}",""])},137:function(t,e,a){"use strict";a(42)},138:function(t,e,a){(t.exports=a(4)(!1)).push([t.i,".change-password-btns[data-v-52dbef8a]{width:100%;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center}",""])},14:function(t,e,a){"use strict";var s=a(47),i=a.n(s),n=(a(89),{name:"ViewPdf",components:{VuePdfApp:i.a},computed:{getFile:function(){return this.file}},props:{file:{required:!0}},data:function(){return{}},methods:{pagesRendered:function(t){setTimeout((function(){return t.pdfViewer.currentScaleValue="page-height"}))}}}),o=a(1),r=Object(o.a)(n,(function(){var t=this.$createElement,e=this._self._c||t;return e("div",{staticClass:"modal-card",staticStyle:{width:"auto"}},[e("vue-pdf-app",{staticStyle:{height:"100vh",width:"960px"},attrs:{pdf:"/storage"+this.getFile},on:{"pages-rendered":this.pagesRendered}})],1)}),[],!1,null,"1286b77c",null);e.a=r.exports},15:function(t,e,a){"use strict";var s={name:"Tab",props:{label:{require:!0,type:String}},data:function(){return{activeTab:!0}}},i=(a(85),a(1)),n=Object(i.a)(s,(function(){var t=this.$createElement;return(this._self._c||t)("div",{directives:[{name:"show",rawName:"v-show",value:this.activeTab,expression:"activeTab"}],staticClass:"s__tabs__content"},[this._t("default")],2)}),[],!1,null,"1f542e2b",null);e.a=n.exports},16:function(t,e,a){"use strict";var s={name:"Tabs",components:{Fragment:a(29).a},props:{tabIndex:{type:Number,default:0},stickyTab:{type:String,default:""}},created:function(){this.tabs=this.$children},mounted:function(){this.selectTab(this.tabIndex)},data:function(){return{selectedIndex:0,tabs:[]}},methods:{selectTab:function(t){this.selectedIndex=t,this.tabs.forEach((function(e,a){e.activeTab=a===t}))}}},i=(a(87),a(1)),n=Object(i.a)(s,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("Fragment",[a("div",{staticClass:"s__tabs",class:t.stickyTab},[a("div",{staticClass:"s__tabs__tab"},[a("ul",t._l(t.tabs,(function(e,s){return a("li",{key:s,class:s===t.selectedIndex&&"isActive",on:{click:function(e){return t.selectTab(s)}}},[a("span",[t._v(t._s(e.label))])])})),0)])]),t._v(" "),t._t("default")],2)}),[],!1,null,"c7d6371c",null);e.a=n.exports},26:function(t,e,a){var s=a(84);"string"==typeof s&&(s=[[t.i,s,""]]);var i={hmr:!0,transform:void 0,insertInto:void 0};a(5)(s,i);s.locals&&(t.exports=s.locals)},27:function(t,e,a){var s=a(86);"string"==typeof s&&(s=[[t.i,s,""]]);var i={hmr:!0,transform:void 0,insertInto:void 0};a(5)(s,i);s.locals&&(t.exports=s.locals)},28:function(t,e,a){var s=a(88);"string"==typeof s&&(s=[[t.i,s,""]]);var i={hmr:!0,transform:void 0,insertInto:void 0};a(5)(s,i);s.locals&&(t.exports=s.locals)},29:function(t,e,a){"use strict";function s(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}function i(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{},i=Object.keys(a);"function"==typeof Object.getOwnPropertySymbols&&(i=i.concat(Object.getOwnPropertySymbols(a).filter((function(t){return Object.getOwnPropertyDescriptor(a,t).enumerable})))),i.forEach((function(e){s(t,e,a[e])}))}return t}a.d(e,"a",(function(){return r}));var n=function(t,e,a){Object.defineProperty(t,e,{configurable:!0,get:function(){return a},set:function(t){console.warn("tried to set frozen property ".concat(e," with ").concat(t))}})},o={abstract:!0,name:"Fragment",props:{name:{type:String,default:function(){return Math.floor(Date.now()*Math.random()).toString(16)}},html:{type:String,default:null}},mounted:function(){var t=this.$el,e=t.parentNode;t.__isFragment=!0,t.__isMounted=!1;var a=document.createComment("fragment#".concat(this.name,"#head")),s=document.createComment("fragment#".concat(this.name,"#tail"));t.__head=a,t.__tail=s;var i=document.createDocumentFragment();if(i.appendChild(a),Array.from(t.childNodes).forEach((function(e){var a=!e.hasOwnProperty("__isFragmentChild__");i.appendChild(e),a&&(n(e,"parentNode",t),n(e,"__isFragmentChild__",!0))})),i.appendChild(s),this.html){var o=document.createElement("template");o.innerHTML=this.html,Array.from(o.content.childNodes).forEach((function(t){i.appendChild(t)}))}var r=t.nextSibling;e.insertBefore(i,t,!0),e.removeChild(t),n(t,"parentNode",e),n(t,"nextSibling",r),r&&n(r,"previousSibling",t),t.__isMounted=!0},render:function(t){var e=this,a=this.$slots.default;return a&&a.length&&a.forEach((function(t){return t.data=i({},t.data,{attrs:i({fragment:e.name},(t.data||{}).attrs)})})),t("div",{attrs:{fragment:this.name}},a)}};var r=o},39:function(t,e,a){var s=a(132);"string"==typeof s&&(s=[[t.i,s,""]]);var i={hmr:!0,transform:void 0,insertInto:void 0};a(5)(s,i);s.locals&&(t.exports=s.locals)},40:function(t,e,a){var s=a(134);"string"==typeof s&&(s=[[t.i,s,""]]);var i={hmr:!0,transform:void 0,insertInto:void 0};a(5)(s,i);s.locals&&(t.exports=s.locals)},41:function(t,e,a){var s=a(136);"string"==typeof s&&(s=[[t.i,s,""]]);var i={hmr:!0,transform:void 0,insertInto:void 0};a(5)(s,i);s.locals&&(t.exports=s.locals)},42:function(t,e,a){var s=a(138);"string"==typeof s&&(s=[[t.i,s,""]]);var i={hmr:!0,transform:void 0,insertInto:void 0};a(5)(s,i);s.locals&&(t.exports=s.locals)},48:function(t,e,a){"use strict";a.r(e);var s=a(2),i=a.n(s),n=a(6),o=a(15),r=a(16),l=a(0),c=a(14);function p(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function u(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?p(Object(a),!0).forEach((function(e){d(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):p(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function d(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var m={name:"PersonalDetails",components:{ViewPdf:c.a},computed:u(u({},Object(l.c)(["getProfile","getCountries"])),{},{getPersonalAttachments:function(){return"string"==typeof this.getProfile.personal_details.attachments?JSON.parse(this.getProfile.personal_details.attachments):[]},getAttachmentDropperId:function(){return this.attachmentDropperId}}),created:function(){var t=this;this.$watch((function(){return t.personalDetails.avatar}),(function(e){e&&t.uploadUserAvatar(e)}))},beforeMount:function(){this.setPersonalDetails(this.getProfile.personal_details)},data:function(){return{isEditPersonalDetails:!0,isEditPersonalDetailsAttachment:!0,isSubmittingPersonalDetails:!1,isSubmittingPersonalDetailsAttachment:!1,isUploadingPhoto:!1,isUpdatingFileComment:!1,attachmentDropperId:"",attachmentUpdateType:"",personalDetails:{avatar:null,title:"",firstName:"",middleName:"",lastName:"",staffId:"",birthDate:new Date,maritalStatus:"",gender:"",attachment:{file:null,comment:""}},userAvatarError:[],personalDetailsAttachmentError:{file:[],comment:[]},personalDetailsErrors:{title:[],firstName:[],middleName:[],lastName:[],staffId:[],birthDate:[],maritalStatus:[],gender:[]}}},methods:u(u({},Object(l.b)(["dispatchAuthUser","dispatchProfile"])),{},{openAttachmentDropper:function(t,e){var a=this.$refs.attachmentDropper;this.attachmentDropperId=t.id,this.attachmentUpdateType=e,a&&(this.personalDetails.attachment.comment=t.comment,a.open())},closeAttachmentDropper:function(){var t=this.$refs.attachmentDropper;this.attachmentUpdateType="",t&&(this.personalDetails.attachment.comment="",this.personalDetails.attachment.file=null,t.close())},setPersonalDetails:function(t){this.personalDetails=u(u({},this.personalDetails),{},{title:t.title||"",firstName:t.firstName||"",middleName:t.middleName||"",lastName:t.lastName||"",staffId:t.staffId||"",birthDate:t.birthDate?new Date(t.birthDate):new Date,maritalStatus:t.maritalStatus||"",gender:t.gender||""})},uploadUserAvatar:function(t){var e=this;this.userAvatarError=[],this.isUploadingPhoto=!0;var a=new FormData;a.append("avatar",t),a.append("id",this.getProfile.user_id),this.$axios.post("/dashboard/ess/upload-avatar",a).then((function(t){200===t.status&&t.data.uploaded&&(e.isUploadingPhoto=!1,e.$page.props.authUser.id===e.getProfile.user_id&&e.dispatchAuthUser({type:"UPDATE_AVATAR",payload:t.data.avatar}),e.dispatchProfile({type:"UPDATE_AVATAR",payload:t.data.avatar}))})).catch((function(t){}))},updatePersonalDetails:function(){var t=this;this.setPersonalDetailsErrors(),this.isSubmittingPersonalDetails=!0,this.$axios.put("/dashboard/ess/update-personal-details/".concat(this.getProfile.user_id),u(u({},this.personalDetails),{},{birthDate:this.personalDetails.birthDate.toISOString()})).then((function(e){200===e.status&&e.data.updated&&(t.$page.props.authUser.id===t.getProfile.user_id&&t.dispatchAuthUser({payload:e.data.authUser}),t.dispatchProfile({type:"UPDATE_PERSONAL_DETAILS",payload:e.data.profile}),setTimeout((function(){t.snackbar("Personal details updated successfully","is-dark"),t.isSubmittingPersonalDetails=!1}),1e3))})).catch((function(e){422===e.response.status&&setTimeout((function(){t.isSubmittingPersonalDetails=!1,t.setPersonalDetailsErrors(e.response.data.errors)}),1e3)}))},updatePersonalDetailsAttachment:function(){var t=this;this.isSubmittingPersonalDetailsAttachment=!0,this.personalDetailsAttachmentError={file:[],comment:[]};var e=new FormData;e.append("file",this.personalDetails.attachment.file),e.append("comment",this.personalDetails.attachment.comment),this.$axios.post("/dashboard/ess/update-personal-details-attachment/".concat(this.getProfile.user_id),e).then((function(e){200===e.status&&(t.personalDetails.attachment={file:null,comment:""},t.dispatchProfile({type:"UPDATE_PERSONAL_DETAILS_ATTACHMENT",payload:e.data.attachments}),setTimeout((function(){t.snackbar("Attachment updated successfully","is-dark"),t.isSubmittingPersonalDetailsAttachment=!1}),1e3))})).catch((function(e){422==e.response.status&&setTimeout((function(){t.setPersonalDetailsAttachmentErrors(e.response.data.errors),t.isSubmittingPersonalDetailsAttachment=!1}),1e3)}))},replacePersonalDetailsAttachment:function(t){var e=this;this.isSubmittingPersonalDetailsAttachment=!0,this.personalDetailsAttachmentError={file:[],comment:[]};var a=new FormData;"comment"===t&&(a.append("id",this.attachmentDropperId),a.append("comment",this.personalDetails.attachment.comment)),"attachment"===t&&(a.append("id",this.attachmentDropperId),a.append("file",this.personalDetails.attachment.file)),this.$axios.post("/dashboard/ess/replace-personal-details-attachment/".concat(this.getProfile.user_id),a).then((function(a){200===a.status&&(e.personalDetails.attachment.file=null,e.dispatchProfile({type:"UPDATE_PERSONAL_DETAILS_ATTACHMENT",payload:a.data.attachments}),setTimeout((function(){"comment"===t&&e.snackbar("Comment updated successfully","is-dark"),"attachment"===t&&e.snackbar("Attachment updated successfully","is-dark"),e.isSubmittingPersonalDetailsAttachment=!1}),1e3))})).catch((function(t){422==t.response.status&&setTimeout((function(){e.setPersonalDetailsAttachmentErrors(t.response.data.errors),e.isSubmittingPersonalDetailsAttachment=!1}),1e3)}))},deletePersonalDetailsAttachment:function(t){var e=this;this.$axios.delete("/dashboard/ess/delete-personal-details-attachment/".concat(this.getProfile.user_id,"/").concat(t)).then((function(a){200===a.status&&a.data.deleted&&(e.dispatchProfile({type:"DELETE_ATTACHMENT",payload:t}),setTimeout((function(){e.snackbar("Attachment deleted successfully","is-dark"),e.isSubmittingPersonalDetailsAttachment=!1}),1e3))})).catch((function(t){}))},viewAttachment:function(t){this.$buefy.modal.open({parent:this,component:c.a,hasModalCard:!0,trapFocus:!0,props:{file:t}})},setPersonalDetailsErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.personalDetailsErrors.title=t.title||[],this.personalDetailsErrors.firstName=t.firstName||[],this.personalDetailsErrors.middleName=t.middleName||[],this.personalDetailsErrors.lastName=t.lastName||[],this.personalDetailsErrors.staffId=t.staffId||[],this.personalDetailsErrors.birthDate=t.birthDate||[],this.personalDetailsErrors.maritalStatus=t.maritalStatus||[],this.personalDetailsErrors.gender=t.gender||[]},cancelPersonalDetailsForm:function(){this.setPersonalDetailsErrors(),this.isEditPersonalDetails=!this.isEditPersonalDetails},setPersonalDetailsAttachmentErrors:function(t){this.personalDetailsAttachmentError={file:t.file||[],comment:t.comment||[]},this.isSubmittingPersonalDetailsAttachment=!1},cancelPersonalDetailsAttachmentForm:function(){this.personalDetails.attachment={file:null,comment:""},this.personalDetailsAttachmentError={file:[],comment:[]},this.isEditPersonalDetailsAttachment=!this.isEditPersonalDetailsAttachment}})},f=a(1),b=Object(f.a)(m,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",[a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"}),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("div",{staticClass:"personal__details"},[a("div",{staticClass:"personal__details__photo"},[a("div",{staticClass:"p-text"},[a("p",[t._v("\n                  "+t._s(t.$t("app.personal_detail_cta"))+"\n                ")])]),t._v(" "),a("div",{staticClass:"personal__details__photo__display"},[t.userOrPermission("update",t.getProfile.user_id)?a("div",{staticClass:"profile__photo__overlay"},[a("b-field",[a("b-tooltip",{attrs:{label:t.$t("app.upload_profile_photo"),type:"is-dark"}},[a("b-upload",{staticClass:"file-label",model:{value:t.personalDetails.avatar,callback:function(e){t.$set(t.personalDetails,"avatar",e)},expression:"personalDetails.avatar"}},[a("span",{staticClass:"file-cta"},[a("b-icon",{staticClass:"file-icon",attrs:{icon:"camera",size:"large"}})],1)])],1)],1)],1):t._e(),t._v(" "),a("div",{staticClass:"photo__wrapper"},[a("b-loading",{attrs:{"can-cancel":!0,"is-full-page":!1},model:{value:t.isUploadingPhoto,callback:function(e){t.isUploadingPhoto=e},expression:"isUploadingPhoto"}}),t._v(" "),a("img",{attrs:{src:"/storage/avatar/"+t.getProfile.personal_details.avatar,alt:t.$t("app.profile_photo"),srcset:""}})],1)])]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"personal__details__detail"},[t.userOrPermission("update",t.getProfile.user_id)?[t.isEditPersonalDetails?a("b-field",{staticClass:"mb-4"},[a("b-button",{staticClass:"is-info is-light",attrs:{"icon-left":"pen"},on:{click:function(e){t.isEditPersonalDetails=!t.isEditPersonalDetails}}},[t._v(t._s(t.$t("app.edit")))])],1):t._e()]:t._e(),t._v(" "),a("fieldset",{staticClass:"mb-4",attrs:{disabled:t.isEditPersonalDetails}},[a("form",{on:{submit:function(e){return e.preventDefault(),t.updatePersonalDetails()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.title"),type:{"is-danger":t.personalDetailsErrors.title.length>0},message:t.personalDetailsErrors.title}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.personalDetails.title,callback:function(e){t.$set(t.personalDetails,"title",e)},expression:"personalDetails.title"}},[a("option",{attrs:{value:"Mr."}},[t._v(t._s(t.$tc("app.mr",1)))]),t._v(" "),a("option",{attrs:{value:"Miss"}},[t._v("\n                            "+t._s(t.$t("app.miss"))+"\n                          ")]),t._v(" "),a("option",{attrs:{value:"Mrs."}},[t._v("\n                            "+t._s(t.$t("app.mrs"))+"\n                          ")]),t._v(" "),a("option",{attrs:{value:"Hon."}},[t._v("\n                            "+t._s(t.$t("app.hon"))+"\n                          ")]),t._v(" "),a("option",{attrs:{value:"Rev."}},[t._v("\n                            "+t._s(t.$t("app.rev"))+"\n                          ")]),t._v(" "),a("option",{attrs:{value:"Dr."}},[t._v(t._s(t.$t("app.dr")))]),t._v(" "),a("option",{attrs:{value:"Prof."}},[t._v("\n                            "+t._s(t.$t("app.prof"))+"\n                          ")]),t._v(" "),a("option",{attrs:{value:"Other"}},[t._v("\n                            "+t._s(t.$tc("app.other",1))+"\n                          ")])])],1)],1),t._v(" "),a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.firstName"),expanded:"",type:{"is-danger":t.personalDetailsErrors.firstName.length>0},message:t.personalDetailsErrors.firstName}},[a("b-input",{attrs:{size:""},model:{value:t.personalDetails.firstName,callback:function(e){t.$set(t.personalDetails,"firstName",e)},expression:"personalDetails.firstName"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.middleName"),expanded:"",type:{"is-danger":t.personalDetailsErrors.middleName.length>0},message:t.personalDetailsErrors.middleName}},[a("b-input",{attrs:{size:""},model:{value:t.personalDetails.middleName,callback:function(e){t.$set(t.personalDetails,"middleName",e)},expression:"personalDetails.middleName"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.lastName"),expanded:"",type:{"is-danger":t.personalDetailsErrors.lastName.length>0},message:t.personalDetailsErrors.lastName}},[a("b-input",{attrs:{size:""},model:{value:t.personalDetails.lastName,callback:function(e){t.$set(t.personalDetails,"lastName",e)},expression:"personalDetails.lastName"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.birthDate"),type:{"is-danger":t.personalDetailsErrors.birthDate.length>0},message:t.personalDetailsErrors.birthDate}},[a("b-datepicker",{attrs:{placeholder:t.$t("placeholder_birthdate"),pack:"fas",icon:"calendar","trap-focus":""},model:{value:t.personalDetails.birthDate,callback:function(e){t.$set(t.personalDetails,"birthDate",e)},expression:"personalDetails.birthDate"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.maritalStatus"),type:{"is-danger":t.personalDetailsErrors.maritalStatus.length>0},message:t.personalDetailsErrors.maritalStatus}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.personalDetails.maritalStatus,callback:function(e){t.$set(t.personalDetails,"maritalStatus",e)},expression:"personalDetails.maritalStatus"}},[a("option",{domProps:{value:t.$tc("app.single",1)}},[t._v("\n                            "+t._s(t.$tc("app.single",1))+"\n                          ")]),t._v(" "),a("option",{domProps:{value:t.$tc("app.married",1)}},[t._v("\n                            "+t._s(t.$tc("app.married",1))+"\n                          ")]),t._v(" "),a("option",{domProps:{value:t.$tc("app.divorced",1)}},[t._v("\n                            "+t._s(t.$tc("app.divorced",1))+"\n                          ")]),t._v(" "),a("option",{domProps:{value:t.$tc("app.widowed",1)}},[t._v("\n                            "+t._s(t.$tc("app.widowed",1))+"\n                          ")]),t._v(" "),a("option",{domProps:{value:t.$tc("app.other",1)}},[t._v("\n                            "+t._s(t.$tc("app.other",1))+"\n                          ")])])],1)],1),t._v(" "),a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$tc("app.staffId"),expanded:"",type:{"is-danger":t.personalDetailsErrors.staffId.length>0},message:t.personalDetailsErrors.staffId}},[a("b-input",{attrs:{size:""},model:{value:t.personalDetails.staffId,callback:function(e){t.$set(t.personalDetails,"staffId",e)},expression:"personalDetails.staffId"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:""+t.$tc("app.gender",1),type:{"is-danger":t.personalDetailsErrors.gender.length>0},message:t.personalDetailsErrors.gender}},[a("div",{staticClass:"block",staticStyle:{"margin-bottom":"-0.2rem"}},[a("b-radio",{attrs:{name:"gender",type:"is-info","native-value":"Male",size:""},model:{value:t.personalDetails.gender,callback:function(e){t.$set(t.personalDetails,"gender",e)},expression:"personalDetails.gender"}},[t._v(t._s(t.$tc("app.male",1)))]),t._v(" "),a("b-radio",{attrs:{name:"gender",type:"is-info","native-value":"Female",size:""},model:{value:t.personalDetails.gender,callback:function(e){t.$set(t.personalDetails,"gender",e)},expression:"personalDetails.gender"}},[t._v(t._s(t.$tc("app.female",1)))])],1)])],1)]),t._v(" "),t.isEditPersonalDetails?t._e():a("b-field",[a("div",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingPersonalDetails}},[t._v("\n                        "+t._s(t.isSubmittingPersonalDetails?t.$t("app.saving")+"...":t.$t("app.save"))+"\n                      ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelPersonalDetailsForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)])],1)]),t._v(" "),t.userOrPermission("update",t.getProfile.user_id)?[t.isEditPersonalDetails?a("b-field",[a("b-button",{staticClass:"is-info is-light",attrs:{"icon-left":"pen"},on:{click:function(e){t.isEditPersonalDetails=!t.isEditPersonalDetails}}},[t._v(t._s(t.$t("app.edit")))])],1):t._e()]:t._e()],2)])])])])]),t._v(" "),a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"},[a("p",{staticClass:"card-header-title"},[t._v("\n          "+t._s(t.$tc("app.attachment",2))+"\n          "),a("span",{staticStyle:{color:"#686767c5"}},[t._v(" ("+t._s(t.$t("app.pdAttachmentDesc"))+")")])])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.userOrPermission("update",t.getProfile.user_id)?a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{open:!1,animation:"slide","aria-id":"addattachment"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"Add Attachment"}},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                  "+t._s(t.$t("app.addAttament"))+"\n                ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{type:"is-info",pack:"fas",icon:e.open?"angle-up":"angle-down"}})],1)])}}],null,!1,1106428251)},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("fieldset",{attrs:{disabled:t.isEditPersonalDetailsAttachment}},[a("form",{on:{submit:function(e){return e.preventDefault(),t.updatePersonalDetailsAttachment(e)}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",[a("b-upload",{attrs:{"drag-drop":"",size:"is-small"},model:{value:t.personalDetails.attachment.file,callback:function(e){t.$set(t.personalDetails.attachment,"file",e)},expression:"personalDetails.attachment.file"}},[a("section",{staticClass:"section"},[a("div",{staticClass:"content has-text-centered"},[a("p",[a("b-icon",{attrs:{icon:"upload",size:"is-small"}})],1),t._v(" "),a("p",[t._v("\n                                    "+t._s(t.$t("app.placeholder_attachment"))+"\n                                  ")])])])])],1),t._v(" "),t.personalDetails.attachment.file?a("div",{staticClass:"tags"},[a("span",{staticClass:"tag is-large is-info is-light"},[t._v("\n                              "+t._s(t.personalDetails.attachment.file.name)+"\n                              "),a("button",{staticClass:"delete is-small",attrs:{type:"button"},on:{click:function(e){t.personalDetails.attachment.file=null}}})])]):t._e(),t._v(" "),a("b-field",{attrs:{type:{"is-danger":t.personalDetailsAttachmentError.file.length>0},message:t.personalDetailsAttachmentError.file}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{type:{"is-danger":t.personalDetailsAttachmentError.comment.length>0},message:t.personalDetailsAttachmentError.comment}},[a("b-input",{attrs:{type:"textarea",placeholder:t.$tc("app.placeholder_comment")+"..."},model:{value:t.personalDetails.attachment.comment,callback:function(e){t.$set(t.personalDetails.attachment,"comment",e)},expression:"personalDetails.attachment.comment"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),t.isEditPersonalDetailsAttachment?t._e():a("b-field",[a("div",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingPersonalDetailsAttachment}},[t._v("\n                            "+t._s(t.isSubmittingPersonalDetailsAttachment?t.$t("app.submitting")+"...":t.$t("app.submit"))+"\n                          ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelPersonalDetailsAttachmentForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)])],1)]),t._v(" "),t.isEditPersonalDetailsAttachment?a("b-field",[a("b-button",{staticClass:"is-info is-light",attrs:{"icon-left":"plus"},on:{click:function(e){t.isEditPersonalDetailsAttachment=!t.isEditPersonalDetailsAttachment}}},[t._v(t._s(t.$t("app.add")))])],1):t._e()],1)])])],1):t._e(),t._v(" "),a("b-table",{attrs:{data:t.getPersonalAttachments,paginated:!0,"per-page":5,"current-page":1,"pagination-simple":!0,"pagination-position":"bottom"}},[a("b-table-column",{attrs:{field:"file",label:""+t.$tc("app.file",1),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("a",{on:{click:function(a){return t.viewAttachment("/attachments/personal/"+e.row.file)}}},[t._v(t._s(e.row.file))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"comment",label:t.$tc("app.comment",1),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.comment))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"actions",label:t.$tc("app.action",2)},scopedSlots:t._u([{key:"default",fn:function(e){return[a("div",{staticClass:"b-tooltips"},[a("b-tooltip",{attrs:{label:t.$t("app.replaceAttachment"),type:"is-dark"}},[a("b-button",{staticClass:"is-info is-light",attrs:{size:"is-small",pack:"fas","icon-right":"upload",id:"comment-id"+t.getAttachmentDropperId},on:{click:function(a){return t.openAttachmentDropper(e.row,"attachment")}}})],1),t._v(" "),a("b-tooltip",{attrs:{label:t.$t("app.editComment"),type:"is-dark"}},[a("b-button",{staticClass:"is-info is-light",attrs:{id:"comment-id"+t.getAttachmentDropperId,size:"is-small",pack:"fas","icon-right":"pen"},on:{click:function(a){return t.openAttachmentDropper(e.row,"comment")}}})],1),t._v(" "),a("b-tooltip",{attrs:{label:t.$t("app.delete"),type:"is-dark"}},[a("b-button",{staticClass:"is-danger is-light",attrs:{size:"is-small",pack:"fas","icon-right":"trash"},on:{click:function(a){return t.deletePersonalDetailsAttachment(e.row.id)}}})],1)],1)]}}])})],1)],1)])])]),t._v(" "),a("dropper",{ref:"attachmentDropper",staticClass:"job-cat-dropper",attrs:{join:"#comment-id"+t.getAttachmentDropperId,"z-index":1e3},on:{"esc-keydown":t.closeAttachmentDropper,"other-area-clicked":t.closeAttachmentDropper}},["comment"===t.attachmentUpdateType?a("form",{staticClass:"p-4",staticStyle:{width:"30rem"},on:{submit:function(e){return e.preventDefault(),t.replacePersonalDetailsAttachment(t.attachmentUpdateType)}}},[a("h3",{staticClass:"label text-main"},[t._v("\n        "+t._s(t.$t("app.edit")+" "+t.$tc("app.comment",1))+"\n      ")]),t._v(" "),a("b-field",{attrs:{type:{"is-danger":t.personalDetailsAttachmentError.comment.length>0},message:t.personalDetailsAttachmentError.comment}},[a("b-input",{attrs:{type:"textarea",placeholder:t.$t("app.placeholder_comment")+"...",expanded:""},model:{value:t.personalDetails.attachment.comment,callback:function(e){t.$set(t.personalDetails.attachment,"comment",e)},expression:"personalDetails.attachment.comment"}})],1),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isUpdatingFileComment}},[t._v("\n          "+t._s(t.isUpdatingFileComment?t.$t("app.saving")+"...":t.$t("app.save"))+"\n        ")]),t._v(" "),a("button",{staticClass:"button is-danger is-light",attrs:{type:"button",disabled:t.isUpdatingFileComment},on:{click:function(e){return t.closeAttachmentDropper()}}},[t._v("\n          "+t._s(t.$t("app.cancel"))+"\n        ")])])],1):t._e(),t._v(" "),"attachment"===t.attachmentUpdateType?a("form",{staticClass:"p-4",staticStyle:{width:"30rem"},on:{submit:function(e){return e.preventDefault(),t.replacePersonalDetailsAttachment(t.attachmentUpdateType)}}},[a("h3",{staticClass:"label text-main"},[t._v("\n        "+t._s(t.$tc("app.replace",1)+" "+t.$tc("app.attachment",1))+"\n      ")]),t._v(" "),a("b-field",[a("b-upload",{staticStyle:{cursor:"pointer"},attrs:{size:"is-small"},model:{value:t.personalDetails.attachment.file,callback:function(e){t.$set(t.personalDetails.attachment,"file",e)},expression:"personalDetails.attachment.file"}},[a("section",{staticClass:"section"},[a("div",{staticClass:"content has-text-centered"},[a("p",[a("b-icon",{attrs:{icon:"upload",size:"is-small"}})],1),t._v(" "),a("p",[t._v(t._s(t.$t("app.placeholder_attachment1")))])])])])],1),t._v(" "),t.personalDetails.attachment.file?a("div",{staticClass:"tags"},[a("span",{staticClass:"tag is-large is-info is-light"},[t._v("\n          "+t._s(t.personalDetails.attachment.file.name)+"\n          "),a("button",{staticClass:"delete is-small",attrs:{type:"button"},on:{click:function(e){t.personalDetails.attachment.file=null}}})])]):t._e(),t._v(" "),a("b-field",{attrs:{type:{"is-danger":t.personalDetailsAttachmentError.file.length>0},message:t.personalDetailsAttachmentError.file}}),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isUpdatingFileComment}},[t._v("\n          "+t._s(t.isUpdatingFileComment?t.$t("app.saving")+"...":t.$t("app.save"))+"\n        ")]),t._v(" "),a("button",{staticClass:"button is-danger is-light",attrs:{type:"button",disabled:t.isUpdatingFileComment},on:{click:function(e){return t.closeAttachmentDropper()}}},[t._v("\n          "+t._s(t.$t("app.cancel"))+"\n        ")])])],1):t._e()])],1)}),[],!1,null,"e49d6658",null).exports;function v(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function _(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?v(Object(a),!0).forEach((function(e){g(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):v(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function g(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var h={name:"ContactDetails",computed:_({},Object(l.c)(["getProfile","getCountries"])),created:function(){},beforeMount:function(){this.setContactDetails(this.getProfile.contact_details)},data:function(){return{locale:this.$lang.getLocale(),isEditContactDetails:!0,isSubmittingContactDetails:!1,contactDetails:{address1:"",address2:"",city:"",region:"",country:"",mobile:"",homeTelephone:"",workTelephone:"",workEmail:"",otherEmail:""},contactDetailsErrors:{address1:[],address2:[],city:[],region:[],country:[],mobile:[],homeTelephone:[],workTelephone:[],workEmail:[],otherEmail:[]}}},methods:_(_({},Object(l.b)(["dispatchProfile"])),{},{deleteContractDetails:function(t){this.job.contractDetails.splice(t,1)},updateContactDetails:function(){var t=this;this.setContactDetailsErrors(),this.isSubmittingContactDetails=!0,this.$axios.put("/dashboard/ess/update-contact-details/".concat(this.getProfile.user_id),this.contactDetails).then((function(e){200===e.status&&e.data.updated&&(t.isSubmittingContactDetails=!1,t.dispatchProfile({type:"UPDATE_CONTACT_DETAILS",payload:t.contactDetails}),t.snackbar("Contact details updated successfully","is-dark"))})).catch((function(e){422===e.response.status&&setTimeout((function(){t.isSubmittingContactDetails=!1,t.setContactDetailsErrors(e.response.data.errors)}),1e3)}))},setContactDetailsErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.contactDetailsErrors.address1=t.address1?t.address1:[],this.contactDetailsErrors.address2=t.address2?t.address2:[],this.contactDetailsErrors.city=t.city?t.city:[],this.contactDetailsErrors.region=t.region?t.region:[],this.contactDetailsErrors.country=t.country?t.country:[],this.contactDetailsErrors.mobile=t.mobile?t.mobile:[],this.contactDetailsErrors.homeTelephone=t.homeTelephone?t.homeTelephone:[],this.contactDetailsErrors.workTelephone=t.workTelephone?t.workTelephone:[],this.contactDetailsErrors.workEmail=t.workEmail?t.workEmail:[],this.contactDetailsErrors.otherEmail=t.otherEmail?t.otherEmail:[]},cancelContactDetailsForm:function(){this.contactDetailsErrors.address1=[],this.contactDetailsErrors.address2=[],this.contactDetailsErrors.city=[],this.contactDetailsErrors.region=[],this.contactDetailsErrors.country=[],this.contactDetailsErrors.mobile=[],this.contactDetailsErrors.homeTelephone=[],this.contactDetailsErrors.workTelephone=[],this.contactDetailsErrors.workEmail=[],this.contactDetailsErrors.otherEmail=[],this.isEditContactDetails=!this.isEditContactDetails,this.setContactDetails()},setEmergencyContactErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.emergencyContactErrors.name=t.name?t.name:[],this.emergencyContactErrors.relationship=t.relationship?t.relationship:[],this.emergencyContactErrors.mobile=t.mobile?t.mobile:[],this.emergencyContactErrors.homeTelephone=t.homeTelephone?t.homeTelephone:[],this.emergencyContactErrors.workTelephone=t.workTelephone?t.workTelephone:[]},setContactDetails:function(t){null!==t&&(this.contactDetails={address1:t.address1,address2:t.address2,city:t.city,region:t.region,country:t.country,mobile:t.mobile,homeTelephone:t.homeTelephone,workTelephone:t.workTelephone,workEmail:t.workEmail,otherEmail:t.otherEmail})}})},C=Object(f.a)(h,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"}),t._v(" "),a("div",{staticClass:"profile-detail-bar"},[a("p",{staticClass:"p-text"},[t._v(t._s(t.$t("app.contact_detail_cta")))])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.userOrPermission("update",t.getProfile.user_id)?[t.isEditContactDetails?a("b-field",{staticClass:"mb-4"},[a("b-button",{staticClass:"is-info is-light",attrs:{"icon-left":"pen"},on:{click:function(e){t.isEditContactDetails=!t.isEditContactDetails}}},[t._v(t._s(t.$t("app.edit")))])],1):t._e()]:t._e(),t._v(" "),a("fieldset",{attrs:{disabled:t.isEditContactDetails}},[a("form",{on:{submit:function(e){return e.preventDefault(),t.updateContactDetails()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:" "+t.$t("app.address")+" (1)",type:{"is-danger":t.contactDetailsErrors.address1.length>0},message:t.contactDetailsErrors.address1}},[a("b-input",{attrs:{type:"textarea",placeholder:" "+t.$t("app.address_placehoder")+"...",size:""},model:{value:t.contactDetails.address1,callback:function(e){t.$set(t.contactDetails,"address1",e)},expression:"contactDetails.address1"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:" "+t.$t("app.address")+" (2)",type:{"is-danger":t.contactDetailsErrors.address2.length>0},message:t.contactDetailsErrors.address2}},[a("b-input",{attrs:{type:"textarea",placeholder:" "+t.$t("app.address_placehoder")+"...",size:""},model:{value:t.contactDetails.address2,callback:function(e){t.$set(t.contactDetails,"address2",e)},expression:"contactDetails.address2"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.city"),expanded:"",type:{"is-danger":t.contactDetailsErrors.city.length>0},message:t.contactDetailsErrors.city}},[a("b-input",{attrs:{size:""},model:{value:t.contactDetails.city,callback:function(e){t.$set(t.contactDetails,"city",e)},expression:"contactDetails.city"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.state")+"/"+t.$t("app.region"),expanded:"",type:{"is-danger":t.contactDetailsErrors.region.length>0},message:t.contactDetailsErrors.region}},[a("b-input",{attrs:{size:""},model:{value:t.contactDetails.region,callback:function(e){t.$set(t.contactDetails,"region",e)},expression:"contactDetails.region"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.country"),expanded:"",type:{"is-danger":t.contactDetailsErrors.country.length>0},message:t.contactDetailsErrors.country}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.contactDetails.country,callback:function(e){t.$set(t.contactDetails,"country",e)},expression:"contactDetails.country"}},t._l(t.getCountries,(function(e){return a("option",{key:e.name,domProps:{value:e.name}},[t._v("\n                      "+t._s("en"!==t.locale?e.translations[""+t.locale]:e.name)+"\n                    ")])})),0)],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.mobile"),expanded:"",type:{"is-danger":t.contactDetailsErrors.mobile.length>0},message:t.contactDetailsErrors.mobile}},[a("b-input",{attrs:{size:""},model:{value:t.contactDetails.mobile,callback:function(e){t.$set(t.contactDetails,"mobile",e)},expression:"contactDetails.mobile"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.work_tel"),expanded:"",type:{"is-danger":t.contactDetailsErrors.workTelephone.length>0},message:t.contactDetailsErrors.workTelephone}},[a("b-input",{attrs:{size:""},model:{value:t.contactDetails.workTelephone,callback:function(e){t.$set(t.contactDetails,"workTelephone",e)},expression:"contactDetails.workTelephone"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.home_tel"),expanded:"",type:{"is-danger":t.contactDetailsErrors.homeTelephone.length>0},message:t.contactDetailsErrors.homeTelephone}},[a("b-input",{attrs:{size:""},model:{value:t.contactDetails.homeTelephone,callback:function(e){t.$set(t.contactDetails,"homeTelephone",e)},expression:"contactDetails.homeTelephone"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.work_email"),expanded:"",type:{"is-danger":t.contactDetailsErrors.workEmail.length>0},message:t.contactDetailsErrors.workEmail}},[a("b-input",{attrs:{size:""},model:{value:t.contactDetails.workEmail,callback:function(e){t.$set(t.contactDetails,"workEmail",e)},expression:"contactDetails.workEmail"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.other_email"),expanded:"",type:{"is-danger":t.contactDetailsErrors.otherEmail.length>0},message:t.contactDetailsErrors.otherEmail}},[a("b-input",{attrs:{size:""},model:{value:t.contactDetails.otherEmail,callback:function(e){t.$set(t.contactDetails,"otherEmail",e)},expression:"contactDetails.otherEmail"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),t.isEditContactDetails?t._e():a("b-field",[a("div",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingContactDetails}},[t._v("\n                  "+t._s(t.isSubmittingContactDetails?t.$t("app.saving")+"...":t.$t("app.save"))+"\n                ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelContactDetailsForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)])],1)]),t._v(" "),t.userOrPermission("update",t.getProfile.user_id)?[t.isEditContactDetails?a("b-field",[a("b-button",{staticClass:"is-info is-light",attrs:{"icon-left":"pen"},on:{click:function(e){t.isEditContactDetails=!t.isEditContactDetails}}},[t._v(t._s(t.$t("app.edit")))])],1):t._e()]:t._e()],2)])])])}),[],!1,null,"2508013e",null).exports;function y(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function D(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?y(Object(a),!0).forEach((function(e){E(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):y(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function E(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var x={name:"ContactDetails",computed:D(D({},Object(l.c)(["getProfile"])),{},{getContactDropperId:function(){return this.contactDropperId}}),created:function(){},data:function(){return{defaultSortDirection:"desc",sortIcon:"arrow-up",sortIconSize:"is-small",closeEmergencyContactDetailsForm:!1,isSubmittingEmergencyContact:!1,contactDropperId:null,emergencyContact:{name:"",relationship:"",mobile:"",homeTelephone:"",workTelephone:""},emergencyContactErrors:{name:[],relationship:[],mobile:[],homeTelephone:[],workTelephone:[]}}},methods:D(D({},Object(l.b)(["dispatchProfile"])),{},{openContactDropper:function(t){this.contactDropperId=t.id;var e=this.$refs.contactDropper;e&&(this.emergencyContact={name:t.name,relationship:t.relationship,mobile:t.mobile,homeTelephone:t.homeTelephone,workTelephone:t.workTelephone},e.open())},closeContactDropper:function(){var t=this.$refs.contactDropper;t&&(this.cancelEmergencyContactDetailsForm(),t.close())},addEmergencyContact:function(){var t=this;this.setEmergencyContactErrors(),this.isSubmittingEmergencyContact=!0,this.$axios.put("/dashboard/ess/add-emergency-contact/".concat(this.getProfile.user_id),this.emergencyContact).then((function(e){200===e.status&&e.data.added&&(t.clearEmergencyForm(),t.isSubmittingEmergencyContact=!1,t.dispatchProfile({type:"ADD_EMERGENCY_CONTACT_DETAILS",payload:JSON.parse(e.data.contacts)}),t.snackbar("Contact added successfully","is-dark"))})).catch((function(e){422===e.response.status&&setTimeout((function(){t.setEmergencyContactErrors(e.response.data.errors),t.isSubmittingEmergencyContact=!1}),1e3)}))},updateEmergencyContact:function(){var t=this;this.setEmergencyContactErrors(),this.isSubmittingEmergencyContact=!0,this.$axios.put("/dashboard/ess/update-emergency-contact/".concat(this.getProfile.user_id,"/").concat(this.contactDropperId),this.emergencyContact).then((function(e){200===e.status&&e.data.updated&&(t.isSubmittingEmergencyContact=!1,t.dispatchProfile({type:"UPDATE_EMERGENCY_CONTACT_DETAILS",payload:D(D({},t.emergencyContact),{},{id:t.contactDropperId})}),t.snackbar("Contact updated successfully","is-dark"))})).catch((function(e){422===e.response.status&&setTimeout((function(){t.setEmergencyContactErrors(e.response.data.errors),t.isSubmittingEmergencyContact=!1}),1e3)}))},deleteEmergencyContact:function(t){var e=this;this.$axios.delete("/dashboard/ess/delete-emergency-contact/".concat(this.getProfile.user_id,"/").concat(t)).then((function(t){200===t.status&&t.data.deleted&&(e.dispatchProfile({type:"DELETE_EMERGENCY_CONTACT_DETAILS",payload:e.contactDropperId}),e.snackbar("Contact deleted successfully","is-dark"))})).catch((function(t){}))},cancelEmergencyContactDetailsForm:function(){this.emergencyContactErrors.name=[],this.emergencyContactErrors.relationship=[],this.emergencyContactErrors.mobile=[],this.emergencyContactErrors.homeTelephone=[],this.emergencyContactErrors.workTelephone=[],this.closeEmergencyContactDetailsForm=!1,this.clearEmergencyForm()},clearEmergencyForm:function(){this.emergencyContact.name="",this.emergencyContact.relationship="",this.emergencyContact.mobile="",this.emergencyContact.homeTelephone="",this.emergencyContact.workTelephone=""},setEmergencyContactErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.emergencyContactErrors={name:t.name||[],relationship:t.relationship||[],mobile:t.mobile||[],homeTelephone:t.homeTelephone||[],workTelephone:t.workTelephone||[]}}})},k=Object(f.a)(x,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"}),t._v(" "),a("div",{staticClass:"profile-detail-bar"},[a("p",{staticClass:"p-text"},[t._v(t._s(t.$t("app.emergency_contact_cta")))])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.userOrPermission("create",t.getProfile.user_id)?a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"addreportingmethod"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"addreportingmethod"}},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                "+t._s(t.$t("app.add_emergency_contact"))+"\n              ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",type:"is-info",icon:e.open?"angle-down":"angle-up"}})],1)])}}],null,!1,1740276904),model:{value:t.closeEmergencyContactDetailsForm,callback:function(e){t.closeEmergencyContactDetailsForm=e},expression:"closeEmergencyContactDetailsForm"}},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("form",{on:{submit:function(e){return e.preventDefault(),t.addEmergencyContact()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.name"),expanded:"",type:{"is-danger":t.emergencyContactErrors.name.length>0},message:t.emergencyContactErrors.name}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.name,callback:function(e){t.$set(t.emergencyContact,"name",e)},expression:"emergencyContact.name"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.relationship"),expanded:"",type:{"is-danger":t.emergencyContactErrors.relationship.length>0},message:t.emergencyContactErrors.relationship}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.relationship,callback:function(e){t.$set(t.emergencyContact,"relationship",e)},expression:"emergencyContact.relationship"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.mobile"),expanded:"",type:{"is-danger":t.emergencyContactErrors.mobile.length>0},message:t.emergencyContactErrors.mobile}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.mobile,callback:function(e){t.$set(t.emergencyContact,"mobile",e)},expression:"emergencyContact.mobile"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.home_tel"),expanded:"",type:{"is-danger":t.emergencyContactErrors.homeTelephone.length>0},message:t.emergencyContactErrors.homeTelephone}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.homeTelephone,callback:function(e){t.$set(t.emergencyContact,"homeTelephone",e)},expression:"emergencyContact.homeTelephone"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:t.$t("app.work_tel"),expanded:"",type:{"is-danger":t.emergencyContactErrors.workTelephone.length>0},message:t.emergencyContactErrors.workTelephone}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.workTelephone,callback:function(e){t.$set(t.emergencyContact,"workTelephone",e)},expression:"emergencyContact.workTelephone"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingEmergencyContact}},[t._v("\n                      "+t._s(t.isSubmittingEmergencyContact?t.$t("app.submitting")+"...":t.$t("app.submit"))+"\n                    ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelEmergencyContactDetailsForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)])])])])],1):t._e(),t._v(" "),a("b-table",{attrs:{data:t.getProfile.emergency_contacts||[],paginated:!0,"per-page":10,"current-page":1,"pagination-simple":!0,"default-sort-direction":"desc","sort-icon":"arrow-up","sort-icon-size":"is-small",striped:"",hoverable:"","default-sort":"id","pagination-position":"bottom","aria-next-label":"Next page","aria-previous-label":"Previous page","aria-page-label":"Page","aria-current-label":"Current page"}},[a("b-table-column",{attrs:{field:"name",label:t.$t("app.name"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.name))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"relationship",label:t.$t("app.relationship"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.relationship))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"mobile",label:t.$t("app.mobile"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.mobile))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"worktelephone",label:t.$t("app.work_tel"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.workTelephone))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"telephone",label:t.$t("app.home_tel"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.homeTelephone))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"actions",label:t.$tc("app.action",2)},scopedSlots:t._u([{key:"default",fn:function(e){return[a("div",{staticClass:"b-tooltips"},[a("b-tooltip",{attrs:{label:t.$t("app.editContact"),type:"is-dark"}},[a("b-button",{staticClass:"is-info is-light",attrs:{size:"is-small",pack:"fas","icon-right":"pen",id:"contact-id"+t.getContactDropperId,disabled:!t.userOrPermission("update",t.getProfile.user_id)},on:{click:function(a){return t.openContactDropper(e.row)}}})],1),t._v(" "),a("b-tooltip",{attrs:{label:t.$t("app.delete"),type:"is-dark"}},[a("b-button",{staticClass:"is-danger is-light",attrs:{size:"is-small",pack:"fas","icon-right":"trash",disabled:!t.userOrPermission("delete",t.getProfile.user_id)},on:{click:function(a){return t.deleteEmergencyContact(e.row.id)}}})],1)],1)]}}])})],1)],1)])]),t._v(" "),a("dropper",{ref:"contactDropper",staticClass:"dropper",attrs:{join:"#contact-id"+t.getContactDropperId,"z-index":999},on:{"esc-keydown":t.closeContactDropper,"other-area-clicked":t.closeContactDropper}},[a("form",{on:{submit:function(e){return e.preventDefault(),t.updateEmergencyContact()}}},[a("h3",{staticClass:"label text-main"},[t._v("Edit Emergency Contact")]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Name",expanded:"",type:{"is-danger":t.emergencyContactErrors.name.length>0},message:t.emergencyContactErrors.name}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.name,callback:function(e){t.$set(t.emergencyContact,"name",e)},expression:"emergencyContact.name"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Relationship",expanded:"",type:{"is-danger":t.emergencyContactErrors.relationship.length>0},message:t.emergencyContactErrors.relationship}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.relationship,callback:function(e){t.$set(t.emergencyContact,"relationship",e)},expression:"emergencyContact.relationship"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Mobile",expanded:"",type:{"is-danger":t.emergencyContactErrors.mobile.length>0},message:t.emergencyContactErrors.mobile}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.mobile,callback:function(e){t.$set(t.emergencyContact,"mobile",e)},expression:"emergencyContact.mobile"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Home Telephone",expanded:"",type:{"is-danger":t.emergencyContactErrors.homeTelephone.length>0},message:t.emergencyContactErrors.homeTelephone}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.homeTelephone,callback:function(e){t.$set(t.emergencyContact,"homeTelephone",e)},expression:"emergencyContact.homeTelephone"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-12"},[a("b-field",{attrs:{label:"Work Telephone",expanded:"",type:{"is-danger":t.emergencyContactErrors.workTelephone.length>0},message:t.emergencyContactErrors.workTelephone}},[a("b-input",{attrs:{size:""},model:{value:t.emergencyContact.workTelephone,callback:function(e){t.$set(t.emergencyContact,"workTelephone",e)},expression:"emergencyContact.workTelephone"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingEmergencyContact}},[t._v("\n          "+t._s(t.isSubmittingEmergencyContact?"Saving...":"Save")+"\n        ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.closeContactDropper()}}},[t._v("Cancel")])],1)])])],1)}),[],!1,null,"6bdeedc6",null).exports;function P(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function $(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?P(Object(a),!0).forEach((function(e){w(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):P(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function w(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var j={name:"JobDetails",components:{ViewPdf:c.a},computed:$($({},Object(l.c)(["getProfile","getJobCategories","getJobTitles","getEmploymentStatus","getDepartments","getUnits","getPositions"])),{},{filteredJobTitles:function(){return this.jTitles}}),created:function(){},mounted:function(){var t=this;this.setJob(this.getProfile.job),this.$watch((function(){return t.job.category}),(function(e){t.job.specification="",t.jTitles=t.getJobTitles.filter((function(t){return t.job_category_id===parseInt(e)}))}),{immediate:!0}),this.$watch((function(){return t.job.title}),(function(e){var a=t.getJobTitles.find((function(t){return t.id===parseInt(e)}));a&&(t.job.specification=a.specification)}),{immediate:!0}),this.$watch((function(){return t.job.department}),(function(e){t.departmentUnits=t.getUnits.filter((function(t){return t.department_id===parseInt(e)})),t.getProfile.job.unit&&(0===t.departmentUnits.length&&(t.departmentUnits=t.getUnits.filter((function(e){return e.id===parseInt(t.getProfile.job.unit)}))),t.job.unit=parseInt(t.getProfile.job.unit)),0===t.departmentUnits.length&&(t.job.unit="")}),{immediate:!0})},data:function(){return{showUserUnit:!0,jTitles:[],departmentUnits:[],jobSpecification:"",contractDetailsControl:"kc",isEditJob:!0,isSubmittingJob:!1,isAwardingContract:!1,job:{category:"",title:"",specification:"",employmentStatus:"",department:"",unit:"",position:"",startDate:null,endDate:null,contractDetails:null,contractDetailsAvailable:"",contractStatus:null},jobErrors:{title:[],specification:[],category:[],employmentStatus:[],department:[],unit:[],position:[],startDate:[],endDate:[],contractDetails:[]}}},methods:$($({},Object(l.b)(["dispatchProfile"])),{},{setJob:function(t){t&&(this.job=$($({},this.job),{},{title:t.title,category:t.category,employmentStatus:t.employmentStatus,department:t.department||"none",unit:t.unit||"",position:t.position||"",startDate:new Date(t.startDate),endDate:new Date(t.endDate),contractDetailsAvailable:t.contractDetails,contractStatus:t.contractStatus?t.contractStatus:null}))},updateJob:function(){var t=this;this.setJobErrors(),this.isSubmittingJob=!0;var e=new FormData;e.append("category",this.job.category),e.append("title",this.job.title),e.append("employmentStatus",this.job.employmentStatus),e.append("department",this.job.department),e.append("unit",this.job.unit),e.append("position",this.job.position),e.append("startDate",this.job.startDate?this.job.startDate.toISOString():""),e.append("endDate",this.job.endDate?this.job.endDate.toISOString():""),e.append("contractStatus",this.job.contractStatus),e.append("contractDetailsControl",this.contractDetailsControl),this.job.contractDetailsAvailable&&e.append("contractDetails",this.job.contractDetailsAvailable),"rc"!==this.contractDetailsControl&&this.job.contractDetailsAvailable||e.append("contractDetails",this.job.contractDetails),this.$axios.post("/dashboard/ess/update-job/".concat(this.getProfile.user_id),e,this.axiosConfig).then((function(e){200===e.status&&e.data.updated&&(t.dispatchProfile({type:"ADD_JOB",payload:e.data.data}),t.setJob(t.getProfile.job),t.contractDetailsControl="kc",t.job.contractDetails=null,setTimeout((function(){t.snackbar("Job updated successfully","is-dark"),t.isSubmittingJob=!1}),1e3))})).catch((function(e){422===e.response.status&&setTimeout((function(){t.isSubmittingJob=!1,t.setJobErrors(e.response.data.errors)}),1e3)}))},awardContract:function(t){var e=this;this.isAwardingContract=!0,this.$axios.put("/dashboard/ess/award-job-contract/".concat(this.getProfile.user_id,"/").concat(t)).then((function(a){200===a.status&&a.data.updated&&(e.dispatchProfile({type:"ADD_JOB",payload:a.data.data}),e.setJob(e.getProfile.job),setTimeout((function(){e.snackbar("Contract ".concat(t?"termindated":"awarded"," successfully"),"is-dark"),e.isAwardingContract=!1}),1e3))})).catch((function(t){e.isAwardingContract=!1}))},viewSpecification:function(t){this.$buefy.modal.open({parent:this,component:c.a,hasModalCard:!0,trapFocus:!0,props:{file:t}})},clearJobForm:function(){this.job.title="",this.job.specification="",this.job.category="",this.job.employmentStatus="",this.job.department="",this.job.unit="",this.job.position="",this.job.startDate=null,this.job.endDate=null,this.job.contractDetails=null,this.job.contractDetailsAvailable="",this.job.contractStatus=null},setJobErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.jobErrors.title=t.title||[],this.jobErrors.specification=t.specification||[],this.jobErrors.category=t.category||[],this.jobErrors.employmentStatus=t.employmentStatus||[],this.jobErrors.department=t.department||[],this.jobErrors.unit=t.unit||[],this.jobErrors.position=t.position||[],this.jobErrors.startDate=t.startDate||[],this.jobErrors.endDate=t.endDate||[],this.jobErrors.contractDetails=t.contractDetails||[]},cancelJobForm:function(){this.setJobErrors(),this.isEditJob=!this.isEditJob}})},S=Object(f.a)(j,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"}),t._v(" "),a("div",{staticClass:"profile-detail-bar"},[a("p",{staticClass:"p-text"},[t._v(t._s(t.$t("app.job_details_cta")))])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.isPermission("update")?[t.isEditJob?a("div",{staticClass:"buttons mb-4"},[a("b-button",{staticClass:"is-info is-light",attrs:{"icon-left":"pen"},on:{click:function(e){t.isEditJob=!t.isEditJob}}},[t._v(t._s(t.$t("app.edit")))])],1):t._e()]:t._e(),t._v(" "),a("fieldset",{attrs:{disabled:t.isEditJob}},[a("form",{on:{submit:function(e){return e.preventDefault(),t.updateJob()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.jobCategory"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{expanded:"",type:{"is-danger":t.jobErrors.category.length>0},message:t.jobErrors.category}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.job.category,callback:function(e){t.$set(t.job,"category",e)},expression:"job.category"}},t._l(t.getJobCategories,(function(e,s){return a("option",{key:s,domProps:{value:e.id}},[t._v("\n                      "+t._s(e.category)+"\n                    ")])})),0)],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.jobTitle"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"",expanded:"",type:{"is-danger":t.jobErrors.title.length>0},message:t.jobErrors.title}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.job.title,callback:function(e){t.$set(t.job,"title",e)},expression:"job.title"}},t._l(t.filteredJobTitles,(function(e,s){return a("option",{key:s,domProps:{value:e.id}},[t._v("\n                      "+t._s(e.title)+"\n                    ")])})),0)],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.jobSpec"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-8"},[a("b-field",{attrs:{label:"",expanded:""}},[a("p",[""===t.job.specification?a("span",[t._v(t._s(t.$t("app.notDefined")))]):!t.jobSpecification&&t.job.specification?a("a",{on:{click:function(e){return t.viewSpecification("/job-specifications/"+t.job.specification)}}},[t._v(t._s(t.job.specification))]):t._e()])])],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.empStatus"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"",expanded:"",type:{"is-danger":t.jobErrors.employmentStatus.length>0},message:t.jobErrors.employmentStatus}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.job.employmentStatus,callback:function(e){t.$set(t.job,"employmentStatus",e)},expression:"job.employmentStatus"}},t._l(t.getEmploymentStatus,(function(e,s){return a("option",{key:s,domProps:{value:e.id}},[t._v("\n                      "+t._s(e.status)+"\n                    ")])})),0)],1)],1)]),t._v(" "),a("h5",{staticClass:"text-main"},[t._v(t._s(t.$t("app.organization")))]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.department"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"",expanded:"",type:{"is-danger":t.jobErrors.department.length>0},message:t.jobErrors.department}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.job.department,callback:function(e){t.$set(t.job,"department",e)},expression:"job.department"}},[a("option",{attrs:{value:"none"}},[t._v("None")]),t._v(" "),t._l(t.getDepartments,(function(e,s){return a("option",{key:s,domProps:{value:e.id}},[t._v("\n                      "+t._s(e.name)+"\n                    ")])}))],2)],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.unit"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"",expanded:"",type:{"is-danger":t.jobErrors.unit.length>0},message:t.jobErrors.unit}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.job.unit,callback:function(e){t.$set(t.job,"unit",e)},expression:"job.unit"}},[a("option",{attrs:{value:""}},[t._v("None")]),t._v(" "),t._l(t.departmentUnits,(function(e,s){return a("option",{key:e+s,domProps:{value:e.id}},[t._v("\n                      "+t._s(e.name)+"\n                    ")])}))],2)],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.position"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"",expanded:"",type:{"is-danger":t.jobErrors.position.length>0},message:t.jobErrors.position}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.job.position,callback:function(e){t.$set(t.job,"position",e)},expression:"job.position"}},[a("option",{attrs:{value:""}},[t._v("None")]),t._v(" "),t._l(t.getPositions,(function(e,s){return a("option",{key:e+s,domProps:{value:e.id}},[t._v("\n                      "+t._s(e.name)+"\n                    ")])}))],2)],1)],1)]),t._v(" "),a("h5",{staticClass:"text-main"},[t._v(t._s(t.$t("app.empContract")))]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.sDate"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"",expanded:"",type:{"is-danger":t.jobErrors.startDate.length>0},message:t.jobErrors.startDate}},[a("b-datetimepicker",{attrs:{timepicker:{hourFormat:"12"},"horizontal-time-picker":"",placeholder:"Click to select...",pack:"fas",icon:"calendar","trap-focus":"",size:""},model:{value:t.job.startDate,callback:function(e){t.$set(t.job,"startDate",e)},expression:"job.startDate"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.eDate"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{expanded:"",type:{"is-danger":t.jobErrors.endDate.length>0},message:t.jobErrors.endDate}},[a("b-datetimepicker",{attrs:{timepicker:{hourFormat:"12"},"horizontal-time-picker":"",placeholder:"Click to select...",pack:"fas",icon:"calendar","trap-focus":"",size:""},model:{value:t.job.endDate,callback:function(e){t.$set(t.job,"endDate",e)},expression:"job.endDate"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.conStatus"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"",expanded:""}},[a("p",[t._v("\n                    "+t._s("award"===t.job.contractStatus?t.$t("app.active"):"terminate"===t.job.contractStatus?t.$t("app.terminated"):t.$t("app.notDefined"))+"\n                  ")])])],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"},[a("b-field",{attrs:{label:t.$t("app.conDetails"),expanded:""}})],1),t._v(" "),a("div",{staticClass:"column is-4"},[t.isNull(t.job.contractDetailsAvailable)?t._e():a("b-field",{attrs:{expanded:""}},[a("p",[t._v(t._s(t.$t("app.notDefined")))])]),t._v(" "),t.isNull(t.job.contractDetailsAvailable)?a("b-field",{attrs:{expanded:""}},[a("p",[a("a",{on:{click:function(e){return t.viewSpecification("/job-contracts/"+t.job.contractDetailsAvailable)}}},[t._v(t._s(t.job.contractDetailsAvailable))])])]):t._e(),t._v(" "),t.job.contractDetailsAvailable?t._e():a("b-field",{attrs:{type:{"is-danger":t.jobErrors.contractDetails.length>0},message:t.jobErrors.contractDetails}},[a("b-field",{staticClass:"file is-dark",attrs:{expanded:""}},[a("b-upload",{staticClass:"file-label",attrs:{size:"is-small"},model:{value:t.job.contractDetails,callback:function(e){t.$set(t.job,"contractDetails",e)},expression:"job.contractDetails"}},[a("span",{staticClass:"file-cta"},[a("b-icon",{staticClass:"file-icon",attrs:{icon:"upload",size:"is-small"}}),t._v(" "),a("span",{staticClass:"file-label"},[t._v("Upload")])],1),t._v(" "),t.job.contractDetails?a("span",{staticClass:"file-name"},[t._v(t._s(t.job.contractDetails.name))]):t._e()])],1)],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-3"}),t._v(" "),a("div",{staticClass:"column is-5"},[t.job.contractDetailsAvailable?a("div",{staticClass:"block"},[a("b-radio",{attrs:{size:"",type:"is-info",name:"contractDetailsControl","native-value":"kc"},model:{value:t.contractDetailsControl,callback:function(e){t.contractDetailsControl=e},expression:"contractDetailsControl"}},[t._v(t._s(t.$t("app.keepCurrent")))]),t._v(" "),a("b-radio",{attrs:{size:"",type:"is-info",name:"contractDetailsControl","native-value":"dc"},model:{value:t.contractDetailsControl,callback:function(e){t.contractDetailsControl=e},expression:"contractDetailsControl"}},[t._v(t._s(t.$t("app.deleteCurrent")))]),t._v(" "),a("b-radio",{attrs:{size:"",type:"is-info",name:"contractDetailsControl","native-value":"rc"},model:{value:t.contractDetailsControl,callback:function(e){t.contractDetailsControl=e},expression:"contractDetailsControl"}},[t._v(t._s(t.$t("app.replaceCurrent")))])],1):t._e(),t._v(" "),"rc"===t.contractDetailsControl?a("b-field",{attrs:{type:{"is-danger":t.jobErrors.contractDetails.length>0},message:t.jobErrors.contractDetails}},[a("b-field",{staticClass:"file is-dark",attrs:{expanded:""}},[a("b-upload",{staticClass:"file-label",attrs:{size:"is-small"},model:{value:t.job.contractDetails,callback:function(e){t.$set(t.job,"contractDetails",e)},expression:"job.contractDetails"}},[a("span",{staticClass:"file-cta"},[a("b-icon",{staticClass:"file-icon",attrs:{icon:"upload",size:"is-small"}}),t._v(" "),a("span",{staticClass:"file-label"},[t._v(t._s(t.$t("app.upload")))])],1),t._v(" "),t.job.contractDetails?a("span",{staticClass:"file-name"},[t._v(t._s(t.job.contractDetails.name))]):t._e()])],1)],1):t._e()],1)]),t._v(" "),a("hr"),t._v(" "),t.isEditJob?t._e():a("div",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{disabled:t.isSubmittingJob}},[t._v("\n                "+t._s(t.isSubmittingJob?t.$t("app.submitting")+"...":t.$t("app.save"))+"\n              ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelJobForm()}}},[t._v(t._s(t.$t("app.cancel")))]),t._v(" "),t.isPermission("update")?["award"===t.job.contractStatus?a("b-button",{staticClass:"is-dark is-light",on:{click:function(e){return t.awardContract("terminate")}}},[t._v("\n                  "+t._s(t.isAwardingContract?t.$t("app.terminatingContract"):t.$t("app.terminateContract"))+"\n                ")]):t._e(),t._v(" "),"terminate"===t.job.contractStatus||null===t.job.contractStatus?a("b-button",{staticClass:"is-info is-light",on:{click:function(e){return t.awardContract("award")}}},[t._v("\n                  "+t._s(t.isAwardingContract?t.$t("app.awardingContract"):t.$t("app.awardContract"))+"\n                ")]):t._e()]:t._e()],2)])]),t._v(" "),t.isPermission("update")?[t.isEditJob?a("div",{staticClass:"buttons"},[a("b-button",{staticClass:"is-info is-light",attrs:{"icon-left":"pen"},on:{click:function(e){t.isEditJob=!t.isEditJob}}},[t._v(t._s(t.$t("app.edit")))])],1):t._e()]:t._e()],2)])])])}),[],!1,null,"23560cfc",null).exports;function O(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function q(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?O(Object(a),!0).forEach((function(e){T(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):O(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function T(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var A={name:"QualificayionDetails",components:{},computed:q(q({},Object(l.c)(["getProfile"])),{},{getEducation:function(){return"string"==typeof this.getProfile.qualifications.education?JSON.parse(this.getProfile.qualifications.education):[]},getContinuousDev:function(){return"string"==typeof this.getProfile.qualifications.continuousDev?JSON.parse(this.getProfile.qualifications.continuousDev):[]},getExpertise:function(){return"string"==typeof this.getProfile.qualifications.expertise?JSON.parse(this.getProfile.qualifications.expertise):[]},getLanguages:function(){return"string"==typeof this.getProfile.qualifications.languages?JSON.parse(this.getProfile.qualifications.languages):[]},getAttachmentDropperId:function(){return this.attachmentDropperId}}),created:function(){},data:function(){return{isEditEducation:!1,isEditExpertise:!1,isEditLanguage:!1,isEditContinuousDev:!1,isSubmitting:!1,attachmentUpdateType:null,attachmentDropperId:null,isSubmittingEducation:!1,isSubmittingContinuousDev:!1,isSubmittingExpertise:!1,isSubmittingLanguage:!1,qualifications:{education:{institution:"",specialization:"",started:null,completed:null},continuousDev:{institution:"",specialization:"",started:null,completed:null},expertise:{expertise:"",yearOfExperience:"",comment:""},languages:{language:"",fluency:"",comment:""}},qualificationsErrors:{education:{institution:[],specialization:[],started:[],completed:[]},continuousDev:{institution:[],specialization:[],started:[],completed:[]},expertise:{expertise:[],yearOfExperience:[],comment:[]},languages:{language:[],fluency:[],comment:[]}}}},methods:q(q({},Object(l.b)(["dispatchProfile"])),{},{openEducationDropper:function(t){var e=this.$refs.educationDropper;this.attachmentDropperId=t.id,e&&(this.qualifications.education={institution:t.institution,specialization:t.specialization,gpa:t.gpa,started:t.started,completed:t.completed},e.open())},closeEducationDropper:function(){var t=this.$refs.educationDropper;this.attachmentUpdateType="",t&&(this.cancelEducationForm(),t.close())},openContinuousDevDropper:function(t){var e=this.$refs.continuousDevDropper;this.attachmentDropperId=t.id,e&&(this.qualifications.continuousDev={institution:t.institution,specialization:t.specialization,started:t.started,completed:t.completed},e.open())},closeContinuousDevDropper:function(){var t=this.$refs.continuousDevDropper;this.attachmentUpdateType="",t&&(this.cancelContinuousDevForm(),t.close())},openExpertiseDropper:function(t){var e=this.$refs.expertiseDropper;this.attachmentDropperId=t.id,e&&(this.qualifications.expertise={expertise:t.expertise,yearOfExperience:t.yearOfExperience,comment:t.comment},e.open())},closeExpertiseDropper:function(){var t=this.$refs.expertiseDropper;this.attachmentUpdateType="",t&&(this.cancelExpertiseForm(),t.close())},openLanguageDropper:function(t){var e=this.$refs.languageDropper;this.attachmentDropperId=t.id,e&&(this.qualifications.languages={language:t.language,fluency:t.fluency,comment:t.comment},e.open())},closeLanguageDropper:function(){var t=this.$refs.languageDropper;this.attachmentUpdateType="",t&&(this.cancelLanguageForm(),t.close())},addEducation:function(){var t=this;this.isSubmittingEducation=!0,this.setEducationErrors(),this.$axios.put("/dashboard/ess/add-education/".concat(this.getProfile.user_id),this.qualifications.education).then((function(e){200===e.status&&e.data.added&&(t.dispatchProfile({type:"ADD_EDUCATION",payload:e.data.data}),t.clearEducationForm(),setTimeout((function(){t.snackbar("Education added successfully","is-dark"),t.isSubmittingEducation=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setEducationErrors(e.response.data.errors),t.isSubmittingEducation=!1}))},updateEducation:function(){var t=this;this.isSubmittingEducation=!0,this.setEducationErrors(),this.$axios.put("/dashboard/ess/update-education/".concat(this.getProfile.user_id,"/").concat(this.attachmentDropperId),this.qualifications.education).then((function(e){200===e.status&&e.data.updated&&(t.closeEducationDropper(),t.dispatchProfile({type:"ADD_EDUCATION",payload:e.data.data}),setTimeout((function(){t.snackbar("Education updated successfully","is-dark"),t.isSubmittingEducation=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setEducationErrors(e.response.data.errors),t.isSubmittingEducation=!1}))},addContinuousDev:function(){var t=this;this.isSubmittingContinuousDev=!0,this.setContinuousDevErrors(),this.$axios.put("/dashboard/ess/add-continuous-dev/".concat(this.getProfile.user_id),this.qualifications.continuousDev).then((function(e){200===e.status&&e.data.added&&(t.dispatchProfile({type:"ADD_CONTINUOUS_DEV",payload:e.data.data}),t.clearContinuousDevForm(),setTimeout((function(){t.snackbar("Development added successfully","is-dark"),t.isSubmittingContinuousDev=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setContinuousDevErrors(e.response.data.errors),t.isSubmittingContinuousDev=!1}))},updateContinuousDev:function(){var t=this;this.isSubmittingContinuousDev=!0,this.setContinuousDevErrors(),this.$axios.put("/dashboard/ess/update-continuous-dev/".concat(this.getProfile.user_id,"/").concat(this.attachmentDropperId),this.qualifications.continuousDev).then((function(e){200===e.status&&e.data.updated&&(t.closeContinuousDevDropper(),t.dispatchProfile({type:"ADD_CONTINUOUS_DEV",payload:e.data.data}),setTimeout((function(){t.snackbar("Development updated successfully","is-dark"),t.isSubmittingContinuousDev=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setContinuousDevErrors(e.response.data.errors),t.isSubmittingContinuousDev=!1}))},addExpertise:function(){var t=this;this.isSubmittingExpertise=!0,this.setExpertiseErrors(),this.$axios.put("/dashboard/ess/add-expertise/".concat(this.getProfile.user_id),this.qualifications.expertise).then((function(e){200===e.status&&e.data.added&&(t.clearExpertiseForm(),t.dispatchProfile({type:"ADD_EXPERTISE",payload:e.data.data}),setTimeout((function(){t.snackbar("Expertise added successfully","is-dark"),t.isSubmittingExpertise=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setExpertiseErrors(e.response.data.errors),t.isSubmittingExpertise=!1}))},updateExpertise:function(){var t=this;this.isSubmittingExpertise=!0,this.setExpertiseErrors(),this.$axios.put("/dashboard/ess/update-expertise/".concat(this.getProfile.user_id,"/").concat(this.attachmentDropperId),this.qualifications.expertise).then((function(e){200===e.status&&e.data.updated&&(t.closeExpertiseDropper(),t.dispatchProfile({type:"ADD_EXPERTISE",payload:e.data.data}),setTimeout((function(){t.snackbar("Expertise updated successfully","is-dark"),t.isSubmittingExpertise=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setExpertiseErrors(e.response.data.errors),t.isSubmittingExpertise=!1}))},addLanguage:function(){var t=this;this.isSubmittingLanguage=!0,this.setLanguageErrors(),this.$axios.put("/dashboard/ess/add-language/".concat(this.getProfile.user_id),this.qualifications.languages).then((function(e){200===e.status&&e.data.added&&(t.clearLanguageForm(),t.dispatchProfile({type:"ADD_LANGUAGE",payload:e.data.data}),setTimeout((function(){t.snackbar("Laguage added successfully","is-dark"),t.isSubmittingLanguage=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setLanguageErrors(e.response.data.errors),t.isSubmittingLanguage=!1}))},updateLanguage:function(){var t=this;this.isSubmittingLanguage=!0,this.setLanguageErrors(),this.$axios.put("/dashboard/ess/update-language/".concat(this.getProfile.user_id,"/").concat(this.attachmentDropperId),this.qualifications.languages).then((function(e){200===e.status&&e.data.added&&(t.closeLanguageDropper(),t.dispatchProfile({type:"ADD_LANGUAGE",payload:e.data.data}),setTimeout((function(){t.snackbar("Laguage updated successfully","is-dark"),t.isSubmittingLanguage=!1}),1e3))})).catch((function(e){422===e.response.status&&t.setLanguageErrors(e.response.data.errors),t.isSubmittingLanguage=!1}))},deleteHandler:function(t,e){var a=this;this.$axios.delete("/dashboard/ess/delete-qualification/".concat(this.getProfile.user_id,"/").concat(e,"/").concat(t)).then((function(e){200===e.status&&e.data.deleted&&(a.dispatchProfile({type:"UDATE_QUALIFICATION",payload:{type:t,data:e.data.data}}),setTimeout((function(){a.snackbar("Data successfully deleted","is-dark")}),1e3))})).catch((function(t){console.log(t)}))},clearEducationForm:function(){this.qualifications.education.institution="",this.qualifications.education.specialization="",this.qualifications.education.started="",this.qualifications.education.completed=""},clearContinuousDevForm:function(){this.qualifications.continuousDev.institution="",this.qualifications.continuousDev.specialization="",this.qualifications.continuousDev.started="",this.qualifications.continuousDev.completed=""},clearExpertiseForm:function(){this.qualifications.expertise.expertise="",this.qualifications.expertise.yearOfExperience="",this.qualifications.expertise.comment=""},clearLanguageForm:function(){this.qualifications.languages.language="",this.qualifications.languages.fluency="",this.qualifications.languages.comment=""},cancelEducationForm:function(){this.isEditEducation=!1,this.clearEducationForm(),this.setEducationErrors()},cancelContinuousDevForm:function(){this.isEditContinuousDev=!1,this.clearContinuousDevForm(),this.setContinuousDevErrors()},cancelLanguageForm:function(){this.isEditLanguage=!1,this.clearLanguageForm(),this.setLanguageErrors()},cancelExpertiseForm:function(){this.isEditExpertise=!1,this.clearExpertiseForm(),this.setExpertiseErrors()},setEducationErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.qualificationsErrors.education={institution:t.institution||[],specialization:t.specialization||[],started:t.started||[],completed:t.completed||[]}},setContinuousDevErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.qualificationsErrors.continuousDev={institution:t.institution||[],specialization:t.specialization||[],started:t.started||[],completed:t.completed||[]}},setExpertiseErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.qualificationsErrors.expertise.expertise=t.expertise?t.expertise:[],this.qualificationsErrors.expertise.yearOfExperience=t.yearOfExperience||[],this.qualificationsErrors.expertise.comment=t.comment||[]},setLanguageErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.qualificationsErrors.languages.language=t.language||[],this.qualificationsErrors.languages.fluency=t.fluency||[],this.qualificationsErrors.languages.comment=t.comment||[]}})},z=Object(f.a)(A,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",[a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"}),t._v(" "),a("div",{staticClass:"profile-detail-bar"},[a("p",{staticClass:"p-text"},[t._v(t._s(t.$t("app.qualification_cta")))])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.userOrPermission("create",t.getProfile.user_id)?a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"addreportingmethod"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"addreportingmethod"}},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                  "+t._s(t.$t("app.add_education"))+"\n                ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",type:"is-info",icon:e.open?"angle-down":"angle-up"}})],1)])}}],null,!1,1913714004),model:{value:t.isEditEducation,callback:function(e){t.isEditEducation=e},expression:"isEditEducation"}},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("form",{on:{submit:function(e){return e.preventDefault(),t.addEducation()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.institution"),expanded:"",type:{"is-danger":t.qualificationsErrors.education.institution.length>0},message:t.qualificationsErrors.education.institution}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.education.institution,callback:function(e){t.$set(t.qualifications.education,"institution",e)},expression:"qualifications.education.institution"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.major_spec"),expanded:"",type:{"is-danger":t.qualificationsErrors.education.specialization.length>0},message:t.qualificationsErrors.education.specialization}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.education.specialization,callback:function(e){t.$set(t.qualifications.education,"specialization",e)},expression:"qualifications.education.specialization"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.started"),expanded:"",type:{"is-danger":t.qualificationsErrors.education.started.length>0},message:t.qualificationsErrors.education.started}},[a("b-select",{attrs:{placeholder:t.$t("app.selectYear"),size:"",expanded:""},model:{value:t.qualifications.education.started,callback:function(e){t.$set(t.qualifications.education,"started",e)},expression:"qualifications.education.started"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                              "+t._s(e)+"\n                            ")])})),0)],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.completed"),expanded:"",type:{"is-danger":t.qualificationsErrors.education.completed.length>0},message:t.qualificationsErrors.education.completed}},[a("b-select",{attrs:{placeholder:t.$t("app.selectYear"),size:"",expanded:""},model:{value:t.qualifications.education.completed,callback:function(e){t.$set(t.qualifications.education,"completed",e)},expression:"qualifications.education.completed"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                              "+t._s(e)+"\n                            ")])})),0)],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingEducation}},[t._v("\n                        "+t._s(t.isSubmittingEducation?""+t.$t("app.submitting"):t.$t("app.add"))+"\n                      ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelEducationForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)],1)])])])],1):t._e(),t._v(" "),a("b-table",{attrs:{data:t.getEducation,paginated:!0,"per-page":5,"current-page":1,"pagination-simple":!0,"pagination-position":"bottom"}},[a("b-table-column",{attrs:{field:"institution",label:t.$t("app.institution"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.institution))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"specialization",label:t.$t("app.specialization"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.specialization))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"started",label:t.$t("app.started"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.started))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"completed",label:t.$t("app.completed"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.completed))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"actions",label:t.$tc("app.action",2)},scopedSlots:t._u([{key:"default",fn:function(e){return[a("div",{staticClass:"b-tooltips"},[a("b-tooltip",{attrs:{label:t.$t("app.edit_education"),type:"is-dark"}},[a("b-button",{staticClass:"is-info is-light",attrs:{size:"is-small",pack:"fas","icon-right":"pen",id:"education-id"+t.getAttachmentDropperId,disabled:!t.userOrPermission("update",t.getProfile.user_id)},on:{click:function(a){return t.openEducationDropper(e.row)}}})],1),t._v(" "),a("b-tooltip",{attrs:{label:t.$t("app.delete"),type:"is-dark"}},[a("b-button",{staticClass:"is-danger is-light",attrs:{size:"is-small",pack:"fas","icon-right":"trash",disabled:!t.userOrPermission("delete",t.getProfile.user_id)},on:{click:function(a){return t.deleteHandler("education",e.row.id)}}})],1)],1)]}}])})],1)],1)])])]),t._v(" "),a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"},[a("p",{staticClass:"card-header-title"},[t._v("\n          "+t._s(t.$tc("app.expertise",1))+"\n        ")])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.userOrPermission("create",t.getProfile.user_id)?a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"addreportingmethod"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"addreportingmethod"}},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                  "+t._s(t.$t("app.add_expertise"))+"\n                ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",type:"is-info",icon:e.open?"angle-down":"angle-up"}})],1)])}}],null,!1,3298448367),model:{value:t.isEditExpertise,callback:function(e){t.isEditExpertise=e},expression:"isEditExpertise"}},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("form",{on:{submit:function(e){return e.preventDefault(),t.addExpertise()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$tc("app.expertise",1),expanded:"",type:{"is-danger":t.qualificationsErrors.expertise.expertise.length>0},message:t.qualificationsErrors.expertise.expertise}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.expertise.expertise,callback:function(e){t.$set(t.qualifications.expertise,"expertise",e)},expression:"qualifications.expertise.expertise"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.year_of_expe"),expanded:"",type:{"is-danger":t.qualificationsErrors.expertise.yearOfExperience.length>0},message:t.qualificationsErrors.expertise.yearOfExperience}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.expertise.yearOfExperience,callback:function(e){t.$set(t.qualifications.expertise,"yearOfExperience",e)},expression:"\n                              qualifications.expertise.yearOfExperience\n                            "}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$tc("app.comment",1),type:{"is-danger":t.qualificationsErrors.expertise.comment.length>0},message:t.qualificationsErrors.expertise.comment}},[a("b-input",{attrs:{type:"textarea",placeholder:t.$t("app.comment_placeholder"),size:""},model:{value:t.qualifications.expertise.comment,callback:function(e){t.$set(t.qualifications.expertise,"comment",e)},expression:"qualifications.expertise.comment"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingExpertise}},[t._v("\n                        "+t._s(t.isSubmittingExpertise?""+t.$t("app.submitting"):t.$t("app.add"))+"\n                      ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelExpertiseForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)],1)])])])],1):t._e(),t._v(" "),a("b-table",{attrs:{data:t.getExpertise,paginated:!0,"per-page":5,"current-page":1,"pagination-simple":!0,"pagination-position":"bottom"}},[a("b-table-column",{attrs:{field:"expertise",label:t.$tc("app.expertise",1),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.expertise))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"yoe",label:t.$t("app.year_of_expe"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.yearOfExperience))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"comment",label:t.$tc("app.comment",1),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.comment))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"actions",label:t.$tc("app.action",2)},scopedSlots:t._u([{key:"default",fn:function(e){return[a("div",{staticClass:"b-tooltips"},[a("b-tooltip",{attrs:{label:t.$t("app.edit_expertise"),type:"is-dark"}},[a("b-button",{staticClass:"is-info is-light",attrs:{size:"is-small",pack:"fas","icon-right":"pen",id:"expertise-id"+t.getAttachmentDropperId,disabled:!t.userOrPermission("update",t.getProfile.user_id)},on:{click:function(a){return t.openExpertiseDropper(e.row)}}})],1),t._v(" "),a("b-tooltip",{attrs:{label:t.$t("app.delete"),type:"is-dark"}},[a("b-button",{staticClass:"is-danger is-light",attrs:{size:"is-small",pack:"fas","icon-right":"trash",disabled:!t.userOrPermission("delete",t.getProfile.user_id)},on:{click:function(a){return t.deleteHandler("expertise",e.row.id)}}})],1)],1)]}}])})],1)],1)])])]),t._v(" "),a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"},[a("p",{staticClass:"card-header-title"},[t._v(t._s(t.$tc("app.language",2)))])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.userOrPermission("create",t.getProfile.user_id)?a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"addreportingmethod"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"addreportingmethod"}},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                  "+t._s(t.$t("app.add_language"))+"\n                ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",type:"is-info",icon:e.open?"angle-down":"angle-up"}})],1)])}}],null,!1,2403258220),model:{value:t.isEditLanguage,callback:function(e){t.isEditLanguage=e},expression:"isEditLanguage"}},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("form",{on:{submit:function(e){return e.preventDefault(),t.addLanguage()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$tc("app.language",1),expanded:"",type:{"is-danger":t.qualificationsErrors.languages.language.length>0},message:t.qualificationsErrors.languages.language}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.languages.language,callback:function(e){t.$set(t.qualifications.languages,"language",e)},expression:"qualifications.languages.language"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.fluency"),expanded:"",type:{"is-danger":t.qualificationsErrors.languages.fluency.length>0},message:t.qualificationsErrors.languages.fluency}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.qualifications.languages.fluency,callback:function(e){t.$set(t.qualifications.languages,"fluency",e)},expression:"qualifications.languages.fluency"}},[a("option",{domProps:{value:t.$t("app.poor")}},[t._v("\n                              "+t._s(t.$t("app.poor"))+"\n                            ")]),t._v(" "),a("option",{domProps:{value:t.$t("app.good")}},[t._v("\n                              "+t._s(t.$t("app.good"))+"\n                            ")]),t._v(" "),a("option",{domProps:{value:t.$t("app.very_good")}},[t._v("\n                              "+t._s(t.$t("app.very_good"))+"\n                            ")]),t._v(" "),a("option",{domProps:{value:t.$t("app.mother_tongue")}},[t._v("\n                              "+t._s(t.$t("app.mother_tongue"))+"\n                            ")])])],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$tc("app.comment",1),type:{"is-danger":t.qualificationsErrors.languages.comment.length>0},message:t.qualificationsErrors.languages.comment}},[a("b-input",{attrs:{type:"textarea",size:"",placeholder:t.$t("app.comment_placeholder")},model:{value:t.qualifications.languages.comment,callback:function(e){t.$set(t.qualifications.languages,"comment",e)},expression:"qualifications.languages.comment"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingLanguage}},[t._v("\n                        "+t._s(t.isSubmittingLanguage?""+t.$t("app.submitting"):t.$t("app.add"))+"\n                      ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelLanguageForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)],1)])])])],1):t._e(),t._v(" "),a("b-table",{attrs:{data:t.getLanguages,paginated:!0,"per-page":5,"current-page":1,"pagination-simple":!0,"pagination-position":"bottom"}},[a("b-table-column",{attrs:{field:"language",label:t.$tc("app.language",1),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.language))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"fluency",label:t.$t("app.fluency"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.fluency))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"comment",label:t.$tc("app.comment",1),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.comment))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"actions",label:t.$tc("app.action",2)},scopedSlots:t._u([{key:"default",fn:function(e){return[a("div",{staticClass:"b-tooltips"},[a("b-tooltip",{attrs:{label:t.$t("app.edit_language"),type:"is-dark"}},[a("b-button",{staticClass:"is-info is-light",attrs:{size:"is-small",pack:"fas","icon-right":"pen",id:"language-id"+t.getAttachmentDropperId,disabled:!t.userOrPermission("update",t.getProfile.user_id)},on:{click:function(a){return t.openLanguageDropper(e.row)}}})],1),t._v(" "),a("b-tooltip",{attrs:{label:t.$t("app.delete"),type:"is-dark"}},[a("b-button",{staticClass:"is-danger is-light",attrs:{size:"is-small",pack:"fas","icon-right":"trash",disabled:!t.userOrPermission("delete",t.getProfile.user_id)},on:{click:function(a){return t.deleteHandler("languages",e.row.id)}}})],1)],1)]}}])})],1)],1)])])]),t._v(" "),a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("header",{staticClass:"card-header"},[a("p",{staticClass:"card-header-title"},[t._v("\n          "+t._s(t.$t("app.continuous_dev"))+"\n        ")])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[t.userOrPermission("create",t.getProfile.user_id)?a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"addreportingmethod"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"addreportingmethod"}},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                  "+t._s(t.$t("app.add_continuous_dev"))+"\n                ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",type:"is-info",icon:e.open?"angle-down":"angle-up"}})],1)])}}],null,!1,3950233307),model:{value:t.isEditContinuousDev,callback:function(e){t.isEditContinuousDev=e},expression:"isEditContinuousDev"}},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("form",{on:{submit:function(e){return e.preventDefault(),t.addContinuousDev()}}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.institution"),expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.institution.length>0},message:t.qualificationsErrors.continuousDev.institution}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.continuousDev.institution,callback:function(e){t.$set(t.qualifications.continuousDev,"institution",e)},expression:"qualifications.continuousDev.institution"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.major_spec"),expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.specialization.length>0},message:t.qualificationsErrors.continuousDev.specialization}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.continuousDev.specialization,callback:function(e){t.$set(t.qualifications.continuousDev,"specialization",e)},expression:"\n                              qualifications.continuousDev.specialization\n                            "}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.started"),expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.started.length>0},message:t.qualificationsErrors.continuousDev.started}},[a("b-select",{attrs:{placeholder:t.$t("app.selectYear"),size:"",expanded:""},model:{value:t.qualifications.continuousDev.started,callback:function(e){t.$set(t.qualifications.continuousDev,"started",e)},expression:"qualifications.continuousDev.started"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                              "+t._s(e)+"\n                            ")])})),0)],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:t.$t("app.completed"),expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.completed.length>0},message:t.qualificationsErrors.continuousDev.completed}},[a("b-select",{attrs:{placeholder:t.$t("app.selectYear"),size:"",expanded:""},model:{value:t.qualifications.continuousDev.completed,callback:function(e){t.$set(t.qualifications.continuousDev,"completed",e)},expression:"qualifications.continuousDev.completed"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                              "+t._s(e)+"\n                            ")])})),0)],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingContinuousDev}},[t._v("\n                        "+t._s(t.isSubmittingContinuousDev?""+t.$t("app.submitting"):t.$t("app.add"))+"\n                      ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelContinuousDevForm()}}},[t._v(t._s(t.$t("app.cancel")))])],1)],1)])])])],1):t._e(),t._v(" "),a("b-table",{attrs:{data:t.getContinuousDev,paginated:!0,"per-page":5,"current-page":1,"pagination-simple":!0,"pagination-position":"bottom"}},[a("b-table-column",{attrs:{field:"institution",label:t.$t("app.institution"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.institution))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"specialization",label:t.$t("app.specialization"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.specialization))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"started",label:t.$t("app.started"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.started))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"completed",label:t.$t("app.completed"),sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.completed))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"actions",label:t.$tc("app.action",2)},scopedSlots:t._u([{key:"default",fn:function(e){return[a("div",{staticClass:"b-tooltips"},[a("b-tooltip",{attrs:{label:t.$t("app.edit_education"),type:"is-dark"}},[a("b-button",{staticClass:"is-info is-light",attrs:{size:"is-small",pack:"fas","icon-right":"pen",id:"continuous-dev-id"+t.getAttachmentDropperId,disabled:!t.userOrPermission("update",t.getProfile.user_id)},on:{click:function(a){return t.openContinuousDevDropper(e.row)}}})],1),t._v(" "),a("b-tooltip",{attrs:{label:t.$t("app.delete"),type:"is-dark"}},[a("b-button",{staticClass:"is-danger is-light",attrs:{size:"is-small",pack:"fas","icon-right":"trash",disabled:!t.userOrPermission("delete",t.getProfile.user_id)},on:{click:function(a){return t.deleteHandler("continuousDev",e.row.id)}}})],1)],1)]}}])})],1)],1)])])]),t._v(" "),a("dropper",{ref:"educationDropper",staticClass:"dropper",attrs:{join:"#education-id"+t.getAttachmentDropperId,"z-index":1e3},on:{"esc-keydown":t.closeEducationDropper,"other-area-clicked":t.closeEducationDropper}},[a("form",{staticStyle:{width:"30rem"},on:{submit:function(e){return e.preventDefault(),t.updateEducation()}}},[a("h3",{staticClass:"label text-main"},[t._v("Edit Educational Details")]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-12"},[a("b-field",{attrs:{label:"Institution",expanded:"",type:{"is-danger":t.qualificationsErrors.education.institution.length>0},message:t.qualificationsErrors.education.institution}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.education.institution,callback:function(e){t.$set(t.qualifications.education,"institution",e)},expression:"qualifications.education.institution"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-12"},[a("b-field",{attrs:{label:"Major/Specialization",expanded:"",type:{"is-danger":t.qualificationsErrors.education.specialization.length>0},message:t.qualificationsErrors.education.specialization}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.education.specialization,callback:function(e){t.$set(t.qualifications.education,"specialization",e)},expression:"qualifications.education.specialization"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"Started",expanded:"",type:{"is-danger":t.qualificationsErrors.education.started.length>0},message:t.qualificationsErrors.education.started}},[a("b-select",{attrs:{placeholder:"Select year...",size:"",expanded:""},model:{value:t.qualifications.education.started,callback:function(e){t.$set(t.qualifications.education,"started",e)},expression:"qualifications.education.started"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                "+t._s(e)+"\n              ")])})),0)],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"Completed",expanded:"",type:{"is-danger":t.qualificationsErrors.education.completed.length>0},message:t.qualificationsErrors.education.completed}},[a("b-select",{attrs:{placeholder:"Select year...",size:"",expanded:""},model:{value:t.qualifications.education.completed,callback:function(e){t.$set(t.qualifications.education,"completed",e)},expression:"qualifications.education.completed"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                "+t._s(e)+"\n              ")])})),0)],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingEducation}},[t._v("\n          "+t._s(t.isSubmittingEducation?"Saving...":"Save")+"\n        ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.closeEducationDropper()}}},[t._v("Cancel")])],1)],1)]),t._v(" "),a("dropper",{ref:"continuousDevDropper",staticClass:"dropper",attrs:{join:"#continuous-dev-id"+t.getAttachmentDropperId,"z-index":1e3},on:{"esc-keydown":t.closeContinuousDevDropper,"other-area-clicked":t.closeContinuousDevDropper}},[a("form",{staticStyle:{width:"30rem"},on:{submit:function(e){return e.preventDefault(),t.updateContinuousDev()}}},[a("h3",{staticClass:"label text-main"},[t._v("Edit Continuous Development")]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-12"},[a("b-field",{attrs:{label:"Institution",expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.institution.length>0},message:t.qualificationsErrors.continuousDev.institution}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.continuousDev.institution,callback:function(e){t.$set(t.qualifications.continuousDev,"institution",e)},expression:"qualifications.continuousDev.institution"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-12"},[a("b-field",{attrs:{label:"Major/Specialization",expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.specialization.length>0},message:t.qualificationsErrors.continuousDev.specialization}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.continuousDev.specialization,callback:function(e){t.$set(t.qualifications.continuousDev,"specialization",e)},expression:"qualifications.continuousDev.specialization"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"Started",expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.started.length>0},message:t.qualificationsErrors.continuousDev.started}},[a("b-select",{attrs:{placeholder:"Select year...",size:"",expanded:""},model:{value:t.qualifications.continuousDev.started,callback:function(e){t.$set(t.qualifications.continuousDev,"started",e)},expression:"qualifications.continuousDev.started"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                "+t._s(e)+"\n              ")])})),0)],1)],1),t._v(" "),a("div",{staticClass:"column is-4"},[a("b-field",{attrs:{label:"Completed",expanded:"",type:{"is-danger":t.qualificationsErrors.continuousDev.completed.length>0},message:t.qualificationsErrors.continuousDev.completed}},[a("b-select",{attrs:{placeholder:"Select year...",size:"",expanded:""},model:{value:t.qualifications.continuousDev.completed,callback:function(e){t.$set(t.qualifications.continuousDev,"completed",e)},expression:"qualifications.continuousDev.completed"}},t._l(t.getYears,(function(e,s){return a("option",{key:s,domProps:{value:e}},[t._v("\n                "+t._s(e)+"\n              ")])})),0)],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingContinuousDev}},[t._v("\n          "+t._s(t.isSubmittingContinuousDev?"Saving...":"Save")+"\n        ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.closeContinuousDevDropper()}}},[t._v("Cancel")])],1)],1)]),t._v(" "),a("dropper",{ref:"expertiseDropper",staticClass:"dropper",attrs:{join:"#expertise-id"+t.getAttachmentDropperId,"z-index":1e3},on:{"esc-keydown":t.closeExpertiseDropper,"other-area-clicked":t.closeExpertiseDropper}},[a("form",{staticStyle:{width:"30rem"},on:{submit:function(e){return e.preventDefault(),t.updateExpertise()}}},[a("h3",{staticClass:"label text-main"},[t._v("Edit Expertise")]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Expertise",expanded:"",type:{"is-danger":t.qualificationsErrors.expertise.expertise.length>0},message:t.qualificationsErrors.expertise.expertise}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.expertise.expertise,callback:function(e){t.$set(t.qualifications.expertise,"expertise",e)},expression:"qualifications.expertise.expertise"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Years of experience",expanded:"",type:{"is-danger":t.qualificationsErrors.expertise.yearOfExperience.length>0},message:t.qualificationsErrors.expertise.yearOfExperience}},[a("b-input",{attrs:{size:"",expanded:""},model:{value:t.qualifications.expertise.yearOfExperience,callback:function(e){t.$set(t.qualifications.expertise,"yearOfExperience",e)},expression:"qualifications.expertise.yearOfExperience"}})],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-12"},[a("b-field",{attrs:{label:"Comment",type:{"is-danger":t.qualificationsErrors.expertise.comment.length>0},message:t.qualificationsErrors.expertise.comment}},[a("b-input",{attrs:{type:"textarea",placeholder:"Type your comment...",size:""},model:{value:t.qualifications.expertise.comment,callback:function(e){t.$set(t.qualifications.expertise,"comment",e)},expression:"qualifications.expertise.comment"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingExpertise}},[t._v("\n          "+t._s(t.isSubmittingExpertise?"Saving...":"Save")+"\n        ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.closeExpertiseDropper()}}},[t._v("Cancel")])],1)],1)]),t._v(" "),a("dropper",{ref:"languageDropper",staticClass:"dropper",attrs:{join:"#language-id"+t.getAttachmentDropperId,"z-index":1e3},on:{"esc-keydown":t.closeLanguageDropper,"other-area-clicked":t.closeLanguageDropper}},[a("form",{staticStyle:{width:"30rem"},on:{submit:function(e){return e.preventDefault(),t.updateLanguage()}}},[a("h3",{staticClass:"label text-main"},[t._v("Edit Language")]),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Language",expanded:"",type:{"is-danger":t.qualificationsErrors.languages.language.length>0},message:t.qualificationsErrors.languages.language}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.qualifications.languages.language,callback:function(e){t.$set(t.qualifications.languages,"language",e)},expression:"qualifications.languages.language"}},[a("option",{attrs:{value:"English"}},[t._v("English")]),t._v(" "),a("option",{attrs:{value:"French"}},[t._v("French")]),t._v(" "),a("option",{attrs:{value:"Ewe"}},[t._v("Ewe")]),t._v(" "),a("option",{attrs:{value:"Ga"}},[t._v("Ga")]),t._v(" "),a("option",{attrs:{value:"Twi"}},[t._v("Twi")])])],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"Fluency",expanded:"",type:{"is-danger":t.qualificationsErrors.languages.fluency.length>0},message:t.qualificationsErrors.languages.fluency}},[a("b-select",{attrs:{size:"",expanded:""},model:{value:t.qualifications.languages.fluency,callback:function(e){t.$set(t.qualifications.languages,"fluency",e)},expression:"qualifications.languages.fluency"}},[a("option",{attrs:{value:"Poor"}},[t._v("Poor")]),t._v(" "),a("option",{attrs:{value:"Good"}},[t._v("Good")]),t._v(" "),a("option",{attrs:{value:"Very Good"}},[t._v("Very Good")]),t._v(" "),a("option",{attrs:{value:"Mother Tongue"}},[t._v("Mother Tongue")])])],1)],1)]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-12"},[a("b-field",{attrs:{label:"Comment",type:{"is-danger":t.qualificationsErrors.languages.comment.length>0},message:t.qualificationsErrors.languages.comment}},[a("b-input",{attrs:{type:"textarea",size:"",placeholder:"Type your comment..."},model:{value:t.qualifications.languages.comment,callback:function(e){t.$set(t.qualifications.languages,"comment",e)},expression:"qualifications.languages.comment"}})],1)],1)]),t._v(" "),a("hr"),t._v(" "),a("b-field",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isSubmittingLanguage}},[t._v("\n          "+t._s(t.isSubmittingLanguage?"Saving...":"Save")+"\n        ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.closeLanguageDropper()}}},[t._v("Cancel")])],1)],1)])],1)}),[],!1,null,"2441dc0d",null).exports;function N(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function L(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var I={name:"ReportToDetails",computed:function(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?N(Object(a),!0).forEach((function(e){L(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):N(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}({},Object(l.c)(["getProfile","getMyLeaders"])),created:function(){},data:function(){return{}},methods:{getFullName:function(t){return"".concat(this.isNull(t.title)," ").concat(t.firstName," ").concat(this.isNull(t.middleName)," ").concat(t.lastName)}}},U=(a(131),{name:"ProfileComponent",components:{PersonalDetails:b,ContactDetails:C,EmergencyContactDetails:k,JobDetails:S,QualificationDetails:z,ReportToDetails:Object(f.a)(I,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("section",{staticClass:"b__collapse__section"},[a("div",{staticClass:"card"},[a("div",{staticClass:"profile-detail-bar"},[a("p",{staticClass:"p-text"},[t._v(t._s(t.$t("app.report_to_cta")))])]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-4"},[a("h5",{staticClass:"text-main"},[t._v(t._s(t.$t("app.report_to")))]),t._v(" "),t.getMyLeaders.hods.length>0?a("div",{staticClass:"mb-3"},t._l(t.getMyLeaders.hods,(function(e,s){return a("div",{key:s},[t.getProfile.department_id===e.department_id?[a("h5",{},[t._v(t._s(t.$t("app.hod"))+"(s)")]),t._v(" "),a("article",{staticClass:"leader__details"},[a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(t.getFullName({title:e.title,lastName:e.lastName,firstName:e.firstName,middleName:e.middleName}))+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.name")))])]),t._v(" "),e.mobile?a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(e.mobile)+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.mobile")))])]):t._e(),t._v(" "),e.mail?a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(e.mail)+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$tc("app.email",1)))])]):t._e(),t._v(" "),e.position?a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(e.position)+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.position")))])]):t._e()])]:t._e()],2)})),0):t._e(),t._v(" "),t.getMyLeaders.supervisors.length>0?a("div",{},t._l(t.getMyLeaders.supervisors,(function(e,s){return a("div",{key:s},[t.getProfile.unit_id===e.unit_id?[a("h5",{},[t._v(t._s(t.$t("app.supervisor"))+"(s)")]),t._v(" "),a("article",{staticClass:"leader__details"},[a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(t.getFullName({title:e.title,lastName:e.lastName,firstName:e.firstName,middleName:e.middleName}))+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.name")))])]),t._v(" "),e.mobile?a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(e.mobile)+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.mobile")))])]):t._e(),t._v(" "),e.mail?a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(e.mail)+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$tc("app.email",1)))])]):t._e(),t._v(" "),e.position?a("p",{staticClass:"report_to_text"},[t._v("\n                      "+t._s(e.position)+"\n                      "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.position")))])]):t._e()])]:t._e()],2)})),0):t._e()]),t._v(" "),a("div",{staticClass:"column is-4"},[a("h5",{staticClass:"text-main"},[t._v(t._s(t.$t("app.report_to_me")))]),t._v(" "),t.getMyLeaders.reportToMe.length>0?a("div",{staticClass:"mb-3"},t._l(t.getMyLeaders.reportToMe,(function(e,s){return a("div",{key:s},[a("article",{staticClass:"leader__details"},[a("p",{staticClass:"report_to_text"},[t._v("\n                    "+t._s(t.getFullName({title:e.title,lastName:e.lastName,firstName:e.firstName,middleName:e.middleName}))+"\n                    "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.name")))])]),t._v(" "),e.mobile?a("p",{staticClass:"report_to_text"},[t._v("\n                    "+t._s(e.mobile)+"\n                    "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.mobile")))])]):t._e(),t._v(" "),e.mail?a("p",{staticClass:"report_to_text"},[t._v("\n                    "+t._s(e.mail)+"\n                    "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$tc("app.email",1)))])]):t._e(),t._v(" "),e.position?a("p",{staticClass:"report_to_text"},[t._v("\n                    "+t._s(e.position)+"\n                    "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.position")))])]):t._e()])])})),0):t._e()]),t._v(" "),t.$page.props.authUser.report_to_roles&&JSON.parse(t.$page.props.authUser.report_to_roles).length>0?a("div",{staticClass:"column is-4"},[a("h5",{staticClass:"text-main"},[t._v("\n              "+t._s(t.$t("app.directorate")+"  ("+t.$t("app.report_to")+")")+"\n            ")]),t._v(" "),a("div",{staticClass:"mb-3"},t._l(JSON.parse(t.$page.props.authUser.report_to_roles),(function(e,s){return a("div",{key:s},[t._l(t.getMyLeaders.directorates,(function(s,i){return[JSON.parse(s.roles).includes(e)?a("article",{key:i},[a("article",{staticClass:"leader__details"},[a("p",{staticClass:"report_to_text"},[t._v("\n                        "+t._s(t.getFullName({title:s.title,lastName:s.lastName,firstName:s.firstName,middleName:s.middleName}))+"\n                        "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.name")))])]),t._v(" "),s.mobile?a("p",{staticClass:"report_to_text"},[t._v("\n                        "+t._s(s.mobile)+"\n                        "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.mobile")))])]):t._e(),t._v(" "),s.mail?a("p",{staticClass:"report_to_text"},[t._v("\n                        "+t._s(s.mail)+"\n                        "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$tc("app.email",1)))])]):t._e(),t._v(" "),s.position?a("p",{staticClass:"report_to_text"},[t._v("\n                        "+t._s(s.position)+"\n                        "),a("span",{staticClass:"report_to_label"},[t._v(t._s(t.$t("app.position")))])]):t._e()])]):t._e()]}))],2)})),0)]):t._e()])])])])])}),[],!1,null,"78f3d5ea",null).exports},computed:{},beforeMount:function(){},created:function(){},data:function(){return{}},methods:{}}),F=(a(133),Object(f.a)(U,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",{staticClass:"staff__profile"},[a("b-tabs",{attrs:{type:"is-toggle",size:"",animated:!1,expanded:""}},[a("b-tab-item",{attrs:{label:t.$t("app.personal_details")}},[a("PersonalDetails")],1),t._v(" "),a("b-tab-item",{attrs:{label:t.$t("app.contact_details")}},[a("ContactDetails")],1),t._v(" "),a("b-tab-item",{attrs:{label:t.$t("app.emergency_contacts")}},[a("EmergencyContactDetails")],1),t._v(" "),a("b-tab-item",{attrs:{label:t.$t("app.job")}},[a("JobDetails")],1),t._v(" "),a("b-tab-item",{attrs:{label:t.$tc("app.qualification",2)}},[a("QualificationDetails")],1),t._v(" "),a("b-tab-item",{attrs:{label:t.$t("app.report_to1")}},[a("ReportToDetails")],1)],1)],1)}),[],!1,null,"0dba6599",null).exports);function J(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function R(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?J(Object(a),!0).forEach((function(e){M(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):J(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function M(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var B={name:"MyLeaveComponent",computed:R(R({},Object(l.c)(["getLeaves","getPersonalDetails","getAuthUser","getLeaveBalance","getProfile","getMyLeaveRequest"])),{},{authUserLeaves:function(){var t=this,e=[];return this.getLeaveBalance.forEach((function(a){a.user_id===t.getAuthUser.id&&(e=a.entitlement)})),e},newBalance:function(){return+(Math.round(this.leaveRequest.availableBalance-this.leaveRequest.total+"e+2")+"e-2")}}),created:function(){var t=this;this.fetchLeaves(),this.fetchLeaveBalance(),this.fetchMyLeaveRequest(),this.$watch((function(){return t.leaveRequest.leaveType}),(function(e){var a=t.authUserLeaves.find((function(t){return t.name===e}));t.leaveRequest.availableBalance=+(Math.round(a.accrual+"e+2")+"e-2"),t.leaveCount=a.leaveCount})),this.$watch((function(){return t.leaveRequest.from}),(function(e){t.leaveRequest.total=t.formatDurationInDay(e,t.leaveRequest.to)})),this.$watch((function(){return t.leaveRequest.to}),(function(e){t.leaveRequest.total=t.formatDurationInDay(t.leaveRequest.from,e)}))},mounted:function(){},data:function(){return{isPaginated:!0,isPaginationSimple:!0,paginationPosition:"bottom",defaultSortDirection:"desc",sortIcon:"arrow-up",sortIconSize:"is-small",currentPage:1,perPage:5,isSubmittingApplyLeave:!1,isToggleApplyLeaveForm:!1,leaveCount:void 0,insufficientBalanceError:"",leaveRequest:{leaveType:"",from:new Date,to:new Date,total:"",newBalance:void 0,availableBalance:void 0,reason:""}}},methods:R(R({},Object(l.b)(["fetchLeaves","fetchLeaveBalance","fetchMyLeaveRequest"])),{},{applyLeave:function(){var t=this;this.isSubmittingApplyLeave=!0,this.leaveRequest.newBalance=this.newBalance,this.leaveRequest.availableBalance>=this.leaveCount?(this.leaveRequest.newBalance=this.newBalance,this.$axios.post("/dashboard/add-leave-request",this.leaveRequest).then((function(e){t.fetchMyLeaveRequest(),setTimeout((function(){t.toast("Request sent successfully","is-dark")}),1e3)})).catch((function(e){422===e.response.status&&console.log(e.response.data.errors),t.isSubmittingApplyLeave=!1}))):(this.insufficientBalanceError="In sufficient leave balance, ".concat(this.leaveCount," days or more is required to make the request"),setTimeout((function(){t.insufficientBalanceError="",t.isSubmittingApplyLeave=!1}),5e3))},cancelApplyLeaveFrom:function(){this.isToggleApplyLeaveForm=!this.isToggleApplyLeaveForm}})},Y=Object(f.a)(B,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",{},[a("div",{staticClass:"content__split__right__tabs__myleave"},[a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{open:!0,animation:"slide","aria-id":"myleavelist"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"myleavelist"}},[a("p",{staticClass:"card-header-title"},[t._v("Leave Requests")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",icon:e.open?"caret-down":"caret-up"}})],1)])}}])},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("div",{staticClass:"content__split__right__tabs__myleave"},[a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"myleave"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"myleave"}},[a("p",{staticClass:"card-header-title"},[t._v("\n                      Appy Leave  \n                      "),t.insufficientBalanceError?a("span",{staticClass:"message is-danger"},[a("span",{staticClass:"message-body",staticStyle:{padding:".3rem 1rem"}},[t._v(t._s(t.insufficientBalanceError))])]):t._e()]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",icon:e.open?"caret-down":"caret-up"}})],1)])}}]),model:{value:t.isToggleApplyLeaveForm,callback:function(e){t.isToggleApplyLeaveForm=e},expression:"isToggleApplyLeaveForm"}},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-7"},[a("form",{staticClass:"leave__type__form",attrs:{action:""},on:{submit:function(e){return e.preventDefault(),t.applyLeave()}}},[a("section",[a("b-field",{attrs:{label:"Select Leave Type:",horizontal:""}},[a("b-select",{attrs:{size:"is-small",expanded:""},model:{value:t.leaveRequest.leaveType,callback:function(e){t.$set(t.leaveRequest,"leaveType",e)},expression:"leaveRequest.leaveType"}},t._l(t.authUserLeaves,(function(e){return a("option",{key:e.id,domProps:{value:e.name}},[t._v(t._s(e.name))])})),0)],1),t._v(" "),a("b-field",{attrs:{label:"Date:",horizontal:""}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"From"}},[a("b-datepicker",{attrs:{size:"is-small",pack:"fas",icon:"calendar"},model:{value:t.leaveRequest.from,callback:function(e){t.$set(t.leaveRequest,"from",e)},expression:"leaveRequest.from"}})],1)],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("b-field",{attrs:{label:"to"}},[a("b-datepicker",{attrs:{size:"is-small",pack:"fas",icon:"calendar"},model:{value:t.leaveRequest.to,callback:function(e){t.$set(t.leaveRequest,"to",e)},expression:"leaveRequest.to"}})],1)],1)])]),t._v(" "),a("b-field",{attrs:{label:"Total:",horizontal:""}},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("b-input",{attrs:{size:"is-small",expanded:"",value:"1",disabled:"true"},model:{value:t.leaveRequest.total,callback:function(e){t.$set(t.leaveRequest,"total",e)},expression:"leaveRequest.total"}})],1),t._v(" "),a("div",{staticClass:"column is-6"},[a("p",[t._v("day(s)")])])])]),t._v(" "),a("b-field",{attrs:{label:"Reason:",horizontal:""}},[a("b-input",{attrs:{type:"textarea",size:"is-small",expanded:""},model:{value:t.leaveRequest.reason,callback:function(e){t.$set(t.leaveRequest,"reason",e)},expression:"leaveRequest.reason"}})],1)],1),t._v(" "),a("section",{staticClass:"mt-5"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit"}},[t._v(t._s(t.isSubmittingApplyLeave?"Submitting...":"Add"))]),t._v(" "),a("button",{staticClass:"button is-danger is-light",attrs:{type:"button"},on:{click:function(e){return t.cancelApplyLeaveFrom()}}},[t._v("Close")])])])]),t._v(" "),a("div",{staticClass:"column is-5"},[a("div",{staticClass:"card"},[a("div",{staticClass:"card-content"},[a("div",{staticClass:"content",staticStyle:{"font-size":".75rem"}},[a("div",{staticClass:"columns",staticStyle:{"margin-bottom":"-1.2rem"}},[a("div",{staticClass:"column is-10"},[a("b",[t._v("As of "+t._s(t.formatDate2(new Date)))])]),t._v(" "),a("div",{staticClass:"column is-2"},[a("b",[t._v("Day(s)")])])]),t._v(" "),a("div",{staticClass:"columns",staticStyle:{"margin-bottom":"-1.2rem"}},[a("div",{staticClass:"column is-10"},[a("p",[t._v("Available balance")])]),t._v(" "),a("div",{staticClass:"column is-2"},[a("p",[t._v(t._s(t.leaveRequest.availableBalance))])])]),t._v(" "),a("div",{staticClass:"columns",staticStyle:{"margin-bottom":"-1.2rem"}},[a("div",{staticClass:"column is-10"},[a("p",[t._v("Currently booked")])]),t._v(" "),a("div",{staticClass:"column is-2"},[a("p",[t._v(t._s(t.leaveRequest.total))])])]),t._v(" "),a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-10"},[a("p",[t._v("New balance")])]),t._v(" "),a("div",{staticClass:"column is-2"},[a("p",[t._v(t._s(t.newBalance?t.newBalance:""))])])])])])])])])])])])],1)]),t._v(" "),a("section",[a("b-table",{attrs:{data:t.getMyLeaveRequest,paginated:t.isPaginated,"per-page":t.perPage,"current-page":t.currentPage,"pagination-simple":t.isPaginationSimple,"pagination-position":t.paginationPosition,"default-sort-direction":t.defaultSortDirection,"sort-icon":t.sortIcon,"sort-icon-size":t.sortIconSize,"default-sort":"date","aria-next-label":"Next page","aria-previous-label":"Previous page","aria-page-label":"Page","aria-current-label":"Current page"}},[a("b-table-column",{attrs:{field:"date",label:"Date",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"tag"},[t._v(t._s(t.formatDateShort2(e.row.from)+" - "+t.formatDateShort2(e.row.to)))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"type",label:"Type",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.type))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"accrual",label:"Days",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.days))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"accrual",label:"New Balance",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.new_balance))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"accrual",label:"Old Balance",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.prev_balance))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"accrual",label:"Reason",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(null!==e.row.reason?e.row.reason.substring(0,25)+"...":""))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"accrual",label:"Status",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized tag",class:t.leaveRequestStatus(e.row.status)},[t._v(t._s(e.row.status))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"actions",label:"Actions"}},[a("div",{staticClass:"b-tooltips"},[a("b-tooltip",{attrs:{label:"Cancel",type:"is-dark"}},[a("b-button",{staticClass:"is-default is-light",attrs:{size:"is-small",pack:"fas","icon-right":"times"}})],1),t._v(" "),a("b-tooltip",{attrs:{label:"Delete",type:"is-dark"}},[a("b-button",{staticClass:"is-danger is-light",attrs:{size:"is-small",pack:"fas","icon-right":"trash"}})],1)],1)])],1)],1)])])])],1)])])}),[],!1,null,"85b99d3a",null).exports;function H(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function G(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?H(Object(a),!0).forEach((function(e){V(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):H(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function V(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var Q={name:"MyEntitlementComponent",computed:G(G({},Object(l.c)(["getLeaves","getLeaveBalance","getAuthUser"])),{},{authUserLeaves:function(){var t=this,e=[];return this.getLeaveBalance.forEach((function(a){a.user_id===t.getAuthUser.id&&(e=a.entitlement)})),e}}),created:function(){this.fetchLeaves(),this.fetchLeaveBalance()},data:function(){return{isPaginated:!0,isPaginationSimple:!0,paginationPosition:"bottom",defaultSortDirection:"desc",sortIcon:"arrow-up",sortIconSize:"is-small",currentPage:1,perPage:5}},methods:G({},Object(l.b)(["fetchLeaves","fetchLeaveBalance"]))},X=(a(135),Object(f.a)(Q,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",{},[a("div",{staticClass:"content__split__right__tabs__myleave"},[a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"myentitlements"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"myentitlements"}},[a("p",{staticClass:"card-header-title"},[t._v("My Entitlements")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",icon:e.open?"caret-down":"caret-up"}})],1)])}}])},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("b-table",{attrs:{data:t.authUserLeaves,paginated:t.isPaginated,"per-page":t.perPage,"current-page":t.currentPage,"pagination-simple":t.isPaginationSimple,"pagination-position":t.paginationPosition,"default-sort-direction":t.defaultSortDirection,"sort-icon":t.sortIcon,"sort-icon-size":t.sortIconSize,"default-sort":"name","aria-next-label":"Next page","aria-previous-label":"Previous page","aria-page-label":"Page","aria-current-label":"Current page"}},[a("b-table-column",{attrs:{field:"name",label:"Name",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.name))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"type",label:"Type",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.type))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"accrual",label:"Accrual",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.accrual))])]}}])})],1)],1)])])],1)]),t._v(" "),a("div",{staticClass:"content__split__right__tabs__myleave"},[a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{open:!1,animation:"slide","aria-id":"entitlements"},scopedSlots:t._u([{key:"trigger",fn:function(e){return a("div",{staticClass:"card-header",attrs:{role:"button","aria-controls":"entitlements"}},[a("p",{staticClass:"card-header-title"},[t._v("Entitlements")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{pack:"fas",icon:e.open?"caret-down":"caret-up"}})],1)])}}])},[t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("b-table",{attrs:{data:t.getLeaves,paginated:t.isPaginated,"per-page":t.perPage,"current-page":t.currentPage,"pagination-simple":t.isPaginationSimple,"pagination-position":t.paginationPosition,"default-sort-direction":t.defaultSortDirection,"sort-icon":t.sortIcon,"sort-icon-size":t.sortIconSize,"default-sort":"name","aria-next-label":"Next page","aria-previous-label":"Previous page","aria-page-label":"Page","aria-current-label":"Current page"}},[a("b-table-column",{attrs:{field:"name",label:"Name",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[t._v(t._s(e.row.name))]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"type",label:"Type",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.type))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"count",label:"Minimum Leave",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",[t._v(t._s(e.row.leave_count+" "+e.row.unit))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"role",label:"Role",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.applicable.role))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"gender",label:"Gender",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.applicable.gender))])]}}])}),t._v(" "),a("b-table-column",{attrs:{field:"maritalStatus",label:"Marital Status",sortable:""},scopedSlots:t._u([{key:"default",fn:function(e){return[a("span",{staticClass:"is-capitalized"},[t._v(t._s(e.row.applicable.maritalStatus))])]}}])})],1)],1)])])],1)])])}),[],!1,null,"72e01fa9",null).exports);function W(t,e,a,s,i,n,o){try{var r=t[n](o),l=r.value}catch(t){return void a(t)}r.done?e(l):Promise.resolve(l).then(s,i)}function K(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function Z(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?K(Object(a),!0).forEach((function(e){tt(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):K(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function tt(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var et={name:"ConfigurationComponent",computed:Z({},Object(l.c)([])),beforeMount:function(){this.authUser=this.$page.props.authUser},mounted:function(){},created:function(){var t=this;this.$watch((function(){return t.locale}),(function(e){e&&t.changeLocale(e)}))},data:function(){return{isUpdatingPassword:!1,openChangePassword:!0,openChangeLanguage:!0,authUser:null,locale:this.$lang.getLocale(),languages:[{name:"English",locale:"en"},{name:"French",locale:"fr"}],credentials:{current_password:"",new_password:"",confirm_new_password:""},credentialErrors:{current_password:[],new_password:[],confirm_new_password:[]}}},methods:Z(Z({},Object(l.b)([])),{},{changePassword:function(){var t=this;this.setCredentialErrors(),this.isUpdatingPassword=!0,this.$axios.put("/change-password",this.credentials).then((function(e){t.isUpdatingPassword=!1,200===e.status&&e.data.changed&&(t.clearCredentials(),t.snackbar("Your password was successfuly changed.","is-dark"))})).catch((function(e){422===e.response.status&&(t.isUpdatingPassword=!1,t.setCredentialErrors(e.response.data.errors))}))},cancelChangePassword:function(){this.openChangePassword=!1,this.clearCredentials(),this.setCredentialErrors()},clearCredentials:function(){this.credentials={current_password:"",new_password:"",confirm_new_password:""}},setCredentialErrors:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.credentialErrors={current_password:t.current_password||[],new_password:t.new_password||[],confirm_new_password:t.confirm_new_password||[]}},changeLocale:function(t){var e,a=this;return(e=i.a.mark((function e(){return i.a.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return e.prev=0,e.next=3,a.$axios.get("/lang/".concat(t));case 3:200===e.sent.status&&(a.$lang.setLocale(t),localStorage.setItem("locale",t)),e.next=10;break;case 7:e.prev=7,e.t0=e.catch(0),console.trace(e.t0);case 10:case"end":return e.stop()}}),e,null,[[0,7]])})),function(){var t=this,a=arguments;return new Promise((function(s,i){var n=e.apply(t,a);function o(t){W(n,s,i,o,r,"next",t)}function r(t){W(n,s,i,o,r,"throw",t)}o(void 0)}))})()}})},at=(a(137),Object(f.a)(et,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",{},[a("div",{staticClass:"content__split__right__tabs__myleave"},[a("div",{staticClass:"columns"},[a("div",{staticClass:"column is-6"},[a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"myleavelist"},model:{value:t.openChangePassword,callback:function(e){t.openChangePassword=e},expression:"openChangePassword"}},[a("div",{staticClass:"card-header",attrs:{slot:"trigger",role:"button","aria-controls":"myleavelist"},slot:"trigger"},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                "+t._s(t.$t("app.change_password"))+"\n              ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{type:"is-info",pack:"fas",icon:t.openChangePassword?"angle-down":"angle-up"}})],1)]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("form",{on:{submit:function(e){return e.preventDefault(),t.changePassword()}}},[a("b-field",{attrs:{label:t.$t("app.current_password"),type:{"is-danger":t.credentialErrors.current_password.length>0},message:t.credentialErrors.current_password}},[a("b-input",{attrs:{placeholder:t.$t("app.current_password"),type:"password",value:"","icon-pack":"fas",icon:"lock"},model:{value:t.credentials.current_password,callback:function(e){t.$set(t.credentials,"current_password",e)},expression:"credentials.current_password"}})],1),t._v(" "),a("b-field",{attrs:{label:t.$t("app.new_password"),type:{"is-danger":t.credentialErrors.new_password.length>0},message:t.credentialErrors.new_password}},[a("b-input",{attrs:{placeholder:t.$t("app.new_password"),type:"password",value:"","icon-pack":"fas",icon:"key"},model:{value:t.credentials.new_password,callback:function(e){t.$set(t.credentials,"new_password",e)},expression:"credentials.new_password"}})],1),t._v(" "),a("b-field",{attrs:{label:t.$t("app.confirm_password"),type:{"is-danger":t.credentialErrors.confirm_new_password.length>0},message:t.credentialErrors.confirm_new_password}},[a("b-input",{attrs:{placeholder:t.$t("app.confirm_password"),type:"password",value:"","icon-pack":"fas",icon:"key"},model:{value:t.credentials.confirm_new_password,callback:function(e){t.$set(t.credentials,"confirm_new_password",e)},expression:"credentials.confirm_new_password"}})],1),t._v(" "),a("hr"),t._v(" "),a("div",{staticClass:"change-password-btns"},[a("div",{staticClass:"buttons"},[a("button",{staticClass:"button is-success is-light",attrs:{type:"submit",disabled:t.isUpdatingPassword}},[t._v("\n                        "+t._s(t.isUpdatingPassword?t.$t("app.updating")+"...":t.$t("app.update"))+"\n                      ")]),t._v(" "),a("b-button",{staticClass:"is-danger is-light",on:{click:function(e){return t.cancelChangePassword()}}},[t._v(t._s(t.$t("app.cancel")))])],1),t._v(" "),a("p",{staticClass:"login-forget-password"},[a("inertia-link",{attrs:{href:"/password-reset-link"}},[t._v(t._s(t.$t("app.forget_pass_text")))])],1)])],1)])])])],1)]),t._v(" "),a("div",{staticClass:"column is-3"},[a("section",{staticClass:"b__collapse__section"},[a("b-collapse",{staticClass:"card",attrs:{animation:"slide","aria-id":"myleavelist"},model:{value:t.openChangeLanguage,callback:function(e){t.openChangeLanguage=e},expression:"openChangeLanguage"}},[a("div",{staticClass:"card-header",attrs:{slot:"trigger",role:"button","aria-controls":"myleavelist"},slot:"trigger"},[a("p",{staticClass:"card-header-title has-text-info"},[t._v("\n                "+t._s(t.$t("app.change_language"))+"\n              ")]),t._v(" "),a("a",{staticClass:"card-header-icon"},[a("b-icon",{attrs:{type:"is-info",pack:"fas",icon:t.openChangeLanguage?"angle-down":"angle-up"}})],1)]),t._v(" "),a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},t._l(t.languages,(function(e){return a("b-field",{key:e.name},[a("b-radio",{attrs:{"native-value":e.locale,type:"is-info",size:"is-medium"},model:{value:t.locale,callback:function(e){t.locale=e},expression:"locale"}},[t._v("\n                    "+t._s(e.name)+"\n                  ")])],1)})),1)])])],1)])])])])}),[],!1,null,"52dbef8a",null).exports);function st(t,e,a,s,i,n,o){try{var r=t[n](o),l=r.value}catch(t){return void a(t)}r.done?e(l):Promise.resolve(l).then(s,i)}function it(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function nt(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?it(Object(a),!0).forEach((function(e){ot(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):it(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function ot(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var rt={name:"ESS",metaInfo:function(){return{title:"Employee Self Service"}},components:{Tab:o.a,Tabs:r.a,ProfileComponent:F,MyLeaveComponent:Y,MyEntitlementComponent:X,ConfigurationComponent:at},layout:n.a,props:{profile:{require:!0,type:Object},jobCategories:Array,jobTitles:Array,employmentStatuses:Array,branches:Array,departments:Array,units:Array,positions:Array,supervisors:Array,hods:Array,managers:Array,reportTo:Array,reportToMe:Array,directorates:Array},computed:nt({},Object(l.c)(["getProfile","getJobCategories","getJobTitles","getEmploymentStatus","getDepartments","getUnits","getCountries"])),beforeMount:function(){},created:function(){this.dispatchProfile({payload:this.profile}),this.dispatchJobCategory({payload:this.jobCategories}),this.dispatchJobTitle({payload:this.jobTitles}),this.dispatchEmploymentStatus({payload:this.employmentStatuses}),this.dispatchDepartment({payload:this.departments}),this.dispatchUnit({payload:this.units}),this.dispatchPosition({payload:this.positions}),this.dispatchProfile({type:"ADD_MY_LEADERS",payload:{supervisors:this.supervisors,hods:this.hods,reportTo:this.reportTo,reportToMe:this.reportToMe,directorates:this.directorates}}),this.getAllCountries()},data:function(){return{tabIndex:0,regex:new RegExp("^/dashboard/ess/[0-9]+/[a-z-]*$"),countries:[]}},methods:nt(nt({},Object(l.b)(["dispatchProfile","dispatchJobCategory","dispatchJobTitle","dispatchEmploymentStatus","dispatchDepartment","dispatchUnit","dispatchPosition","dispatchMyLeaders","dispatchCountry"])),{},{getUserDepartment:function(t){return t.job&&t.job.department?this.getDepartments.find((function(e){return e.id===parseInt(t.job.department)})).name:t.job&&t.job.unit?this.getUnits.find((function(e){return e.id===parseInt(t.job.unit)})).name:""},getEmpStatus:function(t){return t.job?this.getEmploymentStatus.find((function(e){return e.id===parseInt(t.job.employmentStatus)})).status:""},getAllCountries:function(){var t,e=this;return(t=i.a.mark((function t(){var a;return i.a.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:if(localStorage.getItem("countries")||localStorage.setItem("countries",JSON.stringify([])),0!==JSON.parse(localStorage.getItem("countries")).length){t.next=13;break}return t.prev=2,t.next=5,e.$axios.get("https://restcountries.eu/rest/v2/all");case 5:a=t.sent,localStorage.setItem("countries",JSON.stringify(a.data)),t.next=11;break;case 9:t.prev=9,t.t0=t.catch(2);case 11:t.next=14;break;case 13:e.dispatchCountry({payload:JSON.parse(localStorage.getItem("countries"))});case 14:case"end":return t.stop()}}),t,null,[[2,9]])})),function(){var e=this,a=arguments;return new Promise((function(s,i){var n=t.apply(e,a);function o(t){st(n,s,i,o,r,"next",t)}function r(t){st(n,s,i,o,r,"throw",t)}o(void 0)}))})()}})},lt=Object(f.a)(rt,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("section",{staticClass:"content__split"},[a("div",{staticClass:"content__split__left"},[a("div",{staticClass:"content__split__left__panel"},[a("div",{staticClass:"card"},[a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("div",{staticClass:"profile__sidebar"},[a("p",[a("b-icon",{attrs:{pack:"fas",icon:"phone"}}),t._v(" "),a("span",[t._v(t._s(t.getProfile.contact_details?t.getProfile.contact_details.mobile:""))])],1),t._v(" "),a("p",[a("b-icon",{attrs:{pack:"fas",icon:"envelope"}}),t._v(" "),a("span",[t._v(t._s(t.getProfile.contact_details?t.getProfile.contact_details.workEmail:""))])],1)])])])]),t._v(" "),a("div",{staticClass:"card"},[a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("div",{staticClass:"profile__sidebar"},[a("p",[a("b-icon",{attrs:{pack:"fas",icon:"id-card"}}),t._v(" "),a("span",[t._v(t._s(t.getProfile.personal_details?t.getProfile.personal_details.staffId:""))])],1),t._v(" "),a("p",[a("b-icon",{attrs:{pack:"fas",icon:"umbrella"}}),t._v(" "),a("span",[t._v(t._s(t.getUserDepartment(t.getProfile)))])],1),t._v(" "),a("p",[a("b-icon",{attrs:{pack:"fas",icon:"briefcase"}}),t._v(" "),a("span",[t._v(t._s(t.getEmpStatus(t.getProfile)))])],1)])])])]),t._v(" "),a("div",{staticClass:"card"},[a("div",{staticClass:"card-content"},[a("div",{staticClass:"content"},[a("div",{staticClass:"profile__sidebar"},[t._m(0),t._v(" "),a("p",[a("b-icon",{attrs:{pack:"fas",icon:"calendar-alt"}}),t._v(" "),a("span",[t._v(t._s(t.formatDate(t.getProfile.job?t.getProfile.job.startDate:"")))])],1),t._v(" "),a("p",[a("b-icon",{attrs:{pack:"fas",icon:"clock"}}),t._v(" "),a("span",[t._v(t._s(t.formatTime(t.getProfile.job?t.getProfile.job.startDate:"")))])],1)])])])])])]),t._v(" "),a("div",{staticClass:"content__split__right"},[a("tabs",{attrs:{stickyTab:"content__split__right__sticky",tabIndex:t.tabIndex}},[a("tab",{attrs:{label:t.$t("app.profile")}},[a("ProfileComponent")],1),t._v(" "),t.regex.test(t.$page.url)?t._e():a("tab",{attrs:{label:t.$tc("app.configuration",2)}},[a("ConfigurationComponent")],1)],1)],1)])}),[function(){var t=this.$createElement,e=this._self._c||t;return e("p",[e("strong",[this._v("Hire Date")])])}],!1,null,"56dcc705",null);e.default=lt.exports},6:function(t,e,a){"use strict";var s=a(12),i=a(0);function n(t,e){var a=Object.keys(t);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);e&&(s=s.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),a.push.apply(a,s)}return a}function o(t){for(var e=1;e<arguments.length;e++){var a=null!=arguments[e]?arguments[e]:{};e%2?n(Object(a),!0).forEach((function(e){r(t,e,a[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(a)):n(Object(a)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(a,e))}))}return t}function r(t,e,a){return e in t?Object.defineProperty(t,e,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[e]=a,t}var l={name:"Dashboard",metaInfo:{title:"ADU Human Resource Management System",titleTemplate:"%s | ADU Human Resource Management System"},props:{userPermissions:{require:!0,type:Array}},computed:o(o({},Object(i.c)(["getBranches","getDepartments","getOrganizationProfile","getProfile","getAuthUser","getJobTitles"])),{},{authUserName:function(){return"".concat(this.isNull(this.getAuthUser.title)," ").concat(this.getAuthUser.lastName," ").concat(this.getAuthUser.firstName," ").concat(this.isNull(this.getAuthUser.middleName))},authJobTitle:function(){var t=this;return this.getAuthUser.jobTitle&&this.getJobTitles?this.getJobTitles.find((function(e){return e.id===parseInt(t.getAuthUser.jobTitle)})).title:""},getLogo:function(){if(this.getOrganizationProfile)return this.getOrganizationProfile.logo},getOrgName:function(){if(this.getOrganizationProfile)return this.getOrganizationProfile.name}}),beforeMount:function(){var t=this;this.activePage=this.$page.url,s.Inertia.on("navigate",(function(e){t.activePage=e.detail.page.url})),localStorage.getItem("locale")?this.$lang.setLocale(localStorage.getItem("locale")):this.$lang.setLocale("en")},created:function(){this.dispatchAuthUser({payload:this.$page.props.authUser}),this.dispatchJobTitle({payload:this.$page.props.jobTitles}),this.dispatchOrgnizationProfile({payload:this.$page.props.orgInfo})},mounted:function(){},data:function(){return{activePage:"",regex:new RegExp("^/dashboard/ess/[0-9]+/[a-z-]*$")}},methods:o(o({},Object(i.b)(["dispatchOrgnizationProfile","dispatchAuthUser","dispatchJobTitle"])),{},{isNull:function(t){return"null"===t?"":t}})},c=(a(83),a(1)),p=Object(c.a)(l,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("main",{staticClass:"v-cloak"},[a("div",{staticClass:"brand__logo"},[a("div",{staticClass:"brand__logo__main"},[a("img",{attrs:{src:"/storage/logo/"+t.getLogo,alt:"Brand Logo",srcset:""}})])]),t._v(" "),a("header",{staticClass:"header"},[a("nav",{staticClass:"header__nav"},[a("ul",{staticClass:"header__nav__list header__nav__list--left"},[a("li",{class:"header__nav__list__item "+("/dashboard"===t.activePage?"active-left":"")},[a("inertia-link",{attrs:{href:"/dashboard","preserve-scroll":"",headers:{"Custom-Header":"poopjpo"}}},[t._v(t._s(t.$t("app.dashboard")))])],1),t._v(" "),a("li",{class:"header__nav__list__item "+("/dashboard/ess"===t.activePage||t.regex.test(t.activePage)?"active-left":"")},[a("inertia-link",{attrs:{href:"/dashboard/ess","preserve-scroll":""}},[t._v(t._s(t.$t("app.employee")))])],1),t._v(" "),t.isPermission("view_admin")?a("li",{class:"header__nav__list__item "+("/dashboard/admin"===t.activePage?"active-left":"")},[a("inertia-link",{attrs:{href:"/dashboard/admin","preserve-scroll":""}},[t._v(t._s(t.$t("app.admin")))])],1):t._e(),t._v(" "),t.isPermission("view_pim")?a("li",{class:"header__nav__list__item "+("/dashboard/pim"===t.activePage?"active-left":"")},[a("inertia-link",{attrs:{href:"/dashboard/pim","preserve-scroll":""}},[t._v(t._s(t.$t("app.pim")))])],1):t._e(),t._v(" "),t.isPermission("view_leave")?a("li",{class:"header__nav__list__item "+("/dashboard/leave"===t.activePage?"active-left":"")},[a("inertia-link",{attrs:{href:"/dashboard/leave","preserve-scroll":""}},[t._v(t._s(t.$t("app.leave")))])],1):t._e(),t._v(" "),a("li",{class:"header__nav__list__item "+("/dashboard/kpi"===t.activePage?"active-left":"")},[a("inertia-link",{attrs:{href:"/dashboard/kpi","preserve-scroll":""}},[t._v(t._s(t.$t("app.kpi")))])],1),t._v(" "),a("li",{class:"header__nav__list__item "+("/dashboard/staff-directory"===t.activePage?"active-left":"")},[a("inertia-link",{attrs:{href:"/dashboard/staff-directory","preserve-scroll":""}},[t._v(t._s(t.$t("app.staff_directory")))])],1)]),t._v(" "),a("ul",{staticClass:"header__nav__list header__nav__list--right"},[a("li",{staticClass:"header__nav__list__item"},[a("b-dropdown",{attrs:{"aria-role":"list",position:"is-bottom-left"}},[a("p",{attrs:{slot:"trigger",role:"button"},slot:"trigger"},[a("b-icon",{attrs:{pack:"fas",icon:"exclamation-circle",size:"is-small"}})],1),t._v(" "),a("b-dropdown-item",{attrs:{"aria-role":"listitem"}},[a("a",{staticClass:"default",attrs:{href:"#"}},[t._v(" Notifications")])]),t._v(" "),a("b-dropdown-item",{attrs:{"aria-role":"listitem"}},[a("a",{staticClass:"default",attrs:{href:"#"}},[t._v(" Notifications")])]),t._v(" "),a("b-dropdown-item",{attrs:{"aria-role":"listitem"}},[a("a",{staticClass:"default",attrs:{href:"#"}},[t._v(" Notifications")])]),t._v(" "),a("b-dropdown-item",{attrs:{"aria-role":"listitem"}},[a("a",{staticClass:"default",attrs:{href:"#"}},[t._v(" Notifications")])])],1)],1),t._v(" "),a("li",{staticClass:"header__nav__list__item"},[a("b-dropdown",{attrs:{"aria-role":"list",position:"is-bottom-left"}},[a("p",{attrs:{slot:"trigger",role:"button"},slot:"trigger"},[a("b-icon",{attrs:{pack:"fas",icon:"cogs",size:"is-small"}})],1),t._v(" "),a("b-dropdown-item",{attrs:{"aria-role":"listitem"}},[a("inertia-link",{attrs:{href:"/dashboard/ess","preserve-scroll":""}},[a("b-icon",{attrs:{pack:"fas",icon:"user",size:"is-small"}}),t._v("\n                  "+t._s(t.$t("app.profile"))+"\n              ")],1)],1),t._v(" "),a("b-dropdown-item",{attrs:{"aria-role":"listitem"}},[a("inertia-link",{staticClass:"logout-btn",attrs:{href:"/logout",method:"POST",as:"button"}},[a("b-icon",{attrs:{pack:"fas",icon:"sign-out-alt",size:"is-small"}}),t._v("\n                  "+t._s(t.$t("app.logout")))],1)],1)],1)],1)])]),t._v(" "),a("div",{staticClass:"header__details"},[a("div",{staticClass:"header__details__avatar"},[a("div",{staticClass:"header__details__avatar__round"},[a("img",{attrs:{src:"/storage/avatar/"+t.getAuthUser.avatar,alt:"avatar",srcset:""}})])]),t._v(" "),a("div",{staticClass:"header__details__staff"},[a("strong",{staticClass:"header__details__staff__name"},[a("span",[t._v(t._s(t.authUserName))])]),t._v(" "),a("h4",{staticClass:"header__details__staff__title"},[a("span",[t._v(t._s(t.authJobTitle))])])]),t._v(" "),a("div",{staticClass:"header__details__brand__name"},[a("h4",[t._v(t._s(t.getOrgName))])])])]),t._v(" "),[t._t("default")],t._v(" "),a("vue-confirm-dialog")],2)}),[],!1,null,"a741954e",null);e.a=p.exports},83:function(t,e,a){"use strict";a(26)},84:function(t,e,a){(t.exports=a(4)(!1)).push([t.i,"[v-cloak][data-v-a741954e]{display:none}.logout-btn[data-v-a741954e]{border:none;background-color:transparent;color:#686767;cursor:pointer}.logout-btn[data-v-a741954e]:active{border:none}",""])},85:function(t,e,a){"use strict";a(27)},86:function(t,e,a){(t.exports=a(4)(!1)).push([t.i,".s__tabs__content[data-v-1f542e2b]{width:100%}",""])},87:function(t,e,a){"use strict";a(28)},88:function(t,e,a){(t.exports=a(4)(!1)).push([t.i,".s__tabs[data-v-c7d6371c]{width:100%}.s__tabs__tab>ul[data-v-c7d6371c]{width:100%;display:flex;justify-content:flex-start;align-items:flex-start;list-style-type:none}.s__tabs__tab>ul>li[data-v-c7d6371c]{cursor:pointer;font-size:1rem;padding:.15rem .3rem;background-color:#99001c;color:#fff;border-radius:3px}.s__tabs__tab>ul>li[data-v-c7d6371c]:not(:last-child){margin-right:.3rem}.s__tabs__tab>ul>li>span[data-v-c7d6371c]{letter-spacing:.05rem;transition:color .2s ease-in}.isActive[data-v-c7d6371c]{color:#fff!important;background-color:#262626!important}",""])}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+
+module.exports = _arrayWithoutHoles;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArray.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableSpread;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
+
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
+
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/toConsumableArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
+
+var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/iterableToArray.js");
+
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/typeof.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.cjs.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.cjs.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * vue-treeselect v0.4.0 | (c) 2017-2019 Riophae Lee
+ * Released under the MIT License.
+ * https://vue-treeselect.js.org/
+ */
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! fuzzysearch */ "./node_modules/fuzzysearch/index.js");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! lodash/noop */ "./node_modules/lodash/noop.js");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! watch-size */ "./node_modules/watch-size/index.es.mjs");
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! is-promise */ "./node_modules/is-promise/index.js");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! lodash/once */ "./node_modules/lodash/once.js");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! lodash/identity */ "./node_modules/lodash/identity.js");
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! lodash/constant */ "./node_modules/lodash/constant.js");
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! lodash/last */ "./node_modules/lodash/last.js");
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! babel-helper-vue-jsx-merge-props */ "./node_modules/babel-helper-vue-jsx-merge-props/index.js");
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: external "@babel/runtime/helpers/slicedToArray"
+var slicedToArray_ = __webpack_require__(0);
+var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray_);
+
+// EXTERNAL MODULE: external "@babel/runtime/helpers/toConsumableArray"
+var toConsumableArray_ = __webpack_require__(1);
+var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray_);
+
+// EXTERNAL MODULE: external "@babel/runtime/helpers/defineProperty"
+var defineProperty_ = __webpack_require__(2);
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty_);
+
+// EXTERNAL MODULE: external "fuzzysearch"
+var external_fuzzysearch_ = __webpack_require__(3);
+var external_fuzzysearch_default = /*#__PURE__*/__webpack_require__.n(external_fuzzysearch_);
+
+// EXTERNAL MODULE: external "lodash/noop"
+var noop_ = __webpack_require__(4);
+var noop_default = /*#__PURE__*/__webpack_require__.n(noop_);
+
+// CONCATENATED MODULE: ./src/utils/noop.js
+
+// CONCATENATED MODULE: ./src/utils/warning.js
+
+
+var warning_warning =  false ? undefined : function warning(checker, complainer) {
+  if (!checker()) {
+    var _console;
+
+    var message = ['[Vue-Treeselect Warning]'].concat(complainer());
+
+    (_console = console).error.apply(_console, toConsumableArray_default()(message));
+  }
+};
+// CONCATENATED MODULE: ./src/utils/onLeftClick.js
+function onLeftClick(mouseDownHandler) {
+  return function onMouseDown(evt) {
+    if (evt.type === 'mousedown' && evt.button === 0) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      mouseDownHandler.call.apply(mouseDownHandler, [this, evt].concat(args));
+    }
+  };
+}
+// CONCATENATED MODULE: ./src/utils/scrollIntoView.js
+function scrollIntoView($scrollingEl, $focusedEl) {
+  var scrollingReact = $scrollingEl.getBoundingClientRect();
+  var focusedRect = $focusedEl.getBoundingClientRect();
+  var overScroll = $focusedEl.offsetHeight / 3;
+
+  if (focusedRect.bottom + overScroll > scrollingReact.bottom) {
+    $scrollingEl.scrollTop = Math.min($focusedEl.offsetTop + $focusedEl.clientHeight - $scrollingEl.offsetHeight + overScroll, $scrollingEl.scrollHeight);
+  } else if (focusedRect.top - overScroll < scrollingReact.top) {
+    $scrollingEl.scrollTop = Math.max($focusedEl.offsetTop - overScroll, 0);
+  }
+}
+// EXTERNAL MODULE: external "lodash/debounce"
+var debounce_ = __webpack_require__(5);
+var debounce_default = /*#__PURE__*/__webpack_require__.n(debounce_);
+
+// CONCATENATED MODULE: ./src/utils/debounce.js
+
+// EXTERNAL MODULE: external "watch-size"
+var external_watch_size_ = __webpack_require__(6);
+var external_watch_size_default = /*#__PURE__*/__webpack_require__.n(external_watch_size_);
+
+// CONCATENATED MODULE: ./src/utils/removeFromArray.js
+function removeFromArray(arr, elem) {
+  var idx = arr.indexOf(elem);
+  if (idx !== -1) arr.splice(idx, 1);
+}
+// CONCATENATED MODULE: ./src/utils/watchSize.js
+
+
+var intervalId;
+var registered = [];
+var INTERVAL_DURATION = 100;
+
+function run() {
+  intervalId = setInterval(function () {
+    registered.forEach(test);
+  }, INTERVAL_DURATION);
+}
+
+function stop() {
+  clearInterval(intervalId);
+  intervalId = null;
+}
+
+function test(item) {
+  var $el = item.$el,
+      listener = item.listener,
+      lastWidth = item.lastWidth,
+      lastHeight = item.lastHeight;
+  var width = $el.offsetWidth;
+  var height = $el.offsetHeight;
+
+  if (lastWidth !== width || lastHeight !== height) {
+    item.lastWidth = width;
+    item.lastHeight = height;
+    listener({
+      width: width,
+      height: height
+    });
+  }
+}
+
+function watchSizeForIE9($el, listener) {
+  var item = {
+    $el: $el,
+    listener: listener,
+    lastWidth: null,
+    lastHeight: null
+  };
+
+  var unwatch = function unwatch() {
+    removeFromArray(registered, item);
+    if (!registered.length) stop();
+  };
+
+  registered.push(item);
+  test(item);
+  run();
+  return unwatch;
+}
+
+function watchSize($el, listener) {
+  var isIE9 = document.documentMode === 9;
+  var locked = true;
+
+  var wrappedListener = function wrappedListener() {
+    return locked || listener.apply(void 0, arguments);
+  };
+
+  var implementation = isIE9 ? watchSizeForIE9 : external_watch_size_default.a;
+  var removeSizeWatcher = implementation($el, wrappedListener);
+  locked = false;
+  return removeSizeWatcher;
+}
+// CONCATENATED MODULE: ./src/utils/setupResizeAndScrollEventListeners.js
+function findScrollParents($el) {
+  var $scrollParents = [];
+  var $parent = $el.parentNode;
+
+  while ($parent && $parent.nodeName !== 'BODY' && $parent.nodeType === document.ELEMENT_NODE) {
+    if (isScrollElment($parent)) $scrollParents.push($parent);
+    $parent = $parent.parentNode;
+  }
+
+  $scrollParents.push(window);
+  return $scrollParents;
+}
+
+function isScrollElment($el) {
+  var _getComputedStyle = getComputedStyle($el),
+      overflow = _getComputedStyle.overflow,
+      overflowX = _getComputedStyle.overflowX,
+      overflowY = _getComputedStyle.overflowY;
+
+  return /(auto|scroll|overlay)/.test(overflow + overflowY + overflowX);
+}
+
+function setupResizeAndScrollEventListeners($el, listener) {
+  var $scrollParents = findScrollParents($el);
+  window.addEventListener('resize', listener, {
+    passive: true
+  });
+  $scrollParents.forEach(function (scrollParent) {
+    scrollParent.addEventListener('scroll', listener, {
+      passive: true
+    });
+  });
+  return function removeEventListeners() {
+    window.removeEventListener('resize', listener, {
+      passive: true
+    });
+    $scrollParents.forEach(function ($scrollParent) {
+      $scrollParent.removeEventListener('scroll', listener, {
+        passive: true
+      });
+    });
+  };
+}
+// CONCATENATED MODULE: ./src/utils/isNaN.js
+function isNaN_isNaN(x) {
+  return x !== x;
+}
+// EXTERNAL MODULE: external "is-promise"
+var external_is_promise_ = __webpack_require__(7);
+var external_is_promise_default = /*#__PURE__*/__webpack_require__.n(external_is_promise_);
+
+// CONCATENATED MODULE: ./src/utils/isPromise.js
+
+// EXTERNAL MODULE: external "lodash/once"
+var once_ = __webpack_require__(8);
+var once_default = /*#__PURE__*/__webpack_require__.n(once_);
+
+// CONCATENATED MODULE: ./src/utils/once.js
+
+// EXTERNAL MODULE: external "lodash/identity"
+var identity_ = __webpack_require__(9);
+var identity_default = /*#__PURE__*/__webpack_require__.n(identity_);
+
+// CONCATENATED MODULE: ./src/utils/identity.js
+
+// EXTERNAL MODULE: external "lodash/constant"
+var constant_ = __webpack_require__(10);
+var constant_default = /*#__PURE__*/__webpack_require__.n(constant_);
+
+// CONCATENATED MODULE: ./src/utils/constant.js
+
+// CONCATENATED MODULE: ./src/utils/createMap.js
+var createMap = function createMap() {
+  return Object.create(null);
+};
+// EXTERNAL MODULE: external "@babel/runtime/helpers/typeof"
+var typeof_ = __webpack_require__(11);
+var typeof_default = /*#__PURE__*/__webpack_require__.n(typeof_);
+
+// CONCATENATED MODULE: ./src/utils/deepExtend.js
+
+
+function isPlainObject(value) {
+  if (value == null || typeof_default()(value) !== 'object') return false;
+  return Object.getPrototypeOf(value) === Object.prototype;
+}
+
+function copy(obj, key, value) {
+  if (isPlainObject(value)) {
+    obj[key] || (obj[key] = {});
+    deepExtend(obj[key], value);
+  } else {
+    obj[key] = value;
+  }
+}
+
+function deepExtend(target, source) {
+  if (isPlainObject(source)) {
+    var keys = Object.keys(source);
+
+    for (var i = 0, len = keys.length; i < len; i++) {
+      copy(target, keys[i], source[keys[i]]);
+    }
+  }
+
+  return target;
+}
+// EXTERNAL MODULE: external "lodash/last"
+var last_ = __webpack_require__(12);
+var last_default = /*#__PURE__*/__webpack_require__.n(last_);
+
+// CONCATENATED MODULE: ./src/utils/last.js
+
+// CONCATENATED MODULE: ./src/utils/includes.js
+function includes(arrOrStr, elem) {
+  return arrOrStr.indexOf(elem) !== -1;
+}
+// CONCATENATED MODULE: ./src/utils/find.js
+function find(arr, predicate, ctx) {
+  for (var i = 0, len = arr.length; i < len; i++) {
+    if (predicate.call(ctx, arr[i], i, arr)) return arr[i];
+  }
+
+  return undefined;
+}
+// CONCATENATED MODULE: ./src/utils/quickDiff.js
+function quickDiff(arrA, arrB) {
+  if (arrA.length !== arrB.length) return true;
+
+  for (var i = 0; i < arrA.length; i++) {
+    if (arrA[i] !== arrB[i]) return true;
+  }
+
+  return false;
+}
+// CONCATENATED MODULE: ./src/utils/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./src/constants.js
+var NO_PARENT_NODE = null;
+var UNCHECKED = 0;
+var INDETERMINATE = 1;
+var CHECKED = 2;
+var ALL_CHILDREN = 'ALL_CHILDREN';
+var ALL_DESCENDANTS = 'ALL_DESCENDANTS';
+var LEAF_CHILDREN = 'LEAF_CHILDREN';
+var LEAF_DESCENDANTS = 'LEAF_DESCENDANTS';
+var LOAD_ROOT_OPTIONS = 'LOAD_ROOT_OPTIONS';
+var LOAD_CHILDREN_OPTIONS = 'LOAD_CHILDREN_OPTIONS';
+var ASYNC_SEARCH = 'ASYNC_SEARCH';
+var ALL = 'ALL';
+var BRANCH_PRIORITY = 'BRANCH_PRIORITY';
+var LEAF_PRIORITY = 'LEAF_PRIORITY';
+var ALL_WITH_INDETERMINATE = 'ALL_WITH_INDETERMINATE';
+var ORDER_SELECTED = 'ORDER_SELECTED';
+var LEVEL = 'LEVEL';
+var INDEX = 'INDEX';
+var KEY_CODES = {
+  BACKSPACE: 8,
+  ENTER: 13,
+  ESCAPE: 27,
+  END: 35,
+  HOME: 36,
+  ARROW_LEFT: 37,
+  ARROW_UP: 38,
+  ARROW_RIGHT: 39,
+  ARROW_DOWN: 40,
+  DELETE: 46
+};
+var INPUT_DEBOUNCE_DELAY =  false ? undefined : 200;
+var MIN_INPUT_WIDTH = 5;
+var MENU_BUFFER = 40;
+// CONCATENATED MODULE: ./src/mixins/treeselectMixin.js
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+
+function sortValueByIndex(a, b) {
+  var i = 0;
+
+  do {
+    if (a.level < i) return -1;
+    if (b.level < i) return 1;
+    if (a.index[i] !== b.index[i]) return a.index[i] - b.index[i];
+    i++;
+  } while (true);
+}
+
+function sortValueByLevel(a, b) {
+  return a.level === b.level ? sortValueByIndex(a, b) : a.level - b.level;
+}
+
+function createAsyncOptionsStates() {
+  return {
+    isLoaded: false,
+    isLoading: false,
+    loadingError: ''
+  };
+}
+
+function stringifyOptionPropValue(value) {
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number' && !isNaN_isNaN(value)) return value + '';
+  return '';
+}
+
+function match(enableFuzzyMatch, needle, haystack) {
+  return enableFuzzyMatch ? external_fuzzysearch_default()(needle, haystack) : includes(haystack, needle);
+}
+
+function getErrorMessage(err) {
+  return err.message || String(err);
+}
+
+var instanceId = 0;
+/* harmony default export */ var treeselectMixin = ({
+  provide: function provide() {
+    return {
+      instance: this
+    };
+  },
+  props: {
+    allowClearingDisabled: {
+      type: Boolean,
+      default: false
+    },
+    allowSelectingDisabledDescendants: {
+      type: Boolean,
+      default: false
+    },
+    alwaysOpen: {
+      type: Boolean,
+      default: false
+    },
+    appendToBody: {
+      type: Boolean,
+      default: false
+    },
+    async: {
+      type: Boolean,
+      default: false
+    },
+    autoFocus: {
+      type: Boolean,
+      default: false
+    },
+    autoLoadRootOptions: {
+      type: Boolean,
+      default: true
+    },
+    autoDeselectAncestors: {
+      type: Boolean,
+      default: false
+    },
+    autoDeselectDescendants: {
+      type: Boolean,
+      default: false
+    },
+    autoSelectAncestors: {
+      type: Boolean,
+      default: false
+    },
+    autoSelectDescendants: {
+      type: Boolean,
+      default: false
+    },
+    backspaceRemoves: {
+      type: Boolean,
+      default: true
+    },
+    beforeClearAll: {
+      type: Function,
+      default: constant_default()(true)
+    },
+    branchNodesFirst: {
+      type: Boolean,
+      default: false
+    },
+    cacheOptions: {
+      type: Boolean,
+      default: true
+    },
+    clearable: {
+      type: Boolean,
+      default: true
+    },
+    clearAllText: {
+      type: String,
+      default: 'Clear all'
+    },
+    clearOnSelect: {
+      type: Boolean,
+      default: false
+    },
+    clearValueText: {
+      type: String,
+      default: 'Clear value'
+    },
+    closeOnSelect: {
+      type: Boolean,
+      default: true
+    },
+    defaultExpandLevel: {
+      type: Number,
+      default: 0
+    },
+    defaultOptions: {
+      default: false
+    },
+    deleteRemoves: {
+      type: Boolean,
+      default: true
+    },
+    delimiter: {
+      type: String,
+      default: ','
+    },
+    flattenSearchResults: {
+      type: Boolean,
+      default: false
+    },
+    disableBranchNodes: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    disableFuzzyMatching: {
+      type: Boolean,
+      default: false
+    },
+    flat: {
+      type: Boolean,
+      default: false
+    },
+    instanceId: {
+      default: function _default() {
+        return "".concat(instanceId++, "$$");
+      },
+      type: [String, Number]
+    },
+    joinValues: {
+      type: Boolean,
+      default: false
+    },
+    limit: {
+      type: Number,
+      default: Infinity
+    },
+    limitText: {
+      type: Function,
+      default: function limitTextDefault(count) {
+        return "and ".concat(count, " more");
+      }
+    },
+    loadingText: {
+      type: String,
+      default: 'Loading...'
+    },
+    loadOptions: {
+      type: Function
+    },
+    matchKeys: {
+      type: Array,
+      default: constant_default()(['label'])
+    },
+    maxHeight: {
+      type: Number,
+      default: 300
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    name: {
+      type: String
+    },
+    noChildrenText: {
+      type: String,
+      default: 'No sub-options.'
+    },
+    noOptionsText: {
+      type: String,
+      default: 'No options available.'
+    },
+    noResultsText: {
+      type: String,
+      default: 'No results found...'
+    },
+    normalizer: {
+      type: Function,
+      default: identity_default.a
+    },
+    openDirection: {
+      type: String,
+      default: 'auto',
+      validator: function validator(value) {
+        var acceptableValues = ['auto', 'top', 'bottom', 'above', 'below'];
+        return includes(acceptableValues, value);
+      }
+    },
+    openOnClick: {
+      type: Boolean,
+      default: true
+    },
+    openOnFocus: {
+      type: Boolean,
+      default: false
+    },
+    options: {
+      type: Array
+    },
+    placeholder: {
+      type: String,
+      default: 'Select...'
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    retryText: {
+      type: String,
+      default: 'Retry?'
+    },
+    retryTitle: {
+      type: String,
+      default: 'Click to retry'
+    },
+    searchable: {
+      type: Boolean,
+      default: true
+    },
+    searchNested: {
+      type: Boolean,
+      default: false
+    },
+    searchPromptText: {
+      type: String,
+      default: 'Type to search...'
+    },
+    showCount: {
+      type: Boolean,
+      default: false
+    },
+    showCountOf: {
+      type: String,
+      default: ALL_CHILDREN,
+      validator: function validator(value) {
+        var acceptableValues = [ALL_CHILDREN, ALL_DESCENDANTS, LEAF_CHILDREN, LEAF_DESCENDANTS];
+        return includes(acceptableValues, value);
+      }
+    },
+    showCountOnSearch: null,
+    sortValueBy: {
+      type: String,
+      default: ORDER_SELECTED,
+      validator: function validator(value) {
+        var acceptableValues = [ORDER_SELECTED, LEVEL, INDEX];
+        return includes(acceptableValues, value);
+      }
+    },
+    tabIndex: {
+      type: Number,
+      default: 0
+    },
+    value: null,
+    valueConsistsOf: {
+      type: String,
+      default: BRANCH_PRIORITY,
+      validator: function validator(value) {
+        var acceptableValues = [ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE];
+        return includes(acceptableValues, value);
+      }
+    },
+    valueFormat: {
+      type: String,
+      default: 'id'
+    },
+    zIndex: {
+      type: [Number, String],
+      default: 999
+    }
+  },
+  data: function data() {
+    return {
+      trigger: {
+        isFocused: false,
+        searchQuery: ''
+      },
+      menu: {
+        isOpen: false,
+        current: null,
+        lastScrollPosition: 0,
+        placement: 'bottom'
+      },
+      forest: {
+        normalizedOptions: [],
+        nodeMap: createMap(),
+        checkedStateMap: createMap(),
+        selectedNodeIds: this.extractCheckedNodeIdsFromValue(),
+        selectedNodeMap: createMap()
+      },
+      rootOptionsStates: createAsyncOptionsStates(),
+      localSearch: {
+        active: false,
+        noResults: true,
+        countMap: createMap()
+      },
+      remoteSearch: createMap()
+    };
+  },
+  computed: {
+    selectedNodes: function selectedNodes() {
+      return this.forest.selectedNodeIds.map(this.getNode);
+    },
+    internalValue: function internalValue() {
+      var _this = this;
+
+      var internalValue;
+
+      if (this.single || this.flat || this.disableBranchNodes || this.valueConsistsOf === ALL) {
+        internalValue = this.forest.selectedNodeIds.slice();
+      } else if (this.valueConsistsOf === BRANCH_PRIORITY) {
+        internalValue = this.forest.selectedNodeIds.filter(function (id) {
+          var node = _this.getNode(id);
+
+          if (node.isRootNode) return true;
+          return !_this.isSelected(node.parentNode);
+        });
+      } else if (this.valueConsistsOf === LEAF_PRIORITY) {
+        internalValue = this.forest.selectedNodeIds.filter(function (id) {
+          var node = _this.getNode(id);
+
+          if (node.isLeaf) return true;
+          return node.children.length === 0;
+        });
+      } else if (this.valueConsistsOf === ALL_WITH_INDETERMINATE) {
+        var _internalValue;
+
+        var indeterminateNodeIds = [];
+        internalValue = this.forest.selectedNodeIds.slice();
+        this.selectedNodes.forEach(function (selectedNode) {
+          selectedNode.ancestors.forEach(function (ancestor) {
+            if (includes(indeterminateNodeIds, ancestor.id)) return;
+            if (includes(internalValue, ancestor.id)) return;
+            indeterminateNodeIds.push(ancestor.id);
+          });
+        });
+
+        (_internalValue = internalValue).push.apply(_internalValue, indeterminateNodeIds);
+      }
+
+      if (this.sortValueBy === LEVEL) {
+        internalValue.sort(function (a, b) {
+          return sortValueByLevel(_this.getNode(a), _this.getNode(b));
+        });
+      } else if (this.sortValueBy === INDEX) {
+        internalValue.sort(function (a, b) {
+          return sortValueByIndex(_this.getNode(a), _this.getNode(b));
+        });
+      }
+
+      return internalValue;
+    },
+    hasValue: function hasValue() {
+      return this.internalValue.length > 0;
+    },
+    single: function single() {
+      return !this.multiple;
+    },
+    visibleOptionIds: function visibleOptionIds() {
+      var _this2 = this;
+
+      var visibleOptionIds = [];
+      this.traverseAllNodesByIndex(function (node) {
+        if (!_this2.localSearch.active || _this2.shouldOptionBeIncludedInSearchResult(node)) {
+          visibleOptionIds.push(node.id);
+        }
+
+        if (node.isBranch && !_this2.shouldExpand(node)) {
+          return false;
+        }
+      });
+      return visibleOptionIds;
+    },
+    hasVisibleOptions: function hasVisibleOptions() {
+      return this.visibleOptionIds.length !== 0;
+    },
+    showCountOnSearchComputed: function showCountOnSearchComputed() {
+      return typeof this.showCountOnSearch === 'boolean' ? this.showCountOnSearch : this.showCount;
+    },
+    hasBranchNodes: function hasBranchNodes() {
+      return this.forest.normalizedOptions.some(function (rootNode) {
+        return rootNode.isBranch;
+      });
+    },
+    shouldFlattenOptions: function shouldFlattenOptions() {
+      return this.localSearch.active && this.flattenSearchResults;
+    }
+  },
+  watch: {
+    alwaysOpen: function alwaysOpen(newValue) {
+      if (newValue) this.openMenu();else this.closeMenu();
+    },
+    branchNodesFirst: function branchNodesFirst() {
+      this.initialize();
+    },
+    disabled: function disabled(newValue) {
+      if (newValue && this.menu.isOpen) this.closeMenu();else if (!newValue && !this.menu.isOpen && this.alwaysOpen) this.openMenu();
+    },
+    flat: function flat() {
+      this.initialize();
+    },
+    internalValue: function internalValue(newValue, oldValue) {
+      var hasChanged = quickDiff(newValue, oldValue);
+      if (hasChanged) this.$emit('input', this.getValue(), this.getInstanceId());
+    },
+    matchKeys: function matchKeys() {
+      this.initialize();
+    },
+    multiple: function multiple(newValue) {
+      if (newValue) this.buildForestState();
+    },
+    options: {
+      handler: function handler() {
+        if (this.async) return;
+        this.initialize();
+        this.rootOptionsStates.isLoaded = Array.isArray(this.options);
+      },
+      deep: true,
+      immediate: true
+    },
+    'trigger.searchQuery': function triggerSearchQuery() {
+      if (this.async) {
+        this.handleRemoteSearch();
+      } else {
+        this.handleLocalSearch();
+      }
+
+      this.$emit('search-change', this.trigger.searchQuery, this.getInstanceId());
+    },
+    value: function value() {
+      var nodeIdsFromValue = this.extractCheckedNodeIdsFromValue();
+      var hasChanged = quickDiff(nodeIdsFromValue, this.internalValue);
+      if (hasChanged) this.fixSelectedNodeIds(nodeIdsFromValue);
+    }
+  },
+  methods: {
+    verifyProps: function verifyProps() {
+      var _this3 = this;
+
+      warning_warning(function () {
+        return _this3.async ? _this3.searchable : true;
+      }, function () {
+        return 'For async search mode, the value of "searchable" prop must be true.';
+      });
+
+      if (this.options == null && !this.loadOptions) {
+        warning_warning(function () {
+          return false;
+        }, function () {
+          return 'Are you meant to dynamically load options? You need to use "loadOptions" prop.';
+        });
+      }
+
+      if (this.flat) {
+        warning_warning(function () {
+          return _this3.multiple;
+        }, function () {
+          return 'You are using flat mode. But you forgot to add "multiple=true"?';
+        });
+      }
+
+      if (!this.flat) {
+        var propNames = ['autoSelectAncestors', 'autoSelectDescendants', 'autoDeselectAncestors', 'autoDeselectDescendants'];
+        propNames.forEach(function (propName) {
+          warning_warning(function () {
+            return !_this3[propName];
+          }, function () {
+            return "\"".concat(propName, "\" only applies to flat mode.");
+          });
+        });
+      }
+    },
+    resetFlags: function resetFlags() {
+      this._blurOnSelect = false;
+    },
+    initialize: function initialize() {
+      var options = this.async ? this.getRemoteSearchEntry().options : this.options;
+
+      if (Array.isArray(options)) {
+        var prevNodeMap = this.forest.nodeMap;
+        this.forest.nodeMap = createMap();
+        this.keepDataOfSelectedNodes(prevNodeMap);
+        this.forest.normalizedOptions = this.normalize(NO_PARENT_NODE, options, prevNodeMap);
+        this.fixSelectedNodeIds(this.internalValue);
+      } else {
+        this.forest.normalizedOptions = [];
+      }
+    },
+    getInstanceId: function getInstanceId() {
+      return this.instanceId == null ? this.id : this.instanceId;
+    },
+    getValue: function getValue() {
+      var _this4 = this;
+
+      if (this.valueFormat === 'id') {
+        return this.multiple ? this.internalValue.slice() : this.internalValue[0];
+      }
+
+      var rawNodes = this.internalValue.map(function (id) {
+        return _this4.getNode(id).raw;
+      });
+      return this.multiple ? rawNodes : rawNodes[0];
+    },
+    getNode: function getNode(nodeId) {
+      warning_warning(function () {
+        return nodeId != null;
+      }, function () {
+        return "Invalid node id: ".concat(nodeId);
+      });
+      if (nodeId == null) return null;
+      return nodeId in this.forest.nodeMap ? this.forest.nodeMap[nodeId] : this.createFallbackNode(nodeId);
+    },
+    createFallbackNode: function createFallbackNode(id) {
+      var raw = this.extractNodeFromValue(id);
+      var label = this.enhancedNormalizer(raw).label || "".concat(id, " (unknown)");
+      var fallbackNode = {
+        id: id,
+        label: label,
+        ancestors: [],
+        parentNode: NO_PARENT_NODE,
+        isFallbackNode: true,
+        isRootNode: true,
+        isLeaf: true,
+        isBranch: false,
+        isDisabled: false,
+        isNew: false,
+        index: [-1],
+        level: 0,
+        raw: raw
+      };
+      return this.$set(this.forest.nodeMap, id, fallbackNode);
+    },
+    extractCheckedNodeIdsFromValue: function extractCheckedNodeIdsFromValue() {
+      var _this5 = this;
+
+      if (this.value == null) return [];
+
+      if (this.valueFormat === 'id') {
+        return this.multiple ? this.value.slice() : [this.value];
+      }
+
+      return (this.multiple ? this.value : [this.value]).map(function (node) {
+        return _this5.enhancedNormalizer(node);
+      }).map(function (node) {
+        return node.id;
+      });
+    },
+    extractNodeFromValue: function extractNodeFromValue(id) {
+      var _this6 = this;
+
+      var defaultNode = {
+        id: id
+      };
+
+      if (this.valueFormat === 'id') {
+        return defaultNode;
+      }
+
+      var valueArray = this.multiple ? Array.isArray(this.value) ? this.value : [] : this.value ? [this.value] : [];
+      var matched = find(valueArray, function (node) {
+        return node && _this6.enhancedNormalizer(node).id === id;
+      });
+      return matched || defaultNode;
+    },
+    fixSelectedNodeIds: function fixSelectedNodeIds(nodeIdListOfPrevValue) {
+      var _this7 = this;
+
+      var nextSelectedNodeIds = [];
+
+      if (this.single || this.flat || this.disableBranchNodes || this.valueConsistsOf === ALL) {
+        nextSelectedNodeIds = nodeIdListOfPrevValue;
+      } else if (this.valueConsistsOf === BRANCH_PRIORITY) {
+        nodeIdListOfPrevValue.forEach(function (nodeId) {
+          nextSelectedNodeIds.push(nodeId);
+
+          var node = _this7.getNode(nodeId);
+
+          if (node.isBranch) _this7.traverseDescendantsBFS(node, function (descendant) {
+            nextSelectedNodeIds.push(descendant.id);
+          });
+        });
+      } else if (this.valueConsistsOf === LEAF_PRIORITY) {
+        var map = createMap();
+        var queue = nodeIdListOfPrevValue.slice();
+
+        while (queue.length) {
+          var nodeId = queue.shift();
+          var node = this.getNode(nodeId);
+          nextSelectedNodeIds.push(nodeId);
+          if (node.isRootNode) continue;
+          if (!(node.parentNode.id in map)) map[node.parentNode.id] = node.parentNode.children.length;
+          if (--map[node.parentNode.id] === 0) queue.push(node.parentNode.id);
+        }
+      } else if (this.valueConsistsOf === ALL_WITH_INDETERMINATE) {
+        var _map = createMap();
+
+        var _queue = nodeIdListOfPrevValue.filter(function (nodeId) {
+          var node = _this7.getNode(nodeId);
+
+          return node.isLeaf || node.children.length === 0;
+        });
+
+        while (_queue.length) {
+          var _nodeId = _queue.shift();
+
+          var _node = this.getNode(_nodeId);
+
+          nextSelectedNodeIds.push(_nodeId);
+          if (_node.isRootNode) continue;
+          if (!(_node.parentNode.id in _map)) _map[_node.parentNode.id] = _node.parentNode.children.length;
+          if (--_map[_node.parentNode.id] === 0) _queue.push(_node.parentNode.id);
+        }
+      }
+
+      var hasChanged = quickDiff(this.forest.selectedNodeIds, nextSelectedNodeIds);
+      if (hasChanged) this.forest.selectedNodeIds = nextSelectedNodeIds;
+      this.buildForestState();
+    },
+    keepDataOfSelectedNodes: function keepDataOfSelectedNodes(prevNodeMap) {
+      var _this8 = this;
+
+      this.forest.selectedNodeIds.forEach(function (id) {
+        if (!prevNodeMap[id]) return;
+
+        var node = _objectSpread({}, prevNodeMap[id], {
+          isFallbackNode: true
+        });
+
+        _this8.$set(_this8.forest.nodeMap, id, node);
+      });
+    },
+    isSelected: function isSelected(node) {
+      return this.forest.selectedNodeMap[node.id] === true;
+    },
+    traverseDescendantsBFS: function traverseDescendantsBFS(parentNode, callback) {
+      if (!parentNode.isBranch) return;
+      var queue = parentNode.children.slice();
+
+      while (queue.length) {
+        var currNode = queue[0];
+        if (currNode.isBranch) queue.push.apply(queue, toConsumableArray_default()(currNode.children));
+        callback(currNode);
+        queue.shift();
+      }
+    },
+    traverseDescendantsDFS: function traverseDescendantsDFS(parentNode, callback) {
+      var _this9 = this;
+
+      if (!parentNode.isBranch) return;
+      parentNode.children.forEach(function (child) {
+        _this9.traverseDescendantsDFS(child, callback);
+
+        callback(child);
+      });
+    },
+    traverseAllNodesDFS: function traverseAllNodesDFS(callback) {
+      var _this10 = this;
+
+      this.forest.normalizedOptions.forEach(function (rootNode) {
+        _this10.traverseDescendantsDFS(rootNode, callback);
+
+        callback(rootNode);
+      });
+    },
+    traverseAllNodesByIndex: function traverseAllNodesByIndex(callback) {
+      var walk = function walk(parentNode) {
+        parentNode.children.forEach(function (child) {
+          if (callback(child) !== false && child.isBranch) {
+            walk(child);
+          }
+        });
+      };
+
+      walk({
+        children: this.forest.normalizedOptions
+      });
+    },
+    toggleClickOutsideEvent: function toggleClickOutsideEvent(enabled) {
+      if (enabled) {
+        document.addEventListener('mousedown', this.handleClickOutside, false);
+      } else {
+        document.removeEventListener('mousedown', this.handleClickOutside, false);
+      }
+    },
+    getValueContainer: function getValueContainer() {
+      return this.$refs.control.$refs['value-container'];
+    },
+    getInput: function getInput() {
+      return this.getValueContainer().$refs.input;
+    },
+    focusInput: function focusInput() {
+      this.getInput().focus();
+    },
+    blurInput: function blurInput() {
+      this.getInput().blur();
+    },
+    handleMouseDown: onLeftClick(function handleMouseDown(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      if (this.disabled) return;
+      var isClickedOnValueContainer = this.getValueContainer().$el.contains(evt.target);
+
+      if (isClickedOnValueContainer && !this.menu.isOpen && (this.openOnClick || this.trigger.isFocused)) {
+        this.openMenu();
+      }
+
+      if (this._blurOnSelect) {
+        this.blurInput();
+      } else {
+        this.focusInput();
+      }
+
+      this.resetFlags();
+    }),
+    handleClickOutside: function handleClickOutside(evt) {
+      if (this.$refs.wrapper && !this.$refs.wrapper.contains(evt.target)) {
+        this.blurInput();
+        this.closeMenu();
+      }
+    },
+    handleLocalSearch: function handleLocalSearch() {
+      var _this11 = this;
+
+      var searchQuery = this.trigger.searchQuery;
+
+      var done = function done() {
+        return _this11.resetHighlightedOptionWhenNecessary(true);
+      };
+
+      if (!searchQuery) {
+        this.localSearch.active = false;
+        return done();
+      }
+
+      this.localSearch.active = true;
+      this.localSearch.noResults = true;
+      this.traverseAllNodesDFS(function (node) {
+        if (node.isBranch) {
+          var _this11$$set;
+
+          node.isExpandedOnSearch = false;
+          node.showAllChildrenOnSearch = false;
+          node.isMatched = false;
+          node.hasMatchedDescendants = false;
+
+          _this11.$set(_this11.localSearch.countMap, node.id, (_this11$$set = {}, defineProperty_default()(_this11$$set, ALL_CHILDREN, 0), defineProperty_default()(_this11$$set, ALL_DESCENDANTS, 0), defineProperty_default()(_this11$$set, LEAF_CHILDREN, 0), defineProperty_default()(_this11$$set, LEAF_DESCENDANTS, 0), _this11$$set));
+        }
+      });
+      var lowerCasedSearchQuery = searchQuery.trim().toLocaleLowerCase();
+      var splitSearchQuery = lowerCasedSearchQuery.replace(/\s+/g, ' ').split(' ');
+      this.traverseAllNodesDFS(function (node) {
+        if (_this11.searchNested && splitSearchQuery.length > 1) {
+          node.isMatched = splitSearchQuery.every(function (filterValue) {
+            return match(false, filterValue, node.nestedSearchLabel);
+          });
+        } else {
+          node.isMatched = _this11.matchKeys.some(function (matchKey) {
+            return match(!_this11.disableFuzzyMatching, lowerCasedSearchQuery, node.lowerCased[matchKey]);
+          });
+        }
+
+        if (node.isMatched) {
+          _this11.localSearch.noResults = false;
+          node.ancestors.forEach(function (ancestor) {
+            return _this11.localSearch.countMap[ancestor.id][ALL_DESCENDANTS]++;
+          });
+          if (node.isLeaf) node.ancestors.forEach(function (ancestor) {
+            return _this11.localSearch.countMap[ancestor.id][LEAF_DESCENDANTS]++;
+          });
+
+          if (node.parentNode !== NO_PARENT_NODE) {
+            _this11.localSearch.countMap[node.parentNode.id][ALL_CHILDREN] += 1;
+            if (node.isLeaf) _this11.localSearch.countMap[node.parentNode.id][LEAF_CHILDREN] += 1;
+          }
+        }
+
+        if ((node.isMatched || node.isBranch && node.isExpandedOnSearch) && node.parentNode !== NO_PARENT_NODE) {
+          node.parentNode.isExpandedOnSearch = true;
+          node.parentNode.hasMatchedDescendants = true;
+        }
+      });
+      done();
+    },
+    handleRemoteSearch: function handleRemoteSearch() {
+      var _this12 = this;
+
+      var searchQuery = this.trigger.searchQuery;
+      var entry = this.getRemoteSearchEntry();
+
+      var done = function done() {
+        _this12.initialize();
+
+        _this12.resetHighlightedOptionWhenNecessary(true);
+      };
+
+      if ((searchQuery === '' || this.cacheOptions) && entry.isLoaded) {
+        return done();
+      }
+
+      this.callLoadOptionsProp({
+        action: ASYNC_SEARCH,
+        args: {
+          searchQuery: searchQuery
+        },
+        isPending: function isPending() {
+          return entry.isLoading;
+        },
+        start: function start() {
+          entry.isLoading = true;
+          entry.isLoaded = false;
+          entry.loadingError = '';
+        },
+        succeed: function succeed(options) {
+          entry.isLoaded = true;
+          entry.options = options;
+          if (_this12.trigger.searchQuery === searchQuery) done();
+        },
+        fail: function fail(err) {
+          entry.loadingError = getErrorMessage(err);
+        },
+        end: function end() {
+          entry.isLoading = false;
+        }
+      });
+    },
+    getRemoteSearchEntry: function getRemoteSearchEntry() {
+      var _this13 = this;
+
+      var searchQuery = this.trigger.searchQuery;
+
+      var entry = this.remoteSearch[searchQuery] || _objectSpread({}, createAsyncOptionsStates(), {
+        options: []
+      });
+
+      this.$watch(function () {
+        return entry.options;
+      }, function () {
+        if (_this13.trigger.searchQuery === searchQuery) _this13.initialize();
+      }, {
+        deep: true
+      });
+
+      if (searchQuery === '') {
+        if (Array.isArray(this.defaultOptions)) {
+          entry.options = this.defaultOptions;
+          entry.isLoaded = true;
+          return entry;
+        } else if (this.defaultOptions !== true) {
+          entry.isLoaded = true;
+          return entry;
+        }
+      }
+
+      if (!this.remoteSearch[searchQuery]) {
+        this.$set(this.remoteSearch, searchQuery, entry);
+      }
+
+      return entry;
+    },
+    shouldExpand: function shouldExpand(node) {
+      return this.localSearch.active ? node.isExpandedOnSearch : node.isExpanded;
+    },
+    shouldOptionBeIncludedInSearchResult: function shouldOptionBeIncludedInSearchResult(node) {
+      if (node.isMatched) return true;
+      if (node.isBranch && node.hasMatchedDescendants && !this.flattenSearchResults) return true;
+      if (!node.isRootNode && node.parentNode.showAllChildrenOnSearch) return true;
+      return false;
+    },
+    shouldShowOptionInMenu: function shouldShowOptionInMenu(node) {
+      if (this.localSearch.active && !this.shouldOptionBeIncludedInSearchResult(node)) {
+        return false;
+      }
+
+      return true;
+    },
+    getControl: function getControl() {
+      return this.$refs.control.$el;
+    },
+    getMenu: function getMenu() {
+      var ref = this.appendToBody ? this.$refs.portal.portalTarget : this;
+      var $menu = ref.$refs.menu.$refs.menu;
+      return $menu && $menu.nodeName !== '#comment' ? $menu : null;
+    },
+    setCurrentHighlightedOption: function setCurrentHighlightedOption(node) {
+      var _this14 = this;
+
+      var scroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var prev = this.menu.current;
+
+      if (prev != null && prev in this.forest.nodeMap) {
+        this.forest.nodeMap[prev].isHighlighted = false;
+      }
+
+      this.menu.current = node.id;
+      node.isHighlighted = true;
+
+      if (this.menu.isOpen && scroll) {
+        var scrollToOption = function scrollToOption() {
+          var $menu = _this14.getMenu();
+
+          var $option = $menu.querySelector(".vue-treeselect__option[data-id=\"".concat(node.id, "\"]"));
+          if ($option) scrollIntoView($menu, $option);
+        };
+
+        if (this.getMenu()) {
+          scrollToOption();
+        } else {
+          this.$nextTick(scrollToOption);
+        }
+      }
+    },
+    resetHighlightedOptionWhenNecessary: function resetHighlightedOptionWhenNecessary() {
+      var forceReset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var current = this.menu.current;
+
+      if (forceReset || current == null || !(current in this.forest.nodeMap) || !this.shouldShowOptionInMenu(this.getNode(current))) {
+        this.highlightFirstOption();
+      }
+    },
+    highlightFirstOption: function highlightFirstOption() {
+      if (!this.hasVisibleOptions) return;
+      var first = this.visibleOptionIds[0];
+      this.setCurrentHighlightedOption(this.getNode(first));
+    },
+    highlightPrevOption: function highlightPrevOption() {
+      if (!this.hasVisibleOptions) return;
+      var prev = this.visibleOptionIds.indexOf(this.menu.current) - 1;
+      if (prev === -1) return this.highlightLastOption();
+      this.setCurrentHighlightedOption(this.getNode(this.visibleOptionIds[prev]));
+    },
+    highlightNextOption: function highlightNextOption() {
+      if (!this.hasVisibleOptions) return;
+      var next = this.visibleOptionIds.indexOf(this.menu.current) + 1;
+      if (next === this.visibleOptionIds.length) return this.highlightFirstOption();
+      this.setCurrentHighlightedOption(this.getNode(this.visibleOptionIds[next]));
+    },
+    highlightLastOption: function highlightLastOption() {
+      if (!this.hasVisibleOptions) return;
+      var last = last_default()(this.visibleOptionIds);
+      this.setCurrentHighlightedOption(this.getNode(last));
+    },
+    resetSearchQuery: function resetSearchQuery() {
+      this.trigger.searchQuery = '';
+    },
+    closeMenu: function closeMenu() {
+      if (!this.menu.isOpen || !this.disabled && this.alwaysOpen) return;
+      this.saveMenuScrollPosition();
+      this.menu.isOpen = false;
+      this.toggleClickOutsideEvent(false);
+      this.resetSearchQuery();
+      this.$emit('close', this.getValue(), this.getInstanceId());
+    },
+    openMenu: function openMenu() {
+      if (this.disabled || this.menu.isOpen) return;
+      this.menu.isOpen = true;
+      this.$nextTick(this.resetHighlightedOptionWhenNecessary);
+      this.$nextTick(this.restoreMenuScrollPosition);
+      if (!this.options && !this.async) this.loadRootOptions();
+      this.toggleClickOutsideEvent(true);
+      this.$emit('open', this.getInstanceId());
+    },
+    toggleMenu: function toggleMenu() {
+      if (this.menu.isOpen) {
+        this.closeMenu();
+      } else {
+        this.openMenu();
+      }
+    },
+    toggleExpanded: function toggleExpanded(node) {
+      var nextState;
+
+      if (this.localSearch.active) {
+        nextState = node.isExpandedOnSearch = !node.isExpandedOnSearch;
+        if (nextState) node.showAllChildrenOnSearch = true;
+      } else {
+        nextState = node.isExpanded = !node.isExpanded;
+      }
+
+      if (nextState && !node.childrenStates.isLoaded) {
+        this.loadChildrenOptions(node);
+      }
+    },
+    buildForestState: function buildForestState() {
+      var _this15 = this;
+
+      var selectedNodeMap = createMap();
+      this.forest.selectedNodeIds.forEach(function (selectedNodeId) {
+        selectedNodeMap[selectedNodeId] = true;
+      });
+      this.forest.selectedNodeMap = selectedNodeMap;
+      var checkedStateMap = createMap();
+
+      if (this.multiple) {
+        this.traverseAllNodesByIndex(function (node) {
+          checkedStateMap[node.id] = UNCHECKED;
+        });
+        this.selectedNodes.forEach(function (selectedNode) {
+          checkedStateMap[selectedNode.id] = CHECKED;
+
+          if (!_this15.flat && !_this15.disableBranchNodes) {
+            selectedNode.ancestors.forEach(function (ancestorNode) {
+              if (!_this15.isSelected(ancestorNode)) {
+                checkedStateMap[ancestorNode.id] = INDETERMINATE;
+              }
+            });
+          }
+        });
+      }
+
+      this.forest.checkedStateMap = checkedStateMap;
+    },
+    enhancedNormalizer: function enhancedNormalizer(raw) {
+      return _objectSpread({}, raw, {}, this.normalizer(raw, this.getInstanceId()));
+    },
+    normalize: function normalize(parentNode, nodes, prevNodeMap) {
+      var _this16 = this;
+
+      var normalizedOptions = nodes.map(function (node) {
+        return [_this16.enhancedNormalizer(node), node];
+      }).map(function (_ref, index) {
+        var _ref2 = slicedToArray_default()(_ref, 2),
+            node = _ref2[0],
+            raw = _ref2[1];
+
+        _this16.checkDuplication(node);
+
+        _this16.verifyNodeShape(node);
+
+        var id = node.id,
+            label = node.label,
+            children = node.children,
+            isDefaultExpanded = node.isDefaultExpanded;
+        var isRootNode = parentNode === NO_PARENT_NODE;
+        var level = isRootNode ? 0 : parentNode.level + 1;
+        var isBranch = Array.isArray(children) || children === null;
+        var isLeaf = !isBranch;
+        var isDisabled = !!node.isDisabled || !_this16.flat && !isRootNode && parentNode.isDisabled;
+        var isNew = !!node.isNew;
+
+        var lowerCased = _this16.matchKeys.reduce(function (prev, key) {
+          return _objectSpread({}, prev, defineProperty_default()({}, key, stringifyOptionPropValue(node[key]).toLocaleLowerCase()));
+        }, {});
+
+        var nestedSearchLabel = isRootNode ? lowerCased.label : parentNode.nestedSearchLabel + ' ' + lowerCased.label;
+
+        var normalized = _this16.$set(_this16.forest.nodeMap, id, createMap());
+
+        _this16.$set(normalized, 'id', id);
+
+        _this16.$set(normalized, 'label', label);
+
+        _this16.$set(normalized, 'level', level);
+
+        _this16.$set(normalized, 'ancestors', isRootNode ? [] : [parentNode].concat(parentNode.ancestors));
+
+        _this16.$set(normalized, 'index', (isRootNode ? [] : parentNode.index).concat(index));
+
+        _this16.$set(normalized, 'parentNode', parentNode);
+
+        _this16.$set(normalized, 'lowerCased', lowerCased);
+
+        _this16.$set(normalized, 'nestedSearchLabel', nestedSearchLabel);
+
+        _this16.$set(normalized, 'isDisabled', isDisabled);
+
+        _this16.$set(normalized, 'isNew', isNew);
+
+        _this16.$set(normalized, 'isMatched', false);
+
+        _this16.$set(normalized, 'isHighlighted', false);
+
+        _this16.$set(normalized, 'isBranch', isBranch);
+
+        _this16.$set(normalized, 'isLeaf', isLeaf);
+
+        _this16.$set(normalized, 'isRootNode', isRootNode);
+
+        _this16.$set(normalized, 'raw', raw);
+
+        if (isBranch) {
+          var _this16$$set;
+
+          var isLoaded = Array.isArray(children);
+
+          _this16.$set(normalized, 'childrenStates', _objectSpread({}, createAsyncOptionsStates(), {
+            isLoaded: isLoaded
+          }));
+
+          _this16.$set(normalized, 'isExpanded', typeof isDefaultExpanded === 'boolean' ? isDefaultExpanded : level < _this16.defaultExpandLevel);
+
+          _this16.$set(normalized, 'hasMatchedDescendants', false);
+
+          _this16.$set(normalized, 'hasDisabledDescendants', false);
+
+          _this16.$set(normalized, 'isExpandedOnSearch', false);
+
+          _this16.$set(normalized, 'showAllChildrenOnSearch', false);
+
+          _this16.$set(normalized, 'count', (_this16$$set = {}, defineProperty_default()(_this16$$set, ALL_CHILDREN, 0), defineProperty_default()(_this16$$set, ALL_DESCENDANTS, 0), defineProperty_default()(_this16$$set, LEAF_CHILDREN, 0), defineProperty_default()(_this16$$set, LEAF_DESCENDANTS, 0), _this16$$set));
+
+          _this16.$set(normalized, 'children', isLoaded ? _this16.normalize(normalized, children, prevNodeMap) : []);
+
+          if (isDefaultExpanded === true) normalized.ancestors.forEach(function (ancestor) {
+            ancestor.isExpanded = true;
+          });
+
+          if (!isLoaded && typeof _this16.loadOptions !== 'function') {
+            warning_warning(function () {
+              return false;
+            }, function () {
+              return 'Unloaded branch node detected. "loadOptions" prop is required to load its children.';
+            });
+          } else if (!isLoaded && normalized.isExpanded) {
+            _this16.loadChildrenOptions(normalized);
+          }
+        }
+
+        normalized.ancestors.forEach(function (ancestor) {
+          return ancestor.count[ALL_DESCENDANTS]++;
+        });
+        if (isLeaf) normalized.ancestors.forEach(function (ancestor) {
+          return ancestor.count[LEAF_DESCENDANTS]++;
+        });
+
+        if (!isRootNode) {
+          parentNode.count[ALL_CHILDREN] += 1;
+          if (isLeaf) parentNode.count[LEAF_CHILDREN] += 1;
+          if (isDisabled) parentNode.hasDisabledDescendants = true;
+        }
+
+        if (prevNodeMap && prevNodeMap[id]) {
+          var prev = prevNodeMap[id];
+          normalized.isMatched = prev.isMatched;
+          normalized.showAllChildrenOnSearch = prev.showAllChildrenOnSearch;
+          normalized.isHighlighted = prev.isHighlighted;
+
+          if (prev.isBranch && normalized.isBranch) {
+            normalized.isExpanded = prev.isExpanded;
+            normalized.isExpandedOnSearch = prev.isExpandedOnSearch;
+
+            if (prev.childrenStates.isLoaded && !normalized.childrenStates.isLoaded) {
+              normalized.isExpanded = false;
+            } else {
+              normalized.childrenStates = _objectSpread({}, prev.childrenStates);
+            }
+          }
+        }
+
+        return normalized;
+      });
+
+      if (this.branchNodesFirst) {
+        var branchNodes = normalizedOptions.filter(function (option) {
+          return option.isBranch;
+        });
+        var leafNodes = normalizedOptions.filter(function (option) {
+          return option.isLeaf;
+        });
+        normalizedOptions = branchNodes.concat(leafNodes);
+      }
+
+      return normalizedOptions;
+    },
+    loadRootOptions: function loadRootOptions() {
+      var _this17 = this;
+
+      this.callLoadOptionsProp({
+        action: LOAD_ROOT_OPTIONS,
+        isPending: function isPending() {
+          return _this17.rootOptionsStates.isLoading;
+        },
+        start: function start() {
+          _this17.rootOptionsStates.isLoading = true;
+          _this17.rootOptionsStates.loadingError = '';
+        },
+        succeed: function succeed() {
+          _this17.rootOptionsStates.isLoaded = true;
+
+          _this17.$nextTick(function () {
+            _this17.resetHighlightedOptionWhenNecessary(true);
+          });
+        },
+        fail: function fail(err) {
+          _this17.rootOptionsStates.loadingError = getErrorMessage(err);
+        },
+        end: function end() {
+          _this17.rootOptionsStates.isLoading = false;
+        }
+      });
+    },
+    loadChildrenOptions: function loadChildrenOptions(parentNode) {
+      var _this18 = this;
+
+      var id = parentNode.id,
+          raw = parentNode.raw;
+      this.callLoadOptionsProp({
+        action: LOAD_CHILDREN_OPTIONS,
+        args: {
+          parentNode: raw
+        },
+        isPending: function isPending() {
+          return _this18.getNode(id).childrenStates.isLoading;
+        },
+        start: function start() {
+          _this18.getNode(id).childrenStates.isLoading = true;
+          _this18.getNode(id).childrenStates.loadingError = '';
+        },
+        succeed: function succeed() {
+          _this18.getNode(id).childrenStates.isLoaded = true;
+        },
+        fail: function fail(err) {
+          _this18.getNode(id).childrenStates.loadingError = getErrorMessage(err);
+        },
+        end: function end() {
+          _this18.getNode(id).childrenStates.isLoading = false;
+        }
+      });
+    },
+    callLoadOptionsProp: function callLoadOptionsProp(_ref3) {
+      var action = _ref3.action,
+          args = _ref3.args,
+          isPending = _ref3.isPending,
+          start = _ref3.start,
+          succeed = _ref3.succeed,
+          fail = _ref3.fail,
+          end = _ref3.end;
+
+      if (!this.loadOptions || isPending()) {
+        return;
+      }
+
+      start();
+      var callback = once_default()(function (err, result) {
+        if (err) {
+          fail(err);
+        } else {
+          succeed(result);
+        }
+
+        end();
+      });
+      var result = this.loadOptions(_objectSpread({
+        id: this.getInstanceId(),
+        instanceId: this.getInstanceId(),
+        action: action
+      }, args, {
+        callback: callback
+      }));
+
+      if (external_is_promise_default()(result)) {
+        result.then(function () {
+          callback();
+        }, function (err) {
+          callback(err);
+        }).catch(function (err) {
+          console.error(err);
+        });
+      }
+    },
+    checkDuplication: function checkDuplication(node) {
+      var _this19 = this;
+
+      warning_warning(function () {
+        return !(node.id in _this19.forest.nodeMap && !_this19.forest.nodeMap[node.id].isFallbackNode);
+      }, function () {
+        return "Detected duplicate presence of node id ".concat(JSON.stringify(node.id), ". ") + "Their labels are \"".concat(_this19.forest.nodeMap[node.id].label, "\" and \"").concat(node.label, "\" respectively.");
+      });
+    },
+    verifyNodeShape: function verifyNodeShape(node) {
+      warning_warning(function () {
+        return !(node.children === undefined && node.isBranch === true);
+      }, function () {
+        return 'Are you meant to declare an unloaded branch node? ' + '`isBranch: true` is no longer supported, please use `children: null` instead.';
+      });
+    },
+    select: function select(node) {
+      if (this.disabled || node.isDisabled) {
+        return;
+      }
+
+      if (this.single) {
+        this.clear();
+      }
+
+      var nextState = this.multiple && !this.flat ? this.forest.checkedStateMap[node.id] === UNCHECKED : !this.isSelected(node);
+
+      if (nextState) {
+        this._selectNode(node);
+      } else {
+        this._deselectNode(node);
+      }
+
+      this.buildForestState();
+
+      if (nextState) {
+        this.$emit('select', node.raw, this.getInstanceId());
+      } else {
+        this.$emit('deselect', node.raw, this.getInstanceId());
+      }
+
+      if (this.localSearch.active && nextState && (this.single || this.clearOnSelect)) {
+        this.resetSearchQuery();
+      }
+
+      if (this.single && this.closeOnSelect) {
+        this.closeMenu();
+
+        if (this.searchable) {
+          this._blurOnSelect = true;
+        }
+      }
+    },
+    clear: function clear() {
+      var _this20 = this;
+
+      if (this.hasValue) {
+        if (this.single || this.allowClearingDisabled) {
+          this.forest.selectedNodeIds = [];
+        } else {
+            this.forest.selectedNodeIds = this.forest.selectedNodeIds.filter(function (nodeId) {
+              return _this20.getNode(nodeId).isDisabled;
+            });
+          }
+
+        this.buildForestState();
+      }
+    },
+    _selectNode: function _selectNode(node) {
+      var _this21 = this;
+
+      if (this.single || this.disableBranchNodes) {
+        return this.addValue(node);
+      }
+
+      if (this.flat) {
+        this.addValue(node);
+
+        if (this.autoSelectAncestors) {
+          node.ancestors.forEach(function (ancestor) {
+            if (!_this21.isSelected(ancestor) && !ancestor.isDisabled) _this21.addValue(ancestor);
+          });
+        } else if (this.autoSelectDescendants) {
+          this.traverseDescendantsBFS(node, function (descendant) {
+            if (!_this21.isSelected(descendant) && !descendant.isDisabled) _this21.addValue(descendant);
+          });
+        }
+
+        return;
+      }
+
+      var isFullyChecked = node.isLeaf || !node.hasDisabledDescendants || this.allowSelectingDisabledDescendants;
+
+      if (isFullyChecked) {
+        this.addValue(node);
+      }
+
+      if (node.isBranch) {
+        this.traverseDescendantsBFS(node, function (descendant) {
+          if (!descendant.isDisabled || _this21.allowSelectingDisabledDescendants) {
+            _this21.addValue(descendant);
+          }
+        });
+      }
+
+      if (isFullyChecked) {
+        var curr = node;
+
+        while ((curr = curr.parentNode) !== NO_PARENT_NODE) {
+          if (curr.children.every(this.isSelected)) this.addValue(curr);else break;
+        }
+      }
+    },
+    _deselectNode: function _deselectNode(node) {
+      var _this22 = this;
+
+      if (this.disableBranchNodes) {
+        return this.removeValue(node);
+      }
+
+      if (this.flat) {
+        this.removeValue(node);
+
+        if (this.autoDeselectAncestors) {
+          node.ancestors.forEach(function (ancestor) {
+            if (_this22.isSelected(ancestor) && !ancestor.isDisabled) _this22.removeValue(ancestor);
+          });
+        } else if (this.autoDeselectDescendants) {
+          this.traverseDescendantsBFS(node, function (descendant) {
+            if (_this22.isSelected(descendant) && !descendant.isDisabled) _this22.removeValue(descendant);
+          });
+        }
+
+        return;
+      }
+
+      var hasUncheckedSomeDescendants = false;
+
+      if (node.isBranch) {
+        this.traverseDescendantsDFS(node, function (descendant) {
+          if (!descendant.isDisabled || _this22.allowSelectingDisabledDescendants) {
+            _this22.removeValue(descendant);
+
+            hasUncheckedSomeDescendants = true;
+          }
+        });
+      }
+
+      if (node.isLeaf || hasUncheckedSomeDescendants || node.children.length === 0) {
+        this.removeValue(node);
+        var curr = node;
+
+        while ((curr = curr.parentNode) !== NO_PARENT_NODE) {
+          if (this.isSelected(curr)) this.removeValue(curr);else break;
+        }
+      }
+    },
+    addValue: function addValue(node) {
+      this.forest.selectedNodeIds.push(node.id);
+      this.forest.selectedNodeMap[node.id] = true;
+    },
+    removeValue: function removeValue(node) {
+      removeFromArray(this.forest.selectedNodeIds, node.id);
+      delete this.forest.selectedNodeMap[node.id];
+    },
+    removeLastValue: function removeLastValue() {
+      if (!this.hasValue) return;
+      if (this.single) return this.clear();
+      var lastValue = last_default()(this.internalValue);
+      var lastSelectedNode = this.getNode(lastValue);
+      this.select(lastSelectedNode);
+    },
+    saveMenuScrollPosition: function saveMenuScrollPosition() {
+      var $menu = this.getMenu();
+      if ($menu) this.menu.lastScrollPosition = $menu.scrollTop;
+    },
+    restoreMenuScrollPosition: function restoreMenuScrollPosition() {
+      var $menu = this.getMenu();
+      if ($menu) $menu.scrollTop = this.menu.lastScrollPosition;
+    }
+  },
+  created: function created() {
+    this.verifyProps();
+    this.resetFlags();
+  },
+  mounted: function mounted() {
+    if (this.autoFocus) this.focusInput();
+    if (!this.options && !this.async && this.autoLoadRootOptions) this.loadRootOptions();
+    if (this.alwaysOpen) this.openMenu();
+    if (this.async && this.defaultOptions) this.handleRemoteSearch();
+  },
+  destroyed: function destroyed() {
+    this.toggleClickOutsideEvent(false);
+  }
+});
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/HiddenFields.vue?vue&type=script&lang=js&
+
+
+function stringifyValue(value) {
+  if (typeof value === 'string') return value;
+  if (value != null && !isNaN_isNaN(value)) return JSON.stringify(value);
+  return '';
+}
+
+/* harmony default export */ var HiddenFieldsvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--hidden-fields',
+  inject: ['instance'],
+  functional: true,
+  render: function render(_, context) {
+    var h = arguments[0];
+    var instance = context.injections.instance;
+    if (!instance.name || instance.disabled || !instance.hasValue) return null;
+    var stringifiedValues = instance.internalValue.map(stringifyValue);
+    if (instance.multiple && instance.joinValues) stringifiedValues = [stringifiedValues.join(instance.delimiter)];
+    return stringifiedValues.map(function (stringifiedValue, i) {
+      return h("input", {
+        attrs: {
+          type: "hidden",
+          name: instance.name
+        },
+        domProps: {
+          "value": stringifiedValue
+        },
+        key: 'hidden-field-' + i
+      });
+    });
+  }
+});
+// CONCATENATED MODULE: ./src/components/HiddenFields.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_HiddenFieldsvue_type_script_lang_js_ = (HiddenFieldsvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+// CONCATENATED MODULE: ./src/components/HiddenFields.vue
+var HiddenFields_render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = normalizeComponent(
+  components_HiddenFieldsvue_type_script_lang_js_,
+  HiddenFields_render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/HiddenFields.vue"
+/* harmony default export */ var HiddenFields = (component.exports);
+// EXTERNAL MODULE: external "babel-helper-vue-jsx-merge-props"
+var external_babel_helper_vue_jsx_merge_props_ = __webpack_require__(13);
+var external_babel_helper_vue_jsx_merge_props_default = /*#__PURE__*/__webpack_require__.n(external_babel_helper_vue_jsx_merge_props_);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Input.vue?vue&type=script&lang=js&
+
+
+
+var keysThatRequireMenuBeingOpen = [KEY_CODES.ENTER, KEY_CODES.END, KEY_CODES.HOME, KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_RIGHT, KEY_CODES.ARROW_DOWN];
+/* harmony default export */ var Inputvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--input',
+  inject: ['instance'],
+  data: function data() {
+    return {
+      inputWidth: MIN_INPUT_WIDTH,
+      value: ''
+    };
+  },
+  computed: {
+    needAutoSize: function needAutoSize() {
+      var instance = this.instance;
+      return instance.searchable && !instance.disabled && instance.multiple;
+    },
+    inputStyle: function inputStyle() {
+      return {
+        width: this.needAutoSize ? "".concat(this.inputWidth, "px") : null
+      };
+    }
+  },
+  watch: {
+    'instance.trigger.searchQuery': function instanceTriggerSearchQuery(newValue) {
+      this.value = newValue;
+    },
+    value: function value() {
+      if (this.needAutoSize) this.$nextTick(this.updateInputWidth);
+    }
+  },
+  created: function created() {
+    this.debouncedCallback = debounce_default()(this.updateSearchQuery, INPUT_DEBOUNCE_DELAY, {
+      leading: true,
+      trailing: true
+    });
+  },
+  methods: {
+    clear: function clear() {
+      this.onInput({
+        target: {
+          value: ''
+        }
+      });
+    },
+    focus: function focus() {
+      var instance = this.instance;
+
+      if (!instance.disabled) {
+        this.$refs.input && this.$refs.input.focus();
+      }
+    },
+    blur: function blur() {
+      this.$refs.input && this.$refs.input.blur();
+    },
+    onFocus: function onFocus() {
+      var instance = this.instance;
+      instance.trigger.isFocused = true;
+      if (instance.openOnFocus) instance.openMenu();
+    },
+    onBlur: function onBlur() {
+      var instance = this.instance;
+      var menu = instance.getMenu();
+
+      if (menu && document.activeElement === menu) {
+        return this.focus();
+      }
+
+      instance.trigger.isFocused = false;
+      instance.closeMenu();
+    },
+    onInput: function onInput(evt) {
+      var value = evt.target.value;
+      this.value = value;
+
+      if (value) {
+        this.debouncedCallback();
+      } else {
+        this.debouncedCallback.cancel();
+        this.updateSearchQuery();
+      }
+    },
+    onKeyDown: function onKeyDown(evt) {
+      var instance = this.instance;
+      var key = 'which' in evt ? evt.which : evt.keyCode;
+      if (evt.ctrlKey || evt.shiftKey || evt.altKey || evt.metaKey) return;
+
+      if (!instance.menu.isOpen && includes(keysThatRequireMenuBeingOpen, key)) {
+        evt.preventDefault();
+        return instance.openMenu();
+      }
+
+      switch (key) {
+        case KEY_CODES.BACKSPACE:
+          {
+            if (instance.backspaceRemoves && !this.value.length) {
+              instance.removeLastValue();
+            }
+
+            break;
+          }
+
+        case KEY_CODES.ENTER:
+          {
+            evt.preventDefault();
+            if (instance.menu.current === null) return;
+            var current = instance.getNode(instance.menu.current);
+            if (current.isBranch && instance.disableBranchNodes) return;
+            instance.select(current);
+            break;
+          }
+
+        case KEY_CODES.ESCAPE:
+          {
+            if (this.value.length) {
+              this.clear();
+            } else if (instance.menu.isOpen) {
+              instance.closeMenu();
+            }
+
+            break;
+          }
+
+        case KEY_CODES.END:
+          {
+            evt.preventDefault();
+            instance.highlightLastOption();
+            break;
+          }
+
+        case KEY_CODES.HOME:
+          {
+            evt.preventDefault();
+            instance.highlightFirstOption();
+            break;
+          }
+
+        case KEY_CODES.ARROW_LEFT:
+          {
+            var _current = instance.getNode(instance.menu.current);
+
+            if (_current.isBranch && instance.shouldExpand(_current)) {
+              evt.preventDefault();
+              instance.toggleExpanded(_current);
+            } else if (!_current.isRootNode && (_current.isLeaf || _current.isBranch && !instance.shouldExpand(_current))) {
+              evt.preventDefault();
+              instance.setCurrentHighlightedOption(_current.parentNode);
+            }
+
+            break;
+          }
+
+        case KEY_CODES.ARROW_UP:
+          {
+            evt.preventDefault();
+            instance.highlightPrevOption();
+            break;
+          }
+
+        case KEY_CODES.ARROW_RIGHT:
+          {
+            var _current2 = instance.getNode(instance.menu.current);
+
+            if (_current2.isBranch && !instance.shouldExpand(_current2)) {
+              evt.preventDefault();
+              instance.toggleExpanded(_current2);
+            }
+
+            break;
+          }
+
+        case KEY_CODES.ARROW_DOWN:
+          {
+            evt.preventDefault();
+            instance.highlightNextOption();
+            break;
+          }
+
+        case KEY_CODES.DELETE:
+          {
+            if (instance.deleteRemoves && !this.value.length) {
+              instance.removeLastValue();
+            }
+
+            break;
+          }
+
+        default:
+          {
+            instance.openMenu();
+          }
+      }
+    },
+    onMouseDown: function onMouseDown(evt) {
+      if (this.value.length) {
+        evt.stopPropagation();
+      }
+    },
+    renderInputContainer: function renderInputContainer() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      var props = {};
+      var children = [];
+
+      if (instance.searchable && !instance.disabled) {
+        children.push(this.renderInput());
+        if (this.needAutoSize) children.push(this.renderSizer());
+      }
+
+      if (!instance.searchable) {
+        deepExtend(props, {
+          on: {
+            focus: this.onFocus,
+            blur: this.onBlur,
+            keydown: this.onKeyDown
+          },
+          ref: 'input'
+        });
+      }
+
+      if (!instance.searchable && !instance.disabled) {
+        deepExtend(props, {
+          attrs: {
+            tabIndex: instance.tabIndex
+          }
+        });
+      }
+
+      return h("div", external_babel_helper_vue_jsx_merge_props_default()([{
+        "class": "vue-treeselect__input-container"
+      }, props]), [children]);
+    },
+    renderInput: function renderInput() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return h("input", {
+        ref: "input",
+        "class": "vue-treeselect__input",
+        attrs: {
+          type: "text",
+          autocomplete: "off",
+          tabIndex: instance.tabIndex,
+          required: instance.required && !instance.hasValue
+        },
+        domProps: {
+          "value": this.value
+        },
+        style: this.inputStyle,
+        on: {
+          "focus": this.onFocus,
+          "input": this.onInput,
+          "blur": this.onBlur,
+          "keydown": this.onKeyDown,
+          "mousedown": this.onMouseDown
+        }
+      });
+    },
+    renderSizer: function renderSizer() {
+      var h = this.$createElement;
+      return h("div", {
+        ref: "sizer",
+        "class": "vue-treeselect__sizer"
+      }, [this.value]);
+    },
+    updateInputWidth: function updateInputWidth() {
+      this.inputWidth = Math.max(MIN_INPUT_WIDTH, this.$refs.sizer.scrollWidth + 15);
+    },
+    updateSearchQuery: function updateSearchQuery() {
+      var instance = this.instance;
+      instance.trigger.searchQuery = this.value;
+    }
+  },
+  render: function render() {
+    return this.renderInputContainer();
+  }
+});
+// CONCATENATED MODULE: ./src/components/Input.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Inputvue_type_script_lang_js_ = (Inputvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Input.vue
+var Input_render, Input_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Input_component = normalizeComponent(
+  components_Inputvue_type_script_lang_js_,
+  Input_render,
+  Input_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Input_api; }
+Input_component.options.__file = "src/components/Input.vue"
+/* harmony default export */ var Input = (Input_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Placeholder.vue?vue&type=script&lang=js&
+/* harmony default export */ var Placeholdervue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--placeholder',
+  inject: ['instance'],
+  render: function render() {
+    var h = arguments[0];
+    var instance = this.instance;
+    var placeholderClass = {
+      'vue-treeselect__placeholder': true,
+      'vue-treeselect-helper-zoom-effect-off': true,
+      'vue-treeselect-helper-hide': instance.hasValue || instance.trigger.searchQuery
+    };
+    return h("div", {
+      "class": placeholderClass
+    }, [instance.placeholder]);
+  }
+});
+// CONCATENATED MODULE: ./src/components/Placeholder.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Placeholdervue_type_script_lang_js_ = (Placeholdervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Placeholder.vue
+var Placeholder_render, Placeholder_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Placeholder_component = normalizeComponent(
+  components_Placeholdervue_type_script_lang_js_,
+  Placeholder_render,
+  Placeholder_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Placeholder_api; }
+Placeholder_component.options.__file = "src/components/Placeholder.vue"
+/* harmony default export */ var Placeholder = (Placeholder_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SingleValue.vue?vue&type=script&lang=js&
+
+
+/* harmony default export */ var SingleValuevue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--single-value',
+  inject: ['instance'],
+  methods: {
+    renderSingleValueLabel: function renderSingleValueLabel() {
+      var instance = this.instance;
+      var node = instance.selectedNodes[0];
+      var customValueLabelRenderer = instance.$scopedSlots['value-label'];
+      return customValueLabelRenderer ? customValueLabelRenderer({
+        node: node
+      }) : node.label;
+    }
+  },
+  render: function render() {
+    var h = arguments[0];
+    var instance = this.instance,
+        renderValueContainer = this.$parent.renderValueContainer;
+    var shouldShowValue = instance.hasValue && !instance.trigger.searchQuery;
+    return renderValueContainer([shouldShowValue && h("div", {
+      "class": "vue-treeselect__single-value"
+    }, [this.renderSingleValueLabel()]), h(Placeholder), h(Input, {
+      ref: "input"
+    })]);
+  }
+});
+// CONCATENATED MODULE: ./src/components/SingleValue.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_SingleValuevue_type_script_lang_js_ = (SingleValuevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/SingleValue.vue
+var SingleValue_render, SingleValue_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var SingleValue_component = normalizeComponent(
+  components_SingleValuevue_type_script_lang_js_,
+  SingleValue_render,
+  SingleValue_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var SingleValue_api; }
+SingleValue_component.options.__file = "src/components/SingleValue.vue"
+/* harmony default export */ var SingleValue = (SingleValue_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/Delete.vue?vue&type=template&id=364b6320&
+var Deletevue_type_template_id_364b6320_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      attrs: {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 348.333 348.333"
+      }
+    },
+    [
+      _c("path", {
+        attrs: {
+          d:
+            "M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139 0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"
+        }
+      })
+    ]
+  )
+}
+var Deletevue_type_template_id_364b6320_staticRenderFns = []
+Deletevue_type_template_id_364b6320_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/icons/Delete.vue?vue&type=template&id=364b6320&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/Delete.vue?vue&type=script&lang=js&
+/* harmony default export */ var Deletevue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--x'
+});
+// CONCATENATED MODULE: ./src/components/icons/Delete.vue?vue&type=script&lang=js&
+ /* harmony default export */ var icons_Deletevue_type_script_lang_js_ = (Deletevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/icons/Delete.vue
+
+
+
+
+
+/* normalize component */
+
+var Delete_component = normalizeComponent(
+  icons_Deletevue_type_script_lang_js_,
+  Deletevue_type_template_id_364b6320_render,
+  Deletevue_type_template_id_364b6320_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Delete_api; }
+Delete_component.options.__file = "src/components/icons/Delete.vue"
+/* harmony default export */ var Delete = (Delete_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MultiValueItem.vue?vue&type=script&lang=js&
+
+
+/* harmony default export */ var MultiValueItemvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--multi-value-item',
+  inject: ['instance'],
+  props: {
+    node: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    handleMouseDown: onLeftClick(function handleMouseDown() {
+      var instance = this.instance,
+          node = this.node;
+      instance.select(node);
+    })
+  },
+  render: function render() {
+    var h = arguments[0];
+    var instance = this.instance,
+        node = this.node;
+    var itemClass = {
+      'vue-treeselect__multi-value-item': true,
+      'vue-treeselect__multi-value-item-disabled': node.isDisabled,
+      'vue-treeselect__multi-value-item-new': node.isNew
+    };
+    var customValueLabelRenderer = instance.$scopedSlots['value-label'];
+    var labelRenderer = customValueLabelRenderer ? customValueLabelRenderer({
+      node: node
+    }) : node.label;
+    return h("div", {
+      "class": "vue-treeselect__multi-value-item-container"
+    }, [h("div", {
+      "class": itemClass,
+      on: {
+        "mousedown": this.handleMouseDown
+      }
+    }, [h("span", {
+      "class": "vue-treeselect__multi-value-label"
+    }, [labelRenderer]), h("span", {
+      "class": "vue-treeselect__icon vue-treeselect__value-remove"
+    }, [h(Delete)])])]);
+  }
+});
+// CONCATENATED MODULE: ./src/components/MultiValueItem.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_MultiValueItemvue_type_script_lang_js_ = (MultiValueItemvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/MultiValueItem.vue
+var MultiValueItem_render, MultiValueItem_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var MultiValueItem_component = normalizeComponent(
+  components_MultiValueItemvue_type_script_lang_js_,
+  MultiValueItem_render,
+  MultiValueItem_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var MultiValueItem_api; }
+MultiValueItem_component.options.__file = "src/components/MultiValueItem.vue"
+/* harmony default export */ var MultiValueItem = (MultiValueItem_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MultiValue.vue?vue&type=script&lang=js&
+
+
+
+
+/* harmony default export */ var MultiValuevue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--multi-value',
+  inject: ['instance'],
+  methods: {
+    renderMultiValueItems: function renderMultiValueItems() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return instance.internalValue.slice(0, instance.limit).map(instance.getNode).map(function (node) {
+        return h(MultiValueItem, {
+          key: "multi-value-item-".concat(node.id),
+          attrs: {
+            node: node
+          }
+        });
+      });
+    },
+    renderExceedLimitTip: function renderExceedLimitTip() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      var count = instance.internalValue.length - instance.limit;
+      if (count <= 0) return null;
+      return h("div", {
+        "class": "vue-treeselect__limit-tip vue-treeselect-helper-zoom-effect-off",
+        key: "exceed-limit-tip"
+      }, [h("span", {
+        "class": "vue-treeselect__limit-tip-text"
+      }, [instance.limitText(count)])]);
+    }
+  },
+  render: function render() {
+    var h = arguments[0];
+    var renderValueContainer = this.$parent.renderValueContainer;
+    var transitionGroupProps = {
+      props: {
+        tag: 'div',
+        name: 'vue-treeselect__multi-value-item--transition',
+        appear: true
+      }
+    };
+    return renderValueContainer(h("transition-group", external_babel_helper_vue_jsx_merge_props_default()([{
+      "class": "vue-treeselect__multi-value"
+    }, transitionGroupProps]), [this.renderMultiValueItems(), this.renderExceedLimitTip(), h(Placeholder, {
+      key: "placeholder"
+    }), h(Input, {
+      ref: "input",
+      key: "input"
+    })]));
+  }
+});
+// CONCATENATED MODULE: ./src/components/MultiValue.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_MultiValuevue_type_script_lang_js_ = (MultiValuevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/MultiValue.vue
+var MultiValue_render, MultiValue_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var MultiValue_component = normalizeComponent(
+  components_MultiValuevue_type_script_lang_js_,
+  MultiValue_render,
+  MultiValue_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var MultiValue_api; }
+MultiValue_component.options.__file = "src/components/MultiValue.vue"
+/* harmony default export */ var MultiValue = (MultiValue_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/Arrow.vue?vue&type=template&id=11186cd4&
+var Arrowvue_type_template_id_11186cd4_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      attrs: {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 292.362 292.362"
+      }
+    },
+    [
+      _c("path", {
+        attrs: {
+          d:
+            "M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847 0-4.948-1.814-9.229-5.427-12.85z"
+        }
+      })
+    ]
+  )
+}
+var Arrowvue_type_template_id_11186cd4_staticRenderFns = []
+Arrowvue_type_template_id_11186cd4_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/icons/Arrow.vue?vue&type=template&id=11186cd4&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/Arrow.vue?vue&type=script&lang=js&
+/* harmony default export */ var Arrowvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--arrow'
+});
+// CONCATENATED MODULE: ./src/components/icons/Arrow.vue?vue&type=script&lang=js&
+ /* harmony default export */ var icons_Arrowvue_type_script_lang_js_ = (Arrowvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/icons/Arrow.vue
+
+
+
+
+
+/* normalize component */
+
+var Arrow_component = normalizeComponent(
+  icons_Arrowvue_type_script_lang_js_,
+  Arrowvue_type_template_id_11186cd4_render,
+  Arrowvue_type_template_id_11186cd4_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Arrow_api; }
+Arrow_component.options.__file = "src/components/icons/Arrow.vue"
+/* harmony default export */ var Arrow = (Arrow_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Control.vue?vue&type=script&lang=js&
+
+
+
+
+
+/* harmony default export */ var Controlvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--control',
+  inject: ['instance'],
+  computed: {
+    shouldShowX: function shouldShowX() {
+      var instance = this.instance;
+      return instance.clearable && !instance.disabled && instance.hasValue && (this.hasUndisabledValue || instance.allowClearingDisabled);
+    },
+    shouldShowArrow: function shouldShowArrow() {
+      var instance = this.instance;
+      if (!instance.alwaysOpen) return true;
+      return !instance.menu.isOpen;
+    },
+    hasUndisabledValue: function hasUndisabledValue() {
+      var instance = this.instance;
+      return instance.hasValue && instance.internalValue.some(function (id) {
+        return !instance.getNode(id).isDisabled;
+      });
+    }
+  },
+  methods: {
+    renderX: function renderX() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      var title = instance.multiple ? instance.clearAllText : instance.clearValueText;
+      if (!this.shouldShowX) return null;
+      return h("div", {
+        "class": "vue-treeselect__x-container",
+        attrs: {
+          title: title
+        },
+        on: {
+          "mousedown": this.handleMouseDownOnX
+        }
+      }, [h(Delete, {
+        "class": "vue-treeselect__x"
+      })]);
+    },
+    renderArrow: function renderArrow() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      var arrowClass = {
+        'vue-treeselect__control-arrow': true,
+        'vue-treeselect__control-arrow--rotated': instance.menu.isOpen
+      };
+      if (!this.shouldShowArrow) return null;
+      return h("div", {
+        "class": "vue-treeselect__control-arrow-container",
+        on: {
+          "mousedown": this.handleMouseDownOnArrow
+        }
+      }, [h(Arrow, {
+        "class": arrowClass
+      })]);
+    },
+    handleMouseDownOnX: onLeftClick(function handleMouseDownOnX(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      var instance = this.instance;
+      var result = instance.beforeClearAll();
+
+      var handler = function handler(shouldClear) {
+        if (shouldClear) instance.clear();
+      };
+
+      if (external_is_promise_default()(result)) {
+        result.then(handler);
+      } else {
+        setTimeout(function () {
+          return handler(result);
+        }, 0);
+      }
+    }),
+    handleMouseDownOnArrow: onLeftClick(function handleMouseDownOnArrow(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      var instance = this.instance;
+      instance.focusInput();
+      instance.toggleMenu();
+    }),
+    renderValueContainer: function renderValueContainer(children) {
+      var h = this.$createElement;
+      return h("div", {
+        "class": "vue-treeselect__value-container"
+      }, [children]);
+    }
+  },
+  render: function render() {
+    var h = arguments[0];
+    var instance = this.instance;
+    var ValueContainer = instance.single ? SingleValue : MultiValue;
+    return h("div", {
+      "class": "vue-treeselect__control",
+      on: {
+        "mousedown": instance.handleMouseDown
+      }
+    }, [h(ValueContainer, {
+      ref: "value-container"
+    }), this.renderX(), this.renderArrow()]);
+  }
+});
+// CONCATENATED MODULE: ./src/components/Control.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Controlvue_type_script_lang_js_ = (Controlvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Control.vue
+var Control_render, Control_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Control_component = normalizeComponent(
+  components_Controlvue_type_script_lang_js_,
+  Control_render,
+  Control_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Control_api; }
+Control_component.options.__file = "src/components/Control.vue"
+/* harmony default export */ var Control = (Control_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tip.vue?vue&type=script&lang=js&
+/* harmony default export */ var Tipvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--tip',
+  functional: true,
+  props: {
+    type: {
+      type: String,
+      required: true
+    },
+    icon: {
+      type: String,
+      required: true
+    }
+  },
+  render: function render(_, context) {
+    var h = arguments[0];
+    var props = context.props,
+        children = context.children;
+    return h("div", {
+      "class": "vue-treeselect__tip vue-treeselect__".concat(props.type, "-tip")
+    }, [h("div", {
+      "class": "vue-treeselect__icon-container"
+    }, [h("span", {
+      "class": "vue-treeselect__icon-".concat(props.icon)
+    })]), h("span", {
+      "class": "vue-treeselect__tip-text vue-treeselect__".concat(props.type, "-tip-text")
+    }, [children])]);
+  }
+});
+// CONCATENATED MODULE: ./src/components/Tip.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Tipvue_type_script_lang_js_ = (Tipvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Tip.vue
+var Tip_render, Tip_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Tip_component = normalizeComponent(
+  components_Tipvue_type_script_lang_js_,
+  Tip_render,
+  Tip_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Tip_api; }
+Tip_component.options.__file = "src/components/Tip.vue"
+/* harmony default export */ var Tip = (Tip_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Option.vue?vue&type=script&lang=js&
+
+
+
+
+
+var arrowPlaceholder, checkMark, minusMark;
+var Option = {
+  name: 'vue-treeselect--option',
+  inject: ['instance'],
+  props: {
+    node: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    shouldExpand: function shouldExpand() {
+      var instance = this.instance,
+          node = this.node;
+      return node.isBranch && instance.shouldExpand(node);
+    },
+    shouldShow: function shouldShow() {
+      var instance = this.instance,
+          node = this.node;
+      return instance.shouldShowOptionInMenu(node);
+    }
+  },
+  methods: {
+    renderOption: function renderOption() {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      var optionClass = {
+        'vue-treeselect__option': true,
+        'vue-treeselect__option--disabled': node.isDisabled,
+        'vue-treeselect__option--selected': instance.isSelected(node),
+        'vue-treeselect__option--highlight': node.isHighlighted,
+        'vue-treeselect__option--matched': instance.localSearch.active && node.isMatched,
+        'vue-treeselect__option--hide': !this.shouldShow
+      };
+      return h("div", {
+        "class": optionClass,
+        on: {
+          "mouseenter": this.handleMouseEnterOption
+        },
+        attrs: {
+          "data-id": node.id
+        }
+      }, [this.renderArrow(), this.renderLabelContainer([this.renderCheckboxContainer([this.renderCheckbox()]), this.renderLabel()])]);
+    },
+    renderSubOptionsList: function renderSubOptionsList() {
+      var h = this.$createElement;
+      if (!this.shouldExpand) return null;
+      return h("div", {
+        "class": "vue-treeselect__list"
+      }, [this.renderSubOptions(), this.renderNoChildrenTip(), this.renderLoadingChildrenTip(), this.renderLoadingChildrenErrorTip()]);
+    },
+    renderArrow: function renderArrow() {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      if (instance.shouldFlattenOptions && this.shouldShow) return null;
+
+      if (node.isBranch) {
+        var transitionProps = {
+          props: {
+            name: 'vue-treeselect__option-arrow--prepare',
+            appear: true
+          }
+        };
+        var arrowClass = {
+          'vue-treeselect__option-arrow': true,
+          'vue-treeselect__option-arrow--rotated': this.shouldExpand
+        };
+        return h("div", {
+          "class": "vue-treeselect__option-arrow-container",
+          on: {
+            "mousedown": this.handleMouseDownOnArrow
+          }
+        }, [h("transition", transitionProps, [h(Arrow, {
+          "class": arrowClass
+        })])]);
+      }
+
+      if (instance.hasBranchNodes) {
+        if (!arrowPlaceholder) arrowPlaceholder = h("div", {
+          "class": "vue-treeselect__option-arrow-placeholder"
+        }, ["\xA0"]);
+        return arrowPlaceholder;
+      }
+
+      return null;
+    },
+    renderLabelContainer: function renderLabelContainer(children) {
+      var h = this.$createElement;
+      return h("div", {
+        "class": "vue-treeselect__label-container",
+        on: {
+          "mousedown": this.handleMouseDownOnLabelContainer
+        }
+      }, [children]);
+    },
+    renderCheckboxContainer: function renderCheckboxContainer(children) {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      if (instance.single) return null;
+      if (instance.disableBranchNodes && node.isBranch) return null;
+      return h("div", {
+        "class": "vue-treeselect__checkbox-container"
+      }, [children]);
+    },
+    renderCheckbox: function renderCheckbox() {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      var checkedState = instance.forest.checkedStateMap[node.id];
+      var checkboxClass = {
+        'vue-treeselect__checkbox': true,
+        'vue-treeselect__checkbox--checked': checkedState === CHECKED,
+        'vue-treeselect__checkbox--indeterminate': checkedState === INDETERMINATE,
+        'vue-treeselect__checkbox--unchecked': checkedState === UNCHECKED,
+        'vue-treeselect__checkbox--disabled': node.isDisabled
+      };
+      if (!checkMark) checkMark = h("span", {
+        "class": "vue-treeselect__check-mark"
+      });
+      if (!minusMark) minusMark = h("span", {
+        "class": "vue-treeselect__minus-mark"
+      });
+      return h("span", {
+        "class": checkboxClass
+      }, [checkMark, minusMark]);
+    },
+    renderLabel: function renderLabel() {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      var shouldShowCount = node.isBranch && (instance.localSearch.active ? instance.showCountOnSearchComputed : instance.showCount);
+      var count = shouldShowCount ? instance.localSearch.active ? instance.localSearch.countMap[node.id][instance.showCountOf] : node.count[instance.showCountOf] : NaN;
+      var labelClassName = 'vue-treeselect__label';
+      var countClassName = 'vue-treeselect__count';
+      var customLabelRenderer = instance.$scopedSlots['option-label'];
+      if (customLabelRenderer) return customLabelRenderer({
+        node: node,
+        shouldShowCount: shouldShowCount,
+        count: count,
+        labelClassName: labelClassName,
+        countClassName: countClassName
+      });
+      return h("label", {
+        "class": labelClassName
+      }, [node.label, shouldShowCount && h("span", {
+        "class": countClassName
+      }, ["(", count, ")"])]);
+    },
+    renderSubOptions: function renderSubOptions() {
+      var h = this.$createElement;
+      var node = this.node;
+      if (!node.childrenStates.isLoaded) return null;
+      return node.children.map(function (childNode) {
+        return h(Option, {
+          attrs: {
+            node: childNode
+          },
+          key: childNode.id
+        });
+      });
+    },
+    renderNoChildrenTip: function renderNoChildrenTip() {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      if (!node.childrenStates.isLoaded || node.children.length) return null;
+      return h(Tip, {
+        attrs: {
+          type: "no-children",
+          icon: "warning"
+        }
+      }, [instance.noChildrenText]);
+    },
+    renderLoadingChildrenTip: function renderLoadingChildrenTip() {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      if (!node.childrenStates.isLoading) return null;
+      return h(Tip, {
+        attrs: {
+          type: "loading",
+          icon: "loader"
+        }
+      }, [instance.loadingText]);
+    },
+    renderLoadingChildrenErrorTip: function renderLoadingChildrenErrorTip() {
+      var h = this.$createElement;
+      var instance = this.instance,
+          node = this.node;
+      if (!node.childrenStates.loadingError) return null;
+      return h(Tip, {
+        attrs: {
+          type: "error",
+          icon: "error"
+        }
+      }, [node.childrenStates.loadingError, h("a", {
+        "class": "vue-treeselect__retry",
+        attrs: {
+          title: instance.retryTitle
+        },
+        on: {
+          "mousedown": this.handleMouseDownOnRetry
+        }
+      }, [instance.retryText])]);
+    },
+    handleMouseEnterOption: function handleMouseEnterOption(evt) {
+      var instance = this.instance,
+          node = this.node;
+      if (evt.target !== evt.currentTarget) return;
+      instance.setCurrentHighlightedOption(node, false);
+    },
+    handleMouseDownOnArrow: onLeftClick(function handleMouseDownOnOptionArrow() {
+      var instance = this.instance,
+          node = this.node;
+      instance.toggleExpanded(node);
+    }),
+    handleMouseDownOnLabelContainer: onLeftClick(function handleMouseDownOnLabelContainer() {
+      var instance = this.instance,
+          node = this.node;
+
+      if (node.isBranch && instance.disableBranchNodes) {
+        instance.toggleExpanded(node);
+      } else {
+        instance.select(node);
+      }
+    }),
+    handleMouseDownOnRetry: onLeftClick(function handleMouseDownOnRetry() {
+      var instance = this.instance,
+          node = this.node;
+      instance.loadChildrenOptions(node);
+    })
+  },
+  render: function render() {
+    var h = arguments[0];
+    var node = this.node;
+    var indentLevel = this.instance.shouldFlattenOptions ? 0 : node.level;
+
+    var listItemClass = defineProperty_default()({
+      'vue-treeselect__list-item': true
+    }, "vue-treeselect__indent-level-".concat(indentLevel), true);
+
+    var transitionProps = {
+      props: {
+        name: 'vue-treeselect__list--transition'
+      }
+    };
+    return h("div", {
+      "class": listItemClass
+    }, [this.renderOption(), node.isBranch && h("transition", transitionProps, [this.renderSubOptionsList()])]);
+  }
+};
+/* harmony default export */ var Optionvue_type_script_lang_js_ = (Option);
+// CONCATENATED MODULE: ./src/components/Option.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Optionvue_type_script_lang_js_ = (Optionvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Option.vue
+var Option_render, Option_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Option_component = normalizeComponent(
+  components_Optionvue_type_script_lang_js_,
+  Option_render,
+  Option_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Option_api; }
+Option_component.options.__file = "src/components/Option.vue"
+/* harmony default export */ var components_Option = (Option_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Menu.vue?vue&type=script&lang=js&
+
+
+
+
+var directionMap = {
+  top: 'top',
+  bottom: 'bottom',
+  above: 'top',
+  below: 'bottom'
+};
+/* harmony default export */ var Menuvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--menu',
+  inject: ['instance'],
+  computed: {
+    menuStyle: function menuStyle() {
+      var instance = this.instance;
+      return {
+        maxHeight: instance.maxHeight + 'px'
+      };
+    },
+    menuContainerStyle: function menuContainerStyle() {
+      var instance = this.instance;
+      return {
+        zIndex: instance.appendToBody ? null : instance.zIndex
+      };
+    }
+  },
+  watch: {
+    'instance.menu.isOpen': function instanceMenuIsOpen(newValue) {
+      if (newValue) {
+        this.$nextTick(this.onMenuOpen);
+      } else {
+        this.onMenuClose();
+      }
+    }
+  },
+  created: function created() {
+    this.menuSizeWatcher = null;
+    this.menuResizeAndScrollEventListeners = null;
+  },
+  mounted: function mounted() {
+    var instance = this.instance;
+    if (instance.menu.isOpen) this.$nextTick(this.onMenuOpen);
+  },
+  destroyed: function destroyed() {
+    this.onMenuClose();
+  },
+  methods: {
+    renderMenu: function renderMenu() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      if (!instance.menu.isOpen) return null;
+      return h("div", {
+        ref: "menu",
+        "class": "vue-treeselect__menu",
+        on: {
+          "mousedown": instance.handleMouseDown
+        },
+        style: this.menuStyle
+      }, [this.renderBeforeList(), instance.async ? this.renderAsyncSearchMenuInner() : instance.localSearch.active ? this.renderLocalSearchMenuInner() : this.renderNormalMenuInner(), this.renderAfterList()]);
+    },
+    renderBeforeList: function renderBeforeList() {
+      var instance = this.instance;
+      var beforeListRenderer = instance.$scopedSlots['before-list'];
+      return beforeListRenderer ? beforeListRenderer() : null;
+    },
+    renderAfterList: function renderAfterList() {
+      var instance = this.instance;
+      var afterListRenderer = instance.$scopedSlots['after-list'];
+      return afterListRenderer ? afterListRenderer() : null;
+    },
+    renderNormalMenuInner: function renderNormalMenuInner() {
+      var instance = this.instance;
+
+      if (instance.rootOptionsStates.isLoading) {
+        return this.renderLoadingOptionsTip();
+      } else if (instance.rootOptionsStates.loadingError) {
+        return this.renderLoadingRootOptionsErrorTip();
+      } else if (instance.rootOptionsStates.isLoaded && instance.forest.normalizedOptions.length === 0) {
+        return this.renderNoAvailableOptionsTip();
+      } else {
+        return this.renderOptionList();
+      }
+    },
+    renderLocalSearchMenuInner: function renderLocalSearchMenuInner() {
+      var instance = this.instance;
+
+      if (instance.rootOptionsStates.isLoading) {
+        return this.renderLoadingOptionsTip();
+      } else if (instance.rootOptionsStates.loadingError) {
+        return this.renderLoadingRootOptionsErrorTip();
+      } else if (instance.rootOptionsStates.isLoaded && instance.forest.normalizedOptions.length === 0) {
+        return this.renderNoAvailableOptionsTip();
+      } else if (instance.localSearch.noResults) {
+        return this.renderNoResultsTip();
+      } else {
+        return this.renderOptionList();
+      }
+    },
+    renderAsyncSearchMenuInner: function renderAsyncSearchMenuInner() {
+      var instance = this.instance;
+      var entry = instance.getRemoteSearchEntry();
+      var shouldShowSearchPromptTip = instance.trigger.searchQuery === '' && !instance.defaultOptions;
+      var shouldShowNoResultsTip = shouldShowSearchPromptTip ? false : entry.isLoaded && entry.options.length === 0;
+
+      if (shouldShowSearchPromptTip) {
+        return this.renderSearchPromptTip();
+      } else if (entry.isLoading) {
+        return this.renderLoadingOptionsTip();
+      } else if (entry.loadingError) {
+        return this.renderAsyncSearchLoadingErrorTip();
+      } else if (shouldShowNoResultsTip) {
+        return this.renderNoResultsTip();
+      } else {
+        return this.renderOptionList();
+      }
+    },
+    renderOptionList: function renderOptionList() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return h("div", {
+        "class": "vue-treeselect__list"
+      }, [instance.forest.normalizedOptions.map(function (rootNode) {
+        return h(components_Option, {
+          attrs: {
+            node: rootNode
+          },
+          key: rootNode.id
+        });
+      })]);
+    },
+    renderSearchPromptTip: function renderSearchPromptTip() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return h(Tip, {
+        attrs: {
+          type: "search-prompt",
+          icon: "warning"
+        }
+      }, [instance.searchPromptText]);
+    },
+    renderLoadingOptionsTip: function renderLoadingOptionsTip() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return h(Tip, {
+        attrs: {
+          type: "loading",
+          icon: "loader"
+        }
+      }, [instance.loadingText]);
+    },
+    renderLoadingRootOptionsErrorTip: function renderLoadingRootOptionsErrorTip() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return h(Tip, {
+        attrs: {
+          type: "error",
+          icon: "error"
+        }
+      }, [instance.rootOptionsStates.loadingError, h("a", {
+        "class": "vue-treeselect__retry",
+        on: {
+          "click": instance.loadRootOptions
+        },
+        attrs: {
+          title: instance.retryTitle
+        }
+      }, [instance.retryText])]);
+    },
+    renderAsyncSearchLoadingErrorTip: function renderAsyncSearchLoadingErrorTip() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      var entry = instance.getRemoteSearchEntry();
+      return h(Tip, {
+        attrs: {
+          type: "error",
+          icon: "error"
+        }
+      }, [entry.loadingError, h("a", {
+        "class": "vue-treeselect__retry",
+        on: {
+          "click": instance.handleRemoteSearch
+        },
+        attrs: {
+          title: instance.retryTitle
+        }
+      }, [instance.retryText])]);
+    },
+    renderNoAvailableOptionsTip: function renderNoAvailableOptionsTip() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return h(Tip, {
+        attrs: {
+          type: "no-options",
+          icon: "warning"
+        }
+      }, [instance.noOptionsText]);
+    },
+    renderNoResultsTip: function renderNoResultsTip() {
+      var h = this.$createElement;
+      var instance = this.instance;
+      return h(Tip, {
+        attrs: {
+          type: "no-results",
+          icon: "warning"
+        }
+      }, [instance.noResultsText]);
+    },
+    onMenuOpen: function onMenuOpen() {
+      this.adjustMenuOpenDirection();
+      this.setupMenuSizeWatcher();
+      this.setupMenuResizeAndScrollEventListeners();
+    },
+    onMenuClose: function onMenuClose() {
+      this.removeMenuSizeWatcher();
+      this.removeMenuResizeAndScrollEventListeners();
+    },
+    adjustMenuOpenDirection: function adjustMenuOpenDirection() {
+      var instance = this.instance;
+      if (!instance.menu.isOpen) return;
+      var $menu = instance.getMenu();
+      var $control = instance.getControl();
+      var menuRect = $menu.getBoundingClientRect();
+      var controlRect = $control.getBoundingClientRect();
+      var menuHeight = menuRect.height;
+      var viewportHeight = window.innerHeight;
+      var spaceAbove = controlRect.top;
+      var spaceBelow = window.innerHeight - controlRect.bottom;
+      var isControlInViewport = controlRect.top >= 0 && controlRect.top <= viewportHeight || controlRect.top < 0 && controlRect.bottom > 0;
+      var hasEnoughSpaceBelow = spaceBelow > menuHeight + MENU_BUFFER;
+      var hasEnoughSpaceAbove = spaceAbove > menuHeight + MENU_BUFFER;
+
+      if (!isControlInViewport) {
+        instance.closeMenu();
+      } else if (instance.openDirection !== 'auto') {
+        instance.menu.placement = directionMap[instance.openDirection];
+      } else if (hasEnoughSpaceBelow || !hasEnoughSpaceAbove) {
+        instance.menu.placement = 'bottom';
+      } else {
+        instance.menu.placement = 'top';
+      }
+    },
+    setupMenuSizeWatcher: function setupMenuSizeWatcher() {
+      var instance = this.instance;
+      var $menu = instance.getMenu();
+      if (this.menuSizeWatcher) return;
+      this.menuSizeWatcher = {
+        remove: watchSize($menu, this.adjustMenuOpenDirection)
+      };
+    },
+    setupMenuResizeAndScrollEventListeners: function setupMenuResizeAndScrollEventListeners() {
+      var instance = this.instance;
+      var $control = instance.getControl();
+      if (this.menuResizeAndScrollEventListeners) return;
+      this.menuResizeAndScrollEventListeners = {
+        remove: setupResizeAndScrollEventListeners($control, this.adjustMenuOpenDirection)
+      };
+    },
+    removeMenuSizeWatcher: function removeMenuSizeWatcher() {
+      if (!this.menuSizeWatcher) return;
+      this.menuSizeWatcher.remove();
+      this.menuSizeWatcher = null;
+    },
+    removeMenuResizeAndScrollEventListeners: function removeMenuResizeAndScrollEventListeners() {
+      if (!this.menuResizeAndScrollEventListeners) return;
+      this.menuResizeAndScrollEventListeners.remove();
+      this.menuResizeAndScrollEventListeners = null;
+    }
+  },
+  render: function render() {
+    var h = arguments[0];
+    return h("div", {
+      ref: "menu-container",
+      "class": "vue-treeselect__menu-container",
+      style: this.menuContainerStyle
+    }, [h("transition", {
+      attrs: {
+        name: "vue-treeselect__menu--transition"
+      }
+    }, [this.renderMenu()])]);
+  }
+});
+// CONCATENATED MODULE: ./src/components/Menu.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Menuvue_type_script_lang_js_ = (Menuvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Menu.vue
+var Menu_render, Menu_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Menu_component = normalizeComponent(
+  components_Menuvue_type_script_lang_js_,
+  Menu_render,
+  Menu_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Menu_api; }
+Menu_component.options.__file = "src/components/Menu.vue"
+/* harmony default export */ var Menu = (Menu_component.exports);
+// EXTERNAL MODULE: external "vue"
+var external_vue_ = __webpack_require__(14);
+var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MenuPortal.vue?vue&type=script&lang=js&
+
+
+function MenuPortalvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function MenuPortalvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { MenuPortalvue_type_script_lang_js_ownKeys(source, true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { MenuPortalvue_type_script_lang_js_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+var PortalTarget = {
+  name: 'vue-treeselect--portal-target',
+  inject: ['instance'],
+  watch: {
+    'instance.menu.isOpen': function instanceMenuIsOpen(newValue) {
+      if (newValue) {
+        this.setupHandlers();
+      } else {
+        this.removeHandlers();
+      }
+    },
+    'instance.menu.placement': function instanceMenuPlacement() {
+      this.updateMenuContainerOffset();
+    }
+  },
+  created: function created() {
+    this.controlResizeAndScrollEventListeners = null;
+    this.controlSizeWatcher = null;
+  },
+  mounted: function mounted() {
+    var instance = this.instance;
+    if (instance.menu.isOpen) this.setupHandlers();
+  },
+  methods: {
+    setupHandlers: function setupHandlers() {
+      this.updateWidth();
+      this.updateMenuContainerOffset();
+      this.setupControlResizeAndScrollEventListeners();
+      this.setupControlSizeWatcher();
+    },
+    removeHandlers: function removeHandlers() {
+      this.removeControlResizeAndScrollEventListeners();
+      this.removeControlSizeWatcher();
+    },
+    setupControlResizeAndScrollEventListeners: function setupControlResizeAndScrollEventListeners() {
+      var instance = this.instance;
+      var $control = instance.getControl();
+      if (this.controlResizeAndScrollEventListeners) return;
+      this.controlResizeAndScrollEventListeners = {
+        remove: setupResizeAndScrollEventListeners($control, this.updateMenuContainerOffset)
+      };
+    },
+    setupControlSizeWatcher: function setupControlSizeWatcher() {
+      var _this = this;
+
+      var instance = this.instance;
+      var $control = instance.getControl();
+      if (this.controlSizeWatcher) return;
+      this.controlSizeWatcher = {
+        remove: watchSize($control, function () {
+          _this.updateWidth();
+
+          _this.updateMenuContainerOffset();
+        })
+      };
+    },
+    removeControlResizeAndScrollEventListeners: function removeControlResizeAndScrollEventListeners() {
+      if (!this.controlResizeAndScrollEventListeners) return;
+      this.controlResizeAndScrollEventListeners.remove();
+      this.controlResizeAndScrollEventListeners = null;
+    },
+    removeControlSizeWatcher: function removeControlSizeWatcher() {
+      if (!this.controlSizeWatcher) return;
+      this.controlSizeWatcher.remove();
+      this.controlSizeWatcher = null;
+    },
+    updateWidth: function updateWidth() {
+      var instance = this.instance;
+      var $portalTarget = this.$el;
+      var $control = instance.getControl();
+      var controlRect = $control.getBoundingClientRect();
+      $portalTarget.style.width = controlRect.width + 'px';
+    },
+    updateMenuContainerOffset: function updateMenuContainerOffset() {
+      var instance = this.instance;
+      var $control = instance.getControl();
+      var $portalTarget = this.$el;
+      var controlRect = $control.getBoundingClientRect();
+      var portalTargetRect = $portalTarget.getBoundingClientRect();
+      var offsetY = instance.menu.placement === 'bottom' ? controlRect.height : 0;
+      var left = Math.round(controlRect.left - portalTargetRect.left) + 'px';
+      var top = Math.round(controlRect.top - portalTargetRect.top + offsetY) + 'px';
+      var menuContainerStyle = this.$refs.menu.$refs['menu-container'].style;
+      var transformVariations = ['transform', 'webkitTransform', 'MozTransform', 'msTransform'];
+      var transform = find(transformVariations, function (t) {
+        return t in document.body.style;
+      });
+      menuContainerStyle[transform] = "translate(".concat(left, ", ").concat(top, ")");
+    }
+  },
+  render: function render() {
+    var h = arguments[0];
+    var instance = this.instance;
+    var portalTargetClass = ['vue-treeselect__portal-target', instance.wrapperClass];
+    var portalTargetStyle = {
+      zIndex: instance.zIndex
+    };
+    return h("div", {
+      "class": portalTargetClass,
+      style: portalTargetStyle,
+      attrs: {
+        "data-instance-id": instance.getInstanceId()
+      }
+    }, [h(Menu, {
+      ref: "menu"
+    })]);
+  },
+  destroyed: function destroyed() {
+    this.removeHandlers();
+  }
+};
+var placeholder;
+/* harmony default export */ var MenuPortalvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect--menu-portal',
+  created: function created() {
+    this.portalTarget = null;
+  },
+  mounted: function mounted() {
+    this.setup();
+  },
+  destroyed: function destroyed() {
+    this.teardown();
+  },
+  methods: {
+    setup: function setup() {
+      var el = document.createElement('div');
+      document.body.appendChild(el);
+      this.portalTarget = new external_vue_default.a(MenuPortalvue_type_script_lang_js_objectSpread({
+        el: el,
+        parent: this
+      }, PortalTarget));
+    },
+    teardown: function teardown() {
+      document.body.removeChild(this.portalTarget.$el);
+      this.portalTarget.$el.innerHTML = '';
+      this.portalTarget.$destroy();
+      this.portalTarget = null;
+    }
+  },
+  render: function render() {
+    var h = arguments[0];
+    if (!placeholder) placeholder = h("div", {
+      "class": "vue-treeselect__menu-placeholder"
+    });
+    return placeholder;
+  }
+});
+// CONCATENATED MODULE: ./src/components/MenuPortal.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_MenuPortalvue_type_script_lang_js_ = (MenuPortalvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/MenuPortal.vue
+var MenuPortal_render, MenuPortal_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var MenuPortal_component = normalizeComponent(
+  components_MenuPortalvue_type_script_lang_js_,
+  MenuPortal_render,
+  MenuPortal_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var MenuPortal_api; }
+MenuPortal_component.options.__file = "src/components/MenuPortal.vue"
+/* harmony default export */ var MenuPortal = (MenuPortal_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Treeselect.vue?vue&type=script&lang=js&
+
+
+
+
+
+/* harmony default export */ var Treeselectvue_type_script_lang_js_ = ({
+  name: 'vue-treeselect',
+  mixins: [treeselectMixin],
+  computed: {
+    wrapperClass: function wrapperClass() {
+      return {
+        'vue-treeselect': true,
+        'vue-treeselect--single': this.single,
+        'vue-treeselect--multi': this.multiple,
+        'vue-treeselect--searchable': this.searchable,
+        'vue-treeselect--disabled': this.disabled,
+        'vue-treeselect--focused': this.trigger.isFocused,
+        'vue-treeselect--has-value': this.hasValue,
+        'vue-treeselect--open': this.menu.isOpen,
+        'vue-treeselect--open-above': this.menu.placement === 'top',
+        'vue-treeselect--open-below': this.menu.placement === 'bottom',
+        'vue-treeselect--branch-nodes-disabled': this.disableBranchNodes,
+        'vue-treeselect--append-to-body': this.appendToBody
+      };
+    }
+  },
+  render: function render() {
+    var h = arguments[0];
+    return h("div", {
+      ref: "wrapper",
+      "class": this.wrapperClass
+    }, [h(HiddenFields), h(Control, {
+      ref: "control"
+    }), this.appendToBody ? h(MenuPortal, {
+      ref: "portal"
+    }) : h(Menu, {
+      ref: "menu"
+    })]);
+  }
+});
+// CONCATENATED MODULE: ./src/components/Treeselect.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Treeselectvue_type_script_lang_js_ = (Treeselectvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Treeselect.vue
+var Treeselect_render, Treeselect_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Treeselect_component = normalizeComponent(
+  components_Treeselectvue_type_script_lang_js_,
+  Treeselect_render,
+  Treeselect_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Treeselect_api; }
+Treeselect_component.options.__file = "src/components/Treeselect.vue"
+/* harmony default export */ var Treeselect = (Treeselect_component.exports);
+// EXTERNAL MODULE: ./src/style.less
+var style = __webpack_require__(15);
+
+// CONCATENATED MODULE: ./src/index.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VERSION", function() { return VERSION; });
+/* concated harmony reexport Treeselect */__webpack_require__.d(__webpack_exports__, "Treeselect", function() { return Treeselect; });
+/* concated harmony reexport treeselectMixin */__webpack_require__.d(__webpack_exports__, "treeselectMixin", function() { return treeselectMixin; });
+/* concated harmony reexport LOAD_ROOT_OPTIONS */__webpack_require__.d(__webpack_exports__, "LOAD_ROOT_OPTIONS", function() { return LOAD_ROOT_OPTIONS; });
+/* concated harmony reexport LOAD_CHILDREN_OPTIONS */__webpack_require__.d(__webpack_exports__, "LOAD_CHILDREN_OPTIONS", function() { return LOAD_CHILDREN_OPTIONS; });
+/* concated harmony reexport ASYNC_SEARCH */__webpack_require__.d(__webpack_exports__, "ASYNC_SEARCH", function() { return ASYNC_SEARCH; });
+
+
+
+/* harmony default export */ var src = __webpack_exports__["default"] = (Treeselect);
+
+
+var VERSION = "0.4.0";
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=vue-treeselect.cjs.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../css-loader??ref--6-1!../../../postcss-loader/src??ref--6-2!./vue-treeselect.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/babel-helper-vue-jsx-merge-props/index.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/babel-helper-vue-jsx-merge-props/index.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var nestRE = /^(attrs|props|on|nativeOn|class|style|hook)$/
+
+module.exports = function mergeJSXProps (objs) {
+  return objs.reduce(function (a, b) {
+    var aa, bb, key, nestedKey, temp
+    for (key in b) {
+      aa = a[key]
+      bb = b[key]
+      if (aa && nestRE.test(key)) {
+        // normalize class
+        if (key === 'class') {
+          if (typeof aa === 'string') {
+            temp = aa
+            a[key] = aa = {}
+            aa[temp] = true
+          }
+          if (typeof bb === 'string') {
+            temp = bb
+            b[key] = bb = {}
+            bb[temp] = true
+          }
+        }
+        if (key === 'on' || key === 'nativeOn' || key === 'hook') {
+          // merge functions
+          for (nestedKey in bb) {
+            aa[nestedKey] = mergeFn(aa[nestedKey], bb[nestedKey])
+          }
+        } else if (Array.isArray(aa)) {
+          a[key] = aa.concat(bb)
+        } else if (Array.isArray(bb)) {
+          a[key] = [aa].concat(bb)
+        } else {
+          for (nestedKey in bb) {
+            aa[nestedKey] = bb[nestedKey]
+          }
+        }
+      } else {
+        a[key] = b[key]
+      }
+    }
+    return a
+  }, {})
+}
+
+function mergeFn (a, b) {
+  return function () {
+    a && a.apply(this, arguments)
+    b && b.apply(this, arguments)
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css":
+/*!******************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css ***!
+  \******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/*!\n * vue-treeselect v0.4.0 | (c) 2017-2019 Riophae Lee\n * Released under the MIT License.\n * https://vue-treeselect.js.org/\n */\n/**\n * Dependencies\n */\n/**\n * Variables\n */\n/**\n * Mixins\n */\n/**\n * Helpers\n */\n.vue-treeselect-helper-hide {\n  display: none;\n}\n.vue-treeselect-helper-zoom-effect-off {\n  transform: none !important;\n}\n/**\n * Animations\n */\n@-webkit-keyframes vue-treeselect-animation-fade-in {\n  0% {\n    opacity: 0;\n  }\n}\n@keyframes vue-treeselect-animation-fade-in {\n  0% {\n    opacity: 0;\n  }\n}\n@-webkit-keyframes vue-treeselect-animation-bounce {\n  0%,\n  100% {\n    transform: scale(0);\n  }\n  50% {\n    transform: scale(1);\n  }\n}\n@keyframes vue-treeselect-animation-bounce {\n  0%,\n  100% {\n    transform: scale(0);\n  }\n  50% {\n    transform: scale(1);\n  }\n}\n@-webkit-keyframes vue-treeselect-animation-rotate {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@keyframes vue-treeselect-animation-rotate {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n/**\n * Transitions\n */\n.vue-treeselect__multi-value-item--transition-enter-active,\n.vue-treeselect__multi-value-item--transition-leave-active {\n  transition-duration: 200ms;\n  transition-property: transform, opacity;\n}\n.vue-treeselect__multi-value-item--transition-enter-active {\n  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);\n}\n.vue-treeselect__multi-value-item--transition-leave-active {\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  position: absolute;\n}\n.vue-treeselect__multi-value-item--transition-enter,\n.vue-treeselect__multi-value-item--transition-leave-to {\n  transform: scale(0.7);\n  opacity: 0;\n}\n.vue-treeselect__multi-value-item--transition-move {\n  transition: 200ms transform cubic-bezier(0.165, 0.84, 0.44, 1);\n}\n/**\n * Namespace\n */\n.vue-treeselect {\n  position: relative;\n  text-align: left;\n}\n[dir=\"rtl\"] .vue-treeselect {\n  text-align: right;\n}\n.vue-treeselect div,\n.vue-treeselect span {\n  box-sizing: border-box;\n}\n.vue-treeselect svg {\n  fill: currentColor;\n}\n/**\n * Control\n */\n.vue-treeselect__control {\n  padding-left: 5px;\n  padding-right: 5px;\n  display: table;\n  table-layout: fixed;\n  width: 100%;\n  height: 36px;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  background: #fff;\n  transition-duration: 200ms;\n  transition-property: border-color, box-shadow, width, height, background-color, opacity;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.vue-treeselect:not(.vue-treeselect--disabled):not(.vue-treeselect--focused) .vue-treeselect__control:hover {\n  border-color: #cfcfcf;\n}\n.vue-treeselect--focused:not(.vue-treeselect--open) .vue-treeselect__control {\n  border-color: #039be5;\n  box-shadow: 0 0 0 3px rgba(3, 155, 229, 0.1);\n}\n.vue-treeselect--disabled .vue-treeselect__control {\n  background-color: #f9f9f9;\n}\n.vue-treeselect--open .vue-treeselect__control {\n  border-color: #cfcfcf;\n}\n.vue-treeselect--open.vue-treeselect--open-below .vue-treeselect__control {\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.vue-treeselect--open.vue-treeselect--open-above .vue-treeselect__control {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n}\n.vue-treeselect__value-container,\n.vue-treeselect__multi-value {\n  width: 100%;\n  vertical-align: middle;\n}\n.vue-treeselect__value-container {\n  display: table-cell;\n  position: relative;\n}\n.vue-treeselect--searchable:not(.vue-treeselect--disabled) .vue-treeselect__value-container {\n  cursor: text;\n}\n.vue-treeselect__multi-value {\n  display: inline-block;\n}\n.vue-treeselect--has-value .vue-treeselect__multi-value {\n  margin-bottom: 5px;\n}\n.vue-treeselect__placeholder,\n.vue-treeselect__single-value {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  padding-left: 5px;\n  padding-right: 5px;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  line-height: 34px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  pointer-events: none;\n}\n.vue-treeselect__placeholder {\n  color: #bdbdbd;\n}\n.vue-treeselect__single-value {\n  color: #333;\n}\n.vue-treeselect--focused.vue-treeselect--searchable .vue-treeselect__single-value {\n  color: #bdbdbd;\n}\n.vue-treeselect--disabled .vue-treeselect__single-value {\n  position: static;\n}\n.vue-treeselect__multi-value-item-container {\n  display: inline-block;\n  padding-top: 5px;\n  padding-right: 5px;\n  vertical-align: top;\n}\n[dir=\"rtl\"] .vue-treeselect__multi-value-item-container {\n  padding-right: 0;\n  padding-left: 5px;\n}\n.vue-treeselect__multi-value-item {\n  cursor: pointer;\n  display: inline-table;\n  background: #e3f2fd;\n  padding: 2px 0;\n  border: 1px solid transparent;\n  border-radius: 2px;\n  color: #039be5;\n  font-size: 12px;\n  vertical-align: top;\n}\n.vue-treeselect:not(.vue-treeselect--disabled) .vue-treeselect__multi-value-item:not(.vue-treeselect__multi-value-item-disabled):hover .vue-treeselect__multi-value-item:not(.vue-treeselect__multi-value-item-new) .vue-treeselect__multi-value-item:not(.vue-treeselect__multi-value-item-new):hover {\n  cursor: pointer;\n  background: #e3f2fd;\n  color: #039be5;\n}\n.vue-treeselect__multi-value-item.vue-treeselect__multi-value-item-disabled {\n  cursor: default;\n  background: #f5f5f5;\n  color: #757575;\n}\n.vue-treeselect--disabled .vue-treeselect__multi-value-item {\n  cursor: default;\n  background: #fff;\n  border-color: #e5e5e5;\n  color: #555;\n}\n.vue-treeselect__multi-value-item.vue-treeselect__multi-value-item-new {\n  background: #e8f5e9;\n}\n.vue-treeselect__multi-value-item.vue-treeselect__multi-value-item-new:hover {\n  background: #e8f5e9;\n}\n.vue-treeselect__value-remove,\n.vue-treeselect__multi-value-label {\n  display: table-cell;\n  padding: 0 5px;\n  vertical-align: middle;\n}\n.vue-treeselect__value-remove {\n  color: #039be5;\n  padding-left: 5px;\n  border-left: 1px solid #fff;\n  line-height: 0;\n}\n[dir=\"rtl\"] .vue-treeselect__value-remove {\n  border-left: 0 none;\n  border-right: 1px solid #fff;\n}\n.vue-treeselect__multi-value-item:hover .vue-treeselect__value-remove {\n  color: #e53935;\n}\n.vue-treeselect--disabled .vue-treeselect__value-remove,\n.vue-treeselect__multi-value-item-disabled .vue-treeselect__value-remove {\n  display: none;\n}\n.vue-treeselect__value-remove > svg {\n  width: 6px;\n  height: 6px;\n}\n.vue-treeselect__multi-value-label {\n  padding-right: 5px;\n  white-space: pre-line;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.vue-treeselect__limit-tip {\n  display: inline-block;\n  padding-top: 5px;\n  padding-right: 5px;\n  vertical-align: top;\n}\n[dir=\"rtl\"] .vue-treeselect__limit-tip {\n  padding-right: 0;\n  padding-left: 5px;\n}\n.vue-treeselect__limit-tip-text {\n  cursor: default;\n  display: block;\n  margin: 2px 0;\n  padding: 1px 0;\n  color: #bdbdbd;\n  font-size: 12px;\n  font-weight: 600;\n}\n.vue-treeselect__input-container {\n  display: block;\n  max-width: 100%;\n  outline: none;\n}\n.vue-treeselect--single .vue-treeselect__input-container {\n  font-size: inherit;\n  height: 100%;\n}\n.vue-treeselect--multi .vue-treeselect__input-container {\n  display: inline-block;\n  font-size: 12px;\n  vertical-align: top;\n}\n.vue-treeselect--searchable .vue-treeselect__input-container {\n  padding-left: 5px;\n  padding-right: 5px;\n}\n.vue-treeselect--searchable.vue-treeselect--multi.vue-treeselect--has-value .vue-treeselect__input-container {\n  padding-top: 5px;\n  padding-left: 0;\n}\n[dir=\"rtl\"] .vue-treeselect--searchable.vue-treeselect--multi.vue-treeselect--has-value .vue-treeselect__input-container {\n  padding-left: 5px;\n  padding-right: 0;\n}\n.vue-treeselect--disabled .vue-treeselect__input-container {\n  display: none;\n}\n.vue-treeselect__input,\n.vue-treeselect__sizer {\n  margin: 0;\n  line-height: inherit;\n  font-family: inherit;\n  font-size: inherit;\n}\n.vue-treeselect__input {\n  max-width: 100%;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: none;\n  box-sizing: content-box;\n  box-shadow: none;\n  background: none transparent;\n  line-height: 1;\n  vertical-align: middle;\n}\n.vue-treeselect__input::-ms-clear {\n  display: none;\n}\n.vue-treeselect--single .vue-treeselect__input {\n  width: 100%;\n  height: 100%;\n}\n.vue-treeselect--multi .vue-treeselect__input {\n  padding-top: 3px;\n  padding-bottom: 3px;\n}\n.vue-treeselect--has-value .vue-treeselect__input {\n  line-height: inherit;\n  vertical-align: top;\n}\n.vue-treeselect__sizer {\n  position: absolute;\n  top: 0;\n  left: 0;\n  visibility: hidden;\n  height: 0;\n  overflow: scroll;\n  white-space: pre;\n}\n.vue-treeselect__x-container {\n  display: table-cell;\n  vertical-align: middle;\n  width: 20px;\n  text-align: center;\n  line-height: 0;\n  cursor: pointer;\n  color: #ccc;\n  -webkit-animation: 200ms vue-treeselect-animation-fade-in cubic-bezier(0.075, 0.82, 0.165, 1);\n          animation: 200ms vue-treeselect-animation-fade-in cubic-bezier(0.075, 0.82, 0.165, 1);\n}\n.vue-treeselect__x-container:hover {\n  color: #e53935;\n}\n.vue-treeselect__x {\n  width: 8px;\n  height: 8px;\n}\n.vue-treeselect__control-arrow-container {\n  display: table-cell;\n  vertical-align: middle;\n  width: 20px;\n  text-align: center;\n  line-height: 0;\n  cursor: pointer;\n}\n.vue-treeselect--disabled .vue-treeselect__control-arrow-container {\n  cursor: default;\n}\n.vue-treeselect__control-arrow {\n  width: 9px;\n  height: 9px;\n  color: #ccc;\n}\n.vue-treeselect:not(.vue-treeselect--disabled) .vue-treeselect__control-arrow-container:hover .vue-treeselect__control-arrow {\n  color: #616161;\n}\n.vue-treeselect--disabled .vue-treeselect__control-arrow {\n  opacity: 0.35;\n}\n.vue-treeselect__control-arrow--rotated {\n  transform: rotateZ(180deg);\n}\n/**\n * Menu\n */\n.vue-treeselect__menu-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  overflow: visible;\n  transition: 0s;\n}\n.vue-treeselect--open-below:not(.vue-treeselect--append-to-body) .vue-treeselect__menu-container {\n  top: 100%;\n}\n.vue-treeselect--open-above:not(.vue-treeselect--append-to-body) .vue-treeselect__menu-container {\n  bottom: 100%;\n}\n.vue-treeselect__menu {\n  cursor: default;\n  padding-top: 5px;\n  padding-bottom: 5px;\n  display: block;\n  position: absolute;\n  overflow-x: hidden;\n  overflow-y: auto;\n  width: auto;\n  border: 1px solid #cfcfcf;\n  background: #fff;\n  line-height: 180%;\n  -webkit-overflow-scrolling: touch;\n}\n.vue-treeselect--open-below .vue-treeselect__menu {\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n  top: 0;\n  margin-top: -1px;\n  border-top-color: #f2f2f2;\n  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);\n}\n.vue-treeselect--open-above .vue-treeselect__menu {\n  border-top-left-radius: 5px;\n  border-top-right-radius: 5px;\n  bottom: 0;\n  margin-bottom: -1px;\n  border-bottom-color: #f2f2f2;\n}\n.vue-treeselect__indent-level-0 .vue-treeselect__option {\n  padding-left: 5px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-0 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 5px;\n}\n.vue-treeselect__indent-level-0 .vue-treeselect__tip {\n  padding-left: 25px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-0 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 25px;\n}\n.vue-treeselect__indent-level-1 .vue-treeselect__option {\n  padding-left: 25px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-1 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 25px;\n}\n.vue-treeselect__indent-level-1 .vue-treeselect__tip {\n  padding-left: 45px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-1 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 45px;\n}\n.vue-treeselect__indent-level-2 .vue-treeselect__option {\n  padding-left: 45px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-2 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 45px;\n}\n.vue-treeselect__indent-level-2 .vue-treeselect__tip {\n  padding-left: 65px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-2 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 65px;\n}\n.vue-treeselect__indent-level-3 .vue-treeselect__option {\n  padding-left: 65px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-3 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 65px;\n}\n.vue-treeselect__indent-level-3 .vue-treeselect__tip {\n  padding-left: 85px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-3 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 85px;\n}\n.vue-treeselect__indent-level-4 .vue-treeselect__option {\n  padding-left: 85px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-4 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 85px;\n}\n.vue-treeselect__indent-level-4 .vue-treeselect__tip {\n  padding-left: 105px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-4 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 105px;\n}\n.vue-treeselect__indent-level-5 .vue-treeselect__option {\n  padding-left: 105px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-5 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 105px;\n}\n.vue-treeselect__indent-level-5 .vue-treeselect__tip {\n  padding-left: 125px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-5 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 125px;\n}\n.vue-treeselect__indent-level-6 .vue-treeselect__option {\n  padding-left: 125px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-6 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 125px;\n}\n.vue-treeselect__indent-level-6 .vue-treeselect__tip {\n  padding-left: 145px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-6 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 145px;\n}\n.vue-treeselect__indent-level-7 .vue-treeselect__option {\n  padding-left: 145px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-7 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 145px;\n}\n.vue-treeselect__indent-level-7 .vue-treeselect__tip {\n  padding-left: 165px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-7 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 165px;\n}\n.vue-treeselect__indent-level-8 .vue-treeselect__option {\n  padding-left: 165px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-8 .vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 165px;\n}\n.vue-treeselect__indent-level-8 .vue-treeselect__tip {\n  padding-left: 185px;\n}\n[dir=\"rtl\"] .vue-treeselect__indent-level-8 .vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 185px;\n}\n.vue-treeselect__option {\n  padding-left: 5px;\n  padding-right: 5px;\n  display: table;\n  table-layout: fixed;\n  width: 100%;\n}\n.vue-treeselect__option--highlight {\n  background: #f5f5f5;\n}\n.vue-treeselect--single .vue-treeselect__option--selected {\n  background: #e3f2fd;\n  font-weight: 600;\n}\n.vue-treeselect--single .vue-treeselect__option--selected:hover {\n  background: #e3f2fd;\n}\n.vue-treeselect__option--hide {\n  display: none;\n}\n.vue-treeselect__option-arrow-container,\n.vue-treeselect__option-arrow-placeholder {\n  display: table-cell;\n  vertical-align: middle;\n  width: 20px;\n  text-align: center;\n  line-height: 0;\n}\n.vue-treeselect__option-arrow-container {\n  cursor: pointer;\n}\n.vue-treeselect__option-arrow {\n  display: inline-block;\n  width: 9px;\n  height: 9px;\n  color: #ccc;\n  vertical-align: middle;\n  transition: 200ms transform cubic-bezier(0.19, 1, 0.22, 1);\n  transform: rotateZ(-90deg);\n}\n[dir=\"rtl\"] .vue-treeselect__option-arrow {\n  transform: rotateZ(90deg);\n}\n.vue-treeselect__option-arrow-container:hover .vue-treeselect__option-arrow,\n.vue-treeselect--branch-nodes-disabled .vue-treeselect__option:hover .vue-treeselect__option-arrow {\n  color: #616161;\n}\n.vue-treeselect__option-arrow--rotated {\n  transform: rotateZ(0);\n}\n[dir=\"rtl\"] .vue-treeselect__option-arrow--rotated {\n  transform: rotateZ(0);\n}\n.vue-treeselect__option-arrow--rotated.vue-treeselect__option-arrow--prepare-enter {\n  transform: rotateZ(-90deg) !important;\n}\n[dir=\"rtl\"] .vue-treeselect__option-arrow--rotated.vue-treeselect__option-arrow--prepare-enter {\n  transform: rotateZ(90deg) !important;\n}\n.vue-treeselect__label-container {\n  display: table-cell;\n  vertical-align: middle;\n  cursor: pointer;\n  display: table;\n  width: 100%;\n  table-layout: fixed;\n  color: inherit;\n}\n.vue-treeselect__option--disabled .vue-treeselect__label-container {\n  cursor: not-allowed;\n  color: rgba(0, 0, 0, 0.25);\n}\n.vue-treeselect__checkbox-container {\n  display: table-cell;\n  width: 20px;\n  min-width: 20px;\n  height: 100%;\n  text-align: center;\n  vertical-align: middle;\n}\n.vue-treeselect__checkbox {\n  display: block;\n  margin: auto;\n  width: 12px;\n  height: 12px;\n  border-width: 1px;\n  border-style: solid;\n  border-radius: 2px;\n  position: relative;\n  transition: 200ms all cubic-bezier(0.075, 0.82, 0.165, 1);\n}\n.vue-treeselect__check-mark,\n.vue-treeselect__minus-mark {\n  display: block;\n  position: absolute;\n  left: 1px;\n  top: 1px;\n  background-repeat: no-repeat;\n  opacity: 0;\n  transition: 200ms all ease;\n}\n.vue-treeselect__minus-mark {\n  width: 8px;\n  height: 8px;\n  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAgMAAAC5YVYYAAAACVBMVEUAAAD///////9zeKVjAAAAAnRSTlMAuLMp9oYAAAAPSURBVAjXY4CDrJUgBAMAGaECJ9dz3BAAAAAASUVORK5CYII=);\n  background-size: 8px 8px;\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {\n  .vue-treeselect__minus-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAADFBMVEUAAAD///////////84wDuoAAAAA3RSTlMAyTzPIdReAAAAGUlEQVQI12PAD+b///+Nof7//79gAsLFCwAx/w4blADeeQAAAABJRU5ErkJggg==);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {\n  .vue-treeselect__minus-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAADFBMVEUAAAD///////////84wDuoAAAAA3RSTlMAyTzPIdReAAAAGUlEQVQI12PAD+b///+Nof7//79gAsLFCwAx/w4blADeeQAAAABJRU5ErkJggg==);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {\n  .vue-treeselect__minus-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAD1BMVEUAAAD///////////////+PQt5oAAAABHRSTlMAy2EFIuWxUgAAACRJREFUGNNjGBBgJOICBY7KDCoucODEAJSAS6FwUJShGjAQAADBPRGrK2/FhgAAAABJRU5ErkJggg==);\n  }\n}\n.vue-treeselect__checkbox--indeterminate > .vue-treeselect__minus-mark {\n  opacity: 1;\n}\n.vue-treeselect__checkbox--disabled .vue-treeselect__minus-mark {\n  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAgMAAAC5YVYYAAAACVBMVEUAAADi4uLh4eHOxeSRAAAAAnRSTlMAuLMp9oYAAAAPSURBVAjXY4CDrJUgBAMAGaECJ9dz3BAAAAAASUVORK5CYII=);\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {\n  .vue-treeselect__checkbox--disabled .vue-treeselect__minus-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAADFBMVEUAAADi4uLi4uLh4eE5RQaIAAAAA3RSTlMAyTzPIdReAAAAGUlEQVQI12PAD+b///+Nof7//79gAsLFCwAx/w4blADeeQAAAABJRU5ErkJggg==);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {\n  .vue-treeselect__checkbox--disabled .vue-treeselect__minus-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAADFBMVEUAAADi4uLi4uLh4eE5RQaIAAAAA3RSTlMAyTzPIdReAAAAGUlEQVQI12PAD+b///+Nof7//79gAsLFCwAx/w4blADeeQAAAABJRU5ErkJggg==);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {\n  .vue-treeselect__checkbox--disabled .vue-treeselect__minus-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAD1BMVEUAAADh4eHg4ODNzc3h4eEYfw2wAAAABHRSTlMAy2EFIuWxUgAAACRJREFUGNNjGBBgJOICBY7KDCoucODEAJSAS6FwUJShGjAQAADBPRGrK2/FhgAAAABJRU5ErkJggg==);\n  }\n}\n.vue-treeselect__check-mark {\n  width: 8px;\n  height: 8px;\n  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAQlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////8IX9KGAAAAFXRSTlMA8u24NxILB+Tawb6jiH1zRz0xIQIIP3GUAAAAMklEQVQI1y3FtQEAMQDDQD+EGbz/qkEVOpyEOP6PudKjZNSXn4Jm2CKRdBKzSLsFWl8fMG0Bl6Jk1rMAAAAASUVORK5CYII=);\n  background-size: 8px 8px;\n  transform: scaleY(0.125);\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {\n  .vue-treeselect__check-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAYFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////98JRy6AAAAH3RSTlMAzu4sDenl38fBvo1OMyIdEQrj1cSihX5hYFpHNycIcQOASAAAAF9JREFUGNN9zEcOgDAMRFHTS0LvNfe/JRmHKAIJ/mqeLJn+k9uDtaeUeFnFziGsBucUTirrprfe81RqZ3Bb6hPWeuZwDFOHyf+ig9CCzQ7INBn7bG5kF+QSt13BHNJnF7AaCT4Y+CW7AAAAAElFTkSuQmCC);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {\n  .vue-treeselect__check-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAYFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////98JRy6AAAAH3RSTlMAzu4sDenl38fBvo1OMyIdEQrj1cSihX5hYFpHNycIcQOASAAAAF9JREFUGNN9zEcOgDAMRFHTS0LvNfe/JRmHKAIJ/mqeLJn+k9uDtaeUeFnFziGsBucUTirrprfe81RqZ3Bb6hPWeuZwDFOHyf+ig9CCzQ7INBn7bG5kF+QSt13BHNJnF7AaCT4Y+CW7AAAAAElFTkSuQmCC);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {\n  .vue-treeselect__check-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAWlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////9ZMre9AAAAHXRSTlMA/PiJhGNI9XlEHJB/b2ldV08+Oibk49vPp6QhAYgGBuwAAACCSURBVCjPrdHdDoIwDAXgTWAqCigo/+f9X5OwnoUwtis4V92XNWladUl+rzQPeQJAN2EHxoOnsPn7/oYk8fxBv08Rr/deOH/aZ2Nm8ZJ+s573QGfWKnNuZGzWm3+lv2V3pcU1XQ385/yjmBoM3Z+dXvlbYLLD3ujhTaOM3KaIXvNkFkuSEvYy1LqOAAAAAElFTkSuQmCC);\n  }\n}\n.vue-treeselect__checkbox--checked > .vue-treeselect__check-mark {\n  opacity: 1;\n  transform: scaleY(1);\n}\n.vue-treeselect__checkbox--disabled .vue-treeselect__check-mark {\n  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAP1BMVEUAAADj4+Pf39/h4eHh4eHh4eHk5OTh4eHg4ODi4uLh4eHh4eHg4ODh4eHh4eHg4ODh4eHh4eHp6en////h4eFqcyvUAAAAFHRSTlMAOQfy7bgS5NrBvqOIfXNHMSELAgQ/iFsAAAA2SURBVAjXY4AANjYIzcjMAaVFuBkY+RkEWERYmRjYRXjANAOfiIgIFxNIAa8IpxBEi6AwiAQAK2MBd7xY8csAAAAASUVORK5CYII=);\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {\n  .vue-treeselect__checkbox--disabled .vue-treeselect__check-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAXVBMVEUAAADh4eHh4eHh4eHi4uLb29vh4eHh4eHh4eHh4eHh4eHh4eHh4eHi4uLi4uLj4+Pi4uLk5OTo6Ojh4eHh4eHi4uLg4ODg4ODh4eHg4ODh4eHf39/g4OD////h4eEzIk+wAAAAHnRSTlMAzu6/LA3p5eLZx8ONTjYiHRIKooV+YWBaRzEnCANnm5rnAAAAZElEQVQY033P2wqAIAyA4VWaaWrnc/n+j5mbhBjUf7WPoTD47TJb4i5zTr/sRDRHuyFaoWX7uK/RlbctlPEuyI1f4WY9yQINEkf6rzzo8YIzmUFoCs7J1EjeIaa9bXIEmzl8dgOZEAj/+2IvzAAAAABJRU5ErkJggg==);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {\n  .vue-treeselect__checkbox--disabled .vue-treeselect__check-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAXVBMVEUAAADh4eHh4eHh4eHi4uLb29vh4eHh4eHh4eHh4eHh4eHh4eHh4eHi4uLi4uLj4+Pi4uLk5OTo6Ojh4eHh4eHi4uLg4ODg4ODh4eHg4ODh4eHf39/g4OD////h4eEzIk+wAAAAHnRSTlMAzu6/LA3p5eLZx8ONTjYiHRIKooV+YWBaRzEnCANnm5rnAAAAZElEQVQY033P2wqAIAyA4VWaaWrnc/n+j5mbhBjUf7WPoTD47TJb4i5zTr/sRDRHuyFaoWX7uK/RlbctlPEuyI1f4WY9yQINEkf6rzzo8YIzmUFoCs7J1EjeIaa9bXIEmzl8dgOZEAj/+2IvzAAAAABJRU5ErkJggg==);\n  }\n}\n@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {\n  .vue-treeselect__checkbox--disabled .vue-treeselect__check-mark {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAUVBMVEUAAADh4eHh4eHh4eHh4eHi4uLi4uLh4eHh4eHh4eHf39/j4+Ph4eHh4eHh4eHg4ODi4uLh4eHh4eHi4uLh4eHh4eHh4eHh4eHh4eH////h4eF3FMFTAAAAGnRSTlMA+/eJhGhfSHE9JBzz5KaQf3pXT0Xbz0I5AYDw8F0AAAB+SURBVCjPrdHbDoMgEEVRKAii1dZe9fz/hxplTiKIT7qfYCWTEEZdUvOwbckNAD2WHeh3brHW5f5EzGQ+iN+b1Gt6KPvtv16Dn6JX9M9ya3/A1yfu5dlyduL6Hec7mXY6ddXLPP2lpABGZ8PWXfYLTJxZekVhhl7eTX24zZPNKXoRC7zQLjUAAAAASUVORK5CYII=);\n  }\n}\n.vue-treeselect__checkbox--unchecked {\n  border-color: #e0e0e0;\n  background: #fff;\n}\n.vue-treeselect__label-container:hover .vue-treeselect__checkbox--unchecked {\n  border-color: #039be5;\n  background: #fff;\n}\n.vue-treeselect__checkbox--indeterminate {\n  border-color: #039be5;\n  background: #039be5;\n}\n.vue-treeselect__label-container:hover .vue-treeselect__checkbox--indeterminate {\n  border-color: #039be5;\n  background: #039be5;\n}\n.vue-treeselect__checkbox--checked {\n  border-color: #039be5;\n  background: #039be5;\n}\n.vue-treeselect__label-container:hover .vue-treeselect__checkbox--checked {\n  border-color: #039be5;\n  background: #039be5;\n}\n.vue-treeselect__checkbox--disabled {\n  border-color: #e0e0e0;\n  background-color: #f7f7f7;\n}\n.vue-treeselect__label-container:hover .vue-treeselect__checkbox--disabled {\n  border-color: #e0e0e0;\n  background-color: #f7f7f7;\n}\n.vue-treeselect__label {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  display: table-cell;\n  padding-left: 5px;\n  max-width: 100%;\n  vertical-align: middle;\n  cursor: inherit;\n}\n[dir=\"rtl\"] .vue-treeselect__label {\n  padding-left: 0;\n  padding-right: 5px;\n}\n.vue-treeselect__count {\n  margin-left: 5px;\n  font-weight: 400;\n  opacity: 0.6;\n}\n[dir=\"rtl\"] .vue-treeselect__count {\n  margin-left: 0;\n  margin-right: 5px;\n}\n.vue-treeselect__tip {\n  padding-left: 5px;\n  padding-right: 5px;\n  display: table;\n  table-layout: fixed;\n  width: 100%;\n  color: #757575;\n}\n.vue-treeselect__tip-text {\n  display: table-cell;\n  vertical-align: middle;\n  padding-left: 5px;\n  padding-right: 5px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%;\n  font-size: 12px;\n}\n.vue-treeselect__error-tip .vue-treeselect__retry {\n  cursor: pointer;\n  margin-left: 5px;\n  font-style: normal;\n  font-weight: 600;\n  text-decoration: none;\n  color: #039be5;\n}\n[dir=\"rtl\"] .vue-treeselect__error-tip .vue-treeselect__retry {\n  margin-left: 0;\n  margin-right: 5px;\n}\n.vue-treeselect__icon-container {\n  display: table-cell;\n  vertical-align: middle;\n  width: 20px;\n  text-align: center;\n  line-height: 0;\n}\n.vue-treeselect--single .vue-treeselect__icon-container {\n  padding-left: 5px;\n}\n[dir=\"rtl\"] .vue-treeselect--single .vue-treeselect__icon-container {\n  padding-left: 0;\n  padding-right: 5px;\n}\n.vue-treeselect__icon-warning {\n  display: block;\n  margin: auto;\n  border-radius: 50%;\n  position: relative;\n  width: 12px;\n  height: 12px;\n  background: #fb8c00;\n}\n.vue-treeselect__icon-warning::after {\n  display: block;\n  position: absolute;\n  content: \"\";\n  left: 5px;\n  top: 2.5px;\n  width: 2px;\n  height: 1px;\n  border: 0 solid #fff;\n  border-top-width: 5px;\n  border-bottom-width: 1px;\n}\n.vue-treeselect__icon-error {\n  display: block;\n  margin: auto;\n  border-radius: 50%;\n  position: relative;\n  width: 12px;\n  height: 12px;\n  background: #e53935;\n}\n.vue-treeselect__icon-error::before,\n.vue-treeselect__icon-error::after {\n  display: block;\n  position: absolute;\n  content: \"\";\n  background: #fff;\n  transform: rotate(45deg);\n}\n.vue-treeselect__icon-error::before {\n  width: 6px;\n  height: 2px;\n  left: 3px;\n  top: 5px;\n}\n.vue-treeselect__icon-error::after {\n  width: 2px;\n  height: 6px;\n  left: 5px;\n  top: 3px;\n}\n.vue-treeselect__icon-loader {\n  display: block;\n  margin: auto;\n  position: relative;\n  width: 12px;\n  height: 12px;\n  text-align: center;\n  -webkit-animation: 1.6s vue-treeselect-animation-rotate linear infinite;\n          animation: 1.6s vue-treeselect-animation-rotate linear infinite;\n}\n.vue-treeselect__icon-loader::before,\n.vue-treeselect__icon-loader::after {\n  border-radius: 50%;\n  position: absolute;\n  content: \"\";\n  left: 0;\n  top: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  opacity: 0.6;\n  -webkit-animation: 1.6s vue-treeselect-animation-bounce ease-in-out infinite;\n          animation: 1.6s vue-treeselect-animation-bounce ease-in-out infinite;\n}\n.vue-treeselect__icon-loader::before {\n  background: #039be5;\n}\n.vue-treeselect__icon-loader::after {\n  background: #b3e5fc;\n  -webkit-animation-delay: -0.8s;\n          animation-delay: -0.8s;\n}\n/**\n * Menu Portal\n */\n.vue-treeselect__menu-placeholder {\n  display: none;\n}\n.vue-treeselect__portal-target {\n  position: absolute;\n  display: block;\n  left: 0;\n  top: 0;\n  height: 0;\n  width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n  overflow: visible;\n  box-sizing: border-box;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/fuzzysearch/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/fuzzysearch/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function fuzzysearch (needle, haystack) {
+  var tlen = haystack.length;
+  var qlen = needle.length;
+  if (qlen > tlen) {
+    return false;
+  }
+  if (qlen === tlen) {
+    return needle === haystack;
+  }
+  outer: for (var i = 0, j = 0; i < qlen; i++) {
+    var nch = needle.charCodeAt(i);
+    while (j < tlen) {
+      if (haystack.charCodeAt(j++) === nch) {
+        continue outer;
+      }
+    }
+    return false;
+  }
+  return true;
+}
+
+module.exports = fuzzysearch;
+
+
+/***/ }),
+
+/***/ "./node_modules/is-promise/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/is-promise/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = isPromise;
+module.exports.default = isPromise;
+
+function isPromise(obj) {
+  return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Symbol.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_Symbol.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseGetTag.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_freeGlobal.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_freeGlobal.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getRawTag.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getRawTag.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_objectToString.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_objectToString.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_root.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_root.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/before.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/before.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that invokes `func`, with the `this` binding and arguments
+ * of the created function, while it's called less than `n` times. Subsequent
+ * calls to the created function return the result of the last `func` invocation.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {number} n The number of calls at which `func` is no longer invoked.
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new restricted function.
+ * @example
+ *
+ * jQuery(element).on('click', _.before(5, addContactToList));
+ * // => Allows adding up to 4 contacts to the list.
+ */
+function before(n, func) {
+  var result;
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  n = toInteger(n);
+  return function() {
+    if (--n > 0) {
+      result = func.apply(this, arguments);
+    }
+    if (n <= 1) {
+      func = undefined;
+    }
+    return result;
+  };
+}
+
+module.exports = before;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/constant.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/constant.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Creates a function that returns `value`.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Util
+ * @param {*} value The value to return from the new function.
+ * @returns {Function} Returns the new constant function.
+ * @example
+ *
+ * var objects = _.times(2, _.constant({ 'a': 1 }));
+ *
+ * console.log(objects);
+ * // => [{ 'a': 1 }, { 'a': 1 }]
+ *
+ * console.log(objects[0] === objects[1]);
+ * // => true
+ */
+function constant(value) {
+  return function() {
+    return value;
+  };
+}
+
+module.exports = constant;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/debounce.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/debounce.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    now = __webpack_require__(/*! ./now */ "./node_modules/lodash/now.js"),
+    toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        timeWaiting = wait - timeSinceLastCall;
+
+    return maxing
+      ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
+      : timeWaiting;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+module.exports = debounce;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/identity.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/identity.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObject.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isObject.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObjectLike.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isObjectLike.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isSymbol.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isSymbol.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && baseGetTag(value) == symbolTag);
+}
+
+module.exports = isSymbol;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/last.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/last.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Gets the last element of `array`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Array
+ * @param {Array} array The array to query.
+ * @returns {*} Returns the last element of `array`.
+ * @example
+ *
+ * _.last([1, 2, 3]);
+ * // => 3
+ */
+function last(array) {
+  var length = array == null ? 0 : array.length;
+  return length ? array[length - 1] : undefined;
+}
+
+module.exports = last;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/noop.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/noop.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns `undefined`.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.3.0
+ * @category Util
+ * @example
+ *
+ * _.times(2, _.noop);
+ * // => [undefined, undefined]
+ */
+function noop() {
+  // No operation performed.
+}
+
+module.exports = noop;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/now.js":
+/*!************************************!*\
+  !*** ./node_modules/lodash/now.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+module.exports = now;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/once.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/once.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var before = __webpack_require__(/*! ./before */ "./node_modules/lodash/before.js");
+
+/**
+ * Creates a function that is restricted to invoking `func` once. Repeat calls
+ * to the function return the value of the first invocation. The `func` is
+ * invoked with the `this` binding and arguments of the created function.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new restricted function.
+ * @example
+ *
+ * var initialize = _.once(createApplication);
+ * initialize();
+ * initialize();
+ * // => `createApplication` is invoked once
+ */
+function once(func) {
+  return before(2, func);
+}
+
+module.exports = once;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toFinite.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toFinite.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0,
+    MAX_INTEGER = 1.7976931348623157e+308;
+
+/**
+ * Converts `value` to a finite number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.12.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {number} Returns the converted number.
+ * @example
+ *
+ * _.toFinite(3.2);
+ * // => 3.2
+ *
+ * _.toFinite(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toFinite(Infinity);
+ * // => 1.7976931348623157e+308
+ *
+ * _.toFinite('3.2');
+ * // => 3.2
+ */
+function toFinite(value) {
+  if (!value) {
+    return value === 0 ? value : 0;
+  }
+  value = toNumber(value);
+  if (value === INFINITY || value === -INFINITY) {
+    var sign = (value < 0 ? -1 : 1);
+    return sign * MAX_INTEGER;
+  }
+  return value === value ? value : 0;
+}
+
+module.exports = toFinite;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toInteger.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/toInteger.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toFinite = __webpack_require__(/*! ./toFinite */ "./node_modules/lodash/toFinite.js");
+
+/**
+ * Converts `value` to an integer.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToInteger`](http://www.ecma-international.org/ecma-262/7.0/#sec-tointeger).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {number} Returns the converted integer.
+ * @example
+ *
+ * _.toInteger(3.2);
+ * // => 3
+ *
+ * _.toInteger(Number.MIN_VALUE);
+ * // => 0
+ *
+ * _.toInteger(Infinity);
+ * // => 1.7976931348623157e+308
+ *
+ * _.toInteger('3.2');
+ * // => 3
+ */
+function toInteger(value) {
+  var result = toFinite(value),
+      remainder = result % 1;
+
+  return result === result ? (remainder ? result - remainder : result) : 0;
+}
+
+module.exports = toInteger;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toNumber.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toNumber.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = toNumber;
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-fragment/dist/vue-fragment.esm.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vue-fragment/dist/vue-fragment.esm.js ***!
+  \************************************************************/
+/*! exports provided: default, Fragment, SSR, Plugin */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Fragment", function() { return Fragment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SSR", function() { return SSR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Plugin", function() { return Plugin; });
+function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _objectSpread(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{},r=Object.keys(n);"function"==typeof Object.getOwnPropertySymbols&&(r=r.concat(Object.getOwnPropertySymbols(n).filter(function(e){return Object.getOwnPropertyDescriptor(n,e).enumerable}))),r.forEach(function(t){_defineProperty(e,t,n[t])})}return e}var freeze=function(e,t,n){Object.defineProperty(e,t,{configurable:!0,get:function(){return n},set:function(e){console.warn("tried to set frozen property ".concat(t," with ").concat(e))}})},component={abstract:!0,name:"Fragment",props:{name:{type:String,default:function(){return Math.floor(Date.now()*Math.random()).toString(16)}},html:{type:String,default:null}},mounted:function(){var e=this.$el,t=e.parentNode;e.__isFragment=!0,e.__isMounted=!1;var n=document.createComment("fragment#".concat(this.name,"#head")),r=document.createComment("fragment#".concat(this.name,"#tail"));e.__head=n,e.__tail=r;var o=document.createDocumentFragment();if(o.appendChild(n),Array.from(e.childNodes).forEach(function(t){var n=!t.hasOwnProperty("__isFragmentChild__");o.appendChild(t),n&&(freeze(t,"parentNode",e),freeze(t,"__isFragmentChild__",!0))}),o.appendChild(r),this.html){var a=document.createElement("template");a.innerHTML=this.html,Array.from(a.content.childNodes).forEach(function(e){o.appendChild(e)})}var i=e.nextSibling;t.insertBefore(o,e,!0),t.removeChild(e),freeze(e,"parentNode",t),freeze(e,"nextSibling",i),i&&freeze(i,"previousSibling",e),e.__isMounted=!0},render:function(e){var t=this,n=this.$slots.default;return n&&n.length&&n.forEach(function(e){return e.data=_objectSpread({},e.data,{attrs:_objectSpread({fragment:t.name},(e.data||{}).attrs)})}),e("div",{attrs:{fragment:this.name}},n)}};function ssr(e,t){ true&&console.warn("v-fragment SSR is not implemented yet.")}var Fragment=component,SSR=ssr,Plugin={install:function(e){e.component("fragment",component)}},index={Fragment:component,Plugin:Plugin,SSR:ssr};/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functional component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/watch-size/index.es.mjs":
+/*!**********************************************!*\
+  !*** ./node_modules/watch-size/index.es.mjs ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var index = (function (element, listener) {
+	var expand = document.createElement('_');
+	var shrink = expand.appendChild(document.createElement('_'));
+	var expandChild = expand.appendChild(document.createElement('_'));
+	var shrinkChild = shrink.appendChild(document.createElement('_'));
+
+	var lastWidth = void 0,
+	    lastHeight = void 0;
+
+	shrink.style.cssText = expand.style.cssText = 'height:100%;left:0;opacity:0;overflow:hidden;pointer-events:none;position:absolute;top:0;transition:0s;width:100%;z-index:-1';
+	shrinkChild.style.cssText = expandChild.style.cssText = 'display:block;height:100%;transition:0s;width:100%';
+	shrinkChild.style.width = shrinkChild.style.height = '200%';
+
+	element.appendChild(expand);
+
+	test();
+
+	return stop;
+
+	function test() {
+		unbind();
+
+		var width = element.offsetWidth;
+		var height = element.offsetHeight;
+
+		if (width !== lastWidth || height !== lastHeight) {
+			lastWidth = width;
+			lastHeight = height;
+
+			expandChild.style.width = width * 2 + 'px';
+			expandChild.style.height = height * 2 + 'px';
+
+			expand.scrollLeft = expand.scrollWidth;
+			expand.scrollTop = expand.scrollHeight;
+			shrink.scrollLeft = shrink.scrollWidth;
+			shrink.scrollTop = shrink.scrollHeight;
+
+			listener({ width: width, height: height });
+		}
+
+		shrink.addEventListener('scroll', test);
+		expand.addEventListener('scroll', test);
+	}
+
+	function unbind() {
+		shrink.removeEventListener('scroll', test);
+		expand.removeEventListener('scroll', test);
+	}
+
+	function stop() {
+		unbind();
+
+		element.removeChild(expand);
+	}
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+/***/ })
+
+}]);

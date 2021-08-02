@@ -74,7 +74,7 @@
           </b-field>
         </div>
       </form>
-      <form @submit.prevent="updateAssignment('branch')" class="mb-5">
+      <!-- <form @submit.prevent="updateAssignment('branch')" class="mb-5">
         <div
           class="
             is-flex is-justify-content-space-between is-align-items-flex-end
@@ -105,7 +105,7 @@
             </button>
           </b-field>
         </div>
-      </form>
+      </form> -->
       <form
         @submit.prevent="updateAssignment('department')"
         class="mb-5"

@@ -120,7 +120,7 @@ Route::prefix('dashboard')->group(function () {
   Route::post('/update-organization-metadata', 'OrganizationController@editMetadata')->name('update.metadata');
 
   /**
-   * Table Pagination Routes
+   * Role Routes
    */
   Route::post('/add-role', 'RoleController@addNewRole');
   Route::put('/update-role/{role}', 'RoleController@editRole');
@@ -129,8 +129,8 @@ Route::prefix('dashboard')->group(function () {
   Route::put('/add-role-permission/{role}', 'RoleController@addRolePermission');
   Route::delete('/delete-role/{role}', 'RoleController@deleteRole');
   Route::delete('/delete-roles/{roles}', 'RoleController@deleteRoles');
-  Route::put('/add-report-to-role/{role}', 'RoleController@addReportToRole');
-  Route::put('/remove-report-to-role/{role}/{reportTo}', 'RoleController@deleteReportToRole');
+  Route::put('/add-report-to-staff/{role}', 'RoleController@addReportToStaff');
+  Route::put('/remove-report-to-staff/{role}/{reportTo}', 'RoleController@deleteReportToStaff');
 
   /**
    * ESS Routes
@@ -177,6 +177,7 @@ Route::prefix('dashboard')->group(function () {
    */
 
   Route::get('/get-users', 'PaginationController@usersPerPage');
+  Route::get('/get-staff', 'PaginationController@staffPerPage');
   Route::get('/get-appraisals', 'PaginationController@appraisalsPerPage');
   Route::get('/get-appraisees/{appraisal}', 'PaginationController@appraiseesPerPage');
   Route::get('/search-staff', 'PaginationController@searchStaffDirectory');

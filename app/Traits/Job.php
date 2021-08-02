@@ -56,14 +56,21 @@ trait Job
     $request->validate([
       'category' => 'required|numeric',
       'title' => 'required|string',
-      'description' => 'required|string',
-      'specification' => 'required|file|mimes:pdf',
+      'description' => 'nullable|string',
+      'specification' => 'nullable|file|mimes:pdf|max:2048',
     ]);
+    if ($request->file('specification')) {
+      return JobTitle::create([
+        'job_category_id' => $request->category,
+        'title' => $request->title,
+        'description' => $request->description,
+        'specification' => $this->processJobSpecification($request),
+      ]);
+    }
     return JobTitle::create([
       'job_category_id' => $request->category,
       'title' => $request->title,
       'description' => $request->description,
-      'specification' => $this->processJobSpecification($request),
     ]);
   }
   public function updateJobTitle($request, $jobTitle)
@@ -72,8 +79,8 @@ trait Job
       $request->validate([
         'category' => 'required|numeric',
         'title' => 'required|string',
-        'description' => 'required|string',
-        'specification' => 'required|file|mimes:pdf|max:2048',
+        'description' => 'nullable|string',
+        'specification' => 'nullable|file|mimes:pdf|max:2048',
       ]);
       $jobTitle->title = $request->title;
       $jobTitle->description = $request->description;

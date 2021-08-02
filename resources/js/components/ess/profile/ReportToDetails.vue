@@ -94,7 +94,13 @@
               </div>
             </div>
 
-            <div class="column is-4">
+            <div
+              class="column is-4"
+              v-if="
+                $page.props.authUser.report_to_staff &&
+                JSON.parse($page.props.authUser.report_to_staff).length
+              "
+            >
               <h5 class="text-main">{{ $t("app.report_to_me") }}</h5>
               <div class="mb-3" v-if="getMyLeaders.reportToMe.length > 0">
                 <div v-for="(s, i) in getMyLeaders.reportToMe" :key="i">
@@ -137,7 +143,7 @@
               class="column is-4"
               v-if="
                 $page.props.authUser.report_to_roles &&
-                JSON.parse($page.props.authUser.report_to_roles).length > 0
+                JSON.parse($page.props.authUser.report_to_roles).length
               "
             >
               <h5 class="text-main">
@@ -151,10 +157,7 @@
                   :key="i"
                 >
                   <template v-for="(s, j) in getMyLeaders.directorates">
-                    <article
-                      :key="j"
-                      v-if="JSON.parse(s.roles).includes(office)"
-                    >
+                    <article :key="j">
                       <article class="leader__details">
                         <p class="report_to_text">
                           {{

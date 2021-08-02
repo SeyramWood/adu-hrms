@@ -205,18 +205,14 @@ export default {
     branches: Array,
     departments: Array,
     units: Array,
+    jobTitles: Array,
   },
   computed: {
-    ...mapGetters([
-      "getBranches",
-      "getDepartments",
-      "getUnits",
-      "getStaffCount",
-    ]),
+    ...mapGetters(["getDepartments", "getUnits", "getStaffCount"]),
   },
   created() {
     this.dispatchStaffCount({ payload: this.staffCount });
-    this.dispatchBranch({ payload: this.branches });
+    this.dispatchJobTitle({ payload: this.jobTitles });
     this.dispatchDepartment({ payload: this.departments });
     this.dispatchUnit({ payload: this.units });
   },
@@ -282,7 +278,7 @@ export default {
   methods: {
     ...mapActions([
       "dispatchStaffCount",
-      "dispatchBranch",
+      "dispatchJobTitle",
       "dispatchDepartment",
       "dispatchUnit",
     ]),

@@ -60,7 +60,7 @@ export default {
   name: "PasswordResetLink",
   metaInfo() {
     return {
-      title: `Password Reset Link | ADU Human Resource Management System`,
+      title: `Password Reset Link | ADU Staff Portal`,
     };
   },
   data() {

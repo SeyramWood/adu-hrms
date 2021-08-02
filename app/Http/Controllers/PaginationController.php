@@ -15,6 +15,10 @@ class PaginationController extends Controller
     {
         return $this->getUsers();
     }
+    public function staffPerPage()
+    {
+        return $this->getStaffList();
+    }
     public function appraisalsPerPage()
     {
         return $this->getAppraisals();

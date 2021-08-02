@@ -45,12 +45,12 @@ class RoleController extends Controller
     {
         return $this->createRolePermission($request, $role);
     }
-    public function addReportToRole(Request $request, Role $role)
+    public function addReportToStaff(Request $request, Role $role)
     {
-        return $this->createReportToRole($request, $role);
+        return $this->createReportToStaff($request, $role);
     }
-    public function deleteReportToRole(Role $role, $reportTo)
+    public function deleteReportToStaff(Role $role, $reportTo)
     {
-        return $this->destroyReportToRole($role, $reportTo);
+        return $this->destroyReportToStaff($role, $reportTo);
     }
 }

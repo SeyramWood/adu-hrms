@@ -342,9 +342,20 @@
                     v-slot="props"
                     >{{ props.row.id }}</b-table-column
                   >
+                  <b-table-column
+                    field="personal_details.avatar"
+                    label="Avatar"
+                    sortable
+                    v-slot="props"
+                    ><figure class="image is-32x32">
+                      <img
+                        class="is-rounded"
+                        :src="`/storage/avatar/${props.row.personal_details.avatar}`"
+                      /></figure
+                  ></b-table-column>
 
                   <b-table-column
-                    field="username"
+                    field="email"
                     label="Username"
                     sortable
                     v-slot="props"
@@ -352,7 +363,7 @@
                   >
 
                   <b-table-column
-                    field="staff_name"
+                    field="personal_details.lastName"
                     label="Name"
                     sortable
                     v-slot="props"
@@ -449,7 +460,7 @@
                   <template #empty v-if="noUserFound">
                     <article class="table__data__notfound">
                       <b-icon icon="database" pack="fas"></b-icon>
-                      <strong class="pt-3">Ooops! No user found.</strong>
+                      <strong class="pt-3">Ooops! No staff found.</strong>
                     </article>
                   </template>
                 </b-table>
@@ -568,6 +579,7 @@
                     field="permissions"
                     label="Permissions"
                     sortable
+                    width="250"
                     v-slot="props"
                   >
                     <div class="block" style="margin-bottom: -0.02rem">
@@ -641,22 +653,22 @@
                   >
                     <div
                       class="role-user"
-                      v-for="(r, index) in props.row.report_to"
-                      :key="index + r"
+                      v-for="(staff, index) in props.row.report_to"
+                      :key="index"
                     >
                       <b-button
                         rounded
                         size=""
                         type="is-danger is-light"
                         @click="
-                          removeReportToRole({
-                            reportTo: r,
+                          removeReportToStaff({
+                            staff: staff.user_id,
                             role: props.row.id,
                           })
                         "
                         ><b-icon icon="minus" size="is-small"></b-icon
                       ></b-button>
-                      <span>{{ r }}</span>
+                      <span>{{ getFullName(staff) }}</span>
                     </div>
                     <b-button
                       rounded
@@ -856,10 +868,10 @@
       class="dropper"
       :z-index="9999"
     >
-      <h5 class="text-main py-4">Assign Report To Roles</h5>
+      <h5 class="text-main py-4">Assign Staff</h5>
       <form
         style="width: 25rem"
-        @submit.prevent="addReportToRole(getReportToDropperId)"
+        @submit.prevent="addReportToStaff(getReportToDropperId)"
       >
         <b-field
           class="expand-input"
@@ -870,9 +882,9 @@
         >
           <treeselect
             :multiple="true"
-            :options="getFormatedRoles"
+            :options="getStaff"
             placeholder="Select staff..."
-            v-model="reportTo.roles"
+            v-model="reportTo.staff"
             :max-height="200"
           />
         </b-field>
@@ -928,14 +940,6 @@ export default {
           } ${s.personal_details.middleName || ""} ${
             s.personal_details.lastName
           }`,
-        };
-      });
-    },
-    getFormatedRoles() {
-      return this.getRoles.map((r) => {
-        return {
-          id: r.id,
-          label: r.role,
         };
       });
     },
@@ -997,7 +1001,7 @@ export default {
         error: [],
       },
       reportTo: {
-        roles: [],
+        staff: [],
         error: [],
       },
       user: {
@@ -1448,48 +1452,47 @@ export default {
         props: { role },
       });
     },
-    addReportToRole(id) {
+    addReportToStaff(id) {
       this.isSubmittingReportTo = true;
       this.reportTo.error = [];
       this.$axios
-        .put(`/dashboard/add-report-to-role/${id}`, {
-          roles: this.reportTo.roles,
+        .put(`/dashboard/add-report-to-staff/${id}`, {
+          staff: this.reportTo.staff,
         })
         .then((res) => {
           if (res.status === 200 && res.data.created) {
-            console.log(res.data.roles);
             this.dispatchRole({
-              type: "ADD_REPORT_TO_ROLE",
-              payload: { id, data: res.data.roles },
+              type: "ADD_REPORT_TO_STAFF",
+              payload: { id, data: res.data.staff },
             });
             this.isSubmittingReportTo = false;
-            this.reportTo.roles = [];
+            this.reportTo.staff = [];
             this.closeReportToDropper();
             setTimeout(() => {
-              this.snackbar("Role added successfully.", "is-success");
+              this.snackbar("Staff added successfully.", "is-success");
             }, 1000);
           }
         })
         .catch((err) => {
           this.isSubmittingReportTo = false;
           if (err.response.status === 422) {
-            this.reportTo.error = err.response.data.errors.roles || [];
+            this.reportTo.error = err.response.data.errors.staff || [];
           } else {
             console.log(err);
           }
         });
     },
-    removeReportToRole(data) {
+    removeReportToStaff(data) {
       this.$axios
-        .put(`/dashboard/remove-report-to-role/${data.role}/${data.reportTo}`)
+        .put(`/dashboard/remove-report-to-staff/${data.role}/${data.staff}`)
         .then((res) => {
           if (res.status === 200 && res.data.deleted) {
             this.dispatchRole({
-              type: "ADD_REPORT_TO_ROLE",
-              payload: { id: data.role, data: res.data.roles },
+              type: "ADD_REPORT_TO_STAFF",
+              payload: { id: data.role, data: res.data.staff },
             });
             setTimeout(() => {
-              this.snackbar("Role removed successfully.", "is-success");
+              this.snackbar("Staff removed successfully.", "is-success");
             }, 1000);
           }
         })

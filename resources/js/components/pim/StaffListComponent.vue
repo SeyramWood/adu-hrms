@@ -113,16 +113,12 @@
             </section>
 
             <b-table
-              :data="getStaffList"
-              :paginated="isPaginated"
-              :per-page="perPage"
-              :current-page="currentPage"
-              :pagination-simple="isPaginationSimple"
-              :pagination-position="paginationPosition"
+              :data="getStaffList.data"
               :default-sort-direction="defaultSortDirection"
               :sort-icon="sortIcon"
               :sort-icon-size="sortIconSize"
               :checked-rows.sync="checkedRows"
+              :loading="isLoading"
               checkable
               hoverable
               default-sort="id"
@@ -132,7 +128,18 @@
               aria-current-label="Current page"
             >
               <b-table-column
-                field="title"
+                field="props.row.personal_details.avatar"
+                label="Avatar"
+                sortable
+                v-slot="props"
+                ><figure class="image is-32x32">
+                  <img
+                    class="is-rounded"
+                    :src="`/storage/avatar/${props.row.personal_details.avatar}`"
+                  /></figure
+              ></b-table-column>
+              <b-table-column
+                field="personal_details.title"
                 label="Title"
                 sortable
                 v-slot="props"
@@ -143,14 +150,14 @@
                 }}</b-table-column
               >
               <b-table-column
-                field="last_name"
+                field="personal_details.lastName"
                 label="Last Name"
                 sortable
                 v-slot="props"
                 >{{ props.row.personal_details.lastName }}</b-table-column
               >
               <b-table-column
-                field="other_name"
+                field="personal_details.firstName"
                 label="Other Names"
                 sortable
                 v-slot="props"
@@ -187,14 +194,6 @@
                 <span>{{ getEmpStatus(props.row.job) || "N/A" }}</span>
               </b-table-column>
               <b-table-column
-                field="branch"
-                label="Branch"
-                sortable
-                v-slot="props"
-              >
-                <span>{{ props.row.branch || "N/A" }}</span>
-              </b-table-column>
-              <b-table-column
                 field="department"
                 label="Department/Unit"
                 sortable
@@ -203,14 +202,6 @@
                 <span>{{
                   props.row.department || props.row.unit || "N/A"
                 }}</span>
-              </b-table-column>
-              <b-table-column
-                field="supervisor"
-                label="Supervisor"
-                sortable
-                v-slot="props"
-              >
-                <span>{{ props.row.supervisor || "N/A" }}</span>
               </b-table-column>
               <b-table-column field="actions" label="Actions" v-slot="props">
                 <div class="b-tooltips">
@@ -261,6 +252,15 @@
                   </b-tooltip>
                 </div>
               </b-table-column>
+              <template #footer>
+                <paginate :state="getStaffList" :dispatch="dispatchStaff" />
+              </template>
+              <template #empty v-if="noUserFound">
+                <article class="table__data__notfound">
+                  <b-icon icon="database" pack="fas"></b-icon>
+                  <strong class="pt-3">Ooops! No staff found.</strong>
+                </article>
+              </template>
             </b-table>
           </div>
         </div>
@@ -272,19 +272,31 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import AssignmentModal from "./modal/AssignmentModal";
+import Paginate from "../Paginate";
 export default {
   name: "StaffListComponent",
-  components: { AssignmentModal },
+  components: { AssignmentModal, Paginate },
+
   computed: {
     ...mapGetters([
       "getStaffList",
       "getJobTitles",
       "getEmploymentStatus",
-      "getBranches",
       "getDepartments",
     ]),
   },
   mounted() {
+    this.isLoading = true;
+    this.$nextTick(() => {
+      if (this.getStaffList.data.length) {
+        this.isLoading = false;
+      } else {
+        setTimeout(() => {
+          this.isLoading = false;
+          this.noAppraisalFound = true;
+        }, 1000);
+      }
+    });
     // console.log(this.getStaffList);
   },
   data() {
@@ -297,6 +309,8 @@ export default {
       sortIconSize: "is-small",
       currentPage: 1,
       perPage: 50,
+      noUserFound: false,
+      isLoading: false,
       checkedRows: [],
 
       isModalActive: false,
@@ -322,6 +336,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["dispatchStaff"]),
     getStaffToAssign(id) {
       this.staffToAssignId = id;
       this.isModalActive = true;
@@ -330,21 +345,21 @@ export default {
       this.toggleQueryForm = !this.toggleQueryForm;
     },
     cancelAddJobTitle() {
-      console.log("cancel");
+      // console.log("cancel");
     },
     getEmpStatus(job) {
       if (job) {
         const status = this.getEmploymentStatus.find(
           (s) => s.id === parseInt(job.employmentStatus)
         );
-        return status.status || "";
+        return status ? status.status : "";
       }
       return "";
     },
     getJobTitle(job) {
       if (job) {
         const t = this.getJobTitles.find((t) => t.id === parseInt(job.title));
-        return t.title || "";
+        return t ? t.title : "";
       }
       return "";
     },

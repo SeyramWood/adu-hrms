@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const state = {
-    staffList: [],
+    staffList: { data: [] },
     staffDirectory: []
 };
 
@@ -36,7 +36,14 @@ const actions = {
                     commit("deleteUsers", payload);
                     break;
                 default:
-                    commit("addStaff", payload);
+                    try {
+                        const result = await axios.get(
+                            `/dashboard/get-staff?page=${payload}`
+                        );
+                        commit("addStaff", result.data);
+                    } catch (error) {
+                        console.log(error);
+                    }
                     break;
             }
         } catch (err) {
@@ -47,11 +54,19 @@ const actions = {
 
 const mutations = {
     addStaff: (state, data) => {
-        state.staffList = data.map(u => {
-            u.personal_details = JSON.parse(u.personal_details);
-            u.job = u.job ? JSON.parse(u.job) : u.job;
-            return u;
-        });
+        if (!data) return state.staffList;
+        if (data.data.length) {
+            state.staffList = {
+                ...data,
+                data: data.data.map(u => {
+                    u.personal_details = JSON.parse(u.personal_details);
+                    u.job = u.job ? JSON.parse(u.job) : u.job;
+                    return u;
+                })
+            };
+        } else {
+            state.staffList = data;
+        }
     },
     updateJob: (state, data) => {
         let staff = {
@@ -59,8 +74,8 @@ const mutations = {
             personal_details: JSON.parse(data.data.personal_details),
             job: data.data.job ? JSON.parse(data.data.job) : data.data.job
         };
-        state.staffList.splice(
-            state.staffList.findIndex(p => p.id === data.id),
+        state.staffList.data.splice(
+            state.staffList.data.findIndex(p => p.id === data.id),
             1,
             staff
         );
@@ -74,8 +89,6 @@ const mutations = {
                 return u;
             })
         ];
-
-        console.log(data);
     }
 };
 

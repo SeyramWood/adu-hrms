@@ -172,14 +172,13 @@ export default {
   name: "Dashboard",
   metaInfo: {
     // if no subcomponents specify a metaInfo.title, this title will be used
-    title: "ADU Human Resource Management System",
+    title: "ADU Staff Portal",
     // all titles will be injected into this template
-    titleTemplate: "%s | ADU Human Resource Management System",
+    titleTemplate: "%s | ADU Staff Portal",
   },
   props: { userPermissions: { require: true, type: Array } },
   computed: {
     ...mapGetters([
-      "getBranches",
       "getDepartments",
       "getOrganizationProfile",
       "getProfile",
@@ -194,11 +193,11 @@ export default {
       )}`;
     },
     authJobTitle() {
-      if (this.getAuthUser.jobTitle && this.getJobTitles) {
+      if (this.getAuthUser.jobTitle && this.getJobTitles.length) {
         const title = this.getJobTitles.find(
           (t) => t.id === parseInt(this.getAuthUser.jobTitle)
         );
-        return title.title;
+        return title ? title.title : "";
       }
       return "";
     },
@@ -226,7 +225,6 @@ export default {
   },
   created() {
     this.dispatchAuthUser({ payload: this.$page.props.authUser });
-    this.dispatchJobTitle({ payload: this.$page.props.jobTitles });
     this.dispatchOrgnizationProfile({ payload: this.$page.props.orgInfo });
   },
   mounted() {},
@@ -238,11 +236,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      "dispatchOrgnizationProfile",
-      "dispatchAuthUser",
-      "dispatchJobTitle",
-    ]),
+    ...mapActions(["dispatchOrgnizationProfile", "dispatchAuthUser"]),
     isNull(el) {
       if (el === "null" || null) {
         return "";

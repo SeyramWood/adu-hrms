@@ -520,7 +520,6 @@ export default {
   },
   layout: Dashboard,
   props: {
-    staffList: Array,
     jobTitles: Array,
     employmentStatuses: Array,
     branches: Array,
@@ -531,7 +530,7 @@ export default {
     workShifts: Array,
   },
   created() {
-    this.dispatchStaff({ payload: this.staffList });
+    this.dispatchStaff({ payload: 1 });
     this.dispatchJobTitle({ payload: this.jobTitles });
     this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
     this.dispatchDepartment({ payload: this.departments });

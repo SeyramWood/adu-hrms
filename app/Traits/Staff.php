@@ -47,13 +47,11 @@ trait Staff
     }
     if (Gate::any(['admin', 'president'], Auth::user())) {
       return User::join('profiles', 'profiles.user_id', '=', 'users.id')
-        ->leftJoin('branches', 'branches.id', '=', 'profiles.branch_id')
         ->leftJoin('departments', 'departments.id', '=', 'profiles.department_id')
         ->leftJoin('units', 'units.id', '=', 'profiles.unit_id')
         ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
         ->select(
           'users.*',
-          'profiles.branch_id',
           'profiles.department_id',
           'profiles.unit_id',
           'profiles.position_id',
@@ -63,13 +61,12 @@ trait Staff
           'contact_details->mobile as mobile',
           'profiles.job',
           'profiles.slug',
-          'branches.name as branch',
           'departments.name as department',
           'units.name as unit',
           'positions.name as position',
         )
         ->orderBy('users.id', 'desc')
-        ->get();
+        ->paginate(100);
     }
     if (Gate::allows('hod', Auth::user())) {
       return User::join('profiles', 'profiles.user_id', '=', 'users.id')
@@ -321,11 +318,12 @@ trait Staff
 
   public function getDirectorates()
   {
-    $directorates = [];
-    $roleStaff = Role::whereIn('role', (Auth::user()->report_to_roles ? json_decode(Auth::user()->report_to_roles) : []))
-      ->whereNotNull('staff')
+    $authReportToRoles = Auth::user()->report_to_roles ? json_decode(Auth::user()->report_to_roles) : [];
+    $roleStaff = Role::whereNotNull('staff')
+      ->whereIn('id', $authReportToRoles)
       ->select('staff')
       ->get()->toArray();
+    $directorates = [];
     foreach ($roleStaff as  $value) {
       array_push($directorates, json_decode($value['staff']));
     }
@@ -349,6 +347,7 @@ trait Staff
       )
       ->orderBy('users.id', 'desc')
       ->get();
+    // dd($directorate);
   }
 
   public function checkUserPermissions($permission, $roles)
@@ -359,6 +358,7 @@ trait Staff
     }
     return false;
   }
+
   public function getUserPermissions($roles)
   {
     if ($roles) {
@@ -375,10 +375,11 @@ trait Staff
       return $userRoles;
     }
   }
+
   public function getReportTo()
   {
-    if (Auth::user()->report_to_roles && count(json_decode(Auth::user()->report_to_roles))) {
-      $roles = Role::whereIn('role', json_decode(Auth::user()->report_to_roles))->get();
+    if (Auth::user()->report_to_staff && count(json_decode(Auth::user()->report_to_staff))) {
+      $roles = Role::whereIn('role', json_decode(Auth::user()->report_to_staff))->get();
       $allStaff = [];
       for ($i = 0; $i < count($roles); $i++) {
         if ($roles[$i]->staff && count(json_decode($roles[$i]->staff))) {
@@ -411,37 +412,27 @@ trait Staff
   public function getReportToMe()
   {
     if (Auth::user()->roles && count(json_decode(Auth::user()->roles))) {
-      $roles = Role::whereNotNull('report_to')->select('staff', 'report_to')->get();
-      $allStaff = [];
-      for ($i = 0; $i < count($roles); $i++) {
-        if ($roles[$i]->report_to && count(json_decode($roles[$i]->report_to))) {
-          if (count(array_intersect(json_decode(Auth::user()->roles), json_decode($roles[$i]->report_to)))) {
-            if ($roles[$i]->staff && count(json_decode($roles[$i]->staff))) {
-              $sta = json_decode($roles[$i]->staff);
-              $allStaff = array_values(array_merge($allStaff, array_values($sta)));
-            }
-          }
-        }
+      if (Auth::user()->report_to_staff && count(json_decode(Auth::user()->report_to_staff))) {
+        return User::join('profiles', 'profiles.user_id', '=', 'users.id')
+          ->whereIn('users.id', json_decode(Auth::user()->report_to_staff))
+          ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
+          ->select(
+            'users.*',
+            'profiles.branch_id',
+            'profiles.department_id',
+            'profiles.unit_id',
+            'profiles.position_id',
+            'profiles.personal_details->title as title',
+            'profiles.personal_details->lastName as lastName',
+            'profiles.personal_details->firstName as firstName',
+            'profiles.personal_details->middleName as middleName',
+            'profiles.contact_details->mobile as mobile',
+            'profiles.contact_details->workEmail as mail',
+            'positions.name as position',
+          )
+          ->orderBy('users.id', 'desc')
+          ->get();
       }
-      return User::join('profiles', 'profiles.user_id', '=', 'users.id')
-        ->whereIn('users.id', $allStaff)
-        ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
-        ->select(
-          'users.*',
-          'profiles.branch_id',
-          'profiles.department_id',
-          'profiles.unit_id',
-          'profiles.position_id',
-          'profiles.personal_details->title as title',
-          'profiles.personal_details->lastName as lastName',
-          'profiles.personal_details->firstName as firstName',
-          'profiles.personal_details->middleName as middleName',
-          'profiles.contact_details->mobile as mobile',
-          'profiles.contact_details->workEmail as mail',
-          'positions.name as position',
-        )
-        ->orderBy('users.id', 'desc')
-        ->get();
     }
     return [];
   }

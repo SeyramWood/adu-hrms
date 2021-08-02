@@ -27,7 +27,7 @@ class DashboarController extends Controller
             abort(401);
         }
         return inertia('Dashboard', [
-            'branches' => fn () => $this->getBranches(),
+            'jobTitles' => fn () => $this->getJobTitle(),
             'staffCount' => fn () => $this->getStaffCount(),
             'departments' => fn () => $this->getDepartments(),
             'units' => fn () => $this->getUnits(),
@@ -83,7 +83,6 @@ class DashboarController extends Controller
             abort(403);
         }
         return inertia('PIM', [
-            'staffList' => fn () => $this->getStaffList(),
             'jobTitles' => fn () => $this->getJobTitle(),
             'employmentStatuses' => fn () => $this->getEmploymentStatus(),
             'positions' => fn () => $this->getPositions(),

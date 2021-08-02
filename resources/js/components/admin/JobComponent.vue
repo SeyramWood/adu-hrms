@@ -962,7 +962,7 @@ export default {
       data.append("category", this.jobTitle.category);
       data.append("title", this.jobTitle.title);
       data.append("description", this.jobTitle.description);
-      data.append("specification", this.jobTitle.specification);
+      data.append("specification", this.jobTitle.specification || "");
       this.$axios
         .post("/dashboard/create-job-title", data)
         .then((res) => {

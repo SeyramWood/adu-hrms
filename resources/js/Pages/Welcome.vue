@@ -88,7 +88,7 @@ export default {
   name: "Welcome",
   metaInfo() {
     return {
-      title: `Login | ADU Human Resource Management System`,
+      title: `Login | ADU Staff Portal`,
     };
   },
   mounted() {

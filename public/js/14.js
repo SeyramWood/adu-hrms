@@ -108,7 +108,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: "Welcome",
   metaInfo: function metaInfo() {
     return {
-      title: "Login | ADU Human Resource Management System"
+      title: "Login | ADU Staff Portal"
     };
   },
   mounted: function mounted() {
