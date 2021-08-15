@@ -69,5 +69,11 @@ class PermissionServiceProvider extends ServiceProvider
         Gate::define('supervisor', function (User $user) {
             return $user->hasPermission('supervisor');
         });
+
+        /**Other Permissions */
+
+        Gate::define('approve_it_equipment', function (User $user) {
+            return $user->hasPermission('approve_it_equipment');
+        });
     }
 }

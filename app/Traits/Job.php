@@ -63,14 +63,14 @@ trait Job
       return JobTitle::create([
         'job_category_id' => $request->category,
         'title' => $request->title,
-        'description' => $request->description,
+        'description' => $request->description === 'null' ? "" : $request->description,
         'specification' => $this->processJobSpecification($request),
       ]);
     }
     return JobTitle::create([
       'job_category_id' => $request->category,
       'title' => $request->title,
-      'description' => $request->description,
+      'description' => $request->description === 'null' ? "" : $request->description,
     ]);
   }
   public function updateJobTitle($request, $jobTitle)
@@ -82,18 +82,20 @@ trait Job
         'description' => 'nullable|string',
         'specification' => 'nullable|file|mimes:pdf|max:2048',
       ]);
+      $jobTitle->job_category_id = $request->category;
       $jobTitle->title = $request->title;
-      $jobTitle->description = $request->description;
+      $jobTitle->description = $request->description === 'null' ? "" : $request->description;
       $jobTitle->specification = $this->processJobSpecification($request, $jobTitle->specification);
       $jobTitle->save();
     } else {
       $request->validate([
         'category' => 'required|numeric',
         'title' => 'required|string',
-        'description' => 'required|string'
+        'description' => 'nullable|string'
       ]);
+      $jobTitle->job_category_id = $request->category;
       $jobTitle->title = $request->title;
-      $jobTitle->description = $request->description;
+      $jobTitle->description = $request->description === 'null' ? "" : $request->description;
       $jobTitle->save();
     }
     return response()->json(['updated' => true, 'job' => JobTitle::find($jobTitle->id)]);

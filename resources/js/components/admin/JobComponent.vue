@@ -407,7 +407,12 @@
                     sortable
                     v-slot="props"
                   >
-                    <span v-if="openJobTitleDesc !== props.row.id">
+                    <span
+                      v-if="
+                        openJobTitleDesc !== props.row.id &&
+                        props.row.description
+                      "
+                    >
                       {{ `${props.row.description.substring(0, 130)}...` }}
                     </span>
                     <b-collapse
@@ -418,7 +423,7 @@
                       aria-id="contentIdForA11y1"
                       animation="slide"
                     >
-                      <template #trigger="props">
+                      <template #trigger="props" v-if="props.row.description">
                         <a aria-controls="contentIdForA11y1">
                           {{ !props.open ? "view more" : "view less" }}
                         </a>

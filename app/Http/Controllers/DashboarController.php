@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\Job;
 use App\Traits\Admin;
+use App\Traits\ManageEquipmentRequest;
 use App\Traits\ManageRole;
 use App\Traits\Shift;
 use App\Traits\Staff;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Gate;
 
 class DashboarController extends Controller
 {
-    use Admin, Job, Staff, Organization, StaffProfile, Shift, ManageRole;
+    use Admin, Job, Staff, Organization, StaffProfile, Shift, ManageRole, ManageEquipmentRequest;
 
     public function __construct()
     {
@@ -75,6 +76,7 @@ class DashboarController extends Controller
             'reportTo' => fn () => $this->getReportTo(),
             'reportToMe' => fn () => $this->getReportToMe(),
             'directorates' => fn () => $this->getDirectorates(),
+            'grantedEquipmentRequests' => fn () => $this->getGrantedEquipmentRequests(),
         ]);
     }
     public function pim()

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $tab = [
             'user_management', 'job', 'shift_management', 'organization', 'staff_list', 'work_shift', 'pim_reports', 'pim_configuration', 'appraisal', 'kpi_configuration'
         ];
-        $other = ['review_appraisal'];
+        $other = ['review_appraisal', 'approve_it_equipment'];
         $organization = ['admin', 'president', 'oft_president', 'vice_president', 'branch_manager', 'hod', 'supervisor'];
         $crud = ['create', 'read', 'update', 'delete'];
         DB::table('permissions')->insert([

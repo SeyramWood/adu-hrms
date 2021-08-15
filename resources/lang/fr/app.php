@@ -85,9 +85,9 @@ return [
 
   'contact_detail_cta' => 'Coordonnées de l\'employé',
   'mobile' => 'Mobile',
-  'work_tel' => 'Téléphone de travail',
+  'work_tel' => 'Téléphone',
   'home_tel' => 'Téléphone fixe',
-  'work_email' => 'Email de travail',
+  'work_email' => 'Email',
   'other_email' => 'Autre e-mail',
   'email' => 'Email|email',
   'username' => 'Nom d\'utilisateur|nom d\'utilisateur',

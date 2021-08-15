@@ -89,9 +89,9 @@ return [
 
   'contact_detail_cta' => 'Employee Contact Details',
   'mobile' => 'Mobile',
-  'work_tel' => 'Work Telephone',
+  'work_tel' => 'Telephone',
   'home_tel' => 'Home Telephone',
-  'work_email' => 'Work Email',
+  'work_email' => 'Email',
   'other_email' => 'Other Email',
   'email' => 'Email|email',
   'username' => 'Username',

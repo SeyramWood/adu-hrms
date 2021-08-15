@@ -60,8 +60,8 @@ Object.defineProperty(Vue.prototype, "$axios", { value: axios });
 Vue.mixin({
     computed: {
         getYears() {
-            const now = new Date().getUTCFullYear();
-            return Array(now - (now - 91))
+            const now = new Date().getUTCFullYear() + 29;
+            return Array(now - (now - 99))
                 .fill("")
                 .map((v, idx) => now - idx);
         }
@@ -116,6 +116,11 @@ Vue.mixin({
             }
             return el;
         },
+        formatMonthYear(str) {
+            const date = this.$luxon.fromISO(str).toFormat("MMMM, y");
+            if (date === "Invalid DateTime") return "";
+            return date;
+        },
         formatDate(str) {
             const date = this.$luxon.fromISO(str).toFormat("MMMM dd, y");
             if (date === "Invalid DateTime") return "";
@@ -130,6 +135,12 @@ Vue.mixin({
             const time = this.$luxon.fromISO(str).toFormat("hh:mm a");
             if (time === "Invalid DateTime") return "";
             return time;
+        },
+        formatDateTime2(str) {
+            const d = this.formatDate2(str);
+            const t = this.formatTime(str);
+            if (d === "Invalid DateTime" || t === "Invalid DateTime") return "";
+            return `${d} ${t}`;
         },
         formatDurationInHours(start, end) {
             const duration = Interval.fromDateTimes(

@@ -484,13 +484,21 @@
                       size="is-small"
                       pack="fas"
                       icon-right="upload"
-                      :id="`comment-id${getAttachmentDropperId}`"
+                      :id="`comment-id${
+                        getAttachmentDropperId === props.row.id
+                          ? getAttachmentDropperId
+                          : ''
+                      }`"
                       @click="openAttachmentDropper(props.row, 'attachment')"
                     ></b-button>
                   </b-tooltip>
                   <b-tooltip :label="$t('app.editComment')" type="is-dark">
                     <b-button
-                      :id="`comment-id${getAttachmentDropperId}`"
+                      :id="`comment-id${
+                        getAttachmentDropperId === props.row.id
+                          ? getAttachmentDropperId
+                          : ''
+                      }`"
                       class="is-info is-light"
                       size="is-small"
                       pack="fas"
@@ -520,8 +528,8 @@
       ref="attachmentDropper"
       @esc-keydown="closeAttachmentDropper"
       @other-area-clicked="closeAttachmentDropper"
-      class="job-cat-dropper"
-      :z-index="1000"
+      class="dropper"
+      :z-index="9999"
     >
       <form
         @submit.prevent="replacePersonalDetailsAttachment(attachmentUpdateType)"

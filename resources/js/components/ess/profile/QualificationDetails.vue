@@ -95,20 +95,15 @@
                             }"
                             :message="qualificationsErrors.education.started"
                           >
-                            <b-select
+                            <b-datepicker
                               v-model="qualifications.education.started"
+                              type="month"
                               :placeholder="$t('app.selectYear')"
-                              size=""
+                              icon="calendar"
+                              trap-focus
                               expanded
                             >
-                              <option
-                                :value="year"
-                                v-for="(year, index) in getYears"
-                                :key="index"
-                              >
-                                {{ year }}
-                              </option>
-                            </b-select>
+                            </b-datepicker>
                           </b-field>
                         </div>
                         <div class="column is-6">
@@ -122,20 +117,15 @@
                             }"
                             :message="qualificationsErrors.education.completed"
                           >
-                            <b-select
+                            <b-datepicker
                               v-model="qualifications.education.completed"
+                              type="month"
                               :placeholder="$t('app.selectYear')"
-                              size=""
+                              icon="calendar"
+                              trap-focus
                               expanded
                             >
-                              <option
-                                :value="year"
-                                v-for="(year, index) in getYears"
-                                :key="index"
-                              >
-                                {{ year }}
-                              </option>
-                            </b-select>
+                            </b-datepicker>
                           </b-field>
                         </div>
                       </div>
@@ -170,6 +160,8 @@
               :current-page="1"
               :pagination-simple="true"
               pagination-position="bottom"
+              default-sort="id"
+              default-sort-direction="desc"
             >
               <b-table-column
                 field="institution"
@@ -190,14 +182,20 @@
                 :label="$t('app.started')"
                 sortable
                 v-slot="props"
-                >{{ props.row.started }}</b-table-column
+                >{{
+                  props.row.started ? formatMonthYear(props.row.started) : ""
+                }}</b-table-column
               >
               <b-table-column
                 field="completed"
                 :label="$t('app.completed')"
                 sortable
                 v-slot="props"
-                >{{ props.row.completed }}</b-table-column
+                >{{
+                  props.row.completed
+                    ? formatMonthYear(props.row.completed)
+                    : ""
+                }}</b-table-column
               >
               <b-table-column
                 field="actions"
@@ -211,7 +209,11 @@
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`education-id${getAttachmentDropperId}`"
+                      :id="`education-id${
+                        getAttachmentDropperId === props.row.id
+                          ? getAttachmentDropperId
+                          : ''
+                      }`"
                       @click="openEducationDropper(props.row)"
                       :disabled="
                         !userOrPermission('update', getProfile.user_id)
@@ -323,7 +325,7 @@
                           </b-field>
                         </div>
                       </div>
-                      <div class="columns">
+                      <!-- <div class="columns">
                         <div class="column is-6">
                           <b-field
                             :label="$tc('app.comment', 1)"
@@ -342,7 +344,7 @@
                             ></b-input>
                           </b-field>
                         </div>
-                      </div>
+                      </div> -->
 
                       <hr />
                       <b-field class="buttons">
@@ -390,13 +392,13 @@
                 v-slot="props"
                 >{{ props.row.yearOfExperience }}</b-table-column
               >
-              <b-table-column
+              <!-- <b-table-column
                 field="comment"
                 :label="$tc('app.comment', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.comment }}</b-table-column
-              >
+              > -->
               <b-table-column
                 field="actions"
                 :label="$tc('app.action', 2)"
@@ -409,7 +411,11 @@
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`expertise-id${getAttachmentDropperId}`"
+                      :id="`expertise-id${
+                        getAttachmentDropperId === props.row.id
+                          ? getAttachmentDropperId
+                          : ''
+                      }`"
                       @click="openExpertiseDropper(props.row)"
                       :disabled="
                         !userOrPermission('update', getProfile.user_id)
@@ -528,7 +534,7 @@
                           </b-field>
                         </div>
                       </div>
-                      <div class="columns">
+                      <!-- <div class="columns">
                         <div class="column is-6">
                           <b-field
                             :label="$tc('app.comment', 1)"
@@ -547,7 +553,7 @@
                             ></b-input>
                           </b-field>
                         </div>
-                      </div>
+                      </div> -->
                       <hr />
                       <b-field class="buttons">
                         <button
@@ -594,13 +600,13 @@
                 v-slot="props"
                 >{{ props.row.fluency }}</b-table-column
               >
-              <b-table-column
+              <!-- <b-table-column
                 field="comment"
                 :label="$tc('app.comment', 1)"
                 sortable
                 v-slot="props"
                 >{{ props.row.comment }}</b-table-column
-              >
+              > -->
               <b-table-column
                 field="actions"
                 :label="$tc('app.action', 2)"
@@ -613,7 +619,11 @@
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`language-id${getAttachmentDropperId}`"
+                      :id="`language-id${
+                        getAttachmentDropperId === props.row.id
+                          ? getAttachmentDropperId
+                          : ''
+                      }`"
                       @click="openLanguageDropper(props.row)"
                       :disabled="
                         !userOrPermission('update', getProfile.user_id)
@@ -738,20 +748,15 @@
                               qualificationsErrors.continuousDev.started
                             "
                           >
-                            <b-select
+                            <b-datepicker
                               v-model="qualifications.continuousDev.started"
+                              type="month"
                               :placeholder="$t('app.selectYear')"
-                              size=""
+                              icon="calendar"
+                              trap-focus
                               expanded
                             >
-                              <option
-                                :value="year"
-                                v-for="(year, index) in getYears"
-                                :key="index"
-                              >
-                                {{ year }}
-                              </option>
-                            </b-select>
+                            </b-datepicker>
                           </b-field>
                         </div>
                         <div class="column is-6">
@@ -767,20 +772,15 @@
                               qualificationsErrors.continuousDev.completed
                             "
                           >
-                            <b-select
+                            <b-datepicker
                               v-model="qualifications.continuousDev.completed"
+                              type="month"
                               :placeholder="$t('app.selectYear')"
-                              size=""
+                              icon="calendar"
+                              trap-focus
                               expanded
                             >
-                              <option
-                                :value="year"
-                                v-for="(year, index) in getYears"
-                                :key="index"
-                              >
-                                {{ year }}
-                              </option>
-                            </b-select>
+                            </b-datepicker>
                           </b-field>
                         </div>
                       </div>
@@ -815,6 +815,8 @@
               :current-page="1"
               :pagination-simple="true"
               pagination-position="bottom"
+              default-sort="id"
+              default-sort-direction="desc"
             >
               <b-table-column
                 field="institution"
@@ -835,15 +837,21 @@
                 :label="$t('app.started')"
                 sortable
                 v-slot="props"
-                >{{ props.row.started }}</b-table-column
+                >{{
+                  props.row.started ? formatMonthYear(props.row.started) : ""
+                }}</b-table-column
               >
               <b-table-column
                 field="completed"
                 :label="$t('app.completed')"
                 sortable
                 v-slot="props"
-                >{{ props.row.completed }}</b-table-column
-              >
+                >{{
+                  props.row.completed
+                    ? formatMonthYear(props.row.completed)
+                    : ""
+                }}
+              </b-table-column>
               <b-table-column
                 field="actions"
                 :label="$tc('app.action', 2)"
@@ -856,7 +864,11 @@
                       size="is-small"
                       pack="fas"
                       icon-right="pen"
-                      :id="`continuous-dev-id${getAttachmentDropperId}`"
+                      :id="`continuous-dev-id${
+                        getAttachmentDropperId === props.row.id
+                          ? getAttachmentDropperId
+                          : ''
+                      }`"
                       @click="openContinuousDevDropper(props.row)"
                       :disabled="
                         !userOrPermission('update', getProfile.user_id)
@@ -889,7 +901,7 @@
       @esc-keydown="closeEducationDropper"
       @other-area-clicked="closeEducationDropper"
       class="dropper"
-      :z-index="1000"
+      :z-index="9999"
     >
       <form @submit.prevent="updateEducation()" style="width: 30rem">
         <h3 class="label text-main">Edit Educational Details</h3>
@@ -933,7 +945,7 @@
           </div>
         </div>
         <div class="columns">
-          <div class="column is-4">
+          <div class="column is-6">
             <b-field
               label="Started"
               expanded
@@ -942,23 +954,18 @@
               }"
               :message="qualificationsErrors.education.started"
             >
-              <b-select
+              <b-datepicker
                 v-model="qualifications.education.started"
-                placeholder="Select year..."
-                size=""
+                type="month"
+                :placeholder="$t('app.selectYear')"
+                icon="calendar"
+                trap-focus
                 expanded
               >
-                <option
-                  :value="year"
-                  v-for="(year, index) in getYears"
-                  :key="index"
-                >
-                  {{ year }}
-                </option>
-              </b-select>
+              </b-datepicker>
             </b-field>
           </div>
-          <div class="column is-4">
+          <div class="column is-6">
             <b-field
               label="Completed"
               expanded
@@ -968,20 +975,15 @@
               }"
               :message="qualificationsErrors.education.completed"
             >
-              <b-select
+              <b-datepicker
                 v-model="qualifications.education.completed"
-                placeholder="Select year..."
-                size=""
+                type="month"
+                :placeholder="$t('app.selectYear')"
+                icon="calendar"
+                trap-focus
                 expanded
               >
-                <option
-                  :value="year"
-                  v-for="(year, index) in getYears"
-                  :key="index"
-                >
-                  {{ year }}
-                </option>
-              </b-select>
+              </b-datepicker>
             </b-field>
           </div>
         </div>
@@ -1006,7 +1008,7 @@
       @esc-keydown="closeContinuousDevDropper"
       @other-area-clicked="closeContinuousDevDropper"
       class="dropper"
-      :z-index="1000"
+      :z-index="999"
     >
       <form @submit.prevent="updateContinuousDev()" style="width: 30rem">
         <h3 class="label text-main">Edit Continuous Development</h3>
@@ -1050,7 +1052,7 @@
           </div>
         </div>
         <div class="columns">
-          <div class="column is-4">
+          <div class="column is-6">
             <b-field
               label="Started"
               expanded
@@ -1060,23 +1062,18 @@
               }"
               :message="qualificationsErrors.continuousDev.started"
             >
-              <b-select
+              <b-datepicker
                 v-model="qualifications.continuousDev.started"
-                placeholder="Select year..."
-                size=""
+                type="month"
+                :placeholder="$t('app.selectYear')"
+                icon="calendar"
+                trap-focus
                 expanded
               >
-                <option
-                  :value="year"
-                  v-for="(year, index) in getYears"
-                  :key="index"
-                >
-                  {{ year }}
-                </option>
-              </b-select>
+              </b-datepicker>
             </b-field>
           </div>
-          <div class="column is-4">
+          <div class="column is-6">
             <b-field
               label="Completed"
               expanded
@@ -1086,20 +1083,15 @@
               }"
               :message="qualificationsErrors.continuousDev.completed"
             >
-              <b-select
+              <b-datepicker
                 v-model="qualifications.continuousDev.completed"
-                placeholder="Select year..."
-                size=""
+                type="month"
+                :placeholder="$t('app.selectYear')"
+                icon="calendar"
+                trap-focus
                 expanded
               >
-                <option
-                  :value="year"
-                  v-for="(year, index) in getYears"
-                  :key="index"
-                >
-                  {{ year }}
-                </option>
-              </b-select>
+              </b-datepicker>
             </b-field>
           </div>
         </div>
@@ -1126,7 +1118,7 @@
       @esc-keydown="closeExpertiseDropper"
       @other-area-clicked="closeExpertiseDropper"
       class="dropper"
-      :z-index="1000"
+      :z-index="9999"
     >
       <form @submit.prevent="updateExpertise()" style="width: 30rem">
         <h3 class="label text-main">Edit Expertise</h3>
@@ -1168,7 +1160,7 @@
           </div>
         </div>
 
-        <div class="columns">
+        <!-- <div class="columns">
           <div class="column is-12">
             <b-field
               label="Comment"
@@ -1185,7 +1177,7 @@
               ></b-input>
             </b-field>
           </div>
-        </div>
+        </div> -->
         <hr />
         <b-field class="buttons">
           <button
@@ -1207,7 +1199,7 @@
       @esc-keydown="closeLanguageDropper"
       @other-area-clicked="closeLanguageDropper"
       class="dropper"
-      :z-index="1000"
+      :z-index="9999"
     >
       <form @submit.prevent="updateLanguage()" style="width: 30rem">
         <h3 class="label text-main">Edit Language</h3>
@@ -1222,17 +1214,12 @@
               }"
               :message="qualificationsErrors.languages.language"
             >
-              <b-select
+              <b-input
                 size=""
                 expanded
                 v-model="qualifications.languages.language"
               >
-                <option value="English">English</option>
-                <option value="French">French</option>
-                <option value="Ewe">Ewe</option>
-                <option value="Ga">Ga</option>
-                <option value="Twi">Twi</option>
-              </b-select>
+              </b-input>
             </b-field>
           </div>
           <div class="column is-6">
@@ -1249,16 +1236,24 @@
                 expanded
                 v-model="qualifications.languages.fluency"
               >
-                <option value="Poor">Poor</option>
-                <option value="Good">Good</option>
-                <option value="Very Good">Very Good</option>
-                <option value="Mother Tongue">Mother Tongue</option>
+                <option :value="$t('app.poor')">
+                  {{ $t("app.poor") }}
+                </option>
+                <option :value="$t('app.good')">
+                  {{ $t("app.good") }}
+                </option>
+                <option :value="$t('app.very_good')">
+                  {{ $t("app.very_good") }}
+                </option>
+                <option :value="$t('app.mother_tongue')">
+                  {{ $t("app.mother_tongue") }}
+                </option>
               </b-select>
             </b-field>
           </div>
         </div>
 
-        <div class="columns">
+        <!-- <div class="columns">
           <div class="column is-12">
             <b-field
               label="Comment"
@@ -1275,7 +1270,7 @@
               ></b-input>
             </b-field>
           </div>
-        </div>
+        </div> -->
         <hr />
         <b-field class="buttons">
           <button
@@ -1333,8 +1328,8 @@ export default {
       isEditLanguage: false,
       isEditContinuousDev: false,
       isSubmitting: false,
-      attachmentUpdateType: null,
-      attachmentDropperId: null,
+      attachmentUpdateType: "",
+      attachmentDropperId: "",
       isSubmittingEducation: false,
       isSubmittingContinuousDev: false,
       isSubmittingExpertise: false,
@@ -1399,8 +1394,8 @@ export default {
           institution: data.institution,
           specialization: data.specialization,
           gpa: data.gpa,
-          started: data.started,
-          completed: data.completed,
+          started: data.started ? new Date(data.started) : data.started,
+          completed: data.completed ? new Date(data.completed) : data.completed,
         };
         dropper.open();
       }
@@ -1408,6 +1403,7 @@ export default {
     closeEducationDropper() {
       const dropper = this.$refs.educationDropper;
       this.attachmentUpdateType = "";
+      this.attachmentDropperId = "";
       if (dropper) {
         this.cancelEducationForm();
         dropper.close();
@@ -1420,8 +1416,8 @@ export default {
         this.qualifications.continuousDev = {
           institution: data.institution,
           specialization: data.specialization,
-          started: data.started,
-          completed: data.completed,
+          started: data.started ? new Date(data.started) : data.started,
+          completed: data.completed ? new Date(data.completed) : data.completed,
         };
         dropper.open();
       }
@@ -1429,6 +1425,7 @@ export default {
     closeContinuousDevDropper() {
       const dropper = this.$refs.continuousDevDropper;
       this.attachmentUpdateType = "";
+      this.attachmentDropperId = "";
       if (dropper) {
         this.cancelContinuousDevForm();
         dropper.close();
@@ -1449,6 +1446,7 @@ export default {
     closeExpertiseDropper() {
       const dropper = this.$refs.expertiseDropper;
       this.attachmentUpdateType = "";
+      this.attachmentDropperId = "";
       if (dropper) {
         this.cancelExpertiseForm();
         dropper.close();
@@ -1469,6 +1467,7 @@ export default {
     closeLanguageDropper() {
       const dropper = this.$refs.languageDropper;
       this.attachmentUpdateType = "";
+      this.attachmentDropperId = "";
       if (dropper) {
         this.cancelLanguageForm();
         dropper.close();
@@ -1723,14 +1722,14 @@ export default {
     clearEducationForm() {
       this.qualifications.education.institution = "";
       this.qualifications.education.specialization = "";
-      this.qualifications.education.started = "";
-      this.qualifications.education.completed = "";
+      this.qualifications.education.started = null;
+      this.qualifications.education.completed = null;
     },
     clearContinuousDevForm() {
       this.qualifications.continuousDev.institution = "";
       this.qualifications.continuousDev.specialization = "";
-      this.qualifications.continuousDev.started = "";
-      this.qualifications.continuousDev.completed = "";
+      this.qualifications.continuousDev.started = null;
+      this.qualifications.continuousDev.completed = null;
     },
     clearExpertiseForm() {
       this.qualifications.expertise.expertise = "";

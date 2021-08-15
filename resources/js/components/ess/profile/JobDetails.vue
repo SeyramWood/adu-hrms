@@ -21,6 +21,7 @@
           </template>
           <fieldset :disabled="isEditJob">
             <form @submit.prevent="updateJob()">
+              <h5 class="text-main">{{ $t("app.job") }}</h5>
               <div class="columns">
                 <div class="column is-3">
                   <b-field :label="$t('app.jobCategory')" expanded></b-field>
@@ -73,9 +74,10 @@
                 <div class="column is-8">
                   <b-field label expanded>
                     <p>
-                      <span v-if="job.specification === ''">{{
-                        $t("app.notDefined")
-                      }}</span>
+                      <span
+                        v-if="job.specification === '' || jobSpecification"
+                        >{{ $t("app.notDefined") }}</span
+                      >
                       <a
                         v-else-if="!jobSpecification && job.specification"
                         @click="
@@ -456,48 +458,52 @@ export default {
   created() {},
   mounted() {
     this.setJob(this.getProfile.job);
-    this.$watch(
-      () => this.job.category,
-      (value) => {
-        this.job.specification = "";
-        this.jTitles = this.getJobTitles.filter(
-          (el) => el.job_category_id === parseInt(value)
-        );
-      },
-      { immediate: true }
-    );
-    this.$watch(
-      () => this.job.title,
-      (value) => {
-        const title = this.getJobTitles.find(
-          (title) => title.id === parseInt(value)
-        );
-        if (title) {
-          this.job.specification = title.specification;
-        }
-      },
-      { immediate: true }
-    );
-    this.$watch(
-      () => this.job.department,
-      (value) => {
-        this.departmentUnits = this.getUnits.filter(
-          (u) => u.department_id === parseInt(value)
-        );
-        if (this.getProfile.job.unit) {
-          if (this.departmentUnits.length === 0) {
-            this.departmentUnits = this.getUnits.filter(
-              (u) => u.id === parseInt(this.getProfile.job.unit)
-            );
+    this.$nextTick(() => {
+      this.$watch(
+        () => this.job.category,
+        (value) => {
+          this.job.specification = "";
+          this.jTitles = this.getJobTitles.filter(
+            (el) => el.job_category_id === parseInt(value)
+          );
+        },
+        { immediate: true }
+      );
+
+      this.$watch(
+        () => this.job.title,
+        (value) => {
+          const title = this.getJobTitles.find(
+            (title) => title.id === parseInt(value)
+          );
+
+          if (title) {
+            this.job.specification = title.specification || "";
           }
-          this.job.unit = parseInt(this.getProfile.job.unit);
-        }
-        if (this.departmentUnits.length === 0) {
-          this.job.unit = "";
-        }
-      },
-      { immediate: true }
-    );
+        },
+        { immediate: true }
+      );
+      this.$watch(
+        () => this.job.department,
+        (value) => {
+          this.departmentUnits = this.getUnits.filter(
+            (u) => u.department_id === parseInt(value)
+          );
+          if (this.getProfile.job.unit) {
+            if (this.departmentUnits.length === 0) {
+              this.departmentUnits = this.getUnits.filter(
+                (u) => u.id === parseInt(this.getProfile.job.unit)
+              );
+            }
+            this.job.unit = parseInt(this.getProfile.job.unit);
+          }
+          if (this.departmentUnits.length === 0) {
+            this.job.unit = "";
+          }
+        },
+        { immediate: true }
+      );
+    });
   },
   data() {
     return {
@@ -543,14 +549,16 @@ export default {
       if (jobDetails) {
         this.job = {
           ...this.job,
-          title: jobDetails.title,
           category: jobDetails.category,
+          title: jobDetails.title
+            ? parseInt(jobDetails.title)
+            : jobDetails.title,
           employmentStatus: jobDetails.employmentStatus,
           department: jobDetails.department || "none",
           unit: jobDetails.unit || "",
           position: jobDetails.position || "",
           startDate: new Date(jobDetails.startDate),
-          endDate: new Date(jobDetails.endDate),
+          endDate: jobDetails.endDate ? new Date(jobDetails.endDate) : null,
           contractDetailsAvailable: jobDetails.contractDetails,
           contractStatus: jobDetails.contractStatus
             ? jobDetails.contractStatus

@@ -352,6 +352,8 @@ const mutations = {
             },
             ...state.users.data
         ];
+        state.users.to = state.users.to + 1;
+        state.users.total = state.users.total + 1;
     },
     assignUserStatus: (state, data) => {
         data.ids.forEach(id => {
@@ -367,6 +369,8 @@ const mutations = {
             state.users.data.findIndex(u => u.id === id),
             1
         );
+        state.users.to = state.users.to - 1;
+        state.users.total = state.users.total - 1;
     },
     deleteUsers: (state, ids) => {
         ids.forEach(id => {
@@ -374,6 +378,8 @@ const mutations = {
                 state.users.data.findIndex(u => u.id === id),
                 1
             );
+            state.users.to = state.users.to - 1;
+            state.users.total = state.users.total - 1;
         });
     },
     addJobCategories: (state, data) => (state.jobCategories = data),
@@ -547,9 +553,15 @@ const mutations = {
         state.roles = [
             {
                 ...payload,
-                permissions: JSON.parse(payload.permissions),
-                staff: JSON.parse(payload.staff),
-                report_to: JSON.parse(payload.report_to)
+                permissions: payload.permissions
+                    ? JSON.parse(payload.permissions)
+                    : payload.permissions,
+                staff: payload.staff
+                    ? JSON.parse(payload.staff)
+                    : payload.staff,
+                report_to: payload.report_to
+                    ? JSON.parse(payload.report_to)
+                    : payload.report_to
             },
             ...state.roles
         ];

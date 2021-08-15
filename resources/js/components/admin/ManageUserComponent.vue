@@ -967,7 +967,7 @@ export default {
       } else {
         setTimeout(() => {
           this.isLoading = false;
-          this.noAppraisalFound = true;
+          this.noUserFound = true;
         }, 1000);
       }
     });

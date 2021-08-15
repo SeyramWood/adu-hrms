@@ -170,6 +170,26 @@ Route::prefix('dashboard')->group(function () {
   Route::post('/add-self-appraisal', 'SelfAppraisalController@storeSelfAppraisal');
 
 
+  /**
+   * Equipment Routes
+   */
+  Route::post('/add-equipment-request', 'EquipmentRequestController@store');
+  Route::post('/add-equipment-request', 'EquipmentRequestController@store');
+  Route::get('/get-request-approval-name/{id}', 'EquipmentRequestController@requestApprovalName');
+  Route::put('/approve-equipment-request/{equipmentRequest}', 'EquipmentRequestController@approveEquipmentRequest');
+  Route::put('/edit-equipment-request/{equipmentRequest}', 'EquipmentRequestController@update');
+  Route::delete('/delete-equipment-request/{equipmentRequest}', 'EquipmentRequestController@destroy');
+  Route::delete('/delete-equipment-requests/{equipmentRequests}', 'EquipmentRequestController@destroyMultiple');
+  Route::get('/get-granted-requests', 'EquipmentRequestController@getGrantedRequests');
+
+
+  Route::post('/allocate-equipment', 'EquipmentAllocationController@store');
+  Route::put('/edit-equipment-allocation/{equipmentAllocation}', 'EquipmentAllocationController@update');
+  Route::delete('/delete-equipment-allocation/{equipmentAllocation}', 'EquipmentAllocationController@destroy');
+  Route::delete('/delete-equipment-allocations/{equipmentAllocation}', 'EquipmentAllocationController@destroyMultiple');
+  Route::put('/approve-equipment-allocation/{equipmentAllocation}', 'EquipmentAllocationController@approveEquipmentAllocation');
+
+
 
 
   /**
@@ -181,4 +201,8 @@ Route::prefix('dashboard')->group(function () {
   Route::get('/get-appraisals', 'PaginationController@appraisalsPerPage');
   Route::get('/get-appraisees/{appraisal}', 'PaginationController@appraiseesPerPage');
   Route::get('/search-staff', 'PaginationController@searchStaffDirectory');
+  Route::get('/get-my-requests', 'PaginationController@myEquipmentRequests');
+  Route::get('/get-requests', 'PaginationController@equipmentRequests');
+  Route::get('/get-my-allocations', 'PaginationController@myEquipmentAllocations');
+  Route::get('/get-allocations', 'PaginationController@equipmentAllocations');
 });

@@ -121,9 +121,11 @@ trait ManageRole
       'staff' => 'required|array',
     ]);
     $prevToStaff = $role->report_to ? json_decode($role->report_to) : [];
-    $newReportStaff = array_values(array_diff($request->staff, json_decode($role->staff ?? '[]')));;
+    $newReportStaff = array_values(array_diff($request->staff, json_decode($role->staff ?? '[]')));
     $newStaff = array_values(array_unique(array_merge($newReportStaff, $prevToStaff)));
+
     $staff = User::whereIn('id', json_decode($role->staff))->get();
+    $requestStaff = User::whereIn('id', $newStaff)->get();
 
     for ($i = 0; $i < count($staff); $i++) {
       if ($staff[$i]->report_to_staff) {
@@ -131,12 +133,22 @@ trait ManageRole
         $prevRoles = json_decode($staff[$i]->report_to_roles);
         User::where('id', $staff[$i]->id)->update([
           'report_to_staff' => json_encode(array_values(array_unique(array_merge(($prevStaff ?? []), $newStaff)))),
-          'report_to_roles' => json_encode(array_values(array_unique(array_merge(($prevRoles ?? []), [$role->id]))))
         ]);
       } else {
         User::where('id', $staff[$i]->id)->update([
           'report_to_staff' => json_encode($newStaff),
-          'report_to_roles' => json_encode([$role->id])
+        ]);
+      }
+    }
+    for ($i = 0; $i < count($requestStaff); $i++) {
+      if ($requestStaff[$i]->report_to_staff) {
+        $prevRoles = json_decode($staff[$i]->report_to_roles);
+        User::where('id', $requestStaff[$i]->id)->update([
+          'report_to_roles' => json_encode(array_values(array_unique(array_merge(($prevRoles ?? []), json_decode($role->staff ?? '[]')))))
+        ]);
+      } else {
+        User::where('id', $requestStaff[$i]->id)->update([
+          'report_to_roles' => json_encode([$role->staff])
         ]);
       }
     }
@@ -148,16 +160,19 @@ trait ManageRole
   {
     $prevToStaff = json_decode($role->report_to ?? '[]');
     $staff = User::whereIn('id', json_decode($role->staff ?? '[]'))->get();
+    $reportToStaff = User::find($reportTo);
     for ($i = 0; $i < count($staff); $i++) {
       if ($staff[$i]->report_to_staff && count(json_decode($staff[$i]->report_to_staff))) {
         $prevRoles = array_unique(array_values(array_diff(json_decode($staff[$i]->report_to_staff), [$reportTo])));
         User::where('id', $staff[$i]->id)->update(['report_to_staff' => json_encode($prevRoles)]);
       }
-      if ($staff[$i]->report_to_roles && count(json_decode($staff[$i]->report_to_roles))) {
-        $prevRoles = array_unique(array_values(array_diff(json_decode($staff[$i]->report_to_roles), [$role->id])));
-        User::where('id', $staff[$i]->id)->update(['report_to_roles' => json_encode($prevRoles)]);
-      }
     }
+    if ($reportToStaff->report_to_roles && count(json_decode($reportToStaff->report_to_roles))) {
+      $prevRoles = array_unique(array_values(array_diff(json_decode($reportToStaff->report_to_roles), json_decode($role->staff ?? '[]'))));
+      $reportToStaff->report_to_roles = json_encode($prevRoles);
+      $reportToStaff->save();
+    }
+
     $roles = array_unique(array_values(array_diff($prevToStaff, [$reportTo])));
     $role->report_to = count($roles) ? json_encode($roles) : null;
     $role->save();
@@ -190,7 +205,6 @@ trait ManageRole
 
   public function deleteStaffRole($staff, $role, $reportTo = null, $request = null)
   {
-
 
     if (is_array($staff)) {
       $users = User::whereIn('id', $staff)->get();

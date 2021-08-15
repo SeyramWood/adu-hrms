@@ -319,18 +319,9 @@ trait Staff
   public function getDirectorates()
   {
     $authReportToRoles = Auth::user()->report_to_roles ? json_decode(Auth::user()->report_to_roles) : [];
-    $roleStaff = Role::whereNotNull('staff')
-      ->whereIn('id', $authReportToRoles)
-      ->select('staff')
-      ->get()->toArray();
-    $directorates = [];
-    foreach ($roleStaff as  $value) {
-      array_push($directorates, json_decode($value['staff']));
-    }
-    // dd(array_unique(Arr::flatten($directorates)));
-    // $abc = array_unique($directorates);
+    // dd($authReportToRoles);
     $abc = User::join('profiles', 'profiles.user_id', '=', 'users.id')
-      ->whereIn('users.id', array_unique(Arr::flatten($directorates)))
+      ->whereIn('users.id', $authReportToRoles)
       ->where('users.id', '!=', Auth::id())
       ->leftJoin('positions', 'positions.id', '=', 'profiles.position_id')
       ->select(

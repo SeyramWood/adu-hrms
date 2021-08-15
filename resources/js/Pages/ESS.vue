@@ -18,7 +18,7 @@
                   <b-icon pack="fas" icon="envelope"></b-icon>
                   <span>{{
                     getProfile.contact_details
-                      ? getProfile.contact_details.workEmail
+                      ? getProfile.contact_details.email
                       : ""
                   }}</span>
                 </p>
@@ -78,6 +78,9 @@
         <tab :label="$t('app.profile')">
           <ProfileComponent />
         </tab>
+        <tab label="IT Equipment" v-if="!regex.test($page.url)">
+          <EquipmentComponent />
+        </tab>
         <!-- <tab label="My Leave" v-if="!regex.test($page.url)">
           <MyLeaveComponent />
         </tab>
@@ -99,6 +102,7 @@ import Tabs from "../components/Tabs";
 import ProfileComponent from "../components/ess/ProfileComponent";
 import MyLeaveComponent from "../components/ess/MyLeaveComponent";
 import MyEntitlementComponent from "../components/ess/MyEntitlementComponent";
+import EquipmentComponent from "../components/ess/EquipmentComponent";
 import ConfigurationComponent from "../components/ess/ConfigurationComponent";
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -114,6 +118,7 @@ export default {
     ProfileComponent,
     MyLeaveComponent,
     MyEntitlementComponent,
+    EquipmentComponent,
     ConfigurationComponent,
   },
   layout: Dashboard,
@@ -132,6 +137,7 @@ export default {
     reportTo: Array,
     reportToMe: Array,
     directorates: Array,
+    grantedEquipmentRequests: Array,
   },
   computed: {
     ...mapGetters([
@@ -147,23 +153,36 @@ export default {
   beforeMount() {},
   created() {
     this.dispatchProfile({ payload: this.profile });
-    this.dispatchJobCategory({ payload: this.jobCategories });
-    this.dispatchJobTitle({ payload: this.jobTitles });
-    this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
-    this.dispatchDepartment({ payload: this.departments });
-    this.dispatchUnit({ payload: this.units });
-    this.dispatchPosition({ payload: this.positions });
-    this.dispatchProfile({
-      type: "ADD_MY_LEADERS",
-      payload: {
-        supervisors: this.supervisors,
-        hods: this.hods,
-        reportTo: this.reportTo,
-        reportToMe: this.reportToMe,
-        directorates: this.directorates,
-      },
+    this.$nextTick(() => {
+      this.dispatchJobCategory({ payload: this.jobCategories });
+      this.dispatchJobTitle({ payload: this.jobTitles });
+      this.dispatchEmploymentStatus({ payload: this.employmentStatuses });
+      this.dispatchDepartment({ payload: this.departments });
+      this.dispatchUnit({ payload: this.units });
+      this.dispatchPosition({ payload: this.positions });
+      this.getAllCountries();
+      this.dispatchProfile({
+        type: "ADD_MY_LEADERS",
+        payload: {
+          supervisors: this.supervisors,
+          hods: this.hods,
+          reportTo: this.reportTo,
+          reportToMe: this.reportToMe,
+          directorates: this.directorates,
+        },
+      });
+      this.dispatchEquipmentRequest({ payload: 1 });
+      this.dispatchEquipmentAllocation({ payload: 1 });
+      this.dispatchEquipmentRequest({ type: "ADD_REQUESTS", payload: 1 });
+      this.dispatchEquipmentRequest({
+        type: "ADD_GRANTED_REQUEST",
+        payload: this.grantedEquipmentRequests,
+      });
+      this.dispatchEquipmentAllocation({
+        type: "ADD_MY_ALLOCATIONS",
+        payload: 1,
+      });
     });
-    this.getAllCountries();
   },
   data() {
     return {
@@ -183,6 +202,8 @@ export default {
       "dispatchPosition",
       "dispatchMyLeaders",
       "dispatchCountry",
+      "dispatchEquipmentRequest",
+      "dispatchEquipmentAllocation",
     ]),
     getUserDepartment(profile) {
       if (profile.job && profile.job.department) {

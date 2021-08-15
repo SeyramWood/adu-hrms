@@ -213,7 +213,11 @@
                     size="is-small"
                     pack="fas"
                     icon-right="pen"
-                    :id="`contact-id${getContactDropperId}`"
+                    :id="`contact-id${
+                      getContactDropperId === props.row.id
+                        ? getContactDropperId
+                        : ''
+                    }`"
                     @click="openContactDropper(props.row)"
                     :disabled="!userOrPermission('update', getProfile.user_id)"
                   ></b-button>
@@ -241,7 +245,7 @@
       @esc-keydown="closeContactDropper"
       @other-area-clicked="closeContactDropper"
       class="dropper"
-      :z-index="999"
+      :z-index="9999"
     >
       <form @submit.prevent="updateEmergencyContact()">
         <h3 class="label text-main">Edit Emergency Contact</h3>
@@ -357,7 +361,7 @@ export default {
       sortIconSize: "is-small",
       closeEmergencyContactDetailsForm: false,
       isSubmittingEmergencyContact: false,
-      contactDropperId: null,
+      contactDropperId: "",
       emergencyContact: {
         name: "",
         relationship: "",
@@ -440,6 +444,7 @@ export default {
               type: "UPDATE_EMERGENCY_CONTACT_DETAILS",
               payload: { ...this.emergencyContact, id: this.contactDropperId },
             });
+            this.closeContactDropper();
             this.snackbar("Contact updated successfully", "is-dark");
           }
         })

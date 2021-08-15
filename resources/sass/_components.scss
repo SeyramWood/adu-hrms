@@ -119,3 +119,113 @@
         border-radius: 99999px;
     }
 }
+.request__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    &__logo {
+        margin-top: 2rem;
+        width: 12rem;
+        & > img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    &__title {
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $main;
+        padding: 1rem 0;
+    }
+    &__trademark {
+        width: 95%;
+        text-align: left;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $main;
+        padding: 3rem 0;
+    }
+    &__instruction {
+        width: 95%;
+        & > article {
+            & > p:not(:last-child) {
+                padding-bottom: 0.5rem;
+            }
+        }
+    }
+    &__form {
+        width: 95%;
+        &--section {
+            width: 100%;
+            padding: 1rem;
+            border: #167cf057 1px solid;
+
+            & .text {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-end;
+                & .text__label {
+                    width: 26%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    padding-right: 0.5rem;
+                    & > h6,
+                    & > span {
+                        font-weight: bold !important;
+                    }
+                }
+                & .text__line {
+                    width: 74%;
+                    border-bottom: $main 1px solid;
+                }
+            }
+            & .text-1 {
+                width: 100%;
+                & .text-1__label {
+                    text-align: center;
+                    & > h6,
+                    & > span {
+                        font-weight: bold !important;
+                        font-size: 1rem;
+                    }
+                }
+                & .text-1__line {
+                    text-align: center;
+                    border-bottom: $main 1px solid;
+                }
+            }
+
+            & .acknowledgement {
+                padding: 2rem;
+            }
+        }
+        &__header {
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 1rem;
+            text-align: center;
+            color: $main;
+            padding: 1.5rem 0;
+        }
+        &__staff {
+        }
+        &__info {
+        }
+        &__approval {
+        }
+        &__it {
+        }
+    }
+}
+
+.print__document {
+    @media print {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}

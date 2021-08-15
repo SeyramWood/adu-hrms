@@ -23,6 +23,7 @@ class CreateProfilesTable extends Migration
             $table->string('employee_status')->default('current');
             $table->json('personal_details')->nullable();
             $table->json('contact_details')->nullable();
+            $table->json('p_contact_details')->nullable();
             $table->json('emergency_contacts')->nullable();
             $table->json('job')->nullable();
             $table->json('report_to')->nullable();

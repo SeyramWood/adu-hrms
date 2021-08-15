@@ -209,20 +209,25 @@ trait StaffProfile
   public function updateContactDetails($request, $profile)
   {
     $request->validate([
-      "address1" => "required|string",
-      "address2" => "nullable|string",
+      "address" => "required|string",
       "city" => "required|string",
       "region" => "nullable|string",
       "country" => "required|string",
       "mobile" => "required|string",
-      "homeTelephone" => "nullable|string",
-      "workTelephone" => "nullable|string",
-      "workEmail" => "required|string|email",
+      "telephone" => "nullable|string",
+      "email" => "required|string|email",
       "otherEmail" => "nullable|string|email",
     ]);
-    $profile->contact_details = json_encode($request->all());
-    $profile->save();
-    return response()->json(['updated' => true]);
+    if ($request->header('contactType') === 'p_contact') {
+      $profile->contact_details = json_encode($request->all());
+      $profile->save();
+      return response()->json(['updated' => true]);
+    }
+    if ($request->header('contactType') === 'c_contact') {
+      $profile->p_contact_details = json_encode($request->all());
+      $profile->save();
+      return response()->json(['updated' => true]);
+    }
   }
   public function addEmergencyContactDetails($request, $profile)
   {
@@ -296,8 +301,8 @@ trait StaffProfile
     $request->validate([
       "institution" => "required|string",
       "specialization" => "required|string",
-      "started" => "required|numeric",
-      "completed" => "required|numeric",
+      "started" => "required|string",
+      "completed" => "required|string",
     ]);
     $education = is_array(json_decode($profile->qualifications)->education) ? json_decode($profile->qualifications)->education : json_decode(json_decode($profile->qualifications)->education);
     array_push($education, [
@@ -318,8 +323,8 @@ trait StaffProfile
     $request->validate([
       "institution" => "required|string",
       "specialization" => "required|string",
-      "started" => "required|numeric",
-      "completed" => "required|numeric",
+      "started" => "required|string",
+      "completed" => "required|string",
     ]);
     $education = is_array(json_decode($profile->qualifications)->education) ? json_decode($profile->qualifications)->education : json_decode(json_decode($profile->qualifications)->education);
     for ($i = 0; $i < count($education); $i++) {
@@ -346,8 +351,8 @@ trait StaffProfile
     $request->validate([
       "institution" => "required|string",
       "specialization" => "required|string",
-      "started" => "required|numeric",
-      "completed" => "required|numeric",
+      "started" => "required|string",
+      "completed" => "required|string",
     ]);
     $continuousDev = is_array(json_decode($profile->qualifications)->continuousDev) ? json_decode($profile->qualifications)->continuousDev : json_decode(json_decode($profile->qualifications)->continuousDev);
     array_push($continuousDev, [
@@ -368,8 +373,8 @@ trait StaffProfile
     $request->validate([
       "institution" => "required|string",
       "specialization" => "required|string",
-      "started" => "required|numeric",
-      "completed" => "required|numeric",
+      "started" => "required|string",
+      "completed" => "required|string",
     ]);
     $continuousDev = is_array(json_decode($profile->qualifications)->continuousDev) ? json_decode($profile->qualifications)->continuousDev : json_decode(json_decode($profile->qualifications)->continuousDev);
     for ($i = 0; $i < count($continuousDev); $i++) {
@@ -504,7 +509,6 @@ trait StaffProfile
       "title" => "required|numeric",
       "employmentStatus" => "required|numeric",
       "department" => "required",
-      "branch" => "required|numeric",
       "startDate" => [
         'required',
         'string',
@@ -513,11 +517,8 @@ trait StaffProfile
         }
       ],
       "endDate" => [
-        'required',
+        'nullable',
         'string',
-        function ($attribute, $value, $fail) {
-          $value === 'null' && $fail('The end date field is required');
-        }
       ],
       "contractDetails" => $request->file('contractDetails') ? "nullable|file|mimes:pdf|max:2048" : "required",
     ]);
@@ -540,10 +541,10 @@ trait StaffProfile
       'department' => $dpt,
       'unit' => $unt,
       'position' => $request->position,
-      'branch' => $request->branch,
       'startDate' => $request->startDate,
-      'endDate' => $request->endDate,
+      'endDate' => $request->endDate === 'null' ? null : $request->endDate,
       'contractDetails' => $file,
+      'contractStatus' => $request->contractStatus
     ]);
     $profile->department_id = $dpt;
     $profile->unit_id = $unt;
