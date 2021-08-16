@@ -148,7 +148,7 @@ trait ManageRole
         ]);
       } else {
         User::where('id', $requestStaff[$i]->id)->update([
-          'report_to_roles' => $role->staff,
+          'report_to_roles' => json_encode(json_decode($role->staff ?? '[]'))
         ]);
       }
     }
