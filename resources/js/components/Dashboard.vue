@@ -54,7 +54,7 @@
               $t("app.pim")
             }}</inertia-link>
           </li>
-          <li
+          <!-- <li
             :class="`header__nav__list__item ${
               activePage === '/dashboard/leave' ? 'active-left' : ''
             }`"
@@ -63,7 +63,7 @@
             <inertia-link href="/dashboard/leave" preserve-scroll>{{
               $t("app.leave")
             }}</inertia-link>
-          </li>
+          </li> -->
           <li
             :class="`header__nav__list__item ${
               activePage === '/dashboard/kpi' ? 'active-left' : ''

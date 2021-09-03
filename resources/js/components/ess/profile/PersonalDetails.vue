@@ -88,6 +88,9 @@
                             <option value="Mrs.">
                               {{ $t("app.mrs") }}
                             </option>
+                            <option value="Ms">
+                              {{ $t("app.ms") }}
+                            </option>
                             <option value="Hon.">
                               {{ $t("app.hon") }}
                             </option>

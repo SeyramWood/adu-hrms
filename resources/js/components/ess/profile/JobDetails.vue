@@ -9,7 +9,7 @@
       </div>
       <div class="card-content">
         <div class="content">
-          <template v-if="isPermission('update')">
+          <template v-if="userOrPermission('update', getProfile.id)">
             <div class="buttons mb-4" v-if="isEditJob">
               <b-button
                 class="is-info is-light"
@@ -419,7 +419,7 @@
               </div>
             </form>
           </fieldset>
-          <template v-if="isPermission('update')">
+          <template v-if="userOrPermission('update', getProfile.id)">
             <div class="buttons" v-if="isEditJob">
               <b-button
                 class="is-info is-light"

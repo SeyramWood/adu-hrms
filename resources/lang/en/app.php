@@ -39,6 +39,7 @@ return [
   'mr' => 'Mr.',
   'miss' => 'Miss',
   'mrs' => 'Mrs.',
+  'ms' => 'Ms',
   'hon' => 'Hon.',
   'rev' => 'Rev.',
   'dr' => 'Dr.',

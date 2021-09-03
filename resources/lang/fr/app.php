@@ -38,6 +38,7 @@ return [
   'mr' => 'Monsieur.',
   'miss' => 'Manquer.',
   'mrs' => 'Madame.',
+  'ms' => 'Ms',
   'hon' => 'Hon.',
   'rev' => 'Tour.',
   'dr' => 'Dr.',
