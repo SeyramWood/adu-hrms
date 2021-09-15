@@ -94,6 +94,9 @@
                       size="is-small"
                       pack="fas"
                       icon-right="user-cog"
+                      :disabled="
+                        !props.row.staff.includes($page.props.authUser.id)
+                      "
                       @click="openSelfAppraisalModal(props.row)"
                     ></b-button>
                   </b-tooltip>

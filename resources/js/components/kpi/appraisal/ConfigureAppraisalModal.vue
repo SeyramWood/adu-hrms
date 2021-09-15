@@ -126,7 +126,7 @@
           ></b-input>
         </b-field>
         <h5 class="text-main pb-3">Applicable For</h5>
-        <b-field
+        <!-- <b-field
           horizontal
           label="Branch"
           :type="{
@@ -140,7 +140,7 @@
             placeholder="Select branch(es)..."
             v-model="appraisal.applicableFor.branch"
           />
-        </b-field>
+        </b-field> -->
         <b-field
           horizontal
           label="Department"
@@ -216,27 +216,10 @@ export default {
     ...mapGetters([
       "getUsers",
       "getRoles",
-      "getBranches",
       "getDepartments",
       "getUnits",
       "getWorkShifts",
     ]),
-
-    getBrhs() {
-      const data = this.getBranches.map((b) => {
-        return {
-          id: b.id,
-          label: b.name,
-        };
-      });
-      return [
-        {
-          id: "all",
-          label: "All",
-        },
-        ...data,
-      ];
-    },
     getDpts() {
       const data = this.getDepartments.map((d) => {
         return {
@@ -278,7 +261,7 @@ export default {
     getAllRoles() {
       const data = this.getRoles.map((r) => {
         return {
-          id: r.role,
+          id: r.id,
           label: r.role,
         };
       });
@@ -315,7 +298,6 @@ export default {
         },
         description: "",
         applicableFor: {
-          branch: [],
           department: [],
           unit: [],
           role: [],
@@ -337,7 +319,6 @@ export default {
         },
         description: [],
         applicableFor: {
-          branch: [],
           department: [],
           unit: [],
           role: [],

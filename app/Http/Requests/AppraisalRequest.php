@@ -32,7 +32,6 @@ class AppraisalRequest extends FormRequest
             'np.open' => 'required|string',
             'np.close' => 'required|string',
             'description' => 'nullable|string',
-            'applicableFor.branch' => 'required|array',
             'applicableFor.department' => 'required|array',
             'applicableFor.unit' => 'required|array',
             'applicableFor.role' => 'required|array',

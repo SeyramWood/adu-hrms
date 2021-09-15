@@ -25,9 +25,9 @@ class KPIController extends Controller
         //
     }
 
-    public function getAppraisalGoal($appraisal)
+    public function userAppraisal($appraisal, $user = null)
     {
-        // dd($appraisal->keyGoals());
-        return $this->getKeyGoals($appraisal);
+        // dd($appraisal);
+        return $this->getUserAppraisal($appraisal, $user);
     }
 }

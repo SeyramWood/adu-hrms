@@ -167,3 +167,37 @@ button.inertia__link__btn:active {
         // border-bottom: 1px solid red;
     }
 }
+.appraisal-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.1rem 0;
+    // margin-right: 1rem;
+    transition: all ease-in-out 0.2s;
+    &:hover {
+        background-color: #e7e4e4;
+        padding: 0.1rem 0.2rem;
+    }
+    & > p {
+        margin-bottom: 0 !important;
+    }
+    & > div {
+        margin-left: 0.5rem;
+        white-space: nowrap;
+        & > button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            &:focus,
+            &:active {
+                border: none;
+            }
+            &:first-child {
+                padding-right: 0.5rem;
+            }
+            &:last-child {
+                // margin: 0 0.5rem;
+            }
+        }
+    }
+}

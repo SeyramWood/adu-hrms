@@ -167,13 +167,21 @@
                       : ""
                   }}</span>
                 </p>
-                <p style="margin-bottom: 0" class="format__staff">
-                  <strong class="">Branch:: </strong>
-                  {{ props.row.branch }}
-                </p>
-                <p style="margin-bottom: 0" class="format__staff">
+                <p
+                  style="margin-bottom: 0"
+                  class="format__staff"
+                  v-if="props.row.department"
+                >
                   <strong class="">Department:: </strong>
                   {{ props.row.department }}
+                </p>
+                <p
+                  style="margin-bottom: 0"
+                  class="format__staff"
+                  v-if="props.row.unit"
+                >
+                  <strong class="">Unit:: </strong>
+                  {{ props.row.unit }}
                 </p>
               </b-table-column>
               <b-table-column field="actions" label="Actions" v-slot="props">
@@ -188,7 +196,7 @@
                       size="is-small"
                       pack="fas"
                       icon-right="star"
-                      @click="openRateAppraiseeModal()"
+                      @click="openRateAppraiseeModal(props.row.user_id)"
                       :disabled="!isPermission('review_appraisal')"
                     ></b-button>
                   </b-tooltip>
@@ -283,14 +291,14 @@ export default {
         staff.middleName
       )} ${staff.lastName}`;
     },
-    openRateAppraiseeModal() {
+    openRateAppraiseeModal(userId) {
       this.$buefy.modal.open({
         parent: this,
         component: RateAppraiseeModal,
         hasModalCard: true,
         trapFocus: true,
         canCancel: ["escape"],
-        // props: { appraisal },
+        props: { appraisalId: this.appraisal.id, userId },
       });
     },
   },

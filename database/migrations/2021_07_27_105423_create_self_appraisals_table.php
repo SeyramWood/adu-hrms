@@ -23,6 +23,7 @@ class CreateSelfAppraisalsTable extends Migration
             $table->json('initiatives')->nullable();
             $table->json('other_initiatives')->nullable();
             $table->longText('feedback')->nullable();
+            $table->json('metrics')->nullable();
             $table->timestamps();
         });
     }

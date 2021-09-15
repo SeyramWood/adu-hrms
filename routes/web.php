@@ -165,9 +165,18 @@ Route::prefix('dashboard')->group(function () {
    * KPI Routes
    */
   Route::post('/add-appraisal', 'KPIController@storeAppraisal');
-  Route::get('/get-appraisal-goal/{appraisal}', 'KPIController@getAppraisalGoal');
+  Route::get('/get-user-appraisal/{appraisal}/{user?}', 'KPIController@userAppraisal');
   Route::post('/add-key-goal', 'SelfAppraisalController@storeKeyGoal');
   Route::post('/add-self-appraisal', 'SelfAppraisalController@storeSelfAppraisal');
+  Route::put('/update-user-goal/{appraisal}', 'SelfAppraisalController@editUserGoal');
+  Route::put('/update-department-goal/{appraisal}', 'SelfAppraisalController@editDepartmentGoal');
+  Route::put('/update-unit-goal/{appraisal}', 'SelfAppraisalController@editUnitGoal');
+  Route::put('/update-user-appraisal/{appraisal}', 'SelfAppraisalController@editUserAppraisal');
+  Route::put('/update-user-appraisal-metrics/{appraisal}/{user}', 'SelfAppraisalController@editUserAppraisalMetrics');
+  Route::delete('/delete-user-goal/{appraisal}/{goal}', 'SelfAppraisalController@deleteUserGoal');
+  Route::delete('/delete-department-goal/{appraisal}/{goal}', 'SelfAppraisalController@deleteDepartmentGoal');
+  Route::delete('/delete-unit-goal/{appraisal}/{goal}', 'SelfAppraisalController@deleteUnitGoal');
+  Route::delete('/delete-user-appraisal/{appraisal}/{id}/{type}', 'SelfAppraisalController@deleteUserAppraisal');
 
 
   /**

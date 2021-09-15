@@ -23,32 +23,22 @@
           :has-navigation="true"
           icon-prev="chevron-left"
           icon-next="chevron-right"
-          label-position="left"
+          label-position="bottom"
           mobile-mode="compact"
           type="is-info"
-          vertical
         >
           <b-step-item step="1" label="Key Goals">
             <section class="kpi__table">
-              <table class="table is-fullwidth is-hoverable">
+              <table class="table is-fullwidth is-bordered">
                 <thead>
                   <tr>
                     <th class="text-main">My Key Goals</th>
-                    <th
-                      class="text-main"
-                      v-if="
-                        $page.props.authUser.unit_id ||
-                        anyPermission('admin', 'president')
-                      "
-                    >
+                    <th class="text-main" v-if="$page.props.authUser.unit_id">
                       Unit Key Goals
                     </th>
                     <th
                       class="text-main"
-                      v-if="
-                        $page.props.authUser.department_id ||
-                        anyPermission('admin', 'president', 'hod')
-                      "
+                      v-if="$page.props.authUser.department_id"
                     >
                       Department Key Goals
                     </th>
@@ -56,239 +46,468 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="kpi__goals__td">
                       <section class="kpi_goals__wrapper">
                         <div class="content">
-                          <ol type="1">
-                            <li>Coffee</li>
-                            <li>Tea</li>
-                            <li>Milk</li>
+                          <ol
+                            v-if="
+                              userAppraisal &&
+                              userAppraisal.userAppraisal &&
+                              userAppraisal.userAppraisal.goals
+                            "
+                          >
+                            <li
+                              v-for="goal in userAppraisal.userAppraisal.goals"
+                              :key="goal.id"
+                            >
+                              <div class="appraisal-list">
+                                <p>
+                                  {{ goal.goal }}
+                                </p>
+                                <div class="">
+                                  <button
+                                    @click="setEditGoalData(goal, 'user')"
+                                  >
+                                    <b-icon
+                                      icon="pen"
+                                      size="is-small"
+                                      type="is-primary"
+                                    ></b-icon>
+                                  </button>
+                                  <button @click="deleteGoal(goal.id, 'user')">
+                                    <b-icon
+                                      icon="times"
+                                      size="is-small"
+                                      type="is-danger"
+                                    ></b-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
                           </ol>
+                          <p v-else>No key goal found!</p>
                         </div>
-                        <form @submit.prevent="addSelfAppraisal()">
-                          <template v-for="(kg, index) in myGoals">
+                        <template
+                          v-if="openAppraisal(this.appraisal.sap_timestamp)"
+                        >
+                          <form
+                            @submit.prevent="updateGoal('user')"
+                            v-if="isEditingUserGoal"
+                          >
                             <b-field
-                              :key="index"
                               :type="{
-                                'is-danger':
-                                  Object.keys(myGoalErrors).length &&
-                                  myGoalErrors[`goal.${index}.goal`] &&
-                                  myGoalErrors[`goal.${index}.goal`].length,
+                                'is-danger': editUserGoalError.length,
                               }"
-                              :message="
-                                Object.keys(myGoalErrors).length
-                                  ? myGoalErrors[`goal.${index}.goal`]
-                                  : []
-                              "
+                              :message="editUserGoalError"
                             >
                               <b-input
                                 placeholder="Enter new goal..."
                                 type="text"
                                 expanded
-                                v-model="myGoals[index]['goal']"
+                                v-model="editUserGoal.goal"
                               >
                               </b-input>
-                              <p class="control">
-                                <b-button
-                                  type="is-danger is-light"
-                                  icon-left="times"
-                                  :disabled="myGoals.length === 1"
-                                  @click="removeGoal(index)"
-                                />
-                              </p>
                             </b-field>
-                          </template>
 
-                          <section class="goal__btns">
-                            <div class="">
-                              <b-button
-                                class="is-info is-light"
-                                icon-left="plus"
-                                @click="appendNewGoal()"
-                                >Add New</b-button
+                            <section class="goal__btns">
+                              <div></div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="cancelEditGoal('user')"
+                                  :disabled="isSubmittingMyGoal"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmittingMyGoal"
+                                >
+                                  {{
+                                    isSubmittingMyGoal ? "Saving..." : "Save"
+                                  }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                          <form @submit.prevent="addSelfAppraisal()" v-else>
+                            <template v-for="(kg, index) in myGoals">
+                              <b-field
+                                :key="index"
+                                :type="{
+                                  'is-danger':
+                                    Object.keys(myGoalErrors).length &&
+                                    myGoalErrors[`goal.${index}.goal`] &&
+                                    myGoalErrors[`goal.${index}.goal`].length,
+                                }"
+                                :message="
+                                  Object.keys(myGoalErrors).length
+                                    ? myGoalErrors[`goal.${index}.goal`]
+                                    : []
+                                "
                               >
-                            </div>
-                            <div class="block">
-                              <b-button
-                                class="is-default is-light"
-                                @click="cancelGoalForm()"
-                                :disabled="isSubmittingMyGoal"
-                                >Cancel</b-button
-                              >
-                              <button
-                                type="submit"
-                                class="button is-success is-light"
-                                :disabled="isSubmittingMyGoal"
-                              >
-                                {{
-                                  isSubmittingMyGoal ? "Submitting..." : "Add"
-                                }}
-                              </button>
-                            </div>
-                          </section>
-                        </form>
+                                <b-input
+                                  placeholder="Enter new goal..."
+                                  type="text"
+                                  expanded
+                                  v-model="myGoals[index]['goal']"
+                                >
+                                </b-input>
+                                <p class="control">
+                                  <b-button
+                                    type="is-danger is-light"
+                                    icon-left="times"
+                                    :disabled="myGoals.length === 1"
+                                    @click="removeGoal(index)"
+                                  />
+                                </p>
+                              </b-field>
+                            </template>
+
+                            <section class="goal__btns">
+                              <div class="">
+                                <b-button
+                                  class="is-info is-light"
+                                  icon-left="plus"
+                                  @click="appendNewGoal()"
+                                  >Add New</b-button
+                                >
+                              </div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="cancelGoalForm()"
+                                  :disabled="isSubmittingMyGoal"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmittingMyGoal"
+                                >
+                                  {{
+                                    isSubmittingMyGoal ? "Submitting..." : "Add"
+                                  }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                        </template>
                       </section>
                     </td>
                     <td
-                      v-if="
-                        $page.props.authUser.unit_id ||
-                        anyPermission('admin', 'president', 'supervisor')
-                      "
+                      class="kpi__goals__td"
+                      v-if="$page.props.authUser.unit_id"
                     >
                       <section class="kpi_goals__wrapper">
                         <div class="content">
-                          <ol type="1">
-                            <li>Coffee</li>
-                            <li>Tea</li>
-                            <li>Milk</li>
+                          <ol
+                            v-if="
+                              userAppraisal &&
+                              userAppraisal.userUnitGoal &&
+                              userAppraisal.userUnitGoal.goals
+                            "
+                          >
+                            <li
+                              v-for="goal in userAppraisal.userUnitGoal.goals"
+                              :key="goal.id"
+                            >
+                              <div class="appraisal-list">
+                                <p>
+                                  {{ goal.goal }}
+                                </p>
+                                <div class="">
+                                  <button
+                                    @click="setEditGoalData(goal, 'unit')"
+                                  >
+                                    <b-icon
+                                      icon="pen"
+                                      size="is-small"
+                                      type="is-primary"
+                                    ></b-icon>
+                                  </button>
+                                  <button @click="deleteGoal(goal.id, 'unit')">
+                                    <b-icon
+                                      icon="times"
+                                      size="is-small"
+                                      type="is-danger"
+                                    ></b-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
                           </ol>
                         </div>
-                        <form
-                          v-if="anyPermission('admin', 'supervisor')"
-                          @submit.prevent="addSelfAppraisal('unit')"
+                        <template
+                          v-if="openAppraisal(this.appraisal.sap_timestamp)"
                         >
-                          <template v-for="(kg, index) in unitGoals">
-                            <b-field
-                              :key="index"
-                              :type="{
-                                'is-danger':
-                                  Object.keys(unitGoalErrors).length &&
-                                  unitGoalErrors[`goal.${index}.goal`] &&
-                                  unitGoalErrors[`goal.${index}.goal`].length,
-                              }"
-                              :message="
-                                Object.keys(unitGoalErrors).length
-                                  ? unitGoalErrors[`goal.${index}.goal`]
-                                  : []
-                              "
-                            >
-                              <b-input
-                                placeholder="Enter new goal..."
-                                type="text"
-                                expanded
-                                v-model="unitGoals[index]['goal']"
+                          <template v-if="isEditingUnitGoal">
+                            <form @submit.prevent="updateGoal('unit')">
+                              <b-field
+                                :type="{
+                                  'is-danger': editUnitError.length,
+                                }"
+                                :message="editUnitError"
                               >
-                              </b-input>
-                              <p class="control">
-                                <b-button
-                                  type="is-danger is-light"
-                                  icon-left="times"
-                                  :disabled="unitGoals.length === 1"
-                                  @click="removeGoal(index, 'unit')"
-                                />
-                              </p>
-                            </b-field>
-                          </template>
+                                <b-input
+                                  placeholder="Enter new goal..."
+                                  type="text"
+                                  expanded
+                                  v-model="editUnitGoal.goal"
+                                >
+                                </b-input>
+                              </b-field>
 
-                          <section class="goal__btns">
-                            <div class="">
-                              <b-button
-                                class="is-info is-light"
-                                icon-left="plus"
-                                @click="appendNewGoal('unit')"
-                                >Add New</b-button
-                              >
-                            </div>
-                            <div class="block">
-                              <b-button
-                                class="is-default is-light"
-                                @click="cancelGoalForm('unit')"
-                                :disabled="isSubmittingUnitGoal"
-                                >Cancel</b-button
-                              >
-                              <button
-                                type="submit"
-                                class="button is-success is-light"
-                                :disabled="isSubmittingUnitGoal"
-                              >
-                                {{
-                                  isSubmittingUnitGoal ? "Submitting..." : "Add"
-                                }}
-                              </button>
-                            </div>
-                          </section>
-                        </form>
+                              <section class="goal__btns">
+                                <div></div>
+                                <div class="block">
+                                  <b-button
+                                    class="is-default is-light"
+                                    @click="cancelEditGoal('unit')"
+                                    :disabled="isSubmittingUnitGoal"
+                                    >Cancel</b-button
+                                  >
+                                  <button
+                                    type="submit"
+                                    class="button is-success is-light"
+                                    :disabled="isSubmittingUnitGoal"
+                                  >
+                                    {{
+                                      isSubmittingDptGoal ? "Saving..." : "Save"
+                                    }}
+                                  </button>
+                                </div>
+                              </section>
+                            </form>
+                          </template>
+                          <template v-else>
+                            <form
+                              v-if="anyPermission('admin', 'supervisor')"
+                              @submit.prevent="addSelfAppraisal('unit')"
+                            >
+                              <template v-for="(kg, index) in unitGoals">
+                                <b-field
+                                  :key="index"
+                                  :type="{
+                                    'is-danger':
+                                      Object.keys(unitGoalErrors).length &&
+                                      unitGoalErrors[`goal.${index}.goal`] &&
+                                      unitGoalErrors[`goal.${index}.goal`]
+                                        .length,
+                                  }"
+                                  :message="
+                                    Object.keys(unitGoalErrors).length
+                                      ? unitGoalErrors[`goal.${index}.goal`]
+                                      : []
+                                  "
+                                >
+                                  <b-input
+                                    placeholder="Enter new goal..."
+                                    type="text"
+                                    expanded
+                                    v-model="unitGoals[index]['goal']"
+                                  >
+                                  </b-input>
+                                  <p class="control">
+                                    <b-button
+                                      type="is-danger is-light"
+                                      icon-left="times"
+                                      :disabled="unitGoals.length === 1"
+                                      @click="removeGoal(index, 'unit')"
+                                    />
+                                  </p>
+                                </b-field>
+                              </template>
+
+                              <section class="goal__btns">
+                                <div class="">
+                                  <b-button
+                                    class="is-info is-light"
+                                    icon-left="plus"
+                                    @click="appendNewGoal('unit')"
+                                    >Add New</b-button
+                                  >
+                                </div>
+                                <div class="block">
+                                  <b-button
+                                    class="is-default is-light"
+                                    @click="cancelGoalForm('unit')"
+                                    :disabled="isSubmittingUnitGoal"
+                                    >Cancel</b-button
+                                  >
+                                  <button
+                                    type="submit"
+                                    class="button is-success is-light"
+                                    :disabled="isSubmittingUnitGoal"
+                                  >
+                                    {{
+                                      isSubmittingUnitGoal
+                                        ? "Submitting..."
+                                        : "Add"
+                                    }}
+                                  </button>
+                                </div>
+                              </section>
+                            </form>
+                          </template>
+                        </template>
                       </section>
                     </td>
                     <td
-                      v-if="
-                        $page.props.authUser.department_id ||
-                        anyPermission('admin', 'president', 'hod')
-                      "
+                      class="kpi__goals__td"
+                      v-if="$page.props.authUser.department_id"
                     >
                       <section class="kpi_goals__wrapper">
                         <div class="content">
-                          <ol type="1">
-                            <li>Coffee</li>
-                            <li>Tea</li>
-                            <li>Milk</li>
+                          <ol
+                            v-if="
+                              userAppraisal &&
+                              userAppraisal.userDepartmentGoal &&
+                              userAppraisal.userDepartmentGoal.goals
+                            "
+                          >
+                            <li
+                              v-for="goal in userAppraisal.userDepartmentGoal
+                                .goals"
+                              :key="goal.id"
+                            >
+                              <div class="appraisal-list">
+                                <p>
+                                  {{ goal.goal }}
+                                </p>
+                                <div class="">
+                                  <button @click="setEditGoalData(goal, 'dpt')">
+                                    <b-icon
+                                      icon="pen"
+                                      size="is-small"
+                                      type="is-primary"
+                                    ></b-icon>
+                                  </button>
+                                  <button @click="deleteGoal(goal.id, 'dpt')">
+                                    <b-icon
+                                      icon="times"
+                                      size="is-small"
+                                      type="is-danger"
+                                    ></b-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
                           </ol>
                         </div>
-                        <form
-                          v-if="anyPermission('admin', 'hod')"
-                          @submit.prevent="addSelfAppraisal('department')"
+                        <template
+                          v-if="openAppraisal(this.appraisal.sap_timestamp)"
                         >
-                          <template v-for="(kg, index) in dptGoals">
-                            <b-field
-                              :key="index"
-                              :type="{
-                                'is-danger':
-                                  Object.keys(dptGoalErrors).length &&
-                                  dptGoalErrors[`goal.${index}.goal`] &&
-                                  dptGoalErrors[`goal.${index}.goal`].length,
-                              }"
-                              :message="
-                                Object.keys(dptGoalErrors).length
-                                  ? dptGoalErrors[`goal.${index}.goal`]
-                                  : []
-                              "
-                            >
-                              <b-input
-                                placeholder="Enter new goal..."
-                                type="text"
-                                expanded
-                                v-model="dptGoals[index]['goal']"
+                          <template v-if="isEditingDptGoal">
+                            <form @submit.prevent="updateGoal('dpt')">
+                              <b-field
+                                :type="{
+                                  'is-danger': editDptGoalError.length,
+                                }"
+                                :message="editDptGoalError"
                               >
-                              </b-input>
-                              <p class="control">
-                                <b-button
-                                  type="is-danger is-light"
-                                  icon-left="times"
-                                  :disabled="dptGoals.length === 1"
-                                  @click="removeGoal(index, 'department')"
-                                />
-                              </p>
-                            </b-field>
-                          </template>
+                                <b-input
+                                  placeholder="Enter new goal..."
+                                  type="text"
+                                  expanded
+                                  v-model="editDptGoal.goal"
+                                >
+                                </b-input>
+                              </b-field>
 
-                          <section class="goal__btns">
-                            <div class="">
-                              <b-button
-                                class="is-info is-light"
-                                icon-left="plus"
-                                @click="appendNewGoal('department')"
-                                >Add New</b-button
-                              >
-                            </div>
-                            <div class="block">
-                              <b-button
-                                class="is-default is-light"
-                                @click="cancelGoalForm('department')"
-                                :disabled="isSubmittingDptGoal"
-                                >Cancel</b-button
-                              >
-                              <button
-                                type="submit"
-                                class="button is-success is-light"
-                                :disabled="isSubmittingDptGoal"
-                              >
-                                {{
-                                  isSubmittingDptGoal ? "Submitting..." : "Add"
-                                }}
-                              </button>
-                            </div>
-                          </section>
-                        </form>
+                              <section class="goal__btns">
+                                <div></div>
+                                <div class="block">
+                                  <b-button
+                                    class="is-default is-light"
+                                    @click="cancelEditGoal('dpt')"
+                                    :disabled="isSubmittingDptGoal"
+                                    >Cancel</b-button
+                                  >
+                                  <button
+                                    type="submit"
+                                    class="button is-success is-light"
+                                    :disabled="isSubmittingDptGoal"
+                                  >
+                                    {{
+                                      isSubmittingDptGoal ? "Saving..." : "Save"
+                                    }}
+                                  </button>
+                                </div>
+                              </section>
+                            </form>
+                          </template>
+                          <template v-else>
+                            <form
+                              v-if="anyPermission('admin', 'hod')"
+                              @submit.prevent="addSelfAppraisal('department')"
+                            >
+                              <template v-for="(kg, index) in dptGoals">
+                                <b-field
+                                  :key="index"
+                                  :type="{
+                                    'is-danger':
+                                      Object.keys(dptGoalErrors).length &&
+                                      dptGoalErrors[`goal.${index}.goal`] &&
+                                      dptGoalErrors[`goal.${index}.goal`]
+                                        .length,
+                                  }"
+                                  :message="
+                                    Object.keys(dptGoalErrors).length
+                                      ? dptGoalErrors[`goal.${index}.goal`]
+                                      : []
+                                  "
+                                >
+                                  <b-input
+                                    placeholder="Enter new goal..."
+                                    type="text"
+                                    expanded
+                                    v-model="dptGoals[index]['goal']"
+                                  >
+                                  </b-input>
+                                  <p class="control">
+                                    <b-button
+                                      type="is-danger is-light"
+                                      icon-left="times"
+                                      :disabled="dptGoals.length === 1"
+                                      @click="removeGoal(index, 'department')"
+                                    />
+                                  </p>
+                                </b-field>
+                              </template>
+
+                              <section class="goal__btns">
+                                <div class="">
+                                  <b-button
+                                    class="is-info is-light"
+                                    icon-left="plus"
+                                    @click="appendNewGoal('department')"
+                                    >Add New</b-button
+                                  >
+                                </div>
+                                <div class="block">
+                                  <b-button
+                                    class="is-default is-light"
+                                    @click="cancelGoalForm('department')"
+                                    :disabled="isSubmittingDptGoal"
+                                    >Cancel</b-button
+                                  >
+                                  <button
+                                    type="submit"
+                                    class="button is-success is-light"
+                                    :disabled="isSubmittingDptGoal"
+                                  >
+                                    {{
+                                      isSubmittingDptGoal
+                                        ? "Submitting..."
+                                        : "Add"
+                                    }}
+                                  </button>
+                                </div>
+                              </section>
+                            </form>
+                          </template>
+                        </template>
                       </section>
                     </td>
                   </tr>
@@ -298,8 +517,8 @@
           </b-step-item>
 
           <b-step-item step="2" label="Achievement">
-            <section class="kpi__table">
-              <table class="table is-fullwidth is-hoverable">
+            <section class="kpi__table__single">
+              <table class="table is-fullwidth is-bordered">
                 <thead>
                   <tr>
                     <th class="has-text-centered text-main">My Achievement</th>
@@ -307,84 +526,176 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="kpi__goals__td">
                       <section class="kpi_goals__wrapper">
-                        <div class="content" style="width: 30rem">
-                          <ol type="1">
-                            <li>Coffee</li>
-                            <li>Tea</li>
-                            <li>Milk</li>
+                        <div class="content">
+                          <ol
+                            v-if="
+                              userAppraisal &&
+                              userAppraisal.userAppraisal &&
+                              userAppraisal.userAppraisal.achievements
+                            "
+                          >
+                            <li
+                              v-for="achievement in userAppraisal.userAppraisal
+                                .achievements"
+                              :key="achievement.id"
+                            >
+                              <div class="appraisal-list">
+                                <p>
+                                  {{ achievement.achievement }}
+                                </p>
+                                <div class="">
+                                  <button
+                                    @click="
+                                      setEditSelfAppraisal(
+                                        achievement,
+                                        'achievement'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="pen"
+                                      size="is-small"
+                                      type="is-primary"
+                                    ></b-icon>
+                                  </button>
+                                  <button
+                                    @click="
+                                      deleteSelfAppraisal(
+                                        achievement.id,
+                                        'achievements'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="times"
+                                      size="is-small"
+                                      type="is-danger"
+                                    ></b-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
                           </ol>
+                          <p v-else>No achievement found!</p>
                         </div>
-                        <form
-                          style="width: 30rem"
-                          @submit.prevent="addSelfAppraisal('achievement')"
+
+                        <template
+                          v-if="openAppraisal(this.appraisal.np_timestamp)"
                         >
-                          <template v-for="(a, index) in achievements">
+                          <form
+                            @submit.prevent="
+                              updateSelfAppraisal('achievements')
+                            "
+                            v-if="isEditingSelfAppraisal"
+                          >
                             <b-field
-                              :key="index"
                               :type="{
-                                'is-danger':
-                                  Object.keys(achievementErrors).length &&
-                                  achievementErrors[
-                                    `achievement.${index}.achievement`
-                                  ] &&
-                                  achievementErrors[
-                                    `achievement.${index}.achievement`
-                                  ].length,
+                                'is-danger': editAchievementErrors.length,
                               }"
-                              :message="
-                                Object.keys(achievementErrors).length
-                                  ? achievementErrors[
-                                      `achievement.${index}.achievement`
-                                    ]
-                                  : []
-                              "
+                              :message="editAchievementErrors.achievement"
                             >
                               <b-input
-                                placeholder="Enter new achievement recorded..."
+                                placeholder="Enter new achievement..."
                                 type="text"
                                 expanded
-                                v-model="achievements[index]['achievement']"
+                                v-model="editAchievement.achievement"
                               >
                               </b-input>
-                              <p class="control">
-                                <b-button
-                                  type="is-danger is-light"
-                                  icon-left="times"
-                                  :disabled="achievements.length === 1"
-                                  @click="removeGoal(index, 'achievement')"
-                                />
-                              </p>
                             </b-field>
-                          </template>
 
-                          <section class="goal__btns">
-                            <div class="">
-                              <b-button
-                                class="is-info is-light"
-                                icon-left="plus"
-                                @click="appendNewGoal('achievement')"
-                                >Add New</b-button
+                            <section class="goal__btns">
+                              <div></div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="
+                                    cancelEditSelfAppraisal('achievements')
+                                  "
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Saving..." : "Save" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                          <form
+                            @submit.prevent="addSelfAppraisal('achievement')"
+                            v-else
+                          >
+                            <template v-for="(a, index) in achievements">
+                              <b-field
+                                :key="index"
+                                :type="{
+                                  'is-danger':
+                                    Object.keys(achievementErrors).length &&
+                                    achievementErrors[
+                                      `achievement.${index}.achievement`
+                                    ] &&
+                                    achievementErrors[
+                                      `achievement.${index}.achievement`
+                                    ].length,
+                                }"
+                                :message="
+                                  Object.keys(achievementErrors).length
+                                    ? achievementErrors[
+                                        `achievement.${index}.achievement`
+                                      ]
+                                    : []
+                                "
                               >
-                            </div>
-                            <div class="block">
-                              <b-button
-                                class="is-default is-light"
-                                @click="cancelGoalForm('achievement')"
-                                :disabled="isSubmitting"
-                                >Cancel</b-button
-                              >
-                              <button
-                                type="submit"
-                                class="button is-success is-light"
-                                :disabled="isSubmitting"
-                              >
-                                {{ isSubmitting ? "Submitting..." : "Add" }}
-                              </button>
-                            </div>
-                          </section>
-                        </form>
+                                <b-input
+                                  placeholder="Enter new achievement recorded..."
+                                  type="text"
+                                  expanded
+                                  v-model="achievements[index]['achievement']"
+                                >
+                                </b-input>
+                                <p class="control">
+                                  <b-button
+                                    type="is-danger is-light"
+                                    icon-left="times"
+                                    :disabled="achievements.length === 1"
+                                    @click="removeGoal(index, 'achievement')"
+                                  />
+                                </p>
+                              </b-field>
+                            </template>
+
+                            <section class="goal__btns">
+                              <div class="">
+                                <b-button
+                                  class="is-info is-light"
+                                  icon-left="plus"
+                                  @click="appendNewGoal('achievement')"
+                                  >Add New</b-button
+                                >
+                              </div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="cancelGoalForm('achievement')"
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Submitting..." : "Add" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                        </template>
                       </section>
                     </td>
                   </tr>
@@ -394,8 +705,8 @@
           </b-step-item>
 
           <b-step-item step="3" label="Difficulties Faced">
-            <section class="kpi__table">
-              <table class="table is-fullwidth is-hoverable">
+            <section class="kpi__table__single">
+              <table class="table is-fullwidth is-bordered">
                 <thead>
                   <tr>
                     <th class="has-text-centered text-main">Difficulties</th>
@@ -403,84 +714,175 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="kpi__goals__td">
                       <section class="kpi_goals__wrapper">
-                        <div class="content" style="width: 30rem">
-                          <ol type="1">
-                            <li>Coffee</li>
-                            <li>Tea</li>
-                            <li>Milk</li>
+                        <div class="content">
+                          <ol
+                            v-if="
+                              userAppraisal &&
+                              userAppraisal.userAppraisal &&
+                              userAppraisal.userAppraisal.difficulties
+                            "
+                          >
+                            <li
+                              v-for="difficulty in userAppraisal.userAppraisal
+                                .difficulties"
+                              :key="difficulty.id"
+                            >
+                              <div class="appraisal-list">
+                                <p>
+                                  {{ difficulty.difficulty }}
+                                </p>
+                                <div class="">
+                                  <button
+                                    @click="
+                                      setEditSelfAppraisal(
+                                        difficulty,
+                                        'difficulty'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="pen"
+                                      size="is-small"
+                                      type="is-primary"
+                                    ></b-icon>
+                                  </button>
+                                  <button
+                                    @click="
+                                      deleteSelfAppraisal(
+                                        difficulty.id,
+                                        'difficulties'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="times"
+                                      size="is-small"
+                                      type="is-danger"
+                                    ></b-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
                           </ol>
+                          <p v-else>No difficulty found!</p>
                         </div>
-                        <form
-                          style="width: 30rem"
-                          @submit.prevent="addSelfAppraisal('difficulty')"
+                        <template
+                          v-if="openAppraisal(this.appraisal.np_timestamp)"
                         >
-                          <template v-for="(d, index) in difficulties">
+                          <form
+                            @submit.prevent="
+                              updateSelfAppraisal('difficulties')
+                            "
+                            v-if="isEditingSelfAppraisal"
+                          >
                             <b-field
-                              :key="index"
                               :type="{
-                                'is-danger':
-                                  Object.keys(difficultyErrors).length &&
-                                  difficultyErrors[
-                                    `difficulty.${index}.difficulty`
-                                  ] &&
-                                  difficultyErrors[
-                                    `difficulty.${index}.difficulty`
-                                  ].length,
+                                'is-danger': editDifficultyErrors.length,
                               }"
-                              :message="
-                                Object.keys(difficultyErrors).length
-                                  ? difficultyErrors[
-                                      `difficulty.${index}.difficulty`
-                                    ]
-                                  : []
-                              "
+                              :message="editDifficultyErrors.difficulty"
                             >
                               <b-input
-                                placeholder="Enter new difficulty faced..."
+                                placeholder="Enter new difficulty..."
                                 type="text"
                                 expanded
-                                v-model="difficulties[index]['difficulty']"
+                                v-model="editDifficulty.difficulty"
                               >
                               </b-input>
-                              <p class="control">
-                                <b-button
-                                  type="is-danger is-light"
-                                  icon-left="times"
-                                  :disabled="difficulties.length === 1"
-                                  @click="removeGoal(index, 'difficulty')"
-                                />
-                              </p>
                             </b-field>
-                          </template>
 
-                          <section class="goal__btns">
-                            <div class="">
-                              <b-button
-                                class="is-info is-light"
-                                icon-left="plus"
-                                @click="appendNewGoal('difficulty')"
-                                >Add New</b-button
+                            <section class="goal__btns">
+                              <div></div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="
+                                    cancelEditSelfAppraisal('difficulties')
+                                  "
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Saving..." : "Save" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                          <form
+                            @submit.prevent="addSelfAppraisal('difficulty')"
+                            v-else
+                          >
+                            <template v-for="(d, index) in difficulties">
+                              <b-field
+                                :key="index"
+                                :type="{
+                                  'is-danger':
+                                    Object.keys(difficultyErrors).length &&
+                                    difficultyErrors[
+                                      `difficulty.${index}.difficulty`
+                                    ] &&
+                                    difficultyErrors[
+                                      `difficulty.${index}.difficulty`
+                                    ].length,
+                                }"
+                                :message="
+                                  Object.keys(difficultyErrors).length
+                                    ? difficultyErrors[
+                                        `difficulty.${index}.difficulty`
+                                      ]
+                                    : []
+                                "
                               >
-                            </div>
-                            <div class="block">
-                              <b-button
-                                class="is-default is-light"
-                                @click="cancelGoalForm('difficulty')"
-                                :disabled="isSubmitting"
-                                >Cancel</b-button
-                              >
-                              <button
-                                type="submit"
-                                class="button is-success is-light"
-                                :disabled="isSubmitting"
-                              >
-                                {{ isSubmitting ? "Submitting..." : "Add" }}
-                              </button>
-                            </div>
-                          </section>
-                        </form>
+                                <b-input
+                                  placeholder="Enter new difficulty faced..."
+                                  type="text"
+                                  expanded
+                                  v-model="difficulties[index]['difficulty']"
+                                >
+                                </b-input>
+                                <p class="control">
+                                  <b-button
+                                    type="is-danger is-light"
+                                    icon-left="times"
+                                    :disabled="difficulties.length === 1"
+                                    @click="removeGoal(index, 'difficulty')"
+                                  />
+                                </p>
+                              </b-field>
+                            </template>
+
+                            <section class="goal__btns">
+                              <div class="">
+                                <b-button
+                                  class="is-info is-light"
+                                  icon-left="plus"
+                                  @click="appendNewGoal('difficulty')"
+                                  >Add New</b-button
+                                >
+                              </div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="cancelGoalForm('difficulty')"
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Submitting..." : "Add" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                        </template>
                       </section>
                     </td>
                   </tr>
@@ -489,8 +891,8 @@
             </section>
           </b-step-item>
           <b-step-item step="4" label="Project and Initiative (Department)">
-            <section class="kpi__table">
-              <table class="table is-fullwidth is-hoverable">
+            <section class="kpi__table__single">
+              <table class="table is-fullwidth is-bordered">
                 <thead>
                   <tr>
                     <th class="has-text-centered text-main">
@@ -500,84 +902,173 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="kpi__goals__td">
                       <section class="kpi_goals__wrapper">
-                        <div class="content" style="width: 30rem">
-                          <ol type="1">
-                            <li>Coffee</li>
-                            <li>Tea</li>
-                            <li>Milk</li>
+                        <div class="content">
+                          <ol
+                            v-if="
+                              userAppraisal &&
+                              userAppraisal.userAppraisal &&
+                              userAppraisal.userAppraisal.initiatives
+                            "
+                          >
+                            <li
+                              v-for="initiative in userAppraisal.userAppraisal
+                                .initiatives"
+                              :key="initiative.id"
+                            >
+                              <div class="appraisal-list">
+                                <p>
+                                  {{ initiative.initiative }}
+                                </p>
+                                <div class="">
+                                  <button
+                                    @click="
+                                      setEditSelfAppraisal(
+                                        initiative,
+                                        'initiative'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="pen"
+                                      size="is-small"
+                                      type="is-primary"
+                                    ></b-icon>
+                                  </button>
+                                  <button
+                                    @click="
+                                      deleteSelfAppraisal(
+                                        initiative.id,
+                                        'initiatives'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="times"
+                                      size="is-small"
+                                      type="is-danger"
+                                    ></b-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
                           </ol>
+                          <p v-else>No initiative found!</p>
                         </div>
-                        <form
-                          style="width: 30rem"
-                          @submit.prevent="addSelfAppraisal('initiative')"
+                        <template
+                          v-if="openAppraisal(this.appraisal.np_timestamp)"
                         >
-                          <template v-for="(i, index) in initiatives">
+                          <form
+                            @submit.prevent="updateSelfAppraisal('initiatives')"
+                            v-if="isEditingSelfAppraisal"
+                          >
                             <b-field
-                              :key="index"
                               :type="{
-                                'is-danger':
-                                  Object.keys(initiativeErrors).length &&
-                                  initiativeErrors[
-                                    `initiative.${index}.initiative`
-                                  ] &&
-                                  initiativeErrors[
-                                    `initiative.${index}.initiative`
-                                  ].length,
+                                'is-danger': editInitiativeErrors.length,
                               }"
-                              :message="
-                                Object.keys(initiativeErrors).length
-                                  ? initiativeErrors[
-                                      `initiative.${index}.initiative`
-                                    ]
-                                  : []
-                              "
+                              :message="editInitiativeErrors.initiative"
                             >
                               <b-input
-                                placeholder="Enter new project or initiative..."
+                                placeholder="Enter new initiative..."
                                 type="text"
                                 expanded
-                                v-model="initiatives[index]['initiative']"
+                                v-model="editInitiative.initiative"
                               >
                               </b-input>
-                              <p class="control">
-                                <b-button
-                                  type="is-danger is-light"
-                                  icon-left="times"
-                                  :disabled="initiatives.length === 1"
-                                  @click="removeGoal(index, 'initiative')"
-                                />
-                              </p>
                             </b-field>
-                          </template>
 
-                          <section class="goal__btns">
-                            <div class="">
-                              <b-button
-                                class="is-info is-light"
-                                icon-left="plus"
-                                @click="appendNewGoal('initiative')"
-                                >Add New</b-button
+                            <section class="goal__btns">
+                              <div></div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="
+                                    cancelEditSelfAppraisal('initiatives')
+                                  "
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Saving..." : "Save" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                          <form
+                            @submit.prevent="addSelfAppraisal('initiative')"
+                            v-else
+                          >
+                            <template v-for="(i, index) in initiatives">
+                              <b-field
+                                :key="index"
+                                :type="{
+                                  'is-danger':
+                                    Object.keys(initiativeErrors).length &&
+                                    initiativeErrors[
+                                      `initiative.${index}.initiative`
+                                    ] &&
+                                    initiativeErrors[
+                                      `initiative.${index}.initiative`
+                                    ].length,
+                                }"
+                                :message="
+                                  Object.keys(initiativeErrors).length
+                                    ? initiativeErrors[
+                                        `initiative.${index}.initiative`
+                                      ]
+                                    : []
+                                "
                               >
-                            </div>
-                            <div class="block">
-                              <b-button
-                                class="is-default is-light"
-                                @click="cancelGoalForm('initiative')"
-                                :disabled="isSubmitting"
-                                >Cancel</b-button
-                              >
-                              <button
-                                type="submit"
-                                class="button is-success is-light"
-                                :disabled="isSubmitting"
-                              >
-                                {{ isSubmitting ? "Submitting..." : "Add" }}
-                              </button>
-                            </div>
-                          </section>
-                        </form>
+                                <b-input
+                                  placeholder="Enter new project or initiative..."
+                                  type="text"
+                                  expanded
+                                  v-model="initiatives[index]['initiative']"
+                                >
+                                </b-input>
+                                <p class="control">
+                                  <b-button
+                                    type="is-danger is-light"
+                                    icon-left="times"
+                                    :disabled="initiatives.length === 1"
+                                    @click="removeGoal(index, 'initiative')"
+                                  />
+                                </p>
+                              </b-field>
+                            </template>
+
+                            <section class="goal__btns">
+                              <div class="">
+                                <b-button
+                                  class="is-info is-light"
+                                  icon-left="plus"
+                                  @click="appendNewGoal('initiative')"
+                                  >Add New</b-button
+                                >
+                              </div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="cancelGoalForm('initiative')"
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Submitting..." : "Add" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                        </template>
                       </section>
                     </td>
                   </tr>
@@ -586,8 +1077,8 @@
             </section>
           </b-step-item>
           <b-step-item step="5" label="Project and Initiative (Other)">
-            <section class="kpi__table">
-              <table class="table is-fullwidth is-hoverable">
+            <section class="kpi__table__single">
+              <table class="table is-fullwidth is-bordered">
                 <thead>
                   <tr>
                     <th class="has-text-centered text-main">
@@ -597,84 +1088,181 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="kpi__goals__td">
                       <section class="kpi_goals__wrapper">
-                        <div class="content" style="width: 30rem">
-                          <ol type="1">
-                            <li>Coffee</li>
-                            <li>Tea</li>
-                            <li>Milk</li>
+                        <div class="content">
+                          <ol
+                            v-if="
+                              userAppraisal &&
+                              userAppraisal.userAppraisal &&
+                              userAppraisal.userAppraisal.other_initiatives
+                            "
+                          >
+                            <li
+                              v-for="initiative in userAppraisal.userAppraisal
+                                .other_initiatives"
+                              :key="initiative.id"
+                            >
+                              <div class="appraisal-list">
+                                <p>
+                                  {{ initiative.initiative }}
+                                </p>
+                                <div class="">
+                                  <button
+                                    @click="
+                                      setEditSelfAppraisal(
+                                        initiative,
+                                        'otherInitiative'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="pen"
+                                      size="is-small"
+                                      type="is-primary"
+                                    ></b-icon>
+                                  </button>
+                                  <button
+                                    @click="
+                                      deleteSelfAppraisal(
+                                        initiative.id,
+                                        'other_initiatives'
+                                      )
+                                    "
+                                  >
+                                    <b-icon
+                                      icon="times"
+                                      size="is-small"
+                                      type="is-danger"
+                                    ></b-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
                           </ol>
+                          <p v-else>No initiative found!</p>
                         </div>
-                        <form
-                          style="width: 30rem"
-                          @submit.prevent="addSelfAppraisal('otherInitiative')"
+                        <template
+                          v-if="openAppraisal(this.appraisal.np_timestamp)"
                         >
-                          <template v-for="(oi, index) in otherInitiatives">
+                          <form
+                            @submit.prevent="
+                              updateSelfAppraisal('other_initiatives')
+                            "
+                            v-if="isEditingSelfAppraisal"
+                          >
                             <b-field
-                              :key="index"
                               :type="{
-                                'is-danger':
-                                  Object.keys(otherInitiativeErrors).length &&
-                                  otherInitiativeErrors[
-                                    `initiative.${index}.initiative`
-                                  ] &&
-                                  otherInitiativeErrors[
-                                    `initiative.${index}.initiative`
-                                  ].length,
+                                'is-danger': editOtherInitiativeErrors.length,
                               }"
-                              :message="
-                                Object.keys(otherInitiativeErrors).length
-                                  ? otherInitiativeErrors[
-                                      `initiative.${index}.initiative`
-                                    ]
-                                  : []
-                              "
+                              :message="editOtherInitiativeErrors.initiative"
                             >
                               <b-input
-                                placeholder="Enter new project or initiative..."
+                                placeholder="Enter new initiative..."
                                 type="text"
                                 expanded
-                                v-model="otherInitiatives[index]['initiative']"
+                                v-model="editOtherInitiative.initiative"
                               >
                               </b-input>
-                              <p class="control">
-                                <b-button
-                                  type="is-danger is-light"
-                                  icon-left="times"
-                                  :disabled="otherInitiatives.length === 1"
-                                  @click="removeGoal(index, 'otherInitiative')"
-                                />
-                              </p>
                             </b-field>
-                          </template>
 
-                          <section class="goal__btns">
-                            <div class="">
-                              <b-button
-                                class="is-info is-light"
-                                icon-left="plus"
-                                @click="appendNewGoal('otherInitiative')"
-                                >Add New</b-button
+                            <section class="goal__btns">
+                              <div></div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="
+                                    cancelEditSelfAppraisal('other_initiatives')
+                                  "
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Saving..." : "Save" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                          <form
+                            @submit.prevent="
+                              addSelfAppraisal('otherInitiative')
+                            "
+                            v-else
+                          >
+                            <template v-for="(oi, index) in otherInitiatives">
+                              <b-field
+                                :key="index"
+                                :type="{
+                                  'is-danger':
+                                    Object.keys(otherInitiativeErrors).length &&
+                                    otherInitiativeErrors[
+                                      `initiative.${index}.initiative`
+                                    ] &&
+                                    otherInitiativeErrors[
+                                      `initiative.${index}.initiative`
+                                    ].length,
+                                }"
+                                :message="
+                                  Object.keys(otherInitiativeErrors).length
+                                    ? otherInitiativeErrors[
+                                        `initiative.${index}.initiative`
+                                      ]
+                                    : []
+                                "
                               >
-                            </div>
-                            <div class="block">
-                              <b-button
-                                class="is-default is-light"
-                                @click="cancelGoalForm('otherInitiative')"
-                                :disabled="isSubmitting"
-                                >Cancel</b-button
-                              >
-                              <button
-                                type="submit"
-                                class="button is-success is-light"
-                                :disabled="isSubmitting"
-                              >
-                                {{ isSubmitting ? "Submitting..." : "Add" }}
-                              </button>
-                            </div>
-                          </section>
-                        </form>
+                                <b-input
+                                  placeholder="Enter new project or initiative..."
+                                  type="text"
+                                  expanded
+                                  v-model="
+                                    otherInitiatives[index]['initiative']
+                                  "
+                                >
+                                </b-input>
+                                <p class="control">
+                                  <b-button
+                                    type="is-danger is-light"
+                                    icon-left="times"
+                                    :disabled="otherInitiatives.length === 1"
+                                    @click="
+                                      removeGoal(index, 'otherInitiative')
+                                    "
+                                  />
+                                </p>
+                              </b-field>
+                            </template>
+
+                            <section class="goal__btns">
+                              <div class="">
+                                <b-button
+                                  class="is-info is-light"
+                                  icon-left="plus"
+                                  @click="appendNewGoal('otherInitiative')"
+                                  >Add New</b-button
+                                >
+                              </div>
+                              <div class="block">
+                                <b-button
+                                  class="is-default is-light"
+                                  @click="cancelGoalForm('otherInitiative')"
+                                  :disabled="isSubmitting"
+                                  >Cancel</b-button
+                                >
+                                <button
+                                  type="submit"
+                                  class="button is-success is-light"
+                                  :disabled="isSubmitting"
+                                >
+                                  {{ isSubmitting ? "Submitting..." : "Add" }}
+                                </button>
+                              </div>
+                            </section>
+                          </form>
+                        </template>
                       </section>
                     </td>
                   </tr>
@@ -683,7 +1271,7 @@
             </section>
           </b-step-item>
           <b-step-item step="5" label="Overall feedback">
-            <section class="kpi__table">
+            <section class="">
               <table class="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
@@ -692,41 +1280,57 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="">
                       <section class="kpi_goals__wrapper">
-                        <form @submit.prevent="addSelfAppraisal('feedback')">
-                          <b-field
-                            :type="{
-                              'is-danger': feedbackErrors.length,
-                            }"
-                            :message="feedbackErrors"
+                        <template
+                          v-if="openAppraisal(this.appraisal.np_timestamp)"
+                        >
+                          <form
+                            @submit.prevent="
+                              isEditingSelfAppraisalFeedback
+                                ? updateSelfAppraisal('feedback')
+                                : addSelfAppraisal('feedback')
+                            "
                           >
-                            <section class="content">
-                              <editor
-                                api-key="25qhafbs9v6uleue5kg84jeofqdrwawb30mv1o6mgvx4cdbb"
-                                id="feedback"
-                                :init="initEditor"
-                                v-model="feedback"
-                              ></editor>
-                            </section>
-                          </b-field>
-                          <div class="bolck justify-c-start">
-                            <b-button
-                              class="is-default is-light"
-                              @click="cancelGoalForm('feedback')"
-                              :disabled="isSubmitting"
-                              >Cancel</b-button
+                            <b-field
+                              :type="{
+                                'is-danger': feedbackErrors.length,
+                              }"
+                              :message="feedbackErrors"
                             >
-                            &nbsp;&nbsp;
-                            <button
-                              type="submit"
-                              class="button is-success is-light"
-                              :disabled="isSubmitting"
-                            >
-                              {{ isSubmitting ? "Submitting..." : "Add" }}
-                            </button>
-                          </div>
-                        </form>
+                              <section class="content">
+                                <editor
+                                  api-key="25qhafbs9v6uleue5kg84jeofqdrwawb30mv1o6mgvx4cdbb"
+                                  id="feedback"
+                                  :init="initEditor"
+                                  v-model="feedback"
+                                ></editor>
+                              </section>
+                            </b-field>
+                            <div class="bolck justify-c-start">
+                              <b-button
+                                class="is-default is-light"
+                                @click="cancelGoalForm('feedback')"
+                                :disabled="isSubmitting"
+                                >Cancel</b-button
+                              >
+                              &nbsp;&nbsp;
+                              <button
+                                type="submit"
+                                class="button is-success is-light"
+                                :disabled="isSubmitting"
+                              >
+                                {{
+                                  isSubmitting
+                                    ? "Submitting..."
+                                    : isEditingSelfAppraisalFeedback
+                                    ? "Save"
+                                    : "Add"
+                                }}
+                              </button>
+                            </div>
+                          </form>
+                        </template>
                       </section>
                     </td>
                   </tr>
@@ -780,14 +1384,10 @@ export default {
   computed: {
     ...mapGetters(["getAppraisees", "getJobTitles"]),
   },
-  beforeMount() {
-    // this.$nextTick(() => {
-    //   this.dispatchKPI({
-    //     type: "ADD_APPRAISEES",
-    //     payload: { id: this.appraisal.id, page: 1 },
-    //   });
-    // });
-    this.getAppraisalKeyGoal(this.appraisal.id);
+  created() {
+    this.$nextTick(() => {
+      this.getUserAppraisal(this.appraisal.id);
+    });
   },
   data() {
     return {
@@ -802,6 +1402,13 @@ export default {
       isLoading: false,
       noAppraisalFound: false,
       activeStep: 0,
+
+      userAppraisal: null,
+      isEditingUserGoal: false,
+      isEditingUnitGoal: false,
+      isEditingDptGoal: false,
+      isEditingSelfAppraisal: false,
+      isEditingSelfAppraisalFeedback: false,
 
       myGoals: [
         {
@@ -821,6 +1428,22 @@ export default {
           goal: "",
         },
       ],
+
+      editUserGoal: {
+        goal: "",
+        id: "",
+      },
+      editUnitGoal: {
+        goal: "",
+        id: "",
+      },
+      editDptGoal: {
+        goal: "",
+        id: "",
+      },
+      editUserGoalError: [],
+      editUnitGoalError: [],
+      editDptGoalError: [],
 
       achievements: [
         {
@@ -849,6 +1472,12 @@ export default {
 
       feedback: "",
 
+      editAchievement: { achievement: "", id: "" },
+      editDifficulty: { difficulty: "", id: "" },
+      editInitiative: { initiative: "", id: "" },
+      editOtherInitiative: { initiative: "", id: "" },
+      editFeedback: "",
+
       myGoalErrors: {},
       unitGoalErrors: {},
       dptGoalErrors: {},
@@ -857,10 +1486,23 @@ export default {
       initiativeErrors: {},
       otherInitiativeErrors: {},
       feedbackErrors: [],
+      editAchievementErrors: [],
+      editDifficultyErrors: [],
+      editInitiativeErrors: [],
+      editOtherInitiativeErrors: [],
     };
   },
   methods: {
     ...mapActions(["dispatchKPI"]),
+    openAppraisal(period) {
+      const currentDate = new Date();
+      const open = new Date(period.open);
+      const close = new Date(period.close);
+      if (open >= currentDate || close >= currentDate) {
+        return true;
+      }
+      return false;
+    },
     cancelModal() {
       this.$emit("close");
     },
@@ -949,19 +1591,90 @@ export default {
           break;
       }
     },
+    updateSelfAppraisal(type) {
+      switch (type) {
+        case "achievements":
+          this.saveEditedSelfAppraisal({
+            ...this.editAchievement,
+            type,
+          });
+          this.achievementErrors = {};
+          break;
+        case "difficulties":
+          this.saveEditedSelfAppraisal({
+            ...this.editDifficulty,
+            type,
+          });
+          this.difficultyErrors = {};
+          break;
+        case "initiatives":
+          this.saveEditedSelfAppraisal({
+            ...this.editInitiative,
+            type,
+          });
+          this.initiativeErrors = {};
+          break;
+        case "other_initiatives":
+          this.saveEditedSelfAppraisal({
+            ...this.editOtherInitiative,
+            type,
+          });
+          this.otherInitiativeErrors = {};
+          break;
+        case "feedback":
+          this.saveEditedSelfAppraisal({
+            feedback: this.feedback,
+            type,
+          });
+          this.feedbackErrors = [];
+          break;
+        default:
+          return;
+      }
+    },
     saveKeyGoal(data) {
       this.$axios
         .post(`/dashboard/add-key-goal`, data)
         .then((res) => {
-          console.log(res.data);
           if (data.type === "my-goal") {
             this.isSubmittingMyGoal = false;
+            this.myGoals = [
+              {
+                id: `${Math.random(16)}`.split(".")[1],
+                goal: "",
+              },
+            ];
+            this.userAppraisal = {
+              ...this.userAppraisal,
+              userAppraisal: this.formatUserAppraisal(res.data.appraisal)
+                .userAppraisal,
+            };
           }
           if (data.type === "unit-goal") {
             this.isSubmittingUnitGoal = false;
+            this.unitGoals = [
+              {
+                id: `${Math.random(16)}`.split(".")[1],
+                goal: "",
+              },
+            ];
+            this.userAppraisal = {
+              ...this.userAppraisal,
+              ...this.formatUserAppraisal(res.data.appraisal),
+            };
           }
           if (data.type === "department-goal") {
             this.isSubmittingDptGoal = false;
+            this.dptGoals = [
+              {
+                id: `${Math.random(16)}`.split(".")[1],
+                goal: "",
+              },
+            ];
+            this.userAppraisal = {
+              ...this.userAppraisal,
+              ...this.formatUserAppraisal(res.data.appraisal),
+            };
           }
         })
         .catch((err) => {
@@ -985,7 +1698,12 @@ export default {
         .post(`/dashboard/add-self-appraisal`, data)
         .then((res) => {
           this.isSubmitting = false;
-          console.log(res.data);
+          this.cancelGoalForm(data.type);
+          this.userAppraisal = {
+            ...this.userAppraisal,
+            userAppraisal: this.formatUserAppraisal(res.data.appraisal)
+              .userAppraisal,
+          };
         })
         .catch((err) => {
           this.isSubmitting = false;
@@ -1005,6 +1723,216 @@ export default {
             this.feedbackErrors = err.response.data.errors.feedback;
           }
         });
+    },
+
+    saveEditedSelfAppraisal(data) {
+      this.isSubmitting = true;
+      this.$axios
+        .put(
+          `/dashboard/update-user-appraisal/${this.userAppraisal.userAppraisal.appraisal_id}`,
+          data
+        )
+        .then((res) => {
+          this.isSubmitting = false;
+          this.cancelEditSelfAppraisal(data.type);
+          this.userAppraisal = this.formatUserAppraisal(res.data.appraisal);
+        })
+        .catch((err) => {
+          this.isSubmitting = false;
+          if (data.type === "achievements") {
+            this.achievementErrors = err.response.data.errors;
+          }
+          if (data.type === "difficulties") {
+            this.difficultyErrors = err.response.data.errors;
+          }
+          if (data.type === "initiatives") {
+            this.initiativeErrors = err.response.data.errors;
+          }
+          if (data.type === "other_initiatives") {
+            this.otherInitiativeErrors = err.response.data.errors;
+          }
+          if (data.type === "feedback") {
+            this.feedbackErrors = err.response.data.errors.feedback;
+          }
+        });
+    },
+    setEditSelfAppraisal(data, type) {
+      this.isEditingSelfAppraisal = true;
+      if (type === "achievement") {
+        this.editAchievement = { ...data };
+      }
+      if (type === "difficulty") {
+        this.editDifficulty = { ...data };
+      }
+      if (type === "initiative") {
+        this.editInitiative = { ...data };
+      }
+      if (type === "otherInitiative") {
+        this.editOtherInitiative = { ...data };
+      }
+    },
+
+    cancelEditSelfAppraisal(type) {
+      this.isEditingSelfAppraisal = false;
+      if (type === "achievements") {
+        this.$nextTick(() => {
+          this.editAchievement = { achievement: "", id: "" };
+        });
+      }
+      if (type === "difficulties") {
+        this.$nextTick(() => {
+          this.editDifficulty = { difficulty: "", id: "" };
+        });
+      }
+      if (type === "initiatives") {
+        this.$nextTick(() => {
+          this.editInitiative = { initiative: "", id: "" };
+        });
+      }
+      if (type === "other_initiatives") {
+        this.$nextTick(() => {
+          this.editOtherInitiative = { initiative: "", id: "" };
+        });
+      }
+      if (type === "feedback") {
+        this.editFeedback = "";
+      }
+    },
+
+    deleteSelfAppraisal(id, type) {
+      this.$axios
+        .delete(
+          `/dashboard/delete-user-appraisal/${this.userAppraisal.userAppraisal.appraisal_id}/${id}/${type}`
+        )
+        .then(({ data }) => {
+          this.userAppraisal = this.formatUserAppraisal(data.appraisal);
+        })
+        .catch((err) => {
+          console.trace(err);
+        });
+    },
+
+    setEditGoalData(goal, type) {
+      if (type === "user") {
+        this.editUserGoal = { ...goal };
+        this.isEditingUserGoal = true;
+      }
+      if (type === "unit") {
+        this.editUnitGoal = { ...goal };
+        this.isEditingUnitGoal = true;
+      }
+      if (type === "dpt") {
+        this.editDptGoal = { ...goal };
+        this.isEditingDptGoal = true;
+      }
+    },
+    updateGoal(type) {
+      if (type === "user") {
+        this.isSubmittingMyGoal = true;
+        this.$axios
+          .put(
+            `/dashboard/update-user-goal/${this.userAppraisal.userAppraisal.appraisal_id}`,
+            this.editUserGoal
+          )
+          .then(({ data }) => {
+            this.isSubmittingMyGoal = false;
+            this.cancelEditGoal(type);
+            this.userAppraisal = this.formatUserAppraisal(data.appraisal);
+          })
+          .catch((err) => {
+            this.isSubmittingMyGoal = false;
+          });
+      }
+      if (type === "dpt") {
+        this.isSubmittingDptGoal = true;
+        this.$axios
+          .put(
+            `/dashboard/update-department-goal/${this.userAppraisal.userDepartmentGoal.appraisal_id}`,
+            this.editDptGoal
+          )
+          .then(({ data }) => {
+            this.isSubmittingDptGoal = false;
+            this.cancelEditGoal(type);
+            this.userAppraisal = this.formatUserAppraisal(data.appraisal);
+          })
+          .catch((err) => {
+            this.isSubmittingDptGoal = false;
+          });
+      }
+      if (type === "unit") {
+        this.isSubmittingUnitGoal = true;
+        this.$axios
+          .put(
+            `/dashboard/update-unit-goal/${this.userAppraisal.userUnitGoal.appraisal_id}`,
+            this.editUnitGoal
+          )
+          .then(({ data }) => {
+            this.isSubmittingUnitGoal = false;
+            this.cancelEditGoal(type);
+            this.userAppraisal = this.formatUserAppraisal(data.appraisal);
+          })
+          .catch((err) => {
+            this.isSubmittingUnitGoal = false;
+          });
+      }
+    },
+    deleteGoal(id, type) {
+      if (type === "user") {
+        this.$axios
+          .delete(
+            `/dashboard/delete-user-goal/${this.userAppraisal.userAppraisal.appraisal_id}/${id}`
+          )
+          .then(({ data }) => {
+            this.userAppraisal = this.formatUserAppraisal(data.appraisal);
+          })
+          .catch((err) => {
+            console.trace(err);
+          });
+      }
+      if (type === "dpt") {
+        this.$axios
+          .delete(
+            `/dashboard/delete-department-goal/${this.userAppraisal.userDepartmentGoal.appraisal_id}/${id}`
+          )
+          .then(({ data }) => {
+            this.userAppraisal = this.formatUserAppraisal(data.appraisal);
+          })
+          .catch((err) => {
+            console.trace(err);
+          });
+      }
+      if (type === "unit") {
+        this.$axios
+          .delete(
+            `/dashboard/delete-unit-goal/${this.userAppraisal.userUnitGoal.appraisal_id}/${id}`
+          )
+          .then(({ data }) => {
+            this.userAppraisal = this.formatUserAppraisal(data.appraisal);
+          })
+          .catch((err) => {
+            console.trace(err);
+          });
+      }
+    },
+    cancelEditGoal(type) {
+      if (type === "user") {
+        this.isEditingUserGoal = false;
+        this.$nextTick(() => {
+          this.editUserGoal = { goal: "", id: "" };
+        });
+      }
+      if (type === "unit") {
+        this.isEditingUnitGoal = false;
+        this.$nextTick(() => {
+          this.editUnitGoal = { goal: "", id: "" };
+        });
+      }
+      if (type === "dpt") {
+        this.isEditingDptGoal = false;
+        this.$nextTick(() => {
+          this.editDptGoal = { goal: "", id: "" };
+        });
+      }
     },
 
     getJobTitle(id) {
@@ -1181,6 +2109,7 @@ export default {
         case "department":
           this.dptGoals = [
             {
+              id: `${Math.random(16)}`.split(".")[1],
               goal: "",
             },
           ];
@@ -1191,6 +2120,7 @@ export default {
         case "unit":
           this.unitGoals = [
             {
+              id: `${Math.random(16)}`.split(".")[1],
               goal: "",
             },
           ];
@@ -1201,6 +2131,7 @@ export default {
         case "achievement":
           this.achievements = [
             {
+              id: `${Math.random(16)}`.split(".")[1],
               achievement: "",
             },
           ];
@@ -1211,6 +2142,7 @@ export default {
         case "difficulty":
           this.difficulties = [
             {
+              id: `${Math.random(16)}`.split(".")[1],
               difficulty: "",
             },
           ];
@@ -1221,6 +2153,7 @@ export default {
         case "initiative":
           this.initiatives = [
             {
+              id: `${Math.random(16)}`.split(".")[1],
               initiative: "",
             },
           ];
@@ -1231,6 +2164,7 @@ export default {
         case "otherInitiative":
           this.otherInitiatives = [
             {
+              id: `${Math.random(16)}`.split(".")[1],
               initiative: "",
             },
           ];
@@ -1247,6 +2181,7 @@ export default {
         default:
           this.myGoals = [
             {
+              id: `${Math.random(16)}`.split(".")[1],
               goal: "",
             },
           ];
@@ -1259,15 +2194,52 @@ export default {
     generateAppraisalData(type, id, appraisal, goals) {
       return { type, id, appraisal, goals };
     },
-
-    async getAppraisalKeyGoal(id) {
+    formatUserAppraisal(data) {
+      const result = data;
+      for (const key in result) {
+        if (Object.hasOwnProperty.call(result, key)) {
+          if (result[key]) {
+            result[key].goals = JSON.parse(result[key].goals);
+            if (result[key].achievements) {
+              result[key].achievements = JSON.parse(result[key].achievements);
+            }
+            if (result[key].difficulties) {
+              result[key].difficulties = JSON.parse(result[key].difficulties);
+            }
+            if (result[key].initiatives) {
+              result[key].initiatives = JSON.parse(result[key].initiatives);
+            }
+            if (result[key].other_initiatives) {
+              result[key].other_initiatives = JSON.parse(
+                result[key].other_initiatives
+              );
+            }
+            if (result[key].feedback) {
+              result[key].feedback = JSON.parse(result[key].feedback);
+            }
+          }
+        }
+      }
+      return result;
+    },
+    async getUserAppraisal(id) {
       try {
-        const goals = await this.$axios.get(
-          `/dashboard/get-appraisal-goal/${id}`
+        const { data } = await this.$axios.get(
+          `/dashboard/get-user-appraisal/${id}`
         );
-        //console.log(goals);
+        this.userAppraisal = this.formatUserAppraisal(data);
+        if (
+          this.userAppraisal &&
+          this.userAppraisal.userAppraisal &&
+          this.userAppraisal.userAppraisal.feedback
+        ) {
+          this.feedback = this.userAppraisal.userAppraisal.feedback;
+          if (this.feedback) {
+            this.isEditingSelfAppraisalFeedback = true;
+          }
+        }
       } catch (err) {
-        console.log(err);
+        console.trace(err);
       }
     },
   },

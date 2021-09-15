@@ -11,6 +11,7 @@ use App\Models\UserKeyGoal;
 use Illuminate\Support\Arr;
 use App\Models\SelfAppraisal;
 use App\Models\DepartmentKeyGoal;
+use App\Models\Unit;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
@@ -43,16 +44,6 @@ trait ManageKPI
     }
     return $this->paginate(Appraisal::class, 'staff', Auth::id(), 100);
   }
-  public function getKeyGoals($id = null)
-  {
-    if ($id) {
-
-      UserKeyGoal::where('user_id', Auth::id())
-        ->where('appraisal_id', $id)
-        ->join('profiles', 'user_key_goal.user_id', '=', 'profiles.user_id');
-      // ->leftJoin('unit_key_goals', , '=', 'unit_key_goals.unit_id')
-    }
-  }
 
   public function paginate($class, $attribute, $attribute_id, $perPage)
 
@@ -78,23 +69,23 @@ trait ManageKPI
   public function getAppraisees($appraisal)
   {
     return Profile::whereIn('user_id', json_decode($appraisal->staff))
-      ->leftJoin('branches', 'branches.id', '=', 'profiles.branch_id')
       ->leftJoin('departments', 'departments.id', '=', 'profiles.department_id')
+      ->leftJoin('units', 'units.id', '=', 'profiles.unit_id')
       ->select(
+        'profiles.user_id',
         'profiles.personal_details->title as title',
         'profiles.personal_details->firstName as firstName',
         'profiles.personal_details->middleName as middleName',
         'profiles.personal_details->lastName as lastName',
         'profiles.job->title as jobTitle',
-        'branches.name as branch',
         'departments.name as department',
+        'units.name as unit',
       )
       ->orderBy('profiles.user_id', 'desc')
       ->paginate(100);
   }
   public function createAppraisal($request)
   {
-    $branches = $request->applicableFor['branch'];
     $departments = $request->applicableFor['department'];
     $units = $request->applicableFor['unit'];
     $roles = $request->applicableFor['role'];
@@ -117,14 +108,13 @@ trait ManageKPI
     if (in_array('none', $roles)) {
       $roles = [];
     }
-    $staff = $this->filterProfile($branches, $departments, $units, $roles);
+    $staff = $this->filterProfile($departments, $units, $roles);
     $appraisal = Appraisal::create([
       'name' => $request->name,
       'period' => json_encode($request->period),
       'sap_timestamp' => json_encode($request->sap),
       'np_timestamp' => json_encode($request->np),
       'description' => $request->description,
-      'branches' => json_encode($branches),
       'departments' => json_encode($departments),
       'units' => json_encode($units),
       'roles' => json_encode($roles),
@@ -141,69 +131,56 @@ trait ManageKPI
     }
     return $ids;
   }
-  public function filterProfile($branches, $departments, $units, $roles)
+  public function filterProfile($departments, $units, $roles)
   {
-    $branch = [];
-    if (count($departments) === 0 && count($units) === 0 && count($roles) === 0) {
-      $branch = Profile::whereIn('branch_id', $branches)
-        ->select('user_id')
-        ->get()->toArray();
-      return array_values(array_unique(array_merge(Arr::flatten($branch))));
-    }
-    $department = Profile::whereIn('branch_id', $branches)
-      ->whereIn('department_id', $departments)
+    $department = Profile::whereIn('department_id', $departments)
       ->select('user_id')
       ->get()->toArray();
-    $unit = Profile::whereIn('branch_id', $branches)
-      ->whereIn('unit_id', $units)
+    $unit = Profile::whereIn('unit_id', $units)
       ->select('user_id')
       ->get()->toArray();
-    $roleUsers = $this->filterUsers($branches, $roles);
+    $roleUsers = $this->filterRoleUsers($roles);
     return array_values(array_unique(array_merge(Arr::flatten($department), Arr::flatten($unit), Arr::flatten($roleUsers))));
   }
-  public function filterUsers($branches, $roles)
+  public function filterRoleUsers($roles)
   {
-    $ro = Profile::whereIn('branch_id', $branches)
-      ->join('users', 'users.id', '=', 'profiles.user_id')
-      ->select('users.roles', 'users.id')
-      ->get();
+    $ro = Role::whereIn('id', $roles)->select('staff')->get();
     $ids = [];
+
     for ($i = 0; $i < count($ro); $i++) {
-      if ($this->checkUserRole($ro[$i]->roles, $roles)) {
-        array_push($ids, $ro[$i]->id);
-      }
+      $ids = array_values(array_unique(array_merge(json_decode($ro[$i]->staff ?? '[]'), $ids)));
     }
     return $ids;
-  }
-  public function checkUserRole($role, $roles)
-  {
-    if ($role) {
-      $userRoles = json_decode($role);
-      return count(array_intersect($roles, $userRoles)) ? true : false;
-    }
-    return false;
   }
 
   public function createSelfAppraisal($request)
   {
     $appraisal = $this->checkNewAppraisal($request->appraisal, $request->id);
+
     switch ($request->type) {
       case 'my-goal':
+        // $request->validate([
+        //   'goals' => 'required|in'
+        // ])
         if ($appraisal) {
-          $prevApp = json_decode($appraisal->goals) ?? [];
-          foreach ($request->goal as $key => $value) {
-            array_push($prevApp, (object)$request->goal[$key]);
+          $prevApp = json_decode($appraisal->goals ?? '[]');
+          foreach ($request->goals as $key => $value) {
+            array_push($prevApp, (object)$request->goals[$key]);
           }
           $appraisal->goals = json_encode($prevApp);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+          return response()->json(['created' => true, 'appraisal' => [
+            'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+          ]]);
         }
         SelfAppraisal::create([
           'appraisal_id' => $request->appraisal,
           'user_id' => $request->id,
-          'goals' => json_encode($request->goal),
+          'goals' => json_encode($request->goals),
         ]);
-        return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+        return response()->json(['created' => true, 'appraisal' => [
+          'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+        ]]);
       case 'achievement':
         $request->validate([
           'achievement.*.achievement' => 'required|string'
@@ -215,14 +192,18 @@ trait ManageKPI
           }
           $appraisal->achievements = json_encode($prevApp);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+          return response()->json(['created' => true, 'appraisal' => [
+            'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+          ]]);
         }
         SelfAppraisal::create([
           'appraisal_id' => $request->appraisal,
           'user_id' => $request->id,
           'achievements' => json_encode($request->achievement),
         ]);
-        return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+        return response()->json(['created' => true, 'appraisal' => [
+          'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+        ]]);
       case 'difficulty':
         $request->validate([
           'difficulty.*.difficulty' => 'required|string'
@@ -234,14 +215,18 @@ trait ManageKPI
           }
           $appraisal->difficulties = json_encode($prevApp);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+          return response()->json(['created' => true, 'appraisal' => [
+            'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+          ]]);
         }
         SelfAppraisal::create([
           'appraisal_id' => $request->appraisal,
           'user_id' => $request->id,
           'difficulties' => json_encode($request->difficulty),
         ]);
-        return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+        return response()->json(['created' => true, 'appraisal' => [
+          'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+        ]]);
       case 'initiative':
         $request->validate([
           'initiative.*.initiative' => 'required|string'
@@ -253,14 +238,18 @@ trait ManageKPI
           }
           $appraisal->initiatives = json_encode($prevApp);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+          return response()->json(['created' => true, 'appraisal' => [
+            'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+          ]]);
         }
         SelfAppraisal::create([
           'appraisal_id' => $request->appraisal,
           'user_id' => $request->id,
           'initiatives' => json_encode($request->initiative),
         ]);
-        return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+        return response()->json(['created' => true, 'appraisal' => [
+          'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+        ]]);
       case 'otherInitiative':
         $request->validate([
           'initiative.*.initiative' => 'required|string'
@@ -272,14 +261,18 @@ trait ManageKPI
           }
           $appraisal->other_initiatives = json_encode($prevApp);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+          return response()->json(['created' => true, 'appraisal' => [
+            'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+          ]]);
         }
         SelfAppraisal::create([
           'appraisal_id' => $request->appraisal,
           'user_id' => $request->id,
           'other_initiatives' => json_encode($request->initiative),
         ]);
-        return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+        return response()->json(['created' => true, 'appraisal' => [
+          'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+        ]]);
       case 'feedback':
         $request->validate([
           'feedback' => 'required|string'
@@ -287,14 +280,18 @@ trait ManageKPI
         if ($appraisal) {
           $appraisal->feedback = json_encode($request->feedback);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+          return response()->json(['created' => true, 'appraisal' => [
+            'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+          ]]);
         }
         SelfAppraisal::create([
           'appraisal_id' => $request->appraisal,
           'user_id' => $request->id,
           'feedback' => json_encode($request->feedback),
         ]);
-        return response()->json(['created' => true, 'appraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)]);
+        return response()->json(['created' => true, 'appraisal' => [
+          'userAppraisal' => $this->checkNewAppraisal($request->appraisal, $request->id)
+        ]]);
       case 'unit-goal':
         $appraisal = UnitKeyGoal::where('appraisal_id', $request->appraisal)->where('unit_id', $request->id)->first();
         if ($appraisal) {
@@ -304,12 +301,17 @@ trait ManageKPI
           }
           $appraisal->goals = json_encode($prevApp);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => UnitKeyGoal::where('appraisal_id', $request->appraisal)->where('unit_id', $request->id)->first()]);
+          return response()->json([
+            'created' => true, 'appraisal' => $this->getUserAppraisal($request->appraisal)
+          ]);
         }
-        return UnitKeyGoal::create([
+        UnitKeyGoal::create([
           'appraisal_id' => $request->appraisal,
           'unit_id' => $request->id,
           'goals' => json_encode($request->goals),
+        ]);
+        return response()->json([
+          'appraisal' => $this->getUserAppraisal($request->appraisal)
         ]);
       case 'department-goal':
         $appraisal = DepartmentKeyGoal::where('appraisal_id', $request->appraisal)->where('department_id', $request->id)->first();
@@ -320,17 +322,179 @@ trait ManageKPI
           }
           $appraisal->goals = json_encode($prevApp);
           $appraisal->save();
-          return response()->json(['created' => true, 'appraisal' => DepartmentKeyGoal::where('appraisal_id', $request->appraisal)->where('department_id', $request->id)->first()]);
+          return response()->json([
+            'created' => true, 'appraisal' => $this->getUserAppraisal($request->appraisal)
+          ]);
         }
-        return DepartmentKeyGoal::create([
+        DepartmentKeyGoal::create([
           'appraisal_id' => $request->appraisal,
           'department_id' => $request->id,
           'goals' => json_encode($request->goals),
+        ]);
+        return response()->json([
+          'appraisal' => $this->getUserAppraisal($request->appraisal)
         ]);
     }
   }
   public function checkNewAppraisal($id, $userId)
   {
     return SelfAppraisal::where('appraisal_id', $id)->where('user_id', $userId)->first();
+  }
+
+  public function getUserAppraisal($id, $userId = null): array
+  {
+    if ($userId) {
+      $profile = Profile::where('user_id', $userId)->first();
+      $userAppraisal = SelfAppraisal::where('appraisal_id', $id)->where('user_id', $userId)->first();
+      $userUnitGoal = UnitKeyGoal::where('appraisal_id', $id)->where('unit_id', $profile->unit_id)->first();
+      $userDepartmentGoal = DepartmentKeyGoal::where('appraisal_id', $id)->where('department_id', $profile->department_id)->first();
+    } else {
+      $userAppraisal = SelfAppraisal::where('appraisal_id', $id)->where('user_id', Auth::id())->first();
+      $userUnitGoal = UnitKeyGoal::where('appraisal_id', $id)->where('unit_id', Auth::user()->profile->unit_id)->first();
+      $userDepartmentGoal = DepartmentKeyGoal::where('appraisal_id', $id)->where('department_id', Auth::user()->profile->department_id)->first();
+    }
+    return [
+      'userAppraisal' => $userAppraisal,
+      'userUnitGoal' => $userUnitGoal,
+      'userDepartmentGoal' => $userDepartmentGoal,
+    ];
+  }
+
+  public function updateUserGoal($request, $appraisal)
+  {
+    $selfAppraisal  = SelfAppraisal::where('appraisal_id', $appraisal)->where('user_id', Auth::id())->first();
+    $goals = json_decode($selfAppraisal->goals ?? '[]');
+    foreach ($goals as $key => $goal) {
+      if ($request->id === $goal->id) {
+        $goals[$key]->goal = $request->goal;
+      }
+    }
+    $selfAppraisal->goals = json_encode($goals);
+    $selfAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($selfAppraisal->appraisal_id)]);
+  }
+  public function updateUserAppraisal($request, $appraisal)
+  {
+    if ($request->type === 'feedback') {
+      $selfAppraisal  = SelfAppraisal::where('appraisal_id', $appraisal)->where('user_id', Auth::id())->first();
+      $selfAppraisal->feedback = json_encode($request->feedback);
+      $selfAppraisal->save();
+      return response()->json(['appraisal' => $this->getUserAppraisal($selfAppraisal->appraisal_id)]);
+    }
+    $selfAppraisal  = SelfAppraisal::where('appraisal_id', $appraisal)->where('user_id', Auth::id())->first();
+
+
+    $results = json_decode($selfAppraisal["{$request->type}"] ?? '[]');
+
+    foreach ($results as $key => $result) {
+      if ($request->id === $result->id) {
+        if ($request->type === 'achievements') {
+          $results[$key]->achievement = $request->achievement;
+        }
+        if ($request->type === 'difficulties') {
+          $results[$key]->difficulty = $request->difficulty;
+        }
+        if ($request->type === 'initiatives' || $request->type === 'other_initiatives') {
+          $results[$key]->initiative = $request->initiative;
+        }
+      }
+    }
+    $selfAppraisal["{$request->type}"] = json_encode($results);
+    $selfAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($selfAppraisal->appraisal_id)]);
+  }
+  public function updateUserAppraisalMetrics($request, $appraisal, $user)
+  {
+    $selfAppraisal  = SelfAppraisal::where('appraisal_id', $appraisal)->where('user_id', $user)->first();
+    $selfAppraisal->metrics = json_encode((object)$request->all());
+    $selfAppraisal->save();
+    return response()->json(['updated' => true]);
+  }
+
+
+
+  public function updateDepartmentGoal($request, $appraisal)
+  {
+    $dptAppraisal  = DepartmentKeyGoal::where('appraisal_id', $appraisal)->where('department_id', Auth::user()->profile->department_id)->first();
+    $goals = json_decode($dptAppraisal->goals ?? '[]');
+    foreach ($goals as $key => $goal) {
+      if ($request->id === $goal->id) {
+        $goals[$key]->goal = $request->goal;
+      }
+    }
+    $dptAppraisal->goals = json_encode($goals);
+    $dptAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($dptAppraisal->appraisal_id)]);
+  }
+  public function updateUnitGoal($request, $appraisal)
+  {
+    $unitAppraisal  = UnitKeyGoal::where('appraisal_id', $appraisal)->where('unit_id', Auth::user()->profile->unit_id)->first();
+    $goals = json_decode($unitAppraisal->goals ?? '[]');
+    foreach ($goals as $key => $goal) {
+      if ($request->id === $goal->id) {
+        $goals[$key]->goal = $request->goal;
+      }
+    }
+    $unitAppraisal->goals = json_encode($goals);
+    $unitAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($unitAppraisal->appraisal_id)]);
+  }
+  public function destroyUserGoal($appraisal, $id)
+  {
+    $selfAppraisal  = SelfAppraisal::where('appraisal_id', $appraisal)->where('user_id', Auth::id())->first();
+    $goals = json_decode($appraisal->goals ?? '[]');
+    foreach ($goals as $key => $goal) {
+      if ($goal->id === $id) {
+        array_splice($goals, $key, 1);
+      }
+    }
+    $selfAppraisal->goals = json_encode($goals);
+    $selfAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($selfAppraisal->appraisal_id)]);
+  }
+
+  public function destroyUserAppraisal($appraisal, $id, $type)
+  {
+    if ($type === 'feedback') {
+      # code...
+    }
+
+    $selfAppraisal  = SelfAppraisal::where('appraisal_id', $appraisal)->where('user_id', Auth::id())->first();
+    $results = json_decode($selfAppraisal["{$type}"] ?? '[]');
+
+    foreach ($results as $key => $result) {
+      if ($result->id === $id) {
+        array_splice($results, $key, 1);
+      }
+    }
+    $selfAppraisal["{$type}"] = json_encode($results);
+    $selfAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($selfAppraisal->appraisal_id)]);
+  }
+  public function destroyDepartmentGoal($appraisal, $id)
+  {
+    $dptAppraisal  = DepartmentKeyGoal::where('appraisal_id', $appraisal)->where('department_id', Auth::user()->profile->department_id)->first();
+    $goals = json_decode($dptAppraisal->goals ?? '[]');
+    foreach ($goals as $key => $goal) {
+      if ($goal->id === $id) {
+        array_splice($goals, $key, 1);
+      }
+    }
+    $dptAppraisal->goals = json_encode($goals);
+    $dptAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($dptAppraisal->appraisal_id)]);
+  }
+  public function destroyUnitGoal($appraisal, $id)
+  {
+    $unitAppraisal  = UnitKeyGoal::where('appraisal_id', $appraisal)->where('unit_id', Auth::user()->profile->unit_id)->first();
+    $goals = json_decode($unitAppraisal->goals ?? '[]');
+    foreach ($goals as $key => $goal) {
+      if ($goal->id === $id) {
+        array_splice($goals, $key, 1);
+      }
+    }
+    $unitAppraisal->goals = json_encode($goals);
+    $unitAppraisal->save();
+    return response()->json(['appraisal' => $this->getUserAppraisal($unitAppraisal->appraisal_id)]);
   }
 }
