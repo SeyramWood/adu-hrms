@@ -40,7 +40,7 @@
                 <section class="py-4 multiples-actions">
                   <b-dropdown
                     aria-role="list"
-                    :disabled="selectedKPIs.length > 0 ? false : true"
+                    :disabled="selectedAppraisals.length > 0 ? false : true"
                   >
                     <template #trigger="{ active }">
                       <b-button
@@ -52,94 +52,17 @@
                     </template>
                     <b-dropdown-item
                       aria-role="listitem"
-                      @click="openAssignRoleForm()"
-                      >Assign user role</b-dropdown-item
-                    >
-                    <b-dropdown-item
-                      aria-role="listitem"
-                      @click="openAssignStatusForm()"
-                      >Assign account status</b-dropdown-item
-                    >
-                    <b-dropdown-item aria-role="listitem" @click="deleteUsers()"
-                      >Delete users</b-dropdown-item
+                      @click="deleteAppraisals()"
+                      >Delete appraisals</b-dropdown-item
                     >
                   </b-dropdown>
-                  <transition name="fade">
-                    <form
-                      action
-                      v-if="showAssignRoleForm && selectedKPIs.length > 0"
-                    >
-                      <b-field label="Choose Role" expanded>
-                        <div class="block">
-                          <b-checkbox
-                            v-model="roleData"
-                            :native-value="r.role"
-                            v-for="(r, i) in getRolePermissions"
-                            :key="i"
-                            :disabled="r.role === 'ESS'"
-                          >
-                            {{ r.role }}
-                          </b-checkbox>
-                        </div>
-                      </b-field>
-                      <b-field class="buttons">
-                        <b-button
-                          class="is-success is-light"
-                          @click="assignUserRole()"
-                          >Save</b-button
-                        >
-                        <b-button
-                          class="is-danger is-light"
-                          @click="cancelAssignForm()"
-                          >Cancel</b-button
-                        >
-                      </b-field>
-                    </form>
-                    <form
-                      action
-                      v-if="showAssignStatusForm && selectedKPIs.length > 0"
-                    >
-                      <b-field label="Choose Status" expanded>
-                        <div class="block">
-                          <b-radio
-                            type="is-info"
-                            v-model="statusData"
-                            name="status"
-                            native-value="1"
-                          >
-                            Enable
-                          </b-radio>
-                          <b-radio
-                            type="is-info"
-                            v-model="statusData"
-                            name="status"
-                            native-value="0"
-                          >
-                            Disable
-                          </b-radio>
-                        </div>
-                      </b-field>
-                      <b-field class="buttons">
-                        <b-button
-                          class="is-success is-light"
-                          @click="assignUserStatus()"
-                          >Save</b-button
-                        >
-                        <b-button
-                          class="is-danger is-light"
-                          @click="cancelAssignForm()"
-                          >Cancel</b-button
-                        >
-                      </b-field>
-                    </form>
-                  </transition>
                 </section>
                 <b-table
                   :data="getAppraisals.data"
                   :default-sort-direction="defaultSortDirection"
                   :sort-icon="sortIcon"
                   :sort-icon-size="sortIconSize"
-                  :checked-rows.sync="selectedKPIs"
+                  :checked-rows.sync="selectedAppraisals"
                   :loading="isLoading"
                   checkable
                   striped
@@ -198,7 +121,14 @@
                           size="is-small"
                           pack="fas"
                           icon-right="eye"
-                          @click="deleteUser(props.row.id)"
+                          :id="
+                            `view-appraisal-${
+                              props.row.id === getViewAppraisalId
+                                ? getViewAppraisalId
+                                : ''
+                            }`.toString()
+                          "
+                          @click="openViewAppraisalDropper(props.row)"
                         ></b-button>
                       </b-tooltip>
                       <b-tooltip
@@ -211,7 +141,7 @@
                           size="is-small"
                           pack="fas"
                           icon-right="pen"
-                          @click="deleteUser(props.row.id)"
+                          @click="openConfigureAppraisal(props.row)"
                         ></b-button>
                       </b-tooltip>
                       <b-tooltip label="Delete" size="is-small" type="is-dark">
@@ -220,7 +150,7 @@
                           size="is-small"
                           pack="fas"
                           icon-right="trash"
-                          @click="deleteUser(props.row.id)"
+                          @click="deleteAppraisal(props.row.id)"
                         ></b-button>
                       </b-tooltip>
                     </div>
@@ -778,6 +708,147 @@
         </section>
       </b-tab-item>
     </b-tabs>
+
+    <dropper
+      :join="`#view-appraisal-${getViewAppraisalId}`"
+      ref="viewAppraisalDropper"
+      @esc-keydown="closeViewAppraisalDropper"
+      @other-area-clicked="closeViewAppraisalDropper"
+      class="dropper"
+      :z-index="9999"
+    >
+      <h4 class="modal-card-title text-main label pt-2">View Appraisal</h4>
+      <section class="apparisal-details" v-if="viewAppraisal">
+        <h5 class="label pt-2">Details</h5>
+        <div class="apparisal-details__content">
+          <div class="apparisal-details__content__key">
+            <h3>Name</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>{{ viewAppraisal.name }}</p>
+          </div>
+        </div>
+        <div class="apparisal-details__content">
+          <div class="apparisal-details__content__key">
+            <h3>Period</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>
+              {{
+                ` ${formatDate2(viewAppraisal.period.from)} - ${formatDate2(
+                  viewAppraisal.period.to
+                )}`
+              }}
+            </p>
+          </div>
+        </div>
+        <div class="apparisal-details__content">
+          <div class="apparisal-details__content__key">
+            <h3>Self Appraisal Period</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>
+              {{
+                ` ${formatDate2(
+                  viewAppraisal.sap_timestamp.open
+                )} - ${formatDate2(viewAppraisal.sap_timestamp.close)}`
+              }}
+            </p>
+          </div>
+        </div>
+        <div class="apparisal-details__content">
+          <div class="apparisal-details__content__key">
+            <h3>Nomalization Period</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>
+              {{
+                ` ${formatDate2(
+                  viewAppraisal.np_timestamp.open
+                )} - ${formatDate2(viewAppraisal.np_timestamp.close)}`
+              }}
+            </p>
+          </div>
+        </div>
+        <div
+          class="apparisal-details__content"
+          v-if="viewAppraisal.description"
+        >
+          <div class="apparisal-details__content__key">
+            <h3>Description</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>
+              {{ viewAppraisal.description }}
+            </p>
+          </div>
+        </div>
+        <h5 class="label pt-2">Applicable for</h5>
+        <div
+          class="apparisal-details__content"
+          v-if="viewAppraisal.departments && viewAppraisal.departments.length"
+        >
+          <div class="apparisal-details__content__key">
+            <h3>Department</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>
+              <span
+                v-for="(d, index) in findDepartments(viewAppraisal.departments)"
+                :key="`d-${index}`"
+              >
+                <span v-if="index === viewAppraisal.departments.length - 1">{{
+                  ` ${d}`
+                }}</span>
+                <span v-else>{{ `${d}, ` }}</span>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          class="apparisal-details__content"
+          v-if="viewAppraisal.units && viewAppraisal.units.length"
+        >
+          <div class="apparisal-details__content__key">
+            <h3>Unit</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>
+              <span
+                v-for="(u, index) in findUnits(viewAppraisal.units)"
+                :key="`u-${index}`"
+              >
+                <span v-if="index === viewAppraisal.units.length - 1">{{
+                  ` ${u}`
+                }}</span>
+                <span v-else>{{ `${u}, ` }}</span>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          class="apparisal-details__content"
+          v-if="viewAppraisal.roles && viewAppraisal.roles.length"
+        >
+          <div class="apparisal-details__content__key">
+            <h3>Role</h3>
+          </div>
+          <div class="apparisal-details__content__value">
+            <p>
+              <span
+                v-for="(role, index) in viewAppraisal.roles"
+                :key="`role-${index}`"
+              >
+                <span v-if="index === viewAppraisal.roles.length - 1">{{
+                  ` ${role}`
+                }}</span>
+                <span v-else>{{ `${role}, ` }}</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+    </dropper>
   </div>
 </template>
 
@@ -798,10 +869,9 @@ export default {
       "getAppraisals",
       "getUsers",
       "getRolePermissions",
-      "getBranches",
       "getDepartments",
+      "getUnits",
       "getRolePermissions",
-      "getWorkShifts",
     ]),
     getRoles() {
       return this.getRolePermissions.map((r) => {
@@ -810,21 +880,6 @@ export default {
           label: r.role,
         };
       });
-    },
-    getBrhs() {
-      const data = this.getBranches.map((b) => {
-        return {
-          id: b.id,
-          label: b.name,
-        };
-      });
-      return [
-        {
-          id: 0,
-          label: "All",
-        },
-        ...data,
-      ];
     },
     getDpts() {
       return this.getDepartments.map((d) => {
@@ -841,6 +896,9 @@ export default {
           label: s.name,
         };
       });
+    },
+    getViewAppraisalId() {
+      return this.viewAppraisalId;
     },
   },
   mounted() {
@@ -861,7 +919,7 @@ export default {
       defaultSortDirection: "desc",
       sortIcon: "arrow-up",
       sortIconSize: "is-small",
-      selectedKPIs: [],
+      selectedAppraisals: [],
       selectedRating: [],
       isSubmitting: false,
       selected: null,
@@ -870,6 +928,8 @@ export default {
       toggleRatingForm: false,
       showAssignRoleForm: false,
       showAssignStatusForm: false,
+      viewAppraisalId: "",
+      viewAppraisal: null,
       rating: {
         reference: "",
         score: "",
@@ -884,13 +944,62 @@ export default {
   },
   methods: {
     ...mapActions(["dispatchUserAccount", "dispatchStaffCount", "dispatchKPI"]),
-    openConfigureAppraisal() {
+    openViewAppraisalDropper(data) {
+      this.viewAppraisalId = data.id;
+      this.viewAppraisal = data;
+      const dropper = this.$refs.viewAppraisalDropper;
+      if (dropper) {
+        dropper.open();
+      }
+    },
+    closeViewAppraisalDropper() {
+      const dropper = this.$refs.viewAppraisalDropper;
+      if (dropper) {
+        dropper.close();
+        this.$nextTick(() => {
+          this.viewAppraisal = null;
+        });
+      }
+    },
+    deleteAppraisal(id) {
+      this.$axios
+        .delete(`/dashboard/delete-appraisal/${id}`)
+        .then((res) => {
+          if (res.data.deleted) {
+            setTimeout(() => {
+              this.snackbar("Appraisal deleted successfully.", "is-success");
+            }, 1000);
+            this.dispatchKPI({ type: "DELETE_APPRAISAL", payload: id });
+          }
+        })
+        .catch((err) => {
+          console.trace(err);
+        });
+    },
+    deleteAppraisals() {
+      const ids = this.selectedAppraisals.map((a) => a.id);
+      this.$axios
+        .delete(`/dashboard/delete-appraisals/${ids}`)
+        .then((res) => {
+          if (res.data.deleted) {
+            setTimeout(() => {
+              this.snackbar("Appraisal deleted successfully.", "is-success");
+            }, 1000);
+            this.dispatchKPI({ type: "DELETE_APPRAISALS", payload: ids });
+          }
+        })
+        .catch((err) => {
+          console.trace(err);
+        });
+    },
+    openConfigureAppraisal(editAppraisal = null) {
       this.$buefy.modal.open({
         parent: this,
         component: ConfigureAppraisalModal,
         hasModalCard: true,
         trapFocus: true,
         canCancel: ["escape"],
+        props: { editAppraisal },
       });
     },
     openAppraiseListModal(appraisal) {
@@ -904,9 +1013,54 @@ export default {
         props: { appraisal },
       });
     },
+
+    findDepartments(ids) {
+      let dpts = [];
+      ids.forEach((id) => {
+        if (this.getDepartments.find((d) => d.id === id)) {
+          const d = this.getDepartments.find((d) => d.id === id);
+          dpts = [...dpts, d.name];
+        }
+      });
+      return dpts;
+    },
+    findUnits(ids) {
+      let dpts = [];
+      ids.forEach((id) => {
+        if (this.getUnits.find((d) => d.id === id)) {
+          const d = this.getUnits.find((d) => d.id === id);
+          dpts = [...dpts, d.name];
+        }
+      });
+      return dpts;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.apparisal-details {
+  width: 30rem;
+  &__content {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    &__key {
+      width: 35%;
+      text-align: right;
+      padding-right: 0.5rem;
+      & > h3 {
+        font-weight: bold;
+      }
+    }
+    &__value {
+      width: 65%;
+      padding-left: 0.5rem;
+      & > p {
+        color: rgba(0, 0, 0, 0.842) !important;
+      }
+    }
+  }
+}
 </style>

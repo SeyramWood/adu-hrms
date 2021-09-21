@@ -110,6 +110,9 @@ Vue.mixin({
             const intersec = arr1.filter(x => arr2.includes(x));
             return intersec.length && true;
         },
+        arrayDiff(arr1, arr2) {
+            return arr1.filter(x => !arr2.includes(x));
+        },
         isNull(el) {
             if (el === "null" || el === null) {
                 return "";

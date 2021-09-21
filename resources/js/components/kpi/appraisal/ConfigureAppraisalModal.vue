@@ -1,5 +1,9 @@
 <template>
-  <form @submit.prevent="addAppraisalCycle()">
+  <form
+    @submit.prevent="
+      editAppraisal ? updateAppraisalCycle() : addAppraisalCycle()
+    "
+  >
     <div class="modal-card py-4" style="width: 700px">
       <header class="modal-card-head">
         <h4 class="modal-card-title text-main label pt-2">Appraisal Cycle</h4>
@@ -126,21 +130,6 @@
           ></b-input>
         </b-field>
         <h5 class="text-main pb-3">Applicable For</h5>
-        <!-- <b-field
-          horizontal
-          label="Branch"
-          :type="{
-            'is-danger': appraisalErrors.applicableFor.branch.length > 0,
-          }"
-          :message="appraisalErrors.applicableFor.branch"
-        >
-          <treeselect
-            :multiple="true"
-            :options="getBrhs"
-            placeholder="Select branch(es)..."
-            v-model="appraisal.applicableFor.branch"
-          />
-        </b-field> -->
         <b-field
           horizontal
           label="Department"
@@ -192,6 +181,15 @@
           type="submit"
           class="button is-success is-light"
           :disabled="isSubmitting"
+          v-if="editAppraisal"
+        >
+          {{ isSubmitting ? "Saving..." : "Save" }}
+        </button>
+        <button
+          type="submit"
+          class="button is-success is-light"
+          :disabled="isSubmitting"
+          v-else
         >
           {{ isSubmitting ? "Submitting..." : "Add" }}
         </button>
@@ -212,14 +210,11 @@ export default {
   components: {
     Treeselect,
   },
+  props: {
+    editAppraisal: { default: null },
+  },
   computed: {
-    ...mapGetters([
-      "getUsers",
-      "getRoles",
-      "getDepartments",
-      "getUnits",
-      "getWorkShifts",
-    ]),
+    ...mapGetters(["getUsers", "getRoles", "getDepartments", "getUnits"]),
     getDpts() {
       const data = this.getDepartments.map((d) => {
         return {
@@ -278,7 +273,34 @@ export default {
       ];
     },
   },
-  mounted() {},
+  beforeMount() {
+    this.$nextTick(() => {
+      if (this.editAppraisal) {
+        const appraisal = this.editAppraisal;
+        this.appraisal = {
+          name: appraisal.name,
+          period: {
+            from: new Date(appraisal.period.from),
+            to: new Date(appraisal.period.to),
+          },
+          sap: {
+            open: new Date(appraisal.sap_timestamp.open),
+            close: new Date(appraisal.sap_timestamp.close),
+          },
+          np: {
+            open: new Date(appraisal.np_timestamp.open),
+            close: new Date(appraisal.np_timestamp.close),
+          },
+          description: appraisal.description,
+          applicableFor: {
+            department: appraisal.departments || [],
+            unit: appraisal.units || [],
+            role: appraisal.roles ? this.findRoleIds(appraisal.roles) : [],
+          },
+        };
+      }
+    });
+  },
   data() {
     return {
       isSubmitting: false,
@@ -327,16 +349,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["dispatchUserAccount", "dispatchStaffCount"]),
+    ...mapActions(["dispatchUserAccount", "dispatchStaffCount", "dispatchKPI"]),
     cancelModal() {
       this.$emit("close");
     },
-    contentLoader() {
-      const loadingComponent = this.$buefy.loading.open({
-        container: this.$refs.loadUsers.$el,
-      });
-      return loadingComponent;
-    },
+
     addAppraisalCycle() {
       this.setAppraisalErrors();
       this.isSubmitting = true;
@@ -345,11 +362,44 @@ export default {
         .then((res) => {
           if (res.status === 200 && res.data.created) {
             this.clearAppraisalForm();
+            this.dispatchKPI({
+              type: "ADD_NEW_APPRAISAL",
+              payload: res.data.appraisal,
+            });
             setTimeout(() => {
               this.snackbar("Appraisal added successfully.", "is-success");
             }, 1000);
           }
-
+          this.isSubmitting = false;
+        })
+        .catch((err) => {
+          this.isSubmitting = false;
+          if (err.response.status === 422) {
+            this.setAppraisalErrors(err.response.data.errors);
+          }
+        });
+    },
+    updateAppraisalCycle() {
+      this.setAppraisalErrors();
+      this.isSubmitting = true;
+      this.$axios
+        .put(
+          `/dashboard/update-appraisal/${this.editAppraisal.id}`,
+          this.appraisal
+        )
+        .then((res) => {
+          if (res.status === 200 && res.data.created) {
+            console.log(res.data.appraisal);
+            this.clearAppraisalForm();
+            this.dispatchKPI({
+              type: "UPDATE_APPRAISAL",
+              payload: res.data.appraisal,
+            });
+            this.$nextTick(() => {
+              this.cancelModal();
+              this.snackbar("Appraisal updated successfully.", "is-success");
+            });
+          }
           this.isSubmitting = false;
         })
         .catch((err) => {
@@ -413,6 +463,16 @@ export default {
           role: err["applicableFor.role"] || [],
         },
       };
+    },
+    findRoleIds(roles) {
+      let ids = [];
+      roles.forEach((role) => {
+        if (this.getRoles.find((r) => r.role === role)) {
+          const r = this.getRoles.find((r) => r.role === role);
+          ids = [...ids, r.id];
+        }
+      });
+      return ids;
     },
   },
 };

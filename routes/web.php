@@ -165,6 +165,12 @@ Route::prefix('dashboard')->group(function () {
    * KPI Routes
    */
   Route::post('/add-appraisal', 'KPIController@storeAppraisal');
+  Route::put('/update-appraisal/{appraisal}', 'KPIController@updateAppraisal');
+  Route::put('/remove-appraisee/{appraisal}', 'KPIController@removeAppraisee');
+  Route::delete('/delete-appraisal/{appraisal}', 'KPIController@deleteAppraisal');
+  Route::delete('/delete-appraisals/{appraisals}', 'KPIController@deleteAppraisals');
+
+
   Route::get('/get-user-appraisal/{appraisal}/{user?}', 'KPIController@userAppraisal');
   Route::post('/add-key-goal', 'SelfAppraisalController@storeKeyGoal');
   Route::post('/add-self-appraisal', 'SelfAppraisalController@storeSelfAppraisal');

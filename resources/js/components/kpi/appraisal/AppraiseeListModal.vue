@@ -179,37 +179,32 @@
                       : ""
                   }}</span>
                 </p>
-                <p style="margin-bottom: 0" class="format__staff">
-                  <strong class="">Branch:: </strong>
-                  {{ props.row.branch }}
-                </p>
-                <p style="margin-bottom: 0" class="format__staff">
+                <p
+                  style="margin-bottom: 0"
+                  class="format__staff"
+                  v-if="props.row.department"
+                >
                   <strong class="">Department:: </strong>
                   {{ props.row.department }}
+                </p>
+                <p
+                  style="margin-bottom: 0"
+                  class="format__staff"
+                  v-if="props.row.unit"
+                >
+                  <strong class="">Unit:: </strong>
+                  {{ props.row.unit }}
                 </p>
               </b-table-column>
               <b-table-column field="actions" label="Actions" v-slot="props">
                 <div class="b-tooltips">
-                  <b-tooltip
-                    label="View Profile"
-                    size="is-small"
-                    type="is-dark"
-                  >
-                    <b-button
-                      class="is-light"
-                      size="is-small"
-                      pack="fas"
-                      icon-right="eye"
-                      :disabled="!isPermission('read')"
-                    ></b-button>
-                  </b-tooltip>
                   <b-tooltip label="Delete" size="is-small" type="is-dark">
                     <b-button
                       class="is-danger is-light"
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
-                      @click="deleteUser(props.row.id)"
+                      @click="deleteUserFromAppraisal(props.row.user_id)"
                       :disabled="!isPermission('delete')"
                     ></b-button>
                   </b-tooltip>
@@ -276,6 +271,25 @@ export default {
     ...mapActions(["dispatchKPI"]),
     cancelModal() {
       this.$emit("close");
+    },
+    deleteUserFromAppraisal(user) {
+      console.log(user);
+      return;
+      this.$axios
+        .put(
+          `/dashboard/delete-user-from-appraisal/${this.appraisal.id}/${user}`
+        )
+        .then((res) => {
+          if (res.data.deleted) {
+            setTimeout(() => {
+              this.snackbar("Staff removed successfully.", "is-success");
+            }, 1000);
+            // this.dispatchKPI({ type: "DELETE_APPRAISAL", payload: id });
+          }
+        })
+        .catch((err) => {
+          console.trace(err);
+        });
     },
     getJobTitle(id) {
       if (id) {

@@ -15,19 +15,31 @@ class KPIController extends Controller
     {
         return $this->createAppraisal($request);
     }
-    public function update(AppraisalRequest $request, $id)
+    public function updateAppraisal(AppraisalRequest $request, Appraisal $appraisal)
     {
-        //
+        return $this->saveAppraisal($request, $appraisal);
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 
     public function userAppraisal($appraisal, $user = null)
     {
-        // dd($appraisal);
         return $this->getUserAppraisal($appraisal, $user);
+    }
+    public function removeAppraisee(Request $request, Appraisal $appraisal)
+    {
+        $appraisal->staff = json_encode($request->staff);
+        $appraisal->save();
+        return response()->json(['removed' => true]);
+    }
+
+    public function deleteAppraisal(Appraisal $appraisal)
+    {
+        $appraisal->delete();
+        return response()->json(['deleted' => true]);
+    }
+    public function deleteAppraisals($appraisals)
+    {
+        Appraisal::whereIn('id', explode(',', $appraisals))->delete();
+        return response()->json(['deleted' => true]);
     }
 }

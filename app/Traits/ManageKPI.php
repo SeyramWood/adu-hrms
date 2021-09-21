@@ -3,21 +3,16 @@
 namespace App\Traits;
 
 use App\Models\Role;
-use App\Models\User;
 use App\Models\Profile;
 use App\Models\Appraisal;
 use App\Models\UnitKeyGoal;
-use App\Models\UserKeyGoal;
 use Illuminate\Support\Arr;
 use App\Models\SelfAppraisal;
 use App\Models\DepartmentKeyGoal;
-use App\Models\Unit;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
@@ -32,9 +27,6 @@ trait ManageKPI
     }
     if (Gate::any(['admin', 'president'], Auth::user())) {
       return Appraisal::orderBy('id', 'desc')->paginate(100);
-    }
-    if (Gate::allows('branch_manager', Auth::user())) {
-      return $this->paginate(Appraisal::class, 'branches', Auth::user()->profile->branch_id, 100);
     }
     if (Gate::allows('hod', Auth::user())) {
       return $this->paginate(Appraisal::class, 'departments', Auth::user()->profile->department_id, 100);
@@ -120,7 +112,45 @@ trait ManageKPI
       'roles' => json_encode($roles),
       'staff' => json_encode($staff),
     ]);
-    return response()->json(['created' => true, 'data' => Appraisal::find($appraisal->id)]);
+    return response()->json(['created' => true, 'appraisal' => Appraisal::find($appraisal->id)]);
+  }
+  public function saveAppraisal($request, $appraisal)
+  {
+    $departments = $request->applicableFor['department'];
+    $units = $request->applicableFor['unit'];
+    $roles = $request->applicableFor['role'];
+
+    if (in_array('all', $departments)) {
+      $departments = $this->getModelIds('departments');
+    }
+    if (in_array('all', $units)) {
+      $units = $this->getModelIds('units');
+    }
+    if (in_array('all', $roles)) {
+      $roles = $this->getModelIds('roles');
+    }
+    if (in_array('none', $departments)) {
+      $departments = [];
+    }
+    if (in_array('none', $units)) {
+      $units = [];
+    }
+    if (in_array('none', $roles)) {
+      $roles = [];
+    }
+    $staff = $this->filterProfile($departments, $units, $roles);
+
+    $appraisal->name = $request->name;
+    $appraisal->period = json_encode($request->period);
+    $appraisal->sap_timestamp = json_encode($request->sap);
+    $appraisal->np_timestamp = json_encode($request->np);
+    $appraisal->description = $request->description;
+    $appraisal->departments = json_encode($departments);
+    $appraisal->units = json_encode($units);
+    $appraisal->roles = json_encode($roles);
+    $appraisal->staff = json_encode($staff);
+    $appraisal->save();
+    return response()->json(['created' => true, 'appraisal' => Appraisal::find($appraisal->id)]);
   }
   public function getModelIds($model)
   {
