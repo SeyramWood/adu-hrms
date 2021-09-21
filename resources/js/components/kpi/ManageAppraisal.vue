@@ -836,7 +836,7 @@
           <div class="apparisal-details__content__value">
             <p>
               <span
-                v-for="(role, index) in viewAppraisal.roles"
+                v-for="(role, index) in findRoles(viewAppraisal.roles)"
                 :key="`role-${index}`"
               >
                 <span v-if="index === viewAppraisal.roles.length - 1">{{
@@ -871,32 +871,8 @@ export default {
       "getRolePermissions",
       "getDepartments",
       "getUnits",
-      "getRolePermissions",
+      "getRoles",
     ]),
-    getRoles() {
-      return this.getRolePermissions.map((r) => {
-        return {
-          id: r.role,
-          label: r.role,
-        };
-      });
-    },
-    getDpts() {
-      return this.getDepartments.map((d) => {
-        return {
-          id: d.id,
-          label: d.name,
-        };
-      });
-    },
-    getShifts() {
-      return this.getWorkShifts.map((s) => {
-        return {
-          id: s.id,
-          label: s.name,
-        };
-      });
-    },
     getViewAppraisalId() {
       return this.viewAppraisalId;
     },
@@ -1033,6 +1009,16 @@ export default {
         }
       });
       return dpts;
+    },
+    findRoles(ids) {
+      let roles = [];
+      ids.forEach((id) => {
+        if (this.getRoles.find((r) => r.id === id)) {
+          const r = this.getRoles.find((r) => r.id === id);
+          roles = [...roles, r.role];
+        }
+      });
+      return roles;
     },
   },
 };

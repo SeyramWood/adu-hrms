@@ -55,7 +55,7 @@
             <section class="py-4 multiples-actions">
               <b-dropdown
                 aria-role="list"
-                :disabled="selectedKPIs.length > 0 ? false : true"
+                :disabled="selectedAppraisees.length > 0 ? false : true"
               >
                 <template #trigger="{ active }">
                   <b-button
@@ -67,94 +67,17 @@
                 </template>
                 <b-dropdown-item
                   aria-role="listitem"
-                  @click="openAssignRoleForm()"
-                  >Assign user role</b-dropdown-item
-                >
-                <b-dropdown-item
-                  aria-role="listitem"
-                  @click="openAssignStatusForm()"
-                  >Assign account status</b-dropdown-item
-                >
-                <b-dropdown-item aria-role="listitem" @click="deleteUsers()"
-                  >Delete users</b-dropdown-item
+                  @click="removeAppraisees()"
+                  >Delete appraisees</b-dropdown-item
                 >
               </b-dropdown>
-              <transition name="fade">
-                <form
-                  action
-                  v-if="showAssignRoleForm && selectedKPIs.length > 0"
-                >
-                  <b-field label="Choose Role" expanded>
-                    <div class="block">
-                      <b-checkbox
-                        v-model="roleData"
-                        :native-value="r.role"
-                        v-for="(r, i) in getRolePermissions"
-                        :key="i"
-                        :disabled="r.role === 'ESS'"
-                      >
-                        {{ r.role }}
-                      </b-checkbox>
-                    </div>
-                  </b-field>
-                  <b-field class="buttons">
-                    <b-button
-                      class="is-success is-light"
-                      @click="assignUserRole()"
-                      >Save</b-button
-                    >
-                    <b-button
-                      class="is-danger is-light"
-                      @click="cancelAssignForm()"
-                      >Cancel</b-button
-                    >
-                  </b-field>
-                </form>
-                <form
-                  action
-                  v-if="showAssignStatusForm && selectedKPIs.length > 0"
-                >
-                  <b-field label="Choose Status" expanded>
-                    <div class="block">
-                      <b-radio
-                        type="is-info"
-                        v-model="statusData"
-                        name="status"
-                        native-value="1"
-                      >
-                        Enable
-                      </b-radio>
-                      <b-radio
-                        type="is-info"
-                        v-model="statusData"
-                        name="status"
-                        native-value="0"
-                      >
-                        Disable
-                      </b-radio>
-                    </div>
-                  </b-field>
-                  <b-field class="buttons">
-                    <b-button
-                      class="is-success is-light"
-                      @click="assignUserStatus()"
-                      >Save</b-button
-                    >
-                    <b-button
-                      class="is-danger is-light"
-                      @click="cancelAssignForm()"
-                      >Cancel</b-button
-                    >
-                  </b-field>
-                </form>
-              </transition>
             </section>
             <b-table
               :data="getAppraisees.data"
               :default-sort-direction="defaultSortDirection"
               :sort-icon="sortIcon"
               :sort-icon-size="sortIconSize"
-              :checked-rows.sync="selectedKPIs"
+              :checked-rows.sync="selectedAppraisees"
               :loading="isLoading"
               checkable
               striped
@@ -204,7 +127,7 @@
                       size="is-small"
                       pack="fas"
                       icon-right="trash"
-                      @click="deleteUserFromAppraisal(props.row.user_id)"
+                      @click="removeAppraisee(props.row.user_id)"
                       :disabled="!isPermission('delete')"
                     ></b-button>
                   </b-tooltip>
@@ -259,7 +182,7 @@ export default {
       defaultSortDirection: "desc",
       sortIcon: "arrow-up",
       sortIconSize: "is-small",
-      selectedKPIs: [],
+      selectedAppraisees: [],
       isSubmitting: false,
       isLoading: false,
       noAppraisalFound: false,
@@ -272,19 +195,37 @@ export default {
     cancelModal() {
       this.$emit("close");
     },
-    deleteUserFromAppraisal(user) {
-      console.log(user);
-      return;
+    removeAppraisee(user) {
+      const staff = this.appraisal.staff.filter((id) => id !== user);
       this.$axios
-        .put(
-          `/dashboard/delete-user-from-appraisal/${this.appraisal.id}/${user}`
-        )
+        .put(`/dashboard/remove-appraisee/${this.appraisal.id}`, {
+          staff,
+        })
         .then((res) => {
-          if (res.data.deleted) {
+          if (res.data.removed) {
             setTimeout(() => {
               this.snackbar("Staff removed successfully.", "is-success");
             }, 1000);
-            // this.dispatchKPI({ type: "DELETE_APPRAISAL", payload: id });
+            this.dispatchKPI({ type: "DELETE_APPRAISEE", payload: user });
+          }
+        })
+        .catch((err) => {
+          console.trace(err);
+        });
+    },
+    removeAppraisees() {
+      const ids = this.selectedAppraisees.map((a) => a.user_id);
+      const staff = this.arrayDiff(this.appraisal.staff, ids);
+      this.$axios
+        .put(`/dashboard/remove-appraisee/${this.appraisal.id}`, {
+          staff,
+        })
+        .then((res) => {
+          if (res.data.removed) {
+            setTimeout(() => {
+              this.snackbar("Staff removed successfully.", "is-success");
+            }, 1000);
+            this.dispatchKPI({ type: "DELETE_APPRAISEES", payload: ids });
           }
         })
         .catch((err) => {

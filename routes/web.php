@@ -25,6 +25,7 @@ Route::get('/config', function () {
   Artisan::call('cache:clear');
   Artisan::call('config:cache');
   Artisan::call('storage:link');
+  Artisan::call('route:cache');
   return 'Done';
 });
 
